@@ -4,6 +4,7 @@ import { foundKinds, summarise } from './logic/scoring';
 import { TELL_KINDS, type RunState } from './logic/types';
 import { TellCard } from './TellCard';
 import { rupees } from './apps/PayApp';
+import { Confetti } from './Confetti';
 import { Icon } from './Icon';
 
 function Stat({ label, value, tone = 'text-ink' }: { label: string; value: string; tone?: string }) {
@@ -25,6 +26,7 @@ export function RoomComplete({ state, onReplay, onRetry, onContinue }: { state: 
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 p-4 lg:p-8">
+      {!fooled && <Confetti trigger={1} count={60} />}
       <div className="text-center">
         <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl ${fooled ? 'bg-warn/15 text-warn' : 'bg-brand/15 text-brand'}`}><Icon name={fooled ? 'alert' : 'shield'} className="h-8 w-8" /></span>
         <h1 className={`mt-3 text-3xl font-bold ${fooled ? 'text-warn' : 'text-brand'}`}>{fooled ? t('safe.ui.failed') : t('safe.ui.done')}</h1>
@@ -39,6 +41,33 @@ export function RoomComplete({ state, onReplay, onRetry, onContinue }: { state: 
         <Stat label={t('safe.ui.tellsFound')} value={`${sum.tellsFound}/${sum.tellsTotal}`} tone="text-info" />
         <Stat label={t('safe.ui.cards')} value={`${found.size}/${TELL_KINDS.length}`} tone="text-xp" />
       </div>
+
+      {state.script.rule && (
+        <Card className="space-y-3 border-brand/40">
+          <SectionLabel>{t('safe.ui.remember')}</SectionLabel>
+          <p className="text-lg font-bold leading-snug text-ink">{t(state.script.rule)}</p>
+          {state.script.instead && (
+            <div>
+              <p className="mb-1.5 text-xs font-bold uppercase tracking-wider text-muted">{t('safe.ui.doInstead')}</p>
+              <ul className="space-y-1.5">
+                {state.script.instead.map((k) => (
+                  <li key={k} className="flex items-start gap-2 text-sm text-ink-soft">
+                    <Icon name="check" className="mt-0.5 h-4 w-4 text-brand" />
+                    <span>{t(k)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Card>
+      )}
+
+      {(fooled || sum.balanceLost > 0) && (
+        <div className="rounded-lg border-l-4 border-bad bg-surface p-4">
+          <h2 className="font-bold text-ink">{t('home.help.title')}</h2>
+          <p className="text-sm text-ink-soft">{t('home.help.body')}</p>
+        </div>
+      )}
 
       <Card>
         <SectionLabel>{t('safe.ui.cards')}</SectionLabel>

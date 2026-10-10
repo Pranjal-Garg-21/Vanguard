@@ -1,19 +1,20 @@
 /** Draws one surface by type. Used by the live phone and by the replay. */
 import { t } from '@/platform';
-import { ChatView, SmsView } from './apps/MessageViews';
+import { ChatView, SmsView, type Earlier } from './apps/MessageViews';
 import { MailView } from './apps/MailView';
 import { CallTranscript } from './apps/CallScreen';
 import { BrowserView } from './apps/BrowserView';
 import { PayRequestView } from './apps/PayApp';
+import { SearchView } from './apps/SearchView';
 import type { Surface } from './logic/types';
 import type { ViewProps } from './Text';
 
-export function SurfaceBody({ surface, view }: { surface: Surface; view: ViewProps }) {
+export function SurfaceBody({ surface, view, earlier, saidNow, typing }: { surface: Surface; view: ViewProps; earlier?: Earlier; saidNow?: string; typing?: boolean }) {
   switch (surface.type) {
     case 'sms':
       return <SmsView surface={surface} view={view} />;
     case 'chat':
-      return <ChatView surface={surface} view={view} />;
+      return <ChatView surface={surface} view={view} earlier={earlier} saidNow={saidNow} typing={typing} />;
     case 'mail':
       return <MailView surface={surface} view={view} />;
     case 'call':
@@ -22,6 +23,8 @@ export function SurfaceBody({ surface, view }: { surface: Surface; view: ViewPro
       return <BrowserView surface={surface} view={view} />;
     case 'pay-request':
       return <PayRequestView surface={surface} view={view} />;
+    case 'search':
+      return <SearchView surface={surface} view={view} />;
     case 'permission':
       return (
         <div className="p-4 text-phone-ink">
@@ -39,6 +42,7 @@ export const APP_OF: Record<Surface['type'], 'messages' | 'chat' | 'mail' | 'pho
   mail: 'mail',
   call: 'phone',
   'pay-request': 'pay',
+  search: 'browser',
   page: 'browser',
   permission: 'system',
 };
@@ -56,6 +60,8 @@ export function surfaceTitle(s: Surface): string {
       return s.caller;
     case 'pay-request':
       return s.fromName;
+    case 'search':
+      return s.query;
     case 'page':
       return t(s.titleKey);
     case 'permission':
@@ -67,5 +73,6 @@ export function surfacePreview(s: Surface, vars?: Record<string, string | number
   const segs = 'body' in s ? s.body : 'lines' in s ? s.lines : [];
   if (s.type === 'mail') return t(s.subjectKey);
   if (s.type === 'pay-request') return `₹${s.amount.toLocaleString('en-IN')}`;
+  if (s.type === 'search') return '';
   return segs.map((x) => t(x.k, vars)).join('').slice(0, 70);
 }

@@ -84,7 +84,7 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
         setReading({ surface: id, lens });
       },
       onAct: (action) => dispatch({ type: 'act', surface: id, action }),
-      resolved: state.acted[id],
+      resolved: state.acted[id] ?? (state.moved.includes(id) ? 'moved' : undefined),
       timersOff: state.timersOff,
       vars: script.vars,
       remainingMs: timeout ? Math.max(0, timeout.ms - (state.now - (state.deliveredAt[id] ?? 0))) : undefined,
@@ -94,6 +94,31 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
   const unread = (a: AppId) => state.inbox.filter((id) => !state.read.includes(id) && APP_OF[surfaceOf(script, id)?.type ?? 'sms'] === (a === 'phone' ? 'phone' : a)).length;
   const inApp = (a: AppId) => state.inbox.filter((id) => APP_OF[surfaceOf(script, id)?.type ?? 'sms'] === a);
 
+  /** Earlier messages of the same conversation, with the student's replies. */
+  const earlierFor = (id: string, surface: Surface) => {
+    if (surface.type !== 'chat' || !surface.thread) return undefined;
+    const out: { surface: Extract<Surface, { type: 'chat' }>; said?: string }[] = [];
+    for (const other of state.inbox) {
+      if (other === id) break;
+      const sf = surfaceOf(script, other);
+      if (sf?.type !== 'chat' || sf.thread !== surface.thread) continue;
+      const lastAct = [...state.history].reverse().find((h) => h.kind === 'acted' && h.surface === other);
+      const said = lastAct && lastAct.kind === 'acted' ? sf.actions?.find((a) => a.id === lastAct.action)?.say : undefined;
+      out.push({ surface: sf, said });
+    }
+    return out;
+  };
+
+  /** Inbox ids for an app. A conversation shows once, at its latest message. */
+  const listIds = (a: AppId) => {
+    const ids = inApp(a);
+    return ids.filter((id) => {
+      const sf = surfaceOf(script, id);
+      if (sf?.type !== 'chat' || !sf.thread) return true;
+      return !ids.some((later) => later !== id && ids.indexOf(later) > ids.indexOf(id) && (surfaceOf(script, later) as Surface & { thread?: string }).thread === sf.thread);
+    });
+  };
+
   let content: React.ReactNode;
   if (open) {
     const id = baseId as string;
@@ -101,7 +126,19 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
     const verdict = state.verdicts[id];
     content = (
       <div className="pb-6">
-        <SurfaceBody surface={open} view={v} />
+        <SurfaceBody
+          surface={open}
+          view={v}
+          earlier={earlierFor(id, open)}
+          saidNow={(() => {
+            const last = [...state.history].reverse().find((h) => h.kind === 'acted' && h.surface === id);
+            return last && last.kind === 'acted' ? open.actions?.find((a) => a.id === last.action)?.say : undefined;
+          })()}
+          typing={open.type === 'chat' && !!open.thread && state.pending.some((p) => {
+            const sf = surfaceOf(script, p.step);
+            return sf?.type === 'chat' && sf.thread === open.thread;
+          })}
+        />
         <div className="px-4">
           {!lensOn && state.inspected.length === 0 && state.read.length <= 1 && <p className="mb-3 flex items-start gap-2 rounded-lg bg-phone-link/10 p-2.5 text-xs text-phone-ink"><Icon name="search" className="mt-0.5 h-4 w-4 text-phone-link" />{t('safe.ui.lensHint')}</p>}
           {lensOn && <p className="mb-2 text-xs font-bold text-phone-link">{t('safe.ui.lensOn')}</p>}
@@ -130,14 +167,14 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
             </div>
           )}
 
-          {isAct && !state.ended && open.actions && (
+          {isAct && !state.ended && open.actions && open.type !== 'search' && (
             <div className="mt-5 grid gap-2">
               {open.actions.filter((a) => a.id !== open.timeout?.action).map((a) => (
                 <Button
                   key={a.id}
                   variant="secondary"
                   className="!border-phone-line !bg-phone-card !text-phone-ink shadow-sm"
-                  disabled={!!state.acted[id] || state.history.some((h) => h.kind === 'acted' && h.surface === id && h.action === a.id)}
+                  disabled={!!state.acted[id] || state.moved.includes(id) || state.history.some((h) => h.kind === 'acted' && h.surface === id && h.action === a.id)}
                   onClick={() => dispatch({ type: 'act', surface: id, action: a.id })}
                 >
                   {t(a.labelKey)}
@@ -145,23 +182,22 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
               ))}
             </div>
           )}
-          {isAct && state.acted[id] && (() => {
-            const chosen = open.actions?.find((a) => a.id === state.acted[id]);
-            const fb = responseFeedback(open, state.acted[id] as string);
+          {isAct && (() => {
+            const lastAct = [...state.history].reverse().find((h) => h.kind === 'acted' && h.surface === id);
+            if (!lastAct || lastAct.kind !== 'acted') return null;
+            const chosen = open.actions?.find((a) => a.id === lastAct.action);
+            const fb = responseFeedback(open, lastAct.action);
             if (fb && chosen) {
               const better = fb.best ? open.actions?.find((a) => a.id === fb.best) : undefined;
               return (
                 <div className="mt-4 space-y-3">
                   <FeedbackCard feedback={fb} yours={t(chosen.labelKey)} bestLabel={better ? t(better.labelKey) : undefined} vars={script.vars} />
-                  <TellList state={state} surfaceId={id} tone="phone" />
+                  {state.acted[id] && (open.tells?.length ?? 0) > 0 && <TellList state={state} surfaceId={id} tone="phone" />}
                 </div>
               );
             }
-            return (
-              <p className="mt-3 text-xs text-phone-muted">
-                {state.history.some((h) => h.kind === 'acted' && h.surface === id && h.auto) ? t('safe.ui.auto') : t('safe.ui.youDid', { what: t(chosen?.labelKey ?? '') })}
-              </p>
-            );
+            if (!state.acted[id]) return null;
+            return <p className="mt-3 text-xs text-phone-muted">{lastAct.auto ? t('safe.ui.auto') : t('safe.ui.youDid', { what: t(chosen?.labelKey ?? '') })}</p>;
           })()}
         </div>
       </div>
@@ -185,7 +221,7 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
     const requests = inApp('pay').map((id) => ({ id, label: surfacePreview(surfaceOf(script, id) as Surface, script.vars) + ' · ' + surfaceTitle(surfaceOf(script, id) as Surface) }));
     content = <PayHome balance={bankBalance(state)} lost={-(state.effects['money.bank'] ?? 0)} requests={requests} onOpen={openSurface} />;
   } else {
-    const ids = inApp(app);
+    const ids = listIds(app);
     content = (
       <div>
         <h2 className="px-4 pb-1 pt-4 text-xl font-bold text-phone-ink">{APPS.find((a) => a.id === app)?.nameKey}</h2>
@@ -237,7 +273,7 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
       scrollKey={`${baseId ?? app}`}
     >
       {content}
-      {overlay?.type === 'call' && <IncomingCall surface={overlay} view={view(state.open as string, overlay)} actions={overlay.actions ?? []} onAct={(a) => dispatch({ type: 'act', surface: state.open as string, action: a })} />}
+      {overlay?.type === 'call' && <IncomingCall surface={overlay} view={view(state.open as string, overlay)} actions={overlay.actions ?? []} lensNode={reading?.surface === state.open ? <LensReading surface={overlay} lensId={reading.lens} vars={script.vars} /> : undefined} onAct={(a) => dispatch({ type: 'act', surface: state.open as string, action: a })} />}
       {overlay?.type === 'permission' && <PermissionDialog appKey={overlay.appKey} askKey={overlay.askKey} actions={overlay.actions ?? []} onAct={(a) => dispatch({ type: 'act', surface: state.open as string, action: a })} />}
     </PhoneShell>
   );

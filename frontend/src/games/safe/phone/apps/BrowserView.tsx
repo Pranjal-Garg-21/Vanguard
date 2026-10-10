@@ -7,12 +7,14 @@ import type { Surface } from '../logic/types';
 export function BrowserView({ surface, view }: { surface: Extract<Surface, { type: 'page' }>; view: ViewProps }) {
   return (
     <div className="text-phone-ink">
-      <div className="flex items-center gap-2 border-b border-phone-line bg-phone-card px-3 py-2">
-        <Icon name="lock" className="h-4 w-4 text-phone-muted" />
-        <p className="min-w-0 flex-1 truncate rounded-full bg-phone-bubble px-3 py-1 font-mono text-xs">
-          <Lensable surface={surface} lens={surface.urlLens} view={view}>{surface.url}</Lensable>
-        </p>
-      </div>
+      {surface.url && (
+        <div className="flex items-center gap-2 border-b border-phone-line bg-phone-card px-3 py-2">
+          <Icon name="lock" className="h-4 w-4 text-phone-muted" />
+          <p className="min-w-0 flex-1 truncate rounded-full bg-phone-bubble px-3 py-1 font-mono text-xs">
+            <Lensable surface={surface} lens={surface.urlLens} view={view}>{surface.url}</Lensable>
+          </p>
+        </div>
+      )}
       <div className="p-4">
         <h2 className="text-lg font-bold">{t(surface.titleKey)}</h2>
         <p className="mt-2 text-[15px] leading-relaxed">
