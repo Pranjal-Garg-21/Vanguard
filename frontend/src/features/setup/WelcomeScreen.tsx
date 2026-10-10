@@ -16,16 +16,16 @@ export function WelcomeScreen() {
     <StudentScreen
       footer={
         <p className="text-center text-sm">
-          <Link className="font-semibold text-teal-800 underline" to="/facilitator">
+          <Link className="font-semibold text-brand underline" to="/facilitator">
             {t('setup.welcome.facilitator')}
           </Link>
         </p>
       }
     >
       <div className="flex flex-col items-center pt-16 text-center">
-        <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-teal-700 text-5xl shadow-lg">🪙</div>
-        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900">{t('setup.welcome.title')}</h1>
-        <p className="mt-3 max-w-xs text-lg text-slate-600">{t('setup.welcome.tagline')}</p>
+        <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-brand text-4xl font-bold text-brand-ink">P</div>
+        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-ink">{t('setup.welcome.title')}</h1>
+        <p className="mt-3 max-w-xs text-lg text-ink-soft">{t('setup.welcome.tagline')}</p>
 
         <div className="mt-12 flex w-full flex-col gap-3">
           <Button size="lg" onClick={() => navigate('/setup')}>

@@ -22,12 +22,7 @@ import { AVATARS, LANGUAGES } from './pictures';
 const STEPS = ['language', 'a11y', 'class', 'avatar', 'pin', 'confirm', 'done'] as const;
 type Step = (typeof STEPS)[number];
 
-const A11Y_OPTIONS: { key: keyof Accessibility; icon: string }[] = [
-  { key: 'audio', icon: '🔊' },
-  { key: 'largeText', icon: '🔠' },
-  { key: 'reduceMotion', icon: '🐢' },
-  { key: 'timersOff', icon: '⏱️' },
-];
+const A11Y_OPTIONS: { key: keyof Accessibility }[] = [{ key: 'audio' }, { key: 'largeText' }, { key: 'reduceMotion' }, { key: 'timersOff' }];
 
 export function SetupFlow() {
   const navigate = useNavigate();
@@ -97,12 +92,12 @@ export function SetupFlow() {
     <StudentScreen>
       {step !== 'done' && (
         <header className="mb-6 flex items-center justify-between">
-          <button type="button" className="min-h-11 px-2 font-semibold text-teal-800" onClick={back}>
+          <button type="button" className="min-h-11 px-2 font-semibold text-brand" onClick={back}>
             ← {t('setup.steps.back')}
           </button>
           <div className="flex gap-1.5" aria-label={t('setup.steps.progress', { current: index + 1, total: STEPS.length - 1 })}>
             {STEPS.slice(0, -1).map((s, i) => (
-              <span key={s} className={`h-2 w-6 rounded-full ${i <= index ? 'bg-teal-700' : 'bg-slate-200'}`} />
+              <span key={s} className={`h-2 w-6 rounded-full ${i <= index ? 'bg-brand' : 'bg-surface-3'}`} />
             ))}
           </div>
         </header>
@@ -119,34 +114,33 @@ export function SetupFlow() {
                   setLanguage(l.id);
                   go('a11y');
                 }}
-                className={`flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border-2 bg-white shadow-sm transition active:scale-95 ${
-                  language === l.id ? 'border-teal-700' : 'border-slate-200 hover:border-teal-600'
+                className={`flex aspect-[4/3] flex-col items-center justify-center rounded-xl border-2 bg-surface transition active:scale-95 ${
+                  language === l.id ? 'border-brand' : 'border-line hover:border-brand'
                 }`}
               >
                 <span className="text-3xl font-bold" dir={l.id === 'ur' ? 'rtl' : 'ltr'}>
                   {l.native}
                 </span>
-                <span className="mt-1 text-sm text-slate-500">{l.english}</span>
+                <span className="mt-1 text-sm text-muted">{l.english}</span>
               </button>
             ))}
           </div>
-          <p className="mt-4 text-center text-sm text-slate-500">{t('setup.language.note')}</p>
+          <p className="mt-4 text-center text-sm text-muted">{t('setup.language.note')}</p>
         </StepBody>
       )}
 
       {step === 'a11y' && (
         <StepBody title={t('setup.a11y.title')}>
           <div className="space-y-3">
-            {A11Y_OPTIONS.map(({ key, icon }) => (
-              <label key={key} className="flex min-h-16 cursor-pointer items-center gap-4 rounded-2xl border border-slate-200 bg-white px-4 shadow-sm">
-                <span className="text-2xl">{icon}</span>
+            {A11Y_OPTIONS.map(({ key }) => (
+              <label key={key} className="flex min-h-16 cursor-pointer items-center gap-4 rounded-xl border border-line bg-surface px-4">
                 <span className="flex-1">
                   <span className="block text-lg font-semibold">{t(`setup.a11y.${key}`)}</span>
-                  {key === 'timersOff' && <span className="block text-sm text-slate-500">{t('setup.a11y.timersOffHint')}</span>}
+                  {key === 'timersOff' && <span className="block text-sm text-muted">{t('setup.a11y.timersOffHint')}</span>}
                 </span>
                 <input
                   type="checkbox"
-                  className="h-6 w-6 accent-teal-700"
+                  className="h-6 w-6 accent-brand"
                   checked={a11y[key]}
                   onChange={(e) => setA11y({ ...a11y, [key]: e.target.checked })}
                 />
@@ -169,13 +163,13 @@ export function SetupFlow() {
             value={classCode}
             onChange={(e) => setClassCode(normaliseJoinCode(e.target.value))}
             placeholder="ABC123"
-            className="w-full rounded-2xl border-2 border-slate-300 bg-white p-4 text-center font-mono text-4xl tracking-[0.3em] uppercase focus:border-teal-700 focus:outline-none"
+            className="w-full rounded-xl border-2 border-line-strong bg-surface p-4 text-center font-mono text-4xl tracking-[0.3em] uppercase focus:border-brand focus:outline-none"
             aria-label={t('setup.class.title')}
           />
           <div className="mt-4 min-h-12">
-            {classCheck === 'checking' && <p className="text-center text-slate-500">{t('setup.class.checking')}</p>}
+            {classCheck === 'checking' && <p className="text-center text-muted">{t('setup.class.checking')}</p>}
             {classCheck && classCheck !== 'checking' && classCheck.status === 'valid' && (
-              <Notice tone="info">✅ {t('setup.class.valid', { name: classCheck.name })}</Notice>
+              <Notice tone="info">{t('setup.class.valid', { name: classCheck.name })}</Notice>
             )}
             {classCheck && classCheck !== 'checking' && classCheck.status === 'invalid' && <Notice tone="bad">{t('setup.class.invalid')}</Notice>}
             {classCheck && classCheck !== 'checking' && classCheck.status === 'unchecked' && <Notice>{t('setup.class.unchecked')}</Notice>}
@@ -207,8 +201,8 @@ export function SetupFlow() {
                 type="button"
                 onClick={() => setAvatarId(a.id)}
                 aria-pressed={avatarId === a.id}
-                className={`flex aspect-square items-center justify-center rounded-2xl border-2 bg-white text-4xl shadow-sm transition active:scale-95 ${
-                  avatarId === a.id ? 'border-teal-700 ring-4 ring-teal-100' : 'border-slate-200'
+                className={`flex aspect-square items-center justify-center rounded-xl border-2 bg-surface text-4xl transition active:scale-95 ${
+                  avatarId === a.id ? 'border-brand ring-4 ring-brand/25' : 'border-line'
                 }`}
               >
                 {a.emoji}
@@ -222,9 +216,9 @@ export function SetupFlow() {
               maxLength={20}
               onChange={(e) => setName(e.target.value)}
               placeholder={t('setup.avatar.namePlaceholder')}
-              className="mt-2 w-full rounded-2xl border-2 border-slate-300 bg-white p-4 text-xl focus:border-teal-700 focus:outline-none"
+              className="mt-2 w-full rounded-xl border-2 border-line-strong bg-surface p-4 text-xl focus:border-brand focus:outline-none"
             />
-            <span className="mt-1 block text-sm text-slate-500">{t('setup.avatar.nameHint')}</span>
+            <span className="mt-1 block text-sm text-muted">{t('setup.avatar.nameHint')}</span>
           </label>
           <Button size="lg" className="mt-6 w-full" disabled={name.trim().length < 2} onClick={() => go('pin')}>
             {t('setup.steps.next')}
@@ -243,7 +237,7 @@ export function SetupFlow() {
               go('confirm');
             }}
           />
-          <p className="mt-4 text-center text-sm text-slate-500">🤚 {t('setup.pin.coverTip')}</p>
+          <p className="mt-4 text-center text-sm text-muted">{t('setup.pin.coverTip')}</p>
         </StepBody>
       )}
 
@@ -257,7 +251,7 @@ export function SetupFlow() {
         <div className="flex flex-col items-center pt-16 text-center">
           <div className="text-7xl">{AVATARS.find((a) => a.id === avatarId)?.emoji}</div>
           <h1 className="mt-6 text-3xl font-extrabold">{t('setup.done.title', { name: name.trim() })}</h1>
-          <p className="mt-3 text-lg text-slate-600">{t('setup.done.body')}</p>
+          <p className="mt-3 text-lg text-ink-soft">{t('setup.done.body')}</p>
           <Button size="lg" className="mt-10 w-full" onClick={() => navigate('/home')}>
             {t('setup.done.go')}
           </Button>
@@ -270,8 +264,8 @@ export function SetupFlow() {
 function StepBody({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
   return (
     <section>
-      <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">{title}</h1>
-      {subtitle && <p className="mt-2 text-lg text-slate-600">{subtitle}</p>}
+      <h1 className="text-3xl font-extrabold tracking-tight text-ink">{title}</h1>
+      {subtitle && <p className="mt-2 text-lg text-ink-soft">{subtitle}</p>}
       <div className="mt-6">{children}</div>
     </section>
   );

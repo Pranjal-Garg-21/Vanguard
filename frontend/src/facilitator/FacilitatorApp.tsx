@@ -39,11 +39,11 @@ function SignedInGate() {
       <FacilitatorLayout email={session.user.email}>
         <Card className="space-y-3">
           <h1 className="text-xl font-bold">Your account isn’t set up as a facilitator yet</h1>
-          <p className="text-slate-600">Ask your NGO admin to add you. In the Supabase SQL editor they can run:</p>
-          <pre className="overflow-x-auto rounded-xl bg-slate-900 p-3 text-sm text-slate-100">
+          <p className="text-ink-soft">Ask your NGO admin to add you. In the Supabase SQL editor they can run:</p>
+          <pre className="overflow-x-auto rounded-xl bg-bg p-3 text-sm text-brand">
             {`insert into facilitators (id, display_name)\nvalues ('${session.user.id}', 'Your name');`}
           </pre>
-          <p className="text-sm text-slate-500">Then refresh this page.</p>
+          <p className="text-sm text-muted">Then refresh this page.</p>
         </Card>
       </FacilitatorLayout>
     );

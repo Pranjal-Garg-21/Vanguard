@@ -48,9 +48,8 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
   if (players.length === 0) {
     return (
       <Card className="py-12 text-center">
-        <div className="text-5xl">📲</div>
         <h2 className="mt-3 text-lg font-bold">No students yet</h2>
-        <p className="mt-1 text-slate-600">
+        <p className="mt-1 text-ink-soft">
           Share the join code <span className="font-mono font-bold">{cls.join_code}</span> from the “Join code” tab.
         </p>
       </Card>
@@ -72,7 +71,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
         <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
           <Card>
             <h2 className="font-bold">Concepts</h2>
-            <p className="mb-3 text-sm text-slate-500">Share of answers that were right, per concept.</p>
+            <p className="mb-3 text-sm text-muted">Share of answers that were right, per concept.</p>
             <div className="space-y-2">
               {stats.concepts.map((c) => (
                 <div key={c.concept} className="flex items-center gap-3">
@@ -80,10 +79,10 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
                     {humanise(c.concept)}
                   </span>
                   {c.students < MIN_GROUP ? (
-                    <span className="text-xs text-slate-400">Too few students to show</span>
+                    <span className="text-xs text-muted">Too few students to show</span>
                   ) : (
                     <>
-                      <div className="h-3 flex-1 overflow-hidden rounded-full bg-slate-100">
+                      <div className="h-3 flex-1 overflow-hidden rounded-full bg-surface-2">
                         <div className={`h-full rounded-full ${band(c.rate).bar}`} style={{ width: `${Math.round(c.rate * 100)}%` }} />
                       </div>
                       <Badge tone={band(c.rate).tone}>{Math.round(c.rate * 100)}%</Badge>
@@ -92,22 +91,22 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
                 </div>
               ))}
             </div>
-            <div className="mt-4 flex gap-4 text-xs text-slate-500">
-              <span>🔴 under 40%</span>
-              <span>🟠 40–70%</span>
-              <span>🟢 over 70%</span>
+            <div className="mt-4 flex gap-4 text-xs text-muted">
+              <span>Under 40%</span>
+              <span>40–70%</span>
+              <span>Over 70%</span>
             </div>
           </Card>
 
           <Card>
             <h2 className="font-bold">Top misconceptions this week</h2>
-            <p className="mb-3 text-sm text-slate-500">Discuss these in your next session.</p>
-            {stats.misconceptions.length === 0 && <p className="text-slate-500">None recorded this week. 🎉</p>}
+            <p className="mb-3 text-sm text-muted">Discuss these in your next session.</p>
+            {stats.misconceptions.length === 0 && <p className="text-muted">None recorded this week.</p>}
             <ol className="space-y-4">
               {stats.misconceptions.map((m, i) => {
                 const p = PROMPTS[m.id];
                 return (
-                  <li key={m.id} className="rounded-xl bg-amber-50 p-3">
+                  <li key={m.id} className="rounded-lg border-l-4 border-line-strong bg-surface-2 p-3">
                     <div className="flex items-start justify-between gap-2">
                       <span className="font-semibold">
                         {i + 1}. {p?.title ?? humanise(m.id)}
@@ -116,8 +115,8 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
                     </div>
                     {p && (
                       <>
-                        <p className="mt-2 text-sm text-slate-700">{p.prompt}</p>
-                        <p className="mt-1 text-xs font-semibold text-amber-900">Replay together: {p.activity}</p>
+                        <p className="mt-2 text-sm text-ink-soft">{p.prompt}</p>
+                        <p className="mt-1 text-xs font-semibold text-ink-soft">Replay together: {p.activity}</p>
                       </>
                     )}
                   </li>
@@ -130,7 +129,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
 
       <Card>
         <h2 className="mb-3 font-bold">Students and last sync</h2>
-        <div className="divide-y divide-slate-100">
+        <div className="divide-y divide-line">
           {players.map((p) => {
             const stale = !p.last_sync || Date.now() - new Date(p.last_sync).getTime() > 3 * 24 * 60 * 60 * 1000;
             return (
@@ -149,17 +148,17 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
 function Stat({ label, value, sub }: { label: string; value: number; sub?: string }) {
   return (
     <Card className="p-4">
-      <p className="text-sm text-slate-500">{label}</p>
+      <p className="text-sm text-muted">{label}</p>
       <p className="text-3xl font-extrabold">{value}</p>
-      {sub && <p className="text-xs text-slate-400">{sub}</p>}
+      {sub && <p className="text-xs text-muted">{sub}</p>}
     </Card>
   );
 }
 
 function band(rate: number) {
-  if (rate < 0.4) return { bar: 'bg-rose-500', tone: 'bad' as const };
-  if (rate <= 0.7) return { bar: 'bg-amber-500', tone: 'warn' as const };
-  return { bar: 'bg-emerald-500', tone: 'good' as const };
+  if (rate < 0.4) return { bar: 'bg-bad', tone: 'bad' as const };
+  if (rate <= 0.7) return { bar: 'bg-ink-soft', tone: 'neutral' as const };
+  return { bar: 'bg-brand', tone: 'good' as const };
 }
 
 function summarise(events: EventRow[], players: PlayerRow[]) {

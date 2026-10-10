@@ -15,25 +15,25 @@ export function JoinTab({ cls }: { cls: ClassRow }) {
 
   return (
     <div className="grid gap-5 md:grid-cols-[1fr_1.2fr]">
-      <Card className="flex flex-col items-center text-center print:border-0 print:shadow-none">
+      <Card className="flex flex-col items-center text-center print:border-0 print:bg-white print:text-black">
         <h2 className="text-xl font-extrabold">Join {cls.name} on PaisaPath</h2>
         {qr && <img src={qr} alt={`QR code for ${url}`} className="mt-4 w-64 max-w-full" />}
-        <p className="mt-4 text-sm text-slate-500">or open the app and type</p>
+        <p className="mt-4 text-sm text-muted">or open the app and type</p>
         <p className="font-mono text-4xl font-black tracking-[0.3em]">{cls.join_code}</p>
-        <p className="mt-2 text-xs break-all text-slate-400">{url}</p>
+        <p className="mt-2 text-xs break-all text-muted">{url}</p>
       </Card>
 
       <div className="space-y-4 print:hidden">
         <Card className="space-y-3">
           <h3 className="font-bold">How students join</h3>
-          <ol className="list-decimal space-y-1 pl-5 text-slate-700">
+          <ol className="list-decimal space-y-1 pl-5 text-ink-soft">
             <li>Scan the QR with the phone camera (internet needed once).</li>
             <li>Tap “Add to home screen” so it works offline.</li>
             <li>Pick a language ({LANGUAGE_NAMES[cls.language] ?? cls.language} is the class default), an avatar and a picture code.</li>
           </ol>
         </Card>
         <div className="flex flex-wrap gap-3">
-          <Button onClick={() => window.print()}>🖨️ Print QR sheet</Button>
+          <Button onClick={() => window.print()}>Print QR sheet</Button>
           <Button
             variant="secondary"
             onClick={async () => {
@@ -42,7 +42,7 @@ export function JoinTab({ cls }: { cls: ClassRow }) {
               setTimeout(() => setCopied(false), 2000);
             }}
           >
-            {copied ? '✓ Copied' : '🔗 Copy join link'}
+            {copied ? 'Copied' : 'Copy join link'}
           </Button>
         </div>
       </div>

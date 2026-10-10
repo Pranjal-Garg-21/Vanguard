@@ -2,13 +2,26 @@
   "greeting": "Hi {name}",
   "switchPlayer": "Switch player",
   "comingSoon": "Coming soon",
+  "sections": {
+    "path": "Learning path",
+    "modules": "Modules"
+  },
   "lifepath": {
     "title": "Your LifePath",
     "body": "Live a character’s money life, month by month, from opening a bank account to investing."
   },
-  "arcade": { "title": "Arcade", "body": "Quick games on everyday money, staying safe and investing." },
-  "quickplay": { "title": "Quick Play", "body": "One situation, two choices. See what happens." },
-  "progress": { "title": "Your progress", "body": "What you’ve learned and badges you’ve earned." },
+  "arcade": {
+    "title": "Arcade",
+    "body": "Quick games on everyday money, staying safe and investing."
+  },
+  "quickplay": {
+    "title": "Quick Play",
+    "body": "One situation, two choices. See what happens."
+  },
+  "progress": {
+    "title": "Your progress",
+    "body": "What you’ve learned and badges you’ve earned."
+  },
   "help": {
     "title": "Lost money to a scam?",
     "body": "Call 1930 (cybercrime helpline) and tell your bank right away."
@@ -20,5 +33,35 @@
     "syncing": "Syncing…",
     "synced": "All synced",
     "error": "Sync failed, will retry"
-  }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "learn": "Learn",
+    "practice": "Practice",
+    "compete": "Compete"
+  },
+  "stats": {
+    "streak": "Day streak",
+    "xp": "XP",
+    "answers": "Answers",
+    "concepts": "Concepts learned"
+  },
+  "continue": {
+    "title": "Continue learning",
+    "start": "Start LifePath",
+    "stage": "Stage {n} of {total}",
+    "empty": "Begin at Stage 0 and work up."
+  },
+  "daily": {
+    "title": "Daily challenge",
+    "body": "One question a day keeps your streak going. Missing a day never removes progress."
+  },
+  "badges": {
+    "title": "Badges",
+    "body": "Earned for understanding and good habits, never for money."
+  },
+  "stagesTitle": "LifePath stages",
+  "practiceTitle": "Practice",
+  "locked": "Locked",
+  "soon": "Coming soon"
 }

@@ -44,12 +44,12 @@ export function LoginScreen() {
   };
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-gradient-to-b from-teal-50 to-white px-4">
+    <div className="flex min-h-dvh items-center justify-center bg-transparent px-4">
       <div className="w-full max-w-sm">
         <div className="mb-6 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-700 text-3xl shadow">🪙</div>
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-lg bg-brand text-2xl font-bold text-brand-ink">P</div>
           <h1 className="mt-4 text-2xl font-extrabold">Facilitator sign in</h1>
-          <p className="mt-1 text-slate-600">Run your class, unlock stages and see what your students understand.</p>
+          <p className="mt-1 text-ink-soft">Run your class, unlock stages and see what your students understand.</p>
         </div>
 
         <Card>
@@ -64,7 +64,7 @@ export function LoginScreen() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@ngo.org"
-                  className="mt-1 w-full rounded-xl border border-slate-300 p-3 focus:border-teal-700 focus:outline-none"
+                  className="mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 focus:border-brand focus:outline-none"
                 />
               </label>
               {error && <Notice tone="bad">{error}</Notice>}
@@ -85,14 +85,14 @@ export function LoginScreen() {
                   value={code}
                   onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 8))}
                   placeholder="123456"
-                  className="mt-1 w-full rounded-xl border border-slate-300 p-3 text-center font-mono text-2xl tracking-widest focus:border-teal-700 focus:outline-none"
+                  className="mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 text-center font-mono text-2xl tracking-widest focus:border-brand focus:outline-none"
                 />
               </label>
               {error && <Notice tone="bad">{error}</Notice>}
               <Button type="submit" className="w-full" disabled={busy || code.length < 6}>
                 {busy ? 'Checking…' : 'Sign in'}
               </Button>
-              <button type="button" className="w-full text-sm font-semibold text-teal-800" onClick={() => setSent(false)}>
+              <button type="button" className="w-full text-sm font-semibold text-brand" onClick={() => setSent(false)}>
                 Use a different email
               </button>
             </form>
@@ -100,7 +100,7 @@ export function LoginScreen() {
         </Card>
 
         <p className="mt-6 text-center text-sm">
-          <Link to="/" className="font-semibold text-teal-800 underline">
+          <Link to="/" className="font-semibold text-brand underline">
             ← Back to the student app
           </Link>
         </p>
