@@ -1,14 +1,20 @@
 /**
- * Investing ABC: what to do next, then the rooms in small groups. Route: /learn/invest. Owner: P4.
- * One big "up next" card says what to do now; the groups and the games stay folded until you open them.
+ * Investing section page: what to do next, one suggested game, then the rooms in small groups and the games.
+ * Route: /learn/invest. Owner: P4.
+ *
+ * One big "up next" card says what to do now. Games that need a lesson first show what to learn (and a way to
+ * play anyway), so the order of things is taught by the screen itself. The groups and games stay folded.
  */
 import { Link } from 'react-router';
 import { t } from '@/platform';
-import { Badge, Button, Card, ChevronIcon, ProgressBar } from '@/ui';
+import { Badge, Button, Card, ChevronIcon, LockedTile, ProgressBar } from '@/ui';
+import section from '@/content/scenarios/invest/section.json';
+import { useGamesDone } from '../shared/gameSave';
 import { InvestShell } from './InvestShell';
 import { fillTemplate, runCalcs } from './logic/calc';
-import { games, rooms } from './logic/content';
+import { games as gameRooms, lessonById, rooms } from './logic/content';
 import { roomPoints, type RoomSummary } from './logic/room';
+import { gameStates, type GameState, type SectionGame } from './logic/section';
 import type { Room } from './logic/types';
 import { useRoomSummaries } from './useSavedProgress';
 
@@ -21,14 +27,30 @@ const GROUPS = [
   { id: 'time', from: 13, to: 14 },
 ];
 
+const SECTION_GAMES = section.games as SectionGame[];
+const PAGE_GAME_IDS = SECTION_GAMES.filter((g) => g.kind === 'page').map((g) => g.id);
+
 const title = (r: Room) => fillTemplate(t(r.titleKey), runCalcs(r.vars, r.calcs));
 const blurb = (r: Room) => fillTemplate(t(r.blurbKey), runCalcs(r.vars, r.calcs));
 
 export function LessonList() {
   const summaries = useRoomSummaries(rooms);
+  const gameSummaries = useRoomSummaries(gameRooms);
+  const pagesPlayed = useGamesDone(PAGE_GAME_IDS);
+
   // The first room that is not finished is the one to do next.
   const upNext = summaries ? rooms.find((r) => summaries[r.id]?.status !== 'done') : rooms[0];
   const upSummary: RoomSummary | undefined = upNext ? summaries?.[upNext.id] : undefined;
+
+  const loaded = !!(summaries && gameSummaries && pagesPlayed);
+  const states = loaded
+    ? gameStates(
+        SECTION_GAMES,
+        Object.fromEntries(rooms.map((r) => [r.id, summaries[r.id]?.status === 'done'])),
+        Object.fromEntries(SECTION_GAMES.map((g) => [g.id, g.kind === 'room' ? gameSummaries[g.id]?.status === 'done' : !!pagesPlayed[g.id]])),
+      )
+    : [];
+  const recommended = states.find((s) => s.recommended);
 
   return (
     <InvestShell wide>
@@ -50,6 +72,19 @@ export function LessonList() {
           )}
           <Link to={`/learn/invest/${upNext.id}`} className="inline-block">
             <Button size="lg">{upSummary?.status === 'started' ? t('investui.list.continue') : t('investui.list.start')}</Button>
+          </Link>
+        </Card>
+      )}
+
+      {recommended && (
+        <Card className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <Badge tone="info">{t('investui.game.recommended')}</Badge>
+            <p className="mt-1 font-bold text-ink">{t(recommended.game.titleKey)}</p>
+            <p className="text-sm text-ink-soft">{t(recommended.game.hintKey)}</p>
+          </div>
+          <Link to={recommended.game.route}>
+            <Button variant="secondary">{t('investui.list.open')}</Button>
           </Link>
         </Card>
       )}
@@ -93,19 +128,17 @@ export function LessonList() {
           );
         })}
 
-        <details className="rounded-xl border border-line bg-surface">
+        <details className="rounded-xl border border-line bg-surface" open={!!recommended && !upNext}>
           <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3">
             <span className="font-bold text-ink">{t('investui.list.games')}</span>
-            <span className="text-sm text-muted">{t('investui.group.games', { n: games.length + 4 })}</span>
+            <span className="text-sm text-muted">{t('investui.group.games', { n: SECTION_GAMES.length })}</span>
           </summary>
-          <ul className="divide-y divide-line border-t border-line">
-            {games.map((game) => (
-              <GameRow key={game.id} to={`/learn/invest/${game.id}`} title={title(game)} hint={blurb(game)} />
+          <ul className="space-y-3 border-t border-line p-3">
+            {(loaded ? states : SECTION_GAMES.map((game) => ({ game, ready: true, missing: [], played: false, recommended: false }))).map((s) => (
+              <li key={s.game.id}>
+                <GameTile state={s} />
+              </li>
             ))}
-            <GameRow to="/learn/invest/stock-market" title={t('stockmarket.title')} hint={t('stockmarket.open.hint')} />
-            <GameRow to="/learn/invest/mutual-fund" title={t('mutualfund.title')} hint={t('mutualfund.open.hint')} />
-            <GameRow to="/learn/invest/invest-or-scam" title={t('scamsort.title')} hint={t('scamsort.open.hint')} />
-            <GameRow to="/learn/invest/time-machine" title={t('timemachine.title')} hint={t('timemachine.open.hint')} />
           </ul>
         </details>
       </div>
@@ -113,16 +146,38 @@ export function LessonList() {
   );
 }
 
-function GameRow({ to, title: name, hint }: { to: string; title: string; hint: string }) {
+function GameTile({ state }: { state: GameState }) {
+  const { game, ready, missing, played, recommended } = state;
+  const name = t(game.titleKey);
+  if (!ready) {
+    const names = missing.map((id) => title(lessonById.get(id)!)).join(', ');
+    const first = lessonById.get(missing[0]!)!;
+    return (
+      <LockedTile
+        title={name}
+        reason={t('investui.game.learnFirst', { rooms: names })}
+        action={
+          <span className="flex flex-wrap gap-2">
+            <Link to={`/learn/invest/${first.id}`}>
+              <Button variant="secondary">{t('investui.game.goLearn', { room: title(first) })}</Button>
+            </Link>
+            <Link to={game.route}>
+              <Button variant="ghost">{t('investui.game.playAnyway')}</Button>
+            </Link>
+          </span>
+        }
+      />
+    );
+  }
   return (
-    <li>
-      <Link to={to} className="flex items-center gap-3 px-4 py-3 hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-brand">
-        <span className="flex-1">
-          <span className="block font-bold text-ink">{name}</span>
-          <span className="block text-sm text-ink-soft">{hint}</span>
-        </span>
-        <ChevronIcon dir="right" className="h-4 w-4 text-muted" />
-      </Link>
-    </li>
+    <Link to={game.route} className="flex items-center gap-3 rounded-xl border border-line px-4 py-3 hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-brand">
+      <span className="flex-1">
+        <span className="block font-bold text-ink">{name}</span>
+        <span className="block text-sm text-ink-soft">{t(game.hintKey)}</span>
+      </span>
+      {recommended && <Badge tone="info">{t('investui.game.recommended')}</Badge>}
+      {played && <Badge tone="good">{t('investui.game.played')}</Badge>}
+      <ChevronIcon dir="right" className="h-4 w-4 text-muted" />
+    </Link>
   );
 }

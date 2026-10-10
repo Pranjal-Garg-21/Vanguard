@@ -1,6 +1,7 @@
 /** Lab: the same lump sum on one path over different waiting times, across 500 simulated futures. Maths in logic/explore.ts (horizonRange). */
 import { useMemo, useState } from 'react';
 import { t } from '@/platform';
+import { RangeDisplay } from '@/ui';
 import { formatRupees, formatValue } from '../logic/calc';
 import { horizonRange } from '../logic/explore';
 import { LabSlider, Readout } from './controls';
@@ -32,10 +33,8 @@ export function HorizonRange({ amount }: { amount: number }) {
         ))}
       </div>
       <LabSlider id="hr-years" label={t('investui.hor.years')} shown={String(years)} min={1} max={20} step={1} value={years} onChange={setYears} />
-      <div className="grid gap-3 sm:grid-cols-4" aria-live="polite">
-        <Readout label={t('investui.hor.low')} value={formatRupees(r.low)} />
-        <Readout label={t('investui.hor.mid')} value={formatRupees(r.median)} />
-        <Readout label={t('investui.hor.high')} value={formatRupees(r.high)} tone="good" />
+      <div className="space-y-3" aria-live="polite">
+        <RangeDisplay low={r.low} median={r.median} high={r.high} />
         <Readout label={t('investui.hor.loss')} value={formatValue(r.lossChance, 'percent')} tone={r.lossChance > 0.1 ? 'bad' : 'plain'} />
       </div>
       <p className="text-xs text-muted">{t('investui.hor.note')}</p>

@@ -9,6 +9,10 @@ import { Link } from 'react-router';
 import { assumptions } from '@/core/market';
 import { formatRupees } from '@/games/investing/lessons/logic/calc';
 import { InvestShell } from '@/games/investing/lessons/InvestShell';
+import { runCalcs } from '@/games/investing/lessons/logic/calc';
+import { QuestionFlow } from '@/games/investing/lessons/QuestionFlow';
+import type { RoomQuestion } from '@/games/investing/lessons/logic/types';
+import { useQuestionRunner } from '@/games/investing/lessons/useQuestionRunner';
 import { LabSlider } from '@/games/investing/lessons/widgets/controls';
 import { logEvent, t } from '@/platform';
 import { AssumptionsDrawer, Card, ChevronIcon, FanChart, Pager, RangeDisplay, Spinner, type PagerPage } from '@/ui';
@@ -21,6 +25,7 @@ import { runTimeMachine, timeMachineChoice, type TimeMachineParams, type TimeMac
 import { parseTimeMachineSave, type TimeMachineSave } from './logic/save';
 
 const goals = content.goals;
+const check = content.check as unknown as { vars: Parameters<typeof runCalcs>[0]; calcs: Parameters<typeof runCalcs>[1]; questions: RoomQuestion[] };
 const rules = content.rules as InsightRule[];
 
 const tenthsText = (share: number) => {
@@ -52,6 +57,8 @@ function TimeMachineGame({ seed, restore, onSave }: { seed?: number | string; re
   const [inflation, setInflation] = useState(assumptions.inflation.base);
   const [done, setDone] = useState<{ params: TimeMachineParams; run: TimeMachineRun } | null>(null);
 
+  const checkCtx = useMemo(() => runCalcs(check.vars, check.calcs), []);
+  const runner = useQuestionRunner('time_machine_gate', checkCtx);
   const params: TimeMachineParams = useMemo(() => ({ years, initial, monthly, mix, target: goal.target }), [years, initial, monthly, mix, goal.target]);
 
   const pickGoal = (id: string) => {
@@ -144,6 +151,18 @@ function TimeMachineGame({ seed, restore, onSave }: { seed?: number | string; re
       title: t('timemachine.p4.title'),
       hint: t('timemachine.p4.hint'),
       content: done ? <Result done={done} inflation={inflation} setInflation={setInflation} /> : null,
+    },
+    {
+      id: 'check',
+      title: t('timemachine.p5.title'),
+      hint: t('timemachine.p5.hint'),
+      content: (
+        <QuestionFlow
+          questions={check.questions}
+          ctx={checkCtx}
+          h={{ stateOf: runner.stateOf, isDone: runner.isDone, submitNumber: runner.submitNumber, pickOption: runner.pickOption, toggleHint: runner.toggleHint, reveal: runner.reveal }}
+        />
+      ),
     },
   ];
 

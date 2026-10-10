@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import rulesFile from '@/content/scenarios/invest/time_machine.json';
+import { describeCheck } from '@/test/describeCheck';
 import { t } from '@/platform';
 import { pickInsight, tenths, type InsightFacts, type InsightRule } from './insight';
 import { defaultMix, MIX_IDS, setShare, toWeights, type Mix } from './mix';
@@ -8,6 +9,8 @@ import { validateEvent } from '@shared/telemetry/event';
 import { runTimeMachine, timeMachineChoice } from './run';
 
 const rules = rulesFile.rules as InsightRule[];
+const content = rulesFile;
+describeCheck('time machine gate', 'timemachine', rulesFile.check as unknown as Parameters<typeof describeCheck>[2]);
 const goals = rulesFile.goals;
 const total = (m: Mix) => m.steady_box + m.mixed_basket + m.bumpy_ride;
 
@@ -144,5 +147,12 @@ describe('telemetry', () => {
     const r = validateEvent(event);
     if (!r.ok) throw new Error(r.errors.join(', '));
     expect(r.ok).toBe(true);
+  });
+});
+
+describe('S5 gate questions', () => {
+  it('are three, well formed, with a number, a range-reading question and a deadline question', () => {
+    expect(content.check.questions).toHaveLength(3);
+    expect(content.check.questions.map((q) => q.kind)).toEqual(['number', 'choice', 'choice']);
   });
 });

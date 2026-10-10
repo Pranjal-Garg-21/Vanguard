@@ -12,6 +12,11 @@
   "group.time": "Time and staying safe",
   "group.count": "{done} of {total} done",
   "group.games": "{n} games",
+  "game.recommended": "Recommended",
+  "game.played": "Played",
+  "game.learnFirst": "Learn first: {rooms}.",
+  "game.goLearn": "Go to {room}",
+  "game.playAnyway": "Play anyway",
   "list.open": "Open",
   "card.predict": "Make a guess",
 
