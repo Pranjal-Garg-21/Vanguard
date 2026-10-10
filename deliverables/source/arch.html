@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@page { size: 1100px 640px; margin: 0; }
+body { margin: 0; background: #fff; font-family: "Latin Modern Roman", "CMU Serif", Georgia, serif; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+</head><body>
+<pre class="mermaid">
+%%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":28,"rankSpacing":38},"themeVariables":{"fontFamily":"Georgia, serif","fontSize":"18px","primaryColor":"#ffffff","primaryBorderColor":"#333333","primaryTextColor":"#111111","lineColor":"#555555","clusterBkg":"#f6f6f6","clusterBorder":"#999999"}}}%%
+flowchart LR
+  subgraph D["Student device (offline-first PWA)"]
+    direction TB
+    UI["UI screens<br/>onboarding · life months · games"]
+    CORE["Simulation core<br/>deterministic engine · seeded event tape<br/>market model · mastery model"]
+    CON["Content packs<br/>scenarios · lessons · 4 languages"]
+    DB[("Local storage<br/>saves · snapshots · event outbox")]
+    UI --> CORE
+    CON --> CORE
+    CORE --> DB
+  end
+  subgraph C["Cloud (only when online)"]
+    direction TB
+    API["Sync API"]
+    PG[("Database<br/>pseudonymous events")]
+    FAC["Facilitator dashboard"]
+    API --> PG --> FAC
+  end
+  DB -- "background sync" --> API
+</pre>
+<script>mermaid.initialize({ startOnLoad: true });</script>
+</body></html>
