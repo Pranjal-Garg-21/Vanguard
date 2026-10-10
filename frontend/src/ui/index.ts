@@ -5,4 +5,5 @@
  */
 
 export { Badge, Button, Card, Notice, Spinner } from './components';
+export { CheckIcon, ChevronIcon } from './icons';
 export { SimBanner } from './SimBanner';

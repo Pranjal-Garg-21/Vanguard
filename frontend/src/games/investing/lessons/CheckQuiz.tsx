@@ -4,7 +4,7 @@
  */
 import { useMemo, useState } from 'react';
 import { logEvent, t } from '@/platform';
-import { Button } from '@/ui';
+import { Button, CheckIcon } from '@/ui';
 import { fillTemplate, runCalcs } from './logic/calc';
 import { shuffleStable } from './logic/shuffle';
 import type { CheckItem, CheckOption, Level } from './logic/types';
@@ -88,7 +88,7 @@ export function CheckQuiz({
                 className={`flex min-h-14 w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-3 text-start text-base transition-colors ${tone}`}
               >
                 <span>{tx(option.textKey)}</span>
-                {picked && isRight && <span aria-hidden="true">✓</span>}
+                {picked && isRight && <CheckIcon className="h-5 w-5 text-emerald-700" />}
               </button>
             </li>
           );

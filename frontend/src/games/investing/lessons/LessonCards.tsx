@@ -7,7 +7,6 @@ import { formatRupees, formatValue, fillTemplate, type Computed } from './logic/
 import { glossaryById } from './logic/content';
 import type { LessonBlock } from './logic/types';
 import { Markup } from './Markup';
-import { Visual } from './Visual';
 import { ExploreWidget } from './widgets/ExploreWidget';
 
 type Ctx = Record<string, Computed>;
@@ -18,7 +17,7 @@ const LABELS: Partial<Record<LessonBlock['type'], { key: string; tone: string }>
   misconception: { key: 'investui.card.mistake', tone: 'bg-amber-50' },
   formula: { key: 'investui.card.formula', tone: 'bg-slate-100' },
   explore: { key: 'investui.card.explore', tone: 'bg-teal-50' },
-  predict: { key: 'investui.card.predict', tone: 'bg-indigo-50' },
+  predict: { key: 'investui.card.predict', tone: 'bg-sky-50' },
   steps: { key: 'investui.card.steps', tone: 'bg-white' },
   jargon: { key: 'investui.card.words', tone: 'bg-white' },
 };
@@ -30,7 +29,6 @@ export function BlockCard({ block, ctx, onPredictDone }: { block: LessonBlock; c
   return (
     <section className={`space-y-3 rounded-2xl border border-slate-200 p-5 shadow-sm ${label?.tone ?? 'bg-white'}`}>
       {label && <h2 className="text-xs font-bold uppercase tracking-wide text-teal-800">{t(label.key)}</h2>}
-      <Visual id={block.visual} />
 
       {block.textKey && block.type !== 'formula' && (
         <p className={block.type === 'hook' ? 'text-xl font-semibold text-slate-900' : 'text-lg leading-relaxed text-slate-800'}>

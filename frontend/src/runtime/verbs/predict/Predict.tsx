@@ -108,7 +108,7 @@ export function Predict({ question, slider, actual, low, high, format, explanati
           <dl className="grid grid-cols-2 gap-2 text-center">
             <div className="rounded-xl bg-white p-2">
               <dt className="text-xs text-slate-500">{t('investui.predict.yourGuess')}</dt>
-              <dd className="text-lg font-bold text-indigo-700">{format(guess)}</dd>
+              <dd className="text-lg font-bold text-sky-800">{format(guess)}</dd>
             </div>
             <div className="rounded-xl bg-white p-2">
               <dt className="text-xs text-slate-500">{t('investui.predict.model')}</dt>
@@ -127,7 +127,7 @@ export function Predict({ question, slider, actual, low, high, format, explanati
 }
 
 function Marker({ at, label, tone, below = false }: { at: number; label: string; tone: 'guess' | 'model'; below?: boolean }) {
-  const colour = tone === 'guess' ? 'bg-indigo-600' : 'bg-teal-700';
+  const colour = tone === 'guess' ? 'bg-sky-700' : 'bg-teal-700';
   return (
     <div className="absolute top-0 -translate-x-1/2 text-center" style={{ insetInlineStart: `${at}%` }} title={label}>
       <div className={`mx-auto mt-4 h-6 w-6 rounded-full border-2 border-white shadow ${colour} ${below ? 'translate-y-1' : ''}`} />

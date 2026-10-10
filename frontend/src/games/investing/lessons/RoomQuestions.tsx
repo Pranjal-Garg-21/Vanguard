@@ -4,7 +4,7 @@
  */
 import { useMemo, useState } from 'react';
 import { t } from '@/platform';
-import { Button } from '@/ui';
+import { Button, CheckIcon, ChevronIcon } from '@/ui';
 import { fillTemplate, type Computed } from './logic/calc';
 import type { QuestionState } from './logic/room';
 import { shuffleStable } from './logic/shuffle';
@@ -29,7 +29,7 @@ export function QuestionRow(props: Props) {
   const done = state.solved || state.revealed;
 
   return (
-    <div className={`space-y-3 rounded-xl border-2 p-4 ${done ? 'border-emerald-300 bg-emerald-50/50' : 'border-slate-200 bg-white'}`}>
+    <div className={`space-y-3 rounded-xl border p-4 ${done ? 'border-emerald-300 bg-emerald-50/40' : 'border-slate-200 bg-white'}`}>
       <div className="flex items-start justify-between gap-3">
         <p className="text-lg font-semibold text-slate-900">
           <Markup text={tx(q.promptKey)} />
@@ -43,16 +43,20 @@ export function QuestionRow(props: Props) {
 
       {!done && q.hintKey && (
         <div>
-          <button type="button" onClick={props.onHint} className="text-sm font-semibold text-indigo-700 underline">
-            💡 {state.hintShown ? t('investui.room.hideHint') : t('investui.room.hint')}
+          <button type="button" onClick={props.onHint} className="inline-flex items-center gap-1 text-sm font-semibold text-sky-800 hover:underline">
+            {state.hintShown ? t('investui.room.hideHint') : t('investui.room.hint')}
+            <ChevronIcon dir={state.hintShown ? 'up' : 'down'} />
           </button>
-          {state.hintShown && <p className="mt-2 rounded-lg bg-indigo-50 p-3 text-indigo-900">{tx(q.hintKey)}</p>}
+          {state.hintShown && <p className="mt-2 rounded-lg border border-sky-200 bg-sky-50 p-3 text-sky-900">{tx(q.hintKey)}</p>}
         </div>
       )}
 
       {state.solved && !state.revealed && (
-        <div className="rounded-lg bg-emerald-100 p-3 text-emerald-900" aria-live="polite">
-          <p className="font-bold">✓ {t('investui.room.correct')}</p>
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-emerald-900" aria-live="polite">
+          <p className="flex items-center gap-1.5 font-bold">
+            <CheckIcon />
+            {t('investui.room.correct')}
+          </p>
           <p>{tx(q.explainKey)}</p>
         </div>
       )}
@@ -80,7 +84,7 @@ function NumberInput({ q, state, onSubmitNumber, onReveal }: Props & { tx: (k: s
   return (
     <div className="space-y-2">
       <form
-        className="flex gap-2"
+        className="flex flex-wrap gap-2"
         onSubmit={(e) => {
           e.preventDefault();
           if (value.trim() && !done) onSubmitNumber(value);
@@ -95,7 +99,7 @@ function NumberInput({ q, state, onSubmitNumber, onReveal }: Props & { tx: (k: s
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="min-h-12 min-w-0 flex-1 rounded-xl border-2 border-slate-300 px-3 text-lg focus:border-teal-600 focus:outline-none disabled:bg-slate-100"
+          className="min-h-12 min-w-40 flex-1 rounded-xl border border-slate-300 px-3 text-lg focus:border-teal-600 focus:outline-2 focus:outline-teal-600 disabled:bg-slate-100"
         />
         <Button type="submit" disabled={done || !value.trim()}>
           {t('investui.room.submit')}
@@ -137,7 +141,7 @@ function ChoiceList({ q, state, onPickOption, onReveal, tx }: Props & { tx: (k: 
                 className={`flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-2 text-start transition-colors ${tone}`}
               >
                 <span>{tx(o.textKey)}</span>
-                {done && isRight && <span aria-hidden="true">✓</span>}
+                {done && isRight && <CheckIcon className="h-5 w-5 text-emerald-700" />}
               </button>
             </li>
           );
