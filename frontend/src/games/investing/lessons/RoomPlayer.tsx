@@ -3,7 +3,7 @@
  * active task on the right, with the reading and lab beside the questions on wide screens. One column on phones.
  * Route: /learn/invest/:lessonId. Owner: P4.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { logEvent, t } from '@/platform';
 import { Badge, Button, Card, CheckIcon, ChevronIcon, ProgressBar } from '@/ui';
@@ -11,20 +11,34 @@ import { InvestShell } from './InvestShell';
 import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
 import { allLessons } from './logic/content';
-import { checkNumberAnswer, emptyQuestionState, roomPoints, roomQuestions, type QuestionState } from './logic/room';
+import { checkNumberAnswer, emptyQuestionState, roomPoints, roomQuestions, type ProgressMap, type QuestionState } from './logic/room';
 import type { Room, RoomQuestion } from './logic/types';
 import { QuestionRow } from './RoomQuestions';
 
 const LEVEL = 2;
 
-export function RoomPlayer({ room }: { room: Room }) {
+export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initial?: ProgressMap; onChange?: (answers: ProgressMap) => void }) {
   const ctx = useMemo(() => runCalcs(room.vars, room.calcs), [room]);
   const tx = (key: string) => fillTemplate(t(key), ctx);
   const questions = useMemo(() => roomQuestions(room), [room]);
   const totalPoints = roomPoints(room);
 
-  const [answers, setAnswers] = useState<Record<string, QuestionState>>({});
-  const [active, setActive] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, QuestionState>>(initial);
+  // Reopening a room continues at the first task that is not finished yet.
+  const [active, setActive] = useState(() => {
+    const firstOpen = room.tasks.findIndex((x) => !x.questions.every((q) => initial[q.id]?.solved || initial[q.id]?.revealed));
+    return firstOpen === -1 ? 0 : firstOpen;
+  });
+
+  // Save after every change, but not for the state we just loaded.
+  const loadedOnce = useRef(false);
+  useEffect(() => {
+    if (!loadedOnce.current) {
+      loadedOnce.current = true;
+      return;
+    }
+    onChange?.(answers);
+  }, [answers, onChange]);
 
   const stateOf = (q: RoomQuestion) => answers[q.id] ?? emptyQuestionState();
   const isDone = (q: RoomQuestion) => stateOf(q).solved || stateOf(q).revealed;

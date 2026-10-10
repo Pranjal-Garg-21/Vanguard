@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { checks } from './content';
+import { rooms } from './content';
+import { roomQuestions } from './room';
 import { shuffleStable } from './shuffle';
 
 describe('shuffleStable', () => {
@@ -16,8 +17,10 @@ describe('shuffleStable', () => {
     const orders = new Set(['q1', 'q2', 'q3', 'q4', 'q5', 'q6'].map((q) => shuffleStable(items, q).join('')));
     expect(orders.size).toBeGreaterThan(1);
   });
-  it('the right answer is not first in every real check question', () => {
-    const firstIsRight = checks.filter((c) => shuffleStable(c.options, c.id)[0]!.id === c.correct).length;
-    expect(firstIsRight).toBeLessThan(checks.length * 0.6);
+  it('the right answer is not first in most real choice questions (so "always pick the first" does not work)', () => {
+    const choices = rooms.flatMap((r) => roomQuestions(r)).filter((q) => q.kind === 'choice');
+    expect(choices.length).toBeGreaterThan(0);
+    const firstIsRight = choices.filter((q) => shuffleStable(q.options ?? [], q.id)[0]!.id === q.correct).length;
+    expect(firstIsRight).toBeLessThan(choices.length * 0.6);
   });
 });

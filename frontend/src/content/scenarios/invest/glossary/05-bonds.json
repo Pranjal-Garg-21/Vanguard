@@ -1,0 +1,8 @@
+[
+  { "id": "bond", "termKey": "invest_bonds.glossary.bond.term", "defKey": "invest_bonds.glossary.bond.def", "lesson": "lesson_bonds" },
+  { "id": "issuer", "termKey": "invest_bonds.glossary.issuer.term", "defKey": "invest_bonds.glossary.issuer.def", "lesson": "lesson_bonds" },
+  { "id": "face_value", "termKey": "invest_bonds.glossary.face_value.term", "defKey": "invest_bonds.glossary.face_value.def", "lesson": "lesson_bonds" },
+  { "id": "coupon", "termKey": "invest_bonds.glossary.coupon.term", "defKey": "invest_bonds.glossary.coupon.def", "lesson": "lesson_bonds" },
+  { "id": "maturity", "termKey": "invest_bonds.glossary.maturity.term", "defKey": "invest_bonds.glossary.maturity.def", "lesson": "lesson_bonds" },
+  { "id": "credit_risk", "termKey": "invest_bonds.glossary.credit_risk.term", "defKey": "invest_bonds.glossary.credit_risk.def", "lesson": "lesson_bonds" }
+]

@@ -1,0 +1,273 @@
+{
+  "id": "lesson_inflation",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 3,
+  "estMinutes": 10,
+  "difficulty": "easy",
+  "titleKey": "invest_inflation.title",
+  "blurbKey": "invest_inflation.blurb",
+  "concepts": ["inflation", "real_return"],
+  "misconceptions": ["money_in_box_is_safe"],
+  "vars": {
+    "old": { "value": 5, "fmt": "rupees" },
+    "price": { "value": 20, "fmt": "rupees" },
+    "infl": { "value": 0.06, "fmt": "percent" },
+    "money": { "value": 1000, "fmt": "rupees" },
+    "ex": { "value": 100, "fmt": "rupees" },
+    "exr": { "value": 0.05, "fmt": "percent" },
+    "p25": { "value": 25, "fmt": "rupees" },
+    "p40": { "value": 40, "fmt": "rupees" },
+    "y0": { "value": 0 },
+    "labI": { "value": 0.06, "fmt": "percent" },
+    "labY": { "value": 10 },
+    "labY2": { "value": 20 },
+    "nom1": { "value": 0.07, "fmt": "percent" },
+    "inf1": { "value": 0.05, "fmt": "percent" },
+    "nom2": { "value": 0.04, "fmt": "percent" },
+    "inf2": { "value": 0.06, "fmt": "percent" },
+    "bike": { "value": 50000, "fmt": "rupees" },
+    "bi": { "value": 0.05, "fmt": "percent" },
+    "by": { "value": 3 }
+  },
+  "calcs": [
+    { "id": "exNext", "fn": "inflate", "args": ["$ex", "$exr", 1], "fmt": "rupees" },
+    { "id": "nextPrice", "fn": "inflate", "args": ["$price", "$infl", 1], "fmt": "rupees", "round": 1 },
+    { "id": "cupsNow", "fn": "unitsAffordable", "args": ["$money", "$price"] },
+    { "id": "cups25", "fn": "unitsAffordable", "args": ["$money", "$p25"] },
+    { "id": "cups40", "fn": "unitsAffordable", "args": ["$money", "$p40"] },
+    { "id": "labPrice", "fn": "inflate", "args": ["$price", "$labI", "$labY"], "fmt": "rupees", "round": 2 },
+    { "id": "labCups", "fn": "unitsAffordable", "args": ["$money", "$labPrice"] },
+    { "id": "labPrice2", "fn": "inflate", "args": ["$price", "$labI", "$labY2"], "fmt": "rupees", "round": 2 },
+    { "id": "labCups2", "fn": "unitsAffordable", "args": ["$money", "$labPrice2"] },
+    { "id": "real1", "fn": "realReturnApprox", "args": ["$nom1", "$inf1"], "fmt": "percent" },
+    { "id": "real2", "fn": "realReturn", "args": ["$nom2", "$inf2"], "fmt": "percent", "round": 1 },
+    { "id": "bikePrice", "fn": "inflate", "args": ["$bike", "$bi", "$by"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_inflation.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "chai_prices", "textKey": "invest_inflation.t1.hook" },
+        { "type": "define", "textKey": "invest_inflation.t1.define" },
+        { "type": "note", "textKey": "invest_inflation.t1.example" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_inflation.q1.prompt",
+          "concept": "inflation",
+          "points": 10,
+          "hintKey": "invest_inflation.q1.hint",
+          "explainKey": "invest_inflation.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_inflation.q1.opt.a" },
+            { "id": "b", "textKey": "invest_inflation.q1.opt.b" },
+            { "id": "c", "textKey": "invest_inflation.q1.opt.c" },
+            { "id": "d", "textKey": "invest_inflation.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "invest_inflation.q2.prompt",
+          "concept": "inflation",
+          "points": 10,
+          "hintKey": "invest_inflation.q2.hint",
+          "explainKey": "invest_inflation.q2.explain",
+          "answer": "nextPrice",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_inflation.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_inflation.t2.define" },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "invest_inflation.t2.steps.1",
+            "invest_inflation.t2.steps.2",
+            "invest_inflation.t2.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_inflation.q3.prompt",
+          "concept": "inflation",
+          "points": 10,
+          "hintKey": "invest_inflation.q3.hint",
+          "explainKey": "invest_inflation.q3.explain",
+          "answer": "cups40",
+          "unit": "number"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "invest_inflation.q4.prompt",
+          "concept": "inflation",
+          "points": 10,
+          "hintKey": "invest_inflation.q4.hint",
+          "explainKey": "invest_inflation.q4.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_inflation.q4.opt.a" },
+            {
+              "id": "b",
+              "textKey": "invest_inflation.q4.opt.b",
+              "misconception": "money_in_box_is_safe",
+              "feedbackKey": "invest_inflation.q4.fb.b"
+            },
+            { "id": "c", "textKey": "invest_inflation.q4.opt.c" },
+            { "id": "d", "textKey": "invest_inflation.q4.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_inflation.t3.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "inflation_cups",
+            "promptKey": "invest_inflation.t3.explore",
+            "params": { "price": "$price", "inflation": "$infl", "years": "$y0", "money": "$money" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "invest_inflation.q5.prompt",
+          "concept": "inflation",
+          "points": 10,
+          "hintKey": "invest_inflation.q5.hint",
+          "explainKey": "invest_inflation.q5.explain",
+          "answer": "labPrice",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "invest_inflation.q6.prompt",
+          "concept": "inflation",
+          "points": 10,
+          "hintKey": "invest_inflation.q6.hint",
+          "explainKey": "invest_inflation.q6.explain",
+          "answer": "labCups",
+          "unit": "number"
+        },
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "invest_inflation.q7.prompt",
+          "concept": "inflation",
+          "points": 10,
+          "hintKey": "invest_inflation.q7.hint",
+          "explainKey": "invest_inflation.q7.explain",
+          "answer": "labCups2",
+          "unit": "number"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_inflation.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_inflation.t4.define" },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "invest_inflation.t4.steps.1",
+            "invest_inflation.t4.steps.2",
+            "invest_inflation.t4.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "invest_inflation.q8.prompt",
+          "concept": "real_return",
+          "points": 10,
+          "hintKey": "invest_inflation.q8.hint",
+          "explainKey": "invest_inflation.q8.explain",
+          "answer": "real2",
+          "unit": "percent"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "invest_inflation.q9.prompt",
+          "concept": "real_return",
+          "points": 10,
+          "hintKey": "invest_inflation.q9.hint",
+          "explainKey": "invest_inflation.q9.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_inflation.q9.opt.a" },
+            { "id": "b", "textKey": "invest_inflation.q9.opt.b" },
+            { "id": "c", "textKey": "invest_inflation.q9.opt.c" },
+            { "id": "d", "textKey": "invest_inflation.q9.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "invest_inflation.t5.title",
+      "blocks": [
+        { "type": "tradeoff", "textKey": "invest_inflation.t5.tradeoff" },
+        {
+          "type": "misconception",
+          "misconceptions": ["money_in_box_is_safe"],
+          "textKey": "invest_inflation.t5.mistake"
+        },
+        { "type": "jargon", "terms": ["inflation", "buying_power", "nominal_return", "real_return"] }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "invest_inflation.q10.prompt",
+          "concept": "inflation",
+          "points": 20,
+          "hintKey": "invest_inflation.q10.hint",
+          "explainKey": "invest_inflation.q10.explain",
+          "answer": "bikePrice",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q11",
+          "kind": "choice",
+          "promptKey": "invest_inflation.q11.prompt",
+          "concept": "real_return",
+          "points": 10,
+          "hintKey": "invest_inflation.q11.hint",
+          "explainKey": "invest_inflation.q11.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_inflation.q11.opt.a" },
+            { "id": "b", "textKey": "invest_inflation.q11.opt.b" },
+            { "id": "c", "textKey": "invest_inflation.q11.opt.c" },
+            { "id": "d", "textKey": "invest_inflation.q11.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": ["inflation", "buying_power", "nominal_return", "real_return"]
+}

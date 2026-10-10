@@ -1,0 +1,101 @@
+{
+  "title": "Lending and the cost of a broken promise",
+  "blurb": "What you take on when you lend money, and why a bigger promise is not a bonus.",
+
+  "t1.title": "Lending and borrowing",
+  "t1.hook": "A shop owner asks {n} neighbours for {amt} each. He promises to pay back {amtBack} after a year. Your mission: understand what each neighbour is signing up for.",
+  "t1.define": "A **borrower** uses someone else's money and pays interest for it. A **lender** gives the money and earns that interest.",
+  "t1.note": "A bank deposit is a loan that you give to the bank. In both cases you are the lender.",
+
+  "q1.prompt": "When you keep money in a bank deposit, who is the lender?",
+  "q1.opt.a": "You are",
+  "q1.opt.b": "The bank is",
+  "q1.opt.c": "The government is",
+  "q1.opt.d": "Nobody, because it is not a loan",
+  "q1.hint": "Who hands over the money, and who uses it?",
+  "q1.explain": "You hand your money to the bank to use, so you are the lender.",
+
+  "q2.prompt": "A shop owner borrows {b1} and promises {r1} interest for one year. How much interest does he owe? Type a number in rupees.",
+  "q2.hint": "Work out {r1} of the amount borrowed.",
+  "q2.explain": "{r1} of {b1} is {i1}.",
+
+  "t2.title": "The promise",
+  "t2.steps.1": "Each neighbour lends {amt}",
+  "t2.steps.2": "The shop promises {amtBack} back after a year",
+  "t2.steps.3": "If the shop pays, each neighbour earns {gain}, which is a return of {rate}",
+
+  "q3.prompt": "A lender hands over {l2}. The borrower promises {l2back} back. If the promise is kept, what is the lender's return? Type a percentage.",
+  "q3.hint": "Return = what you earn ÷ what you lent. First find what you earn.",
+  "q3.explain": "{l2back} minus {l2} is the profit. Divided by {l2}, that is a return of {ret}.",
+
+  "q4.prompt": "All {n} neighbours are paid in full. How much interest does the shop owner pay in total? Type a number in rupees.",
+  "q4.hint": "Use the interest for one neighbour from the steps, then count all {n}.",
+  "q4.explain": "{n} neighbours at {gain} each is {total}.",
+
+  "t3.title": "When the borrower cannot pay",
+  "t3.define": "**Default** is when a borrower cannot pay what was promised. Lenders may get back only part of their money, or none.",
+  "t3.steps.1": "The shop has a bad year and closes",
+  "t3.steps.2": "The owner can repay only part of what he owes",
+  "t3.steps.3": "Each lender gets back less than they lent",
+  "t3.explore": "Open the lab. One lender lends money. Change the promised rate and how much comes back if the shop fails.",
+
+  "q5.prompt": "In the lab, set the money recovered to {rec40} and leave the rate alone. If the shop fails, what is the lender's net result? Use a minus sign for a loss.",
+  "q5.hint": "Net result = money that comes back minus the money lent. Read it from the failing side of the lab.",
+  "q5.explain": "Only {rec40} of {labAmt} comes back, so the lender is down by {labLoss}. The net result is {labNet}.",
+
+  "q6.prompt": "Now set the promised rate to {r20}. If the shop pays, how much interest does the lender earn? Type a number in rupees.",
+  "q6.hint": "Read interest earned from the paying side of the lab.",
+  "q6.explain": "{r20} of {labAmt} is {gain20}.",
+
+  "q7.prompt": "Move the promised rate up and down while the shop fails. Does a higher promised rate change the loss?",
+  "q7.opt.a": "No. The loss depends on how much is recovered",
+  "q7.opt.b": "Yes. A higher rate always protects the lender",
+  "q7.opt.c": "Yes. A higher rate makes the loss bigger",
+  "q7.opt.d": "Only when the lender is rich",
+  "q7.hint": "Watch the failing side of the lab as you move the rate slider.",
+  "q7.explain": "If the shop fails, a promise is just a promise. The loss depends on what is recovered, not on the rate that was promised.",
+
+  "t4.title": "A higher promise is a warning",
+  "t4.tradeoff": "A higher promised rate usually means a higher chance that the promise breaks. A safer borrower usually offers less, and sleeps easier.",
+  "t4.mistake": "A very high promised return is not a free bonus. It is often a warning sign. No one can truly guarantee a return.",
+
+  "q8.prompt": "Neighbour A has run a shop for 20 years and promises 8%. A stranger, B, promises 40% a year, guaranteed. How should you think about B?",
+  "q8.opt.a": "The higher promise signals higher risk, so look much closer",
+  "q8.opt.b": "40% is a bonus, so B is the better choice",
+  "q8.opt.c": "Guaranteed means B cannot fail",
+  "q8.opt.d": "Only the rate matters, not who is borrowing",
+  "q8.fb.b": "A very high promise is more often a sign of danger than of a bonus. Someone safe rarely needs to offer so much.",
+  "q8.fb.c": "The word guaranteed is only a promise. No borrower can remove the chance of failing.",
+  "q8.hint": "Ask why anyone would offer to pay so much.",
+  "q8.explain": "A promise far above the normal rate is a warning. A promise is not a guarantee.",
+
+  "q9.prompt": "Challenge: you lend {l5}. The borrower fails and repays only {rec40} of it. How many rupees do you lose? Type a number.",
+  "q9.hint": "Work out the part that is not repaid.",
+  "q9.explain": "Only {rec40} of {l5} comes back, so you lose {loss5}.",
+
+  "t5.title": "Where lending shows up",
+  "t5.note": "A bank deposit is a loan to a bank. A bond is a loan to a company or the government. In each case you are the lender, and the promise can break.",
+
+  "q10.prompt": "Which of these is lending?",
+  "q10.opt.a": "Keeping money in a bank deposit",
+  "q10.opt.b": "Buying a share in a company",
+  "q10.opt.c": "Buying a gold ring",
+  "q10.opt.d": "Paying an electricity bill",
+  "q10.hint": "Look for the one where you hand over money and expect it back with interest.",
+  "q10.explain": "A deposit is a loan to the bank. A share is ownership, gold is a thing, and a bill is a payment.",
+
+  "q11.prompt": "What does default mean?",
+  "q11.opt.a": "The borrower pays early",
+  "q11.opt.b": "The borrower cannot pay what was promised",
+  "q11.opt.c": "The lender raises the interest rate",
+  "q11.opt.d": "The loan is renewed",
+  "q11.hint": "Think about the shop that closed.",
+  "q11.explain": "Default is when a borrower cannot pay what was promised.",
+
+  "glossary.borrower.term": "Borrower",
+  "glossary.borrower.def": "Someone who uses another person's money and pays interest.",
+  "glossary.lender.term": "Lender",
+  "glossary.lender.def": "Someone who gives money to be used and earns interest.",
+  "glossary.default.term": "Default",
+  "glossary.default.def": "When a borrower cannot pay what was promised."
+}

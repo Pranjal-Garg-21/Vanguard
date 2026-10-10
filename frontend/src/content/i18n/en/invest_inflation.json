@@ -1,0 +1,98 @@
+{
+  "title": "Inflation and buying power",
+  "blurb": "Why the same rupees buy less as years go by, and what that means for your savings.",
+
+  "t1.title": "Prices rise",
+  "t1.hook": "When Ravi's father was a boy, a cup of chai cost {old}. Today it costs {price}. Your mission: find out why, and what it means for savings.",
+  "t1.define": "**Inflation** is the rise in prices over time. It is usually measured as a percentage per year.",
+  "t1.example": "At {exr} inflation a year, an item that costs {ex} today costs {exNext} a year from now.",
+
+  "q1.prompt": "What is inflation?",
+  "q1.opt.a": "A general rise in prices over time",
+  "q1.opt.b": "A rise in your salary",
+  "q1.opt.c": "A fall in prices",
+  "q1.opt.d": "A charge your bank adds",
+  "q1.hint": "Think about what happened to the price of chai.",
+  "q1.explain": "Inflation is a general rise in prices over time.",
+
+  "q2.prompt": "Chai costs {price} today. With inflation of {infl} a year, what will it cost next year? Type a number in rupees.",
+  "q2.hint": "Add {infl} of today's price to today's price.",
+  "q2.explain": "{price} grows by {infl} to {nextPrice}.",
+
+  "t2.title": "What your money can buy",
+  "t2.define": "**Buying power** is how much your money can buy. If prices rise and your money stays the same, its buying power falls.",
+  "t2.steps.1": "A cup of chai costs {price}, so {money} buys {cupsNow} cups",
+  "t2.steps.2": "The price rises to {p25}: the same {money} now buys only {cups25} cups",
+  "t2.steps.3": "The money did not change. What it can buy did.",
+
+  "q3.prompt": "Chai now costs {p40}. How many whole cups can {money} buy? Type a number.",
+  "q3.hint": "Divide the money by the price of one cup.",
+  "q3.explain": "{money} ÷ {p40} is {cups40} cups.",
+
+  "q4.prompt": "Your savings stay at {money} for ten years, while prices keep rising. What happens to what you can buy?",
+  "q4.opt.a": "You can buy less",
+  "q4.opt.b": "You can buy the same, because the amount did not change",
+  "q4.opt.c": "You can buy more",
+  "q4.opt.d": "It depends only on which bank you use",
+  "q4.fb.b": "The number stays the same, but each rupee buys less once prices rise. That is the part that is easy to miss.",
+  "q4.hint": "Look at the cups in the steps above. Did the money or the price change?",
+  "q4.explain": "Prices rose and the money stayed the same, so it buys less.",
+
+  "t3.title": "Lab: prices over time",
+  "t3.explore": "Open the lab. Change the inflation rate and the years. Watch the price of a cup and how many cups the money buys.",
+
+  "q5.prompt": "In the lab, set inflation to {labI} and the years to {labY}. What does one cup cost then? Type a number in rupees.",
+  "q5.hint": "Read the price of one cup then. Typing it to the nearest rupee is fine.",
+  "q5.explain": "At {labI} a year, a {price} cup costs {labPrice} after {labY} years.",
+
+  "q6.prompt": "With the same settings, how many whole cups can {money} buy then? Type a number.",
+  "q6.hint": "Divide {money} by the new price of one cup, and ignore any part of a cup.",
+  "q6.explain": "{money} ÷ {labPrice} is {labCups} whole cups, against {cupsNow} today.",
+
+  "q7.prompt": "Now set the years to {labY2}. How many whole cups can {money} buy?",
+  "q7.hint": "Same lab. Change only the years.",
+  "q7.explain": "After {labY2} years a cup costs {labPrice2}, so {money} buys {labCups2} cups.",
+
+  "t4.title": "Real return",
+  "t4.define": "**Nominal return** is what your money earns, in rupees. **Real return** is what is left after inflation. It shows whether your buying power grew.",
+  "t4.steps.1": "A plan pays {nom1} a year",
+  "t4.steps.2": "Prices rise {inf1} a year",
+  "t4.steps.3": "Real return is about {nom1} minus {inf1}, which is {real1}",
+
+  "q8.prompt": "A plan pays {nom2} a year while inflation is {inf2}. What is the real return? Type a percentage. Use a minus sign if it is negative.",
+  "q8.hint": "Take inflation away from the return. A negative answer means buying power fell.",
+  "q8.explain": "{nom2} earned, {inf2} lost to prices: a real return of about {real2}.",
+
+  "q9.prompt": "Your savings grew by 5% in a year, but prices rose by 7%. Which is true?",
+  "q9.opt.a": "You can buy slightly less than before",
+  "q9.opt.b": "You are richer, because the number grew",
+  "q9.opt.c": "Nothing has changed",
+  "q9.opt.d": "Prices must have fallen",
+  "q9.hint": "Compare the growth in your money with the growth in prices.",
+  "q9.explain": "Prices rose faster than your money grew, so your buying power fell a little.",
+
+  "t5.title": "Challenge",
+  "t5.tradeoff": "Cash feels safe because the number never falls. But prices can rise, so its buying power can fall. Money that grows faster than prices keeps up, but growing money usually carries risk.",
+  "t5.mistake": "Many people think money kept safe at home keeps its value. The amount stays the same. What it can buy does not.",
+
+  "q10.prompt": "A bike costs {bike} today. Prices rise {bi} a year. What will the same bike cost in {by} years? Type a number in rupees.",
+  "q10.hint": "Grow the price by {bi} for one year, then again, then again.",
+  "q10.explain": "{bike} grows by {bi} a year for {by} years, which gives {bikePrice}.",
+
+  "q11.prompt": "Why can money in a cupboard be safe and still lose value?",
+  "q11.opt.a": "Prices rise while the amount stays the same",
+  "q11.opt.b": "Thieves always find it",
+  "q11.opt.c": "Notes wear out within a year",
+  "q11.opt.d": "Banks charge a fee for cupboards",
+  "q11.hint": "Think about the cups of chai again.",
+  "q11.explain": "The notes are safe, but prices rise, so the same notes buy less each year.",
+
+  "glossary.inflation.term": "Inflation",
+  "glossary.inflation.def": "A general rise in prices over time.",
+  "glossary.buying_power.term": "Buying power",
+  "glossary.buying_power.def": "How much your money can buy.",
+  "glossary.nominal_return.term": "Nominal return",
+  "glossary.nominal_return.def": "What your money earns, before taking inflation into account.",
+  "glossary.real_return.term": "Real return",
+  "glossary.real_return.def": "What your money earns after inflation is taken away."
+}

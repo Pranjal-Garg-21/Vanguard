@@ -217,6 +217,18 @@ function roomKeys(room: Room): string[] {
   return keys;
 }
 
+/**
+ * True when `answer` appears in `text` as a whole number, not as part of a bigger one.
+ * "12" is found in "12 years" but not in "₹12,400", "112" or "12%". Written amounts like "₹150" match as written.
+ */
+function appearsAsNumber(text: string, answer: string): boolean {
+  const escaped = answer.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const startsPlain = /^\d/.test(answer);
+  const before = startsPlain ? '(?<![\\d,.₹-])' : '';
+  const after = /%$/.test(answer) ? '(?![\\d,.])' : '(?![\\d%]|[,.]\\d)';
+  return new RegExp(`${before}${escaped}${after}`).test(text);
+}
+
 /** The text a student reads in a task before answering (cards, steps, lab instruction). */
 function teachingText(blocks: LessonBlock[], ctx: Record<string, Computed>): string {
   return blocks
@@ -331,7 +343,10 @@ describe.each(rooms.map((r) => [r.id, r] as const))('room %s', (_id, room) => {
       const reading = teachingText(room.tasks.slice(0, i + 1).flatMap((t) => t.blocks), c);
       for (const q of task.questions.filter((x) => x.kind === 'number')) {
         const answerText = c[q.answer!]!.text;
-        expect(reading.includes(answerText), `${q.id}: the answer "${answerText}" appears in the reading at or before ${task.id}`).toBe(false);
+        expect(
+          appearsAsNumber(reading, answerText),
+          `${q.id}: the answer "${answerText}" appears in the reading at or before ${task.id}`,
+        ).toBe(false);
       }
     });
   });
@@ -387,5 +402,22 @@ describe('strings hygiene', () => {
     }
     const orphans = Object.keys(strings).filter((k) => !used.has(k));
     expect(orphans).toEqual([]);
+  });
+});
+
+describe('appearsAsNumber (the spoiler checker)', () => {
+  it('finds a whole number and a written amount', () => {
+    expect(appearsAsNumber('doubles in 12 years', '12')).toBe(true);
+    expect(appearsAsNumber('profit is ₹150 here', '₹150')).toBe(true);
+    expect(appearsAsNumber('a return of 60%', '60%')).toBe(true);
+    expect(appearsAsNumber('a loss of -₹50', '-₹50')).toBe(true);
+  });
+  it('does not mistake a number for part of a bigger one', () => {
+    expect(appearsAsNumber('total ₹12,400', '12')).toBe(false);
+    expect(appearsAsNumber('it is 112 days', '12')).toBe(false);
+    expect(appearsAsNumber('a rate of 8%', '8')).toBe(false);
+    expect(appearsAsNumber('about 12.5 years', '12')).toBe(false);
+    expect(appearsAsNumber('₹1,50,000', '₹150')).toBe(false);
+    expect(appearsAsNumber('a return of 160%', '60%')).toBe(false);
   });
 });

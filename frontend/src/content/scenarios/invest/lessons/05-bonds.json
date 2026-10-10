@@ -1,0 +1,271 @@
+{
+  "id": "lesson_bonds",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 5,
+  "estMinutes": 12,
+  "difficulty": "medium",
+  "titleKey": "invest_bonds.title",
+  "blurbKey": "invest_bonds.blurb",
+  "concepts": ["bonds", "bond_price_rates", "default_risk"],
+  "misconceptions": ["bonds_are_risk_free"],
+  "vars": {
+    "face": { "value": 10000, "fmt": "rupees" },
+    "coupon": { "value": 0.07, "fmt": "percent" },
+    "years": { "value": 3 },
+    "labCoupon": { "value": 0.05, "fmt": "percent" },
+    "labYears": { "value": 3 },
+    "c6": { "value": 0.06, "fmt": "percent" },
+    "y2": { "value": 2 },
+    "rec30": { "value": 0.3, "fmt": "percent" },
+    "m7": { "value": 0.07, "fmt": "percent" },
+    "m9": { "value": 0.09, "fmt": "percent" },
+    "left2": { "value": 2 }
+  },
+  "calcs": [
+    { "id": "pay", "fn": "couponPayment", "args": ["$face", "$coupon"], "fmt": "rupees" },
+    { "id": "pay6", "fn": "couponPayment", "args": ["$face", "$c6"], "fmt": "rupees" },
+    { "id": "total2", "fn": "bondValueAtMaturity", "args": ["$face", "$c6", "$y2"], "fmt": "rupees" },
+    { "id": "loss30", "fn": "defaultLoss", "args": ["$face", "$rec30"], "fmt": "rupees" },
+    { "id": "price9", "fn": "bondPrice", "args": ["$face", "$coupon", "$m9", "$left2"], "fmt": "rupees" },
+    { "id": "total3", "fn": "bondValueAtMaturity", "args": ["$face", "$coupon", "$years"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_bonds.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "bond_certificate", "textKey": "invest_bonds.t1.hook" },
+        { "type": "define", "textKey": "invest_bonds.t1.define" },
+        { "type": "analogy", "visual": "neighbour_loan", "textKey": "invest_bonds.t1.analogy" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_bonds.q1.prompt",
+          "concept": "bonds",
+          "points": 10,
+          "hintKey": "invest_bonds.q1.hint",
+          "explainKey": "invest_bonds.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_bonds.q1.opt.a" },
+            { "id": "b", "textKey": "invest_bonds.q1.opt.b" },
+            { "id": "c", "textKey": "invest_bonds.q1.opt.c" },
+            { "id": "d", "textKey": "invest_bonds.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "invest_bonds.q2.prompt",
+          "concept": "bonds",
+          "points": 10,
+          "hintKey": "invest_bonds.q2.hint",
+          "explainKey": "invest_bonds.q2.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_bonds.q2.opt.a" },
+            { "id": "b", "textKey": "invest_bonds.q2.opt.b" },
+            { "id": "c", "textKey": "invest_bonds.q2.opt.c" },
+            { "id": "d", "textKey": "invest_bonds.q2.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_bonds.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_bonds.t2.define" },
+        {
+          "type": "steps",
+          "stepKeys": ["invest_bonds.t2.steps.1", "invest_bonds.t2.steps.2", "invest_bonds.t2.steps.3"]
+        },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "bond_schedule",
+            "promptKey": "invest_bonds.t2.explore",
+            "params": { "face": "$face", "coupon": "$labCoupon", "years": "$labYears" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_bonds.q3.prompt",
+          "concept": "bonds",
+          "points": 10,
+          "hintKey": "invest_bonds.q3.hint",
+          "explainKey": "invest_bonds.q3.explain",
+          "answer": "pay6",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_bonds.q4.prompt",
+          "concept": "bonds",
+          "points": 10,
+          "hintKey": "invest_bonds.q4.hint",
+          "explainKey": "invest_bonds.q4.explain",
+          "answer": "total2",
+          "unit": "rupees"
+        },
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "invest_bonds.q5.prompt",
+          "concept": "bonds",
+          "points": 10,
+          "hintKey": "invest_bonds.q5.hint",
+          "explainKey": "invest_bonds.q5.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_bonds.q5.opt.a" },
+            { "id": "b", "textKey": "invest_bonds.q5.opt.b" },
+            { "id": "c", "textKey": "invest_bonds.q5.opt.c" },
+            { "id": "d", "textKey": "invest_bonds.q5.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_bonds.t3.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_bonds.t3.define" },
+        { "type": "note", "textKey": "invest_bonds.t3.issuers" },
+        {
+          "type": "misconception",
+          "misconceptions": ["bonds_are_risk_free"],
+          "textKey": "invest_bonds.t3.mistake"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "invest_bonds.q6.prompt",
+          "concept": "default_risk",
+          "points": 10,
+          "hintKey": "invest_bonds.q6.hint",
+          "explainKey": "invest_bonds.q6.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_bonds.q6.opt.a" },
+            {
+              "id": "b",
+              "textKey": "invest_bonds.q6.opt.b",
+              "misconception": "bonds_are_risk_free",
+              "feedbackKey": "invest_bonds.q6.fb.b"
+            },
+            { "id": "c", "textKey": "invest_bonds.q6.opt.c" },
+            { "id": "d", "textKey": "invest_bonds.q6.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "invest_bonds.q7.prompt",
+          "concept": "default_risk",
+          "points": 10,
+          "hintKey": "invest_bonds.q7.hint",
+          "explainKey": "invest_bonds.q7.explain",
+          "answer": "loss30",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_bonds.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_bonds.t4.define" },
+        {
+          "type": "steps",
+          "stepKeys": ["invest_bonds.t4.steps.1", "invest_bonds.t4.steps.2", "invest_bonds.t4.steps.3"]
+        },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "bond_price",
+            "promptKey": "invest_bonds.t4.explore",
+            "params": { "face": "$face", "coupon": "$coupon", "market": "$m7", "years": "$left2" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "invest_bonds.q8.prompt",
+          "concept": "bond_price_rates",
+          "points": 10,
+          "hintKey": "invest_bonds.q8.hint",
+          "explainKey": "invest_bonds.q8.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_bonds.q8.opt.a" },
+            { "id": "b", "textKey": "invest_bonds.q8.opt.b" },
+            { "id": "c", "textKey": "invest_bonds.q8.opt.c" },
+            { "id": "d", "textKey": "invest_bonds.q8.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "invest_bonds.q9.prompt",
+          "concept": "bond_price_rates",
+          "points": 10,
+          "hintKey": "invest_bonds.q9.hint",
+          "explainKey": "invest_bonds.q9.explain",
+          "answer": "price9",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "invest_bonds.q10.prompt",
+          "concept": "bond_price_rates",
+          "points": 10,
+          "hintKey": "invest_bonds.q10.hint",
+          "explainKey": "invest_bonds.q10.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_bonds.q10.opt.a" },
+            { "id": "b", "textKey": "invest_bonds.q10.opt.b" },
+            { "id": "c", "textKey": "invest_bonds.q10.opt.c" },
+            { "id": "d", "textKey": "invest_bonds.q10.opt.d" }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "invest_bonds.t5.title",
+      "blocks": [
+        { "type": "note", "textKey": "invest_bonds.t5.recap" },
+        { "type": "jargon", "terms": ["bond", "issuer", "face_value", "coupon", "maturity", "credit_risk"] }
+      ],
+      "questions": [
+        {
+          "id": "q11",
+          "kind": "number",
+          "promptKey": "invest_bonds.q11.prompt",
+          "concept": "bonds",
+          "points": 20,
+          "hintKey": "invest_bonds.q11.hint",
+          "explainKey": "invest_bonds.q11.explain",
+          "answer": "total3",
+          "unit": "rupees"
+        }
+      ]
+    }
+  ],
+  "glossary": ["bond", "issuer", "face_value", "coupon", "maturity", "credit_risk"]
+}

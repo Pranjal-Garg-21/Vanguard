@@ -15,7 +15,9 @@
 | Financial math library | `core/market/finance/` | Done, tested |
 | Seeded RNG, market engine, 500-futures runner | `core/market/` | Done, tested (20 years × 500 futures ≈ 30 ms) |
 | Lesson format, calculator, validator | `games/investing/lessons/logic/` | Done, tested |
-| Lesson content (lessons 1–2) | `content/scenarios/invest/{lessons,checks,glossary}/`, `content/i18n/en/invest_*.json` | Lessons 1–2 done; 3–6 next |
+| Lesson content (rooms 1-6: profit/loss, interest, inflation, lending, bonds, stocks) | `content/scenarios/invest/{lessons,glossary}/`, `content/i18n/en/invest_*.json` | Done. All six are rooms; each plays end to end in the real UI. Lessons 7-14 (risk, diversification, funds, ETFs, gold, liquidity, horizon, scams) still to write |
+| Lab widgets | `games/investing/lessons/widgets/` | 8 labs: fall_rise, simple_vs_compound, start_early, inflation_cups, lender_outcomes, bond_schedule, bond_price, position_lab (maths in `logic/explore.ts`, tested) |
+| Saved progress | `games/investing/lessons/useSavedProgress.ts`, `logic/room.ts` | Done. Saved per player through `saveGame`; the list shows New / In progress / Completed and marks "Up next"; reopening continues at the first unfinished task |
 | Predict verb | `runtime/verbs/predict/` | Done (slider version; options version comes with lesson 4) |
 | `SimBanner` | `ui/SimBanner.tsx` | Done |
 | Investing ABC screens | `games/investing/lessons/` (routes `/learn/invest`, `/learn/invest/:lessonId`) | Done, viewed in browser |

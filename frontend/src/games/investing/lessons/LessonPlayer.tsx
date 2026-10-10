@@ -12,14 +12,14 @@ import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
 import { allLessons, checkById, lessonById } from './logic/content';
 import type { Lesson, LessonBlock, Level } from './logic/types';
-import { RoomPlayer } from './RoomPlayer';
+import { RoomLoader } from './RoomLoader';
 
 type Page = { kind: 'block'; block: LessonBlock } | { kind: 'check' } | { kind: 'summary' };
 
 export function LessonPlayer() {
   const { lessonId = '' } = useParams();
   const lesson = lessonById.get(lessonId);
-  if (lesson?.kind === 'room') return <RoomPlayer key={lesson.id} room={lesson} />;
+  if (lesson?.kind === 'room') return <RoomLoader key={lesson.id} room={lesson} />;
   if (!lesson) {
     return (
       <InvestShell>

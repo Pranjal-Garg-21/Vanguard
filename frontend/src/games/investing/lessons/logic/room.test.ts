@@ -1,5 +1,71 @@
 import { describe, expect, it } from 'vitest';
-import { checkNumberAnswer, expectedDisplay, parseAnswer } from './room';
+import { rooms } from './content';
+import {
+  checkNumberAnswer,
+  emptyQuestionState,
+  expectedDisplay,
+  parseAnswer,
+  parseProgress,
+  progressSlot,
+  roomQuestions,
+  serializeProgress,
+  summariseProgress,
+  type ProgressMap,
+} from './room';
+
+describe('saving progress', () => {
+  const room = rooms[0]!;
+  const qs = roomQuestions(room);
+  const solved = (): ProgressMap => Object.fromEntries(qs.map((q) => [q.id, { ...emptyQuestionState(), solved: true }]));
+
+  it('a new room has nothing done; one answer makes it started; every answer makes it done', () => {
+    expect(summariseProgress(room, {}).status).toBe('new');
+    expect(summariseProgress(room, { [qs[0]!.id]: { ...emptyQuestionState(), solved: true } }).status).toBe('started');
+    const all = summariseProgress(room, solved());
+    expect(all.status).toBe('done');
+    expect(all.tasksDone).toBe(room.tasks.length);
+    expect(all.earned).toBe(all.total);
+  });
+  it('a hint or a wrong try counts as started, but earns nothing', () => {
+    const s = summariseProgress(room, { [qs[0]!.id]: { ...emptyQuestionState(), hintShown: true } });
+    expect(s.status).toBe('started');
+    expect(s.earned).toBe(0);
+  });
+  it('a revealed answer completes the task but earns no points', () => {
+    const answers: ProgressMap = solved();
+    answers[qs[0]!.id] = { ...emptyQuestionState(), revealed: true };
+    const s = summariseProgress(room, answers);
+    expect(s.status).toBe('done');
+    expect(s.earned).toBe(s.total - qs[0]!.points);
+  });
+  it('survives a save and load round trip', () => {
+    const answers: ProgressMap = {
+      [qs[0]!.id]: { ...emptyQuestionState(), solved: true, wrong: 2, hintShown: true },
+      [qs[1]!.id]: { ...emptyQuestionState(), wrong: 1, wrongOptions: ['b'], lastFeedbackKey: 'x.y' },
+    };
+    const back = parseProgress(JSON.parse(JSON.stringify(serializeProgress(answers, room))), room);
+    expect(back[qs[0]!.id]).toMatchObject({ solved: true, wrong: 2, hintShown: true });
+    expect(back[qs[1]!.id]).toMatchObject({ wrong: 1, wrongOptions: ['b'], lastFeedbackKey: 'x.y' });
+  });
+  it('does not store untouched questions or questions from another room', () => {
+    const saved = serializeProgress({ [qs[0]!.id]: emptyQuestionState(), 'not_a_question': { ...emptyQuestionState(), solved: true } }, room);
+    expect(saved).toEqual({});
+  });
+  it('never trusts saved data: junk is dropped and odd values are made safe', () => {
+    expect(parseProgress(null, room)).toEqual({});
+    expect(parseProgress('hello', room)).toEqual({});
+    expect(parseProgress([1, 2], room)).toEqual({});
+    const messy = parseProgress(
+      { [qs[0]!.id]: { solved: 'yes', wrong: -5, wrongOptions: ['a', 7, null], hintShown: true }, other_room_q: { solved: true }, [qs[1]!.id]: 'oops' },
+      room,
+    );
+    expect(Object.keys(messy)).toEqual([qs[0]!.id]);
+    expect(messy[qs[0]!.id]).toMatchObject({ solved: false, wrong: 0, wrongOptions: ['a'], hintShown: true });
+  });
+  it('each room saves to its own slot', () => {
+    expect(progressSlot('lesson_a')).not.toBe(progressSlot('lesson_b'));
+  });
+});
 
 describe('parseAnswer', () => {
   it('reads plain numbers, rupee signs, commas and percent signs', () => {

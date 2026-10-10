@@ -1,0 +1,273 @@
+{
+  "id": "lesson_stocks",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 6,
+  "estMinutes": 12,
+  "difficulty": "medium",
+  "titleKey": "invest_stocks.title",
+  "blurbKey": "invest_stocks.blurb",
+  "concepts": ["stock_basics", "dividends", "market_cap", "exchange_basics", "bid_ask_liquidity", "liquidity"],
+  "misconceptions": ["guaranteed_returns_exist", "stock_price_equals_company_size"],
+  "vars": {
+    "tot": { "value": 1000 },
+    "mine": { "value": 10 },
+    "t2": { "value": 500 },
+    "m2": { "value": 25 },
+    "shares": { "value": 10 },
+    "price": { "value": 100, "fmt": "rupees" },
+    "chg0": { "value": 0 },
+    "div0": { "value": 0 },
+    "chgQ": { "value": 0.12, "fmt": "percent" },
+    "divQ": { "value": 2, "fmt": "rupees" },
+    "feeRate": { "value": 0.005, "fmt": "percent" },
+    "priceA": { "value": 10, "fmt": "rupees" },
+    "sharesA": { "value": 2000000 },
+    "priceB": { "value": 500, "fmt": "rupees" },
+    "sharesB": { "value": 10000 },
+    "bid": { "value": 99, "fmt": "rupees" },
+    "ask": { "value": 102, "fmt": "rupees" }
+  },
+  "calcs": [
+    { "id": "own", "fn": "div", "args": ["$m2", "$t2"], "fmt": "percent" },
+    { "id": "up", "fn": "add", "args": [1, "$chgQ"] },
+    { "id": "nowPrice", "fn": "mul", "args": ["$price", "$up"], "fmt": "rupees" },
+    { "id": "spent", "fn": "mul", "args": ["$shares", "$price"], "fmt": "rupees" },
+    { "id": "fee", "fn": "tradeFee", "args": ["$spent", "$feeRate"], "fmt": "rupees" },
+    { "id": "divTotal", "fn": "dividendIncome", "args": ["$shares", "$divQ"], "fmt": "rupees" },
+    { "id": "profitLab", "fn": "positionProfit", "args": ["$shares", "$price", "$nowPrice", "$divQ", "$fee"], "fmt": "rupees" },
+    { "id": "capA", "fn": "marketCap", "args": ["$priceA", "$sharesA"], "fmt": "rupees" },
+    { "id": "capB", "fn": "marketCap", "args": ["$priceB", "$sharesB"], "fmt": "rupees" },
+    { "id": "spreadAns", "fn": "spread", "args": ["$bid", "$ask"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_stocks.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "stall_shares", "textKey": "invest_stocks.t1.hook" },
+        { "type": "define", "textKey": "invest_stocks.t1.define" },
+        { "type": "analogy", "visual": "stall_shares", "textKey": "invest_stocks.t1.analogy" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_stocks.q1.prompt",
+          "concept": "stock_basics",
+          "points": 10,
+          "hintKey": "invest_stocks.q1.hint",
+          "explainKey": "invest_stocks.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_stocks.q1.opt.a" },
+            { "id": "b", "textKey": "invest_stocks.q1.opt.b" },
+            { "id": "c", "textKey": "invest_stocks.q1.opt.c" },
+            { "id": "d", "textKey": "invest_stocks.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "invest_stocks.q2.prompt",
+          "concept": "stock_basics",
+          "points": 10,
+          "hintKey": "invest_stocks.q2.hint",
+          "explainKey": "invest_stocks.q2.explain",
+          "answer": "own",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_stocks.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_stocks.t2.define" },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "position_lab",
+            "promptKey": "invest_stocks.t2.explore",
+            "params": { "shares": "$shares", "price": "$price", "change": "$chg0", "dividend": "$div0", "fee": "$feeRate" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_stocks.q3.prompt",
+          "concept": "dividends",
+          "points": 20,
+          "hintKey": "invest_stocks.q3.hint",
+          "explainKey": "invest_stocks.q3.explain",
+          "answer": "profitLab",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_stocks.q4.prompt",
+          "concept": "dividends",
+          "points": 10,
+          "hintKey": "invest_stocks.q4.hint",
+          "explainKey": "invest_stocks.q4.explain",
+          "answer": "divTotal",
+          "unit": "rupees"
+        },
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "invest_stocks.q5.prompt",
+          "concept": "dividends",
+          "points": 10,
+          "hintKey": "invest_stocks.q5.hint",
+          "explainKey": "invest_stocks.q5.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_stocks.q5.opt.a" },
+            { "id": "b", "textKey": "invest_stocks.q5.opt.b" },
+            { "id": "c", "textKey": "invest_stocks.q5.opt.c" },
+            { "id": "d", "textKey": "invest_stocks.q5.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_stocks.t3.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_stocks.t3.define" },
+        { "type": "tradeoff", "textKey": "invest_stocks.t3.tradeoff" }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "invest_stocks.q6.prompt",
+          "concept": "stock_basics",
+          "points": 10,
+          "hintKey": "invest_stocks.q6.hint",
+          "explainKey": "invest_stocks.q6.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_stocks.q6.opt.a" },
+            {
+              "id": "b",
+              "textKey": "invest_stocks.q6.opt.b",
+              "misconception": "guaranteed_returns_exist",
+              "feedbackKey": "invest_stocks.q6.fb.b"
+            },
+            { "id": "c", "textKey": "invest_stocks.q6.opt.c" },
+            { "id": "d", "textKey": "invest_stocks.q6.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "invest_stocks.q7.prompt",
+          "concept": "stock_basics",
+          "points": 10,
+          "hintKey": "invest_stocks.q7.hint",
+          "explainKey": "invest_stocks.q7.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_stocks.q7.opt.a" },
+            { "id": "b", "textKey": "invest_stocks.q7.opt.b" },
+            { "id": "c", "textKey": "invest_stocks.q7.opt.c" },
+            { "id": "d", "textKey": "invest_stocks.q7.opt.d" }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_stocks.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_stocks.t4.define" },
+        {
+          "type": "misconception",
+          "misconceptions": ["stock_price_equals_company_size"],
+          "textKey": "invest_stocks.t4.mistake"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "invest_stocks.q8.prompt",
+          "concept": "market_cap",
+          "points": 10,
+          "hintKey": "invest_stocks.q8.hint",
+          "explainKey": "invest_stocks.q8.explain",
+          "answer": "capA",
+          "unit": "rupees"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "invest_stocks.q9.prompt",
+          "concept": "market_cap",
+          "points": 10,
+          "hintKey": "invest_stocks.q9.hint",
+          "explainKey": "invest_stocks.q9.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_stocks.q9.opt.a" },
+            {
+              "id": "b",
+              "textKey": "invest_stocks.q9.opt.b",
+              "misconception": "stock_price_equals_company_size",
+              "feedbackKey": "invest_stocks.q9.fb.b"
+            },
+            { "id": "c", "textKey": "invest_stocks.q9.opt.c" },
+            { "id": "d", "textKey": "invest_stocks.q9.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "invest_stocks.t5.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_stocks.t5.define" },
+        { "type": "define", "textKey": "invest_stocks.t5.define2" },
+        {
+          "type": "jargon",
+          "terms": ["share", "dividend", "exchange", "market_cap", "bid", "ask", "spread", "liquidity"]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "invest_stocks.q10.prompt",
+          "concept": "bid_ask_liquidity",
+          "points": 10,
+          "hintKey": "invest_stocks.q10.hint",
+          "explainKey": "invest_stocks.q10.explain",
+          "answer": "spreadAns",
+          "unit": "rupees"
+        },
+        {
+          "id": "q11",
+          "kind": "choice",
+          "promptKey": "invest_stocks.q11.prompt",
+          "concept": "liquidity",
+          "points": 10,
+          "hintKey": "invest_stocks.q11.hint",
+          "explainKey": "invest_stocks.q11.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_stocks.q11.opt.a" },
+            { "id": "b", "textKey": "invest_stocks.q11.opt.b" },
+            { "id": "c", "textKey": "invest_stocks.q11.opt.c" },
+            { "id": "d", "textKey": "invest_stocks.q11.opt.d" }
+          ],
+          "correct": "b"
+        }
+      ]
+    }
+  ],
+  "glossary": ["share", "dividend", "exchange", "market_cap", "bid", "ask", "spread", "liquidity"]
+}
