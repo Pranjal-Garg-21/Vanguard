@@ -615,7 +615,13 @@ export function PaisapurGame() {
         const Play = game.Component;
         return (
           <div className="minigame w-full max-w-md">
-            <Play ctx={contextFromLife(life, { level: overlay.level })} onComplete={(r) => answer(r)} />
+            {/* Keyed so a game that opens twice starts over rather than
+                resuming the state of the previous time it ran. */}
+            <Play
+              key={`${overlay.id}:${overlaySeq}`}
+              ctx={contextFromLife(life, { level: overlay.level })}
+              onComplete={(r) => answer(r)}
+            />
           </div>
         );
       }

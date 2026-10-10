@@ -65,6 +65,9 @@ export function EverydayArcade({
         </header>
 
         <Component
+          // Replaying a game starts it over, rather than resuming the round
+          // the student just finished.
+          key={`${playing.game.id}:${playing.level}:${seed}`}
           ctx={ctx}
           onComplete={(r) => {
             setResult({ game: playing.game, result: r });
