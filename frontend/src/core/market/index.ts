@@ -5,6 +5,7 @@
 
 export * from './assumptions';
 export * from './finance';
+export * from './format';
 export * from './montecarlo';
 export * from './regimes';
 export * from './rng';

@@ -1,5 +1,8 @@
 import * as finance from '@/core/market/finance';
-import type { CalcDef, Fmt, VarDef } from './types';
+import { formatRupees, formatValue } from '@/core/market';
+import type { CalcDef, VarDef } from './types';
+
+export { formatRupees, formatValue };
 
 const helpers: Record<string, (...a: number[]) => number> = {
   add: (a, b) => a + b,
@@ -19,18 +22,6 @@ const lookup = (name: string): Fn => {
 export interface Computed {
   raw: number;
   text: string;
-}
-
-/** Indian digit grouping: 1234567 -> 12,34,567. Stand-in for P3's shared formatter. */
-export function formatRupees(n: number, round = 0): string {
-  const s = new Intl.NumberFormat('en-IN', { minimumFractionDigits: round, maximumFractionDigits: round }).format(Math.abs(n));
-  return `${n < 0 ? '-' : ''}₹${s}`;
-}
-
-export function formatValue(raw: number, fmt: Fmt = 'number', round = 0): string {
-  if (fmt === 'rupees') return formatRupees(raw, round);
-  if (fmt === 'percent') return `${Number((raw * 100).toFixed(round))}%`;
-  return Number(raw.toFixed(round)).toLocaleString('en-IN', { maximumFractionDigits: round });
 }
 
 /** Evaluate vars and calcs in order. Returns each name's raw value and its display text. */

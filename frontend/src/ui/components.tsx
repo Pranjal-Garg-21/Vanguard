@@ -4,7 +4,7 @@
  * (keep the names and props, or update the callers).
  * Colours come from the tokens in src/index.css.
  */
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
@@ -21,7 +21,7 @@ export function Button({
   size = 'md',
   className = '',
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant; size?: 'md' | 'lg' }) {
+}: ComponentProps<'button'> & { variant?: ButtonVariant; size?: 'md' | 'lg' }) {
   const sizing = size === 'lg' ? 'min-h-14 px-6 text-lg' : 'min-h-11 px-4';
   return (
     <button

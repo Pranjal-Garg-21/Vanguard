@@ -1,9 +1,12 @@
 /**
  * Design kit: tokens, components (Card, BigButton, Meter, ...), guardrails
- * (SimBanner, FanChart, AssumptionsDrawer), icons.
+ * (SimBanner, RangeDisplay, FanChart, AssumptionsDrawer), icons.
  * Owner: P4
  */
 
+export { AssumptionsDrawer, type AssumptionsDrawerProps } from './AssumptionsDrawer';
 export { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from './components';
+export { FanChart, type FanChartProps } from './FanChart';
 export { CheckIcon, ChevronIcon } from './icons';
+export { RangeDisplay, type RangeDisplayProps } from './RangeDisplay';
 export { SimBanner } from './SimBanner';

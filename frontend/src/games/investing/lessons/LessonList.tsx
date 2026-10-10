@@ -78,6 +78,18 @@ export function LessonList() {
           );
         })}
       </ol>
+
+      <h2 className="pt-4 text-xs font-bold tracking-[0.15em] text-muted uppercase">{t('investui.list.games')}</h2>
+      <Link to="/learn/invest/time-machine" className="block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:max-w-md">
+        <Card className="space-y-2 transition-colors hover:border-brand">
+          <h3 className="text-lg font-bold">{t('timemachine.title')}</h3>
+          <p className="text-sm text-ink-soft">{t('timemachine.open.hint')}</p>
+          <span className="inline-flex items-center gap-1 text-sm font-bold text-brand">
+            {t('timemachine.open')}
+            <ChevronIcon dir="right" />
+          </span>
+        </Card>
+      </Link>
     </InvestShell>
   );
 }

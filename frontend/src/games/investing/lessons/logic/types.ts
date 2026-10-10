@@ -1,4 +1,6 @@
-export type Fmt = 'rupees' | 'percent' | 'number';
+import type { Fmt } from '@/core/market';
+
+export type { Fmt };
 
 /** A number the lesson story gives us (an input, not derived). `percent` values are fractions (0.08 = 8%). */
 export interface VarDef {

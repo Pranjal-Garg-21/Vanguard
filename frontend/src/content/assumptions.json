@@ -1,7 +1,7 @@
 {
   "version": 1,
   "currency": "INR",
-  "disclaimerKey": "banner.simulation",
+  "disclaimerKey": "investui.banner",
   "inflation": {
     "base": 0.06,
     "low": 0.04,
