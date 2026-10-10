@@ -6,11 +6,13 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, useParams } from 'react-router';
 import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
 import { LessonList, LessonPlayer } from '@/games/investing/lessons';
+import { InvestOrScam } from '@/games/investing/invest-or-scam';
 import { MutualFund } from '@/games/investing/mutual-fund';
 import { StockMarket } from '@/games/investing/stock-market';
 import { TimeMachine } from '@/games/investing/time-machine';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
+import { Gallery } from './Gallery';
 import { StudentEntry } from './StudentEntry';
 import { Dashboard } from '@/features/home';
 
@@ -31,10 +33,12 @@ export const router = createBrowserRouter([
   { path: '/join/:code', element: <JoinLink /> },
   { path: '/home', element: <Dashboard /> },
   { path: '/dev', element: <DevHome /> },
+  { path: '/gallery', element: <Gallery /> },
   { path: '/learn/invest', element: <LessonList /> },
   { path: '/learn/invest/time-machine', element: <TimeMachine /> },
   { path: '/learn/invest/stock-market', element: <StockMarket /> },
   { path: '/learn/invest/mutual-fund', element: <MutualFund /> },
+  { path: '/learn/invest/invest-or-scam', element: <InvestOrScam /> },
   { path: '/learn/invest/:lessonId', element: <LessonPlayer /> },
   {
     path: '/facilitator/*',

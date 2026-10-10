@@ -21,7 +21,7 @@
   /* Text */
   --color-ink: #f4f6fa;
   --color-ink-soft: #c3cbdc;
-  --color-muted: #8b95ad;
+  --color-muted: #9aa5bd;
 
   /* Accent: THM lime, with dark text on top */
   --color-brand: #a3ea2a;
@@ -32,7 +32,7 @@
   /* Status / difficulty tags */
   --color-good: #a3ea2a;
   --color-warn: #ffb72b;
-  --color-bad: #ff5468;
+  --color-bad: #ff6a7b;
   --color-info: #3dc8f5;
   --color-xp: #b57cff;
 }

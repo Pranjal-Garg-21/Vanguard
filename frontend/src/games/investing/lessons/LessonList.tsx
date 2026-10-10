@@ -96,7 +96,7 @@ export function LessonList() {
         <details className="rounded-xl border border-line bg-surface">
           <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3">
             <span className="font-bold text-ink">{t('investui.list.games')}</span>
-            <span className="text-sm text-muted">{t('investui.group.games', { n: games.length + 3 })}</span>
+            <span className="text-sm text-muted">{t('investui.group.games', { n: games.length + 4 })}</span>
           </summary>
           <ul className="divide-y divide-line border-t border-line">
             {games.map((game) => (
@@ -104,6 +104,7 @@ export function LessonList() {
             ))}
             <GameRow to="/learn/invest/stock-market" title={t('stockmarket.title')} hint={t('stockmarket.open.hint')} />
             <GameRow to="/learn/invest/mutual-fund" title={t('mutualfund.title')} hint={t('mutualfund.open.hint')} />
+            <GameRow to="/learn/invest/invest-or-scam" title={t('scamsort.title')} hint={t('scamsort.open.hint')} />
             <GameRow to="/learn/invest/time-machine" title={t('timemachine.title')} hint={t('timemachine.open.hint')} />
           </ul>
         </details>

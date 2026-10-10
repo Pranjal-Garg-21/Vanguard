@@ -11,12 +11,14 @@ import { formatRupees } from '@/games/investing/lessons/logic/calc';
 import { InvestShell } from '@/games/investing/lessons/InvestShell';
 import { LabSlider } from '@/games/investing/lessons/widgets/controls';
 import { logEvent, t } from '@/platform';
-import { AssumptionsDrawer, Card, ChevronIcon, FanChart, Pager, RangeDisplay, type PagerPage } from '@/ui';
+import { AssumptionsDrawer, Card, ChevronIcon, FanChart, Pager, RangeDisplay, Spinner, type PagerPage } from '@/ui';
+import { useGameSave } from '../shared/gameSave';
 import content from '@/content/scenarios/invest/time_machine.json';
 import { PathsGuide } from './PathsGuide';
 import { pickInsight, tenths, type InsightRule } from './logic/insight';
 import { defaultMix, MIX_IDS, setShare, type Mix } from './logic/mix';
 import { runTimeMachine, timeMachineChoice, type TimeMachineParams, type TimeMachineRun } from './logic/run';
+import { parseTimeMachineSave, type TimeMachineSave } from './logic/save';
 
 const goals = content.goals;
 const rules = content.rules as InsightRule[];
@@ -26,14 +28,27 @@ const tenthsText = (share: number) => {
   return t(key, n === undefined ? {} : { n });
 };
 
+/** Loads your last goal, plan and split (if any), then opens at the first step with them filled in. */
 export function TimeMachine({ seed }: { seed?: number | string }) {
+  const { loaded, saved, save } = useGameSave('time-machine', parseTimeMachineSave);
+  if (!loaded) {
+    return (
+      <InvestShell>
+        <Spinner />
+      </InvestShell>
+    );
+  }
+  return <TimeMachineGame seed={seed} restore={saved.state} onSave={save} />;
+}
+
+function TimeMachineGame({ seed, restore, onSave }: { seed?: number | string; restore: TimeMachineSave | null; onSave: (state: TimeMachineSave | null, done?: boolean) => void }) {
   const [page, setPage] = useState(0);
-  const [goalId, setGoalId] = useState(goals[0]!.id);
+  const [goalId, setGoalId] = useState(restore?.goalId ?? goals[0]!.id);
   const goal = goals.find((g) => g.id === goalId)!;
-  const [years, setYears] = useState(goal.years);
-  const [initial, setInitial] = useState(goal.initial);
-  const [monthly, setMonthly] = useState(goal.monthly);
-  const [mix, setMix] = useState<Mix>(defaultMix);
+  const [years, setYears] = useState(restore?.years ?? goal.years);
+  const [initial, setInitial] = useState(restore?.initial ?? goal.initial);
+  const [monthly, setMonthly] = useState(restore?.monthly ?? goal.monthly);
+  const [mix, setMix] = useState<Mix>(restore?.mix ?? defaultMix);
   const [inflation, setInflation] = useState(assumptions.inflation.base);
   const [done, setDone] = useState<{ params: TimeMachineParams; run: TimeMachineRun } | null>(null);
 
@@ -51,6 +66,7 @@ export function TimeMachine({ seed }: { seed?: number | string }) {
   const run = () => {
     const result = runTimeMachine(params, seed);
     setDone({ params, run: result });
+    onSave({ goalId, years, initial, monthly, mix }, true);
     const insight = pickInsight(rules, result.facts);
     void logEvent({
       mode: 'arcade',

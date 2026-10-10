@@ -1,0 +1,99 @@
+{
+  "_note": "Investing, Gambling or Scam? Twelve offers to sort. 'tells' are the signs shown after each answer: red flags (guarantee, urgency, secrecy, recruiting, celebrity, unregistered, chance, no_value) and good signs (honest_risk, real_value, registered). No real names. A hyped coin is speculation: it sorts under gambling, and its explanation says it is not a certain scam.",
+  "buckets": ["investing", "gambling", "scam"],
+  "cards": [
+    { "id": "s1", "answer": "gambling", "tells": ["chance", "no_value"] },
+    { "id": "s2", "answer": "investing", "tells": ["real_value", "honest_risk"] },
+    { "id": "s3", "answer": "scam", "tells": ["guarantee"], "trap": "guaranteed_returns_exist" },
+    { "id": "s4", "answer": "scam", "tells": ["urgency", "secrecy"] },
+    { "id": "s5", "answer": "investing", "tells": ["real_value", "honest_risk"] },
+    { "id": "s6", "answer": "scam", "tells": ["recruiting", "no_value"], "trap": "recruiting_is_normal_income" },
+    { "id": "s7", "answer": "gambling", "tells": ["no_value", "chance"], "trap": "speculation_is_investing" },
+    { "id": "s8", "answer": "scam", "tells": ["secrecy", "guarantee"] },
+    { "id": "s9", "answer": "investing", "tells": ["registered", "honest_risk"] },
+    { "id": "s10", "answer": "gambling", "tells": ["chance", "no_value"] },
+    { "id": "s11", "answer": "scam", "tells": ["celebrity", "unregistered"] },
+    { "id": "s12", "answer": "investing", "tells": ["registered", "honest_risk"] }
+  ],
+  "tellKinds": {
+    "guarantee": "flag",
+    "urgency": "flag",
+    "secrecy": "flag",
+    "recruiting": "flag",
+    "celebrity": "flag",
+    "unregistered": "flag",
+    "chance": "flag",
+    "no_value": "flag",
+    "honest_risk": "good",
+    "real_value": "good",
+    "registered": "good"
+  },
+  "check": {
+    "vars": {
+      "weekly": { "value": 0.04, "fmt": "percent" },
+      "weeks": { "value": 52 }
+    },
+    "calcs": [{ "id": "yearly", "fn": "mul", "args": ["$weekly", "$weeks"], "fmt": "percent" }],
+    "questions": [
+      {
+        "id": "x1",
+        "kind": "number",
+        "promptKey": "scamsort.check.x1.prompt",
+        "concept": "red_flags",
+        "points": 15,
+        "hintKey": "scamsort.check.x1.hint",
+        "explainKey": "scamsort.check.x1.explain",
+        "answer": "yearly",
+        "unit": "percent"
+      },
+      {
+        "id": "x2",
+        "kind": "choice",
+        "promptKey": "scamsort.check.x2.prompt",
+        "concept": "red_flags",
+        "points": 10,
+        "hintKey": "scamsort.check.x2.hint",
+        "explainKey": "scamsort.check.x2.explain",
+        "options": [
+          { "id": "a", "textKey": "scamsort.check.x2.opt.a" },
+          { "id": "b", "textKey": "scamsort.check.x2.opt.b" },
+          { "id": "c", "textKey": "scamsort.check.x2.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "scamsort.check.x2.fb.c" },
+          { "id": "d", "textKey": "scamsort.check.x2.opt.d" }
+        ],
+        "correct": "a"
+      },
+      {
+        "id": "x3",
+        "kind": "choice",
+        "promptKey": "scamsort.check.x3.prompt",
+        "concept": "speculation_vs_investing",
+        "points": 10,
+        "hintKey": "scamsort.check.x3.hint",
+        "explainKey": "scamsort.check.x3.explain",
+        "options": [
+          { "id": "a", "textKey": "scamsort.check.x3.opt.a" },
+          { "id": "b", "textKey": "scamsort.check.x3.opt.b", "misconception": "speculation_is_investing", "feedbackKey": "scamsort.check.x3.fb.b" },
+          { "id": "c", "textKey": "scamsort.check.x3.opt.c" },
+          { "id": "d", "textKey": "scamsort.check.x3.opt.d" }
+        ],
+        "correct": "a"
+      },
+      {
+        "id": "x4",
+        "kind": "choice",
+        "promptKey": "scamsort.check.x4.prompt",
+        "concept": "red_flags",
+        "points": 15,
+        "hintKey": "scamsort.check.x4.hint",
+        "explainKey": "scamsort.check.x4.explain",
+        "options": [
+          { "id": "a", "textKey": "scamsort.check.x4.opt.a" },
+          { "id": "b", "textKey": "scamsort.check.x4.opt.b", "misconception": "recruiting_is_normal_income", "feedbackKey": "scamsort.check.x4.fb.b" },
+          { "id": "c", "textKey": "scamsort.check.x4.opt.c" },
+          { "id": "d", "textKey": "scamsort.check.x4.opt.d" }
+        ],
+        "correct": "a"
+      }
+    ]
+  }
+}

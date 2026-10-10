@@ -10,7 +10,8 @@ import { Link } from 'react-router';
 import { formatValue } from '@/core/market';
 import { InvestShell } from '@/games/investing/lessons/InvestShell';
 import { logEvent, t } from '@/platform';
-import { AssumptionsDrawer, Button, Card, ChevronIcon, ProgressBar } from '@/ui';
+import { AssumptionsDrawer, Button, Card, ChevronIcon, ProgressBar, Spinner } from '@/ui';
+import { useGameSave } from '../shared/gameSave';
 import raw from '@/content/scenarios/invest/stock_market.json';
 import { CoachDock, CoachFeed, type Turn } from './CoachFeed';
 import { Debrief } from './Debrief';
@@ -19,6 +20,7 @@ import { commentsAfterTrade, commentsAfterWeek, type Comment } from './logic/coa
 import { money, signedMoney } from './logic/format';
 import { buildMarket, changeAt, newsForRound, priceAt } from './logic/market';
 import { buy, feeRate, isError, newPortfolio, payDividends, sell, totalValue } from './logic/portfolio';
+import { parseStockSave, type StockSave } from './logic/save';
 import type { MarketConfig, Portfolio } from './logic/types';
 import { MarketTable, type Row } from './MarketTable';
 import { MoneyPanel } from './MoneyPanel';
@@ -27,11 +29,24 @@ import { NewsCard } from './NewsCard';
 const config = raw as unknown as MarketConfig;
 const MAX_TURNS = 8;
 
+/** Loads the saved game (if any), then plays. Your place is saved after every move, so a refresh picks up where you were. */
 export function StockMarket({ seed = 'stock-market' }: { seed?: number | string }) {
+  const { loaded, saved, save } = useGameSave('stock-market', parseStockSave);
+  if (!loaded) {
+    return (
+      <InvestShell wide>
+        <Spinner />
+      </InvestShell>
+    );
+  }
+  return <StockMarketGame seed={seed} initial={saved.state} onSave={save} />;
+}
+
+function StockMarketGame({ seed, initial, onSave }: { seed: number | string; initial: StockSave | null; onSave: (state: StockSave | null, done?: boolean) => void }) {
   const market = useMemo(() => buildMarket(config, seed), [seed]);
-  const [phase, setPhase] = useState<'intro' | 'play' | 'debrief'>('intro');
-  const [round, setRound] = useState(1);
-  const [portfolio, setPortfolio] = useState<Portfolio>(() => newPortfolio(config.cash));
+  const [phase, setPhase] = useState<'intro' | 'play' | 'debrief'>(initial?.phase ?? 'intro');
+  const [round, setRound] = useState(initial?.round ?? 1);
+  const [portfolio, setPortfolio] = useState<Portfolio>(() => initial?.portfolio ?? newPortfolio(config.cash));
   const [error, setError] = useState<string | null>(null);
   const [turns, setTurns] = useState<Turn[]>([]);
   const turnId = useRef(0);
@@ -77,6 +92,7 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
     setError(null);
     const last = next.trades[next.trades.length - 1]!;
     setPortfolio(next);
+    onSave({ phase: 'play', round, portfolio: next });
     addTurn(
       round,
       commentsAfterTrade({ config, round, side, id, qty, price: last.price, fee: last.fee, before: portfolio, after: next, prices, changes, news, failedIds, name: nameOf }),
@@ -93,6 +109,7 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
     setError(null);
     if (round >= config.rounds) {
       log(`end_${Math.round((gain / config.cash) * 100)}`, { concept: 'profit_loss' });
+      onSave({ phase: 'debrief', round, portfolio }, true);
       setPhase('debrief');
       window.scrollTo({ top: 0 });
       return;
@@ -114,6 +131,7 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
     );
     setPortfolio(paid);
     setRound(next);
+    onSave({ phase: 'play', round: next, portfolio: paid });
   };
 
   const replay = () => {
@@ -121,6 +139,7 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
     setRound(1);
     setError(null);
     setTurns([]);
+    onSave(null);
     setPhase('intro');
     window.scrollTo({ top: 0 });
   };
@@ -196,6 +215,9 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
             <Button size="lg" className="w-full" onClick={endWeek}>
               {round >= config.rounds ? t('stockmarket.end.last') : t('stockmarket.end.week', { n: round })}
             </Button>
+            <button type="button" onClick={replay} className="mx-auto block min-h-11 text-sm font-bold text-ink-soft hover:text-brand">
+              {t('stockmarket.startOver')}
+            </button>
           </div>
         </div>
       )}
