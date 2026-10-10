@@ -44,7 +44,7 @@ export function Lensable({ surface, lens, view, children }: { surface: Surface; 
       type="button"
       onClick={() => view.onInspect(def.id)}
       aria-label={t('safe.ui.lens')}
-      className={`inline cursor-help text-left ${flagged ? 'rounded bg-bad/20 px-0.5 font-semibold text-bad underline decoration-bad decoration-wavy' : OUTLINE} ${done && !flagged ? 'bg-phone-link/10' : ''}`}
+      className={`inline cursor-help text-start ${flagged ? 'rounded bg-bad/20 px-0.5 font-semibold text-bad underline decoration-bad decoration-wavy' : OUTLINE} ${done && !flagged ? 'bg-phone-link/10' : ''}`}
     >
       {children}
     </button>
@@ -67,7 +67,7 @@ export function RichText({ segments, surface, view }: { segments: Segment[]; sur
         }
         if (isLink) {
           return (
-            <button key={i} type="button" onClick={() => view.onAct(seg.action as string)} className="inline text-left">
+            <button key={i} type="button" onClick={() => view.onAct(seg.action as string)} className="inline text-start">
               {inner}
             </button>
           );
@@ -84,7 +84,7 @@ export function LensReading({ surface, lensId, vars }: { surface: Surface; lensI
   if (!def) return null;
   const tell = surface.tells?.find((x) => x.id === def.tell);
   return (
-    <div role="status" className={`mt-3 rounded-lg border-l-4 p-3 text-sm ${tell ? 'border-bad bg-bad/10' : 'border-phone-link bg-phone-link/10'}`}>
+    <div role="status" className={`mt-3 rounded-lg border-s-4 p-3 text-sm ${tell ? 'border-bad bg-bad/10' : 'border-phone-link bg-phone-link/10'}`}>
       <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-phone-muted"><Icon name="search" className="h-3.5 w-3.5" />{t('safe.ui.lensReveal')}</p>
       <p className="mt-1 text-phone-ink">{t(def.revealKey, vars)}</p>
       <p className={`mt-1 flex items-center gap-1 text-xs font-bold ${tell ? 'text-bad' : 'text-phone-muted'}`}>{tell && <Icon name="flag" className="h-3.5 w-3.5" />}{tell ? t('safe.ui.lensFound') : t('safe.ui.lensNothing')}</p>

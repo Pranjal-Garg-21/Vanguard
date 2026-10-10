@@ -19,7 +19,7 @@ export function PayHome({ balance, lost, requests, onOpen }: { balance: number; 
         <p className="rounded-lg bg-phone-card p-4 text-sm text-phone-muted">{t('safe.ui.noMessages')}</p>
       ) : (
         requests.map((r) => (
-          <button key={r.id} type="button" onClick={() => onOpen(r.id)} className="mb-2 flex w-full items-center justify-between rounded-lg bg-phone-card p-3 text-left text-sm font-medium shadow-sm">
+          <button key={r.id} type="button" onClick={() => onOpen(r.id)} className="mb-2 flex w-full items-center justify-between rounded-lg bg-phone-card p-3 text-start text-sm font-medium shadow-sm">
             {r.label}
             <span aria-hidden>›</span>
           </button>
@@ -46,7 +46,7 @@ export function PayRequestView({ surface, view }: { surface: Extract<Surface, { 
       {secs !== null && !view.resolved && (
         <p className="mt-3 text-center font-mono text-sm font-bold text-amber-600">
           <Lensable surface={surface} lens={surface.lens?.find((l) => l.id === 'timer')?.id} view={view}>
-            <Icon name="clock" className="mr-1 inline h-4 w-4 align-text-bottom" />{t('safe.ui.timer', { s: secs })}
+            <Icon name="clock" className="me-1 inline h-4 w-4 align-text-bottom" />{t('safe.ui.timer', { s: secs })}
           </Lensable>
           {view.timersOff && <span className="block text-xs font-normal text-phone-muted">{t('safe.ui.timersOff')}</span>}
         </p>

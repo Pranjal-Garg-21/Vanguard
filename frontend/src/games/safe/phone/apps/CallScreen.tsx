@@ -59,7 +59,7 @@ export function IncomingCall({ surface, view, actions, onAct, lensNode, after, o
           {view.timersOff && <span className="font-sans text-xs font-normal text-white/60"> {t('safe.ui.timersOff')}</span>}
         </p>
       )}
-      <div className="mt-4 rounded-2xl rounded-tl-sm bg-white/10 px-4 py-3 text-[15px] leading-relaxed">
+      <div className="mt-4 rounded-2xl rounded-ss-sm bg-white/10 px-4 py-3 text-[15px] leading-relaxed">
         <RichText segments={surface.lines} surface={surface} view={view} />
       </div>
       {lensNode && !after && <div className="mt-3 text-phone-ink">{lensNode}</div>}
@@ -87,7 +87,7 @@ export function CallTranscript({ surface, view }: { surface: Call; view: ViewPro
       <p className="mt-1 text-lg font-bold">
         <Lensable surface={surface} lens={surface.callerLens} view={view}>{surface.caller}</Lensable>
       </p>
-      <div className="mt-3 rounded-2xl rounded-tl-sm bg-phone-bubble px-3.5 py-2.5 text-[15px] italic leading-relaxed">
+      <div className="mt-3 rounded-2xl rounded-ss-sm bg-phone-bubble px-3.5 py-2.5 text-[15px] italic leading-relaxed">
         &ldquo;<RichText segments={surface.lines} surface={surface} view={view} />&rdquo;
       </div>
     </div>

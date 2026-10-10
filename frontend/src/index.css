@@ -217,7 +217,7 @@ body {
   .commit button,
   .game button,
   .arcade button {
-    @apply pixel-frame min-h-12 bg-parchment px-4 py-2 text-left font-bold text-ink
+    @apply pixel-frame min-h-12 bg-parchment px-4 py-2 text-start font-bold text-ink
            transition-transform hover:translate-y-[-2px]
            focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink
            disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0;
@@ -290,7 +290,7 @@ body {
     @apply flex-1 font-bold;
   }
   .arcade__dot {
-    @apply ml-2 inline-block h-3 w-3 align-middle;
+    @apply ms-2 inline-block h-3 w-3 align-middle;
   }
   .arcade__dot[data-status='green'] {
     @apply bg-grass-dark;
@@ -426,7 +426,7 @@ body {
     @apply flex flex-col gap-3;
   }
   .rank__ladder li {
-    @apply border-l-8 border-l-grass-dark;
+    @apply border-s-8 border-l-grass-dark;
   }
   .rank__ladder li[data-moved='true'] {
     @apply border-l-gold;
@@ -466,16 +466,16 @@ body {
     @apply font-bold text-bad;
   }
   .buffer--have {
-    @apply border-l-8 border-l-grass-dark;
+    @apply border-s-8 border-l-grass-dark;
   }
   .buffer--none {
-    @apply border-l-8 border-l-bad;
+    @apply border-s-8 border-l-bad;
   }
   .badge {
     @apply pixel-frame bg-gold p-3 text-center font-bold;
   }
   .help-card ol {
-    @apply my-2 list-decimal pl-6;
+    @apply my-2 list-decimal ps-6;
   }
   .help-card li {
     @apply py-1 text-sm;
@@ -490,7 +490,7 @@ body {
     @apply border-b-2 border-dotted border-ink/30 py-2;
   }
   .passerby--handled {
-    @apply border-l-8 border-l-grass-dark;
+    @apply border-s-8 border-l-grass-dark;
   }
   .pin__display {
     @apply text-center text-4xl tracking-[0.4em];
@@ -548,7 +548,7 @@ body {
     @apply inline-block h-4 w-4 flex-none;
   }
   .spend-chart__value {
-    @apply ml-auto tabular-nums;
+    @apply ms-auto tabular-nums;
   }
   .simulated,
   .plan__long {

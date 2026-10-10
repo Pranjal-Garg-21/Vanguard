@@ -65,7 +65,7 @@ export function PixelOption({
       role={multi ? 'checkbox' : 'radio'}
       aria-checked={selected}
       onClick={onClick}
-      className={`pixel-frame flex min-h-16 w-full items-center gap-4 px-4 py-3 text-left text-lg font-semibold transition-transform active:translate-y-1 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-gold ${
+      className={`pixel-frame flex min-h-16 w-full items-center gap-4 px-4 py-3 text-start text-lg font-semibold transition-transform active:translate-y-1 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-gold ${
         selected ? 'bg-gold text-ink' : 'bg-white text-ink hover:bg-parchment-dark'
       }`}
     >

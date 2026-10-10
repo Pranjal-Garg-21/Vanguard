@@ -31,7 +31,7 @@ export function SearchView({ surface, view }: { surface: Extract<Surface, { type
                   <span className="truncate text-emerald-700">{r.url}</span>
                 </Lensable>
               </div>
-              <button type="button" onClick={tap} disabled={!!view.resolved && !view.debrief} className="mt-1 block text-left text-base font-medium text-phone-link underline-offset-2 hover:underline disabled:no-underline">
+              <button type="button" onClick={tap} disabled={!!view.resolved && !view.debrief} className="mt-1 block text-start text-base font-medium text-phone-link underline-offset-2 hover:underline disabled:no-underline">
                 {t(r.titleKey, view.vars)}
               </button>
               <p className="mt-0.5 text-sm text-phone-muted">{t(r.snippetKey, view.vars)}</p>

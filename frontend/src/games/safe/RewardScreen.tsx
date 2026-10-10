@@ -66,7 +66,7 @@ export function RewardScreen({ entryTitle, gain, progress, next, backLabel, onNe
             </span>
           ))}
         </div>
-        <p className="mt-4 text-5xl font-bold tabular-nums text-brand">+{xp}<span className="ml-1 text-lg font-bold text-ink-soft">{t('safe.reward.xp')}</span></p>
+        <p className="mt-4 text-5xl font-bold tabular-nums text-brand">+{xp}<span className="ms-1 text-lg font-bold text-ink-soft">{t('safe.reward.xp')}</span></p>
       </div>
 
       <Card className="animate-rise space-y-2" >
@@ -126,7 +126,7 @@ export function RewardScreen({ entryTitle, gain, progress, next, backLabel, onNe
 
       <div className="animate-rise space-y-3 pt-2">
         {next ? (
-          <button type="button" onClick={onNext} className="flex w-full items-center gap-4 rounded-xl border-2 border-brand bg-brand/10 p-4 text-left transition hover:bg-brand/20">
+          <button type="button" onClick={onNext} className="flex w-full items-center gap-4 rounded-xl border-2 border-brand bg-brand/10 p-4 text-start transition hover:bg-brand/20">
             <div className="flex-1">
               <p className="text-xs font-bold uppercase tracking-wider text-brand">{t('safe.reward.next')}</p>
               <p className="text-lg font-bold text-ink">{next.title}</p>

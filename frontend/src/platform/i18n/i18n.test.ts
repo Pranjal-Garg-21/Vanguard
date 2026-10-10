@@ -65,17 +65,20 @@ describe('t()', () => {
 
 describe('switching language', () => {
   it('falls back to English for a key the pack is missing', () => {
+    // A key of this test's own, so the assertion does not quietly become
+    // meaningless the day the Telugu pack is finished.
+    registerStrings('en', { 'test.fallback.only_english': 'Check my order' });
     registerStrings('te', { 'common.continue': 'కొనసాగించు' });
     setLanguage('te');
     expect(t('common.continue')).toBe('కొనసాగించు');
-    // Not translated yet, so English shows rather than a raw key.
-    expect(t('verb.rank.check_order')).toBe('Check my order');
+    expect(t('test.fallback.only_english')).toBe('Check my order');
   });
 
   it('refuses to switch to a pack that is not on the device', () => {
     // UC-PLAT-04: keep the current language and download at the next
-    // connection, rather than showing a screen of raw key names.
-    expect(setLanguage('hi')).toBe(false);
+    // connection, rather than showing a screen of raw key names. 'zz' is not a
+    // language the app ships, so this stays true once hi is translated.
+    expect(setLanguage('zz' as Parameters<typeof setLanguage>[0])).toBe(false);
     expect(getLanguage()).toBe('en');
   });
 });

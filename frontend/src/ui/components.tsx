@@ -54,7 +54,7 @@ export function Notice({ children, tone = 'warn' }: { children: ReactNode; tone?
     bad: 'border-bad bg-bad/10 text-ink',
     info: 'border-brand bg-brand/10 text-ink',
   };
-  return <div className={`rounded-lg border-l-4 p-3 text-sm ${tones[tone]}`}>{children}</div>;
+  return <div className={`rounded-lg border-s-4 p-3 text-sm ${tones[tone]}`}>{children}</div>;
 }
 
 export function Spinner({ label = 'Loading…' }: { label?: string }) {

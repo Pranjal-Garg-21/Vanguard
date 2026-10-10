@@ -104,7 +104,7 @@ export function UpiSimulator({ seed = 1, mode = 'arcade', timersOff = false, onC
         <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/15 text-brand"><Icon name="shield" className="h-8 w-8" /></span>
         <h1 className="text-3xl font-bold text-ink">{t('safe.upi.done.title')}</h1>
         <p className="mx-auto max-w-md text-ink-soft">{t('safe.upi.done.body')}</p>
-        <div className="grid gap-3 text-left sm:grid-cols-3">
+        <div className="grid gap-3 text-start sm:grid-cols-3">
           <Card className="p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">{t('safe.upi.done.moneyLost')}</p><p className={`mt-1 text-2xl font-bold tabular-nums ${lost > 0 ? 'text-bad' : 'text-brand'}`}>{rupees(lost)}</p></Card>
           <Card className="p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">{t('safe.upi.done.check')}</p><p className="mt-1 text-2xl font-bold tabular-nums text-info">{scored[0]}/{scored[1]}</p></Card>
           <Card className="p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">{t('safe.upi.done.pinHabit')}</p><p className="mt-1 text-lg font-bold text-ink">{result.misconceptions.includes('pin_uncovered') ? t('safe.upi.done.notCovered') : t('safe.upi.done.covered')}</p></Card>

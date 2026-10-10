@@ -42,7 +42,7 @@ export function PayScanScreen({ message, onProceed }: { message: string | null; 
           <div className="mt-4 flex flex-1 items-center justify-center rounded-2xl bg-slate-900">
             <div className="relative flex h-44 w-44 items-center justify-center rounded-xl border-2 border-dashed border-brand text-slate-300">
               <Icon name="qr" className="h-24 w-24" />
-              <Icon name="camera" className="absolute -bottom-3 right-3 h-6 w-6 rounded bg-slate-900 text-brand" />
+              <Icon name="camera" className="absolute -bottom-3 end-3 h-6 w-6 rounded bg-slate-900 text-brand" />
             </div>
           </div>
           <Button className="mt-4 w-full" onClick={() => setScanned(true)}>{t('safe.upi.scan.cta')}</Button>

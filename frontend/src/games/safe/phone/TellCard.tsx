@@ -23,7 +23,7 @@ export function TellCard({ kind, found, collected, isNew }: { kind: TellKind; fo
         <p className="text-xs text-muted">{t(meta.hintKey)}</p>
         {!lit && <p className="mt-0.5 text-[11px] font-medium text-info">{t('safe.ui.cardUnlock')}</p>}
       </div>
-      {tag && <span className={`absolute -top-2 right-2 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase ${isNew ? 'bg-brand text-brand-ink' : 'bg-surface-3 text-ink-soft'}`}>{tag}</span>}
+      {tag && <span className={`absolute -top-2 end-2 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase ${isNew ? 'bg-brand text-brand-ink' : 'bg-surface-3 text-ink-soft'}`}>{tag}</span>}
     </div>
   );
 }

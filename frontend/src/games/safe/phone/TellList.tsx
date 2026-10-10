@@ -13,7 +13,7 @@ export function TellList({ state, surfaceId, tone = 'dark' }: { state: RunState;
   return (
     <ul className="space-y-2">
       {[...found.map((x) => ({ ...x, ok: true })), ...missed.map((x) => ({ ...x, ok: false }))].map((x) => (
-        <li key={x.id} className={`rounded-lg border-l-4 p-2.5 text-sm ${x.ok ? 'border-emerald-500 bg-emerald-500/10' : 'border-bad bg-bad/10'}`}>
+        <li key={x.id} className={`rounded-lg border-s-4 p-2.5 text-sm ${x.ok ? 'border-emerald-500 bg-emerald-500/10' : 'border-bad bg-bad/10'}`}>
           <p className={`flex flex-wrap items-center gap-1.5 font-bold ${ink}`}>
             <Icon name={x.ok ? 'check' : 'x'} className={`h-4 w-4 ${x.ok ? 'text-emerald-500' : 'text-bad'}`} />
             <Icon name={TELL_META[x.kind].icon} className="h-4 w-4" />

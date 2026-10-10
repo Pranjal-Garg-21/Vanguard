@@ -44,7 +44,7 @@ export function Quiz({ questions, onFinish }: { questions: QuizQuestion[]; onFin
           {q.options.map((o) => {
             const state = !picked ? '' : o.correct ? 'border-brand bg-brand/10' : picked === o.id ? 'border-bad bg-bad/10' : 'opacity-60';
             return (
-              <button key={o.id} type="button" disabled={!!picked} onClick={() => choose(o.id)} className={`w-full rounded-lg border border-line-strong bg-surface-2 p-3 text-left text-ink transition enabled:hover:border-brand ${state}`}>
+              <button key={o.id} type="button" disabled={!!picked} onClick={() => choose(o.id)} className={`w-full rounded-lg border border-line-strong bg-surface-2 p-3 text-start text-ink transition enabled:hover:border-brand ${state}`}>
                 {t(o.textKey)}
               </button>
             );

@@ -12,7 +12,7 @@ export function RoomLayout({ panel, children, drawerLabel, top }: { panel: React
     <div className="flex min-h-dvh flex-col lg:h-dvh lg:overflow-hidden">
       {top}
       <div className="grid min-h-0 flex-1 lg:grid-cols-2">
-        <section className="min-w-0 lg:overflow-y-auto lg:border-r lg:border-line">
+        <section className="min-w-0 lg:overflow-y-auto lg:border-e lg:border-line">
           <div className="hidden p-6 lg:block">{panel}</div>
           <details className="m-4 rounded-xl border border-line bg-surface p-4 lg:hidden">
             <summary className="cursor-pointer text-sm font-bold text-brand">{drawerLabel}</summary>

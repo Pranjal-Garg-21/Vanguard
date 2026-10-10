@@ -241,7 +241,7 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact, on
             <button key={a.id} type="button" onClick={() => setApp(a.id)} className="relative flex flex-col items-center gap-1.5 text-xs font-medium text-phone-ink">
               <span className={`flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow ${a.tint}`}><Icon name={a.icon} className="h-7 w-7" /></span>
               {a.nameKey}
-              {unread(a.id) > 0 && <span className="absolute -right-0.5 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-bad px-1 text-[11px] font-bold text-white">{unread(a.id)}</span>}
+              {unread(a.id) > 0 && <span className="absolute -end-0.5 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-bad px-1 text-[11px] font-bold text-white">{unread(a.id)}</span>}
             </button>
           ))}
         </div>
@@ -261,7 +261,7 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact, on
           const s = surfaceOf(script, id) as Surface;
           const verdict = state.verdicts[id];
           return (
-            <button key={id} type="button" onClick={() => openSurface(id)} className="flex w-full items-start gap-3 border-b border-phone-line px-4 py-3 text-left">
+            <button key={id} type="button" onClick={() => openSurface(id)} className="flex w-full items-start gap-3 border-b border-phone-line px-4 py-3 text-start">
               <span className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ${state.read.includes(id) ? 'bg-transparent' : 'bg-phone-link'}`} />
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-semibold text-phone-ink">{surfaceTitle(s)}</span>
@@ -282,7 +282,7 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact, on
 
   const bannerSurface = banner ? surfaceOf(script, banner) : undefined;
   const bannerNode = bannerSurface && (
-    <button type="button" onClick={() => openSurface(banner as string)} className="mx-2 mt-1 flex min-w-0 animate-banner-in items-start gap-2 rounded-xl border border-phone-line bg-phone-card p-3 text-left shadow-lg">
+    <button type="button" onClick={() => openSurface(banner as string)} className="mx-2 mt-1 flex min-w-0 animate-banner-in items-start gap-2 rounded-xl border border-phone-line bg-phone-card p-3 text-start shadow-lg">
       <Icon name={bannerSurface.type === 'call' ? 'phone' : 'bell'} className="mt-0.5 h-5 w-5 text-phone-link" />
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-bold text-phone-ink">{surfaceTitle(bannerSurface)}</span>

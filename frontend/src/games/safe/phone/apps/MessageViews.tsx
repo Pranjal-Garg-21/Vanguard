@@ -14,7 +14,7 @@ function Avatar({ name }: { name: string }) {
   );
 }
 
-const INCOMING = 'max-w-[88%] rounded-2xl rounded-tl-sm bg-phone-bubble px-3.5 py-2.5 text-[15px] leading-relaxed text-phone-ink';
+const INCOMING = 'max-w-[88%] rounded-2xl rounded-ss-sm bg-phone-bubble px-3.5 py-2.5 text-[15px] leading-relaxed text-phone-ink';
 
 export function SmsView({ surface, view }: { surface: Sms; view: ViewProps }) {
   return (
@@ -56,15 +56,15 @@ export function ChatView({ surface, view, earlier = [], saidNow, typing }: { sur
         {earlier.map((m, i) => (
           <div key={i} className="space-y-2">
             <div className={INCOMING}>{m.surface.body.map((seg) => t(seg.k, view.vars)).join('')}</div>
-            {m.said && <div className="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-phone-link px-3.5 py-2.5 text-[15px] leading-relaxed text-white">{t(m.said, view.vars)}</div>}
+            {m.said && <div className="ms-auto max-w-[80%] rounded-2xl rounded-se-sm bg-phone-link px-3.5 py-2.5 text-[15px] leading-relaxed text-white">{t(m.said, view.vars)}</div>}
           </div>
         ))}
         <div className={INCOMING}>
           <RichText segments={surface.body} surface={surface} view={view} />
         </div>
-        {saidNow && <div className="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-phone-link px-3.5 py-2.5 text-[15px] leading-relaxed text-white">{t(saidNow, view.vars)}</div>}
+        {saidNow && <div className="ms-auto max-w-[80%] rounded-2xl rounded-se-sm bg-phone-link px-3.5 py-2.5 text-[15px] leading-relaxed text-white">{t(saidNow, view.vars)}</div>}
         {typing && (
-          <div className="flex w-14 items-center justify-center gap-1 rounded-2xl rounded-tl-sm bg-phone-bubble py-3" aria-label={t('safe.ui.typing')} role="status">
+          <div className="flex w-14 items-center justify-center gap-1 rounded-2xl rounded-ss-sm bg-phone-bubble py-3" aria-label={t('safe.ui.typing')} role="status">
             {[0, 1, 2].map((i) => <span key={i} className="h-1.5 w-1.5 animate-pulse rounded-full bg-phone-muted" style={{ animationDelay: `${i * 0.2}s` }} />)}
           </div>
         )}

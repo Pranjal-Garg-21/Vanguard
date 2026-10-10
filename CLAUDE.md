@@ -24,6 +24,14 @@ npm run typecheck        # tsc -b
 npm run build            # tsc -b && vite build
 ```
 
+From the repo root (content tooling, no dependencies):
+
+```bash
+node tools/authoring/validate.mjs                      # content: ids, keys, effects, story
+node tools/authoring/strings-export.mjs te out.tsv     # strings out to a translator
+node tools/authoring/strings-import.mjs te out.tsv     # and back, with placeholder guards
+```
+
 Run `npm run typecheck && npm run lint && npm test` before a PR; CI (`.github/workflows/ci.yml`) runs typecheck → lint → test → build. The app runs without keys; Supabase needs `frontend/.env.local` (see `.env.example`). Tile sheet PNGs come from Kenney packs (fetch steps in `readme.md`); `/dev/tiles` shows tile indexes, `/dev` shows the outbox.
 
 ## Layout
