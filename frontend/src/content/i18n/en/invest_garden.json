@@ -1,0 +1,84 @@
+{
+  "title": "Compounding Garden",
+  "blurb": "Grow two gardens side by side and see why interest on interest, and starting early, change everything.",
+
+  "t1.title": "Two gardens",
+  "t1.hook": "Asha has two mango gardens. In one, the trees only give fruit. In the other, the fruit grows into new trees. Your mission: see which garden wins.",
+  "t1.define": "**Simple interest** is earned only on your original money. **Compound interest** is earned on your original money and on the interest it already earned.",
+  "t1.analogy": "In the simple garden, the same trees give fruit every year. In the compound garden, each year's fruit grows into more trees that give fruit too.",
+
+  "q1.prompt": "In which garden does the fruit grow new trees?",
+  "q1.opt.a": "The compound garden",
+  "q1.opt.b": "The simple garden",
+  "q1.opt.c": "Both gardens",
+  "q1.opt.d": "Neither garden",
+  "q1.fb.b": "In the simple garden the same trees give fruit each year. Interest does not earn more interest there.",
+  "q1.hint": "Reread the analogy card.",
+  "q1.explain": "In the compound garden, interest earns interest, like fruit growing into new trees.",
+
+  "q2.prompt": "Simple interest is earned on...",
+  "q2.opt.a": "Only your original money",
+  "q2.opt.b": "Your original money and earlier interest",
+  "q2.opt.c": "Only the interest",
+  "q2.opt.d": "Nothing at all",
+  "q2.hint": "Reread the definition at the top of this task.",
+  "q2.explain": "Simple interest is earned only on the original amount.",
+
+  "t2.title": "Guess the garden",
+  "t2.define": "Compound interest looks slow at first, then speeds up. Your guess will show how well your instinct fits the maths.",
+  "t2.predict": "A compound garden starts with {P} at {rate} a year. What will it be worth after {yrs} years?",
+  "t2.reveal": "Each year's interest earns interest too, so {P} grows to about {comp10}. Most people guess lower.",
+
+  "q3.prompt": "With simple interest only, how much interest does {P} earn in {yrs} years at {rate}? Type a number in rupees.",
+  "q3.hint": "Original money times the rate times the years.",
+  "q3.explain": "{P} times {rate} times {yrs} years is {interestS}.",
+
+  "q4.prompt": "The compound garden ends higher than the simple one. How many rupees more is that, the interest on interest? Type a number in rupees.",
+  "q4.hint": "Compound value minus simple value. Simple value is the original money plus the simple interest.",
+  "q4.explain": "The compound garden reached {comp10}. The simple one reached {P} plus {interestS}. The gap is {extra}.",
+
+  "t3.title": "Fast-forward",
+  "t3.define": "The gap between the gardens does not grow evenly. It grows faster each year. Time is the strongest lever.",
+  "t3.explore": "Open the lab. Set the years to {yrsLong} and compare the two gardens.",
+
+  "q5.prompt": "In the lab, what is the compound garden worth after {yrsLong} years? Type a number in rupees.",
+  "q5.hint": "Read the compound value in the lab at {yrsLong} years.",
+  "q5.explain": "{P} at {rate} a year for {yrsLong} years becomes about {comp20}.",
+
+  "q6.prompt": "Use the Rule of 72. At {rate} a year, about how many years does money take to double? Type a number.",
+  "q6.hint": "Divide 72 by the rate.",
+  "q6.explain": "72 divided by {ratePct} is {doubling} years.",
+
+  "q7.prompt": "As the years go on, what happens to the gap between the compound and simple gardens?",
+  "q7.opt.a": "It grows bigger, and faster each year",
+  "q7.opt.b": "It stays the same",
+  "q7.opt.c": "It shrinks",
+  "q7.opt.d": "It disappears",
+  "q7.hint": "Compare the gap at 10 years with the gap at {yrsLong} years in the lab.",
+  "q7.explain": "Interest on interest keeps growing, so the gap widens faster each year.",
+
+  "t4.title": "Start early",
+  "t4.hook": "Asha and Dev each save {monthly} a month until age {stop}. Asha starts at age {ageE}. Dev starts at age {ageL}. Your mission: see what ten years does.",
+  "t4.explore": "Open the lab. Set the starting age to {ageE} and note the result. Then set it to {ageL}.",
+
+  "q8.prompt": "In the lab, what is Asha's money worth at age {stop} if she starts at {ageE}? Type a number in rupees.",
+  "q8.hint": "Set the starting age to {ageE} and read the value at the end.",
+  "q8.explain": "Saving {monthly} a month for {yearsE} years at {rateM} grows to about {earlyFV}.",
+
+  "q9.prompt": "What is Dev's money worth at age {stop} if he starts at {ageL}? Type a number in rupees.",
+  "q9.hint": "Set the starting age to {ageL} and read the value at the end.",
+  "q9.explain": "Saving {monthly} a month for {yearsL} years grows to about {lateFV}.",
+
+  "q10.prompt": "How many more rupees did Asha put in than Dev? Type a number in rupees.",
+  "q10.hint": "Read what each of them put in, and subtract.",
+  "q10.explain": "Asha put in {putEarly} and Dev put in {putLate}, so Asha put in {morePut} more.",
+
+  "q11.prompt": "Dev says: starting ten years later is almost the same. What is the problem?",
+  "q11.opt.a": "The extra ten years of growth are worth far more than the extra money Asha put in",
+  "q11.opt.b": "Nothing, ten years makes almost no difference",
+  "q11.opt.c": "Dev earns a higher rate",
+  "q11.opt.d": "Asha's money does not grow",
+  "q11.fb.b": "Look at the two end values. Asha put in a little more but ends with far more, because her money had ten more years to grow.",
+  "q11.hint": "Compare the extra money Asha put in with the gap between the end values.",
+  "q11.explain": "Early money has more years to earn interest on interest. Starting early is worth far more than the extra rupees put in."
+}

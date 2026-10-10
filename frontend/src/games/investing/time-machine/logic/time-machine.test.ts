@@ -4,7 +4,8 @@ import { t } from '@/platform';
 import { pickInsight, tenths, type InsightFacts, type InsightRule } from './insight';
 import { defaultMix, MIX_IDS, setShare, toWeights, type Mix } from './mix';
 import { typicalYear } from './paths';
-import { runTimeMachine } from './run';
+import { validateEvent } from '@shared/telemetry/event';
+import { runTimeMachine, timeMachineChoice } from './run';
 
 const rules = rulesFile.rules as InsightRule[];
 const goals = rulesFile.goals;
@@ -134,5 +135,14 @@ describe('typicalYear', () => {
     expect(steady.high - steady.low).toBeLessThan(bumpy.high - bumpy.low);
     expect(steady.low).toBeGreaterThan(10000);
     expect(bumpy.low).toBeLessThan(10000);
+  });
+});
+
+describe('telemetry', () => {
+  it('records a choice the event validator accepts', () => {
+    const event = { eid: 'e1', pid: 'p1', class: null, mode: 'arcade', activity: 'time_machine', concept: 'time_horizon', choice: timeMachineChoice(10, defaultMix), correct: null, misconception: null, level: 2, stage: null, lifeStage: null, timeline: 'main', ts: 1, v: 1 };
+    const r = validateEvent(event);
+    if (!r.ok) throw new Error(r.errors.join(', '));
+    expect(r.ok).toBe(true);
   });
 });

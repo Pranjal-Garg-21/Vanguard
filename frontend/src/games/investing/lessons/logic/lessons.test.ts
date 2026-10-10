@@ -1,7 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { fillTemplate, runCalcs, type Computed } from './calc';
 import { EXPLORE_WIDGETS, VISUALS } from './explore';
-import { glossary, glossaryById, knownConcepts, knownMisconceptions, rooms, strings } from './content';
+import { games, glossary, glossaryById, knownConcepts, knownMisconceptions, rooms, strings } from './content';
+
+const everyRoom = [...rooms, ...games];
 import { checkNumberAnswer, expectedDisplay, roomPoints, roomQuestions } from './room';
 import type { LessonBlock, Room } from './types';
 
@@ -39,8 +41,12 @@ function render(key: string, ctx: Record<string, Computed>, where: string): stri
 describe('lessons exist', () => {
   it('has at least one lesson, with unique ids and order', () => {
     expect(rooms.length).toBeGreaterThan(0);
-    expect(new Set(rooms.map((l) => l.id)).size).toBe(rooms.length);
+    expect(new Set(everyRoom.map((l) => l.id)).size).toBe(everyRoom.length);
     expect(new Set(rooms.map((l) => l.order)).size).toBe(rooms.length);
+    expect(new Set(games.map((l) => l.order)).size).toBe(games.length);
+  });
+  it('keeps games out of the lesson path (their order is after every lesson)', () => {
+    for (const g of games) expect(g.order).toBeGreaterThan(Math.max(...rooms.map((r) => r.order)));
   });
 });
 
@@ -53,6 +59,7 @@ function roomKeys(room: Room): string[] {
   const keys = [room.titleKey, room.blurbKey];
   for (const task of room.tasks) {
     keys.push(task.titleKey);
+    if (task.predict) keys.push(task.predict.questionKey, task.predict.explainKey);
     for (const b of task.blocks) {
       if (b.textKey) keys.push(b.textKey);
       keys.push(...(b.stepKeys ?? []));
@@ -88,7 +95,7 @@ function teachingText(blocks: LessonBlock[], ctx: Record<string, Computed>): str
     .join(' ');
 }
 
-describe.each(rooms.map((r) => [r.id, r] as const))('room %s', (_id, room) => {
+describe.each(everyRoom.map((r) => [r.id, r] as const))('room %s', (_id, room) => {
   const ctx = () => runCalcs(room.vars, room.calcs);
   const questions = roomQuestions(room);
 
@@ -201,6 +208,30 @@ describe.each(rooms.map((r) => [r.id, r] as const))('room %s', (_id, room) => {
     });
   });
 
+  it('guess steps: the answer and range exist, sit inside the slider, and the range is honest', () => {
+    const c = ctx();
+    for (const task of room.tasks) {
+      const p = task.predict;
+      if (!p) continue;
+      expect(knownConcepts.has(p.concept), `${task.id}: unknown concept ${p.concept}`).toBe(true);
+      expect(p.slider.min).toBeLessThan(p.slider.max);
+      expect(p.slider.step).toBeGreaterThan(0);
+      const actual = c[p.actual]?.raw;
+      expect(actual, `${task.id}: predict answer calc ${p.actual} does not exist`).not.toBeUndefined();
+      expect(actual!).toBeGreaterThanOrEqual(p.slider.min);
+      expect(actual!).toBeLessThanOrEqual(p.slider.max);
+      expect(Boolean(p.rangeLow), `${task.id}: give both ends of the range or neither`).toBe(Boolean(p.rangeHigh));
+      if (p.rangeLow && p.rangeHigh) {
+        const lo = c[p.rangeLow]!.raw;
+        const hi = c[p.rangeHigh]!.raw;
+        expect(lo).toBeLessThanOrEqual(actual!);
+        expect(actual!).toBeLessThanOrEqual(hi);
+        expect(lo).toBeGreaterThanOrEqual(p.slider.min);
+        expect(hi).toBeLessThanOrEqual(p.slider.max);
+      }
+    }
+  });
+
   it('its glossary terms exist', () => {
     for (const g of room.glossary) expect(glossaryIds.has(g), `unknown glossary term ${g}`).toBe(true);
     for (const t of room.tasks) for (const b of t.blocks) for (const term of b.terms ?? []) expect(glossaryIds.has(term), `unknown term ${term}`).toBe(true);
@@ -226,7 +257,7 @@ describe('strings hygiene', () => {
       used.add(g.termKey);
       used.add(g.defKey);
     }
-    for (const r of rooms) roomKeys(r).forEach((k) => used.add(k));
+    for (const r of everyRoom) roomKeys(r).forEach((k) => used.add(k));
     const orphans = Object.keys(strings).filter((k) => !used.has(k));
     expect(orphans).toEqual([]);
   });

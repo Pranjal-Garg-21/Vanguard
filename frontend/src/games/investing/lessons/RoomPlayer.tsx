@@ -13,6 +13,7 @@ import { fillTemplate, runCalcs } from './logic/calc';
 import { rooms } from './logic/content';
 import { checkNumberAnswer, emptyQuestionState, roomPoints, roomQuestions, type ProgressMap, type QuestionState } from './logic/room';
 import type { Room, RoomQuestion } from './logic/types';
+import { PredictStep } from './PredictStep';
 import { QuestionRow } from './RoomQuestions';
 
 const LEVEL = 2;
@@ -187,6 +188,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
                 {task.blocks.map((block, i) => (
                   <BlockCard key={`${task.id}-${i}`} block={block} ctx={ctx} />
                 ))}
+                {task.predict && <PredictStep key={task.id} roomId={room.id} predict={task.predict} ctx={ctx} />}
               </div>
 
               <div className="space-y-4">

@@ -105,9 +105,25 @@ export interface RoomQuestion {
   correct?: string;
 }
 
+/** "Guess first, then see the model's answer" (the Predict verb). Numbers are calc ids from the room's calcs. */
+export interface PredictSpec {
+  questionKey: string;
+  slider: { min: number; max: number; step: number };
+  unit: Unit;
+  /** Calc id for the model's answer. */
+  actual: string;
+  /** Calc ids bounding an honest range. Leave both out when the answer is exact. */
+  rangeLow?: string;
+  rangeHigh?: string;
+  explainKey: string;
+  concept: string;
+}
+
 export interface RoomTask {
   id: string;
   titleKey: string;
+  /** A guess-first step shown after the teaching and before the questions. */
+  predict?: PredictSpec;
   /** Teaching for this task (same block types as a card lesson). */
   blocks: LessonBlock[];
   questions: RoomQuestion[];

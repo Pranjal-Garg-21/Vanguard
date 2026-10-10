@@ -5,6 +5,8 @@
   "list.subtitle": "Short lessons on how money works. One idea at a time.",
   "list.minutes": "{n} min",
   "list.games": "Practice games",
+  "list.open": "Open",
+  "card.predict": "Make a guess",
 
   "btn.back": "Back",
   "btn.showStep": "Show next step",

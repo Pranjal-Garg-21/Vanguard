@@ -14,7 +14,7 @@ import content from '@/content/scenarios/invest/time_machine.json';
 import { PathsGuide } from './PathsGuide';
 import { pickInsight, tenths, type InsightRule } from './logic/insight';
 import { defaultMix, MIX_IDS, setShare, type Mix } from './logic/mix';
-import { runTimeMachine, type TimeMachineParams, type TimeMachineRun } from './logic/run';
+import { runTimeMachine, timeMachineChoice, type TimeMachineParams, type TimeMachineRun } from './logic/run';
 
 const goals = content.goals;
 const rules = content.rules as InsightRule[];
@@ -56,7 +56,7 @@ export function TimeMachine({ seed }: { seed?: number | string }) {
       mode: 'arcade',
       activity: 'time_machine',
       concept: insight.concept,
-      choice: `${params.years}y ${mix.steady_box}/${mix.mixed_basket}/${mix.bumpy_ride}`,
+      choice: timeMachineChoice(params.years, mix),
       level: 2,
       ...(insight.misconception ? { misconception: insight.misconception } : {}),
     });

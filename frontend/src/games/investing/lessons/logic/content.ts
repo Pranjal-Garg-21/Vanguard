@@ -15,6 +15,11 @@ export const rooms = (
   values(import.meta.glob('/src/content/scenarios/invest/lessons/*.json', { eager: true, import: 'default' })) as Room[]
 ).sort((a, b) => a.order - b.order);
 
+/** Practice games that run on the room engine (a guess step, labs and questions). Not part of the lesson path. */
+export const games = (
+  values(import.meta.glob('/src/content/scenarios/invest/games/*.json', { eager: true, import: 'default' })) as Room[]
+).sort((a, b) => a.order - b.order);
+
 export const glossary = values(
   import.meta.glob('/src/content/scenarios/invest/glossary/*.json', { eager: true, import: 'default' }),
 ).flat() as GlossaryEntry[];
@@ -38,4 +43,4 @@ export const knownMisconceptions = new Set([
 ]);
 
 export const glossaryById = new Map(glossary.map((g) => [g.id, g]));
-export const lessonById = new Map(rooms.map((l) => [l.id, l]));
+export const lessonById = new Map([...rooms, ...games].map((l) => [l.id, l]));

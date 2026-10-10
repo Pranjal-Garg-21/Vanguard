@@ -18,13 +18,14 @@
 | Lesson content (rooms 1-14: profit/loss, interest, inflation, lending, bonds, stocks, risk, diversification, funds, ETFs, gold, liquidity, time horizon, scams) | `content/scenarios/invest/{lessons,glossary}/`, `content/i18n/en/invest_*.json` | Done. All 14 are rooms and pass the validator. Rooms 7-8 teach the three Time Machine paths and are linked from it. Still to do: reviewer sign-off (D12), check items / S5 gate |
 | Lab widgets | `games/investing/lessons/widgets/` | 16 labs: fall_rise, simple_vs_compound, start_early, inflation_cups, lender_outcomes, bond_schedule, bond_price, position_lab, path_range, basket_split, sip_units, fee_drag, etf_buy, making_charge, cash_speed, horizon_range, pyramid_growth (maths in `logic/explore.ts` and `core/market/finance`, tested). Numbers a room quotes for a path or for liquidity are checked against `assumptions.json` by `paths-sync.test.ts` |
 | Saved progress | `games/investing/lessons/useSavedProgress.ts`, `logic/room.ts` | Done. Saved per player through `saveGame`; the list shows New / In progress / Completed and marks "Up next"; reopening continues at the first unfinished task |
-| Predict verb | `runtime/verbs/predict/` | Done (slider version; options version comes with lesson 4) |
+| Predict verb | `runtime/verbs/predict/` | Done (slider version). Rooms can carry a guess step (`predict` on a task); validated for answer, range and slider fit |
 | `SimBanner` | `ui/SimBanner.tsx` | Done |
 | Investing ABC screens | `games/investing/lessons/` (routes `/learn/invest`, `/learn/invest/:lessonId`) | Done, viewed in browser |
 | Explore widgets | `games/investing/lessons/widgets/` | `fall_rise`, `simple_vs_compound` done |
 | `RangeDisplay`, `FanChart` (plain SVG), `AssumptionsDrawer`, brand-name test | `ui/`, `content/brand-names.test.ts` | Done, tested, viewed in browser. Rest of the design kit (gallery, Meter, Dialog...) not started |
 | Time Machine | `games/investing/time-machine/` (route `/learn/invest/time-machine`) | Done: goal, plan, mix sliders, 500 futures, fan chart, range, data-driven insight card (`content/scenarios/invest/time_machine.json`). Not yet a registered MiniGame (waits for P2's runner); no check items / S5 gate yet |
-| Games (Chai Price, Garden, Stock Market, Mutual Fund, Invest-or-Scam) | `games/investing/<game>/` | Not started |
+| Chai Price Time Travel, Compounding Garden | `content/scenarios/invest/games/*.json` (run on the room engine; routes `/learn/invest/game_chai_price`, `/learn/invest/game_garden`) | Done. Each has a guess step (Predict verb), labs and 7-8 questions, and is saved per player. Not yet MiniGames in P2's runner; no LifePath effects yet (`sawInflation` flag) |
+| Games (Stock Market, Mutual Fund, Invest-or-Scam) | `games/investing/<game>/` | Not started |
 
 **Lesson format additions (since §13).** Blocks can now be `explore` (a hands-on widget), `steps` (a worked example revealed one line per tap); any block can carry a `visual`; a wrong option that exposes a misconception must carry a `feedbackKey` (names the specific mistake first). The validator enforces: every lesson has an explore block, every analogy has a picture, cards are 45 words or fewer, sentences 22 words or fewer, definitions 15 words or fewer. Strings live one file per lesson: `invest_<lesson>.json`, used as `t('invest_<lesson>.<key>')`.
 

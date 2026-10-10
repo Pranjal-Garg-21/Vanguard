@@ -4,7 +4,7 @@ import { t } from '@/platform';
 import { Badge, Card, ChevronIcon, ProgressBar } from '@/ui';
 import { InvestShell } from './InvestShell';
 import { fillTemplate, runCalcs } from './logic/calc';
-import { rooms } from './logic/content';
+import { games, rooms } from './logic/content';
 import { roomPoints, type RoomSummary } from './logic/room';
 import { useRoomSummaries } from './useSavedProgress';
 
@@ -80,16 +80,34 @@ export function LessonList() {
       </ol>
 
       <h2 className="pt-4 text-xs font-bold tracking-[0.15em] text-muted uppercase">{t('investui.list.games')}</h2>
-      <Link to="/learn/invest/time-machine" className="block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:max-w-md">
-        <Card className="space-y-2 transition-colors hover:border-brand">
-          <h3 className="text-lg font-bold">{t('timemachine.title')}</h3>
-          <p className="text-sm text-ink-soft">{t('timemachine.open.hint')}</p>
-          <span className="inline-flex items-center gap-1 text-sm font-bold text-brand">
-            {t('timemachine.open')}
-            <ChevronIcon dir="right" />
-          </span>
-        </Card>
-      </Link>
+      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {games.map((game) => {
+          const ctx = runCalcs(game.vars, game.calcs);
+          return (
+            <li key={game.id}>
+              <GameCard to={`/learn/invest/${game.id}`} title={fillTemplate(t(game.titleKey), ctx)} hint={fillTemplate(t(game.blurbKey), ctx)} open={t('investui.list.open')} />
+            </li>
+          );
+        })}
+        <li>
+          <GameCard to="/learn/invest/time-machine" title={t('timemachine.title')} hint={t('timemachine.open.hint')} open={t('timemachine.open')} />
+        </li>
+      </ul>
     </InvestShell>
+  );
+}
+
+function GameCard({ to, title, hint, open }: { to: string; title: string; hint: string; open: string }) {
+  return (
+    <Link to={to} className="block h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+      <Card className="flex h-full flex-col gap-2 transition-colors hover:border-brand">
+        <h3 className="text-lg font-bold">{title}</h3>
+        <p className="flex-1 text-sm text-ink-soft">{hint}</p>
+        <span className="inline-flex items-center gap-1 text-sm font-bold text-brand">
+          {open}
+          <ChevronIcon dir="right" />
+        </span>
+      </Card>
+    </Link>
   );
 }

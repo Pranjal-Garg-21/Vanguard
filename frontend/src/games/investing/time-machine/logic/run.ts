@@ -34,3 +34,8 @@ export function runTimeMachine(p: TimeMachineParams, seed: number | string = 'ti
     },
   };
 }
+
+/** The choice recorded in telemetry, e.g. "10y_40-40-20". Telemetry ids allow only letters, digits and _ . : - */
+export function timeMachineChoice(years: number, mix: Mix): string {
+  return `${years}y_${mix.steady_box}-${mix.mixed_basket}-${mix.bumpy_ride}`;
+}
