@@ -24,6 +24,13 @@ describe('judge feedback', () => {
   });
 });
 
+describe('neutral steps', () => {
+  const surface = { type: 'chat', from: 'X', body: [], best: 'call', actions: [{ id: 'call', labelKey: 'a', risk: 'neutral' }, { id: 'ask', labelKey: 'b', risk: 'neutral', noteKey: 'n' }, { id: 'mute', labelKey: 'c', risk: 'neutral' }] } as unknown as Surface;
+  it('the best neutral step is graded best', () => expect(responseFeedback(surface, 'call')).toMatchObject({ grade: 'best' }));
+  it('another neutral step with a note is a coaching note, not a grade', () => expect(responseFeedback(surface, 'ask')).toMatchObject({ grade: 'info', best: null }));
+  it('a neutral step with no note gets no card', () => expect(responseFeedback(surface, 'mute')).toBeNull());
+});
+
 describe('inbox response feedback', () => {
   const day = buildInboxDay(pool as unknown as PoolItem[], { seed: 4, count: 10, level: 3 });
   const surfaces = day.steps.map((s) => s.surface).filter((s) => s.respond);

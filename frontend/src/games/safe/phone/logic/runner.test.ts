@@ -46,12 +46,16 @@ describe('runner timing', () => {
 });
 
 describe('neutral steps', () => {
-  it('leave the surface open so the student can still decide', () => {
+  it('close the screen once the student moves on, so a decision cannot be undone', () => {
     let s = run(createRun(KYC), { type: 'tick', ms: 1500 }, { type: 'act', surface: 'sms', action: 'open_link' });
     expect(s.acted.sms).toBeUndefined();
     s = run(s, { type: 'act', surface: 'sms', action: 'open_link' });
     expect(s.history.filter((h) => h.kind === 'acted')).toHaveLength(1);
+    // Having moved on to the page, the message's own options are closed.
+    expect(s.moved).toContain('sms');
     s = run(s, { type: 'act', surface: 'sms', action: 'ignore' });
+    expect(s.ended).toBe(false);
+    s = run(s, { type: 'tick', ms: 700 }, { type: 'act', surface: 'page', action: 'close_page' });
     expect(s.outcome).toBe('safe');
   });
 });
