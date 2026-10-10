@@ -25,6 +25,7 @@
 
   "t2.title": "Guess the price",
   "t2.define": "A model can estimate the future price by assuming prices rise at a steady rate. Real prices jump around, so treat the answer as a range, not a promise.",
+  "t2.formula": "Future price = price today × (1 + inflation)^years. Example: a ₹50 meal with 4% inflation for 3 years costs 50 × 1.04 × 1.04 × 1.04, about ₹56.",
   "t2.predict": "What will one cup cost in {years} years, if prices keep rising about {infl} a year?",
   "t2.reveal": "Prices rising {infl} a year turn {price} into about {future}. This is an estimate, built on a made-up steady rate.",
 
@@ -34,6 +35,7 @@
 
   "t3.title": "Money in a box",
   "t3.hook": "Asha keeps {money} in a box at home. Not a rupee is ever taken out. Your mission: see what it can buy in the future.",
+  "t3.formula": "Value in today's money = amount ÷ (1 + inflation)^years. Example: ₹2,000 after 3 years of 4% inflation is worth 2,000 ÷ 1.04 ÷ 1.04 ÷ 1.04, about ₹1,778.",
   "t3.explore": "Open the lab. Set the inflation to {infl} and slide the years to {years}. Watch the cups.",
 
   "q4.prompt": "In the lab, how many whole cups does {money} buy after {years} years of {infl} inflation? Type a number.",

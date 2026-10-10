@@ -54,6 +54,8 @@
 
   "t3.title": "Numbers over time",
   "t3.define": "Without any swings, growth is just compounding. Money grown at a steady rate for **n** years becomes the start amount times (1 + rate) multiplied by itself n times.",
+  "t3.formula": "Compound amount = start × (1 + rate)^years. Example: ₹2,000 at 5% for 2 years is 2,000 × 1.05 × 1.05 = ₹2,205.",
+  "t3.rule72": "Rule of 72: divide 72 by the yearly rate, as a plain number, to estimate years to double. At 6% that is about 72 ÷ 6 = 12 years.",
   "t3.note": "Real paths swing around a steady line like this one. The steady line is a way to feel the numbers, not a promise.",
 
   "q6.prompt": "If {amt} grew a steady {rate} a year with no swings, what would it become after {years} years? Type a number in rupees.",

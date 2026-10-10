@@ -21,6 +21,7 @@
 
   "t2.title": "What your money can buy",
   "t2.define": "**Buying power** is how much your money can buy. If prices rise and your money stays the same, its buying power falls.",
+  "t2.formula": "Future price = price today × (1 + inflation)^years. Example: a ₹50 meal with 4% inflation for 3 years costs 50 × 1.04 × 1.04 × 1.04, about ₹56.",
   "t2.steps.1": "A cup of chai costs {price}, so {money} buys {cupsNow} cups",
   "t2.steps.2": "The price rises to {p25}: the same {money} now buys only {cups25} cups",
   "t2.steps.3": "The money did not change. What it can buy did.",

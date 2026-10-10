@@ -48,6 +48,7 @@
   "t3.title": "The making charge",
   "t3.hook": "Asha buys gold jewellery for {price}. The shop adds a making charge of {charge}.",
   "t3.define": "A **making charge** pays for crafting the jewellery. It is part of the price you pay. It is not gold, and it usually does not come back when you sell.",
+  "t3.formula": "Rise needed to break even = making charge ÷ (1 − making charge). Example: a 10% charge needs 0.10 ÷ 0.90, about 11.1%.",
   "t3.explore": "Open the lab. Keep the making charge at {charge}. Set the gold price change to +{rise}.",
 
   "q5.prompt": "How much of the {price} is making charge? Type a number in rupees.",

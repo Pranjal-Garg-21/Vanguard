@@ -7,43 +7,182 @@
   "difficulty": "easy",
   "titleKey": "invest_lending.title",
   "blurbKey": "invest_lending.blurb",
-  "concepts": ["lending_as_investing", "default_risk"],
-  "misconceptions": ["high_rate_is_free_bonus", "guaranteed_returns_exist"],
+  "concepts": [
+    "lending_as_investing",
+    "default_risk"
+  ],
+  "misconceptions": [
+    "high_rate_is_free_bonus",
+    "guaranteed_returns_exist"
+  ],
   "vars": {
-    "n": { "value": 8 },
-    "amt": { "value": 1500, "fmt": "rupees" },
-    "rate": { "value": 0.1, "fmt": "percent" },
-    "b1": { "value": 8000, "fmt": "rupees" },
-    "r1": { "value": 0.05, "fmt": "percent" },
-    "l2": { "value": 2000, "fmt": "rupees" },
-    "l2back": { "value": 2300, "fmt": "rupees" },
-    "labAmt": { "value": 1000, "fmt": "rupees" },
-    "labRate": { "value": 0.1, "fmt": "percent" },
-    "labRecAll": { "value": 1, "fmt": "percent" },
-    "rec40": { "value": 0.4, "fmt": "percent" },
-    "r20": { "value": 0.2, "fmt": "percent" },
-    "l5": { "value": 5000, "fmt": "rupees" }
+    "n": {
+      "value": 8
+    },
+    "amt": {
+      "value": 1500,
+      "fmt": "rupees"
+    },
+    "rate": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "b1": {
+      "value": 8000,
+      "fmt": "rupees"
+    },
+    "r1": {
+      "value": 0.05,
+      "fmt": "percent"
+    },
+    "l2": {
+      "value": 2000,
+      "fmt": "rupees"
+    },
+    "l2back": {
+      "value": 2300,
+      "fmt": "rupees"
+    },
+    "labAmt": {
+      "value": 1000,
+      "fmt": "rupees"
+    },
+    "labRate": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "labRecAll": {
+      "value": 1,
+      "fmt": "percent"
+    },
+    "rec40": {
+      "value": 0.4,
+      "fmt": "percent"
+    },
+    "r20": {
+      "value": 0.2,
+      "fmt": "percent"
+    },
+    "l5": {
+      "value": 5000,
+      "fmt": "rupees"
+    }
   },
   "calcs": [
-    { "id": "up", "fn": "add", "args": [1, "$rate"] },
-    { "id": "amtBack", "fn": "mul", "args": ["$amt", "$up"], "fmt": "rupees" },
-    { "id": "gain", "fn": "sub", "args": ["$amtBack", "$amt"], "fmt": "rupees" },
-    { "id": "i1", "fn": "simpleInterest", "args": ["$b1", "$r1", 1], "fmt": "rupees" },
-    { "id": "ret", "fn": "returnPct", "args": ["$l2", "$l2back"], "fmt": "percent" },
-    { "id": "total", "fn": "mul", "args": ["$n", "$gain"], "fmt": "rupees" },
-    { "id": "labLoss", "fn": "defaultLoss", "args": ["$labAmt", "$rec40"], "fmt": "rupees" },
-    { "id": "labNet", "fn": "mul", "args": ["$labLoss", -1], "fmt": "rupees" },
-    { "id": "gain20", "fn": "simpleInterest", "args": ["$labAmt", "$r20", 1], "fmt": "rupees" },
-    { "id": "loss5", "fn": "defaultLoss", "args": ["$l5", "$rec40"], "fmt": "rupees" }
+    {
+      "id": "up",
+      "fn": "add",
+      "args": [
+        1,
+        "$rate"
+      ]
+    },
+    {
+      "id": "amtBack",
+      "fn": "mul",
+      "args": [
+        "$amt",
+        "$up"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "gain",
+      "fn": "sub",
+      "args": [
+        "$amtBack",
+        "$amt"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "i1",
+      "fn": "simpleInterest",
+      "args": [
+        "$b1",
+        "$r1",
+        1
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "ret",
+      "fn": "returnPct",
+      "args": [
+        "$l2",
+        "$l2back"
+      ],
+      "fmt": "percent"
+    },
+    {
+      "id": "total",
+      "fn": "mul",
+      "args": [
+        "$n",
+        "$gain"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labLoss",
+      "fn": "defaultLoss",
+      "args": [
+        "$labAmt",
+        "$rec40"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labNet",
+      "fn": "mul",
+      "args": [
+        "$labLoss",
+        -1
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "gain20",
+      "fn": "simpleInterest",
+      "args": [
+        "$labAmt",
+        "$r20",
+        1
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "loss5",
+      "fn": "defaultLoss",
+      "args": [
+        "$l5",
+        "$rec40"
+      ],
+      "fmt": "rupees"
+    }
   ],
   "tasks": [
     {
       "id": "t1",
       "titleKey": "invest_lending.t1.title",
       "blocks": [
-        { "type": "hook", "visual": "neighbour_loan", "textKey": "invest_lending.t1.hook" },
-        { "type": "define", "textKey": "invest_lending.t1.define" },
-        { "type": "note", "textKey": "invest_lending.t1.note" }
+        {
+          "type": "hook",
+          "visual": "neighbour_loan",
+          "textKey": "invest_lending.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_lending.t1.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_lending.t1.formula"
+        },
+        {
+          "type": "note",
+          "textKey": "invest_lending.t1.note"
+        }
       ],
       "questions": [
         {
@@ -55,10 +194,22 @@
           "hintKey": "invest_lending.q1.hint",
           "explainKey": "invest_lending.q1.explain",
           "options": [
-            { "id": "a", "textKey": "invest_lending.q1.opt.a" },
-            { "id": "b", "textKey": "invest_lending.q1.opt.b" },
-            { "id": "c", "textKey": "invest_lending.q1.opt.c" },
-            { "id": "d", "textKey": "invest_lending.q1.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_lending.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_lending.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_lending.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_lending.q1.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -81,7 +232,11 @@
       "blocks": [
         {
           "type": "steps",
-          "stepKeys": ["invest_lending.t2.steps.1", "invest_lending.t2.steps.2", "invest_lending.t2.steps.3"]
+          "stepKeys": [
+            "invest_lending.t2.steps.1",
+            "invest_lending.t2.steps.2",
+            "invest_lending.t2.steps.3"
+          ]
         }
       ],
       "questions": [
@@ -113,17 +268,28 @@
       "id": "t3",
       "titleKey": "invest_lending.t3.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_lending.t3.define" },
+        {
+          "type": "define",
+          "textKey": "invest_lending.t3.define"
+        },
         {
           "type": "steps",
-          "stepKeys": ["invest_lending.t3.steps.1", "invest_lending.t3.steps.2", "invest_lending.t3.steps.3"]
+          "stepKeys": [
+            "invest_lending.t3.steps.1",
+            "invest_lending.t3.steps.2",
+            "invest_lending.t3.steps.3"
+          ]
         },
         {
           "type": "explore",
           "explore": {
             "widget": "lender_outcomes",
             "promptKey": "invest_lending.t3.explore",
-            "params": { "amount": "$labAmt", "rate": "$labRate", "recovery": "$labRecAll" }
+            "params": {
+              "amount": "$labAmt",
+              "rate": "$labRate",
+              "recovery": "$labRecAll"
+            }
           }
         }
       ],
@@ -159,10 +325,22 @@
           "hintKey": "invest_lending.q7.hint",
           "explainKey": "invest_lending.q7.explain",
           "options": [
-            { "id": "a", "textKey": "invest_lending.q7.opt.a" },
-            { "id": "b", "textKey": "invest_lending.q7.opt.b" },
-            { "id": "c", "textKey": "invest_lending.q7.opt.c" },
-            { "id": "d", "textKey": "invest_lending.q7.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_lending.q7.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_lending.q7.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_lending.q7.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_lending.q7.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -172,10 +350,15 @@
       "id": "t4",
       "titleKey": "invest_lending.t4.title",
       "blocks": [
-        { "type": "tradeoff", "textKey": "invest_lending.t4.tradeoff" },
+        {
+          "type": "tradeoff",
+          "textKey": "invest_lending.t4.tradeoff"
+        },
         {
           "type": "misconception",
-          "misconceptions": ["high_rate_is_free_bonus"],
+          "misconceptions": [
+            "high_rate_is_free_bonus"
+          ],
           "textKey": "invest_lending.t4.mistake"
         }
       ],
@@ -189,7 +372,10 @@
           "hintKey": "invest_lending.q8.hint",
           "explainKey": "invest_lending.q8.explain",
           "options": [
-            { "id": "a", "textKey": "invest_lending.q8.opt.a" },
+            {
+              "id": "a",
+              "textKey": "invest_lending.q8.opt.a"
+            },
             {
               "id": "b",
               "textKey": "invest_lending.q8.opt.b",
@@ -202,7 +388,10 @@
               "misconception": "guaranteed_returns_exist",
               "feedbackKey": "invest_lending.q8.fb.c"
             },
-            { "id": "d", "textKey": "invest_lending.q8.opt.d" }
+            {
+              "id": "d",
+              "textKey": "invest_lending.q8.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -223,8 +412,18 @@
       "id": "t5",
       "titleKey": "invest_lending.t5.title",
       "blocks": [
-        { "type": "note", "textKey": "invest_lending.t5.note" },
-        { "type": "jargon", "terms": ["borrower", "lender", "default"] }
+        {
+          "type": "note",
+          "textKey": "invest_lending.t5.note"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "borrower",
+            "lender",
+            "default"
+          ]
+        }
       ],
       "questions": [
         {
@@ -236,10 +435,22 @@
           "hintKey": "invest_lending.q10.hint",
           "explainKey": "invest_lending.q10.explain",
           "options": [
-            { "id": "a", "textKey": "invest_lending.q10.opt.a" },
-            { "id": "b", "textKey": "invest_lending.q10.opt.b" },
-            { "id": "c", "textKey": "invest_lending.q10.opt.c" },
-            { "id": "d", "textKey": "invest_lending.q10.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_lending.q10.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_lending.q10.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_lending.q10.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_lending.q10.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -252,15 +463,31 @@
           "hintKey": "invest_lending.q11.hint",
           "explainKey": "invest_lending.q11.explain",
           "options": [
-            { "id": "a", "textKey": "invest_lending.q11.opt.a" },
-            { "id": "b", "textKey": "invest_lending.q11.opt.b" },
-            { "id": "c", "textKey": "invest_lending.q11.opt.c" },
-            { "id": "d", "textKey": "invest_lending.q11.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_lending.q11.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_lending.q11.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_lending.q11.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_lending.q11.opt.d"
+            }
           ],
           "correct": "b"
         }
       ]
     }
   ],
-  "glossary": ["borrower", "lender", "default"]
+  "glossary": [
+    "borrower",
+    "lender",
+    "default"
+  ]
 }

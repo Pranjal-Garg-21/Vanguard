@@ -7,26 +7,72 @@
   "difficulty": "medium",
   "titleKey": "invest_horizon.title",
   "blurbKey": "invest_horizon.blurb",
-  "concepts": ["time_horizon", "uncertainty_ranges", "interest_compound", "risk_return"],
-  "misconceptions": ["guaranteed_returns_exist", "past_returns_repeat"],
+  "concepts": [
+    "time_horizon",
+    "uncertainty_ranges",
+    "interest_compound",
+    "risk_return"
+  ],
+  "misconceptions": [
+    "guaranteed_returns_exist",
+    "past_returns_repeat"
+  ],
   "vars": {
-    "amt": { "value": 10000, "fmt": "rupees" },
-    "rate": { "value": 0.1, "fmt": "percent" },
-    "years": { "value": 20 },
-    "r72": { "value": 8 }
+    "amt": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "rate": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "years": {
+      "value": 20
+    },
+    "r72": {
+      "value": 8
+    }
   },
   "calcs": [
-    { "id": "grown", "fn": "compoundAmount", "args": ["$amt", "$rate", "$years"], "fmt": "rupees" },
-    { "id": "doubleYrs", "fn": "ruleOf72", "args": ["$r72"], "fmt": "number", "round": 0 }
+    {
+      "id": "grown",
+      "fn": "compoundAmount",
+      "args": [
+        "$amt",
+        "$rate",
+        "$years"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "doubleYrs",
+      "fn": "ruleOf72",
+      "args": [
+        "$r72"
+      ],
+      "fmt": "number",
+      "round": 0
+    }
   ],
   "tasks": [
     {
       "id": "t1",
       "titleKey": "invest_horizon.t1.title",
       "blocks": [
-        { "type": "hook", "visual": "long_road", "textKey": "invest_horizon.t1.hook" },
-        { "type": "define", "textKey": "invest_horizon.t1.define" },
-        { "type": "analogy", "visual": "long_road", "textKey": "invest_horizon.t1.analogy" }
+        {
+          "type": "hook",
+          "visual": "long_road",
+          "textKey": "invest_horizon.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_horizon.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "long_road",
+          "textKey": "invest_horizon.t1.analogy"
+        }
       ],
       "questions": [
         {
@@ -38,10 +84,22 @@
           "hintKey": "invest_horizon.q1.hint",
           "explainKey": "invest_horizon.q1.explain",
           "options": [
-            { "id": "a", "textKey": "invest_horizon.q1.opt.a" },
-            { "id": "b", "textKey": "invest_horizon.q1.opt.b" },
-            { "id": "c", "textKey": "invest_horizon.q1.opt.c" },
-            { "id": "d", "textKey": "invest_horizon.q1.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_horizon.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_horizon.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_horizon.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_horizon.q1.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -54,10 +112,22 @@
           "hintKey": "invest_horizon.q2.hint",
           "explainKey": "invest_horizon.q2.explain",
           "options": [
-            { "id": "a", "textKey": "invest_horizon.q2.opt.a" },
-            { "id": "b", "textKey": "invest_horizon.q2.opt.b" },
-            { "id": "c", "textKey": "invest_horizon.q2.opt.c" },
-            { "id": "d", "textKey": "invest_horizon.q2.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_horizon.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_horizon.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_horizon.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_horizon.q2.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -67,10 +137,19 @@
       "id": "t2",
       "titleKey": "invest_horizon.t2.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_horizon.t2.define" },
+        {
+          "type": "define",
+          "textKey": "invest_horizon.t2.define"
+        },
         {
           "type": "explore",
-          "explore": { "widget": "horizon_range", "promptKey": "invest_horizon.t2.explore", "params": { "amount": "$amt" } }
+          "explore": {
+            "widget": "horizon_range",
+            "promptKey": "invest_horizon.t2.explore",
+            "params": {
+              "amount": "$amt"
+            }
+          }
         }
       ],
       "questions": [
@@ -83,10 +162,24 @@
           "hintKey": "invest_horizon.q3.hint",
           "explainKey": "invest_horizon.q3.explain",
           "options": [
-            { "id": "a", "textKey": "invest_horizon.q3.opt.a" },
-            { "id": "b", "textKey": "invest_horizon.q3.opt.b", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_horizon.q3.fb.b" },
-            { "id": "c", "textKey": "invest_horizon.q3.opt.c" },
-            { "id": "d", "textKey": "invest_horizon.q3.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_horizon.q3.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_horizon.q3.opt.b",
+              "misconception": "guaranteed_returns_exist",
+              "feedbackKey": "invest_horizon.q3.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_horizon.q3.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_horizon.q3.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -99,10 +192,22 @@
           "hintKey": "invest_horizon.q4.hint",
           "explainKey": "invest_horizon.q4.explain",
           "options": [
-            { "id": "a", "textKey": "invest_horizon.q4.opt.a" },
-            { "id": "b", "textKey": "invest_horizon.q4.opt.b" },
-            { "id": "c", "textKey": "invest_horizon.q4.opt.c" },
-            { "id": "d", "textKey": "invest_horizon.q4.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_horizon.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_horizon.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_horizon.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_horizon.q4.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -115,10 +220,22 @@
           "hintKey": "invest_horizon.q5.hint",
           "explainKey": "invest_horizon.q5.explain",
           "options": [
-            { "id": "a", "textKey": "invest_horizon.q5.opt.a" },
-            { "id": "b", "textKey": "invest_horizon.q5.opt.b" },
-            { "id": "c", "textKey": "invest_horizon.q5.opt.c" },
-            { "id": "d", "textKey": "invest_horizon.q5.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_horizon.q5.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_horizon.q5.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_horizon.q5.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_horizon.q5.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -128,8 +245,22 @@
       "id": "t3",
       "titleKey": "invest_horizon.t3.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_horizon.t3.define" },
-        { "type": "note", "textKey": "invest_horizon.t3.note" }
+        {
+          "type": "define",
+          "textKey": "invest_horizon.t3.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_horizon.t3.formula"
+        },
+        {
+          "type": "note",
+          "textKey": "invest_horizon.t3.rule72"
+        },
+        {
+          "type": "note",
+          "textKey": "invest_horizon.t3.note"
+        }
       ],
       "questions": [
         {
@@ -160,9 +291,22 @@
       "id": "t4",
       "titleKey": "invest_horizon.t4.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_horizon.t4.define" },
-        { "type": "tradeoff", "textKey": "invest_horizon.t4.tradeoff" },
-        { "type": "jargon", "terms": ["time_horizon", "projection", "assumption"] }
+        {
+          "type": "define",
+          "textKey": "invest_horizon.t4.define"
+        },
+        {
+          "type": "tradeoff",
+          "textKey": "invest_horizon.t4.tradeoff"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "time_horizon",
+            "projection",
+            "assumption"
+          ]
+        }
       ],
       "questions": [
         {
@@ -174,10 +318,24 @@
           "hintKey": "invest_horizon.q8.hint",
           "explainKey": "invest_horizon.q8.explain",
           "options": [
-            { "id": "a", "textKey": "invest_horizon.q8.opt.a" },
-            { "id": "b", "textKey": "invest_horizon.q8.opt.b", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_horizon.q8.fb.b" },
-            { "id": "c", "textKey": "invest_horizon.q8.opt.c" },
-            { "id": "d", "textKey": "invest_horizon.q8.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_horizon.q8.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_horizon.q8.opt.b",
+              "misconception": "guaranteed_returns_exist",
+              "feedbackKey": "invest_horizon.q8.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_horizon.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_horizon.q8.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -190,15 +348,33 @@
           "hintKey": "invest_horizon.q9.hint",
           "explainKey": "invest_horizon.q9.explain",
           "options": [
-            { "id": "a", "textKey": "invest_horizon.q9.opt.a" },
-            { "id": "b", "textKey": "invest_horizon.q9.opt.b", "misconception": "past_returns_repeat", "feedbackKey": "invest_horizon.q9.fb.b" },
-            { "id": "c", "textKey": "invest_horizon.q9.opt.c" },
-            { "id": "d", "textKey": "invest_horizon.q9.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_horizon.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_horizon.q9.opt.b",
+              "misconception": "past_returns_repeat",
+              "feedbackKey": "invest_horizon.q9.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_horizon.q9.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_horizon.q9.opt.d"
+            }
           ],
           "correct": "a"
         }
       ]
     }
   ],
-  "glossary": ["time_horizon", "projection", "assumption"]
+  "glossary": [
+    "time_horizon",
+    "projection",
+    "assumption"
+  ]
 }

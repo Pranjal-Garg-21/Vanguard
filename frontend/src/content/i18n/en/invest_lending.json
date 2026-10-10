@@ -5,6 +5,7 @@
   "t1.title": "Lending and borrowing",
   "t1.hook": "A shop owner asks {n} neighbours for {amt} each. He promises to pay back {amtBack} after a year. Your mission: understand what each neighbour is signing up for.",
   "t1.define": "A **borrower** uses someone else's money and pays interest for it. A **lender** gives the money and earns that interest.",
+  "t1.formula": "Interest for one year = amount lent × rate. Write the rate as a decimal. Example: lending ₹2,000 at 5% for a year earns 2,000 × 0.05 = ₹100.",
   "t1.note": "A bank deposit is a loan that you give to the bank. In both cases you are the lender.",
 
   "q1.prompt": "When you keep money in a bank deposit, who is the lender?",

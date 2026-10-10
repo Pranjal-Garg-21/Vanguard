@@ -28,6 +28,7 @@
   "t2.define": "Compound interest looks slow at first, then speeds up. Your guess will show how well your instinct fits the maths.",
   "t2.predict": "A compound garden starts with {P} at {rate} a year. What will it be worth after {yrs} years?",
   "t2.reveal": "Each year's interest earns interest too, so {P} grows to about {comp10}. Most people guess lower.",
+  "t2.formula": "Simple interest = principal × rate × years. Write the rate as a decimal. Example: ₹2,000 at 5% for 4 years is 2,000 × 0.05 × 4 = ₹400.",
 
   "q3.prompt": "With simple interest only, how much interest does {P} earn in {yrs} years at {rate}? Type a number in rupees.",
   "q3.hint": "Original money times the rate times the years.",
@@ -39,6 +40,8 @@
 
   "t3.title": "Fast-forward",
   "t3.define": "The gap between the gardens does not grow evenly. It grows faster each year. Time is the strongest lever.",
+  "t3.formula": "Compound amount = principal × (1 + rate)^years. The small raised number means multiply (1 + rate) by itself that many times. Example: ₹2,000 at 5% for 2 years is 2,000 × 1.05 × 1.05 = ₹2,205.",
+  "t3.rule72": "Rule of 72: divide 72 by the yearly rate, written as a plain number, to estimate the years to double. Example: at 6% it takes about 72 ÷ 6 = 12 years.",
   "t3.explore": "Open the lab. Set the years to {yrsLong} and compare the two gardens.",
 
   "q5.prompt": "In the lab, what is the compound garden worth after {yrsLong} years? Type a number in rupees.",

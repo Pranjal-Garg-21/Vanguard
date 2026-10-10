@@ -7,29 +7,105 @@
   "difficulty": "medium",
   "titleKey": "invest_gold.title",
   "blurbKey": "invest_gold.blurb",
-  "concepts": ["commodities", "commodity_exchange", "gold_costs", "asset_comparison"],
-  "misconceptions": ["gold_has_no_costs", "gold_always_goes_up", "commodity_trading_is_easy_money"],
+  "concepts": [
+    "commodities",
+    "commodity_exchange",
+    "gold_costs",
+    "asset_comparison"
+  ],
+  "misconceptions": [
+    "gold_has_no_costs",
+    "gold_always_goes_up",
+    "commodity_trading_is_easy_money"
+  ],
   "vars": {
-    "price": { "value": 60000, "fmt": "rupees" },
-    "charge": { "value": 0.12, "fmt": "percent" },
-    "rise": { "value": 0.1, "fmt": "percent" }
+    "price": {
+      "value": 60000,
+      "fmt": "rupees"
+    },
+    "charge": {
+      "value": 0.12,
+      "fmt": "percent"
+    },
+    "rise": {
+      "value": 0.1,
+      "fmt": "percent"
+    }
   },
   "calcs": [
-    { "id": "chargeAmt", "fn": "makingChargeAmount", "args": ["$price", "$charge"], "fmt": "rupees" },
-    { "id": "content", "fn": "sub", "args": ["$price", "$chargeAmt"], "fmt": "rupees" },
-    { "id": "up", "fn": "add", "args": [1, "$rise"] },
-    { "id": "sellVal", "fn": "mul", "args": ["$content", "$up"], "fmt": "rupees" },
-    { "id": "shortfall", "fn": "sub", "args": ["$price", "$sellVal"], "fmt": "rupees" },
-    { "id": "breakeven", "fn": "makingChargeBreakeven", "args": ["$charge"], "fmt": "percent", "round": 1 }
+    {
+      "id": "chargeAmt",
+      "fn": "makingChargeAmount",
+      "args": [
+        "$price",
+        "$charge"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "content",
+      "fn": "sub",
+      "args": [
+        "$price",
+        "$chargeAmt"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "up",
+      "fn": "add",
+      "args": [
+        1,
+        "$rise"
+      ]
+    },
+    {
+      "id": "sellVal",
+      "fn": "mul",
+      "args": [
+        "$content",
+        "$up"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "shortfall",
+      "fn": "sub",
+      "args": [
+        "$price",
+        "$sellVal"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "breakeven",
+      "fn": "makingChargeBreakeven",
+      "args": [
+        "$charge"
+      ],
+      "fmt": "percent",
+      "round": 1
+    }
   ],
   "tasks": [
     {
       "id": "t1",
       "titleKey": "invest_gold.t1.title",
       "blocks": [
-        { "type": "hook", "visual": "wheat_farmer", "textKey": "invest_gold.t1.hook" },
-        { "type": "define", "textKey": "invest_gold.t1.define" },
-        { "type": "analogy", "visual": "wheat_farmer", "textKey": "invest_gold.t1.analogy" }
+        {
+          "type": "hook",
+          "visual": "wheat_farmer",
+          "textKey": "invest_gold.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_gold.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "wheat_farmer",
+          "textKey": "invest_gold.t1.analogy"
+        }
       ],
       "questions": [
         {
@@ -41,10 +117,22 @@
           "hintKey": "invest_gold.q1.hint",
           "explainKey": "invest_gold.q1.explain",
           "options": [
-            { "id": "a", "textKey": "invest_gold.q1.opt.a" },
-            { "id": "b", "textKey": "invest_gold.q1.opt.b" },
-            { "id": "c", "textKey": "invest_gold.q1.opt.c" },
-            { "id": "d", "textKey": "invest_gold.q1.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_gold.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_gold.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_gold.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_gold.q1.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -57,10 +145,24 @@
           "hintKey": "invest_gold.q2.hint",
           "explainKey": "invest_gold.q2.explain",
           "options": [
-            { "id": "a", "textKey": "invest_gold.q2.opt.a" },
-            { "id": "b", "textKey": "invest_gold.q2.opt.b" },
-            { "id": "c", "textKey": "invest_gold.q2.opt.c", "misconception": "commodity_trading_is_easy_money", "feedbackKey": "invest_gold.q2.fb.c" },
-            { "id": "d", "textKey": "invest_gold.q2.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_gold.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_gold.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_gold.q2.opt.c",
+              "misconception": "commodity_trading_is_easy_money",
+              "feedbackKey": "invest_gold.q2.fb.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_gold.q2.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -70,8 +172,14 @@
       "id": "t2",
       "titleKey": "invest_gold.t2.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_gold.t2.define" },
-        { "type": "note", "textKey": "invest_gold.t2.note" }
+        {
+          "type": "define",
+          "textKey": "invest_gold.t2.define"
+        },
+        {
+          "type": "note",
+          "textKey": "invest_gold.t2.note"
+        }
       ],
       "questions": [
         {
@@ -83,10 +191,22 @@
           "hintKey": "invest_gold.q3.hint",
           "explainKey": "invest_gold.q3.explain",
           "options": [
-            { "id": "a", "textKey": "invest_gold.q3.opt.a" },
-            { "id": "b", "textKey": "invest_gold.q3.opt.b" },
-            { "id": "c", "textKey": "invest_gold.q3.opt.c" },
-            { "id": "d", "textKey": "invest_gold.q3.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_gold.q3.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_gold.q3.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_gold.q3.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_gold.q3.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -99,10 +219,24 @@
           "hintKey": "invest_gold.q4.hint",
           "explainKey": "invest_gold.q4.explain",
           "options": [
-            { "id": "a", "textKey": "invest_gold.q4.opt.a" },
-            { "id": "b", "textKey": "invest_gold.q4.opt.b", "misconception": "gold_always_goes_up", "feedbackKey": "invest_gold.q4.fb.b" },
-            { "id": "c", "textKey": "invest_gold.q4.opt.c" },
-            { "id": "d", "textKey": "invest_gold.q4.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_gold.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_gold.q4.opt.b",
+              "misconception": "gold_always_goes_up",
+              "feedbackKey": "invest_gold.q4.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_gold.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_gold.q4.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -112,11 +246,28 @@
       "id": "t3",
       "titleKey": "invest_gold.t3.title",
       "blocks": [
-        { "type": "hook", "textKey": "invest_gold.t3.hook" },
-        { "type": "define", "textKey": "invest_gold.t3.define" },
+        {
+          "type": "hook",
+          "textKey": "invest_gold.t3.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_gold.t3.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_gold.t3.formula"
+        },
         {
           "type": "explore",
-          "explore": { "widget": "making_charge", "promptKey": "invest_gold.t3.explore", "params": { "price": "$price", "charge": "$charge" } }
+          "explore": {
+            "widget": "making_charge",
+            "promptKey": "invest_gold.t3.explore",
+            "params": {
+              "price": "$price",
+              "charge": "$charge"
+            }
+          }
         }
       ],
       "questions": [
@@ -162,10 +313,24 @@
           "hintKey": "invest_gold.q8.hint",
           "explainKey": "invest_gold.q8.explain",
           "options": [
-            { "id": "a", "textKey": "invest_gold.q8.opt.a" },
-            { "id": "b", "textKey": "invest_gold.q8.opt.b", "misconception": "gold_has_no_costs", "feedbackKey": "invest_gold.q8.fb.b" },
-            { "id": "c", "textKey": "invest_gold.q8.opt.c" },
-            { "id": "d", "textKey": "invest_gold.q8.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_gold.q8.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_gold.q8.opt.b",
+              "misconception": "gold_has_no_costs",
+              "feedbackKey": "invest_gold.q8.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_gold.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_gold.q8.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -175,9 +340,23 @@
       "id": "t4",
       "titleKey": "invest_gold.t4.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_gold.t4.define" },
-        { "type": "tradeoff", "textKey": "invest_gold.t4.tradeoff" },
-        { "type": "jargon", "terms": ["commodity", "commodity_exchange", "making_charge", "purity"] }
+        {
+          "type": "define",
+          "textKey": "invest_gold.t4.define"
+        },
+        {
+          "type": "tradeoff",
+          "textKey": "invest_gold.t4.tradeoff"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "commodity",
+            "commodity_exchange",
+            "making_charge",
+            "purity"
+          ]
+        }
       ],
       "questions": [
         {
@@ -189,15 +368,32 @@
           "hintKey": "invest_gold.q9.hint",
           "explainKey": "invest_gold.q9.explain",
           "options": [
-            { "id": "a", "textKey": "invest_gold.q9.opt.a" },
-            { "id": "b", "textKey": "invest_gold.q9.opt.b" },
-            { "id": "c", "textKey": "invest_gold.q9.opt.c" },
-            { "id": "d", "textKey": "invest_gold.q9.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_gold.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_gold.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_gold.q9.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_gold.q9.opt.d"
+            }
           ],
           "correct": "a"
         }
       ]
     }
   ],
-  "glossary": ["commodity", "commodity_exchange", "making_charge", "purity"]
+  "glossary": [
+    "commodity",
+    "commodity_exchange",
+    "making_charge",
+    "purity"
+  ]
 }

@@ -7,45 +7,210 @@
   "difficulty": "medium",
   "titleKey": "invest_garden.title",
   "blurbKey": "invest_garden.blurb",
-  "concepts": ["interest_simple", "interest_compound", "simple_vs_compound", "start_early"],
-  "misconceptions": ["interest_always_simple", "late_start_is_fine"],
+  "concepts": [
+    "interest_simple",
+    "interest_compound",
+    "simple_vs_compound",
+    "start_early"
+  ],
+  "misconceptions": [
+    "interest_always_simple",
+    "late_start_is_fine"
+  ],
   "vars": {
-    "P": { "value": 10000, "fmt": "rupees" },
-    "rate": { "value": 0.08, "fmt": "percent" },
-    "ratePct": { "value": 8 },
-    "yrs": { "value": 10 },
-    "yrsLong": { "value": 20 },
-    "rateM": { "value": 0.1, "fmt": "percent" },
-    "monthly": { "value": 500, "fmt": "rupees" },
-    "ageE": { "value": 18 },
-    "ageL": { "value": 28 },
-    "stop": { "value": 58 }
+    "P": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "rate": {
+      "value": 0.08,
+      "fmt": "percent"
+    },
+    "ratePct": {
+      "value": 8
+    },
+    "yrs": {
+      "value": 10
+    },
+    "yrsLong": {
+      "value": 20
+    },
+    "rateM": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "monthly": {
+      "value": 500,
+      "fmt": "rupees"
+    },
+    "ageE": {
+      "value": 18
+    },
+    "ageL": {
+      "value": 28
+    },
+    "stop": {
+      "value": 58
+    }
   },
   "calcs": [
-    { "id": "interestS", "fn": "simpleInterest", "args": ["$P", "$rate", "$yrs"], "fmt": "rupees" },
-    { "id": "comp10", "fn": "compoundAmount", "args": ["$P", "$rate", "$yrs"], "fmt": "rupees" },
-    { "id": "extra", "fn": "interestOnInterest", "args": ["$P", "$rate", "$yrs"], "fmt": "rupees" },
-    { "id": "comp20", "fn": "compoundAmount", "args": ["$P", "$rate", "$yrsLong"], "fmt": "rupees" },
-    { "id": "doubling", "fn": "ruleOf72", "args": ["$ratePct"], "fmt": "number", "round": 0 },
-    { "id": "yearsE", "fn": "sub", "args": ["$stop", "$ageE"] },
-    { "id": "monthsE", "fn": "mul", "args": ["$yearsE", 12] },
-    { "id": "yearsL", "fn": "sub", "args": ["$stop", "$ageL"] },
-    { "id": "monthsL", "fn": "mul", "args": ["$yearsL", 12] },
-    { "id": "earlyFV", "fn": "futureValueMonthly", "args": ["$monthly", "$rateM", "$monthsE"], "fmt": "rupees" },
-    { "id": "lateFV", "fn": "futureValueMonthly", "args": ["$monthly", "$rateM", "$monthsL"], "fmt": "rupees" },
-    { "id": "putEarly", "fn": "mul", "args": ["$monthly", "$monthsE"], "fmt": "rupees" },
-    { "id": "putLate", "fn": "mul", "args": ["$monthly", "$monthsL"], "fmt": "rupees" },
-    { "id": "morePut", "fn": "sub", "args": ["$putEarly", "$putLate"], "fmt": "rupees" },
-    { "id": "gapFV", "fn": "sub", "args": ["$earlyFV", "$lateFV"], "fmt": "rupees" }
+    {
+      "id": "interestS",
+      "fn": "simpleInterest",
+      "args": [
+        "$P",
+        "$rate",
+        "$yrs"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "comp10",
+      "fn": "compoundAmount",
+      "args": [
+        "$P",
+        "$rate",
+        "$yrs"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "extra",
+      "fn": "interestOnInterest",
+      "args": [
+        "$P",
+        "$rate",
+        "$yrs"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "comp20",
+      "fn": "compoundAmount",
+      "args": [
+        "$P",
+        "$rate",
+        "$yrsLong"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "doubling",
+      "fn": "ruleOf72",
+      "args": [
+        "$ratePct"
+      ],
+      "fmt": "number",
+      "round": 0
+    },
+    {
+      "id": "yearsE",
+      "fn": "sub",
+      "args": [
+        "$stop",
+        "$ageE"
+      ]
+    },
+    {
+      "id": "monthsE",
+      "fn": "mul",
+      "args": [
+        "$yearsE",
+        12
+      ]
+    },
+    {
+      "id": "yearsL",
+      "fn": "sub",
+      "args": [
+        "$stop",
+        "$ageL"
+      ]
+    },
+    {
+      "id": "monthsL",
+      "fn": "mul",
+      "args": [
+        "$yearsL",
+        12
+      ]
+    },
+    {
+      "id": "earlyFV",
+      "fn": "futureValueMonthly",
+      "args": [
+        "$monthly",
+        "$rateM",
+        "$monthsE"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "lateFV",
+      "fn": "futureValueMonthly",
+      "args": [
+        "$monthly",
+        "$rateM",
+        "$monthsL"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "putEarly",
+      "fn": "mul",
+      "args": [
+        "$monthly",
+        "$monthsE"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "putLate",
+      "fn": "mul",
+      "args": [
+        "$monthly",
+        "$monthsL"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "morePut",
+      "fn": "sub",
+      "args": [
+        "$putEarly",
+        "$putLate"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "gapFV",
+      "fn": "sub",
+      "args": [
+        "$earlyFV",
+        "$lateFV"
+      ],
+      "fmt": "rupees"
+    }
   ],
   "tasks": [
     {
       "id": "t1",
       "titleKey": "invest_garden.t1.title",
       "blocks": [
-        { "type": "hook", "visual": "mango_trees", "textKey": "invest_garden.t1.hook" },
-        { "type": "define", "textKey": "invest_garden.t1.define" },
-        { "type": "analogy", "visual": "mango_trees", "textKey": "invest_garden.t1.analogy" }
+        {
+          "type": "hook",
+          "visual": "mango_trees",
+          "textKey": "invest_garden.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_garden.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "mango_trees",
+          "textKey": "invest_garden.t1.analogy"
+        }
       ],
       "questions": [
         {
@@ -57,10 +222,24 @@
           "hintKey": "invest_garden.q1.hint",
           "explainKey": "invest_garden.q1.explain",
           "options": [
-            { "id": "a", "textKey": "invest_garden.q1.opt.a" },
-            { "id": "b", "textKey": "invest_garden.q1.opt.b", "misconception": "interest_always_simple", "feedbackKey": "invest_garden.q1.fb.b" },
-            { "id": "c", "textKey": "invest_garden.q1.opt.c" },
-            { "id": "d", "textKey": "invest_garden.q1.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_garden.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_garden.q1.opt.b",
+              "misconception": "interest_always_simple",
+              "feedbackKey": "invest_garden.q1.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_garden.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_garden.q1.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -73,10 +252,22 @@
           "hintKey": "invest_garden.q2.hint",
           "explainKey": "invest_garden.q2.explain",
           "options": [
-            { "id": "a", "textKey": "invest_garden.q2.opt.a" },
-            { "id": "b", "textKey": "invest_garden.q2.opt.b" },
-            { "id": "c", "textKey": "invest_garden.q2.opt.c" },
-            { "id": "d", "textKey": "invest_garden.q2.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_garden.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_garden.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_garden.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_garden.q2.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -85,10 +276,23 @@
     {
       "id": "t2",
       "titleKey": "invest_garden.t2.title",
-      "blocks": [{ "type": "define", "textKey": "invest_garden.t2.define" }],
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "invest_garden.t2.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_garden.t2.formula"
+        }
+      ],
       "predict": {
         "questionKey": "invest_garden.t2.predict",
-        "slider": { "min": 10000, "max": 40000, "step": 500 },
+        "slider": {
+          "min": 10000,
+          "max": 40000,
+          "step": 500
+        },
         "unit": "rupees",
         "actual": "comp10",
         "explainKey": "invest_garden.t2.reveal",
@@ -123,10 +327,29 @@
       "id": "t3",
       "titleKey": "invest_garden.t3.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_garden.t3.define" },
+        {
+          "type": "define",
+          "textKey": "invest_garden.t3.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_garden.t3.formula"
+        },
+        {
+          "type": "note",
+          "textKey": "invest_garden.t3.rule72"
+        },
         {
           "type": "explore",
-          "explore": { "widget": "simple_vs_compound", "promptKey": "invest_garden.t3.explore", "params": { "principal": "$P", "rate": "$rate", "years": "$yrs" } }
+          "explore": {
+            "widget": "simple_vs_compound",
+            "promptKey": "invest_garden.t3.explore",
+            "params": {
+              "principal": "$P",
+              "rate": "$rate",
+              "years": "$yrs"
+            }
+          }
         }
       ],
       "questions": [
@@ -161,10 +384,22 @@
           "hintKey": "invest_garden.q7.hint",
           "explainKey": "invest_garden.q7.explain",
           "options": [
-            { "id": "a", "textKey": "invest_garden.q7.opt.a" },
-            { "id": "b", "textKey": "invest_garden.q7.opt.b" },
-            { "id": "c", "textKey": "invest_garden.q7.opt.c" },
-            { "id": "d", "textKey": "invest_garden.q7.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_garden.q7.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_garden.q7.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_garden.q7.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_garden.q7.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -174,13 +409,21 @@
       "id": "t4",
       "titleKey": "invest_garden.t4.title",
       "blocks": [
-        { "type": "hook", "textKey": "invest_garden.t4.hook" },
+        {
+          "type": "hook",
+          "textKey": "invest_garden.t4.hook"
+        },
         {
           "type": "explore",
           "explore": {
             "widget": "start_early",
             "promptKey": "invest_garden.t4.explore",
-            "params": { "monthly": "$monthly", "rate": "$rateM", "startAge": "$ageL", "stopAge": "$stop" }
+            "params": {
+              "monthly": "$monthly",
+              "rate": "$rateM",
+              "startAge": "$ageL",
+              "stopAge": "$stop"
+            }
           }
         }
       ],
@@ -227,15 +470,35 @@
           "hintKey": "invest_garden.q11.hint",
           "explainKey": "invest_garden.q11.explain",
           "options": [
-            { "id": "a", "textKey": "invest_garden.q11.opt.a" },
-            { "id": "b", "textKey": "invest_garden.q11.opt.b", "misconception": "late_start_is_fine", "feedbackKey": "invest_garden.q11.fb.b" },
-            { "id": "c", "textKey": "invest_garden.q11.opt.c" },
-            { "id": "d", "textKey": "invest_garden.q11.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_garden.q11.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_garden.q11.opt.b",
+              "misconception": "late_start_is_fine",
+              "feedbackKey": "invest_garden.q11.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_garden.q11.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_garden.q11.opt.d"
+            }
           ],
           "correct": "a"
         }
       ]
     }
   ],
-  "glossary": ["interest", "principal", "simple_interest", "compound_interest", "rate"]
+  "glossary": [
+    "interest",
+    "principal",
+    "simple_interest",
+    "compound_interest",
+    "rate"
+  ]
 }

@@ -7,40 +7,163 @@
   "difficulty": "easy",
   "titleKey": "invest_chai.title",
   "blurbKey": "invest_chai.blurb",
-  "concepts": ["inflation", "real_return"],
-  "misconceptions": ["money_in_box_is_safe"],
+  "concepts": [
+    "inflation",
+    "real_return"
+  ],
+  "misconceptions": [
+    "money_in_box_is_safe"
+  ],
   "vars": {
-    "p0": { "value": 5, "fmt": "rupees" },
-    "p1": { "value": 10, "fmt": "rupees" },
-    "p2": { "value": 15, "fmt": "rupees" },
-    "p3": { "value": 20, "fmt": "rupees" },
-    "price": { "value": 20, "fmt": "rupees" },
-    "infl": { "value": 0.06, "fmt": "percent" },
-    "infLow": { "value": 0.04, "fmt": "percent" },
-    "infMid": { "value": 0.05, "fmt": "percent" },
-    "infHigh": { "value": 0.08, "fmt": "percent" },
-    "years": { "value": 10 },
-    "money": { "value": 1000, "fmt": "rupees" },
-    "nominal": { "value": 0.04, "fmt": "percent" }
+    "p0": {
+      "value": 5,
+      "fmt": "rupees"
+    },
+    "p1": {
+      "value": 10,
+      "fmt": "rupees"
+    },
+    "p2": {
+      "value": 15,
+      "fmt": "rupees"
+    },
+    "p3": {
+      "value": 20,
+      "fmt": "rupees"
+    },
+    "price": {
+      "value": 20,
+      "fmt": "rupees"
+    },
+    "infl": {
+      "value": 0.06,
+      "fmt": "percent"
+    },
+    "infLow": {
+      "value": 0.04,
+      "fmt": "percent"
+    },
+    "infMid": {
+      "value": 0.05,
+      "fmt": "percent"
+    },
+    "infHigh": {
+      "value": 0.08,
+      "fmt": "percent"
+    },
+    "years": {
+      "value": 10
+    },
+    "money": {
+      "value": 1000,
+      "fmt": "rupees"
+    },
+    "nominal": {
+      "value": 0.04,
+      "fmt": "percent"
+    }
   },
   "calcs": [
-    { "id": "future", "fn": "inflate", "args": ["$price", "$infl", "$years"], "fmt": "rupees" },
-    { "id": "futLow", "fn": "inflate", "args": ["$price", "$infLow", "$years"], "fmt": "rupees" },
-    { "id": "futHigh", "fn": "inflate", "args": ["$price", "$infHigh", "$years"], "fmt": "rupees" },
-    { "id": "midFuture", "fn": "inflate", "args": ["$price", "$infMid", "$years"], "fmt": "rupees" },
-    { "id": "cupsNow", "fn": "unitsAffordable", "args": ["$money", "$price"], "fmt": "number", "round": 0 },
-    { "id": "cupsThen", "fn": "unitsAffordable", "args": ["$money", "$future"], "fmt": "number", "round": 0 },
-    { "id": "realVal", "fn": "realValue", "args": ["$money", "$infl", "$years"], "fmt": "rupees" },
-    { "id": "realRet", "fn": "realReturn", "args": ["$nominal", "$infl"], "fmt": "percent", "round": 1 }
+    {
+      "id": "future",
+      "fn": "inflate",
+      "args": [
+        "$price",
+        "$infl",
+        "$years"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "futLow",
+      "fn": "inflate",
+      "args": [
+        "$price",
+        "$infLow",
+        "$years"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "futHigh",
+      "fn": "inflate",
+      "args": [
+        "$price",
+        "$infHigh",
+        "$years"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "midFuture",
+      "fn": "inflate",
+      "args": [
+        "$price",
+        "$infMid",
+        "$years"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "cupsNow",
+      "fn": "unitsAffordable",
+      "args": [
+        "$money",
+        "$price"
+      ],
+      "fmt": "number",
+      "round": 0
+    },
+    {
+      "id": "cupsThen",
+      "fn": "unitsAffordable",
+      "args": [
+        "$money",
+        "$future"
+      ],
+      "fmt": "number",
+      "round": 0
+    },
+    {
+      "id": "realVal",
+      "fn": "realValue",
+      "args": [
+        "$money",
+        "$infl",
+        "$years"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "realRet",
+      "fn": "realReturn",
+      "args": [
+        "$nominal",
+        "$infl"
+      ],
+      "fmt": "percent",
+      "round": 1
+    }
   ],
   "tasks": [
     {
       "id": "t1",
       "titleKey": "invest_chai.t1.title",
       "blocks": [
-        { "type": "hook", "visual": "chai_prices", "textKey": "invest_chai.t1.hook" },
-        { "type": "define", "textKey": "invest_chai.t1.define" },
-        { "type": "analogy", "visual": "chai_prices", "textKey": "invest_chai.t1.analogy" }
+        {
+          "type": "hook",
+          "visual": "chai_prices",
+          "textKey": "invest_chai.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_chai.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "chai_prices",
+          "textKey": "invest_chai.t1.analogy"
+        }
       ],
       "questions": [
         {
@@ -52,10 +175,22 @@
           "hintKey": "invest_chai.q1.hint",
           "explainKey": "invest_chai.q1.explain",
           "options": [
-            { "id": "a", "textKey": "invest_chai.q1.opt.a" },
-            { "id": "b", "textKey": "invest_chai.q1.opt.b" },
-            { "id": "c", "textKey": "invest_chai.q1.opt.c" },
-            { "id": "d", "textKey": "invest_chai.q1.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_chai.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_chai.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_chai.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_chai.q1.opt.d"
+            }
           ],
           "correct": "a"
         },
@@ -68,10 +203,22 @@
           "hintKey": "invest_chai.q2.hint",
           "explainKey": "invest_chai.q2.explain",
           "options": [
-            { "id": "a", "textKey": "invest_chai.q2.opt.a" },
-            { "id": "b", "textKey": "invest_chai.q2.opt.b" },
-            { "id": "c", "textKey": "invest_chai.q2.opt.c" },
-            { "id": "d", "textKey": "invest_chai.q2.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_chai.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_chai.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_chai.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_chai.q2.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -80,10 +227,23 @@
     {
       "id": "t2",
       "titleKey": "invest_chai.t2.title",
-      "blocks": [{ "type": "define", "textKey": "invest_chai.t2.define" }],
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "invest_chai.t2.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_chai.t2.formula"
+        }
+      ],
       "predict": {
         "questionKey": "invest_chai.t2.predict",
-        "slider": { "min": 20, "max": 60, "step": 1 },
+        "slider": {
+          "min": 20,
+          "max": 60,
+          "step": 1
+        },
         "unit": "rupees",
         "actual": "future",
         "rangeLow": "futLow",
@@ -109,13 +269,25 @@
       "id": "t3",
       "titleKey": "invest_chai.t3.title",
       "blocks": [
-        { "type": "hook", "textKey": "invest_chai.t3.hook" },
+        {
+          "type": "hook",
+          "textKey": "invest_chai.t3.hook"
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_chai.t3.formula"
+        },
         {
           "type": "explore",
           "explore": {
             "widget": "inflation_cups",
             "promptKey": "invest_chai.t3.explore",
-            "params": { "price": "$price", "inflation": "$infl", "years": "$years", "money": "$money" }
+            "params": {
+              "price": "$price",
+              "inflation": "$infl",
+              "years": "$years",
+              "money": "$money"
+            }
           }
         }
       ],
@@ -151,10 +323,24 @@
           "hintKey": "invest_chai.q6.hint",
           "explainKey": "invest_chai.q6.explain",
           "options": [
-            { "id": "a", "textKey": "invest_chai.q6.opt.a" },
-            { "id": "b", "textKey": "invest_chai.q6.opt.b", "misconception": "money_in_box_is_safe", "feedbackKey": "invest_chai.q6.fb.b" },
-            { "id": "c", "textKey": "invest_chai.q6.opt.c" },
-            { "id": "d", "textKey": "invest_chai.q6.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_chai.q6.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_chai.q6.opt.b",
+              "misconception": "money_in_box_is_safe",
+              "feedbackKey": "invest_chai.q6.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_chai.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_chai.q6.opt.d"
+            }
           ],
           "correct": "a"
         }
@@ -164,8 +350,14 @@
       "id": "t4",
       "titleKey": "invest_chai.t4.title",
       "blocks": [
-        { "type": "define", "textKey": "invest_chai.t4.define" },
-        { "type": "note", "textKey": "invest_chai.t4.note" }
+        {
+          "type": "define",
+          "textKey": "invest_chai.t4.define"
+        },
+        {
+          "type": "note",
+          "textKey": "invest_chai.t4.note"
+        }
       ],
       "questions": [
         {
@@ -188,15 +380,32 @@
           "hintKey": "invest_chai.q8.hint",
           "explainKey": "invest_chai.q8.explain",
           "options": [
-            { "id": "a", "textKey": "invest_chai.q8.opt.a" },
-            { "id": "b", "textKey": "invest_chai.q8.opt.b" },
-            { "id": "c", "textKey": "invest_chai.q8.opt.c" },
-            { "id": "d", "textKey": "invest_chai.q8.opt.d" }
+            {
+              "id": "a",
+              "textKey": "invest_chai.q8.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_chai.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_chai.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_chai.q8.opt.d"
+            }
           ],
           "correct": "a"
         }
       ]
     }
   ],
-  "glossary": ["inflation", "buying_power", "real_return", "nominal_return"]
+  "glossary": [
+    "inflation",
+    "buying_power",
+    "real_return",
+    "nominal_return"
+  ]
 }

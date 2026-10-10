@@ -232,6 +232,17 @@ describe.each(everyRoom.map((r) => [r.id, r] as const))('room %s', (_id, room) =
     }
   });
 
+  it('teaches the formula before asking for it: a formula card whenever a question needs a core formula', () => {
+    const FORMULA_FNS = ['compoundAmount', 'simpleInterest', 'simpleAmount', 'inflate', 'realValue', 'makingChargeBreakeven', 'ruleOf72'];
+    const needs = questions
+      .filter((q) => q.kind === 'number')
+      .map((q) => (room.calcs ?? []).find((c) => c.id === q.answer))
+      .filter((c) => c && FORMULA_FNS.includes(c.fn));
+    if (needs.length === 0) return;
+    const hasFormula = room.tasks.some((t) => t.blocks.some((b) => b.type === 'formula'));
+    expect(hasFormula, `asks for ${needs.map((c) => c!.fn).join(', ')} but has no formula card`).toBe(true);
+  });
+
   it('its glossary terms exist', () => {
     for (const g of room.glossary) expect(glossaryIds.has(g), `unknown glossary term ${g}`).toBe(true);
     for (const t of room.tasks) for (const b of t.blocks) for (const term of b.terms ?? []) expect(glossaryIds.has(term), `unknown term ${term}`).toBe(true);

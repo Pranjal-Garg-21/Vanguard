@@ -24,6 +24,7 @@
   "t2.steps.1": "Year 1: {P} × {r} = {yr1}",
   "t2.steps.2": "Years 2 and 3: the same {yr1} each year, because the base never changes",
   "t2.steps.3": "After {y3} years: {yr3} of interest, so {tot3} in total",
+  "t2.formula": "Simple interest = principal × rate × years. Write the rate as a decimal. Example: ₹2,000 at 5% for 4 years is 2,000 × 0.05 × 4 = ₹400.",
 
   "q3.prompt": "Ravi lends {sP} at {sr} simple interest for {sy} years. How much interest does he earn in total? Type a number in rupees.",
   "q3.hint": "Work out one year of interest, then multiply by the number of years.",
@@ -44,6 +45,7 @@
   "t3.steps.2": "Year 2: {c1} grows by {r} to {c2}",
   "t3.steps.3": "Year 3: {c2} grows by {r} to {c3}",
   "t3.steps.4": "Simple gave {tot3}. Compound gave {c3}. The extra {extra3} is interest on interest.",
+  "t3.formula": "Compound amount = principal × (1 + rate)^years. The small raised number means multiply (1 + rate) by itself that many times. Example: ₹2,000 at 5% for 2 years is 2,000 × 1.05 × 1.05 = ₹2,205.",
   "t3.explore": "Open the lab. The grey line is simple interest and the green line is compound. Move the sliders, then answer the questions.",
 
   "q5.prompt": "{lp} grows at {lr} a year, with interest added once a year. How much will it be after {ly} years? Type a number in rupees.",
