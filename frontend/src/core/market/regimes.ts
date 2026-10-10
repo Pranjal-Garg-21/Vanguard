@@ -55,5 +55,3 @@ export function drawRegimes(months: number, rng: Rng): Regime[] {
   }
   return out;
 }
-
-export const allCalm = (months: number): Regime[] => Array.from({ length: months }, () => 'calm' as Regime);

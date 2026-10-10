@@ -38,8 +38,6 @@ export function roomQuestions(room: Room): RoomQuestion[] {
   return room.tasks.flatMap((t) => t.questions);
 }
 
-export const DIFFICULTIES = ['easy', 'medium', 'hard'] as const;
-
 /** What we remember about one question while a student works through a room. */
 export interface QuestionState {
   solved: boolean;

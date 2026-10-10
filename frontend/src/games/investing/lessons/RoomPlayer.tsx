@@ -10,7 +10,7 @@ import { Badge, Button, Card, CheckIcon, ChevronIcon, ProgressBar } from '@/ui';
 import { InvestShell } from './InvestShell';
 import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
-import { allLessons } from './logic/content';
+import { rooms } from './logic/content';
 import { checkNumberAnswer, emptyQuestionState, roomPoints, roomQuestions, type ProgressMap, type QuestionState } from './logic/room';
 import type { Room, RoomQuestion } from './logic/types';
 import { QuestionRow } from './RoomQuestions';
@@ -46,7 +46,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
   const tasksDone = room.tasks.filter((_, i) => taskDone(i)).length;
   const earned = questions.reduce((sum, q) => sum + (stateOf(q).solved && !stateOf(q).revealed ? q.points : 0), 0);
   const roomDone = tasksDone === room.tasks.length;
-  const next = allLessons.find((l) => l.order === room.order + 1);
+  const next = rooms.find((l) => l.order === room.order + 1);
   const task = room.tasks[active]!;
 
   const update = (q: RoomQuestion, change: (s: QuestionState) => QuestionState) =>
@@ -185,7 +185,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
             <div className="mt-6 grid gap-8 xl:grid-cols-2">
               <div className="space-y-4">
                 {task.blocks.map((block, i) => (
-                  <BlockCard key={`${task.id}-${i}`} block={block} ctx={ctx} onPredictDone={() => undefined} />
+                  <BlockCard key={`${task.id}-${i}`} block={block} ctx={ctx} />
                 ))}
               </div>
 

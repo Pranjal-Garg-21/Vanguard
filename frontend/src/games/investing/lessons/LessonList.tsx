@@ -4,7 +4,7 @@ import { t } from '@/platform';
 import { Badge, Card, ChevronIcon, ProgressBar } from '@/ui';
 import { InvestShell } from './InvestShell';
 import { fillTemplate, runCalcs } from './logic/calc';
-import { allLessons, rooms } from './logic/content';
+import { rooms } from './logic/content';
 import { roomPoints, type RoomSummary } from './logic/room';
 import { useRoomSummaries } from './useSavedProgress';
 
@@ -22,9 +22,9 @@ export function LessonList() {
       </header>
 
       <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {allLessons.map((lesson) => {
+        {rooms.map((lesson) => {
           const ctx = runCalcs(lesson.vars, lesson.calcs);
-          const summary: RoomSummary | undefined = lesson.kind === 'room' ? summaries?.[lesson.id] : undefined;
+          const summary: RoomSummary | undefined = summaries?.[lesson.id];
           const isUpNext = lesson.id === upNextId;
           const action =
             summary?.status === 'done' ? t('investui.list.review') : summary?.status === 'started' ? t('investui.list.continue') : t('investui.list.start');
@@ -54,8 +54,8 @@ export function LessonList() {
 
                   <div className="flex flex-wrap gap-2">
                     <Badge>{t('investui.list.minutes', { n: lesson.estMinutes })}</Badge>
-                    {lesson.kind === 'room' && <Badge>{t('investui.list.points', { n: roomPoints(lesson) })}</Badge>}
-                    {lesson.kind === 'room' && <Badge>{t(`investui.room.difficulty.${lesson.difficulty}`)}</Badge>}
+                    <Badge>{t('investui.list.points', { n: roomPoints(lesson) })}</Badge>
+                    <Badge>{t(`investui.room.difficulty.${lesson.difficulty}`)}</Badge>
                   </div>
 
                   {summary && summary.status !== 'new' && (
