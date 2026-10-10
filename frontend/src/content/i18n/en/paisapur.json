@@ -315,5 +315,19 @@
     "concepts_value": "{seen} of {total} discovered, {mastered} mastered",
     "debt_note": "You still have some debt. Paying it off is the best guaranteed return there is.",
     "free_note": "You finish the year debt-free. That's a strong start to adult life."
+  },
+  "building": {
+    "lab": "Money Lab",
+    "bank": "Bank",
+    "bond": "Bond Office",
+    "zaroorat": "Zaroorat",
+    "shauq": "Shauq Bazaar",
+    "lender": "Sahukar",
+    "home": "Home",
+    "kabirhome": "Kabir's",
+    "exchange": "Exchange",
+    "insurance": "Insurance",
+    "cyber": "Cyber Cell",
+    "jackpot": "Dhamaka"
   }
 }

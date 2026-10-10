@@ -133,6 +133,7 @@ describe('maps', () => {
         expect(LEGEND.stamps[b.stamp], b.stamp).toBeDefined();
         if (b.to) expect(PAISAPUR.maps[b.to], b.to).toBeDefined();
         if (b.closed) expect(strings.has(b.closed), b.closed).toBe(true);
+        expect(strings.has(`paisapur.building.${b.id}`), `name tag for ${b.id}`).toBe(true);
         if (b.when) expect(parses(b.when)).not.toThrow();
       }
       for (const w of m.warps ?? []) {

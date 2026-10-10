@@ -9,6 +9,12 @@ import { SHEETS, type SheetName } from '@/ui';
 export const TILE = 16;
 export const VIEW_W = 15;
 export const VIEW_H = 10;
+/**
+ * The canvas is this many device pixels per game pixel. The art is drawn
+ * with nearest-neighbour scaling (so it looks the same), but text such as
+ * building names is rasterised at full resolution and stays sharp.
+ */
+export const RENDER_SCALE = 3;
 
 /** Walking sprites live in RPG Urban: columns 23–26 = left, down, up, right; 3 rows per character. */
 const DIR_COL: Record<Dir, number> = { left: 23, down: 24, up: 25, right: 26 };
@@ -114,7 +120,26 @@ export type Frame = {
   npcFacing: Record<string, Dir>;
   /** 0 = clear, 1 = black (for map transitions). */
   fade: number;
+  /** The short name shown above a building, by building id. */
+  label: (buildingId: string) => string;
 };
+
+/** A name tag over a building's roof: parchment with a hard pixel edge, like the town's signs. */
+function drawLabel(ctx: CanvasRenderingContext2D, text: string, cx: number, top: number, viewW: number) {
+  ctx.font = '700 6.5px "Pixelify Sans", ui-monospace, monospace';
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+  const w = Math.ceil(ctx.measureText(text).width) + 6;
+  const h = 9;
+  // Keep the tag on screen when a building is half out of view.
+  const x = Math.min(Math.max(cx - w / 2, 1), viewW - w - 1);
+  ctx.fillStyle = '#3b2412';
+  ctx.fillRect(x - 1, top - 1, w + 2, h + 2);
+  ctx.fillStyle = '#fff1c9';
+  ctx.fillRect(x, top, w, h);
+  ctx.fillStyle = '#3b2412';
+  ctx.fillText(text, x + w / 2, top + h / 2 + 0.5);
+}
 
 /** The player's position in pixels, including the step in progress. */
 function playerPixels(w: Walker): { x: number; y: number } {
@@ -132,6 +157,9 @@ export function draw(ctx: CanvasRenderingContext2D, assets: Assets, f: Frame): v
   const viewW = VIEW_W * TILE;
   const viewH = VIEW_H * TILE;
 
+  // Game pixels → device pixels (see RENDER_SCALE).
+  const scale = ctx.canvas.width / viewW;
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
   ctx.imageSmoothingEnabled = false;
   ctx.fillStyle = '#10141c';
   ctx.fillRect(0, 0, viewW, viewH);
@@ -175,6 +203,20 @@ export function draw(ctx: CanvasRenderingContext2D, assets: Assets, f: Frame): v
   const frame = moving && walker.t > 0.25 && walker.t < 0.75 ? 1 + walker.foot : 0;
   bodies.push({ y: p.y, draw: () => drawCharacter(ctx, assets, f.playerSprite, walker.pos.facing, frame, ox + p.x, oy + p.y - 1) });
   bodies.sort((a, b) => a.y - b.y).forEach((b) => b.draw());
+
+  // Building names, on top of everything, so a shop can be found at a glance.
+  for (const b of map.buildings ?? []) {
+    const stamp = world.legend.stamps[b.stamp]!;
+    const width = stamp.rows[0]!.length * TILE;
+    const left = ox + b.x * TILE;
+    const bottom = oy + (b.y + stamp.rows.length) * TILE;
+    if (left + width < 0 || left > viewW || bottom < 0 || oy + b.y * TILE > viewH) continue;
+    // On the roof; if the roof is scrolled off the top, the tag slides down with the building.
+    const top = Math.min(Math.max(oy + b.y * TILE + 2, 1), bottom - 12);
+    // A building that will open later in the story shows a lock.
+    const locked = !!b.to && !!b.when && !f.cond(b.when);
+    drawLabel(ctx, `${locked ? '🔒 ' : ''}${f.label(b.id)}`, left + width / 2, top, viewW);
+  }
 
   if (f.fade > 0) {
     ctx.fillStyle = `rgba(0,0,0,${f.fade})`;

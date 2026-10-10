@@ -33,7 +33,7 @@ import { StartMenu, type MenuScreen } from './menu';
 import { audio } from './audio/engine';
 import { trackForMap } from './audio/logic/score';
 import { DuelScreen, RivalPanel, WhatIfPanel } from './extras';
-import { draw, loadAssets, VIEW_H, VIEW_W, TILE, type Assets, type Walker } from './render';
+import { draw, loadAssets, RENDER_SCALE, VIEW_H, VIEW_W, TILE, type Assets, type Walker } from './render';
 import { KEY_A, KEY_MENU } from './input';
 import { ChoiceBox, ConceptCard, Controls, DialogueBox, Hud, QuizPanel, Toasts, type Toast } from './ui';
 
@@ -533,6 +533,7 @@ export function PaisapurGame() {
         playerSprite: lifeRef.current?.look ?? 'player_a',
         npcFacing: npcFacing.current,
         fade: fade.current,
+        label: (id) => t(`paisapur.building.${id}`),
       });
       last = now;
       raf = requestAnimationFrame(tick);
@@ -701,8 +702,8 @@ export function PaisapurGame() {
         <div className="relative overflow-hidden rounded-b-md bg-black">
           <canvas
             ref={canvasRef}
-            width={VIEW_W * TILE}
-            height={VIEW_H * TILE}
+            width={VIEW_W * TILE * RENDER_SCALE}
+            height={VIEW_H * TILE * RENDER_SCALE}
             className="block w-full"
             style={{ imageRendering: 'pixelated', aspectRatio: `${VIEW_W} / ${VIEW_H}` }}
             role="img"
