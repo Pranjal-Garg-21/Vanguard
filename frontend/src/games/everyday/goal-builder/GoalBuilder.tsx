@@ -16,7 +16,7 @@ import { Commit } from '@/runtime/verbs/commit';
 import type { MiniGameChoice } from '@/core/types';
 import type { VerbOutcome } from '@/runtime/verbs/types';
 import { combine, type GameProps } from '../shared/game';
-import { characterGoal, disposableIncome } from '../shared/economics';
+import { disposableOf, goalOf } from '../shared/economics';
 import { buildPlan, predictionOptions, scorePrediction } from './logic/timeline';
 import content from '@/content/scenarios/plan/goal-builder.json';
 
@@ -25,8 +25,9 @@ type Specific = { id: string; textKey: string; amount: number };
 export function GoalBuilder({ ctx, onComplete }: GameProps) {
   const t = useT();
 
-  const goal = useMemo(() => characterGoal(ctx.persona), [ctx.persona]);
-  const affordable = useMemo(() => disposableIncome(ctx.persona), [ctx.persona]);
+  // The player's own goal and spare money in the story; persona defaults in the Arcade.
+  const goal = useMemo(() => goalOf(ctx), [ctx]);
+  const affordable = useMemo(() => disposableOf(ctx), [ctx]);
 
   // A starting rate the character could actually manage: half of what is left
   // after the bills, rounded to something countable.

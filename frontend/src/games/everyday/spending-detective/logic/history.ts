@@ -10,7 +10,7 @@
 
 import type { MiniGameContext } from '@/core/types';
 import { deriveSeed, makeRng, type Rng } from '@/runtime/verbs/shared/rng';
-import { disposableIncome } from '../../shared/economics';
+import { disposableOf } from '../../shared/economics';
 
 export type Txn = {
   id: string;
@@ -58,7 +58,8 @@ const between = (rng: Rng, min: number, max: number) =>
  */
 export function synthesiseHistory(ctx: MiniGameContext): Txn[] {
   const rng = makeRng(deriveSeed(ctx.seed, 'sm02:history'));
-  const budget = Math.max(400, disposableIncome(ctx.persona));
+  // What the character really had left after needs: the story's figure, or the persona's in the Arcade.
+  const budget = Math.max(400, disposableOf(ctx));
   const out: Txn[] = [];
 
   for (const template of REPEATS) {
@@ -128,35 +129,43 @@ export function scaleToBudget(txns: readonly Txn[], budget: number): Txn[] {
   return kept;
 }
 
+/**
+ * Group real payments by what they were for. Each line keeps its count and an
+ * average unit price, so `amount × count` is what was really spent on it.
+ * Entries without a reason are skipped rather than lumped together: an
+ * unlabelled "everything else ×23" line hides the very leaks this game hunts.
+ */
 export function fromLedger(entries: readonly LedgerEntry[]): Txn[] {
-  const grouped = new Map<string, Txn>();
+  const grouped = new Map<string, { txn: Txn; total: number }>();
   for (const entry of entries) {
     const amount = Math.abs(entry.amount ?? 0);
-    if (amount === 0) continue;
-    const key = entry.reasonKey ?? 'sm02.txn.other';
+    if (amount === 0 || !entry.reasonKey) continue;
+    const key = entry.reasonKey;
     const existing = grouped.get(key);
     if (existing) {
-      existing.count += 1;
-      existing.repeated = true;
+      existing.total += amount;
+      existing.txn.count += 1;
+      existing.txn.repeated = true;
+      existing.txn.amount = Math.round(existing.total / existing.txn.count);
       continue;
     }
     grouped.set(key, {
-      id: key,
-      textKey: key,
-      category: entry.category ?? 'other',
-      amount,
-      count: 1,
-      repeated: false,
+      total: amount,
+      txn: { id: key, textKey: key, category: entry.category ?? 'other', amount, count: 1, repeated: false },
     });
   }
-  return [...grouped.values()];
+  return [...grouped.values()].map((g) => g.txn);
+}
+
+/** Whether the month comes from the character's own story spending, or is generated. */
+export function historySource(ctx: MiniGameContext): 'ledger' | 'generated' {
+  const ledger = (ctx.stateSlice as { ledger?: LedgerEntry[] })?.ledger;
+  // A handful of entries is not a month; fall back rather than show a stub.
+  return Array.isArray(ledger) && ledger.filter((e) => e.reasonKey).length >= 6 ? 'ledger' : 'generated';
 }
 
 export function historyFor(ctx: MiniGameContext): Txn[] {
-  const slice = ctx.stateSlice as { ledger?: LedgerEntry[] };
-  const ledger = slice?.ledger;
-  // A handful of entries is not a month; fall back rather than show a stub.
-  if (Array.isArray(ledger) && ledger.length >= 6) return fromLedger(ledger);
+  if (historySource(ctx) === 'ledger') return fromLedger((ctx.stateSlice as { ledger: LedgerEntry[] }).ledger);
   return synthesiseHistory(ctx);
 }
 

@@ -16,7 +16,7 @@ import { rupees, useT } from '@/platform';
 import { Allocate, type AllocateDetail, type AllocateJar } from '@/runtime/verbs/allocate';
 import type { VerbOutcome } from '@/runtime/verbs/types';
 import { combine, type GameProps } from '../shared/game';
-import { characterBills, incomeFromContext } from '../shared/economics';
+import { billsOf, incomeOf } from '../shared/economics';
 import { buildStatement, type MonthEndStatement } from './logic/statement';
 import content from '@/content/scenarios/plan/jar-split.json';
 
@@ -26,8 +26,9 @@ export function JarSplit({ ctx, onComplete }: GameProps) {
   const [phase, setPhase] = useState<'hook' | 'allocate' | 'statement'>('hook');
   const [outcome, setOutcome] = useState<VerbOutcome | null>(null);
 
-  const income = incomeFromContext(ctx);
-  const bills = useMemo(() => characterBills(ctx.persona), [ctx.persona]);
+  // The story's income and needs list when it passes them; persona defaults in the Arcade.
+  const income = incomeOf(ctx);
+  const bills = useMemo(() => billsOf(ctx), [ctx]);
 
   const jars = useMemo<AllocateJar[]>(
     () =>

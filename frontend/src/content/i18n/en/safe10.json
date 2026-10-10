@@ -1,5 +1,5 @@
 {
-  "hook": "Your friend Imran just paid ₹2,000 for a job registration fee. The website has disappeared. He is sitting next to you, and he does not know what to do.",
+  "hook": "Your friend {friend} just paid ₹2,000 for a job registration fee. The website has disappeared. {friend} is sitting next to you and does not know what to do.",
   "prompt": "Help him. Put the steps in the order he should do them.",
   "summary": "You know the order now. The first hour matters most.",
   "call_1930": {
@@ -30,7 +30,7 @@
     "recovery": "If money is lost to fraud, call 1930 first and report at cybercrime.gov.in. Acting in the first hour gives the best chance of getting it back."
   },
   "result": {
-    "fast": "You moved fast and got the order right. That gives Imran the best chance of seeing his ₹2,000 again.",
+    "fast": "You moved fast and got the order right. That gives {friend} the best chance of seeing that money again.",
     "good_order": "The order was right. Next time, even faster — the first hour matters most.",
     "wrong_order": "Close. Look at what goes first: the helpline call comes before everything else, because it is what can still stop the money.",
     "chance": "Chance of recovering the money: {percent}%",
@@ -39,5 +39,7 @@
   "helpcard": {
     "title": "If money is lost to fraud",
     "footer": "1930 is free to call. cybercrime.gov.in is the official portal. It is never too late to report."
-  }
+  },
+  "hook_ponzi": "{friend} just lost {amount, rupees} to Double Dhamaka. The office is empty and the phone numbers are dead. {friend} is sitting next to you and does not know what to do.",
+  "default_friend": "Imran"
 }

@@ -229,7 +229,8 @@
     "spend": "Spending",
     "windfall": "Festival bonus",
     "scholarship": "Scholarship",
-    "goal": "Goal purchase"
+    "goal": "Goal purchase",
+    "sold": "Sold something"
   },
   "menu": {
     "title": "Menu",

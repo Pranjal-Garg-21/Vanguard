@@ -218,7 +218,71 @@
     },
     {
      "minigame": "debt-ladder",
-     "level": 1
+     "level": 1,
+     "on": {
+      "br01.choose:family": [
+       {
+        "do": {
+         "type": "takeLoan",
+         "kind": "family",
+         "amount": 2000,
+         "months": 3
+        }
+       },
+       {
+        "say": "story.c4.ladder_family",
+        "who": "mom"
+       }
+      ],
+      "br01.choose:bank": [
+       {
+        "say": "story.c4.ladder_bank",
+        "who": "lender"
+       }
+      ],
+      "br01.choose:moneylender": [
+       {
+        "do": {
+         "type": "takeLoan",
+         "kind": "moneylender",
+         "amount": 2000,
+         "months": 3
+        }
+       },
+       {
+        "say": "story.c4.ladder_moneylender",
+        "who": "lender"
+       }
+      ],
+      "br01.choose:bnpl": [
+       {
+        "say": "story.c4.ladder_bnpl",
+        "who": "lender"
+       }
+      ],
+      "br01.choose:loan_app": [
+       {
+        "do": {
+         "type": "takeLoan",
+         "kind": "loanapp",
+         "amount": 2500,
+         "months": 3
+        }
+       },
+       {
+        "flag": "loanapp_done"
+       },
+       {
+        "say": "story.c4.ladder_app"
+       }
+      ],
+      "br01.choose:none": [
+       {
+        "say": "story.c4.ladder_none",
+        "who": "lender"
+       }
+      ]
+     }
     },
     {
      "flag": "lender_met"

@@ -40,16 +40,8 @@
     },
     {
      "minigame": "goal-builder",
-     "level": 1
-    },
-    {
-     "if": "!flag:goal_done",
-     "then": [
-      {
-       "say": "story.c2.prof_plan",
-       "who": "professor"
-      }
-     ]
+     "level": 1,
+     "apply": true
     },
     {
      "say": "story.c2.prof_whatif",
@@ -81,85 +73,96 @@
        "concept": "pay_yourself_first"
       },
       {
-       "choice": [
+       "if": "autosave",
+       "then": [
         {
-         "label": "choice.autosave_100",
-         "log": {
-          "concept": "pay_yourself_first",
-          "choice": "autosave_100",
-          "correct": true
-         },
-         "do": [
-          {
-           "do": {
-            "type": "setAutoSave",
-            "amount": 100
-           }
-          },
-          {
-           "say": "story.c2.pyf_set",
-           "who": "professor"
-          }
-         ]
-        },
-        {
-         "label": "choice.autosave_200",
-         "log": {
-          "concept": "pay_yourself_first",
-          "choice": "autosave_200",
-          "correct": true
-         },
-         "do": [
-          {
-           "do": {
-            "type": "setAutoSave",
-            "amount": 200
-           }
-          },
-          {
-           "say": "story.c2.pyf_set",
-           "who": "professor"
-          }
-         ]
-        },
-        {
-         "label": "choice.autosave_300",
-         "log": {
-          "concept": "pay_yourself_first",
-          "choice": "autosave_300",
-          "correct": true
-         },
-         "do": [
-          {
-           "do": {
-            "type": "setAutoSave",
-            "amount": 300
-           }
-          },
-          {
-           "say": "story.c2.pyf_set",
-           "who": "professor"
-          }
-         ]
-        },
-        {
-         "label": "choice.autosave_none",
-         "log": {
-          "concept": "pay_yourself_first",
-          "choice": "none",
-          "correct": false,
-          "misconception": "save_what_is_left"
-         },
-         "do": [
-          {
-           "say": "story.c2.pyf_later",
-           "who": "professor"
-          }
-         ]
+         "say": "story.c2.pyf_already",
+         "who": "professor"
         }
        ],
-       "prompt": "story.c2.q_autosave",
-       "who": "professor"
+       "else": [
+        {
+         "choice": [
+          {
+           "label": "choice.autosave_100",
+           "log": {
+            "concept": "pay_yourself_first",
+            "choice": "autosave_100",
+            "correct": true
+           },
+           "do": [
+            {
+             "do": {
+              "type": "setAutoSave",
+              "amount": 100
+             }
+            },
+            {
+             "say": "story.c2.pyf_set",
+             "who": "professor"
+            }
+           ]
+          },
+          {
+           "label": "choice.autosave_200",
+           "log": {
+            "concept": "pay_yourself_first",
+            "choice": "autosave_200",
+            "correct": true
+           },
+           "do": [
+            {
+             "do": {
+              "type": "setAutoSave",
+              "amount": 200
+             }
+            },
+            {
+             "say": "story.c2.pyf_set",
+             "who": "professor"
+            }
+           ]
+          },
+          {
+           "label": "choice.autosave_300",
+           "log": {
+            "concept": "pay_yourself_first",
+            "choice": "autosave_300",
+            "correct": true
+           },
+           "do": [
+            {
+             "do": {
+              "type": "setAutoSave",
+              "amount": 300
+             }
+            },
+            {
+             "say": "story.c2.pyf_set",
+             "who": "professor"
+            }
+           ]
+          },
+          {
+           "label": "choice.autosave_none",
+           "log": {
+            "concept": "pay_yourself_first",
+            "choice": "none",
+            "correct": false,
+            "misconception": "save_what_is_left"
+           },
+           "do": [
+            {
+             "say": "story.c2.pyf_later",
+             "who": "professor"
+            }
+           ]
+          }
+         ],
+         "prompt": "story.c2.q_autosave",
+         "who": "professor"
+        }
+       ]
       },
       {
        "objective": "objective.ch2_month2"

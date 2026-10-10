@@ -3,9 +3,9 @@
  * Owner: P3.
  */
 
-import type { MiniGameContext, Persona } from '@/core/types';
+import type { MiniGameContext } from '@/core/types';
 import { deriveSeed, makeRng } from '@/runtime/verbs/shared/rng';
-import { billsTotalFor } from '../../shared/economics';
+import { billsTotalOf } from '../../shared/economics';
 import { matchesPersona, type ContextFilter } from '../../shared/game';
 
 export type Shock = {
@@ -26,6 +26,12 @@ export function pickShock(
   shocks: readonly Shock[],
   ctx: MiniGameContext,
 ): Shock | undefined {
+  // The story names the shock it is staging (e.g. the cracked phone and its
+  // repair bill), so the game shows the same event at the same price.
+  const staged = ctx.params as { shock?: string; amount?: number } | undefined;
+  const named = staged?.shock ? shocks.find((s) => s.id === staged.shock) : undefined;
+  if (named) return typeof staged?.amount === 'number' ? { ...named, amount: staged.amount } : named;
+
   const eligible = shocks.filter((s) => matchesPersona(s.personaFilter, ctx));
   if (eligible.length === 0) return shocks[shocks.length - 1];
 
@@ -49,10 +55,11 @@ export function bufferFromContext(ctx: MiniGameContext): number {
  * §12.6 suggests one month of needs as the example.
  */
 export function emergencyTargets(
-  persona: Persona,
+  ctx: MiniGameContext,
   multiples: readonly number[],
 ): { months: number; amount: number; labelKey: string }[] {
-  const monthOfNeeds = billsTotalFor(persona);
+  // A month of needs at the story's own prices, or the persona's in the Arcade.
+  const monthOfNeeds = billsTotalOf(ctx);
   const labels: Record<string, string> = {
     '0.5': 'sm03.reflect.half_month',
     '1': 'sm03.reflect.one_month',

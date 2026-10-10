@@ -52,7 +52,7 @@ describe('the targets offered afterwards', () => {
   const persona = { lifeStage: 'college_student', circumstance: 'dependent' };
 
   it('scales to a month of that character’s own needs', () => {
-    const targets = emergencyTargets(persona, [0.5, 1, 2]);
+    const targets = emergencyTargets(ctxFor(persona), [0.5, 1, 2]);
     expect(targets).toHaveLength(3);
     const [half, one, two] = targets;
     expect(one!.amount).toBeGreaterThan(half!.amount);
@@ -62,8 +62,26 @@ describe('the targets offered afterwards', () => {
   });
 
   it('rounds to amounts a student can picture counting', () => {
-    for (const target of emergencyTargets(persona, [0.5, 1, 2])) {
+    for (const target of emergencyTargets(ctxFor(persona), [0.5, 1, 2])) {
       expect(target.amount % 50).toBe(0);
     }
+  });
+});
+
+describe('inside the story', () => {
+  it('stages the shock the story names, at the story’s price', () => {
+    const ctx = { ...ctxFor({ circumstance: 'young_entrepreneur' }), params: { shock: 'screen', amount: 1500 } };
+    expect(pickShock(shocks, ctx)).toMatchObject({ id: 'screen', amount: 1500 });
+  });
+
+  it('measures a month of needs in the story’s own prices', () => {
+    const ctx: MiniGameContext = {
+      ...ctxFor({ lifeStage: 'school_student' }),
+      stateSlice: { story: { bills: [{ id: 'bus_pass', textKey: 'x', amount: 200 }, { id: 'recharge', textKey: 'y', amount: 600 }] } } as MiniGameContext['stateSlice'],
+    };
+    // storyOf needs a numeric income to trust the slice.
+    (ctx.stateSlice as { story: Record<string, unknown> }).story.income = 1500;
+    const one = emergencyTargets(ctx, [1])[0]!;
+    expect(one.amount).toBe(800);
   });
 });

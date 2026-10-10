@@ -41,69 +41,10 @@
      "who": "meena"
     },
     {
-     "choice": [
-      {
-       "label": "choice.acc_savings",
-       "log": {
-        "concept": "savings_account",
-        "choice": "savings",
-        "correct": true
-       },
-       "do": [
-        {
-         "say": "story.c1.meena_savings",
-         "who": "meena"
-        }
-       ]
-      },
-      {
-       "label": "choice.acc_current",
-       "log": {
-        "concept": "savings_account",
-        "choice": "current",
-        "correct": false
-       },
-       "do": [
-        {
-         "say": "story.c1.meena_current",
-         "who": "meena"
-        }
-       ]
-      },
-      {
-       "label": "choice.acc_none",
-       "log": {
-        "concept": "why_bank",
-        "choice": "cash_home",
-        "correct": false,
-        "misconception": "cash_at_home_safe"
-       },
-       "do": [
-        {
-         "say": "story.c1.meena_none",
-         "who": "meena"
-        }
-       ]
-      }
-     ],
-     "prompt": "story.c1.q_account",
-     "who": "meena"
-    },
-    {
      "concept": "savings_account"
     },
     {
      "say": "story.c1.meena_form"
-    },
-    {
-     "minigame": "bank-counter",
-     "level": 1
-    },
-    {
-     "concept": "nominee"
-    },
-    {
-     "concept": "minimum_balance_fees"
     },
     {
      "do": {
@@ -114,52 +55,18 @@
      "flag": "account_open"
     },
     {
-     "toast": "toast.account_open"
+     "minigame": "bank-counter",
+     "level": 1,
+     "apply": true
     },
     {
-     "choice": [
-      {
-       "label": "choice.dep_500",
-       "when": "cash>=500",
-       "do": [
-        {
-         "do": {
-          "type": "deposit",
-          "amount": 500
-         }
-        }
-       ]
-      },
-      {
-       "label": "choice.dep_1000",
-       "when": "cash>=1000",
-       "do": [
-        {
-         "do": {
-          "type": "deposit",
-          "amount": 1000
-         }
-        }
-       ]
-      },
-      {
-       "label": "choice.dep_1200",
-       "when": "cash>=1200",
-       "do": [
-        {
-         "do": {
-          "type": "deposit",
-          "amount": 1200
-         }
-        }
-       ]
-      },
-      {
-       "label": "choice.dep_none"
-      }
-     ],
-     "prompt": "story.c1.q_deposit",
-     "who": "meena"
+     "concept": "nominee"
+    },
+    {
+     "concept": "minimum_balance_fees"
+    },
+    {
+     "toast": "toast.account_open"
     },
     {
      "say": "story.c1.meena_interest",
@@ -167,10 +74,6 @@
     },
     {
      "concept": "simple_interest"
-    },
-    {
-     "say": "story.c1.meena_card",
-     "who": "meena"
     },
     {
      "concept": "pin_secrecy"

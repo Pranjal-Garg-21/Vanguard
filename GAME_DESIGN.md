@@ -663,6 +663,25 @@ Balance: a typical year runs 10–12 months (later chapters need time to pass: a
 
 Not built yet: haggling, Telugu/Hindi/Urdu text.
 
+## 13.55 Mini-games inside the story
+
+P3's Everyday Money games run inside story scenes. Rules that keep them coherent with the dialogue:
+
+- **One economy.** Inside the story a game shows the player's real income, needs (at the shop's prices), cash, savings, goal and spending, and the lenders charge the story's rates. The old persona table is only for the Arcade.
+- **One decision, one place.** If the game asks it (account type, deposit, how to pay a shock, which lender), the dialogue does not ask it again.
+- **Game decisions count.** The deposit in Bank Counter is the real deposit; Goal Builder's choice sets the goal price and the monthly saving; Surprise Month's choice decides how the cracked phone is paid (savings, Mom, a loan app, skipping it, selling something); Debt Ladder's choice becomes a real loan on the same terms, or none.
+- **Same scene.** The story stages the game's event (the ₹1,500 cracked phone at the bus stop; Kabir's Ponzi loss in Rescue Mission).
+
+| Scene | Game | What carries over |
+|---|---|---|
+| Mom's cupboard (Ch 1) | Document Hunt | Documents in hand |
+| Meena (Ch 1) | Bank Counter | Account type, nominee, real cash → real deposit, PIN (the KYC scam follows as a Scam Duel) |
+| Professor (Ch 2) | Swipe Sort, Jar Split, Goal Builder | Shop prices and needs; goal price and monthly saving |
+| Cracked phone (Ch 3) | Surprise Month | How the ₹1,500 repair is paid |
+| Professor (Ch 3) | Spending Detective | Last month's real purchases |
+| Sahukar (Ch 4) | Debt Ladder | A real loan at the story's rates, or none |
+| Fatima (Ch 6) | Rescue Mission | Kabir's recovery after Double Dhamaka |
+
 ## 13.6 Curriculum map
 
 Every concept in `content/concepts.json` is taught in the story (a test enforces this) and appears in the Money Journal.

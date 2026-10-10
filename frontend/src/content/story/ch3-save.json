@@ -7,126 +7,92 @@
    "say": "story.c3.crack1"
   },
   {
-   "say": "story.c3.crack2"
-  },
-  {
-   "if": "bank>=1500",
-   "then": [
-    {
-     "say": "story.c3.crack_fund"
-    }
-   ],
-   "else": [
-    {
-     "say": "story.c3.crack_nofund"
-    }
-   ]
-  },
-  {
-   "choice": [
-    {
-     "label": "choice.crack_savings",
-     "when": "bank>=1500",
-     "log": {
-      "concept": "emergency_fund",
-      "choice": "paid_savings",
-      "correct": true
-     },
-     "do": [
-      {
-       "do": {
-        "type": "spend",
-        "amount": 1500,
-        "reason": "repair:phone",
-        "from": "bank"
-       }
-      },
-      {
-       "say": "story.c3.crack_paid"
-      }
-     ]
-    },
-    {
-     "label": "choice.crack_cash",
-     "when": "cash>=1500",
-     "log": {
-      "concept": "emergency_fund",
-      "choice": "paid_cash",
-      "correct": true
-     },
-     "do": [
-      {
-       "do": {
-        "type": "spend",
-        "amount": 1500,
-        "reason": "repair:phone",
-        "from": "cash"
-       }
-      },
-      {
-       "say": "story.c3.crack_paid"
-      }
-     ]
-    },
-    {
-     "label": "choice.crack_mom",
-     "when": "!loan:family",
-     "log": {
-      "concept": "emergency_fund",
-      "choice": "borrow_family",
-      "correct": false
-     },
-     "do": [
-      {
-       "do": {
-        "type": "takeLoan",
-        "kind": "family",
-        "amount": 1500,
-        "months": 5
-       }
-      },
-      {
-       "do": {
-        "type": "spend",
-        "amount": 1500,
-        "reason": "repair:phone",
-        "from": "bank"
-       }
-      },
-      {
-       "say": "story.c3.crack_mom",
-       "who": "mom"
-      }
-     ]
-    },
-    {
-     "label": "choice.crack_skip",
-     "log": {
-      "concept": "emergency_fund",
-      "choice": "skip",
-      "correct": false
-     },
-     "do": [
-      {
-       "do": {
-        "type": "meter",
-        "peace": -15
-       }
-      },
-      {
-       "say": "story.c3.crack_skip"
-      }
-     ]
-    }
-   ],
-   "prompt": "story.common.what_do"
-  },
-  {
-   "concept": "emergency_fund"
-  },
-  {
    "minigame": "surprise-month",
-   "level": 1
+   "level": 1,
+   "params": {
+    "shock": "screen",
+    "amount": 1500
+   },
+   "apply": true,
+   "on": {
+    "sm03.choose:emergency_jar": [
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_paid"
+     }
+    ],
+    "sm03.choose:family": [
+     {
+      "do": {
+       "type": "takeLoan",
+       "kind": "family",
+       "amount": 1500,
+       "months": 5
+      }
+     },
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_mom",
+      "who": "mom"
+     }
+    ],
+    "sm03.choose:loan_app": [
+     {
+      "do": {
+       "type": "takeLoan",
+       "kind": "loanapp",
+       "amount": 1875,
+       "months": 3
+      }
+     },
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_app"
+     }
+    ],
+    "sm03.choose:skip_need": [
+     {
+      "say": "story.c3.crack_skip"
+     }
+    ],
+    "sm03.choose:sell": [
+     {
+      "do": {
+       "type": "gain",
+       "amount": 1500,
+       "reason": "sold"
+      }
+     },
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_sold"
+     }
+    ]
+   }
   },
   {
    "flag": "phone_cracked"
@@ -662,6 +628,22 @@
  ],
  "prof_ch3": [
   {
+   "once": "spend_detective",
+   "do": [
+    {
+     "say": "story.c3.prof_leaks",
+     "who": "professor"
+    },
+    {
+     "minigame": "spending-detective",
+     "level": 1
+    },
+    {
+     "concept": "expense_tracking"
+    }
+   ]
+  },
+  {
    "if": "goalKind:education",
    "then": [
     {
@@ -670,16 +652,6 @@
       {
        "say": "story.c3.prof_scholarship",
        "who": "professor"
-      },
-      {
-       "say": "story.c3.prof_leaks"
-      },
-      {
-       "minigame": "spending-detective",
-       "level": 1
-      },
-      {
-       "concept": "expense_tracking"
       },
       {
        "concept": "scholarships"

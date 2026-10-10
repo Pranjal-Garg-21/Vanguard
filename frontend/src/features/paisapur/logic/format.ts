@@ -35,6 +35,7 @@ export function storyVars(life: LifeState, name: string, goalName: string): Reco
     savings: amount(emergencyFund(life)),
     worth: amount(netWorth(life)),
     month: life.month,
+    autosave: amount(life.bank.autoSave),
   };
 }
 

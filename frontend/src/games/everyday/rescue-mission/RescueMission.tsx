@@ -27,6 +27,9 @@ export function RescueMission({ ctx, onComplete }: GameProps) {
   const t = useT();
 
   const [phase, setPhase] = useState<'hook' | 'rank' | 'result'>('hook');
+  // The story says whose money was lost and how; the Arcade uses a stranger's job-fee scam.
+  const scene = (ctx.params ?? {}) as { friend?: string; amount?: number; hook?: 'ponzi' };
+  const who = { friend: scene.friend ?? t('safe10.default_friend'), amount: scene.amount ?? 2000 };
   const [outcome, setOutcome] = useState<VerbOutcome | null>(null);
 
   const items = useMemo<RankItem[]>(
@@ -63,7 +66,7 @@ export function RescueMission({ ctx, onComplete }: GameProps) {
   if (phase === 'hook') {
     return (
       <section className="game game--safe10">
-        <p>{t(content.hookKey)}</p>
+        <p>{t(scene.hook === 'ponzi' ? 'safe10.hook_ponzi' : content.hookKey, who)}</p>
         <button type="button" onClick={() => setPhase('rank')}>
           {t('common.continue')}
         </button>
@@ -98,7 +101,7 @@ export function RescueMission({ ctx, onComplete }: GameProps) {
       <section className="game game--safe10">
         <p>
           {perfect && fast
-            ? t('safe10.result.fast')
+            ? t('safe10.result.fast', who)
             : perfect
               ? t('safe10.result.good_order')
               : t('safe10.result.wrong_order')}

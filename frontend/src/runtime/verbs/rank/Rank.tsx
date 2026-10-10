@@ -40,6 +40,8 @@ export type RankProps = VerbCommonProps & {
   /** Rescue Mission shows a clock: acting fast matters. Never a countdown. */
   timed?: boolean;
   promptKey?: string;
+  /** Values for the prompt's {placeholders}. */
+  promptVars?: Record<string, string | number>;
   shuffle?: boolean;
   onPlayAudio?: (audioKey: string) => void;
 };
@@ -53,6 +55,7 @@ export function Rank({
   costUnit = 'rupees',
   timed = false,
   promptKey,
+  promptVars,
   shuffle = false,
   onPlayAudio,
 }: RankProps) {
@@ -146,7 +149,7 @@ export function Rank({
               <li key={id} data-moved={studentPosition !== idx}>
                 <strong>{t(item.textKey)}</strong>
                 {costUnit === 'rupees' && <span> · {rupees(item.value)}</span>}
-                {item.revealKey && <p>{t(item.revealKey)}</p>}
+                {item.revealKey && <p>{t(item.revealKey, item.revealVars)}</p>}
               </li>
             );
           })}
@@ -174,7 +177,7 @@ export function Rank({
   // -- ordering ------------------------------------------------------------
   return (
     <section className="rank">
-      {promptKey && <p>{t(promptKey)}</p>}
+      {promptKey && <p>{t(promptKey, promptVars)}</p>}
 
       <ol className="rank__list">
         {order.map((id, idx) => {

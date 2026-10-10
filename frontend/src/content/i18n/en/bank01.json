@@ -1,5 +1,5 @@
 {
-  "prompt": "Your scholarship can only be paid into a bank account in your name. Find what the bank needs and put it in the folder.",
+  "prompt": "The bank needs proof of who you are and where you live before it opens a bank account in your name. Find what it asks for and put it in the folder.",
   "summary": "Your folder is ready. Now you can open the account.",
   "bucket": {
     "folder": "Bank folder",

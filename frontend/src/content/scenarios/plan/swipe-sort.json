@@ -33,7 +33,8 @@
       "explainKey": "pb01.bus_pass.why",
       "concepts": {
         "needs_wants": 0.9
-      }
+      },
+      "storyItem": "bus_pass"
     },
     {
       "id": "sneakers_new",
@@ -44,7 +45,8 @@
       "concepts": {
         "needs_wants": 0.9
       },
-      "misconception": "everything_i_want_is_need"
+      "misconception": "everything_i_want_is_need",
+      "storyItem": "sneakers"
     },
     {
       "id": "phone_recharge",
@@ -59,7 +61,8 @@
       },
       "concepts": {
         "context_dependence": 0.9
-      }
+      },
+      "storyItem": "recharge"
     },
     {
       "id": "biryani_friends",
@@ -100,7 +103,8 @@
       "explainKey": "pb01.notebook.why",
       "concepts": {
         "needs_wants": 0.8
-      }
+      },
+      "storyItem": "notebooks"
     },
     {
       "id": "umbrella",
@@ -121,7 +125,8 @@
       "explainKey": "pb01.movie_ticket.why",
       "concepts": {
         "needs_wants": 0.8
-      }
+      },
+      "storyItem": "movie"
     },
     {
       "id": "haircut",
@@ -211,7 +216,8 @@
         "lifeStage": [
           "college_student"
         ]
-      }
+      },
+      "storyItem": "mess_fee"
     },
     {
       "id": "lab_manual",

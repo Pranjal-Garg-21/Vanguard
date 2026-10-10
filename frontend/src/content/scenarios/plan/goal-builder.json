@@ -4,43 +4,127 @@
   "_useCase": "UC-PB-03",
   "id": "goal-builder",
   "pillar": "plan",
-  "stage": ["S2"],
+  "stage": [
+    "S2"
+  ],
   "verb": "commit",
   "hookKey": "pb03.hook",
-  "concepts": ["goal_setting"],
-
+  "concepts": [
+    "goal_setting"
+  ],
   "_calendar": "8.5 names the festivals the content rotates through. The LifePath year is assumed to start in June unless the runtime says otherwise, so a goal reached 7 months in lands near Sankranti.",
   "startMonthOfYear": 5,
-
   "specifics": {
     "laptop": [
-      { "id": "second_hand", "textKey": "pb03.specific.laptop.second_hand", "amount": 18000 },
-      { "id": "entry", "textKey": "pb03.specific.laptop.entry", "amount": 25000 },
-      { "id": "wanted", "textKey": "pb03.specific.laptop.wanted", "amount": 32000 }
+      {
+        "id": "second_hand",
+        "textKey": "pb03.specific.laptop.second_hand",
+        "amount": 18000
+      },
+      {
+        "id": "entry",
+        "textKey": "pb03.specific.laptop.entry",
+        "amount": 25000
+      },
+      {
+        "id": "wanted",
+        "textKey": "pb03.specific.laptop.wanted",
+        "amount": 32000
+      }
     ],
     "phone": [
-      { "id": "refurb", "textKey": "pb03.specific.phone.refurb", "amount": 5000 },
-      { "id": "new_basic", "textKey": "pb03.specific.phone.new_basic", "amount": 8000 },
-      { "id": "wanted", "textKey": "pb03.specific.phone.wanted", "amount": 14000 }
+      {
+        "id": "refurb",
+        "textKey": "pb03.specific.phone.refurb",
+        "amount": 5000
+      },
+      {
+        "id": "new_basic",
+        "textKey": "pb03.specific.phone.new_basic",
+        "amount": 8000
+      },
+      {
+        "id": "wanted",
+        "textKey": "pb03.specific.phone.wanted",
+        "amount": 14000
+      }
     ],
     "bike": [
-      { "id": "used", "textKey": "pb03.specific.bike.used", "amount": 18000 },
-      { "id": "new", "textKey": "pb03.specific.bike.new", "amount": 30000 }
+      {
+        "id": "used",
+        "textKey": "pb03.specific.bike.used",
+        "amount": 18000
+      },
+      {
+        "id": "new",
+        "textKey": "pb03.specific.bike.new",
+        "amount": 30000
+      }
     ],
     "coaching": [
-      { "id": "online", "textKey": "pb03.specific.coaching.online", "amount": 3000 },
-      { "id": "batch", "textKey": "pb03.specific.coaching.batch", "amount": 6000 }
+      {
+        "id": "online",
+        "textKey": "pb03.specific.coaching.online",
+        "amount": 3000
+      },
+      {
+        "id": "batch",
+        "textKey": "pb03.specific.coaching.batch",
+        "amount": 5000
+      }
     ],
     "business": [
-      { "id": "small", "textKey": "pb03.specific.business.small", "amount": 5000 },
-      { "id": "planned", "textKey": "pb03.specific.business.planned", "amount": 10000 }
+      {
+        "id": "small",
+        "textKey": "pb03.specific.business.small",
+        "amount": 5000
+      },
+      {
+        "id": "planned",
+        "textKey": "pb03.specific.business.planned",
+        "amount": 10000
+      }
     ],
     "family": [
-      { "id": "part", "textKey": "pb03.specific.family.part", "amount": 4000 },
-      { "id": "whole", "textKey": "pb03.specific.family.whole", "amount": 8000 }
+      {
+        "id": "part",
+        "textKey": "pb03.specific.family.part",
+        "amount": 4000
+      },
+      {
+        "id": "whole",
+        "textKey": "pb03.specific.family.whole",
+        "amount": 8000
+      }
+    ],
+    "trip": [
+      {
+        "id": "day",
+        "textKey": "pb03.specific.trip.day",
+        "amount": 1500
+      },
+      {
+        "id": "hills",
+        "textKey": "pb03.specific.trip.hills",
+        "amount": 2500
+      }
+    ],
+    "cycle": [
+      {
+        "id": "basic",
+        "textKey": "pb03.specific.cycle.basic",
+        "amount": 2500
+      },
+      {
+        "id": "geared",
+        "textKey": "pb03.specific.cycle.geared",
+        "amount": 3500
+      }
     ]
   },
-
-  "conceptCard": { "textKey": "pb03.concept.goal", "icon": "target" },
+  "conceptCard": {
+    "textKey": "pb03.concept.goal",
+    "icon": "target"
+  },
   "summaryKey": "pb03.summary"
 }

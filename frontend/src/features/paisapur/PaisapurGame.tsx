@@ -52,7 +52,7 @@ type Overlay =
   | { kind: 'night'; before: LifeState }
   | { kind: 'menu'; screen: MenuScreen | null }
   | { kind: 'duel'; id: string }
-  | { kind: 'minigame'; id: string; level: Level };
+  | { kind: 'minigame'; id: string; level: Level; params?: Record<string, unknown> };
 
 const KEY_DIRS: Record<string, Dir> = {
   ArrowUp: 'up',
@@ -292,7 +292,7 @@ export function PaisapurGame() {
       if (key === 'toast.goal') audio.jingle('goal');
     },
     duel: (id) => ask<'win' | 'lose'>({ kind: 'duel', id }),
-    minigame: (id, level) => ask<MiniGameResult>({ kind: 'minigame', id, level }),
+    minigame: (id, level, params) => ask<MiniGameResult>({ kind: 'minigame', id, level, params }),
     checkpoint: (label) => {
       const start = sceneStart.current;
       if (!start) return;
@@ -620,7 +620,7 @@ export function PaisapurGame() {
                 resuming the state of the previous time it ran. */}
             <Play
               key={`${overlay.id}:${overlaySeq}`}
-              ctx={contextFromLife(life, { level: overlay.level })}
+              ctx={contextFromLife(life, { level: overlay.level, params: overlay.params })}
               onComplete={(r) => answer(r)}
             />
           </div>

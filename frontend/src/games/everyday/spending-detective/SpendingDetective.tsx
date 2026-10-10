@@ -25,6 +25,7 @@ import {
   annualise,
   categoryTotals,
   historyFor,
+  historySource,
   leaks,
   lineTotal,
   projectHalving,
@@ -114,7 +115,7 @@ export function SpendingDetective({ ctx, onComplete }: GameProps) {
       <section className="game game--sm02">
         <p>{t(content.hookKey)}</p>
         <TransactionList rows={history.map((x) => ({ ...x }))} />
-        <p className="simulated">{t('sm02.simulated')}</p>
+        <p className="simulated">{t(historySource(ctx) === 'ledger' ? 'sm02.simulated_story' : 'sm02.simulated')}</p>
         <button type="button" onClick={() => setPhase('sort')}>
           {t('common.continue')}
         </button>

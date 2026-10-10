@@ -1,7 +1,7 @@
 /**
  * UC-BR-01 Debt Cost Ladder — P3.
  *
- * The character needs ₹2,000 for three months. Four ways to get it. The student
+ * The character needs ₹2,000 for three months. Five ways to get it. The student
  * ranks them by what they actually pay back, sees the ladder, picks one, and
  * then misses a payment — because the missed payment is where the four options
  * stop looking similar.
@@ -23,8 +23,21 @@ import type { RichEffectMap, VerbOutcome } from '@/runtime/verbs/types';
 import { combine, type GameProps } from '../shared/game';
 import { conceptMap, effectMap } from '@/runtime/verbs/types';
 import content from '@/content/scenarios/borrow/debt-ladder.json';
+import { ladderOptions, type LadderOption } from './logic/ladder';
 
-type Option = (typeof content.options)[number];
+type Option = LadderOption;
+
+/** Values every line about a lender can use. */
+const varsFor = (o: Option) => ({
+  total: o.value,
+  monthly: o.monthlyPayment,
+  months: o.months,
+  rate: o.ratePercent,
+  yearly: Math.round(o.ratePercent * 12),
+  fee: o.feePercent,
+  borrowed: o.borrowed,
+  principal: content.principal,
+});
 
 type Phase = 'hook' | 'rank' | 'choose' | 'missed' | 'concept';
 
@@ -34,6 +47,7 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
   const [phase, setPhase] = useState<Phase>('hook');
   const [rankOutcome, setRankOutcome] = useState<VerbOutcome | null>(null);
   const [chosen, setChosen] = useState<Option | null>(null);
+  const options = useMemo(() => ladderOptions(), []);
 
   /**
    * Did the student order by monthly payment instead of by total repaid? That
@@ -43,34 +57,49 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
   const rankedByInstalment = useMemo(() => {
     const detail = rankOutcome?.detail as RankDetail | undefined;
     if (!detail) return false;
-    const byInstalment = [...content.options]
+    const byInstalment = [...options]
       .sort((a, b) => a.monthlyPayment - b.monthlyPayment)
       .map((o) => o.id);
     return (
       detail.inversions > 0 && detail.order.every((id, i) => id === byInstalment[i])
     );
-  }, [rankOutcome]);
+  }, [rankOutcome, options]);
 
   const items = useMemo<RankItem[]>(
     () =>
-      content.options.map((o) => ({
+      options.map((o) => ({
         id: o.id,
         textKey: o.textKey,
         value: o.value,
         revealKey: o.revealKey,
+        revealVars: varsFor(o),
         concepts: conceptMap(o.concepts),
-        misconception: 'misconception' in o ? o.misconception : undefined,
+        misconception: o.misconception,
       })),
-    [],
+    [options],
   );
 
-  function finish(option: Option) {
+  function finish(option: Option | null) {
     const detail = rankOutcome?.detail as RankDetail | undefined;
+
+    // Not borrowing is a real answer: no debt, nothing owed.
+    if (!option) {
+      onComplete(
+        combine(content.summaryKey, [
+          {
+            choices: [...(rankOutcome?.choices ?? []), { stepId: 'br01.choose', choiceId: 'none', ms: detail?.elapsedMs ?? 0 }],
+            conceptDeltas: rankOutcome?.conceptDeltas ?? {},
+            misconceptions: rankOutcome?.misconceptions ?? [],
+          },
+        ]),
+      );
+      return;
+    }
 
     // Taking the money is a real debt in the simulation, not just a score.
     const effects: RichEffectMap = {
       'money.debt.add': {
-        amount: content.principal,
+        amount: option.borrowed,
         lender: option.id,
         totalRepayable: option.value,
         months: option.months,
@@ -79,7 +108,7 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
       ...effectMap('missedEffects' in option ? option.missedEffects : undefined),
     };
     if ('flags' in option && option.flags) {
-      for (const [flag, value] of Object.entries(option.flags)) {
+      for (const [flag, value] of Object.entries(option.flags as Record<string, boolean>)) {
         effects[`meta.flags.${flag}`] = value;
       }
     }
@@ -113,7 +142,7 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
   if (phase === 'hook') {
     return (
       <section className="game game--br01">
-        <p>{t(content.hookKey)}</p>
+        <p>{t(content.hookKey, { principal: content.principal })}</p>
         <button type="button" onClick={() => setPhase('rank')}>
           {t('common.continue')}
         </button>
@@ -130,6 +159,7 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
         direction="asc"
         costUnit="rupees"
         promptKey={content.promptKey}
+        promptVars={{ principal: content.principal }}
         onComplete={(outcome) => {
           setRankOutcome(outcome);
           setPhase('choose');
@@ -143,7 +173,7 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
       <section className="game game--br01">
         <p>{t(content.chooseKey)}</p>
         <ul>
-          {content.options.map((option) => (
+          {options.map((option) => (
             <li key={option.id}>
               <button
                 type="button"
@@ -164,6 +194,12 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
               </button>
             </li>
           ))}
+          <li>
+            <button type="button" onClick={() => finish(null)}>
+              <strong>{t('br01.none.text')}</strong>
+              <span>{t('br01.none.detail')}</span>
+            </button>
+          </li>
         </ul>
       </section>
     );
@@ -187,7 +223,13 @@ export function DebtLadder({ ctx, onComplete }: GameProps) {
     return (
       <section className="game game--br01">
         <p>{t(content.conceptCard.textKey)}</p>
-        <p>{t('br01.result.cheapest_first')}</p>
+        <p>
+          {t('br01.result.cheapest_first', {
+            family: options.find((o) => o.id === 'family')?.value ?? content.principal,
+            diff: (options.find((o) => o.id === 'loan_app')?.value ?? 0) - (options.find((o) => o.id === 'family')?.value ?? 0),
+            principal: content.principal,
+          })}
+        </p>
         {/* Only called out when they actually fell for it. */}
         {rankedByInstalment && <p>{t('br01.result.emi_trap')}</p>}
         <p>{t('br01.borrowed', { amount: content.principal })}</p>

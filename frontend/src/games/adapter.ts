@@ -10,9 +10,10 @@
  * passes nothing, and the games fall back to persona defaults.
  */
 
-import { emergencyFund, incomeFor, needsCost, type LifeState } from '@/core/engine';
+import { emergencyFund, incomeFor, ITEMS, monthlyNeeds, needsCost, priceOf, type LifeState } from '@/core/engine';
 import type { Level, MiniGameContext, PlayMode } from '@/core/types';
 import { everydayGames } from './everyday';
+import type { StoryEconomy } from './everyday/shared/economics';
 import type { UiMiniGame } from './everyday/shared/game';
 
 const byId = new Map<string, UiMiniGame>(everydayGames.map((g) => [g.id, g]));
@@ -66,9 +67,67 @@ export function personaFromLife(life: LifeState): Record<string, unknown> {
   };
 }
 
+/** Story goals the games know under another name (their content is keyed by these). */
+const GOAL_CONTENT_KEY: Record<string, string> = { fees: 'coaching', stall: 'business' };
+
+/** Spending Detective's categories for the story's shop items. */
+const ITEM_CATEGORY: Record<string, string> = {
+  bus_pass: 'transport',
+  recharge: 'recharge',
+  chai: 'chai',
+  snacks: 'chai',
+  game_topup: 'games',
+};
+
+/**
+ * Everything a game needs to talk about the player's real money, in the story's
+ * own numbers. Games prefer this over their persona defaults (economics.ts).
+ */
+export function storyEconomy(life: LifeState): StoryEconomy {
+  return {
+    month: life.month,
+    income: incomeFor(life, life.month + 1),
+    cash: life.cash,
+    bank: life.bank.balance,
+    emergency: emergencyFund(life),
+    bills: monthlyNeeds(life).map((item) => ({
+      id: item.id,
+      textKey: `paisapur.item.${item.id}`,
+      amount: priceOf(item, life.month),
+    })),
+    goal: {
+      id: GOAL_CONTENT_KEY[life.goal.id] ?? life.goal.id,
+      storyId: life.goal.id,
+      textKey: `paisapur.goal.${life.goal.id}`,
+      amount: life.goal.target,
+    },
+    prices: Object.fromEntries(ITEMS.map((item) => [item.id, priceOf(item, life.month)])),
+  };
+}
+
+/**
+ * The player's real spending, shaped as Spending Detective reads it: purchases,
+ * repairs and money lost, never income, deposits or savings moves.
+ */
+export function spendingLedger(life: LifeState): { amount: number; reasonKey: string; category: string }[] {
+  const out: { amount: number; reasonKey: string; category: string }[] = [];
+  // Last month, the most recent full one: the game calls it "this month".
+  for (const entry of life.ledger) {
+    if (entry.month !== Math.max(0, life.month - 1)) continue;
+    if (entry.amount >= 0 || entry.where === 'pot') continue;
+    const [kind, detail] = entry.reason.split(':');
+    if (kind === 'buy' && detail) {
+      out.push({ amount: -entry.amount, reasonKey: `paisapur.item.${detail}`, category: ITEM_CATEGORY[detail] ?? 'other' });
+    } else if (kind === 'repair' || kind === 'scam' || kind === 'ponzi' || kind === 'fire' || kind === 'lend') {
+      out.push({ amount: -entry.amount, reasonKey: `paisapur.reason.${kind}`, category: 'other' });
+    }
+  }
+  return out;
+}
+
 export function contextFromLife(
   life: LifeState,
-  opts: { level?: Level; mode?: PlayMode } = {},
+  opts: { level?: Level; mode?: PlayMode; params?: Record<string, unknown> } = {},
 ): MiniGameContext {
   return {
     persona: personaFromLife(life),
@@ -80,12 +139,14 @@ export function contextFromLife(
         cash: life.cash,
         bank: life.bank.balance,
         savingsJars: { emergency: emergencyFund(life) },
-        monthlyIncome: { amount: incomeFor(life, life.month) },
+        monthlyIncome: { amount: incomeFor(life, life.month + 1) },
       },
       // Spending Detective builds the month from this when it is rich enough.
-      ledger: life.ledger,
+      ledger: spendingLedger(life),
       needsCost: needsCost(life),
+      story: storyEconomy(life),
     } as MiniGameContext['stateSlice'],
     mode: opts.mode ?? 'lifepath',
+    params: opts.params,
   };
 }

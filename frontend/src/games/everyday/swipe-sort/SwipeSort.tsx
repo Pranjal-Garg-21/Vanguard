@@ -20,6 +20,7 @@ import { asBuckets, combine, matchesPersona, type GameProps } from '../shared/ga
 import { conceptMap } from '@/runtime/verbs/types';
 import content from '@/content/scenarios/plan/swipe-sort.json';
 import { detectFunIsBad, type FunRecord } from './logic/fun';
+import { storyPrice } from '../shared/economics';
 
 type PoolCard = (typeof content.cards)[number];
 
@@ -31,7 +32,8 @@ export function SwipeSort({ ctx, onComplete }: GameProps) {
         .map((c) => ({
           id: c.id,
           textKey: c.textKey,
-          amount: c.amount,
+          // Items the story's shops also sell show the story's price.
+          amount: storyPrice(ctx, 'storyItem' in c ? c.storyItem : undefined) ?? c.amount,
           correctBucket: c.correctBucket,
           explainKey: c.explainKey,
           recontext: 'recontext' in c ? c.recontext : undefined,

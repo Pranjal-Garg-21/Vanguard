@@ -49,6 +49,8 @@ export type AllocateProps = VerbCommonProps & {
   /** Everything must be allocated before continuing. */
   requireFull?: boolean;
   promptKey?: string;
+  /** Values for the prompt's {placeholders}. */
+  promptVars?: Record<string, string | number>;
   concepts?: Record<ConceptId, number>;
   onPlayAudio?: (audioKey: string) => void;
 };
@@ -63,6 +65,7 @@ export function Allocate({
   coinDenominations,
   requireFull = true,
   promptKey,
+  promptVars,
   concepts,
   onPlayAudio,
 }: AllocateProps) {
@@ -154,7 +157,7 @@ export function Allocate({
 
   return (
     <section className="allocate">
-      {promptKey && <p>{t(promptKey)}</p>}
+      {promptKey && <p>{t(promptKey, promptVars)}</p>}
 
       <p className="allocate__remaining" aria-live="polite">
         {t('verb.allocate.remaining', { amount: remaining })}

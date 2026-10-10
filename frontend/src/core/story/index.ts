@@ -8,6 +8,7 @@
 import { emergencyFund, GOAL_DEFS, goalFunds, needsBought, needsCost, type Action, type LifeState } from '@/core/engine';
 import type { Level, MiniGameResult } from '@/core/types';
 import type { Pos } from '@/core/world';
+import { gameEffectsToActions } from './gameEffects';
 
 // ── Conditions ──────────────────────────────────────────────────────────
 // A condition is terms joined by "&&" and "||" ("&&" binds tighter), e.g.
@@ -158,8 +159,21 @@ export type Step =
    * Hands over to a registered MiniGame (GAME_DESIGN §"Script commands"). The
    * game teaches its own concepts, so what it reports comes back as Journal
    * progress; `then` runs once the player is out of it.
+   *
+   * `params` stages the scene inside the game (which shock, whose money).
+   * `apply` turns the game's simple effects (deposits, meters, a sharper goal)
+   * into story money; see gameEffects.ts. `on` runs story steps for a choice
+   * made inside the game, keyed "stepId:choiceId" (e.g. "sm03.choose:family"),
+   * so the story decides what that choice really costs.
    */
-  | { minigame: string; level?: Level; then?: Step[] }
+  | {
+      minigame: string;
+      level?: Level;
+      params?: Record<string, unknown>;
+      apply?: boolean;
+      on?: Record<string, Step[]>;
+      then?: Step[];
+    }
   | { checkpoint: string }
   | { end: true };
 
@@ -182,7 +196,7 @@ export interface Host {
   /** A Scam Duel; resolves with who won. */
   duel(id: string): Promise<'win' | 'lose'>;
   /** Runs a registered MiniGame and resolves with what the player did in it. */
-  minigame(id: string, level: Level): Promise<MiniGameResult>;
+  minigame(id: string, level: Level, params?: Record<string, unknown>): Promise<MiniGameResult>;
   /** Saves a What-If checkpoint for the scene being played. */
   checkpoint(label: string): void;
 }
@@ -254,15 +268,23 @@ async function runStep(scripts: Scripts, step: Step, host: Host, depth: number):
     return runSteps(scripts, (result === 'win' ? step.win : step.lose) ?? [], host, depth + 1);
   }
   if ('minigame' in step) {
-    const result = await host.minigame(step.minigame, step.level ?? 1);
+    const result = await host.minigame(step.minigame, step.level ?? 1, step.params);
     // A mini-game's conceptDeltas are mastery targets (§10.3), so a high
     // target means the player showed they understood it. That is the same
     // signal a right answer gives, so it moves the Journal the same way.
     for (const [concept, target] of Object.entries(result.conceptDeltas)) {
       host.dispatch({ type: 'learn', concept, correct: target >= 0.7 });
     }
+    // Logged against a concept the game taught, because the facilitator heatmap
+    // groups by concept. (Every game reports one; the id is only a last resort.)
+    const concept = Object.keys(result.conceptDeltas)[0] ?? step.minigame;
     for (const misconception of result.misconceptions) {
-      host.log({ concept: step.minigame, choice: step.minigame, correct: false, misconception });
+      host.log({ concept, choice: step.minigame, correct: false, misconception });
+    }
+    if (step.apply) for (const action of gameEffectsToActions(result.effects)) host.dispatch(action);
+    for (const choice of result.choices) {
+      const branch = step.on?.[`${choice.stepId}:${choice.choiceId}`];
+      if (branch) await runSteps(scripts, branch, host, depth + 1);
     }
     return runSteps(scripts, step.then ?? [], host, depth + 1);
   }
@@ -284,7 +306,10 @@ export function walkSteps(steps: Step[], visit: (s: Step) => void): void {
       walkSteps(s.lose ?? [], visit);
     }
     if ('once' in s) walkSteps(s.do, visit);
-    if ('minigame' in s) walkSteps(s.then ?? [], visit);
+    if ('minigame' in s) {
+      for (const branch of Object.values(s.on ?? {})) walkSteps(branch, visit);
+      walkSteps(s.then ?? [], visit);
+    }
   }
 }
 

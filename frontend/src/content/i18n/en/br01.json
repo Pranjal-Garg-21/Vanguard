@@ -1,38 +1,48 @@
 {
-  "hook": "The hospital needs ₹2,000 today. You can pay it back over three months, but you do not have it right now.",
-  "prompt": "Four ways to get ₹2,000. Put them in order, cheapest to pay back first.",
-  "choose": "Now pick the one you would actually use.",
+  "hook": "Say you needed {principal, rupees} for three months: a fee, a repair, a deposit on something you want. Here is what each lender in Paisapur would charge you.",
+  "prompt": "Five ways to get {principal, rupees}. Put them in order, cheapest to pay back first.",
+  "choose": "Now pick the one you would actually use, or decide not to borrow at all.",
   "summary": "You compared what each one really costs to pay back.",
   "family": {
     "text": "Borrow from family",
-    "reveal": "₹2,000 back. No interest — but you owe something that is not money.",
-    "missed": "You missed a payment. Nobody charged you anything. But your uncle asked about it in front of everyone at dinner, and that cost something too."
+    "reveal": "{total, rupees} back. No interest, but you owe something that is not money.",
+    "missed": "Nobody would charge you anything. But your uncle would ask about it in front of everyone at dinner, and that costs something too."
   },
   "bnpl": {
     "text": "Buy now, pay later",
-    "reveal": "₹2,400 back. Only ₹400 a month — the smallest of the four, which is exactly why it feels cheapest. But it runs for six months, not three, and you pay ₹400 more than you would have.",
-    "missed": "You missed a payment. A ₹400 late fee was added, and it is now on your repayment record."
+    "reveal": "{total, rupees} back. Only {monthly, rupees} a month, the smallest of all, which is exactly why it feels cheapest. But it runs for {months} months, not three.",
+    "missed": "A late fee would be added, and it would go on your repayment record."
   },
   "moneylender": {
     "text": "Local moneylender",
-    "reveal": "₹2,600 back. Ten percent a month: ₹200 every month, on top of the ₹2,000.",
-    "missed": "You missed a payment. The interest kept running, so you now owe more than when you started."
+    "reveal": "{total, rupees} back. {rate}% a month, every month: about {yearly}% a year.",
+    "missed": "The interest keeps running, so you would owe more than when you started, and the collector would visit."
   },
   "loan_app": {
     "text": "Instant loan app",
-    "reveal": "₹3,100 back, and that is if nothing goes wrong. A ₹300 processing fee, ₹400 interest, and a ₹400 penalty if you are late.",
-    "missed": "You missed a payment. The app started calling the contacts in your phone — people who had nothing to do with the loan. This is what the app wanted your contact list for."
+    "reveal": "{total, rupees} back. The app keeps a {fee}% fee upfront, so you must borrow {borrowed, rupees} to get {principal, rupees}, then pay {rate}% a month on all of it.",
+    "missed": "The app would start calling the contacts in your phone, people who had nothing to do with the loan. That is what it wanted your contact list for."
   },
   "concept": {
     "total_cost": "Compare what you pay back in total, not what you pay each month. A small instalment can hide a large total."
   },
   "monthly_vs_total": "{monthly, rupees} a month for {months} months · {total, rupees} paid back in total",
   "result": {
-    "cheapest_first": "Family was cheapest at ₹2,000. The loan app costs ₹1,100 more for the same ₹2,000.",
-    "emi_trap": "Look at the monthly amounts again. Pay later had the smallest instalment of all four — and the second biggest total. A small monthly payment stretched over more months is not a cheaper loan."
+    "cheapest_first": "Family was cheapest at {family, rupees}. The loan app costs {diff, rupees} more for the same {principal, rupees}.",
+    "emi_trap": "Look at the monthly amounts again. Pay later had the smallest instalment of all, but not the smallest total. A small monthly payment stretched over more months is not a cheaper loan."
   },
   "borrowed": "You borrowed {amount, rupees}.",
   "chose": "You chose: {option}",
-  "missed_title": "One month later",
-  "missed_intro": "Money was tight and you missed one payment."
+  "missed_title": "What if you missed a payment?",
+  "missed_intro": "Say money got tight one month and you missed a payment:",
+  "bank": {
+    "text": "Paisapur Bank loan (Mr. Iyer)",
+    "reveal": "{total, rupees} back. {rate}% a month plus a {fee}% fee: slow paperwork, but cheap, and paying on time builds your credit score.",
+    "missed": "If you missed an EMI: a late fee is added, and a missed payment drops your credit score, which makes the next loan dearer."
+  },
+  "none": {
+    "text": "I won't borrow",
+    "detail": "Wait, save, or find a cheaper way. Not borrowing is always an option."
+  },
+  "no_borrow": "You chose not to borrow. Often the cheapest loan is the one you never take."
 }

@@ -19,7 +19,7 @@ import { useMemo, useState } from 'react';
 import { rupees, useT } from '@/platform';
 import { Allocate, type AllocateDetail } from '@/runtime/verbs/allocate';
 import { combine, type GameProps } from '../shared/game';
-import { characterIncome } from '../shared/economics';
+import { cashOf, incomeOf } from '../shared/economics';
 import { accountsFor, canMaintain, isWeakPin, type Account } from './logic/accounts';
 import content from '@/content/scenarios/bank/bank-counter.json';
 
@@ -34,9 +34,10 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
     () => accountsFor(content.accounts as Account[], ctx.persona),
     [ctx.persona],
   );
-  const income = characterIncome(ctx.persona).amount;
-  /** Cash in hand at the counter — roughly a month's money. */
-  const cashOnHand = Math.max(200, Math.round(income / 2 / 50) * 50);
+  // The story's own income and cash when it passes them; persona defaults in the Arcade.
+  const income = incomeOf(ctx);
+  /** Cash in hand at the counter. */
+  const cashOnHand = cashOf(ctx);
 
   const [phase, setPhase] = useState<Phase>('hook');
   const [account, setAccount] = useState<Account | null>(null);
@@ -51,7 +52,7 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
 
   function chooseAccount(next: Account) {
     setAccount(next);
-    setPhase(canMaintain(next, ctx.persona) ? 'form' : 'warn');
+    setPhase(canMaintain(next, ctx.persona, income) ? 'form' : 'warn');
   }
 
   function finish() {
@@ -70,7 +71,7 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
             nominee: nominee ? 0.9 : 0.4,
             // Shielding the keypad is the behaviour the moment exists to teach.
             pin_secrecy: shielded ? 0.9 : 0.5,
-            minimum_balance_fees: canMaintain(account, ctx.persona) ? 0.9 : 0.4,
+            minimum_balance_fees: canMaintain(account, ctx.persona, income) ? 0.9 : 0.4,
           },
           misconceptions: [],
           effects: {
@@ -79,7 +80,7 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
             'meta.flags.hasBankAccount': true,
             'meta.flags.accountType': account.id,
             // Month 2 charges the student who picked a minimum they cannot hold.
-            'meta.flags.accountMinimumAtRisk': !canMaintain(account, ctx.persona),
+            'meta.flags.accountMinimumAtRisk': !canMaintain(account, ctx.persona, income),
             // P5's single-message component picks this up (UC-SAFE-03).
             'meta.flags.pendingKycSms': true,
           },
@@ -188,6 +189,7 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
         ctx={ctx}
         total={cashOnHand}
         promptKey="bank02.deposit.prompt"
+        promptVars={{ amount: rupees(cashOnHand) }}
         jars={[
           { id: 'bank', textKey: 'bank02.deposit.jar_bank', emoji: '🏦' },
           { id: 'pocket', textKey: 'bank02.deposit.jar_pocket', emoji: '👛' },
@@ -273,7 +275,8 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
         </ul>
         <p>{t('bank02.pin.done')}</p>
         <p>{t(content.conceptCard.textKey)}</p>
-        <button type="button" onClick={() => setPhase('sms')}>
+        {/* In the story the KYC scam arrives as its own scene right after; only the Arcade shows it here. */}
+        <button type="button" onClick={() => (ctx.mode === 'lifepath' ? finish() : setPhase('sms'))}>
           {t('common.continue')}
         </button>
       </section>

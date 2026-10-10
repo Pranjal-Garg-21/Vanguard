@@ -91,8 +91,8 @@
   },
   "fraud_recovery": {
     "title": "If you get scammed",
-    "body": "Act fast: call your bank to block your account or card, report it on India's cybercrime helpline 1930 or cybercrime.gov.in, change your passwords, and tell someone you trust. The faster you report, the better the chance of recovery.",
-    "example": "Scammed at 9 pm? Call the bank and 1930 the same night. Don't wait for morning."
+    "body": "Act fast: call India's cybercrime helpline 1930 first (it can freeze money before it moves on), then call your bank to block your account or card, report on cybercrime.gov.in, change your passwords, and tell someone you trust.",
+    "example": "Scammed at 9 pm? Call 1930 and your bank the same night. Don't wait for morning."
   },
   "goal_setting": {
     "title": "Money goals",

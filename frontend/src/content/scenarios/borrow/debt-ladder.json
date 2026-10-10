@@ -1,5 +1,5 @@
 {
-  "_comment": "UC-BR-01 Debt Cost Ladder. Implementation.md 12.6: the character needs ₹2,000 for 3 months and ranks four sources by TOTAL REPAID, not by instalment — that is the whole lesson, and the misconception compare_emi_not_total is exactly the trap. The trap is load-bearing: buy-now-pay-later stretches to SIX months, so it has the smallest monthly payment of the four and the second-largest total. Ordering by instalment and ordering by total must stay different or the misconception cannot occur; games.test.ts asserts this. Totals are tuned to the plan's own example figures (₹2,000 vs ₹2,600 vs ₹3,100+). No real lender, app or brand is named anywhere.",
+  "_comment": "UC-BR-01 Debt Cost Ladder. Implementation.md 12.6: the character needs ₹2,000 for 3 months and ranks four sources by TOTAL REPAID, not by instalment — that is the whole lesson, and the misconception compare_emi_not_total is exactly the trap. The trap is load-bearing: buy-now-pay-later stretches to SIX months, so it has the smallest monthly payment of the four and the second-largest total. Ordering by instalment and ordering by total must stay different or the misconception cannot occur; games.test.ts asserts this. Instalments and totals are computed in logic/ladder.ts from core/engine RULES (the same rates the story's bank, Sahukar and loan app use); only the fixed buy-now-pay-later plan keeps stated terms here. No real lender, app or brand is named anywhere.",
   "_owner": "P3",
   "_useCase": "UC-BR-01",
   "id": "debt-ladder",
@@ -21,10 +21,7 @@
     {
       "id": "family",
       "textKey": "br01.family.text",
-      "value": 2000,
       "revealKey": "br01.family.reveal",
-      "monthlyPayment": 667,
-      "months": 3,
       "concepts": {
         "loan_basics": 0.9
       },
@@ -34,6 +31,31 @@
       "missedPaymentKey": "br01.family.missed",
       "missedEffects": {
         "human.trust": -15
+      }
+    },
+    {
+      "id": "bank",
+      "textKey": "br01.bank.text",
+      "revealKey": "br01.bank.reveal",
+      "concepts": {
+        "loan_basics": 0.9,
+        "credit_score": 0.8
+      },
+      "missedPaymentKey": "br01.bank.missed",
+      "missedEffects": {
+        "human.peaceOfMind": -5
+      }
+    },
+    {
+      "id": "moneylender",
+      "textKey": "br01.moneylender.text",
+      "revealKey": "br01.moneylender.reveal",
+      "concepts": {
+        "loan_basics": 0.9
+      },
+      "missedPaymentKey": "br01.moneylender.missed",
+      "missedEffects": {
+        "human.peaceOfMind": -15
       }
     },
     {
@@ -54,27 +76,9 @@
       }
     },
     {
-      "id": "moneylender",
-      "textKey": "br01.moneylender.text",
-      "value": 2600,
-      "revealKey": "br01.moneylender.reveal",
-      "monthlyPayment": 867,
-      "months": 3,
-      "concepts": {
-        "loan_basics": 0.9
-      },
-      "missedPaymentKey": "br01.moneylender.missed",
-      "missedEffects": {
-        "human.peaceOfMind": -15
-      }
-    },
-    {
       "id": "loan_app",
       "textKey": "br01.loan_app.text",
-      "value": 3100,
       "revealKey": "br01.loan_app.reveal",
-      "monthlyPayment": 1033,
-      "months": 3,
       "concepts": {
         "loan_basics": 0.9
       },

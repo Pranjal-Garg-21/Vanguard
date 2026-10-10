@@ -27,7 +27,7 @@
   "c1": {
     "prof_hint": "Paisapur Bank is just east of here. Meena Rao, the manager, will look after you.",
     "mom_generic": "Did you open your bank account yet? Meena Rao at the bank is very kind.",
-    "mom_docs": "Documents? Of course. Here's your ID card and the electricity bill with our address on it. Keep them safe and give them only to the bank.",
+    "mom_docs": "Documents for the bank? Let's look in the cupboard together. Take only what the bank asks for, and keep everything else safe at home.",
     "mom_proud": "You opened your own bank account? I'm so proud of you!",
     "mom_buyer": "Oh, and someone was asking about your old cycle. They're waiting outside to buy it.",
     "meena1": "Welcome to Paisapur Bank! I'm Meena Rao, the branch manager. Here to open your first account?",
@@ -38,7 +38,7 @@
     "meena_current": "A current account is for businesses that make lots of payments, and it pays no interest. Let's open a savings account for you instead.",
     "meena_none": "Cash at home doesn't grow, and it can be lost or stolen. Bank deposits are even insured up to ₹5 lakh. Let's open a savings account.",
     "q_deposit": "How much of your cash would you like to deposit?",
-    "meena_interest": "Your savings account pays 3.5% a year. The bank credits a little interest every month.",
+    "meena_interest": "Your account pays 3.5% a year. The bank credits a little interest every month.",
     "meena_card": "Here's your debit card. Choose a secret PIN, and never, ever tell it to anyone. Not even me.",
     "meena_upi": "Last thing: let's set up UPI on your phone, so you can pay by scanning a QR code.",
     "meena_done": "All done! You're officially banked. Go and tell your family!",
@@ -94,12 +94,13 @@
     "prof_whatif": "And one more thing: my What-If Machine, by the door, lets you go back to any big decision, try another choice and compare both lives. Mistakes are for learning here!",
     "shauq_emi": "Ah, you're saving for a {goalName}? Why wait? Take it home TODAY on a Paisapur credit card! No-cost EMI! Easy!",
     "emi_taken": "Enjoy! Your first card bill comes next month. Paying just the minimum is fine... for us.",
-    "emi_saved": "Suit yourself. (\"No-cost\" EMIs often hide fees, and if you miss a payment, card interest is over 40% a year.)"
+    "emi_saved": "Suit yourself. (\"No-cost\" EMIs often hide fees, and if you miss a payment, card interest is over 40% a year.)",
+    "pyf_already": "You already set aside ₹{autosave} a month in Goal Builder. That's paying yourself first: it leaves your account before you can spend it."
   },
   "c3": {
     "prof_hint": "Talk to Lakshmi Aunty in the square. Nobody in Paisapur knows more about saving.",
     "mom": "An emergency fund means a broken phone is a bad day, not a disaster.",
-    "crack1": "CRACK! Your phone slips off the table and lands face-down on the floor.",
+    "crack1": "CRACK! On the way home, your phone slips out of your pocket at the bus stop.",
     "crack2": "The screen is shattered. The repair shop says ₹1,500.",
     "crack_fund": "You check your bank balance. You have savings for exactly this kind of day.",
     "crack_nofund": "You check your balance. It's not enough. Your stomach drops.",
@@ -126,7 +127,9 @@
     "prof_scholarship": "Good news for a learner like you: the coaching centre gives merit scholarships. Answer my two questions and I'll recommend you!",
     "scholarship_won": "Splendid! The centre is giving you ₹1,500. I've put it straight into your goal pot: money you never have to repay.",
     "scholarship_lost": "Not this time. Scholarships come round every year, so keep applying, to many of them.",
-    "prof_leaks": "“Before you chase more money, find out where the money you already have is going. Most of it leaves in twenty-rupee pieces.”"
+    "prof_leaks": "Before you chase more money, find out where the money you already have is going. Most of it leaves in twenty-rupee pieces.",
+    "crack_app": "The app pays the repair shop in minutes. The repayments, and the reminders, start next month.",
+    "crack_sold": "You sell your old cycle to a neighbour to pay for the repair. It hurts a little, but you owe nobody."
   },
   "c4": {
     "prof1": "Many people borrow for big things. Borrowing isn't always bad, but there is good debt and bad debt.",
@@ -169,7 +172,13 @@
     "prof_cons": "Your {goalName} will be worth less every year. Borrowing for it means paying interest on something that keeps shrinking. Ask yourself: can I wait and save?",
     "prof_quick": "Your goal was small enough to save for. That's why you didn't need a loan. Bigger goals are where borrowing tempts people.",
     "iyer_edu": "Our education loan charges 0.8% a month, less than our regular loan, and it's meant for courses and study tools.",
-    "iyer_wait": "Live with your choices for a couple of months: pay your EMIs, see how it feels. Then come back for my challenge."
+    "iyer_wait": "Live with your choices for a couple of months: pay your EMIs, see how it feels. Then come back for my challenge.",
+    "ladder_family": "Two thousand? All right, but you pay it back over three months, beta. I'll be counting.",
+    "ladder_bank": "The bank? Then go to Mr. Iyer and his papers. Slow, but cheaper than me. I won't pretend otherwise.",
+    "ladder_moneylender": "Here's your ₹2,000. Five percent a month, every month. I'll see you on the first.",
+    "ladder_bnpl": "Pay-later is for buying things at Shauq Bazaar. There's nothing to buy here.",
+    "ladder_app": "You install the app. ₹2,000 lands in your account, out of the ₹2,500 you now owe. The first reminder arrives before you're home.",
+    "ladder_none": "Not borrowing? Smart. Most people who come here wish they hadn't."
   },
   "c5": {
     "prof1": "The Smart Borrower badge! Now let's talk about making money grow. But beware: inflation eats money that just sits.",
@@ -220,7 +229,7 @@
     "fire_insured": "The insurance company pays for everything. You lost a bad afternoon, not your savings.",
     "fire_uninsured": "No insurance. Replacing everything costs ₹2,000 from your savings.",
     "fatima1": "Inspector Fatima, Cyber Cell. Most frauds start with someone sharing too much: an ID photo, a password, an OTP.",
-    "fatima2": "And if you're ever scammed, act fast: call your bank, call 1930, report on the cybercrime portal, and change your passwords.",
+    "fatima2": "And if you're ever scammed, act fast: call 1930 first, then your bank to block the account, then report on cybercrime.gov.in and change your passwords.",
     "fatima_report": "Double Dhamaka? We've had our eye on Mr. Jackpot. With your evidence, we're moving in tonight.",
     "fatima_refund": "We recovered some of the money. Here's ₹800 of your ₹2,000. Most victims of a Ponzi get nothing back.",
     "kabir_lost": "Later, Kabir finds you. \"I lost my money in Double Dhamaka. But I reported it fast, like you said. Thanks, friend.\"",
@@ -230,7 +239,8 @@
     "fatima_hint": "We've heard rumours about a get-rich scheme across the road. If you learn anything, report it here.",
     "fatima_done": "Stay sharp, and keep your PINs to yourself!",
     "kabir": "From now on, I'm doing it your way. Boring. Slow. Safe. Actually... kind of nice.",
-    "fire_stall": "Your stall burns down! Without insurance, rebuilding and restocking costs ₹4,000 from your savings."
+    "fire_stall": "Your stall burns down! Without insurance, rebuilding and restocking costs ₹4,000 from your savings.",
+    "fatima_rescue": "Kabir is outside, shaking. Help him do the right things, in the right order. The first hour matters most."
   },
   "end": {
     "prof1": "{name}! Six badges. A full Money Journal. Do you remember when you came in here a year ago, with ₹1,000 and a birthday cake?",

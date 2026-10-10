@@ -7,9 +7,9 @@ import type { MiniGameResult } from '@/core/types';
 
 /** A host that records what the script asked it to do. */
 function spyHost(result: MiniGameResult) {
-  const calls: { id: string; level: number }[] = [];
+  const calls: { id: string; level: number; params?: Record<string, unknown> }[] = [];
   const actions: Action[] = [];
-  const logs: { misconception?: string }[] = [];
+  const logs: { concept?: string; misconception?: string }[] = [];
   let state: LifeState = newLife(1);
 
   const host: Host = {
@@ -27,8 +27,8 @@ function spyHost(result: MiniGameResult) {
     log: (spec) => logs.push(spec),
     toast: () => {},
     duel: async () => 'win',
-    minigame: async (id, level) => {
-      calls.push({ id, level });
+    minigame: async (id, level, params) => {
+      calls.push({ id, level, ...(params ? { params } : {}) });
       return result;
     },
     checkpoint: () => {},
@@ -86,7 +86,60 @@ describe('the minigame script command', () => {
     expect(spy.actions.some((a) => a.type === 'flag' && a.name === 'ladder_done')).toBe(true);
   });
 
-  it('does not apply the game’s effects', async () => {
+  it('logs a caught misconception against a concept the game taught, not the game id', async () => {
+    const spy = spyHost(result({ conceptDeltas: { expense_tracking: 0.4 }, misconceptions: ['small_spends_dont_matter'] }));
+    await runScript({ s: [{ minigame: 'spending-detective' }] as Step[] }, 's', spy.host);
+    expect(spy.logs[0]).toMatchObject({ concept: 'expense_tracking', misconception: 'small_spends_dont_matter' });
+  });
+
+  it('passes the scene setup to the game', async () => {
+    const spy = spyHost(result());
+    await runScript({ s: [{ minigame: 'surprise-month', params: { shock: 'screen', amount: 1500 } }] as Step[] }, 's', spy.host);
+    expect(spy.calls[0]?.params).toEqual({ shock: 'screen', amount: 1500 });
+  });
+
+  it('applies simple effects when the script asks: deposits, meters and a sharper goal', async () => {
+    const spy = spyHost(
+      result({
+        effects: {
+          'money.bank': 400,
+          'money.cash': -400,
+          'human.trust': -10,
+          'meta.goals.set': { target: 5000, monthly: 300 },
+        } as unknown as MiniGameResult['effects'],
+      }),
+    );
+    await runScript({ s: [{ minigame: 'bank-counter', apply: true }] as Step[] }, 's', spy.host);
+    expect(spy.actions.filter((a) => a.type !== 'learn')).toEqual([
+      { type: 'deposit', amount: 400 },
+      { type: 'meter', peace: 0, trust: -10, safety: 0 },
+      { type: 'setGoalTarget', amount: 5000 },
+      { type: 'setAutoSave', amount: 300 },
+    ]);
+  });
+
+  it('runs the story branch for the choice made inside the game', async () => {
+    const spy = spyHost(result({ choices: [{ stepId: 'sm03.choose', choiceId: 'family', ms: 0 }] }));
+    await runScript(
+      {
+        s: [
+          {
+            minigame: 'surprise-month',
+            on: {
+              'sm03.choose:family': [{ flag: 'borrowed_from_mom' }],
+              'sm03.choose:loan_app': [{ flag: 'used_app' }],
+            },
+          },
+        ] as Step[],
+      },
+      's',
+      spy.host,
+    );
+    const flags = spy.actions.filter((a) => a.type === 'flag').map((a) => (a as { name: string }).name);
+    expect(flags).toEqual(['borrowed_from_mom']);
+  });
+
+  it('does not apply the game’s effects unless the script asks', async () => {
     // Paisapur's engine owns the money, and the scripts' own `do:` actions
     // already move it. Applying a game's effects as well would double-count.
     const spy = spyHost(result({ effects: { 'money.cash': 500 } }));

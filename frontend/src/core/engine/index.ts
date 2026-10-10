@@ -137,6 +137,10 @@ export type Action =
   | { type: 'learn'; concept: string; correct: boolean; rate?: number }
   | { type: 'buyGoal'; onCard?: boolean }
   | { type: 'toPot'; amount: number }
+  /** A more specific version of the same goal (e.g. a refurbished phone instead of a new one). */
+  | { type: 'setGoalTarget'; amount: number }
+  /** Pays from savings: the bank first, then the goal pot, then cash. */
+  | { type: 'payFromSavings'; amount: number; reason: string }
   /** Changes income `in` months from now (1 = next month) by `factor`. */
   | { type: 'adjustIncome'; in: number; factor: number }
   | { type: 'advanceMonth' };
@@ -467,6 +471,10 @@ export function check(state: LifeState, action: Action): string | null {
       if (state.flags.goal_done) return 'errors.already';
       if (action.onCard) return state.bank.open ? null : 'errors.no_account';
       return goalFunds(state) < state.goal.target ? 'errors.not_enough' : null;
+    case 'setGoalTarget':
+      return action.amount > 0 ? null : 'errors.unknown';
+    case 'payFromSavings':
+      return state.bank.balance + state.pot + state.cash < action.amount ? 'errors.not_enough' : null;
     case 'toPot':
       return action.amount <= 0 || state.cash + state.bank.balance < action.amount ? 'errors.not_enough' : null;
     case 'setAutoSave':
@@ -520,6 +528,23 @@ export function reduce(state: LifeState, action: Action): LifeState {
       s.owned = [...(s.owned ?? []), { id: `goal:${s.goal.id}`, month: s.month, price: s.goal.target }];
       if (s.goal.id === 'stall') s.flags.stall = true;
       s.peace = clamp(s.peace + 15);
+      return s;
+    }
+    case 'setGoalTarget':
+      s.goal = { ...s.goal, target: rupees(action.amount) };
+      return s;
+    case 'payFromSavings': {
+      let left = rupees(action.amount);
+      const fromBank = Math.min(s.bank.balance, left);
+      if (fromBank) pay(s, fromBank, 'bank', action.reason);
+      left -= fromBank;
+      const fromPot = Math.min(s.pot, left);
+      if (fromPot) {
+        s.pot -= fromPot;
+        ledger(s, -fromPot, 'pot', action.reason);
+      }
+      left -= fromPot;
+      if (left) pay(s, left, 'cash', action.reason);
       return s;
     }
     case 'adjustIncome':

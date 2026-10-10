@@ -36,11 +36,11 @@ export function accountsFor(accounts: readonly Account[], persona: Persona): Acc
  * account they cannot maintain and meet the charge in Month 2. This only
  * decides whether to say something first.
  */
-export function canMaintain(account: Account, persona: Persona): boolean {
+export function canMaintain(account: Account, persona: Persona, income = characterIncome(persona).amount): boolean {
   if (account.minimumBalance === 0) return true;
   // Money that has to sit untouched is money they do not have to live on. A
   // minimum above a third of monthly income will bite a student sooner or later.
-  return account.minimumBalance <= characterIncome(persona).amount / 3;
+  return account.minimumBalance <= income / 3;
 }
 
 /**

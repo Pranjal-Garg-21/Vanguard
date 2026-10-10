@@ -34,8 +34,8 @@ export function SurpriseMonth({ ctx, onComplete }: GameProps) {
   const covered = shock !== undefined && buffer >= shock.amount;
 
   const targets = useMemo(
-    () => emergencyTargets(ctx.persona, content.targetMonthsOfNeeds),
-    [ctx.persona],
+    () => emergencyTargets(ctx, content.targetMonthsOfNeeds),
+    [ctx],
   );
 
   const [phase, setPhase] = useState<'hook' | 'choose' | 'result' | 'reflect'>('hook');

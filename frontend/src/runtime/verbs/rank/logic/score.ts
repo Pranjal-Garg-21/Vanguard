@@ -17,6 +17,8 @@ export type RankItem = Localised & {
   value: number;
   /** Revealed after submitting, e.g. "₹2,000 + ₹600 interest". */
   revealKey?: string;
+  /** Values for the reveal's {placeholders}. */
+  revealVars?: Record<string, string | number>;
   concepts?: Record<ConceptId, number>;
   misconception?: MisconceptionId;
 };

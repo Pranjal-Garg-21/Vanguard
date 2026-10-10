@@ -221,10 +221,6 @@
     },
     {
      "concept": "fraud_recovery"
-    },
-    {
-     "minigame": "rescue-mission",
-     "level": 1
     }
    ]
   },
@@ -256,6 +252,19 @@
     },
     {
      "say": "story.c6.kabir_lost"
+    },
+    {
+     "say": "story.c6.fatima_rescue",
+     "who": "fatima"
+    },
+    {
+     "minigame": "rescue-mission",
+     "level": 1,
+     "params": {
+      "friend": "Kabir",
+      "amount": 2000,
+      "hook": "ponzi"
+     }
     }
    ]
   },

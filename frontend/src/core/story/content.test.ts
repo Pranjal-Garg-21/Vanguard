@@ -30,7 +30,7 @@ const ACTIONS: Action['type'][] = [
   'setup', 'work', 'shock', 'setSip', 'gain', 'spend', 'openAccount', 'enableUpi', 'deposit', 'withdraw',
   'setAutoSave', 'buy', 'openDeposit', 'takeLoan', 'repayLoan', 'buyAsset', 'sellAsset', 'buyBond',
   'buyInsurance', 'scamLoss', 'meter', 'flag', 'badge', 'chapter', 'objective', 'seeConcept', 'learn', 'advanceMonth',
-  'buyGoal', 'toPot', 'adjustIncome',
+  'buyGoal', 'toPot', 'adjustIncome', 'setGoalTarget', 'payFromSavings',
 ];
 
 describe('story scripts', () => {

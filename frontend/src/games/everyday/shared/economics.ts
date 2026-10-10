@@ -111,7 +111,9 @@ export const billsTotalFor = (persona: Persona) =>
 /** §7.5 goal amounts. */
 const GOALS: Record<string, CharacterGoal> = {
   laptop: { id: 'laptop', textKey: 'goal.laptop', amount: 25000 },
-  coaching: { id: 'coaching', textKey: 'goal.coaching', amount: 6000 },
+  coaching: { id: 'coaching', textKey: 'goal.coaching', amount: 5000 },
+  trip: { id: 'trip', textKey: 'goal.trip', amount: 2500 },
+  cycle: { id: 'cycle', textKey: 'goal.cycle', amount: 3500 },
   bike: { id: 'bike', textKey: 'goal.bike', amount: 30000 },
   business: { id: 'business', textKey: 'goal.business', amount: 10000 },
   family: { id: 'family', textKey: 'goal.family', amount: 8000 },
@@ -145,3 +147,45 @@ export function incomeFromContext(ctx: MiniGameContext): number {
   const fromState = slice?.money?.monthlyIncome?.amount;
   return typeof fromState === 'number' ? fromState : characterIncome(ctx.persona).amount;
 }
+
+// ── The story's own numbers ─────────────────────────────────────────────
+//
+// Inside Paisapur the adapter passes `stateSlice.story`, the player's real
+// income, bills, cash, savings, goal and shop prices. Every game reads its
+// money through the helpers below, so a game opened in the story talks about
+// the same rupees as the dialogue around it. The persona table above is only
+// the Arcade's fallback.
+
+export type StoryEconomy = {
+  month: number;
+  /** Next month's income. */
+  income: number;
+  cash: number;
+  bank: number;
+  /** Savings reachable in an emergency (bank + goal pot). */
+  emergency: number;
+  /** This month's needs, itemised, at this month's prices. */
+  bills: Bill[];
+  /** `id` is the key games use for their goal content; `storyId` is the story's own. */
+  goal: CharacterGoal & { storyId: string };
+  /** Shop item id → price this month. */
+  prices: Record<string, number>;
+};
+
+export function storyOf(ctx: MiniGameContext): StoryEconomy | null {
+  const story = (ctx.stateSlice as { story?: StoryEconomy } | undefined)?.story;
+  return story && typeof story.income === 'number' ? story : null;
+}
+
+export const incomeOf = (ctx: MiniGameContext): number => storyOf(ctx)?.income ?? incomeFromContext(ctx);
+export const billsOf = (ctx: MiniGameContext): Bill[] => storyOf(ctx)?.bills ?? characterBills(ctx.persona);
+export const billsTotalOf = (ctx: MiniGameContext): number => billsOf(ctx).reduce((sum, b) => sum + b.amount, 0);
+export const goalOf = (ctx: MiniGameContext): CharacterGoal => storyOf(ctx)?.goal ?? characterGoal(ctx.persona);
+/** What is left after the bills: what Wants and Future share. */
+export const disposableOf = (ctx: MiniGameContext): number => Math.max(0, incomeOf(ctx) - billsTotalOf(ctx));
+/** Cash in hand, or a plausible amount in the Arcade (about half a month's money). */
+export const cashOf = (ctx: MiniGameContext): number =>
+  storyOf(ctx)?.cash ?? Math.max(200, Math.round(characterIncome(ctx.persona).amount / 2 / 50) * 50);
+/** The story price of a shop item, if this card is one of the story's items. */
+export const storyPrice = (ctx: MiniGameContext, itemId: string | undefined): number | undefined =>
+  itemId ? storyOf(ctx)?.prices[itemId] : undefined;
