@@ -2,6 +2,7 @@
  * Pure maths behind the lesson "explore" widgets and the list of what the lesson format allows.
  * No React here, so it can be tested and reused by the games later.
  */
+import { assumptions } from '@/core/market';
 import {
   bondPrice,
   breakevenGain,
@@ -12,7 +13,10 @@ import {
   inflate,
   positionProfit,
   simpleAmount,
+  spreadLoss,
   tradeFee,
+  typicalHigh,
+  typicalLow,
   unitsAffordable,
 } from '@/core/market/finance';
 
@@ -26,6 +30,8 @@ export const EXPLORE_WIDGETS = [
   'bond_schedule',
   'bond_price',
   'position_lab',
+  'path_range',
+  'basket_split',
 ] as const;
 export type ExploreWidgetId = (typeof EXPLORE_WIDGETS)[number];
 
@@ -39,6 +45,8 @@ export const VISUALS = [
   'neighbour_loan',
   'bond_certificate',
   'stall_shares',
+  'road_ride',
+  'egg_basket',
 ] as const;
 export type VisualId = (typeof VISUALS)[number];
 
@@ -133,4 +141,19 @@ export function positionOutcome(shares: number, buyPrice: number, change: number
     dividend: shares * dividendPerShare,
     profit: positionProfit(shares, buyPrice, nowPrice, dividendPerShare, fee),
   };
+}
+
+/** path_range: where `amount` could end after one typical year on a path from assumptions.json. */
+export function pathRange(amount: number, assetId: string) {
+  const a = assumptions.assets[assetId];
+  if (!a) throw new Error(`Unknown path: ${assetId}`);
+  const low = typicalLow(amount, a.meanAnnual, a.fee, a.volAnnual);
+  const high = typicalHigh(amount, a.meanAnnual, a.fee, a.volAnnual);
+  return { low, high, width: high - low };
+}
+
+/** basket_split: loss, slice size and what is left when `fall` hits one business or the whole market. */
+export function basketSplit(total: number, fall: number, count: number, scope: 'one' | 'market') {
+  const loss = spreadLoss(total, fall, count, scope);
+  return { eachSlice: total / count, loss, left: total - loss };
 }

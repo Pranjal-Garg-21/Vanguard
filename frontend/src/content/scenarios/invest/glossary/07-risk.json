@@ -1,0 +1,6 @@
+[
+  { "id": "risk", "termKey": "invest_risk.glossary.risk.term", "defKey": "invest_risk.glossary.risk.def", "lesson": "lesson_risk" },
+  { "id": "volatility", "termKey": "invest_risk.glossary.volatility.term", "defKey": "invest_risk.glossary.volatility.def", "lesson": "lesson_risk" },
+  { "id": "paper_loss", "termKey": "invest_risk.glossary.paper_loss.term", "defKey": "invest_risk.glossary.paper_loss.def", "lesson": "lesson_risk" },
+  { "id": "typical_year", "termKey": "invest_risk.glossary.typical_year.term", "defKey": "invest_risk.glossary.typical_year.def", "lesson": "lesson_risk" }
+]

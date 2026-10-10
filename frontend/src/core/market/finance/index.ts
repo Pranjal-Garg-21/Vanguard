@@ -5,3 +5,4 @@ export * from './bonds';
 export * from './stocks';
 export * from './funds';
 export * from './gold';
+export * from './risk';

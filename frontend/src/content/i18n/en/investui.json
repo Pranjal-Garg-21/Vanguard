@@ -124,5 +124,22 @@
   "scp.simple": "Simple",
   "scp.compound": "Compound",
   "scp.extra": "Interest on interest",
-  "scp.summary": "After {years} years: simple {simple}, compound {compound}. The gap, {extra}, is interest on interest."
+  "scp.summary": "After {years} years: simple {simple}, compound {compound}. The gap, {extra}, is interest on interest.",
+
+  "path.intro": "Pick a path to see where {amount} could end after one typical year.",
+  "path.pick": "Choose a path",
+  "path.low": "Low end",
+  "path.high": "High end",
+  "path.width": "How wide the range is",
+  "path.note": "About 2 years in 3 end inside this range. Other years can be better or worse.",
+
+  "basket.intro": "You have {total} to spread over businesses in equal slices. One business, or the whole market, takes a hit.",
+  "basket.count": "Businesses you split across",
+  "basket.fall": "How far it falls",
+  "basket.scope": "What falls",
+  "basket.scope.one": "One business falls",
+  "basket.scope.market": "The whole market falls",
+  "basket.each": "Money in each business",
+  "basket.loss": "Your loss",
+  "basket.left": "What you have left"
 }

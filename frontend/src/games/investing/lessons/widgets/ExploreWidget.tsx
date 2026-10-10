@@ -3,7 +3,9 @@ import { BondPrice } from './BondPrice';
 import { BondSchedule } from './BondSchedule';
 import { FallRise } from './FallRise';
 import { InflationCups } from './InflationCups';
+import { BasketSplit } from './BasketSplit';
 import { LenderOutcomes } from './LenderOutcomes';
+import { PathRange } from './PathRange';
 import { PositionLab } from './PositionLab';
 import { SimpleVsCompound } from './SimpleVsCompound';
 import { StartEarly } from './StartEarly';
@@ -26,6 +28,10 @@ export function ExploreWidget({ widget, params: p }: { widget: string; params: R
       return <BondPrice face={p.face ?? 10000} coupon={p.coupon ?? 0.07} market={p.market ?? 0.07} years={p.years ?? 2} />;
     case 'position_lab':
       return <PositionLab shares={p.shares ?? 10} price={p.price ?? 100} change={p.change ?? 0} dividend={p.dividend ?? 0} fee={p.fee ?? 0.005} />;
+    case 'path_range':
+      return <PathRange amount={p.amount ?? 10000} />;
+    case 'basket_split':
+      return <BasketSplit total={p.total ?? 6000} fall={p.fall ?? 0.3} />;
     default:
       return null;
   }

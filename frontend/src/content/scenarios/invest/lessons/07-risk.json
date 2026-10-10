@@ -1,0 +1,255 @@
+{
+  "id": "lesson_risk",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 7,
+  "estMinutes": 12,
+  "difficulty": "medium",
+  "titleKey": "invest_risk.title",
+  "blurbKey": "invest_risk.blurb",
+  "concepts": ["risk_return", "volatility_vs_loss", "paper_vs_realised", "behaviour_gap", "time_horizon"],
+  "misconceptions": ["risk_means_only_loss", "guaranteed_returns_exist", "dip_means_loss", "it_always_comes_back"],
+  "vars": {
+    "amt": { "value": 10000, "fmt": "rupees" },
+    "sMean": { "value": 0.065, "fmt": "percent", "round": 1 },
+    "sFee": { "value": 0, "fmt": "percent", "round": 1 },
+    "sVol": { "value": 0.015, "fmt": "percent", "round": 1 },
+    "bMean": { "value": 0.13, "fmt": "percent", "round": 1 },
+    "bFee": { "value": 0.005, "fmt": "percent", "round": 1 },
+    "bVol": { "value": 0.22, "fmt": "percent", "round": 1 },
+    "fall": { "value": 0.25, "fmt": "percent" },
+    "rebound": { "value": 9000, "fmt": "rupees" }
+  },
+  "calcs": [
+    { "id": "sLow", "fn": "typicalLow", "args": ["$amt", "$sMean", "$sFee", "$sVol"], "fmt": "rupees" },
+    { "id": "sHigh", "fn": "typicalHigh", "args": ["$amt", "$sMean", "$sFee", "$sVol"], "fmt": "rupees" },
+    { "id": "sWidth", "fn": "sub", "args": ["$sHigh", "$sLow"], "fmt": "rupees" },
+    { "id": "bLow", "fn": "typicalLow", "args": ["$amt", "$bMean", "$bFee", "$bVol"], "fmt": "rupees" },
+    { "id": "bHigh", "fn": "typicalHigh", "args": ["$amt", "$bMean", "$bFee", "$bVol"], "fmt": "rupees" },
+    { "id": "bWidth", "fn": "sub", "args": ["$bHigh", "$bLow"], "fmt": "rupees" },
+    { "id": "keep", "fn": "sub", "args": [1, "$fall"] },
+    { "id": "afterFall", "fn": "mul", "args": ["$amt", "$keep"], "fmt": "rupees" },
+    { "id": "sellerExtra", "fn": "sub", "args": ["$rebound", "$afterFall"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_risk.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "road_ride", "textKey": "invest_risk.t1.hook" },
+        { "type": "define", "textKey": "invest_risk.t1.define" },
+        { "type": "analogy", "visual": "road_ride", "textKey": "invest_risk.t1.analogy" },
+        { "type": "note", "textKey": "invest_risk.t1.paths" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_risk.q1.prompt",
+          "concept": "risk_return",
+          "points": 10,
+          "hintKey": "invest_risk.q1.hint",
+          "explainKey": "invest_risk.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_risk.q1.opt.a" },
+            { "id": "b", "textKey": "invest_risk.q1.opt.b", "misconception": "risk_means_only_loss", "feedbackKey": "invest_risk.q1.fb.b" },
+            { "id": "c", "textKey": "invest_risk.q1.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_risk.q1.fb.c" },
+            { "id": "d", "textKey": "invest_risk.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "invest_risk.q2.prompt",
+          "concept": "volatility_vs_loss",
+          "points": 10,
+          "hintKey": "invest_risk.q2.hint",
+          "explainKey": "invest_risk.q2.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_risk.q2.opt.a" },
+            { "id": "b", "textKey": "invest_risk.q2.opt.b" },
+            { "id": "c", "textKey": "invest_risk.q2.opt.c" },
+            { "id": "d", "textKey": "invest_risk.q2.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_risk.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_risk.t2.define" },
+        {
+          "type": "explore",
+          "explore": { "widget": "path_range", "promptKey": "invest_risk.t2.explore", "params": { "amount": "$amt" } }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_risk.q3.prompt",
+          "concept": "risk_return",
+          "points": 20,
+          "hintKey": "invest_risk.q3.hint",
+          "explainKey": "invest_risk.q3.explain",
+          "answer": "bLow",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_risk.q4.prompt",
+          "concept": "volatility_vs_loss",
+          "points": 15,
+          "hintKey": "invest_risk.q4.hint",
+          "explainKey": "invest_risk.q4.explain",
+          "answer": "sWidth",
+          "unit": "rupees"
+        },
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "invest_risk.q5.prompt",
+          "concept": "risk_return",
+          "points": 10,
+          "hintKey": "invest_risk.q5.hint",
+          "explainKey": "invest_risk.q5.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_risk.q5.opt.a" },
+            { "id": "b", "textKey": "invest_risk.q5.opt.b" },
+            { "id": "c", "textKey": "invest_risk.q5.opt.c" },
+            { "id": "d", "textKey": "invest_risk.q5.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_risk.t3.title",
+      "blocks": [
+        { "type": "hook", "textKey": "invest_risk.t3.hook" },
+        { "type": "define", "textKey": "invest_risk.t3.define" },
+        {
+          "type": "steps",
+          "stepKeys": ["invest_risk.t3.s1", "invest_risk.t3.s2", "invest_risk.t3.s3", "invest_risk.t3.s4"]
+        },
+        { "type": "tradeoff", "textKey": "invest_risk.t3.tradeoff" }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "invest_risk.q6.prompt",
+          "concept": "paper_vs_realised",
+          "points": 10,
+          "hintKey": "invest_risk.q6.hint",
+          "explainKey": "invest_risk.q6.explain",
+          "answer": "afterFall",
+          "unit": "rupees"
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "invest_risk.q7.prompt",
+          "concept": "paper_vs_realised",
+          "points": 15,
+          "hintKey": "invest_risk.q7.hint",
+          "explainKey": "invest_risk.q7.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_risk.q7.opt.a" },
+            { "id": "b", "textKey": "invest_risk.q7.opt.b", "misconception": "dip_means_loss", "feedbackKey": "invest_risk.q7.fb.b" },
+            { "id": "c", "textKey": "invest_risk.q7.opt.c", "misconception": "it_always_comes_back", "feedbackKey": "invest_risk.q7.fb.c" },
+            { "id": "d", "textKey": "invest_risk.q7.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_risk.t4.title",
+      "blocks": [
+        { "type": "hook", "textKey": "invest_risk.t4.hook" },
+        { "type": "define", "textKey": "invest_risk.t4.define" },
+        { "type": "note", "textKey": "invest_risk.t4.note" }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "invest_risk.q8.prompt",
+          "concept": "behaviour_gap",
+          "points": 15,
+          "hintKey": "invest_risk.q8.hint",
+          "explainKey": "invest_risk.q8.explain",
+          "answer": "sellerExtra",
+          "unit": "rupees"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "invest_risk.q9.prompt",
+          "concept": "time_horizon",
+          "points": 15,
+          "hintKey": "invest_risk.q9.hint",
+          "explainKey": "invest_risk.q9.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_risk.q9.opt.a" },
+            { "id": "b", "textKey": "invest_risk.q9.opt.b", "misconception": "it_always_comes_back", "feedbackKey": "invest_risk.q9.fb.b" },
+            { "id": "c", "textKey": "invest_risk.q9.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_risk.q9.fb.c" },
+            { "id": "d", "textKey": "invest_risk.q9.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "invest_risk.t5.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_risk.t5.define" },
+        { "type": "tradeoff", "textKey": "invest_risk.t5.tradeoff" },
+        { "type": "jargon", "terms": ["risk", "volatility", "paper_loss", "typical_year"] }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "invest_risk.q10.prompt",
+          "concept": "risk_return",
+          "points": 10,
+          "hintKey": "invest_risk.q10.hint",
+          "explainKey": "invest_risk.q10.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_risk.q10.opt.a" },
+            { "id": "b", "textKey": "invest_risk.q10.opt.b", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_risk.q10.fb.b" },
+            { "id": "c", "textKey": "invest_risk.q10.opt.c" },
+            { "id": "d", "textKey": "invest_risk.q10.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q11",
+          "kind": "choice",
+          "promptKey": "invest_risk.q11.prompt",
+          "concept": "risk_return",
+          "points": 10,
+          "hintKey": "invest_risk.q11.hint",
+          "explainKey": "invest_risk.q11.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_risk.q11.opt.a" },
+            { "id": "b", "textKey": "invest_risk.q11.opt.b", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_risk.q11.fb.b" },
+            { "id": "c", "textKey": "invest_risk.q11.opt.c" },
+            { "id": "d", "textKey": "invest_risk.q11.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": ["risk", "volatility", "paper_loss", "typical_year"]
+}

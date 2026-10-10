@@ -1,4 +1,5 @@
 /** "Meet the three paths": says what each path is before the student splits any money. */
+import { Link } from 'react-router';
 import { formatRupees } from '@/core/market';
 import { t } from '@/platform';
 import { Card } from '@/ui';
@@ -23,6 +24,14 @@ export function PathsGuide() {
         })}
       </ul>
       <p className="text-xs text-muted">{t('timemachine.paths.note')}</p>
+      <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold">
+        <Link to="/learn/invest/lesson_risk" className="text-brand hover:underline">
+          {t('timemachine.paths.learnRisk')}
+        </Link>
+        <Link to="/learn/invest/lesson_diversification" className="text-brand hover:underline">
+          {t('timemachine.paths.learnSpread')}
+        </Link>
+      </p>
     </Card>
   );
 }
