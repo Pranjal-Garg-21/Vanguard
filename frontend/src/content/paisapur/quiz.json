@@ -1,0 +1,36 @@
+{
+  "questions": [
+    { "id": "bank_kyc", "concept": "kyc", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "c": "click_kyc_link" } },
+    { "id": "bank_type", "concept": "savings_account", "options": ["a", "b", "c"], "answer": "a" },
+    { "id": "bank_pin", "concept": "pin_secrecy", "options": ["a", "b", "c"], "answer": "c", "misconceptions": { "a": "share_otp" } },
+    { "id": "bank_receive", "concept": "upi_collect", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "a": "pin_to_receive" } },
+
+    { "id": "budget_needs", "concept": "needs_wants", "options": ["a", "b", "c"], "answer": "a" },
+    { "id": "budget_rule", "concept": "budgeting", "options": ["a", "b", "c"], "answer": "c" },
+    { "id": "budget_sale", "concept": "sales_tricks", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "a": "sale_means_saving" } },
+    { "id": "budget_first", "concept": "pay_yourself_first", "options": ["a", "b", "c"], "answer": "a", "misconceptions": { "b": "save_what_is_left" } },
+
+    { "id": "save_emergency", "concept": "emergency_fund", "options": ["a", "b", "c"], "answer": "b" },
+    { "id": "save_compound", "concept": "compound_interest", "options": ["a", "b", "c"], "answer": "c" },
+    { "id": "save_72", "concept": "rule_of_72", "options": ["a", "b", "c"], "answer": "a" },
+    { "id": "save_inflation", "concept": "inflation", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "a": "inflation_doesnt_matter" } },
+
+    { "id": "debt_total", "concept": "emi", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "a": "emi_is_the_only_cost" } },
+    { "id": "debt_minimum", "concept": "credit_card", "options": ["a", "b", "c"], "answer": "c", "misconceptions": { "a": "minimum_payment_ok" } },
+    { "id": "debt_score", "concept": "credit_score", "options": ["a", "b", "c"], "answer": "a" },
+    { "id": "debt_app", "concept": "loan_app_trap", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "a": "debt_is_free_money" } },
+
+    { "id": "inv_bond", "concept": "bonds", "options": ["a", "b", "c"], "answer": "a" },
+    { "id": "inv_diversify", "concept": "diversification", "options": ["a", "b", "c"], "answer": "c", "misconceptions": { "a": "one_stock_is_enough" } },
+    { "id": "inv_horizon", "concept": "time_horizon", "options": ["a", "b", "c"], "answer": "b" },
+    { "id": "inv_crash", "concept": "volatility", "options": ["a", "b", "c"], "answer": "a", "misconceptions": { "b": "panic_sell" } },
+    { "id": "inv_etf", "concept": "index_etf", "options": ["a", "b", "c"], "answer": "c" },
+    { "id": "inv_risk", "concept": "risk_return", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "c": "high_return_no_risk" } },
+
+    { "id": "safe_ponzi", "concept": "ponzi", "options": ["a", "b", "c"], "answer": "b", "misconceptions": { "a": "guaranteed_returns_real" } },
+    { "id": "safe_insurance", "concept": "insurance", "options": ["a", "b", "c"], "answer": "a", "misconceptions": { "c": "insurance_is_waste" } },
+    { "id": "safe_report", "concept": "fraud_recovery", "options": ["a", "b", "c"], "answer": "c" },
+    { "id": "safe_job", "concept": "job_scam", "options": ["a", "b", "c"], "answer": "a", "misconceptions": { "b": "pay_to_get_job" } },
+    { "id": "safe_real", "concept": "real_return", "options": ["a", "b", "c"], "answer": "b" }
+  ]
+}

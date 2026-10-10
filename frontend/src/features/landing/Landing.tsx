@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router';
 import { getSetting, listProfiles, loadActiveProfile, t, useActiveProfile } from '@/platform';
 import { LANDING_SCENE, PixelButton, STRIP_TREES, TileMap, VILLAGE_LEGEND } from '@/ui';
 
-type Door = '/village' | '/arcade';
+type Door = '/play' | '/arcade';
 
 export function Landing() {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export function Landing() {
             <PixelButton
               className="w-full flex-col items-start! gap-1 py-4 text-left"
               disabled={busy}
-              onClick={() => void enter('/village')}
+              onClick={() => void enter('/play')}
             >
               <span className="text-2xl">{t('landing.simulator.title')}</span>
               <span className="text-base font-normal">{t('landing.simulator.body')}</span>

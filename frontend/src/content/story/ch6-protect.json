@@ -1,0 +1,361 @@
+{
+  "prof_ch6": [
+    {
+      "once": "ch6_intro",
+      "do": [
+        {
+          "say": "story.c6.prof1",
+          "who": "professor"
+        },
+        {
+          "say": "story.c6.prof2",
+          "who": "professor"
+        },
+        {
+          "objective": "objective.ch6_investigate"
+        }
+      ]
+    },
+    {
+      "say": "story.c6.prof_hint",
+      "who": "professor"
+    }
+  ],
+  "jackpot": [
+    {
+      "if": "flag:jackpot_busted",
+      "then": [
+        {
+          "say": "story.c6.jackpot_closed"
+        },
+        {
+          "end": true
+        }
+      ]
+    },
+    {
+      "once": "jackpot_intro",
+      "do": [
+        {
+          "checkpoint": "checkpoint.jackpot"
+        },
+        {
+          "say": "story.c6.jackpot1",
+          "who": "jackpot"
+        },
+        {
+          "duel": "jackpot",
+          "win": [
+            {
+              "say": "story.c6.ponzi_think"
+            }
+          ],
+          "lose": [
+            {
+              "do": {
+                "type": "scamLoss",
+                "amount": 2000,
+                "reason": "ponzi:dhamaka"
+              }
+            },
+            {
+              "flag": "ponzi_in"
+            },
+            {
+              "say": "story.c6.ponzi_in",
+              "who": "jackpot"
+            }
+          ]
+        },
+        {
+          "concept": "too_good_to_be_true"
+        },
+        {
+          "concept": "ponzi"
+        },
+        {
+          "flag": "jackpot_seen"
+        },
+        {
+          "objective": "objective.ch6_report"
+        },
+        {
+          "end": true
+        }
+      ]
+    },
+    {
+      "say": "story.c6.jackpot_again",
+      "who": "jackpot"
+    }
+  ],
+  "insurer": [
+    {
+      "once": "insurer_intro",
+      "do": [
+        {
+          "say": "story.c6.ins1",
+          "who": "insurer"
+        },
+        {
+          "concept": "insurance"
+        },
+        {
+          "flag": "insurance_seen"
+        }
+      ]
+    },
+    {
+      "if": "insured",
+      "then": [
+        {
+          "say": "story.c6.ins_have",
+          "who": "insurer"
+        },
+        {
+          "end": true
+        }
+      ]
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.ins_buy",
+          "when": "account",
+          "log": {
+            "concept": "insurance",
+            "choice": "bought",
+            "correct": true
+          },
+          "do": [
+            {
+              "do": {
+                "type": "buyInsurance"
+              }
+            },
+            {
+              "say": "story.c6.ins_bought",
+              "who": "insurer"
+            }
+          ]
+        },
+        {
+          "label": "choice.ins_no",
+          "log": {
+            "concept": "insurance",
+            "choice": "declined",
+            "correct": false,
+            "misconception": "insurance_is_waste"
+          },
+          "do": [
+            {
+              "say": "story.c6.ins_no",
+              "who": "insurer"
+            }
+          ]
+        }
+      ],
+      "prompt": "story.c6.ins_q",
+      "who": "insurer"
+    }
+  ],
+  "fire": [
+    {
+      "say": "story.c6.fire1"
+    },
+    {
+      "if": "insured",
+      "then": [
+        {
+          "say": "story.c6.fire_insured"
+        }
+      ],
+      "else": [
+        {
+          "if": "flag:stall",
+          "then": [
+            {
+              "do": {
+                "type": "shock",
+                "amount": 4000,
+                "reason": "fire"
+              }
+            },
+            {
+              "say": "story.c6.fire_stall"
+            }
+          ],
+          "else": [
+            {
+              "do": {
+                "type": "shock",
+                "amount": 2000,
+                "reason": "fire"
+              }
+            },
+            {
+              "say": "story.c6.fire_uninsured"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "flag": "fire_done"
+    }
+  ],
+  "fatima": [
+    {
+      "once": "fatima_intro",
+      "do": [
+        {
+          "say": "story.c6.fatima1",
+          "who": "fatima"
+        },
+        {
+          "concept": "identity_protection"
+        },
+        {
+          "say": "story.c6.fatima2",
+          "who": "fatima"
+        },
+        {
+          "concept": "fraud_recovery"
+        }
+      ]
+    },
+    {
+      "if": "flag:jackpot_seen && !flag:jackpot_busted",
+      "then": [
+        {
+          "say": "story.c6.fatima_report",
+          "who": "fatima"
+        },
+        {
+          "flag": "jackpot_busted"
+        },
+        {
+          "if": "flag:ponzi_in",
+          "then": [
+            {
+              "say": "story.c6.fatima_refund",
+              "who": "fatima"
+            },
+            {
+              "do": {
+                "type": "gain",
+                "amount": 800,
+                "reason": "recovered"
+              }
+            }
+          ]
+        },
+        {
+          "say": "story.c6.kabir_lost"
+        }
+      ]
+    },
+    {
+      "if": "flag:jackpot_busted && !badge:shield",
+      "then": [
+        {
+          "say": "story.c6.fatima_challenge",
+          "who": "fatima"
+        },
+        {
+          "choice": [
+            {
+              "label": "choice.challenge_yes",
+              "do": [
+                {
+                  "quiz": [
+                    "safe_ponzi",
+                    "safe_insurance",
+                    "safe_report",
+                    "safe_job",
+                    "safe_real"
+                  ],
+                  "pass": 4,
+                  "then": [
+                    {
+                      "say": "story.c6.fatima_pass",
+                      "who": "fatima"
+                    },
+                    {
+                      "badge": "shield"
+                    },
+                    {
+                      "flag": "game_complete"
+                    },
+                    {
+                      "objective": "objective.end"
+                    }
+                  ],
+                  "else": [
+                    {
+                      "say": "story.c6.fatima_fail",
+                      "who": "fatima"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "choice.not_yet"
+            }
+          ],
+          "who": "fatima"
+        },
+        {
+          "end": true
+        }
+      ]
+    },
+    {
+      "if": "!flag:jackpot_seen",
+      "then": [
+        {
+          "say": "story.c6.fatima_hint",
+          "who": "fatima"
+        }
+      ]
+    },
+    {
+      "if": "badge:shield",
+      "then": [
+        {
+          "say": "story.c6.fatima_done",
+          "who": "fatima"
+        }
+      ]
+    }
+  ],
+  "prof_end": [
+    {
+      "once": "end_talk",
+      "do": [
+        {
+          "say": "story.end.prof1",
+          "who": "professor"
+        },
+        {
+          "concept": "income_tax"
+        },
+        {
+          "say": "story.end.prof2",
+          "who": "professor"
+        }
+      ]
+    },
+    {
+      "open": "year"
+    },
+    {
+      "open": "rival"
+    },
+    {
+      "say": "story.end.prof3",
+      "who": "professor"
+    }
+  ]
+}

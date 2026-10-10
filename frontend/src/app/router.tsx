@@ -7,8 +7,8 @@ import { createBrowserRouter, Navigate, useParams } from 'react-router';
 import { ArcadeHub } from '@/features/arcade';
 import { Landing } from '@/features/landing';
 import { BaselineFlow } from '@/features/onboarding';
+import { PaisapurGame } from '@/features/paisapur';
 import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
-import { VillageGame } from '@/features/village';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
 import { TileInspector } from './TileInspector';
@@ -27,7 +27,8 @@ export const router = createBrowserRouter([
   { path: '/', element: <Landing /> },
   { path: '/onboarding', element: <BaselineFlow /> },
   { path: '/arcade', element: <ArcadeHub /> },
-  { path: '/village', element: <VillageGame /> },
+  { path: '/play', element: <PaisapurGame /> },
+  { path: '/village', element: <Navigate to="/play" replace /> },
   { path: '/welcome', element: <WelcomeScreen /> },
   { path: '/setup', element: <SetupFlow /> },
   { path: '/who', element: <PlayerPicker /> },

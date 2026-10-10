@@ -1,5 +1,5 @@
 export { Tile, TileMap, type LegendEntry } from './Tiles';
-export { SHEETS, TINY_DUNGEON, TINY_TOWN, type SheetName, type TileSheet } from './sheets';
+export { RPG_URBAN, SHEETS, TINY_DUNGEON, TINY_TOWN, type SheetName, type TileSheet } from './sheets';
 export {
   HEROES,
   INTERIOR_LEGEND,

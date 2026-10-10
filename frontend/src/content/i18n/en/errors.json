@@ -1,0 +1,14 @@
+{
+  "not_enough": "You don't have enough money for that.",
+  "not_enough_cash": "You don't have that much cash.",
+  "not_enough_bank": "You don't have that much in the bank.",
+  "no_account": "You need a bank account first.",
+  "no_upi": "Set up UPI at the bank first.",
+  "min_500": "The minimum is ₹500.",
+  "min_100": "The minimum is ₹100.",
+  "bad_credit": "Your credit score is too low for a bank loan.",
+  "one_loan": "You already have a bank loan.",
+  "already": "You already have this.",
+  "worked": "You've already worked this month.",
+  "unknown": "That didn't work."
+}

@@ -1,0 +1,59 @@
+{
+  "id": "exchange",
+  "name": "maps.exchange",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWWWW",
+    "WMMMMWMMMMW",
+    "WFFFFFFFFFW",
+    "WCCCCFCCCCW",
+    "WFFFFFFFFFW",
+    "WnFFFFFFFnW",
+    "WFFFFFFFFFW",
+    "WWWWWEWWWWW"
+  ],
+  "entry": {
+    "x": 5,
+    "y": 6,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "ravi",
+      "sprite": "ravi",
+      "x": 2,
+      "y": 2,
+      "facing": "down",
+      "script": "ravi"
+    },
+    {
+      "id": "gold_clerk",
+      "sprite": "clerk",
+      "x": 8,
+      "y": 2,
+      "facing": "down",
+      "script": "goldclerk"
+    },
+    {
+      "id": "trader",
+      "sprite": "townsfolk_a",
+      "x": 6,
+      "y": 5,
+      "facing": "left",
+      "script": "townsfolk_trader"
+    }
+  ],
+  "objects": [
+    {
+      "x": 3,
+      "y": 1,
+      "script": "ticker"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "script": "ticker"
+    }
+  ],
+  "triggers": []
+}

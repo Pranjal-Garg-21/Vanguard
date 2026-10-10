@@ -24,7 +24,7 @@ npm run dev
 
 ### Tile art (one-time)
 
-The graphics are 2D tile sheets from Kenney's CC0 packs *Tiny Town* and *Tiny Dungeon*. The PNGs are not downloaded by `npm install`; fetch them once:
+The graphics are 2D tile sheets from Kenney's CC0 packs *Tiny Town*, *Tiny Dungeon* and *RPG Urban Pack*. The packed PNGs are committed in `frontend/public/assets/`; to re-fetch the first two:
 
 ```bash
 cd frontend
@@ -63,7 +63,8 @@ CI runs typecheck, lint, tests and build on every pull request.
 | `/onboarding` | Starting-point questions (what you know, your status, your goals), asked once per player |
 | `/who` | Player picker on a shared phone |
 | `/join/ABC123` | Link inside the class QR; opens setup with the code filled in |
-| `/village` | The playable simulator: walk with arrow keys (or the on-screen pad), enter shops, talk at the counter |
+| `/play` | **Paisapur**, the main game: a top-down money RPG (arrow keys/WASD, Z = talk, X = back, M = menu; touch pad on phones) |
+| `/village` | Old link; redirects to `/play` |
 | `/home` | Temporary student home (P2 replaces it) |
 | `/arcade` | Temporary minigame menu (P4 replaces it) |
 | `/facilitator` | Facilitator login, classes, plan, insights |
@@ -73,6 +74,7 @@ CI runs typecheck, lint, tests and build on every pull request.
 ## Documents
 
 - [TEAM_GUIDE.md](TEAM_GUIDE.md): **start here**, everything built so far and how to add your work
+- [GAME_DESIGN.md](GAME_DESIGN.md): the main game, *Paisapur*: story, world, systems
 - [Implementation.md](Implementation.md): product and design spec
 - [work_division.md](work_division.md): who builds what
 - [REPO_STRUCTURE.md](REPO_STRUCTURE.md): code layout and rules

@@ -1,0 +1,32 @@
+{
+  "title": "What-If Machine",
+  "intro": "Pick a big decision and go back to it. Same world, same luck: only your choice changes. The life you leave is kept, so you can compare or come back.",
+  "this_life": "This life",
+  "other_life": "Other life",
+  "compare_title": "Your two lives, side by side",
+  "compare_note": "The other life is where you were before you rewound ({label}).",
+  "switch": "Switch to the other life",
+  "checkpoints": "Big decisions you can revisit",
+  "none": "No big decisions yet. Live a little first!",
+  "when": "Month {month} · Chapter {chapter}",
+  "rewind": "Go back",
+  "go": "Rewind",
+  "confirm": "Your current life is kept as the \"other life\". You'll replay this moment and can choose differently.",
+  "metric": {
+    "worth": "Net worth",
+    "savings": "Savings",
+    "debt": "Debt",
+    "scams": "Lost to scams",
+    "peace": "Peace of mind",
+    "goal": "Goals reached",
+    "badges": "Badges"
+  },
+  "why": {
+    "scams": "{better} lost ₹{amount} less to scams.",
+    "debt": "{better} owes ₹{amount} less.",
+    "savings": "{better} has ₹{amount} more saved for a rainy day.",
+    "peace": "{better} sleeps better: {amount} points more peace of mind.",
+    "worth": "Overall, {better} is ₹{amount} better off.",
+    "same": "So far, the two lives are about the same."
+  }
+}

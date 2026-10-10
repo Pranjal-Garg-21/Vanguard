@@ -1,0 +1,147 @@
+{
+  "duels": [
+    {
+      "id": "kyc_sms",
+      "foe": "phone",
+      "concept": "phishing",
+      "stake": 500,
+      "rounds": [
+        { "tactic": "urgency", "options": [
+          { "id": "a", "effect": "fall" },
+          { "id": "b", "effect": "counter" },
+          { "id": "c", "effect": "dodge" }
+        ]},
+        { "tactic": "fake_link", "options": [
+          { "id": "a", "effect": "counter" },
+          { "id": "b", "effect": "fall" },
+          { "id": "c", "effect": "dodge" }
+        ]},
+        { "tactic": "ask_otp", "options": [
+          { "id": "a", "effect": "dodge" },
+          { "id": "b", "effect": "fall" },
+          { "id": "c", "effect": "counter" }
+        ]}
+      ]
+    },
+    {
+      "id": "qr_buyer",
+      "foe": "shady",
+      "concept": "upi_collect",
+      "stake": 800,
+      "rounds": [
+        { "tactic": "friendly", "options": [
+          { "id": "a", "effect": "dodge" },
+          { "id": "b", "effect": "counter" },
+          { "id": "c", "effect": "fall" }
+        ]},
+        { "tactic": "scan_to_receive", "options": [
+          { "id": "a", "effect": "fall" },
+          { "id": "b", "effect": "dodge" },
+          { "id": "c", "effect": "counter" }
+        ]},
+        { "tactic": "ask_pin", "options": [
+          { "id": "a", "effect": "counter" },
+          { "id": "b", "effect": "fall" },
+          { "id": "c", "effect": "dodge" }
+        ]}
+      ]
+    },
+    {
+      "id": "job_task",
+      "foe": "phone",
+      "concept": "job_scam",
+      "stake": 500,
+      "rounds": [
+        { "tactic": "greed", "options": [
+          { "id": "a", "effect": "counter" },
+          { "id": "b", "effect": "fall" },
+          { "id": "c", "effect": "dodge" }
+        ]},
+        { "tactic": "social_proof", "options": [
+          { "id": "a", "effect": "dodge" },
+          { "id": "b", "effect": "counter" },
+          { "id": "c", "effect": "fall" }
+        ]},
+        { "tactic": "fee", "options": [
+          { "id": "a", "effect": "fall" },
+          { "id": "b", "effect": "dodge" },
+          { "id": "c", "effect": "counter" }
+        ]}
+      ]
+    },
+    {
+      "id": "bank_call",
+      "foe": "caller",
+      "concept": "impersonation",
+      "stake": 1000,
+      "rounds": [
+        { "tactic": "fear", "options": [
+          { "id": "a", "effect": "fall" },
+          { "id": "b", "effect": "counter" },
+          { "id": "c", "effect": "dodge" }
+        ]},
+        { "tactic": "authority", "options": [
+          { "id": "a", "effect": "counter" },
+          { "id": "b", "effect": "dodge" },
+          { "id": "c", "effect": "fall" }
+        ]},
+        { "tactic": "ask_otp", "options": [
+          { "id": "a", "effect": "dodge" },
+          { "id": "b", "effect": "fall" },
+          { "id": "c", "effect": "counter" }
+        ]}
+      ]
+    },
+    {
+      "id": "loan_app",
+      "foe": "shady",
+      "concept": "loan_app_trap",
+      "stake": 5000,
+      "rounds": [
+        { "tactic": "instant", "options": [
+          { "id": "a", "effect": "dodge" },
+          { "id": "b", "effect": "counter" },
+          { "id": "c", "effect": "fall" }
+        ]},
+        { "tactic": "no_checks", "options": [
+          { "id": "a", "effect": "counter" },
+          { "id": "b", "effect": "fall" },
+          { "id": "c", "effect": "dodge" }
+        ]},
+        { "tactic": "permissions", "options": [
+          { "id": "a", "effect": "fall" },
+          { "id": "b", "effect": "dodge" },
+          { "id": "c", "effect": "counter" }
+        ]}
+      ]
+    },
+    {
+      "id": "jackpot",
+      "foe": "jackpot",
+      "concept": "ponzi",
+      "stake": 2000,
+      "rounds": [
+        { "tactic": "guarantee", "options": [
+          { "id": "a", "effect": "counter" },
+          { "id": "b", "effect": "fall" },
+          { "id": "c", "effect": "dodge" }
+        ]},
+        { "tactic": "social_proof", "options": [
+          { "id": "a", "effect": "dodge" },
+          { "id": "b", "effect": "counter" },
+          { "id": "c", "effect": "fall" }
+        ]},
+        { "tactic": "scarcity", "options": [
+          { "id": "a", "effect": "fall" },
+          { "id": "b", "effect": "dodge" },
+          { "id": "c", "effect": "counter" }
+        ]},
+        { "tactic": "recruit", "options": [
+          { "id": "a", "effect": "counter" },
+          { "id": "b", "effect": "dodge" },
+          { "id": "c", "effect": "fall" }
+        ]}
+      ]
+    }
+  ]
+}

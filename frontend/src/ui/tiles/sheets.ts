@@ -16,5 +16,8 @@ export const TINY_TOWN: TileSheet = { url: '/assets/tiny-town/tilemap.png', colu
 
 export const TINY_DUNGEON: TileSheet = { url: '/assets/tiny-dungeon/tilemap.png', columns: 12, rows: 11 };
 
-export const SHEETS = { 'tiny-town': TINY_TOWN, 'tiny-dungeon': TINY_DUNGEON } as const;
+/** Modern town: characters with 4-direction walk frames, street props, shop stalls. 27×18 tiles. */
+export const RPG_URBAN: TileSheet = { url: '/assets/rpg-urban/tilemap.png', columns: 27, rows: 18 };
+
+export const SHEETS = { 'tiny-town': TINY_TOWN, 'tiny-dungeon': TINY_DUNGEON, 'rpg-urban': RPG_URBAN } as const;
 export type SheetName = keyof typeof SHEETS;

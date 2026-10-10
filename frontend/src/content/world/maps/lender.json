@@ -1,0 +1,31 @@
+{
+  "id": "lender",
+  "name": "maps.lender",
+  "interior": true,
+  "rows": [
+    "wwwwwwwww",
+    "wSffffSSw",
+    "wfffffffw",
+    "wffcccffw",
+    "wfffffffw",
+    "wNfffffNw",
+    "wwwwewwww"
+  ],
+  "entry": {
+    "x": 4,
+    "y": 5,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "lender",
+      "sprite": "lender",
+      "x": 4,
+      "y": 2,
+      "facing": "down",
+      "script": "lender"
+    }
+  ],
+  "objects": [],
+  "triggers": []
+}

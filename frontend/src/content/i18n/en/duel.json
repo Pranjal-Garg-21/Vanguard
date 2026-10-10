@@ -1,0 +1,187 @@
+{
+  "ui": {
+    "appears": "A wild {foe} appears!",
+    "pressure": "PRESSURE",
+    "shields": "SAFETY",
+    "used": "{foe} used {tactic}!",
+    "what_do": "What will you do?",
+    "counter": "You spotted the tell! It's super effective!",
+    "dodge": "Not quite. {foe} pushes harder… (−1 safety)",
+    "fall": "You fell for it! (−2 safety)",
+    "win": "{foe} gives up and disappears!",
+    "lose": "{foe} got what they wanted…",
+    "tells": "Tells you spotted",
+    "continue": "Continue",
+    "stake": "At stake: {amount}"
+  },
+  "foe": {
+    "phone": "Scam message",
+    "shady": "Smooth stranger",
+    "caller": "Fake bank officer",
+    "jackpot": "Mr. Jackpot"
+  },
+  "tactic": {
+    "urgency": "URGENCY",
+    "fake_link": "FAKE LINK",
+    "ask_otp": "ASK FOR OTP",
+    "friendly": "FRIENDLY CHAT",
+    "scan_to_receive": "SCAN TO RECEIVE",
+    "ask_pin": "ASK FOR PIN",
+    "greed": "EASY MONEY",
+    "social_proof": "EVERYONE'S DOING IT",
+    "fee": "PAY TO START",
+    "fear": "FEAR",
+    "authority": "FAKE AUTHORITY",
+    "instant": "INSTANT MONEY",
+    "no_checks": "NO QUESTIONS ASKED",
+    "permissions": "GIVE ME ACCESS",
+    "guarantee": "GUARANTEED RETURNS",
+    "scarcity": "LAST CHANCE",
+    "recruit": "BRING YOUR FRIENDS"
+  },
+  "tell": {
+    "urgency": "Urgency: real banks give you time.",
+    "fake_link": "Links in SMS: banks never send them for KYC.",
+    "ask_otp": "OTP request: nobody genuine ever needs it.",
+    "friendly": "Too friendly, too fast: a stranger in a hurry.",
+    "scan_to_receive": "\"Scan to receive\": scanning is for paying.",
+    "ask_pin": "PIN to receive: a PIN only ever sends money.",
+    "greed": "Pay that's too good for the work.",
+    "social_proof": "\"Everyone earned\": fake proof is easy to make.",
+    "fee": "Pay-to-join: real jobs pay you.",
+    "fear": "Fear: panic makes you act before you think.",
+    "authority": "Fake authority: names and IDs are easy to invent.",
+    "instant": "Instant money with no questions has a hidden price.",
+    "no_checks": "No checks means no rules protecting you.",
+    "permissions": "Contact and photo access is used for harassment.",
+    "guarantee": "Guaranteed high returns don't exist.",
+    "scarcity": "\"Last chance tonight\": pressure to stop you thinking.",
+    "recruit": "Recruitment bonuses: new money pays old members."
+  },
+  "kyc_sms": {
+    "urgency": {
+      "line": "\"Dear customer, your account will be BLOCKED in 2 HOURS!\"",
+      "a": "Panic and act fast",
+      "b": "Real banks don't threaten by SMS. Stay calm.",
+      "c": "Reply \"why?\" to the number"
+    },
+    "fake_link": {
+      "line": "\"Update your KYC now at bit.ly/pspb-kyc\"",
+      "a": "Don't tap. I'll use the official app or branch.",
+      "b": "Tap the link and fill the form",
+      "c": "Forward it to a friend to check"
+    },
+    "ask_otp": {
+      "line": "\"Enter the OTP you just received to complete KYC.\"",
+      "a": "Ignore it and hope it stops",
+      "b": "Type in the OTP",
+      "c": "Never share an OTP. Delete and report the SMS."
+    }
+  },
+  "qr_buyer": {
+    "friendly": {
+      "line": "\"Hey friend! I LOVE your old cycle. ₹1,500, deal? I'm in a hurry!\"",
+      "a": "Sure, let's be quick",
+      "b": "Slow down. How will you pay me?",
+      "c": "Whatever you say, boss!"
+    },
+    "scan_to_receive": {
+      "line": "\"I'm sending a QR code. Scan it to RECEIVE your ₹1,500!\"",
+      "a": "Scan it",
+      "b": "Ask him to send cash instead",
+      "c": "I never scan to receive. Send it to my UPI ID."
+    },
+    "ask_pin": {
+      "line": "\"Arre, just enter your PIN, then the money comes in!\"",
+      "a": "A PIN only sends money. No deal.",
+      "b": "Enter the PIN",
+      "c": "Enter a wrong PIN to be safe"
+    }
+  },
+  "job_task": {
+    "greed": {
+      "line": "\"PART-TIME JOB! ₹5,000 a day just for liking videos!\"",
+      "a": "That's far too much pay for that work.",
+      "b": "Sign me up!",
+      "c": "Ask for more details"
+    },
+    "social_proof": {
+      "line": "\"Look at these screenshots: 400 students earned today!\"",
+      "a": "Ask Kabir if he's heard of it",
+      "b": "Screenshots are easy to fake.",
+      "c": "Wow, they look real. I'm in!"
+    },
+    "fee": {
+      "line": "\"Pay ₹500 registration to unlock your first task!\"",
+      "a": "Pay the ₹500",
+      "b": "Negotiate to ₹200",
+      "c": "Real jobs pay me. Block and report."
+    }
+  },
+  "bank_call": {
+    "fear": {
+      "line": "\"Someone is using your card RIGHT NOW! You'll lose everything!\"",
+      "a": "Oh no! What do I do?!",
+      "b": "Take a breath. Panic is what scammers want.",
+      "c": "Put the phone on speaker"
+    },
+    "authority": {
+      "line": "\"I'm Officer Sharma, Paisapur Bank fraud team, employee ID 4471.\"",
+      "a": "Anyone can say that. I'll call the bank myself.",
+      "b": "Ask for his branch address",
+      "c": "An ID number! He must be real."
+    },
+    "ask_otp": {
+      "line": "\"Read me the OTP we just sent, so I can block the card.\"",
+      "a": "Say you'll call back later",
+      "b": "Read out the OTP",
+      "c": "Hang up and call the number on my card."
+    }
+  },
+  "loan_app": {
+    "instant": {
+      "line": "\"₹5,000 in your account in 5 minutes! Instantly!\"",
+      "a": "Ask how fast exactly",
+      "b": "Instant money usually hides a huge cost.",
+      "c": "Great, I need it now!"
+    },
+    "no_checks": {
+      "line": "\"No documents, no credit check, no questions!\"",
+      "a": "A real lender follows rules. Is this one registered?",
+      "b": "No paperwork, perfect!",
+      "c": "Ask if they need a photo"
+    },
+    "permissions": {
+      "line": "\"Just allow access to your contacts and photos. Formality!\"",
+      "a": "Allow everything",
+      "b": "Allow only photos",
+      "c": "No app needs my contacts to lend. Walk away."
+    }
+  },
+  "jackpot": {
+    "guarantee": {
+      "line": "\"Put in ₹2,000, get ₹4,000 in 30 days. GUARANTEED!\"",
+      "a": "Nothing honest guarantees doubling. Where do returns come from?",
+      "b": "Guaranteed? I'm in!",
+      "c": "Can I start with ₹1,000?"
+    },
+    "social_proof": {
+      "line": "\"Half of Paisapur has joined! Even your friend Kabir!\"",
+      "a": "Ask how many people joined",
+      "b": "Early members get paid with new members' money.",
+      "c": "If Kabir joined, it must be fine!"
+    },
+    "scarcity": {
+      "line": "\"Offer closes TONIGHT. Decide now or miss out forever!\"",
+      "a": "Quick, before it closes!",
+      "b": "Ask if it might reopen",
+      "c": "A real investment won't vanish overnight. No."
+    },
+    "recruit": {
+      "line": "\"Bring three friends and get a ₹1,000 bonus each!\"",
+      "a": "Bonuses for recruiting: that's a pyramid. I'm reporting this.",
+      "b": "Tell him you'll think about it",
+      "c": "Text all my friends"
+    }
+  }
+}

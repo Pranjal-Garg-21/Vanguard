@@ -1,0 +1,119 @@
+{
+  "items": [
+    {
+      "id": "bus_pass",
+      "shop": "zaroorat",
+      "kind": "need",
+      "price": 200,
+      "gst": 0,
+      "monthly": true
+    },
+    {
+      "id": "recharge",
+      "shop": "zaroorat",
+      "kind": "need",
+      "price": 150,
+      "gst": 18,
+      "monthly": true
+    },
+    {
+      "id": "notebooks",
+      "shop": "zaroorat",
+      "kind": "need",
+      "price": 120,
+      "gst": 0,
+      "monthly": true
+    },
+    {
+      "id": "groceries",
+      "shop": "zaroorat",
+      "kind": "need",
+      "price": 300,
+      "gst": 5,
+      "monthly": true
+    },
+    {
+      "id": "mess_fee",
+      "shop": "zaroorat",
+      "kind": "need",
+      "price": 600,
+      "gst": 5,
+      "monthly": true,
+      "stage": "college"
+    },
+    {
+      "id": "soap",
+      "shop": "zaroorat",
+      "kind": "need",
+      "price": 60,
+      "gst": 5
+    },
+    {
+      "id": "fruit",
+      "shop": "zaroorat",
+      "kind": "need",
+      "price": 80,
+      "gst": 0
+    },
+    {
+      "id": "chai",
+      "shop": "zaroorat",
+      "kind": "want",
+      "price": 20,
+      "gst": 5,
+      "joy": 1
+    },
+    {
+      "id": "sneakers",
+      "shop": "shauq",
+      "kind": "want",
+      "price": 1800,
+      "was": 3600,
+      "gst": 5,
+      "joy": 8,
+      "keep": true
+    },
+    {
+      "id": "game_topup",
+      "shop": "shauq",
+      "kind": "want",
+      "price": 299,
+      "gst": 18,
+      "joy": 4
+    },
+    {
+      "id": "headphones",
+      "shop": "shauq",
+      "kind": "want",
+      "price": 1200,
+      "gst": 18,
+      "joy": 6,
+      "keep": true
+    },
+    {
+      "id": "movie",
+      "shop": "shauq",
+      "kind": "want",
+      "price": 250,
+      "gst": 18,
+      "joy": 5
+    },
+    {
+      "id": "snacks",
+      "shop": "shauq",
+      "kind": "want",
+      "price": 60,
+      "gst": 5,
+      "joy": 2
+    },
+    {
+      "id": "poster",
+      "shop": "shauq",
+      "kind": "want",
+      "price": 150,
+      "gst": 18,
+      "joy": 2,
+      "keep": true
+    }
+  ]
+}
