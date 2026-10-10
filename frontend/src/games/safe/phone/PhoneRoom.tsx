@@ -3,7 +3,7 @@
  * Both verbs (Judge, Act in-situ) are thin wrappers over this.
  */
 import { useState } from 'react';
-import { t } from '@/platform';
+import { t, useAccessibility } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
 import { Button, Icon } from '@/ui';
 import { runMeta, scoreRun, type RunMeta } from './logic/scoring';
@@ -39,7 +39,9 @@ export function PhoneRoom({ script, mode = 'arcade', timersOff = false, embedded
 function Attempt({ script, mode, timersOff, embedded, top, collected, onComplete, onRetry }: Omit<Required<PhoneRoomProps>, 'top' | 'collected'> & { top?: React.ReactNode; collected?: string[]; onRetry: () => void }) {
   const [phase, setPhase] = useState<Phase>(embedded ? 'play' : 'brief');
   const [lensOn, setLensOn] = useState(false);
-  const { state, dispatch } = usePhoneRun(script, { timersOff, paused: phase !== 'play' });
+  // The student's "No timers" setting applies to every room, wherever it is launched from.
+  const a11y = useAccessibility();
+  const { state, dispatch } = usePhoneRun(script, { timersOff: timersOff || a11y.timersOff, paused: phase !== 'play' });
 
 
   if (phase === 'brief') {

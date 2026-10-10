@@ -10,6 +10,7 @@ export * from './telemetry';
 export * from './sync';
 export * from './i18n';
 export * from './classes';
+export * from './a11y';
 export { getSupabase, isSupabaseConfigured } from './supabase/client';
 export type { Accessibility, Profile } from './storage/db';
 export type { GameEvent, GameEventInput, GameMode, StageId } from '@shared/telemetry/event.ts';

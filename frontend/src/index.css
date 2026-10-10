@@ -95,6 +95,21 @@
   }
 }
 
+/* The student's own settings from setup (see platform/a11y). */
+html[data-reduce-motion='true'] *,
+html[data-reduce-motion='true'] *::before,
+html[data-reduce-motion='true'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Bigger text: every size is in rem, so growing the root grows the whole app. */
+html[data-large-text='true'] {
+  font-size: 125%;
+}
+
 /* Right half of a room: a dark "device" stage the phone sits on, like a virtual desktop. */
 .device-stage {
   background-color: #10182b;

@@ -5,23 +5,26 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import {
+  applyAccessibility,
   checkClassCode,
   createProfile,
+  DEFAULT_ACCESSIBILITY,
   JOIN_CODE_LENGTH,
   normaliseJoinCode,
   t,
   type Accessibility,
   type ClassCheck,
   type Language,
+  useActiveProfile,
 } from '@/platform';
 import { Button, Icon, Notice } from '@/ui';
 import { PicturePin } from './components/PicturePin';
 import { StudentScreen } from './components/StudentScreen';
 import { AVATARS, LANGUAGES } from './pictures';
+import { Avatar } from './components/Avatar';
 
 const STEPS = ['language', 'a11y', 'class', 'avatar', 'pin', 'confirm', 'done'] as const;
 type Step = (typeof STEPS)[number];
-import { Avatar } from './components/Avatar';
 
 const A11Y_OPTIONS: { key: keyof Accessibility }[] = [{ key: 'audio' }, { key: 'largeText' }, { key: 'reduceMotion' }, { key: 'timersOff' }];
 
@@ -33,6 +36,9 @@ export function SetupFlow() {
   const [step, setStep] = useState<Step>('language');
   const [language, setLanguage] = useState<Language>('en');
   const [a11y, setA11y] = useState<Accessibility>({ audio: false, largeText: false, reduceMotion: false, timersOff: false });
+
+  // Leaving setup puts the page back to the signed-in player's own settings (or the defaults).
+  useEffect(() => () => applyAccessibility(useActiveProfile.getState().profile?.a11y ?? DEFAULT_ACCESSIBILITY), []);
   const [classCode, setClassCode] = useState(codeFromLink);
   const [classCheck, setClassCheck] = useState<ClassCheck | 'checking' | null>(null);
   const [avatarId, setAvatarId] = useState<string>(AVATARS[0].id);
@@ -144,7 +150,11 @@ export function SetupFlow() {
                   type="checkbox"
                   className="h-6 w-6 accent-brand"
                   checked={a11y[key]}
-                  onChange={(e) => setA11y({ ...a11y, [key]: e.target.checked })}
+                  onChange={(e) => {
+                    const next = { ...a11y, [key]: e.target.checked };
+                    setA11y(next);
+                    applyAccessibility(next); // preview bigger text or less movement right away
+                  }}
                 />
               </label>
             ))}

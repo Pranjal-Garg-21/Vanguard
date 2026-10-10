@@ -235,3 +235,20 @@ describe('reading feedback before moving on', () => {
     expect(run(s, { type: 'continue' })).toEqual(s);
   });
 });
+
+describe('timers can be turned off while a run is in progress', () => {
+  const collect = collectRequestVariant(collectTemplate as unknown as Scenario, 1, 3400);
+  it('stops an expiry that has not happened yet, and never fails afterwards', () => {
+    let s = run(createRun(collect), { type: 'tick', ms: 800 }, { type: 'act', surface: 'chat', action: 'wait' }, { type: 'tick', ms: 3000 });
+    expect(s.open).toBe('request');
+    s = run(s, { type: 'timers', off: true }, { type: 'tick', ms: 600000 });
+    expect(s.acted.request).toBeUndefined();
+    expect(s.ended).toBe(false);
+  });
+
+  it('turning timers on again lets them run', () => {
+    let s = run(createRun(collect, { timersOff: true }), { type: 'tick', ms: 800 }, { type: 'act', surface: 'chat', action: 'wait' }, { type: 'tick', ms: 3000 });
+    s = run(s, { type: 'timers', off: false }, { type: 'tick', ms: 20000 });
+    expect(s.acted.request).toBe('expire');
+  });
+});

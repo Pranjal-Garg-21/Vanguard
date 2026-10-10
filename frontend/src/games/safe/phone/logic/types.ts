@@ -160,6 +160,7 @@ export type RunState = {
 
 export type RunAction =
   | { type: 'tick'; ms: number }
+  | { type: 'timers'; off: boolean }
   | { type: 'continue' }
   | { type: 'open'; surface: string }
   | { type: 'close' }
