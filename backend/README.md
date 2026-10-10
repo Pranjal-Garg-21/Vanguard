@@ -1,0 +1,76 @@
+# backend
+
+The cloud side of PaisaPath, on Supabase. Owner: P5.
+
+```
+backend/supabase/
+├── config.toml                 Local Supabase settings
+├── migrations/                 Database tables and access rules, applied in order
+├── functions/
+│   └── ingest/                 Receives event batches from student phones
+└── seed.sql                    Local demo data
+```
+
+Students never touch the database directly. Their phones call the `ingest` function, which checks the class code and writes with the service role. Facilitators log in, and row-level security shows them only their own classes.
+
+## Connect to the hosted project
+
+1. Get the project from Supabase: **Project Settings → API** gives the project URL, the anon (or publishable) key and the service_role (or secret) key.
+2. **Frontend keys:** copy `frontend/.env.example` to `frontend/.env.local` and fill in the URL and anon key.
+3. **Link the CLI** (from this folder):
+   ```bash
+   npx supabase login
+   npx supabase link --project-ref <your-project-ref>
+   ```
+4. **Create the tables**, either with the CLI:
+   ```bash
+   npx supabase db push
+   ```
+   or by hand in the dashboard's **SQL Editor**: open each file in `supabase/migrations/`, paste it and click **Run**, **in filename order**:
+   1. `20261010000000_init.sql`: all tables, join-code generator, row-level security
+   2. `20261010000001_check_join_code.sql`: lets the student app check a class code
+
+   Run each file only once. Later migrations get higher numbers; run only the new ones.
+5. **Deploy the function:**
+   ```bash
+   npx supabase functions deploy ingest
+   ```
+
+Where each key goes:
+
+| Key | Where | Safe in the browser? |
+|---|---|---|
+| Project URL | `frontend/.env.local` → `VITE_SUPABASE_URL` | Yes |
+| anon / publishable key | `frontend/.env.local` → `VITE_SUPABASE_ANON_KEY` | Yes (RLS protects data) |
+| service_role / secret key | `backend/.env` → `SUPABASE_SECRET_KEY`, for admin scripts only. Edge functions get it from Supabase automatically | **No, never** |
+| Database password | `backend/.env` → `SUPABASE_DB_PASSWORD` | **No** |
+| CLI access token (optional) | `backend/.env` → `SUPABASE_ACCESS_TOKEN` | **No** |
+
+`backend/.env` is git-ignored; `backend/.env.example` is the committed template. To make the CLI use these values, load them first: `set -a; source .env; set +a`.
+
+## Run locally (optional, needs Docker)
+
+```bash
+npx supabase start       # local Postgres, auth and functions
+npx supabase db reset    # re-applies migrations and seed.sql
+npx supabase functions serve ingest
+```
+
+`supabase start` prints a local URL and anon key; put them in `frontend/.env.local` to develop against the local stack.
+
+## Adding a facilitator
+
+There are no shared logins and no passwords. Each facilitator signs in with their own email and receives a sign-in link (or code). Only registered emails can sign in.
+
+1. **Authentication → Users → Add user → Send invitation** (or "Create new user"), with their email.
+2. In the **SQL Editor**, register them as a facilitator:
+   ```sql
+   insert into public.facilitators (id, display_name)
+   select id, 'Their name' from auth.users where email = 'them@example.com';
+   ```
+3. They open `/facilitator`, enter their email and click the link in the email.
+
+Settings to check once on the hosted project:
+- **Authentication → Sign In / Providers:** turn off **Allow new users to sign up** (public sign-up is already off locally in `config.toml`).
+- **Authentication → URL Configuration:** add `http://localhost:5173/**` (and your deployed URL later) to **Redirect URLs**, so the email link returns to the app.
+- To get a 6-digit code in the email as well as the link, add `{{ .Token }}` to the **Magic Link** email template.

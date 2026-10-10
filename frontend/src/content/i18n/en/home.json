@@ -1,0 +1,24 @@
+{
+  "greeting": "Hi {name}",
+  "switchPlayer": "Switch player",
+  "comingSoon": "Coming soon",
+  "lifepath": {
+    "title": "Your LifePath",
+    "body": "Live a character’s money life, month by month, from opening a bank account to investing."
+  },
+  "arcade": { "title": "Arcade", "body": "Quick games on everyday money, staying safe and investing." },
+  "quickplay": { "title": "Quick Play", "body": "One situation, two choices. See what happens." },
+  "progress": { "title": "Your progress", "body": "What you’ve learned and badges you’ve earned." },
+  "help": {
+    "title": "Lost money to a scam?",
+    "body": "Call 1930 (cybercrime helpline) and tell your bank right away."
+  },
+  "sync": {
+    "disabled": "Saved on this phone",
+    "offline": "Offline · saved on this phone",
+    "pending": "{count} to sync",
+    "syncing": "Syncing…",
+    "synced": "All synced",
+    "error": "Sync failed, will retry"
+  }
+}
