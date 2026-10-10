@@ -39,12 +39,9 @@ export function MarketTable({
               <div className="space-y-0.5">
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="text-lg font-bold">{t(r.company.nameKey)}</h3>
-                  <Badge>{r.company.ticker}</Badge>
                   {r.failed && <Badge tone="bad">{t('stockmarket.shut')}</Badge>}
                 </div>
-                <p className="text-sm text-ink-soft">
-                  {t(r.company.taglineKey)} <span className="text-muted">· {t(`stockmarket.sector.${r.company.sector}`)}</span>
-                </p>
+                <p className="text-sm text-ink-soft">{t(r.company.taglineKey)}</p>
               </div>
 
               <div className="flex items-center gap-3">

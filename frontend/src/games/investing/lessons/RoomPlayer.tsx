@@ -14,7 +14,7 @@ import { rooms } from './logic/content';
 import { roomPoints, roomQuestions, type ProgressMap } from './logic/room';
 import type { Room } from './logic/types';
 import { PredictStep } from './PredictStep';
-import { QuestionRow } from './RoomQuestions';
+import { QuestionFlow } from './QuestionFlow';
 import { useQuestionRunner } from './useQuestionRunner';
 
 export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initial?: ProgressMap; onChange?: (answers: ProgressMap) => void }) {
@@ -142,18 +142,11 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
 
               <div className="space-y-4">
                 <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('investui.room.answerBelow')}</h3>
-                {task.questions.map((q) => (
-                  <QuestionRow
-                    key={q.id}
-                    q={q}
-                    ctx={ctx}
-                    state={stateOf(q)}
-                    onSubmitNumber={(v) => submitNumber(q, v)}
-                    onPickOption={(id) => pickOption(q, id)}
-                    onHint={() => toggleHint(q)}
-                    onReveal={() => reveal(q)}
-                  />
-                ))}
+                <QuestionFlow
+                  questions={task.questions}
+                  ctx={ctx}
+                  h={{ stateOf, isDone, submitNumber, pickOption, toggleHint, reveal }}
+                />
               </div>
             </div>
 

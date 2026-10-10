@@ -9,7 +9,6 @@ import { MIX_IDS } from './logic/mix';
 export function PathsGuide() {
   return (
     <Card className="space-y-3">
-      <h2 className="font-bold">{t('timemachine.paths.title')}</h2>
       <p className="text-sm text-ink-soft">{t('timemachine.paths.intro')}</p>
       <ul className="space-y-2">
         {MIX_IDS.map((id) => {

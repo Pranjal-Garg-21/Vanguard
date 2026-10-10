@@ -9,4 +9,5 @@ export { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from 
 export { FanChart, type FanChartProps } from './FanChart';
 export { CheckIcon, ChevronIcon } from './icons';
 export { RangeDisplay, type RangeDisplayProps } from './RangeDisplay';
+export { Pager, type PagerPage } from './Pager';
 export { SimBanner } from './SimBanner';

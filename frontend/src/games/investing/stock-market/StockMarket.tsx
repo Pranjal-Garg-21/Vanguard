@@ -140,9 +140,7 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
           <ul className="list-disc space-y-1 ps-5 text-ink">
             <li>{t('stockmarket.intro.1')}</li>
             <li>{t('stockmarket.intro.2', { fee: feeText })}</li>
-            <li>{t('stockmarket.intro.3')}</li>
             <li>{t('stockmarket.intro.5')}</li>
-            <li>{t('stockmarket.intro.4')}</li>
           </ul>
           <Button size="lg" onClick={() => setPhase('play')}>
             {t('stockmarket.intro.start')}
@@ -175,6 +173,7 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
                 <span className="text-sm text-muted">{t('stockmarket.title')}</span>
               </div>
               <ProgressBar value={(round - 1) / config.rounds} />
+              <p className="text-lg text-ink-soft">{t('stockmarket.todo')}</p>
             </div>
 
             {/* On a phone the money panel sits lower down, so keep the numbers that matter in view. */}

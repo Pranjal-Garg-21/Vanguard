@@ -2,14 +2,14 @@
 import { assumptions, formatRupees, months, type FundPlan } from '@/core/market';
 import { LabSlider } from '@/games/investing/lessons/widgets/controls';
 import { t } from '@/platform';
-import { Button, Card } from '@/ui';
+import { Card } from '@/ui';
 import raw from '@/content/scenarios/invest/mutual_fund.json';
 
 const LIMITS = (raw as { plan: Record<'lump' | 'sip', { min: number; max: number; step: number; default: number }> & { years: { min: number; max: number; default: number } } }).plan;
 
 export const defaultPlan = (method: FundPlan['method']): FundPlan => ({ method, amount: LIMITS[method].default, years: LIMITS.years.default });
 
-export function PlanStep({ fundId, plan, onChange, onRun, onBack, ran }: { fundId: string; plan: FundPlan; onChange: (p: FundPlan) => void; onRun: () => void; onBack: () => void; ran: boolean }) {
+export function PlanStep({ fundId, plan, onChange }: { fundId: string; plan: FundPlan; onChange: (p: FundPlan) => void }) {
   const lim = LIMITS[plan.method];
   const total = plan.method === 'sip' ? plan.amount * months(plan) : plan.amount;
 
@@ -39,16 +39,6 @@ export function PlanStep({ fundId, plan, onChange, onRun, onBack, ran }: { fundI
         </div>
         <p className="text-ink-soft">{t('mutualfund.plan.summary', { total: formatRupees(total), fund: t(assumptions.funds[fundId]!.labelKey) })}</p>
       </Card>
-      <div className="flex flex-wrap gap-3">
-        {!ran && (
-          <Button variant="secondary" onClick={onBack}>
-            {t('mutualfund.back.step')}
-          </Button>
-        )}
-        <Button size="lg" onClick={onRun}>
-          {ran ? t('mutualfund.plan.rerun') : t('mutualfund.plan.run', { years: plan.years })}
-        </Button>
-      </div>
     </div>
   );
 }

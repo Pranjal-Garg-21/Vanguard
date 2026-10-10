@@ -46,5 +46,15 @@
   "paths.year": "In a typical year, ₹10,000 ends between {low} and {high}.",
   "paths.note": "A typical year means about 2 years out of 3. Some years fall outside it. These paths are made up for learning, not real products.",
   "paths.learnRisk": "Learn first: Risk, return and swings",
-  "paths.learnSpread": "Learn first: Spreading your money"
+  "paths.learnSpread": "Learn first: Spreading your money",
+  "p1.title": "What are you saving for?",
+  "p1.hint": "Pick one goal. The numbers are already filled in for you.",
+  "p1.change": "Change the numbers",
+  "p2.title": "Meet the three paths",
+  "p2.hint": "Your money can sit in three made-up places. Read how they differ, then continue.",
+  "p3.title": "Split your money",
+  "p3.hint": "Decide how many of every 100 rupees go to each path. There is no right answer.",
+  "p4.title": "What 500 futures look like",
+  "p4.hint": "Each future is one way things could go. Look at the range, not one number.",
+  "result.more": "More numbers"
 }

@@ -1,0 +1,5 @@
+{
+  "pager.step": "Step {n} of {total}",
+  "pager.next": "Next",
+  "pager.back": "Back"
+}

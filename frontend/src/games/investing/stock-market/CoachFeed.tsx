@@ -27,19 +27,42 @@ function Line({ c }: { c: Comment }) {
   );
 }
 
+/** The two comments worth reading first: the first thing that happened, and the most important thing to think about. */
+export function leadComments(comments: Comment[]): { lead: Comment[]; rest: Comment[] } {
+  const first = comments[0];
+  if (!first) return { lead: [], rest: [] };
+  const others = comments.slice(1);
+  const second = others.find((c) => c.tone === 'warn') ?? others.find((c) => c.kind === 'think') ?? others[0];
+  const lead = second ? [first, second] : [first];
+  return { lead, rest: comments.filter((c) => !lead.includes(c)) };
+}
+
 export function CoachFeed({ turns }: { turns: Turn[] }) {
   const [latest, ...earlier] = turns;
+  const { lead, rest } = leadComments(latest?.comments ?? []);
   return (
     <Card className="space-y-3">
       <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('stockmarket.coach.title')}</h2>
       {!latest ? (
         <p className="text-ink-soft">{t('stockmarket.coach.empty')}</p>
       ) : (
-        <ul key={latest.id} aria-live="polite" className="coach-in space-y-2">
-          {latest.comments.map((c, i) => (
-            <Line key={i} c={c} />
-          ))}
-        </ul>
+        <div key={latest.id} className="coach-in space-y-2">
+          <ul aria-live="polite" className="space-y-2">
+            {lead.map((c, i) => (
+              <Line key={i} c={c} />
+            ))}
+          </ul>
+          {rest.length > 0 && (
+            <details className="text-sm">
+              <summary className="cursor-pointer font-bold text-info">{t('stockmarket.coach.moreAbout')}</summary>
+              <ul className="mt-2 space-y-2">
+                {rest.map((c, i) => (
+                  <Line key={i} c={c} />
+                ))}
+              </ul>
+            </details>
+          )}
+        </div>
       )}
       {earlier.length > 0 && (
         <details className="text-sm">
@@ -80,7 +103,7 @@ export function CoachDock({ turn }: { turn: Turn | undefined }) {
         </div>
         {open ? (
           <ul key={turn.id} className="max-h-[50vh] space-y-2 overflow-y-auto">
-            {turn.comments.map((c, i) => (
+            {leadComments(turn.comments).lead.map((c, i) => (
               <Line key={i} c={c} />
             ))}
           </ul>

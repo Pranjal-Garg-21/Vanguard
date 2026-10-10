@@ -25,6 +25,27 @@ export function BlockCard({ block, ctx }: { block: LessonBlock; ctx: Ctx }) {
   const tx = (key: string) => fillTemplate(t(key), ctx);
   const label = LABELS[block.type];
 
+  // "Words to remember" is a reference, not part of the story: keep it folded until asked for.
+  if (block.type === 'jargon') {
+    return (
+      <details className="rounded-xl border border-line bg-surface">
+        <summary className="cursor-pointer px-5 py-3 text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('investui.card.words')}</summary>
+        <dl className="space-y-2 border-t border-line p-4">
+          {(block.terms ?? []).map((id) => {
+            const g = glossaryById.get(id);
+            if (!g) return null;
+            return (
+              <div key={id} className="rounded-lg bg-surface-2 p-3">
+                <dt className="font-bold text-ink">{t(g.termKey)}</dt>
+                <dd className="text-ink-soft">{t(g.defKey)}</dd>
+              </div>
+            );
+          })}
+        </dl>
+      </details>
+    );
+  }
+
   return (
     <Card className={`space-y-3 !p-5 ${label ? `border-l-4 ${label.edge}` : ''}`}>
       {label && <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t(label.key)}</h2>}
@@ -49,20 +70,6 @@ export function BlockCard({ block, ctx }: { block: LessonBlock; ctx: Ctx }) {
         </div>
       )}
 
-      {block.type === 'jargon' && (
-        <dl className="space-y-2">
-          {(block.terms ?? []).map((id) => {
-            const g = glossaryById.get(id);
-            if (!g) return null;
-            return (
-              <div key={id} className="rounded-lg bg-surface-2 p-3">
-                <dt className="font-bold text-ink">{t(g.termKey)}</dt>
-                <dd className="text-ink-soft">{t(g.defKey)}</dd>
-              </div>
-            );
-          })}
-        </dl>
-      )}
     </Card>
   );
 }

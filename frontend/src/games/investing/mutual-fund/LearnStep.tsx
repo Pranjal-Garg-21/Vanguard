@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { formatRupees } from '@/core/market';
 import { LabSlider, Readout } from '@/games/investing/lessons/widgets/controls';
 import { t } from '@/platform';
-import { Button, Card } from '@/ui';
+import { Card } from '@/ui';
 
 const fmt = (n: number) => String(Number(n.toFixed(2)));
 
-export function LearnStep({ nav, onNext }: { nav: { pool: number; units: number; money: number }; onNext: () => void }) {
+export function LearnStep({ nav }: { nav: { pool: number; units: number; money: number } }) {
   const [pool, setPool] = useState(nav.pool);
   const [units, setUnits] = useState(nav.units);
   const [money, setMoney] = useState(nav.money);
@@ -34,10 +34,6 @@ export function LearnStep({ nav, onNext }: { nav: { pool: number; units: number;
           <Readout label={t('mutualfund.learn.calc.yours')} value={fmt(money / price)} tone="good" />
         </div>
       </Card>
-
-      <Button size="lg" onClick={onNext}>
-        {t('mutualfund.learn.next')}
-      </Button>
     </div>
   );
 }
