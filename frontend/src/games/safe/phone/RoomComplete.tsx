@@ -17,7 +17,7 @@ function Stat({ label, value, tone = 'text-ink' }: { label: string; value: strin
 }
 
 /** Completion screen in the style of a finished room: result, stats and the red-flag cards. */
-export function RoomComplete({ state, onReplay, onRetry, onContinue }: { state: RunState; onReplay: () => void; onRetry: () => void; onContinue: () => void }) {
+export function RoomComplete({ state, collected = [], onReplay, onRetry, onContinue }: { state: RunState; /** Cards found in earlier rooms. */ collected?: string[]; onReplay: () => void; onRetry: () => void; onContinue: () => void }) {
   const sum = summarise(state);
   const found = new Set(foundKinds(state));
   const judge = state.script.mode === 'judge';
@@ -39,7 +39,7 @@ export function RoomComplete({ state, onReplay, onRetry, onContinue }: { state: 
         {inbox && <Stat label={t('safe.ui.falseAlarms')} value={String(sum.falseAlarms)} tone={sum.falseAlarms > 0 ? 'text-warn' : 'text-brand'} />}
         {!judge && <Stat label={t('safe.ui.moneyLost')} value={rupees(sum.balanceLost)} tone={sum.balanceLost > 0 ? 'text-bad' : 'text-brand'} />}
         <Stat label={t('safe.ui.tellsFound')} value={`${sum.tellsFound}/${sum.tellsTotal}`} tone="text-info" />
-        <Stat label={t('safe.ui.cards')} value={`${found.size}/${TELL_KINDS.length}`} tone="text-xp" />
+        <Stat label={t('safe.ui.cards')} value={`${new Set([...found, ...collected]).size}/${TELL_KINDS.length}`} tone="text-xp" />
       </div>
 
       {state.script.rule && (
@@ -73,7 +73,7 @@ export function RoomComplete({ state, onReplay, onRetry, onContinue }: { state: 
         <SectionLabel>{t('safe.ui.cards')}</SectionLabel>
         <p className="mb-3 mt-1 text-sm text-muted">{t('safe.ui.cardsHint')}</p>
         <div className="grid gap-3 sm:grid-cols-2">
-          {TELL_KINDS.map((k) => <TellCard key={k} kind={k} found={found.has(k)} isNew={found.has(k)} />)}
+          {TELL_KINDS.map((k) => <TellCard key={k} kind={k} found={found.has(k)} collected={collected.includes(k)} isNew={found.has(k) && !collected.includes(k)} />)}
         </div>
       </Card>
 
