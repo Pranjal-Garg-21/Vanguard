@@ -4,273 +4,67 @@
   "pillar": "invest",
   "order": 2,
   "estMinutes": 4,
-  "concepts": [
-    "interest_simple",
-    "interest_compound",
-    "simple_vs_compound",
-    "start_early"
-  ],
-  "misconceptions": [
-    "interest_always_simple",
-    "late_start_is_fine"
-  ],
-  "levels": [
-    1,
-    2,
-    3
-  ],
+  "concepts": ["interest_simple", "interest_compound", "simple_vs_compound", "start_early"],
+  "misconceptions": ["interest_always_simple", "late_start_is_fine"],
+  "levels": [1, 2, 3],
   "vars": {
-    "P": {
-      "value": 10000,
-      "fmt": "rupees"
-    },
-    "r": {
-      "value": 0.08,
-      "fmt": "percent"
-    },
-    "years": {
-      "value": 10
-    },
-    "monthly": {
-      "value": 500,
-      "fmt": "rupees"
-    },
-    "months": {
-      "value": 120
-    },
-    "sipRate": {
-      "value": 0.1,
-      "fmt": "percent"
-    },
-    "sipLow": {
-      "value": 0.08,
-      "fmt": "percent"
-    },
-    "sipHigh": {
-      "value": 0.12,
-      "fmt": "percent"
-    },
-    "startEarly": {
-      "value": 18
-    },
-    "startLate": {
-      "value": 28
-    },
-    "stopAge": {
-      "value": 58
-    }
+    "P": { "value": 10000, "fmt": "rupees" },
+    "r": { "value": 0.08, "fmt": "percent" },
+    "years": { "value": 10 },
+    "monthly": { "value": 500, "fmt": "rupees" },
+    "months": { "value": 120 },
+    "sipRate": { "value": 0.1, "fmt": "percent" },
+    "sipLow": { "value": 0.08, "fmt": "percent" },
+    "sipHigh": { "value": 0.12, "fmt": "percent" },
+    "startEarly": { "value": 18 },
+    "startLate": { "value": 28 },
+    "stopAge": { "value": 58 }
   },
   "calcs": [
-    {
-      "id": "simple",
-      "fn": "simpleAmount",
-      "args": [
-        "$P",
-        "$r",
-        "$years"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "comp",
-      "fn": "compoundAmount",
-      "args": [
-        "$P",
-        "$r",
-        "$years"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "extra",
-      "fn": "sub",
-      "args": [
-        "$comp",
-        "$simple"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "ratePct",
-      "fn": "mul",
-      "args": [
-        "$r",
-        100
-      ]
-    },
-    {
-      "id": "double",
-      "fn": "ruleOf72",
-      "args": [
-        "$ratePct"
-      ],
-      "round": 0
-    },
-    {
-      "id": "put",
-      "fn": "mul",
-      "args": [
-        "$monthly",
-        "$months"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "sip",
-      "fn": "futureValueMonthly",
-      "args": [
-        "$monthly",
-        "$sipRate",
-        "$months"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "sipLo",
-      "fn": "futureValueMonthly",
-      "args": [
-        "$monthly",
-        "$sipLow",
-        "$months"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "sipHi",
-      "fn": "futureValueMonthly",
-      "args": [
-        "$monthly",
-        "$sipHigh",
-        "$months"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "yearsEarly",
-      "fn": "sub",
-      "args": [
-        "$stopAge",
-        "$startEarly"
-      ]
-    },
-    {
-      "id": "yearsLate",
-      "fn": "sub",
-      "args": [
-        "$stopAge",
-        "$startLate"
-      ]
-    },
-    {
-      "id": "monthsEarly",
-      "fn": "mul",
-      "args": [
-        "$yearsEarly",
-        12
-      ]
-    },
-    {
-      "id": "monthsLate",
-      "fn": "mul",
-      "args": [
-        "$yearsLate",
-        12
-      ]
-    },
-    {
-      "id": "early",
-      "fn": "futureValueMonthly",
-      "args": [
-        "$monthly",
-        "$sipRate",
-        "$monthsEarly"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "late",
-      "fn": "futureValueMonthly",
-      "args": [
-        "$monthly",
-        "$sipRate",
-        "$monthsLate"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "putEarly",
-      "fn": "mul",
-      "args": [
-        "$monthly",
-        "$monthsEarly"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "putLate",
-      "fn": "mul",
-      "args": [
-        "$monthly",
-        "$monthsLate"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "ratio",
-      "fn": "div",
-      "args": [
-        "$early",
-        "$late"
-      ],
-      "round": 1
-    },
-    {
-      "id": "putRatio",
-      "fn": "div",
-      "args": [
-        "$putEarly",
-        "$putLate"
-      ],
-      "round": 1
-    },
-    {
-      "id": "gap",
-      "fn": "sub",
-      "args": [
-        "$startLate",
-        "$startEarly"
-      ]
-    }
+    { "id": "simple", "fn": "simpleAmount", "args": ["$P", "$r", "$years"], "fmt": "rupees" },
+    { "id": "comp", "fn": "compoundAmount", "args": ["$P", "$r", "$years"], "fmt": "rupees" },
+    { "id": "extra", "fn": "sub", "args": ["$comp", "$simple"], "fmt": "rupees" },
+    { "id": "ratePct", "fn": "mul", "args": ["$r", 100] },
+    { "id": "double", "fn": "ruleOf72", "args": ["$ratePct"], "round": 0 },
+    { "id": "put", "fn": "mul", "args": ["$monthly", "$months"], "fmt": "rupees" },
+    { "id": "sip", "fn": "futureValueMonthly", "args": ["$monthly", "$sipRate", "$months"], "fmt": "rupees" },
+    { "id": "sipLo", "fn": "futureValueMonthly", "args": ["$monthly", "$sipLow", "$months"], "fmt": "rupees" },
+    { "id": "sipHi", "fn": "futureValueMonthly", "args": ["$monthly", "$sipHigh", "$months"], "fmt": "rupees" },
+    { "id": "yearsEarly", "fn": "sub", "args": ["$stopAge", "$startEarly"] },
+    { "id": "yearsLate", "fn": "sub", "args": ["$stopAge", "$startLate"] },
+    { "id": "monthsEarly", "fn": "mul", "args": ["$yearsEarly", 12] },
+    { "id": "monthsLate", "fn": "mul", "args": ["$yearsLate", 12] },
+    { "id": "early", "fn": "futureValueMonthly", "args": ["$monthly", "$sipRate", "$monthsEarly"], "fmt": "rupees" },
+    { "id": "late", "fn": "futureValueMonthly", "args": ["$monthly", "$sipRate", "$monthsLate"], "fmt": "rupees" },
+    { "id": "putEarly", "fn": "mul", "args": ["$monthly", "$monthsEarly"], "fmt": "rupees" },
+    { "id": "putLate", "fn": "mul", "args": ["$monthly", "$monthsLate"], "fmt": "rupees" },
+    { "id": "ratio", "fn": "div", "args": ["$early", "$late"], "round": 1 },
+    { "id": "putRatio", "fn": "div", "args": ["$putEarly", "$putLate"], "round": 1 },
+    { "id": "gap", "fn": "sub", "args": ["$startLate", "$startEarly"] }
   ],
   "blocks": [
+    { "type": "hook", "visual": "piggy_bank", "textKey": "invest_interest.hook" },
+    { "type": "define", "textKey": "invest_interest.define" },
+    { "type": "define", "textKey": "invest_interest.define2" },
+    { "type": "analogy", "visual": "mango_trees", "textKey": "invest_interest.analogy" },
     {
-      "type": "hook",
-      "textKey": "invest_interest.hook"
+      "type": "explore",
+      "explore": {
+        "widget": "simple_vs_compound",
+        "promptKey": "invest_interest.explore.prompt",
+        "params": { "principal": "$P", "rate": "$r", "years": "$years" }
+      }
     },
     {
-      "type": "define",
-      "textKey": "invest_interest.define"
-    },
-    {
-      "type": "analogy",
-      "textKey": "invest_interest.analogy"
-    },
-    {
-      "type": "worked",
+      "type": "steps",
       "minLevel": 2,
-      "textKey": "invest_interest.worked"
+      "stepKeys": ["invest_interest.steps.1", "invest_interest.steps.2", "invest_interest.steps.3"]
     },
     {
       "type": "predict",
       "predict": {
         "questionKey": "invest_interest.predict.q",
-        "input": {
-          "kind": "slider",
-          "min": 60000,
-          "max": 150000,
-          "step": 1000,
-          "unit": "rupees"
-        },
+        "input": { "kind": "slider", "min": 60000, "max": 150000, "step": 1000, "unit": "rupees" },
         "reveal": {
           "actual": "sip",
           "rangeLow": "sipLo",
@@ -280,58 +74,24 @@
       }
     },
     {
-      "type": "worked",
+      "type": "steps",
       "minLevel": 2,
-      "textKey": "invest_interest.early"
+      "stepKeys": [
+        "invest_interest.early.1",
+        "invest_interest.early.2",
+        "invest_interest.early.3",
+        "invest_interest.early.4"
+      ]
     },
-    {
-      "type": "tradeoff",
-      "textKey": "invest_interest.tradeoff"
-    },
-    {
-      "type": "misconception",
-      "misconceptions": [
-        "interest_always_simple"
-      ],
-      "textKey": "invest_interest.mistake.flat"
-    },
-    {
-      "type": "misconception",
-      "misconceptions": [
-        "late_start_is_fine"
-      ],
-      "textKey": "invest_interest.mistake.late"
-    },
-    {
-      "type": "formula",
-      "minLevel": 3,
-      "textKey": "invest_interest.formula"
-    },
+    { "type": "tradeoff", "textKey": "invest_interest.tradeoff" },
+    { "type": "misconception", "misconceptions": ["interest_always_simple"], "textKey": "invest_interest.mistake.flat" },
+    { "type": "misconception", "misconceptions": ["late_start_is_fine"], "textKey": "invest_interest.mistake.late" },
+    { "type": "formula", "minLevel": 3, "textKey": "invest_interest.formula" },
     {
       "type": "jargon",
-      "terms": [
-        "interest",
-        "principal",
-        "simple_interest",
-        "compound_interest",
-        "rate",
-        "rule_of_72"
-      ]
+      "terms": ["interest", "principal", "simple_interest", "compound_interest", "rate", "rule_of_72"]
     }
   ],
-  "check": [
-    "interest_01",
-    "interest_02",
-    "interest_03",
-    "interest_04",
-    "interest_05"
-  ],
-  "glossary": [
-    "interest",
-    "principal",
-    "simple_interest",
-    "compound_interest",
-    "rate",
-    "rule_of_72"
-  ]
+  "check": ["interest_01", "interest_02", "interest_03", "interest_04", "interest_05"],
+  "glossary": ["interest", "principal", "simple_interest", "compound_interest", "rate", "rule_of_72"]
 }

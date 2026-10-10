@@ -31,7 +31,9 @@ export type BlockType =
   | 'tradeoff'
   | 'misconception'
   | 'formula'
-  | 'jargon';
+  | 'jargon'
+  | 'explore'
+  | 'steps';
 
 export type PredictInput =
   | { kind: 'slider'; min: number; max: number; step: number; unit: string }
@@ -50,9 +52,24 @@ export interface PredictSpec {
   };
 }
 
+/** A hands-on widget inside a lesson ("play with the numbers"). */
+export interface ExploreSpec {
+  widget: string;
+  /** Instruction shown above the widget. */
+  promptKey: string;
+  /** Starting values, as "" references to the lesson's vars/calcs. */
+  params: Record<string, string>;
+}
+
 export interface LessonBlock {
   type: BlockType;
   textKey?: string;
+  /** Picture to show with the card (an id from VISUALS). Required on analogies. */
+  visual?: string;
+  /** For 'explore' blocks. */
+  explore?: ExploreSpec;
+  /** For 'steps' blocks: one line per tap, revealed one at a time. */
+  stepKeys?: string[];
   /** Lowest level that sees this block (default 1). L1 = story, L2 = numbers, L3 = formulas. */
   minLevel?: Level;
   /** For 'misconception' blocks. */
@@ -84,6 +101,8 @@ export interface CheckOption {
   textKey: string;
   /** Set on a wrong option that exposes a named misconception. */
   misconception?: string;
+  /** Shown first when this option is picked: names the specific mistake. Required with misconception. */
+  feedbackKey?: string;
 }
 
 export interface CheckItem {

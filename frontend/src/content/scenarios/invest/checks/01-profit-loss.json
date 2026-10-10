@@ -208,7 +208,8 @@
       {
         "id": "b",
         "textKey": "invest_profit_loss.check.profit_loss_04.opt.b",
-        "misconception": "fall_then_rise_same_pct_is_even"
+        "misconception": "fall_then_rise_same_pct_is_even",
+        "feedbackKey": "invest_profit_loss.check.profit_loss_04.fb.b"
       },
       {
         "id": "c",
@@ -248,7 +249,8 @@
       {
         "id": "a",
         "textKey": "invest_profit_loss.check.profit_loss_05.opt.a",
-        "misconception": "fall_then_rise_same_pct_is_even"
+        "misconception": "fall_then_rise_same_pct_is_even",
+        "feedbackKey": "invest_profit_loss.check.profit_loss_05.fb.a"
       },
       {
         "id": "b",

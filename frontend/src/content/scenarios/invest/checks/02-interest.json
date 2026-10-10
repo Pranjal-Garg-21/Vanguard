@@ -17,7 +17,8 @@
       {
         "id": "c",
         "textKey": "invest_interest.check.interest_01.opt.c",
-        "misconception": "interest_always_simple"
+        "misconception": "interest_always_simple",
+        "feedbackKey": "invest_interest.check.interest_01.fb.c"
       },
       {
         "id": "d",
@@ -140,12 +141,14 @@
       {
         "id": "a",
         "textKey": "invest_interest.check.interest_04.opt.a",
-        "misconception": "late_start_is_fine"
+        "misconception": "late_start_is_fine",
+        "feedbackKey": "invest_interest.check.interest_04.fb.a"
       },
       {
         "id": "b",
         "textKey": "invest_interest.check.interest_04.opt.b",
-        "misconception": "late_start_is_fine"
+        "misconception": "late_start_is_fine",
+        "feedbackKey": "invest_interest.check.interest_04.fb.b"
       },
       {
         "id": "c",
@@ -208,7 +211,8 @@
       {
         "id": "b",
         "textKey": "invest_interest.check.interest_05.opt.b",
-        "misconception": "interest_always_simple"
+        "misconception": "interest_always_simple",
+        "feedbackKey": "invest_interest.check.interest_05.fb.b"
       },
       {
         "id": "c",

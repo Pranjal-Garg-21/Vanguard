@@ -4,197 +4,62 @@
   "pillar": "invest",
   "order": 1,
   "estMinutes": 3,
-  "concepts": [
-    "profit_loss",
-    "return_percent",
-    "paper_vs_realised"
-  ],
-  "misconceptions": [
-    "fall_then_rise_same_pct_is_even"
-  ],
-  "levels": [
-    1,
-    2,
-    3
-  ],
+  "concepts": ["profit_loss", "return_percent", "paper_vs_realised"],
+  "misconceptions": ["fall_then_rise_same_pct_is_even"],
+  "levels": [1, 2, 3],
   "vars": {
-    "buy": {
-      "value": 250,
-      "fmt": "rupees"
-    },
-    "sell": {
-      "value": 400,
-      "fmt": "rupees"
-    },
-    "lowSell": {
-      "value": 200,
-      "fmt": "rupees"
-    },
-    "startAmt": {
-      "value": 1000,
-      "fmt": "rupees"
-    },
-    "fall": {
-      "value": 0.5,
-      "fmt": "percent"
-    },
-    "smallBase": {
-      "value": 200,
-      "fmt": "rupees"
-    },
-    "smallPct": {
-      "value": 0.5,
-      "fmt": "percent"
-    },
-    "bigBase": {
-      "value": 5000,
-      "fmt": "rupees"
-    },
-    "bigPct": {
-      "value": 0.1,
-      "fmt": "percent"
-    }
+    "buy": { "value": 250, "fmt": "rupees" },
+    "sell": { "value": 400, "fmt": "rupees" },
+    "lowSell": { "value": 200, "fmt": "rupees" },
+    "startAmt": { "value": 1000, "fmt": "rupees" },
+    "fall": { "value": 0.5, "fmt": "percent" },
+    "smallBase": { "value": 200, "fmt": "rupees" },
+    "smallPct": { "value": 0.5, "fmt": "percent" },
+    "bigBase": { "value": 5000, "fmt": "rupees" },
+    "bigPct": { "value": 0.1, "fmt": "percent" }
   },
   "calcs": [
-    {
-      "id": "profit1",
-      "fn": "profit",
-      "args": [
-        "$buy",
-        "$sell"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "ret1",
-      "fn": "returnPct",
-      "args": [
-        "$buy",
-        "$sell"
-      ],
-      "fmt": "percent"
-    },
-    {
-      "id": "loss1",
-      "fn": "profit",
-      "args": [
-        "$buy",
-        "$lowSell"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "lossAbs",
-      "fn": "mul",
-      "args": [
-        "$loss1",
-        -1
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "ret2",
-      "fn": "returnPct",
-      "args": [
-        "$buy",
-        "$lowSell"
-      ],
-      "fmt": "percent"
-    },
-    {
-      "id": "keep",
-      "fn": "sub",
-      "args": [
-        1,
-        "$fall"
-      ]
-    },
-    {
-      "id": "afterFall",
-      "fn": "mul",
-      "args": [
-        "$startAmt",
-        "$keep"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "needGain",
-      "fn": "breakevenGain",
-      "args": [
-        "$fall"
-      ],
-      "fmt": "percent"
-    },
-    {
-      "id": "up",
-      "fn": "add",
-      "args": [
-        1,
-        "$fall"
-      ]
-    },
-    {
-      "id": "afterRise",
-      "fn": "mul",
-      "args": [
-        "$afterFall",
-        "$up"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "smallGain",
-      "fn": "mul",
-      "args": [
-        "$smallBase",
-        "$smallPct"
-      ],
-      "fmt": "rupees"
-    },
-    {
-      "id": "bigGain",
-      "fn": "mul",
-      "args": [
-        "$bigBase",
-        "$bigPct"
-      ],
-      "fmt": "rupees"
-    }
+    { "id": "profit1", "fn": "profit", "args": ["$buy", "$sell"], "fmt": "rupees" },
+    { "id": "ret1", "fn": "returnPct", "args": ["$buy", "$sell"], "fmt": "percent" },
+    { "id": "loss1", "fn": "profit", "args": ["$buy", "$lowSell"], "fmt": "rupees" },
+    { "id": "ret2", "fn": "returnPct", "args": ["$buy", "$lowSell"], "fmt": "percent" },
+    { "id": "keep", "fn": "sub", "args": [1, "$fall"] },
+    { "id": "afterFall", "fn": "mul", "args": ["$startAmt", "$keep"], "fmt": "rupees" },
+    { "id": "needGain", "fn": "breakevenGain", "args": ["$fall"], "fmt": "percent" },
+    { "id": "up", "fn": "add", "args": [1, "$fall"] },
+    { "id": "afterRise", "fn": "mul", "args": ["$afterFall", "$up"], "fmt": "rupees" },
+    { "id": "smallGain", "fn": "mul", "args": ["$smallBase", "$smallPct"], "fmt": "rupees" },
+    { "id": "bigGain", "fn": "mul", "args": ["$bigBase", "$bigPct"], "fmt": "rupees" }
   ],
   "blocks": [
+    { "type": "hook", "visual": "samosa_stall", "textKey": "invest_profit_loss.hook" },
+    { "type": "define", "textKey": "invest_profit_loss.define" },
+    { "type": "define", "textKey": "invest_profit_loss.define2" },
+    { "type": "analogy", "visual": "tea_stall", "textKey": "invest_profit_loss.analogy" },
     {
-      "type": "hook",
-      "textKey": "invest_profit_loss.hook"
-    },
-    {
-      "type": "define",
-      "textKey": "invest_profit_loss.define"
-    },
-    {
-      "type": "note",
-      "textKey": "invest_profit_loss.paper"
-    },
-    {
-      "type": "analogy",
-      "textKey": "invest_profit_loss.analogy"
-    },
-    {
-      "type": "worked",
+      "type": "steps",
       "minLevel": 2,
-      "textKey": "invest_profit_loss.worked"
+      "stepKeys": [
+        "invest_profit_loss.steps.1",
+        "invest_profit_loss.steps.2",
+        "invest_profit_loss.steps.3",
+        "invest_profit_loss.steps.4"
+      ]
+    },
+    { "type": "note", "textKey": "invest_profit_loss.paper" },
+    {
+      "type": "explore",
+      "explore": {
+        "widget": "fall_rise",
+        "promptKey": "invest_profit_loss.explore.prompt",
+        "params": { "start": "$startAmt", "fall": "$fall" }
+      }
     },
     {
       "type": "predict",
       "predict": {
         "questionKey": "invest_profit_loss.predict.q",
-        "input": {
-          "kind": "slider",
-          "min": 0,
-          "max": 3,
-          "step": 0.1,
-          "unit": "percent"
-        },
+        "input": { "kind": "slider", "min": 0, "max": 3, "step": 0.1, "unit": "percent" },
         "reveal": {
           "actual": "needGain",
           "rangeLow": "needGain",
@@ -203,45 +68,15 @@
         }
       }
     },
-    {
-      "type": "tradeoff",
-      "textKey": "invest_profit_loss.tradeoff"
-    },
+    { "type": "tradeoff", "textKey": "invest_profit_loss.tradeoff" },
     {
       "type": "misconception",
-      "misconceptions": [
-        "fall_then_rise_same_pct_is_even"
-      ],
+      "misconceptions": ["fall_then_rise_same_pct_is_even"],
       "textKey": "invest_profit_loss.mistake"
     },
-    {
-      "type": "formula",
-      "minLevel": 3,
-      "textKey": "invest_profit_loss.formula"
-    },
-    {
-      "type": "jargon",
-      "terms": [
-        "profit",
-        "loss",
-        "return",
-        "paper_gain",
-        "realised"
-      ]
-    }
+    { "type": "formula", "minLevel": 3, "textKey": "invest_profit_loss.formula" },
+    { "type": "jargon", "terms": ["profit", "loss", "return", "paper_gain", "realised"] }
   ],
-  "check": [
-    "profit_loss_01",
-    "profit_loss_02",
-    "profit_loss_03",
-    "profit_loss_04",
-    "profit_loss_05"
-  ],
-  "glossary": [
-    "profit",
-    "loss",
-    "return",
-    "paper_gain",
-    "realised"
-  ]
+  "check": ["profit_loss_01", "profit_loss_02", "profit_loss_03", "profit_loss_04", "profit_loss_05"],
+  "glossary": ["profit", "loss", "return", "paper_gain", "realised"]
 }

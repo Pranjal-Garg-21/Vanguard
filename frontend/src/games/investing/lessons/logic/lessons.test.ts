@@ -1,10 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { fillTemplate, runCalcs, type Computed } from './calc';
+import { EXPLORE_WIDGETS, VISUALS } from './explore';
 import { checkById, checks, glossary, glossaryById, knownConcepts, knownMisconceptions, lessons, strings } from './content';
 
 const glossaryIds = new Set(glossaryById.keys());
 const MAX_SENTENCE_WORDS = 22;
 const MAX_DEFINITION_WORDS = 15;
+const MAX_CARD_WORDS = 45; // one card = one idea, readable in about 20 seconds
+const MAX_STEP_WORDS = 20;
+const NEEDS_TEXT = ['hook', 'define', 'analogy', 'note', 'worked', 'tradeoff', 'misconception', 'formula'];
 const used = new Set<string>();
 
 function str(key: string | undefined, where: string): string {
@@ -65,7 +69,19 @@ describe.each(lessons.map((l) => [l.id, l] as const))('lesson %s', (_id, lesson)
     const c = ctx();
     for (const [i, b] of lesson.blocks.entries()) {
       const where = `${lesson.id} block ${i} (${b.type})`;
-      if (b.textKey) render(b.textKey, c, where);
+      if (b.textKey) {
+        const text = render(b.textKey, c, where);
+        if (b.type !== 'formula') {
+          expect(words(text), `${where}: card too long (max ${MAX_CARD_WORDS} words)`).toBeLessThanOrEqual(MAX_CARD_WORDS);
+        }
+      }
+      if (b.type === 'steps') {
+        expect(b.stepKeys && b.stepKeys.length >= 2 && b.stepKeys.length <= 6, `${where}: steps needs 2 to 6 lines`).toBe(true);
+        for (const k of b.stepKeys ?? []) {
+          expect(words(render(k, c, where)), `${where}: step too long`).toBeLessThanOrEqual(MAX_STEP_WORDS);
+        }
+      }
+      if (b.type === 'explore') render(b.explore!.promptKey, c, where);
       if (b.predict) {
         render(b.predict.questionKey, c, where);
         render(b.predict.reveal.explainKey, c, where);
@@ -74,7 +90,7 @@ describe.each(lessons.map((l) => [l.id, l] as const))('lesson %s', (_id, lesson)
           expect(b.predict.input.options.map((o) => o.id)).toContain(b.predict.input.correct);
         }
       }
-      if (b.type !== 'jargon' && b.type !== 'predict') expect(b.textKey, `${where} needs textKey`).toBeTruthy();
+      if (NEEDS_TEXT.includes(b.type)) expect(b.textKey, `${where} needs textKey`).toBeTruthy();
     }
   });
 
@@ -97,7 +113,26 @@ describe.each(lessons.map((l) => [l.id, l] as const))('lesson %s', (_id, lesson)
   it('has levels in order: formulas only at L3, worked numbers at L2 or higher', () => {
     for (const b of lesson.blocks) {
       if (b.type === 'formula') expect(b.minLevel).toBe(3);
-      if (b.type === 'worked') expect(b.minLevel).toBeGreaterThanOrEqual(2);
+      if (b.type === 'worked' || b.type === 'steps') expect(b.minLevel).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it('is interactive: has something to do, not only to read', () => {
+    const c = ctx();
+    const explores = lesson.blocks.filter((b) => b.type === 'explore');
+    expect(explores.length, 'needs at least one explore block').toBeGreaterThan(0);
+    for (const b of explores) {
+      expect((EXPLORE_WIDGETS as readonly string[]).includes(b.explore!.widget), `unknown widget ${b.explore!.widget}`).toBe(true);
+      for (const [name, ref] of Object.entries(b.explore!.params)) {
+        expect(ref.startsWith('$') && c[ref.slice(1)], `explore param ${name} -> ${ref} does not resolve`).toBeTruthy();
+      }
+    }
+  });
+
+  it('has a picture for every analogy, and only known pictures', () => {
+    for (const b of lesson.blocks) {
+      if (b.type === 'analogy') expect(b.visual, 'analogy needs a visual').toBeTruthy();
+      if (b.visual) expect((VISUALS as readonly string[]).includes(b.visual), `unknown visual ${b.visual}`).toBe(true);
     }
   });
 
@@ -128,6 +163,7 @@ describe.each(checks.map((c) => [c.id, c] as const))('check item %s', (_id, item
     expect(knownConcepts.has(item.concept), `unknown concept ${item.concept}`).toBe(true);
     for (const o of item.options) {
       if (o.misconception) {
+        expect(o.feedbackKey, `option ${o.id} tests a misconception, so it needs feedbackKey`).toBeTruthy();
         expect(o.id).not.toBe(item.correct);
         expect(knownMisconceptions.has(o.misconception), `unknown misconception ${o.misconception}`).toBe(true);
       }
@@ -139,6 +175,12 @@ describe.each(checks.map((c) => [c.id, c] as const))('check item %s', (_id, item
     render(item.stemKey, c, `${item.id} stem`);
     const why = render(item.whyKey, c, `${item.id} why`);
     expect(sentences(why).length, 'why should be at most 3 sentences').toBeLessThanOrEqual(3);
+    for (const o of item.options) {
+      if (o.feedbackKey) {
+        const fb = render(o.feedbackKey, c, `${item.id} feedback ${o.id}`);
+        expect(sentences(fb).length, 'feedback should be short').toBeLessThanOrEqual(2);
+      }
+    }
     const rendered = new Map(item.options.map((o) => [o.id, render(o.textKey, c, `${item.id} option ${o.id}`)]));
     const right = rendered.get(item.correct)!;
     for (const [id, text] of rendered) if (id !== item.correct) expect(text, `option ${id} duplicates the right answer`).not.toBe(right);
@@ -171,6 +213,8 @@ describe('strings hygiene', () => {
       const c = runCalcs(l.vars, l.calcs);
       for (const b of l.blocks) {
         if (b.textKey) render(b.textKey, c, 'hygiene');
+        b.stepKeys?.forEach((k) => used.add(k));
+        if (b.explore) used.add(b.explore.promptKey);
         if (b.predict) {
           used.add(b.predict.questionKey);
           used.add(b.predict.reveal.explainKey);
@@ -181,7 +225,10 @@ describe('strings hygiene', () => {
     for (const c of checks) {
       used.add(c.stemKey);
       used.add(c.whyKey);
-      c.options.forEach((o) => used.add(o.textKey));
+      c.options.forEach((o) => {
+        used.add(o.textKey);
+        if (o.feedbackKey) used.add(o.feedbackKey);
+      });
     }
     const orphans = Object.keys(strings).filter((k) => !used.has(k));
     expect(orphans).toEqual([]);
