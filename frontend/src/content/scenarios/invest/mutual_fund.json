@@ -1,0 +1,113 @@
+{
+  "_note": "Mutual Fund Challenge content. Funds and their numbers live in assumptions.json (funds). Never rank the funds or call one 'best'.",
+  "plan": {
+    "lump": { "min": 10000, "max": 100000, "step": 10000, "default": 50000 },
+    "sip": { "min": 500, "max": 5000, "step": 500, "default": 1000 },
+    "years": { "min": 3, "max": 15, "default": 10 }
+  },
+  "nav": { "pool": 600000, "units": 5000, "money": 3000 },
+  "check": {
+    "vars": {
+      "money": { "value": 3000, "fmt": "rupees" },
+      "nav1": { "value": 150, "fmt": "rupees" },
+      "nav2": { "value": 120, "fmt": "rupees" },
+      "P": { "value": 50000, "fmt": "rupees" },
+      "gross": { "value": 0.1, "fmt": "percent" },
+      "feeA": { "value": 0.005, "fmt": "percent", "round": 1 },
+      "feeB": { "value": 0.02, "fmt": "percent" },
+      "yrs": { "value": 10 }
+    },
+    "calcs": [
+      { "id": "u1", "fn": "unitsBought", "args": ["$money", "$nav1"], "fmt": "number", "round": 0 },
+      { "id": "u2", "fn": "unitsBought", "args": ["$money", "$nav2"], "fmt": "number", "round": 0 },
+      { "id": "rA", "fn": "sub", "args": ["$gross", "$feeA"] },
+      { "id": "rB", "fn": "sub", "args": ["$gross", "$feeB"] },
+      { "id": "endA", "fn": "compoundAmount", "args": ["$P", "$rA", "$yrs"], "fmt": "rupees" },
+      { "id": "endB", "fn": "compoundAmount", "args": ["$P", "$rB", "$yrs"], "fmt": "rupees" },
+      { "id": "gap", "fn": "sub", "args": ["$endA", "$endB"], "fmt": "rupees" }
+    ],
+    "questions": [
+      {
+        "id": "f1",
+        "kind": "number",
+        "promptKey": "mutualfund.check.f1.prompt",
+        "concept": "pooled_funds",
+        "points": 15,
+        "hintKey": "mutualfund.check.f1.hint",
+        "explainKey": "mutualfund.check.f1.explain",
+        "answer": "u1",
+        "unit": "number"
+      },
+      {
+        "id": "f2",
+        "kind": "number",
+        "promptKey": "mutualfund.check.f2.prompt",
+        "concept": "sip_concept",
+        "points": 15,
+        "hintKey": "mutualfund.check.f2.hint",
+        "explainKey": "mutualfund.check.f2.explain",
+        "answer": "u2",
+        "unit": "number"
+      },
+      {
+        "id": "f3",
+        "kind": "choice",
+        "promptKey": "mutualfund.check.f3.prompt",
+        "concept": "sip_concept",
+        "points": 10,
+        "hintKey": "mutualfund.check.f3.hint",
+        "explainKey": "mutualfund.check.f3.explain",
+        "options": [
+          { "id": "a", "textKey": "mutualfund.check.f3.opt.a" },
+          { "id": "b", "textKey": "mutualfund.check.f3.opt.b", "misconception": "sip_guarantees_profit", "feedbackKey": "mutualfund.check.f3.fb.b" },
+          { "id": "c", "textKey": "mutualfund.check.f3.opt.c" },
+          { "id": "d", "textKey": "mutualfund.check.f3.opt.d" }
+        ],
+        "correct": "a"
+      },
+      {
+        "id": "f4",
+        "kind": "number",
+        "promptKey": "mutualfund.check.f4.prompt",
+        "concept": "fees_cost",
+        "points": 20,
+        "hintKey": "mutualfund.check.f4.hint",
+        "explainKey": "mutualfund.check.f4.explain",
+        "answer": "gap",
+        "unit": "rupees"
+      },
+      {
+        "id": "f5",
+        "kind": "choice",
+        "promptKey": "mutualfund.check.f5.prompt",
+        "concept": "etf",
+        "points": 10,
+        "hintKey": "mutualfund.check.f5.hint",
+        "explainKey": "mutualfund.check.f5.explain",
+        "options": [
+          { "id": "a", "textKey": "mutualfund.check.f5.opt.a" },
+          { "id": "b", "textKey": "mutualfund.check.f5.opt.b" },
+          { "id": "c", "textKey": "mutualfund.check.f5.opt.c", "misconception": "etf_means_no_risk", "feedbackKey": "mutualfund.check.f5.fb.c" },
+          { "id": "d", "textKey": "mutualfund.check.f5.opt.d" }
+        ],
+        "correct": "a"
+      },
+      {
+        "id": "f6",
+        "kind": "choice",
+        "promptKey": "mutualfund.check.f6.prompt",
+        "concept": "pooled_funds",
+        "points": 15,
+        "hintKey": "mutualfund.check.f6.hint",
+        "explainKey": "mutualfund.check.f6.explain",
+        "options": [
+          { "id": "a", "textKey": "mutualfund.check.f6.opt.a" },
+          { "id": "b", "textKey": "mutualfund.check.f6.opt.b", "misconception": "higher_fee_means_better", "feedbackKey": "mutualfund.check.f6.fb.b" },
+          { "id": "c", "textKey": "mutualfund.check.f6.opt.c", "misconception": "best_fund_exists", "feedbackKey": "mutualfund.check.f6.fb.c" },
+          { "id": "d", "textKey": "mutualfund.check.f6.opt.d", "misconception": "best_fund_exists", "feedbackKey": "mutualfund.check.f6.fb.d" }
+        ],
+        "correct": "a"
+      }
+    ]
+  }
+}

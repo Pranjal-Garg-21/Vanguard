@@ -93,6 +93,9 @@ export function LessonList() {
           <GameCard to="/learn/invest/stock-market" title={t('stockmarket.title')} hint={t('stockmarket.open.hint')} open={t('stockmarket.open')} />
         </li>
         <li>
+          <GameCard to="/learn/invest/mutual-fund" title={t('mutualfund.title')} hint={t('mutualfund.open.hint')} open={t('mutualfund.open')} />
+        </li>
+        <li>
           <GameCard to="/learn/invest/time-machine" title={t('timemachine.title')} hint={t('timemachine.open.hint')} open={t('timemachine.open')} />
         </li>
       </ul>

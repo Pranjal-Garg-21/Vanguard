@@ -49,23 +49,31 @@
     "index_basket": {
       "style": "index",
       "costYearly": 0.005,
-      "labelKey": "fund.index_basket"
+      "labelKey": "fund.index_basket",
+      "meanAnnual": 0.1,
+      "volAnnual": 0.1
     },
     "active_growth": {
       "style": "active",
       "costYearly": 0.02,
-      "labelKey": "fund.active_growth"
+      "labelKey": "fund.active_growth",
+      "meanAnnual": 0.115,
+      "volAnnual": 0.15
     },
     "sector_focus": {
       "style": "sector",
       "costYearly": 0.015,
-      "labelKey": "fund.sector_focus"
+      "labelKey": "fund.sector_focus",
+      "meanAnnual": 0.11,
+      "volAnnual": 0.22
     },
     "index_etf": {
       "style": "etf",
       "costYearly": 0.004,
       "tradingCost": 0.001,
-      "labelKey": "fund.index_etf"
+      "labelKey": "fund.index_etf",
+      "meanAnnual": 0.1,
+      "volAnnual": 0.1
     }
   },
   "costs": {

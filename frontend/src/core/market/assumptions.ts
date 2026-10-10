@@ -12,7 +12,11 @@ export interface AssetAssumption {
 
 export interface FundAssumption {
   style: 'index' | 'active' | 'sector' | 'etf';
+  /** Yearly cost taken out of the fund (the expense ratio). */
   costYearly: number;
+  /** Average yearly growth and swing of what the fund holds, before its cost. Made up, for teaching. */
+  meanAnnual: number;
+  volAnnual: number;
   tradingCost?: number;
   labelKey: string;
 }
