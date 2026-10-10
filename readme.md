@@ -46,6 +46,7 @@ CI runs typecheck, lint, tests and build on every pull request.
 
 ## Documents
 
+- [TEAM_GUIDE.md](TEAM_GUIDE.md): **start here**, everything built so far and how to add your work
 - [Implementation.md](Implementation.md): product and design spec
 - [work_division.md](work_division.md): who builds what
 - [REPO_STRUCTURE.md](REPO_STRUCTURE.md): code layout and rules
