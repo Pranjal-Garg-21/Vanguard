@@ -1,573 +1,501 @@
-# PaisaPath — Work Division (5 People)
+# PaisaPath — Work Division (5 People, Rebalanced)
 
-| Person | Slice | In one line |
+## How the work is split
+
+The split is balanced by **effort and complexity**, not by number of features. Two rules shaped it:
+
+1. **Nobody waits until the end to do their main work.** Each person has a substantial logic-heavy piece to build from day one. Screen polish happens in a shared final phase, not as one person's job.
+2. **The life simulator is split across two people.** P2 builds the engine and the forward-moving life; P1 builds everything that looks back across a life (Rewind, Parallel Lives, year-end review) plus the player's persona and progress.
+
+| Person | Slice | Main complexity |
 |---|---|---|
-| **P1** | Front Door, Progress & Facilitator UI | Everything the student touches before and around the game, the shared design system, and the facilitator's screens |
-| **P2** | Life Engine, LifePath & Rewind | The simulation engine, the 12-month sequential life (S0–S6), the module runtime, Quick Play, and Rewind & Parallel Lives |
-| **P3** | Everyday Money games | Get Banked, Plan & Budget, Save & Manage and Borrowing games, plus four shared interaction verbs |
-| **P4** | Investing Arcade | Market simulation, all investing games, and the guardrail components (ranges, assumptions, disclaimer) |
-| **P5** | Stay Safe games & Platform | Simulated phone surfaces, all safety games, offline storage, sync, backend, languages and audio |
+| **P1** | Persona, Progress & Time Travel | Classifier, mastery model, snapshot/branch manager, deterministic replay, timeline comparison |
+| **P2** | Core Engine & LifePath | Pure simulation reducer, seeded event tape, stage graph, scheduler, module runtime |
+| **P3** | Everyday Money & Content Pipeline | Four interaction verbs, bank/budget/save/borrow games, translation and validation pipeline |
+| **P4** | Investing, Design Kit & Investment Scams | Market simulation and Monte Carlo, investing games, guardrail components, shared UI kit |
+| **P5** | Stay Safe, Platform & Facilitator | Simulated phone surfaces, scam games, offline storage and sync, backend, facilitator dashboard |
 
-Each person owns their slice end to end: logic, UI, content (scenario JSON, check questions, strings) and tests. Shared pieces have one owner but are used by everyone.
+### Effort balance
+
+Effort is in relative points (1 point ≈ half a day of focused work for one person). MVP points are what must be built; stretch points are optional.
+
+| | P1 | P2 | P3 | P4 | P5 |
+|---|---|---|---|---|---|
+| **MVP effort** | 15 | 14.5 | 14.5 | 14.5 | 15 |
+| Stretch effort | 4 | 2 | 8 | 9 | 5 |
+| Early work (Phase 0–1) | Classifier, initial state, mastery model, snapshot format | Types, reducer, RNG and tape, runtime | Triage and Allocate verbs, i18n loader, validator | Design kit, guardrail components, market engine | Scaffold, storage, outbox, phone surfaces |
+| Late work (Phase 3–4) | Progress screens, certificate | Dashboard, story polish | Translations, audio files | Arcade shell polish | Facilitator dashboard polish |
+
+### Timeline at a glance
+
+```mermaid
+gantt
+    dateFormat X
+    axisFormat %s
+    section P1
+    Classifier, initial state, mastery model   :0, 3
+    Onboarding screens, pre/post check         :3, 6
+    Branch manager and replay                  :3, 7
+    Comparison, Parallel Lives, year-end        :7, 10
+    Quick Play, Progress, certificate           :10, 13
+    section P2
+    Types, reducer, RNG and tape               :0, 4
+    Module runtime and Choose verb              :2, 5
+    Stage graph, gates, scheduler               :5, 9
+    LifePath screens, dashboard                 :8, 12
+    Story skeleton, capstone                    :11, 13
+    section P3
+    Triage, Allocate, i18n loader, validator    :0, 4
+    Get Banked games                            :3, 6
+    Budget and save games                        :5, 10
+    Commit, Rank, Debt Ladder, Rescue Mission   :8, 11
+    Translations, audio pipeline                :10, 13
+    section P4
+    Design kit and guardrail components          :0, 3
+    Market engine and Predict verb              :2, 6
+    Chai Price, Compounding, Time Machine        :5, 9
+    Stock Market and Mutual Fund games           :8, 12
+    Arcade shell, investment-scam sort           :11, 13
+    section P5
+    Scaffold, storage, outbox, profiles          :0, 4
+    Phone surfaces, UPI Simulator                :3, 7
+    Scam Inbox                                   :6, 9
+    Sync and backend                             :7, 11
+    Facilitator dashboard                        :10, 13
+```
+
+*(Units are working blocks, not calendar dates; stretch it to your hackathon length.)*
 
 ---
 
-## P1 — Front Door, Progress & Facilitator UI
+## P1 — Persona, Progress & Time Travel
 
 ### Mission
-A student gets from a link to playing their character in under 5 minutes, always knows what to do next, and can see what they've learned. A facilitator can set up and run a class from their phone.
+Turn ten answers into a believable character, track what each student understands, and let students look back across a life: rewind any key decision, compare parallel lives under the same luck, and review their year.
 
 ### Owns
-`src/design/` · `src/onboarding/` · `src/home/` · `src/progress/` · `src/facilitator/`
+`src/onboarding/` · `src/mastery/` · `src/rewind/` · `src/quickplay/` · `src/progress/`
 
 ### Responsibilities
 
-**1. Design system (build first; everyone depends on it)**
-- Tailwind design tokens: colour palette with light and dark variants, spacing scale, type scale with a "large text" mode.
-- Core components: `Card`, `BigButton`, `Meter` (cash, peace of mind, trust, goal, safety), `CoinStack`, `Dialog`, `BottomSheet`, `ProgressBar`, `AudioButton`, `LockedTile` (with reason text), `Badge`, `Toast`.
-- Right-to-left-safe layout utilities (Urdu), tested on every component.
-- Icon set: four pillar icons, meter icons, navigation icons.
-- A gallery page showing every component and its states, so others can copy usage.
+**1. Classifier and initial state (early, pure logic — 2.5 pts)**
+- `classify(answers): Persona` producing:
+  - life stage: school student (17) / college student (19) / first-time earner (21)
+  - circumstance: dependent / part-time earner / family contributor / young entrepreneur / guided saver
+  - money personality: saver / spender / supporter / risk-curious
+  - maturity: starter / builder / navigator (score from the experience question + the scenario question)
+  - tags: language, audio, text size, timers, household savings style, focus pillar, content mix
+- `generateInitialState(persona, seed): GameState`: starting cash, income and its regularity (fixed / irregular / seasonal), fixed needs, commitments (household share, siblings' costs), goal and goal amount, ±10% seeded variation. Every character starts unbanked so every life begins at Stage S0.
+- All values in a config file so they can be tuned without code changes.
+- Exhaustive unit tests: every answer combination gives a valid persona and state.
 
-**2. Setup flow**
-- Language picker: four large buttons in each language's own script, with audio.
-- Accessibility screen: audio narration, larger text, reduce motion, timers off.
-- Class code entry with a large keypad, plus QR scanning.
-- Avatar picker (12 illustrated avatars) and picture-PIN (choose 4 of 9 pictures).
-- "Play without a class" option that creates a local-only profile.
-
-**3. Character builder (10 questions)**
-- Question screens driven by a JSON config (question text keys, options, images, audio keys, filters), one question per screen, picture options, "Skip" or "Surprise me" on each.
-- The ten questions describe the *character*, never the student's real family or money:
-  1. Who do you want to play as? (school student 17 / college student 19 / first-time earner 21)
+**2. Character builder screens (1 pt)**
+- Ten question screens driven by a JSON config (text keys, options, images, audio keys, filters), one per screen, picture options, "Skip" or "Surprise me".
+- The questions describe the *character*, never the student's real family or money:
+  1. Who do you want to play as?
   2. Where does your character's money come from? (filtered by Q1)
   3. Who does your character live with, and what do they pay for?
   4. What is your character's big goal this year?
   5. How does your character's family keep its savings?
   6. Your character suddenly gets ₹1,000. What do they do first?
-  7. How much have *you* done with money tasks so far? (experience level only, no amounts)
+  7. How much have *you* done with money tasks so far? (experience only, no amounts)
   8. What do you want to get better at first?
   9. How do you like to learn?
   10. A short budgeting scenario (baseline knowledge)
-- Character naming (suggested local names or typed) and a character card summarising the life, with "Start this life" and "Change something".
+- Character naming and a character card ("Start this life" / "Change something").
+- Setup screens before the questions (language, accessibility, class code, avatar, picture-PIN) use P5's profile API.
 
-**4. Classifier and initial state**
-- `classify(answers): Persona` — life stage, circumstance (dependent / part-time earner / family contributor / young entrepreneur / guided saver), money personality (saver / spender / supporter / risk-curious), maturity (starter / builder / navigator) and tags (language, audio, text size, timers, household savings style, focus pillar, content mix).
-- `generateInitialState(persona, seed): GameState` — starting cash, monthly income and its regularity, fixed needs, commitments (household share, siblings' costs), goal and goal amount, ±10% seeded variation. Every character starts unbanked so every life begins at Stage S0.
-- All starting values in a config file so they can be tuned without code changes.
-
-**5. Pre-check and post-check**
+**3. Pre-check and post-check (1 pt)**
 - Two separate pools of 6 scenario questions (1–2 per pillar), never sharing an item.
-- Pre-check framed as "let's see where you start", no score shown; sets starting mastery (capped at 0.5).
-- Post-check after the year-end review, with a per-pillar growth screen.
+- Pre-check sets starting mastery (capped at 0.5), no score shown. Post-check after the year-end review, with growth per pillar.
 
-**6. Profiles on shared devices**
-- Avatar grid → picture-PIN → that student's dashboard.
-- Lockout after 3 wrong PINs, "Switch player" button, archiving old profiles.
-- Full isolation between profiles in local storage (using P5's storage API).
+**4. Mastery model (early, pure logic — 1.5 pts)**
+- `updateMastery(state, conceptDeltas, kind)`: `m = m + rate × (target − m)`, rate 0.3 for checks and 0.15 for in-play choices.
+- Status thresholds: red < 0.4, amber 0.4–0.7, green > 0.7.
+- Stuck rule: hint with audio after 2 misses on a concept, simpler variant after 3.
+- Spaced review queue: green concepts come back after 3, 7 and 14 days (used by Daily Challenge).
+- Misconception counters.
+- Used by P2's runtime and scheduler; unit tested.
 
-**7. Home dashboard**
-- One screen that fits 360×640 without scrolling: the LifePath card (month, stage, meters, rewind available), Arcade, Quick Play, My Progress, Learn, What-If Lab, Help card.
-- Locked tiles show a lock and a one-line audio reason.
-- "Recommended" tags from P2's scheduler; "Resume" when an activity was left midway.
-- Guided first-visit tour with at most 3 tooltips; sync status badge from P5.
+**5. Branch manager (core complexity — 3 pts)**
+- Snapshot format: full serialized `GameState` (including seed and tape cursor), timeline ID, checkpoint event ID, month, label.
+- Save a snapshot before every event marked `checkpoint: true` (6–10 per year) through P5's storage API.
+- `createBranch(snapshotId)`: new timeline that keeps the world seed and event tape, so outside events (shocks, festivals, scam messages, market moves) arrive in the same months in every timeline. Consequence events depend on that timeline's own flags.
+- Fast-forward: replay the original timeline's recorded actions after the branch point through P2's reducer, stopping when an action is no longer possible (e.g. not enough money).
+- Branch limit (configurable, default 3), "make this my life", and a guarantee that the original timeline is never overwritten.
+- Tests: tape events identical across branches; original state unchanged after branching; fast-forward stops correctly.
 
-**8. My Progress**
-- Mastery rings per pillar made of concept dots (red < 0.4, amber 0.4–0.7, green > 0.7).
-- Concept list per pillar with plain-language names.
-- "Your weak spots": up to 3 red concepts, each with a Practise button that launches the right activity through P2's runtime.
+**6. Rewind viewer and comparison (2.5 pts)**
+- Timeline strip of 12 months with checkpoint icons and labels ("M2 · Bought a phone ₹7,500").
+- Tap a checkpoint → see the original choice → "Live this differently".
+- Side-by-side comparison of 2–3 timelines: cash, bank, jars, debt, investments, goal, peace of mind, trust, safety.
+- "What made the difference": rule-based top 3 drivers from the ledger diff, explanation templates, a line chart across months, and a trade-off sentence instead of a verdict.
 
-**9. Badges and certificate**
-- Badge unlock animation at the reward step and a badge shelf.
-- Badges reward understanding and good process, never simulated money.
-- Certificate generated on the device (display name, class, NGO, pillars completed, date), saved as image or PDF, working offline and in all four languages including RTL. Participation version if not all stages are done.
+**7. Year-end review, Parallel Lives and Future Me (1.5 pts)**
+- "Your Year": goal, emergencies handled, scams avoided, debt, where the money went.
+- Parallel Lives summary across branches.
+- Future Me at 25: older avatar shaped by habits (prepared, calm, in debt), with a projected range from P4's market engine and the Assumptions drawer. Never a rich vs poor comparison.
+- Hands over to the post-check, then "Replay as a different character".
 
-**10. Settings**
-- Language, audio narration, auto-play audio, larger text, reduce motion, timers off, interest-free view. Changes apply instantly and are written to the persona tags.
+**8. Quick Play (1 pt)**
+- Scenario map grouped by pillar (24 scenarios + capstone), completion ticks and mastery colours.
+- Each scenario runs in P2's module runtime with a sandbox character generated from the persona; the LifePath character is never affected, only mastery is shared.
+- Debrief and "take the other branch and compare" (reusing the comparison view).
 
-**11. Learn glossary (stretch)**
-- Searchable list of 40+ terms (SIP, FD, inflation, UPI, EMI, KYC, NAV…), each with a one-line definition, a 60-second explainer card with audio, and a link to the activity that teaches it. Underlined terms inside scenarios open the card.
+**9. Progress, badges and certificate (late — 1 pt)**
+- Mastery rings per pillar, concept list, "Your weak spots" with Practise buttons.
+- Badge shelf; badges reward understanding and good process, never money.
+- Certificate generated on the device (name, class, NGO, pillars completed, date), offline, in all four languages including Urdu right-to-left.
 
-**12. Facilitator UI** (P5 builds the API behind it)
-- Facilitator login, class list.
-- Create class: name, NGO, centre, default language → join code and printable QR; consent checklist reminder.
-- Plan screen: the S0–S6 path and Arcade sections; unlock a stage for the class from a date; choose a session focus; generate a session QR for instant offline unlocks.
-- Class heatmap: concepts by pillar × red/amber/green counts; "Top 3 misconceptions this week" each with a 10-minute discussion prompt; pre → post gain per pillar; last-sync time per device.
-- Stretch: individual student list with stuck flags and PIN reset; printable offline worksheets; CSV/PDF report export; doubts inbox grouped by concept (preset doubt types, no free text).
+**Stretch (4 pts)**
+- Daily Challenge (one due concept per day, a streak that never removes progress).
+- Test-out of S0 and S1 for students who already bank or use UPI.
+- Class leaderboard by concepts mastered; challenge codes (persona + seed + scenario as a QR) so a classmate plays the same life with the same luck.
 
 ### Use cases owned
 | ID | Name | MVP |
 |---|---|---|
-| UC-SYS-01 | Install and first launch | ✅ |
 | UC-SYS-02 | Build a character (10 questions) | ✅ |
 | UC-SYS-03 | Pre-check and post-check | ✅ |
-| UC-SYS-04 | Return as a player on a shared device | ✅ |
-| UC-SYS-05 | Navigate the home dashboard | ✅ |
 | UC-SYS-06 | Mastery map and weak-spot practice | ✅ |
 | UC-SYS-07 | Badges and certificate | ✅ |
-| UC-SYS-08 | Learn glossary | Stretch |
-| UC-SYS-09 | Language, audio and accessibility | ✅ |
-| UC-FAC-01 | Create a class and join code | ✅ |
-| UC-FAC-02 | Plan sessions and unlock stages | ✅ |
-| UC-FAC-03 | Class heatmap and top misconceptions | ✅ |
-| UC-FAC-04 | Individual progress and stuck students | Stretch |
-| UC-FAC-05 | Print offline worksheets | Stretch |
-| UC-FAC-06 | Export a report | Stretch |
-| UC-FAC-07 | Answer student doubts | Stretch |
+| UC-LIFE-04 | Rewind to a key decision | ✅ |
+| UC-LIFE-05 | Compare timelines and Parallel Lives | ✅ |
+| UC-LIFE-06 | Year-end review and Future Me | ✅ |
+| UC-LIFE-07 | Quick Play scenario | ✅ |
+| UC-LIFE-03 | Test out of a stage | Stretch |
+| UC-LIFE-08 | Daily Challenge | Stretch |
+| UC-CLASS-01 | Class mastery leaderboard | Stretch |
+| UC-CLASS-02 | Challenge a classmate on the same life | Stretch |
 
 ### Provides to others
-- Design system components and tokens (everyone).
-- `Persona` object and the initial `GameState` (P2).
-- The Progress screen as the entry point for weak-spot practice.
+`Persona` and initial `GameState` (P2), mastery model (P2's runtime and scheduler, P5's facilitator aggregates use the same thresholds), snapshot format and branch manager, comparison view.
 
 ### Depends on
-- **P2:** `GameState`, mastery values, lock state, "Recommended" flags, the runtime to launch practice.
-- **P5:** storage API, i18n hook `t(key)`, audio hook, sync status, facilitator API.
+- **P2:** types, reducer (for replay), checkpoint flags, runtime.
+- **P4:** design kit, range and Assumptions components, market engine for Future Me.
+- **P5:** storage API, profile API, `logEvent()`.
+- **P3:** i18n hook.
 
 ### Content to write
-The 10 questions and options, pre/post item pools (12 items), badge list and descriptions, glossary terms, discussion prompts for the top 15 misconceptions, onboarding and dashboard strings.
-
-### Tests
-- Unit tests for `classify` and `generateInitialState` over every answer combination.
-- Visual checks of every screen at 360×640, with large text, and in Urdu RTL.
-
-### Order of work
-1. Design system basics → 2. Setup flow and character builder → 3. Classifier and initial state → 4. Dashboard → 5. Progress and badges → 6. Facilitator create class and heatmap → 7. Pre/post check and certificate → 8. Stretch items.
+The 10 questions and options, pre/post item pools (12 items), badge list, comparison explanation templates, Quick Play map labels.
 
 ### Done when
-Onboarding works end to end offline; every answer combination produces a valid persona and state; the dashboard and Progress match the engine's state; a facilitator can create a class and see a heatmap built from real synced data.
+Every answer combination gives a valid persona; mastery updates match the formula in tests; a branch keeps the same luck and never changes the original; the year-end review works from any persona and any combination of branches.
 
 ---
 
-## P2 — Life Engine, LifePath & Rewind
+## P2 — Core Engine & LifePath
 
 ### Mission
-One deterministic engine powers every mode. A 12-month life moves in order through stages S0–S6. Students can rewind any key decision and compare lives fairly, under the same luck.
+Build the deterministic engine that powers every mode, and the 12-month life that moves forward through stages S0–S6.
 
 ### Owns
-`src/engine/` · `src/lifepath/` · `src/rewind/` · `src/runtime/` (module runner + Choose verb) · `src/app/` stores · merging of `src/content/concepts.json`
+`src/engine/` · `src/lifepath/` · `src/runtime/` (module runner + Choose verb) · `src/home/` · `src/app/` stores · merging of `src/content/concepts.json`
 
 ### Responsibilities
 
-**1. Types and contracts (build first; everyone depends on them)**
-- `types.ts`: `GameState` (money, human meters, meta, learn, ledger), `Persona` (agreed with P1), `MiniGame`, `MiniGameContext`, `MiniGameResult`, `EffectMap`, `Snapshot`, `Event`.
-- `concepts.json` skeleton with all concept and misconception IDs; P2 merges additions from others.
+**1. Types and contracts (first, everyone depends on them — 1 pt)**
+- `types.ts`: `GameState` (money, human meters, meta, learn, ledger), `Persona` (agreed with P1), `MiniGame`, `MiniGameContext`, `MiniGameResult`, `EffectMap`, `Event`.
+- `concepts.json` skeleton with every concept and misconception ID.
 - A stub `ModuleRunner` so P3, P4 and P5 can mount their games from day one.
 
-**2. Engine reducer**
-- `reduce(state, action) → { state, events }`, pure and fully serializable.
+**2. Engine reducer (core complexity — 3 pts)**
+- `reduce(state, action) → { state, events }`: pure and fully serializable.
 - Actions: `START_MONTH`, `APPLY_EFFECTS`, `CHOOSE`, `ALLOCATE`, `COMMIT`, `MINIGAME_RESULT`, `END_MONTH`, `TAKE_DEBT`, `REPAY`, `SET_FLAG`.
-- Effect path syntax (`money.savingsJars.emergency: -2000`), `requires` checks that grey out unaffordable options, commitments that deduct every month and "bite" when income drops, a ledger entry with a reason key for every money movement.
-- Shortfall handling: when cash goes negative, force a shortfall event (borrow from family, loan app, cut a want).
+- Effect paths (`money.savingsJars.emergency: -2000`), `requires` checks that grey out unaffordable options, commitments that deduct every month and bite when income drops, debt with interest and due dates, a ledger entry with a reason key for every money movement.
+- Shortfall handling: cash below zero forces a shortfall event.
+- Property-based tests: same seed + same actions → identical state; money is never created or lost except through effects.
 
-**3. Seeded randomness and the event tape**
-- A small seeded random number generator.
-- `buildTape(seed, persona)`: all outside events for 12 months — shocks (cracked screen, medicine, school fee), festivals, scam messages, market regime, whether a friend repays a loan. The tape is what makes rewind fair: the same events arrive in the same months in every timeline.
+**3. Seeded randomness and the event tape (1.5 pts)**
+- A seeded random number generator shared by all games.
+- `buildTape(seed, persona)`: all outside events for 12 months (shocks, festivals, scam messages, market regime, whether a friend repays). The tape is what makes P1's rewind fair.
 
-**4. Stage graph (S0–S6)**
-- JSON definitions: S0 Get Banked (month 0), S1 Digital Money (1), S2 First Money & Plan (1–2), S3 Save & Track (3–4), S4 Big Decisions & Borrowing (5–7), S5 Grow Money (8–10), S6 Protect & Look Ahead (11–12).
-- Per stage: event pool, gate items, unlock rules, the safety event injected in that stage.
-- Gate logic: 2–3 items; fail → practice one level down → retry with new items; after a third fail, unlock with a "Recommended practice" flag.
-- Test-out for S0 and S1 (stretch); facilitator overrides that open stages in the Arcade and Quick Play without breaking LifePath order.
-- Arcade unlock order: Everyday Money and Stay Safe open from the start; Investing opens after S3.
+**4. Module runtime (2 pts)**
+- `ModuleRunner` running the 8 steps: Hook → Play → Result → Why? → Concept → Try again → Check → Reward.
+- Mounts the owner's `MiniGame` in Play; renders Why?, Concept, Check and Reward from scenario JSON; a short mode for gate items.
+- Autosave after every step (resume from any step); events through P5's `logEvent()`; mastery through P1's model.
+- Arcade and Quick Play modes never apply effects to the LifePath character.
 
-**5. Scheduler and adaptivity**
-- `pickEvents(state, library, tape)`: stage events filtered by persona and `requires`, plus tape events due this month, plus adaptive events; 2–4 events per month, never two of the same pillar in a row; one extra focus-pillar event every other month.
-- Adaptivity rules in config, for example: fell for a loan app → debt follow-up next month and Debt Cost Ladder later; collect-request misconception → repeat a variant within 2 months; peace of mind < 30 for two months → a breathing-space event; no emergency fund at S4 → a shock is guaranteed before S5; concept still red after its stage → Daily Challenge item.
-
-**6. Mastery model**
-- Update rule `m = m + rate × (target − m)` (0.3 for checks, 0.15 for in-play choices); red/amber/green thresholds.
-- Stuck rule: hint with audio after 2 misses, simpler variant after 3.
-- Spaced review: green concepts come back as Daily Challenge items after 3, 7 and 14 days.
-
-**7. Module runtime (the 8-step loop)**
-- `ModuleRunner` runs every activity through: Hook → Play → Result → Why? → Concept → Try again → Check → Reward.
-- Mounts the owner's `MiniGame` in the Play step; renders Why?, Concept, Check and Reward from scenario JSON; short mode (Play, Result, Concept, Check) for Daily Challenge and gate items.
-- Autosaves after every step; emits events through P5's `logEvent()`.
-- In Arcade and Quick Play mode, game effects never touch the LifePath character; only mastery is shared.
-
-**8. Choose verb**
+**5. Choose verb (0.5 pt)**
 - 2–4 options with pictures and audio; greyed options with reasons ("₹600 short").
 
-**9. LifePath screens**
-- Month intro (calendar page, income arrives, commitments deducted), event sequence, meter animations, month-end statement (income, needs, wants, saved, debt, one line of feedback), stage intro and gate screens.
+**6. Stage graph and gates (1.5 pts)**
+- JSON definitions: S0 Get Banked (month 0), S1 Digital Money (1), S2 First Money & Plan (1–2), S3 Save & Track (3–4), S4 Big Decisions & Borrowing (5–7), S5 Grow Money (8–10), S6 Protect & Look Ahead (11–12).
+- Per stage: event pool, gate items, unlock rules, the safety event for that stage.
+- Gate flow: 2–3 items; fail → practice one level down → retry with new items; after a third fail, unlock with a "Recommended practice" flag.
+- Arcade unlock order (Everyday Money and Stay Safe open; Investing after S3) and facilitator overrides from P5's sync.
 
-**10. Branch manager (Rewind)**
-- Snapshot before every event marked `checkpoint: true` (6–10 per year).
-- Create a branch from a snapshot, keeping the world seed and tape; consequence events depend on that timeline's flags.
-- Fast-forward: replay recorded later actions automatically, stopping when an action is no longer possible.
-- Branch limit (configurable, default 3); "make this my life"; the original timeline is never overwritten.
-- Snapshots stored through P5's storage schema.
+**7. Scheduler and adaptivity (2 pts)**
+- `pickEvents(state, library, tape)`: stage events filtered by persona and `requires`, plus tape events due this month, plus adaptive events; 2–4 per month; no two of the same pillar in a row; focus-pillar bonus.
+- Adaptivity rules in config: loan app taken → debt follow-up and Debt Cost Ladder later; collect-request mistake → a variant within 2 months; low peace of mind → breathing-space event; no emergency fund by S4 → guaranteed shock; concept still red → review item.
+- A hook so other owners can register single events (e.g. P5's scam messages, P3's KYC SMS).
 
-**11. Rewind viewer and Parallel Lives**
-- Timeline strip with checkpoint icons and labels ("M2 · Bought a phone ₹7,500").
-- Side-by-side comparison of 2–3 timelines: cash, bank, jars, debt, investments, goal, peace of mind, trust, safety.
-- "What made the difference" card built by rules from the ledger diff (top 3 drivers), a line chart across months, and a trade-off sentence instead of a verdict.
+**8. LifePath screens (2 pts)**
+- Month intro (calendar page, income arrives, commitments deducted), event sequence, meter animations, month-end statement (income, needs, wants, saved, debt, one line of feedback), stage intro and gate screens, checkpoint markers for P1.
 
-**12. Year-end review and Future Me**
-- "Your Year" summary: goal, emergencies handled, scams avoided, debt, where the money went.
-- Parallel Lives summary if branches exist.
-- Future Me at 25: older avatar shaped by habits (prepared, calm, in debt) with a projected range and P4's Assumptions drawer; never a rich vs poor comparison.
-- Hands over to P1's post-check and certificate; "Replay as a different character".
+**9. Home dashboard (late — 0.5 pt)**
+- The single-screen dashboard: LifePath card with month, stage and meters, Arcade, Quick Play, Progress, What-If Lab, Help card, locked tiles with reasons, "Recommended" and "Resume" tags, sync status from P5, a guided tour of at most 3 tooltips.
 
-**13. Quick Play and Daily Challenge**
-- Scenario map grouped by pillar (24 scenarios + capstone), completion ticks and mastery colours.
-- Sandbox character generated from the persona for each scenario; debrief; "take the other branch and compare".
-- Daily Challenge (stretch): one due concept, one short item, a streak that never removes progress when missed.
+**10. Story skeleton and capstone (0.5 pt)**
+- Month and stage connective cards, the capstone "One Year of Your Life", and the static advice-guard card ("We teach how money works, not what to buy"). Pillar events themselves are written by P3, P4 and P5.
 
-**14. Story content and guards**
-- Connective story cards for each month and stage, the capstone, and the static advice-guard card ("We teach how money works, not what to buy").
-
-**15. Class features (stretch)**
-- Class leaderboard by concepts mastered (never by money), with an option to hide your name.
-- Challenge codes (persona + seed + scenario) shown as a QR, so a classmate can play the same life with the same luck.
+**Stretch (2 pts)**
+- Seasonal and festival variety engine (content variables by seed); facilitator "session focus" weighting in the scheduler.
 
 ### Use cases owned
 | ID | Name | MVP |
 |---|---|---|
 | UC-LIFE-01 | Play a LifePath month | ✅ |
 | UC-LIFE-02 | Pass a stage gate | ✅ |
-| UC-LIFE-03 | Test out of a stage | Stretch |
-| UC-LIFE-04 | Rewind to a key decision | ✅ |
-| UC-LIFE-05 | Compare timelines and Parallel Lives | ✅ |
-| UC-LIFE-06 | Year-end review and Future Me | ✅ |
-| UC-LIFE-07 | Play a Quick Play scenario | ✅ |
-| UC-LIFE-08 | Daily Challenge | Stretch |
 | UC-LIFE-09 | Resume after an interruption | ✅ |
 | UC-LIFE-10 | Ask for investment advice (guard) | ✅ |
-| UC-CLASS-01 | Class mastery leaderboard | Stretch |
-| UC-CLASS-02 | Challenge a classmate on the same life | Stretch |
+| UC-SYS-05 | Navigate the home dashboard | ✅ |
 
 ### Provides to others
-Types, the `MiniGame` contract, `ModuleRunner`, Choose verb, engine store, concept list, scheduler hooks for injecting single events (e.g. P5's scam messages).
+Types, `MiniGame` contract, `ModuleRunner`, Choose verb, reducer (P1 uses it for replay), tape, scheduler hook, concept list.
 
 ### Depends on
-- **P1:** `Persona` and initial state; design system.
-- **P5:** storage, outbox `logEvent()`, i18n.
-- **P3, P4, P5:** the mini-games mounted in each stage.
-- **P4:** range display and Assumptions drawer for Future Me.
-
-### Content to write
-Stage definitions and gate items, month and stage story cards, the capstone, adaptivity rules, comparison explanation templates, advice-guard card.
-
-### Tests
-- Determinism: same seed + same choices → identical serialized state (property-based tests over random choice sequences).
-- Branch fairness: tape events occur in the same months in every timeline; the original timeline is unchanged after branching.
-- Resume: killing the app at every module step and reopening loses at most the current tap.
-
-### Order of work
-1. Types, concept list, stub runner → 2. Reducer and RNG/tape → 3. Module runtime and Choose → 4. LifePath screens with stub games → 5. Stage graph, gates and scheduler → 6. Mastery model → 7. Branch manager and comparison → 8. Year-end review → 9. Quick Play → 10. Stretch items.
+- **P1:** persona and initial state, mastery model.
+- **P4:** design kit.
+- **P5:** storage, `logEvent()`, facilitator unlocks.
+- **P3, P4, P5:** the mini-games and pillar events for each stage.
 
 ### Done when
-A full 12-month life plays end to end (stub games at first, real ones as they land); same seed and choices always give the same state; branches keep the same luck; resume works from any step.
+A 12-month life plays end to end (stub games first, real ones as they land); same seed and actions always give the same state; resume works from any step; every stage gate works.
 
 ---
 
-## P3 — Everyday Money games
+## P3 — Everyday Money & Content Pipeline
 
 ### Mission
-Take the character from unbanked to budgeting, saving and borrowing wisely, and build the four interaction verbs most other games reuse.
+Take the character from unbanked to budgeting, saving and borrowing wisely; build the four interaction verbs most games reuse; and own the pipeline that turns content into validated, translated packs.
 
 ### Owns
-`src/games/everyday/` · verbs `Allocate`, `Commit`, `Triage`, `Rank` in `src/runtime/verbs/` · `src/content/scenarios/bank/`, `plan/`, `save/`, `borrow/`
+`src/games/everyday/` · verbs `Allocate`, `Commit`, `Triage`, `Rank` · `src/content/scenarios/bank/`, `plan/`, `save/`, `borrow/` · `src/platform/i18n/` · `src/content/i18n/` · `tools/authoring/`
 
 ### Responsibilities
 
-**1. Verb components (build early; P4 and P5 use them)**
-- **Triage:** swipe cards left/right with tap and keyboard fallbacks; context re-sort support; summary of disagreements.
-- **Allocate:** drag coin stacks into jars, with a slider mode; live overflow check when bills exceed a jar; L1 uses ₹50 coins, L3 shows percentages and custom jars.
+**1. Verb components (early, others use them — 2.5 pts)**
+- **Triage:** swipe cards with tap and keyboard fallbacks, context re-sort, summary of disagreements.
+- **Allocate:** drag coin stacks into jars plus slider mode, live overflow check, L1 coins only, L3 percentages and custom jars.
 - **Commit:** amount + duration picker that creates a recurring engine commitment (savings, EMI, SIP).
-- **Rank:** drag to order a list; shows the ₹ cost of the student's order vs the best order.
-- Each returns choices in the `MiniGameResult` format; each documented with an example scenario.
+- **Rank:** drag to order, ₹ cost of the student's order vs the best one.
+- Each returns `MiniGameResult` choices and is documented with an example.
 
-**2. Get Banked (Stage S0)**
-- **Document Hunt:** a room scene with tappable items (Aadhaar, PAN, photo, school ID, a sibling's ID, an electricity bill, a cinema ticket, guardian's ID); drag into a bank folder; wrong items bounce back with a reason; guardian ID required for under-18 characters; branch for a missing document.
-- **Bank Counter:** a generic counter (no real bank branding) with a clerk character; three account cards (savings, zero-balance basic, minor account with guardian); a simplified illustrated form with nominee explanation; a welcome kit (passbook, debit card, PIN envelope); PIN setting where a passer-by appears to teach covering the keypad; sets `hasBankAccount`; then hands a fake "KYC incomplete" SMS to P5's Scam Inbox component.
+**2. Content pipeline (early validator, late translations — 2 pts)**
+- i18n loader `t(key)` with fallbacks, plural rules, ₹ formatting with Indian digit grouping, right-to-left switching for Urdu.
+- Content validator in CI: JSON schema for scenarios; checks concept IDs, verbs, effect paths, and that every string key exists in every language.
+- String extraction from scenario JSON and a translation spreadsheet round-trip; English and Telugu complete, Hindi and Urdu for at least S0–S2.
+- Audio pipeline: one file per string key, lazy loading, fallback to device text-to-speech.
 
-**3. Plan & Budget games**
-- **Swipe Sort (needs vs wants):** 30+ persona-specific cards; some return with context ("…and your classes are online"); explanations for disagreements, no hard "wrong" on ambiguous items.
-- **Jar Split:** income arrives as coins scaled to the character; Needs / Wants / Future (later Emergency) jars; known bills attached to Needs; overflow warning; month-end statement of what leaked and what survived; special feedback for family contributors whose needs take ~80%.
-- **Goal Builder:** predict months to reach the goal, slider for the monthly amount, timeline animation, make the goal specific, saved as a commitment that becomes the 🎯 meter.
-- Stretch: **Phone vs Coaching** (opportunity cost, e.g. a ₹1,200 trip = 2.4 months of goal), **Good Month, Lean Month** (irregular income buffer), **Family Market Trip** (unit prices at two shops), **Festival and Peer Pressure** (including what the character says to friends).
+**3. Get Banked, Stage S0 (2 pts)**
+- **Document Hunt:** room scene with tappable documents (Aadhaar, PAN, photo, school ID, a sibling's ID, a bill, a cinema ticket, guardian's ID); drag into a bank folder; wrong items bounce back with reasons; guardian ID for under-18s; branch for a missing document.
+- **Bank Counter:** a generic counter (no real branding); savings / zero-balance / minor account cards; illustrated form with nominee; welcome kit; PIN setting with a passer-by to teach covering the keypad; sets `hasBankAccount`; triggers a fake KYC SMS through P5's single-message component.
 
-**4. Save & Manage games**
-- **Spending Detective:** a UPI-style history built from the character's own ledger plus tape items; tag transactions by category; pie chart; convert one leak to a year ("chai = ₹5,280/year"); rank leaks and pick one to cut; 6-month projection. All data simulated.
-- **Surprise Month:** a tape shock (screen ₹2,000, medicine ₹1,500, school trip, bike repair); calm path with a buffer and the *Emergency Ready* badge, or options without one (family, loan app hand-off, skip a need, sell something); set an emergency target and add the Emergency jar.
-- Stretch: **Pay Yourself First** (two versions of the character side by side), **Where to Keep Your Money** (cash, bank, deposits, post office, committee rated on safety, access, growth; interest-free options first when that view is on), **A Friend Needs ₹2,000** (lending and trust), **The 70%-Off Sale** (impulse vs intent, 48-hour rule), **Insurance Pool** (20 characters sharing risk).
+**4. Plan & Budget, Stage S2 (3 pts)**
+- **Swipe Sort:** 30+ persona-specific needs/wants cards with context re-sorts and explanations.
+- **Jar Split:** income as coins scaled to the character; Needs / Wants / Future (later Emergency); bills attached to Needs; overflow warning; month-end statement; feedback for family contributors whose needs take ~80%.
+- **Goal Builder:** predict months to the goal, slider, timeline animation, make the goal specific, saved as a commitment and the 🎯 meter.
 
-**5. Borrowing games**
-- **Debt Cost Ladder:** need ₹2,000 for 3 months; family, moneylender, loan app, buy-now-pay-later; rank by cost; ladder animation of total repaid; missed-payment follow-up for the chosen option.
-- Stretch: **Bike: EMI vs Save-and-Buy** (true cost of credit, the credit score as a "trust meter"), **Education Choice** (coaching, college, ITI, job; scholarships vs education loan; shapes later events).
+**5. Save & Manage, Stage S3 (2.5 pts)**
+- **Spending Detective:** UPI-style history built from the character's ledger plus tape items; tag categories; pie chart; one leak converted to a year; rank leaks; 6-month projection. All simulated.
+- **Surprise Month:** tape shock (screen, medicine, school trip, bike repair); calm path with a buffer and the *Emergency Ready* badge, or options without one; set an emergency target and add the Emergency jar.
 
-**6. What-If Lab: goal and EMI calculators (stretch)**
-- Pre-filled with the character's numbers, freely editable, nothing stored, assumptions always shown.
+**6. Borrowing and recovery (1.5 pts)**
+- **Debt Cost Ladder (S4):** need ₹2,000 for 3 months; family, moneylender, loan app, buy-now-pay-later; rank by cost; ladder animation of total repaid; missed-payment follow-up.
+- **Rescue Mission (S6):** the character's friend lost ₹2,000 to a fake job site; order the steps (1930, bank, cybercrime.gov.in, evidence, trusted adult, warn others); faster correct order → better recovery chance; result saved as the dashboard's Help card. (Built here because it uses the Rank verb.)
+
+**7. Pillar events and checks (1 pt)**
+- LifePath events for S0, S2, S3, S4 (shocks, festivals, peer pressure), 2–3 check items per use case, gate items for those stages.
+
+**Stretch (8 pts)**
+- Phone vs Coaching, Good Month/Lean Month, Family Market Trip, Festival and Peer Pressure, Pay Yourself First, Where to Keep Your Money (with interest-free view), A Friend Needs ₹2,000, 70%-Off Sale, Insurance Pool, Bike EMI vs Save, Education Choice, What-If goal and EMI calculators, Learn glossary, spreadsheet → JSON authoring converter.
 
 ### Use cases owned
 | ID | Name | MVP |
 |---|---|---|
 | UC-BANK-01 | Document Hunt | ✅ |
-| UC-BANK-02 | Bank Counter: open an account | ✅ |
+| UC-BANK-02 | Bank Counter | ✅ |
 | UC-PB-01 | Needs vs Wants Swipe Sort | ✅ |
 | UC-PB-02 | Jar Split | ✅ |
 | UC-PB-03 | Goal Builder | ✅ |
-| UC-PB-04 | Phone vs Coaching | Stretch |
-| UC-PB-05 | Good Month, Lean Month | Stretch |
-| UC-PB-06 | Family Market Trip | Stretch |
-| UC-PB-07 | Festival and Peer Pressure | Stretch |
-| UC-SM-01 | Pay Yourself First | Stretch |
 | UC-SM-02 | Spending Detective | ✅ |
 | UC-SM-03 | Surprise Month | ✅ |
-| UC-SM-04 | Where to Keep Your Money | Stretch |
-| UC-SM-05 | A Friend Needs ₹2,000 | Stretch |
-| UC-SM-06 | The 70%-Off Sale | Stretch |
-| UC-SM-07 | Insurance Pool | Stretch |
 | UC-BR-01 | Debt Cost Ladder | ✅ |
-| UC-BR-02 | Bike: EMI vs Save-and-Buy | Stretch |
-| UC-BR-03 | Education Choice | Stretch |
-| UC-TK-01 | What-If Lab: goal and EMI | Stretch |
+| UC-SAFE-10 | Rescue Mission | ✅ |
+| UC-SYS-09 | Language, audio and accessibility (pipeline side) | ✅ |
+| UC-PLAT-04 | Download another language | ✅ |
+| UC-PB-04 to 07, UC-SM-01, 04 to 07, UC-BR-02, 03, UC-TK-01, UC-SYS-08, UC-PLAT-03 | Stretch games and tools | Stretch |
 
 ### Provides to others
-The four verb components; the `hasBankAccount` flag; the transaction-list component (reused by P5's UPI history).
+Four verbs, `t(key)` and audio hooks, content validator, transaction-list component (reused by P5's UPI history), Help card content.
 
 ### Depends on
 - **P2:** runtime, Choose verb, types, engine actions.
-- **P1:** design system.
-- **P4:** Predict verb (Goal Builder, Pay Yourself First, sale, insurance).
-- **P5:** Scam Inbox single-message component (KYC SMS after account opening), i18n.
-
-### Content to write
-Scenario JSON for every use case above; 2–3 check items per use case; gate items for S0, S2, S3 and S4; 30+ needs/wants cards; shock events for the tape; festival and place variables.
-
-### Tests
-- Verb components return correct result shapes; Allocate never allows money to appear or disappear.
-- Each game runs at L1 and L2 inside the module runner.
-
-### Order of work
-1. Triage and Allocate → 2. Document Hunt and Bank Counter → 3. Swipe Sort, Jar Split, Goal Builder → 4. Commit and Rank → 5. Spending Detective, Surprise Month → 6. Debt Cost Ladder → 7. Stretch games by stage order.
+- **P4:** design kit, Predict verb.
+- **P5:** single-message scam component, storage for downloaded language packs.
 
 ### Done when
-S0, S2 and S3 play end to end inside LifePath with real games; all 8 MVP use cases work at L1 and L2; the four verbs are documented and used by at least one other person's game.
+S0, S2 and S3 play end to end inside LifePath; all MVP games work at L1 and L2; the four verbs are used in at least one other person's game; the validator runs in CI; English and Telugu are complete.
 
 ---
 
-## P4 — Investing Arcade
+## P4 — Investing, Design Kit & Investment Scams
 
 ### Mission
-Make risk, time, compounding and diversification something students feel, through simulations that are honest about uncertainty and never recommend anything.
+Make risk, time, compounding and diversification something students feel, with simulations that are honest about uncertainty and never recommend anything. Also provide the shared UI kit so nobody waits on design.
 
 ### Owns
-`src/games/investing/` · `Predict` verb · guardrail components (`AssumptionsDrawer`, `RangeDisplay`, `FanChart`, `SimBanner`) · `src/content/scenarios/invest/` · `src/content/assumptions.json`
+`src/design/` · `src/games/investing/` · `Predict` verb · guardrail components · `src/content/scenarios/invest/` · `src/content/assumptions.json`
 
 ### Responsibilities
 
-**1. Guardrail components (build early; P2 and P3 use them)**
-- `assumptions.json`: growth rates, volatility, inflation and fees for every fictional asset.
-- `AssumptionsDrawer` that shows the assumptions behind any projection.
-- `RangeDisplay` ("between ₹X and ₹Y in most futures") and `FanChart` (shaded band + median line, Recharts).
-- `SimBanner`: "Simulation based on assumptions. Not a prediction or advice." on every investing screen.
+**1. Design kit (day one — 1.5 pts)**
+- Set up a ready-made Tailwind component approach (copy-in components rather than designing from scratch) with tokens for colours (light and dark), spacing and a large-text type scale.
+- Core components: `Card`, `BigButton`, `Meter`, `CoinStack`, `Dialog`, `BottomSheet`, `ProgressBar`, `AudioButton`, `LockedTile`, `Badge`, `Toast`; RTL-safe utilities; pillar and meter icons.
+- A gallery page. Functional first; visual polish happens in the shared final phase.
 
-**2. Predict verb**
-- Slider or option guess before a reveal; a guess-vs-reality chart where the gap is the lesson.
+**2. Guardrail components (early — 1.5 pts)**
+- `assumptions.json`: growth, volatility, inflation and fees for every fictional asset.
+- `AssumptionsDrawer`, `RangeDisplay`, `FanChart` (shaded band + median), `SimBanner` ("Simulation based on assumptions. Not a prediction or advice.").
 
-**3. Market simulation engine**
-- Seeded return generator per fictional asset class: Steady Box, Mixed Basket, Bumpy Ride, sector mini-businesses, fictional companies, fictional funds, gold, property.
-- Shocks and news events read from P2's tape.
-- Monte Carlo runner for 500 futures in a Web Worker (or pre-computed), under 1 second on a low-end phone.
-- Pure functions with unit tests; P2 uses it for Future Me ranges.
+**3. Predict verb (0.5 pt)**
+- Guess before the reveal; guess-vs-reality chart.
 
-**4. Stage S5 games (inside LifePath)**
-- **Chai Price Time Travel:** chai from ₹5 to ₹20 over time; predict the price in 10 years; range reveal; ₹1,000 in a box buys fewer and fewer cups.
-- **Compounding Garden / ₹500 a month for 10 years:** simple vs compound gardens side by side; predict first; fast-forward 5/10/20 years; start at 18 vs 28; L1 visual, L2 numbers, L3 Rule of 72.
-- **Time Machine:** choose a goal and deadline, choose a mix of three paths, run 500 futures, fan chart, insight that money needed soon should take less risk.
-- Stretch: **Risk & Return Ride** (5 years month by month, a 25% drop and a sell / wait / add-more choice), **Basket Builder** (6 fictional mini-businesses hit by sector events; all-in-one vs spread).
+**4. Market simulation engine (core complexity — 3 pts)**
+- Seeded return generator per fictional asset: Steady Box, Mixed Basket, Bumpy Ride, sector mini-businesses, fictional companies and funds, gold, property.
+- News and shock events read from P2's tape.
+- Monte Carlo runner for 500 futures in a Web Worker, under 1 second on a low-end phone.
+- Pure, unit tested; used by P1 for Future Me.
 
-**5. Arcade: Stock Market Simulator**
-- 6 fictional companies (logo, one-line business, price chart), virtual ₹10,000, 12 rounds.
-- Each round: a news card → prices move → buy, sell or hold; portfolio panel with gain or loss.
-- Behavioural moments: a social-media rumour (FOMO) and a sharp drop (panic).
-- Small fee per trade; debrief on what moved prices, diversification, trading frequency and its cost, compared with "buy a spread and hold".
-- Navigator mode (stretch): an order book with bid and ask prices and limit orders.
+**5. Stage S5 games (3 pts)**
+- **Chai Price Time Travel:** ₹5 to ₹20 chai over time; predict; range reveal; ₹1,000 in a box buys fewer cups.
+- **Compounding Garden / ₹500 a month for 10 years:** simple vs compound gardens; predict first; fast-forward 5/10/20 years; start at 18 vs 28; L1 visual, L2 numbers, L3 Rule of 72.
+- **Time Machine:** goal and deadline, mix of three paths, run 500 futures, fan chart, insight that money needed soon should take less risk.
 
-**6. Arcade: Mutual Fund Challenge**
-- Pool animation (many small amounts into one fund holding many companies); NAV as the price of one unit.
-- Three fictional funds (low-cost index-style, higher-cost active, sector).
-- Lump sum vs hypothetical monthly SIP; 10 simulated years with dips; rupee cost averaging shown as more units bought when prices are low.
-- Fee comparison over time; ranges and Assumptions drawer; never a "best fund".
+**6. Stock Market Simulator (2 pts)**
+- 6 fictional companies, virtual ₹10,000, 12 rounds; news card → price move → buy / sell / hold; portfolio panel; a rumour (FOMO) and a sharp drop (panic); fee per trade; debrief vs "buy a spread and hold".
 
-**7. Arcade stretch games**
-- **Where to Park ₹10,000** (Arcade hub): split across cash, a deposit, a fund, gold and a property share; 5 years of events; links to each deeper game.
-- **Property Deal Simulator:** three fictional properties; uncover hidden costs (down payment, registration and stamp duty, brokerage, EMI and interest, maintenance, repairs, tax); rent, vacancies and repairs over the years; a sudden cash need tests liquidity; compare with renting and investing the difference.
-- **Gold & Asset Challenge:** jewellery vs coins vs a generic "digital or paper gold" category; making charges and purity; resale deductions; comparison with a deposit and a fund under the same events.
-- **Trading Pit** (classroom multiplayer, with P5 for local networking): the facilitator's device hosts a market for 2–3 fictional assets with a hidden true value; students post buy/sell prices in rounds; reveal and discussion. Bots for single-player.
-- **What-If Lab compounding calculator:** growth curve with range, inflation toggle, Assumptions drawer, nothing stored.
+**7. Mutual Fund Challenge (1.5 pts)**
+- Pool animation and NAV; 3 fictional funds (low-cost index-style, higher-cost active, sector); lump sum vs hypothetical SIP; 10 years with dips; rupee cost averaging; fee comparison; never a "best fund".
 
-**8. Arcade shell**
-- Investing section page with game tiles, lock state (opens after S3 or facilitator override) and "Recommended" tags.
+**8. Investing, Gambling or Scam? (0.5 pt)**
+- Sort cards (guaranteed 30% a month, paid Telegram tips, long-term investing with no guarantee, a betting app, a hyped coin); honest signs vs red flags; regulators mentioned generally, no product names.
+
+**9. Arcade shell and S5 events (1 pt)**
+- Investing section page with tiles, lock state (after S3 or facilitator override), "Recommended" tags; S5 LifePath events and gate items.
+
+**Stretch (9 pts)**
+- Risk & Return Ride, Basket Builder, Where to Park ₹10,000, Property Deal Simulator, Gold & Asset Challenge, Stock Market order-book mode, Trading Pit (classroom multiplayer, with P5 for local networking), What-If compounding calculator, The Telegram Group & Celebrity Says Double It, The Pyramid (Ponzi).
 
 ### Use cases owned
 | ID | Name | MVP |
 |---|---|---|
 | UC-INV-01 | Chai Price Time Travel | ✅ |
 | UC-INV-02 | Compounding Garden / ₹500 for 10 years | ✅ |
-| UC-INV-03 | Risk & Return Ride | Stretch |
-| UC-INV-04 | Time Machine (500 futures) | ✅ |
-| UC-INV-05 | Basket Builder | Stretch |
-| UC-INV-06 | Where to Park ₹10,000 | Stretch |
+| UC-INV-04 | Time Machine | ✅ |
 | UC-INV-07 | Stock Market Simulator | ✅ |
 | UC-INV-08 | Mutual Fund Challenge | ✅ |
-| UC-INV-09 | Property Deal Simulator | Stretch |
-| UC-INV-10 | Gold & Asset Challenge | Stretch |
-| UC-INV-11 | Trading Pit | Stretch |
-| UC-TK-02 | What-If Lab: compounding | Stretch |
+| UC-SAFE-09 | Investing, Gambling or Scam? | ✅ |
+| UC-INV-03, 05, 06, 09, 10, 11, UC-TK-02, UC-SAFE-07, UC-SAFE-08 | Stretch games | Stretch |
 
 ### Provides to others
-Guardrail components, Predict verb, market simulation engine.
+Design kit (everyone), guardrail components (P1, P3), Predict verb (P3), market engine (P1).
 
 ### Depends on
-- **P2:** runtime, types, tape events.
-- **P3:** Allocate and Commit verbs.
-- **P1:** design system.
-- **P5:** local networking for Trading Pit (stretch), i18n.
-
-### Content to write
-Fictional company and fund names and descriptions, news cards, property and gold cost cards, check items, S5 gate items, the content of `assumptions.json`.
-
-### Tests
-- Market engine: seeded runs are identical; distributions match the configured assumptions.
-- Performance: 500 futures under 1 second on a throttled low-end profile.
-- Word-list test over all content files: no real company, fund, bank, app or brand names.
-
-### Order of work
-1. Guardrail components and Predict → 2. Market engine → 3. Chai Price and Compounding Garden → 4. Time Machine → 5. Stock Market Simulator → 6. Mutual Fund Challenge → 7. Arcade shell → 8. Stretch games.
+- **P2:** runtime, types, tape.
+- **P3:** Allocate and Commit verbs, i18n.
+- **P5:** local networking for Trading Pit (stretch).
 
 ### Done when
-S5 plays inside LifePath; the Stock Market and Mutual Fund games are complete; every investing screen shows the banner, ranges and the Assumptions drawer; the word-list test passes.
+S5 plays inside LifePath; Stock Market and Mutual Fund games are complete; every investing screen shows the banner, ranges and Assumptions drawer; a word-list test confirms no real company, fund, bank or brand names; 500 futures run in under a second on a throttled phone profile.
 
 ---
 
-## P5 — Stay Safe games & Platform
+## P5 — Stay Safe, Platform & Facilitator
 
 ### Mission
-Students get scammed safely and learn the patterns behind scams. The whole app installs from a link, runs offline, syncs when it can, and works in four languages.
+Students get scammed safely and learn the patterns behind scams. The app installs from a link, runs offline, syncs when it can, and gives facilitators a view of their class.
 
 ### Owns
-`src/games/safe/` · `Judge` and `ActInSitu` verbs and simulated phone surfaces · `src/platform/` · `tools/authoring/` · `supabase/` · i18n pipeline and `src/content/i18n/` · `src/content/scenarios/safe/`
+`src/games/safe/` · `Judge` and `ActInSitu` verbs and phone surfaces · `src/platform/` (except i18n) · `supabase/` · `src/facilitator/`
 
-### Part A — Stay Safe
+### Responsibilities
 
-**1. Simulated phone surfaces (generic designs, no real branding)**
-- UPI-style app: link account, set PIN, pay by QR, collect request, transaction history (reusing P3's list component).
-- SMS list, chat thread, email view, incoming call screen with audio, app permission dialogs.
-- Optional timer overlay that respects "timers off".
+**1. Project scaffold (day one — 1 pt)**
+- Vite + React + TypeScript + Tailwind; lint, format, Vitest; CI running tests and P3's validator.
 
-**2. Verbs**
-- **Judge:** legit / suspicious / scam with tappable "tells" revealed on the artefact.
-- **Act in-situ:** actions inside a surface that move simulated money, then a post-mortem with highlighted tells and a slow-motion replay.
+**2. Storage and profiles (early — 2 pts)**
+- Dexie schema: `profiles`, `saves`, `snapshots`, `outbox`, `settings`, `contentMeta`; per-profile isolation; storage-quota checks; a simple storage API.
+- Profile API and setup screens: language picker, accessibility toggles, class code with QR scan, avatar picker, picture-PIN, avatar grid for shared devices, lockout after 3 wrong PINs, switch player, "play without a class".
 
-**3. MVP games**
-- **UPI Simulator (S1):** pay ₹50 by QR; then "RAHUL K. is requesting ₹1,200" for a cricket bat sale, with a 15-second timer; paying lowers the balance and triggers the four-tells post-mortem; rule card "You never need a PIN to receive money"; also QR "scan to receive" and how refunds really work.
-- **Scam Inbox:** a day of messages (fake KYC link, lottery with processing fee, like-videos job, "Mom, new number", plus a genuine school message); Block & report / Ignore / Open / Ask a trusted adult; safe "what would have happened" sequences; scoring for correct responses, false alarms and time. Also a single-message mode the scheduler injects into every LifePath stage.
-- **Rescue Mission (S6):** the character's friend lost ₹2,000 to a fake job site; order the steps (call 1930, inform the bank, report at cybercrime.gov.in, save evidence, tell a trusted adult, warn others); faster correct order gives a better recovery chance; result saved as the static Help card on the dashboard.
+**3. PWA (1 pt)**
+- `vite-plugin-pwa`: app shell under 3 MB precached, content packs cached per language, install prompt, safe updates.
 
-**4. Stretch games**
-- **Identity Vault:** sort OTP, PINs, password, Aadhaar photo, PAN, account number, name, school, ID selfie into never / carefully / OK to share; phone privacy cards.
-- **Red Flag Hunter:** tap suspicious parts of a message; reveal categories (urgency, too good to be true, asks for secrets, pretends to be someone, secrecy).
-- **The Call:** audio call escalating from friendly to threatening, including a fake "digital arrest"; correct path is refuse, hang up, call the official number, tell an adult.
-- **Loan App Trap:** "instant loan" ad, permission requests, huge fees, harassment of contacts; debrief on permissions, registered lenders and reporting; sets `fellForLoanApp`.
-- **The Telegram Group and Celebrity Says Double It:** fake profit screenshots, a VIP fee, a pump-and-dump on a fictional stock, a labelled deepfake-style endorsement.
-- **The Pyramid:** predict, then watch a Ponzi scheme pay early members with later members' money until it collapses.
-- **Investing, Gambling or Scam?:** sort guaranteed returns, paid tips, long-term investing, betting apps and a hyped coin; regulated vs red-flag signs, no product names.
+**4. Outbox and sync (1.5 pts)**
+- `logEvent()` used by everyone, enforcing the event schema (pseudonymous ID, class, activity, concept, choice, correct, misconception, level, stage, timeline, timestamp; no names, no free text).
+- Batches of 200 with idempotent IDs, retry with backoff, compaction when storage is low; pull of class unlocks and content versions; sync status for the dashboard.
 
-**Tone rule:** never blame the victim. No game asks about the student's real experiences.
+**5. Backend (1.5 pts)**
+- Supabase tables: `ngos`, `classes`, `facilitators`, `players` (ID, class, display name only), `events`, `class_concept_daily`, `unlocks`.
+- Row-level security (facilitators see only their classes); facilitator-only login; edge function that aggregates events into heatmap data.
 
-### Part B — Platform
+**6. Facilitator dashboard (late — 2 pts)**
+- Create class → join code and printable QR, consent checklist reminder.
+- Plan screen: unlock stages for the class, session QR for instant offline unlocks.
+- Heatmap: concepts by pillar × red/amber/green; top 3 misconceptions with 10-minute discussion prompts; pre → post gain; last sync per device.
 
-**5. Project setup (build first)**
-- Vite + React + TypeScript + Tailwind; linting, formatting, Vitest; CI that runs tests and the content validator on every pull request.
+**7. Phone surfaces and verbs (2 pts)**
+- Generic UPI-style app (link account, PIN, QR pay, collect request, history using P3's list), SMS list, chat thread, email, incoming call with audio, permission dialogs; timer overlay respecting "timers off".
+- **Judge** (legit / suspicious / scam with tappable tells) and **Act in-situ** (simulated money moves, then a post-mortem with highlighted tells and slow-motion replay).
 
-**6. PWA and installation**
-- `vite-plugin-pwa` (Workbox): precached app shell under 3 MB, content packs cached per language, install prompt, safe update handling.
+**8. UPI Simulator, Stage S1 (1.5 pts)**
+- Pay ₹50 by QR; then "RAHUL K. is requesting ₹1,200" for a cricket bat sale with a 15-second timer; paying lowers the balance and shows the four tells; rule card "You never need a PIN to receive money"; QR "scan to receive"; how refunds work.
 
-**7. Local storage**
-- Dexie schema: `profiles`, `saves`, `snapshots`, `outbox`, `settings`, `contentMeta`.
-- Per-profile isolation, storage-quota checks, a simple storage API for others.
+**9. Scam Inbox (2.5 pts)**
+- A day of messages (fake KYC link, lottery fee, like-videos job, "Mom, new number", a genuine school message); Block & report / Ignore / Open / Ask a trusted adult; safe "what would have happened" sequences; scoring for correct responses, false alarms and time.
+- Single-message mode registered with P2's scheduler for every LifePath stage.
+- 40+ messages with red-flag annotations; S1 gate items.
 
-**8. Sync**
-- `logEvent()` outbox API used by everyone; events follow a fixed schema (pseudonymous player ID, class, activity, concept, choice, correct, misconception, level, stage, timeline, timestamp; no names or free text).
-- Batches of up to 200 with idempotent IDs, retry with backoff, compaction into daily summaries when storage is low.
-- Pull of class unlocks and content versions in the same sync; sync status indicator for P1's dashboard.
-- Stretch: offline transfer from student devices to the facilitator's device (QR export or local hotspot).
+**Stretch (5 pts)**
+- Identity Vault, Red Flag Hunter, The Call (audio, fake "digital arrest"), Loan App Trap (permissions, fees, harassment, registered lenders), content pack updates, offline transfer from student devices to the facilitator (QR or hotspot), individual student view, worksheets, report export, doubts inbox, local networking for P4's Trading Pit.
 
-**9. Backend**
-- Supabase tables: `ngos`, `classes`, `facilitators`, `players` (ID, class, display name only), `events`, `class_concept_daily`, `unlocks`, `doubts`.
-- Row-level security so facilitators see only their own classes; facilitator-only login.
-- Edge function to aggregate events into the heatmap data; API endpoints for P1's facilitator screens (create class, unlocks, heatmap, misconceptions, student list, export).
-
-**10. Languages**
-- String loader `t(key)` with fallbacks, plural rules, ₹ formatting with Indian digit grouping.
-- RTL switching for Urdu.
-- String extraction from scenario JSON; translation spreadsheet round-trip; English and Telugu complete, Hindi and Urdu for at least S0–S2.
-- Language pack download on demand.
-
-**11. Audio**
-- One audio file per string key, lazy-loaded; fallback to device text-to-speech where available; audio pack per language.
-
-**12. Content validator and authoring pipeline**
-- JSON schema for scenarios; validator checks concept IDs, verbs, effect paths and that every string key exists in every language (MVP).
-- Spreadsheet → JSON converter and a preview route for teachers (stretch); optional AI drafting helper used only at authoring time.
-
-**13. Privacy and consent**
-- Enforce the event schema (reject free text); facilitator consent checklist text; no device identifiers.
+**Tone rule:** never blame the victim; no game asks about the student's real experiences.
 
 ### Use cases owned
 | ID | Name | MVP |
 |---|---|---|
-| UC-SAFE-01 | UPI Simulator: pay vs collect | ✅ |
-| UC-SAFE-02 | Identity Vault | Stretch |
-| UC-SAFE-03 | Scam Inbox | ✅ |
-| UC-SAFE-04 | Red Flag Hunter | Stretch |
-| UC-SAFE-05 | The Call | Stretch |
-| UC-SAFE-06 | Loan App Trap | Stretch |
-| UC-SAFE-07 | The Telegram Group and Celebrity Says Double It | Stretch |
-| UC-SAFE-08 | The Pyramid | Stretch |
-| UC-SAFE-09 | Investing, Gambling or Scam? | Stretch |
-| UC-SAFE-10 | Rescue Mission | ✅ |
+| UC-SYS-01 | Install and first launch | ✅ |
+| UC-SYS-04 | Return as a player on a shared device | ✅ |
 | UC-PLAT-01 | Play offline and sync later | ✅ |
-| UC-PLAT-02 | Content pack update | Stretch |
-| UC-PLAT-03 | Author a new scenario | Stretch |
-| UC-PLAT-04 | Download another language | ✅ |
-| Backend for UC-FAC-01 to 07 | Facilitator API | ✅ for 01–03 |
+| UC-FAC-01 | Create a class and join code | ✅ |
+| UC-FAC-02 | Plan sessions and unlock stages | ✅ |
+| UC-FAC-03 | Class heatmap and misconceptions | ✅ |
+| UC-SAFE-01 | UPI Simulator | ✅ |
+| UC-SAFE-03 | Scam Inbox | ✅ |
+| UC-SAFE-02, 04, 05, 06, UC-PLAT-02, UC-FAC-04 to 07 | Stretch | Stretch |
 
 ### Provides to others
-Project scaffold and CI, storage API, `logEvent()`, `t(key)` and audio hooks, facilitator API, phone surface components, Scam Inbox single-message component, local networking for Trading Pit (stretch).
+Scaffold and CI, storage and profile APIs, `logEvent()`, sync status, phone surfaces, single-message scam component, facilitator API.
 
 ### Depends on
-- **P2:** runtime, types, scheduler hook for injecting messages.
-- **P1:** design system; facilitator screens that call the API.
-- **P3:** transaction-list component, Rank and Triage verbs.
-
-### Content to write
-40+ scam and genuine messages with red-flag annotations, call scripts and audio, check items, S1 and S6 gate items, Help card text, translation of all strings into Telugu (and Hindi/Urdu for S0–S2).
-
-### Tests
-- End-to-end in airplane mode: play, reconnect, the facilitator heatmap updates within a minute.
-- Validator passes on all content in all languages.
-- Row-level security: a facilitator can't read another class.
-- Every safety game in Urdu RTL and with timers off.
-
-### Order of work
-1. Scaffold, CI, Dexie schema, `logEvent()` and `t(key)` stubs → 2. Phone surfaces and Act in-situ → 3. UPI Simulator → 4. Scam Inbox (full and single-message mode) → 5. PWA offline and sync → 6. Backend and facilitator API → 7. Rescue Mission and Judge → 8. Telugu translation and audio → 9. Validator → 10. Stretch games and pipeline.
+- **P2:** runtime, types, scheduler hook.
+- **P1:** mastery thresholds (so the heatmap matches student Progress).
+- **P3:** i18n, Rank and Triage verbs, transaction list.
+- **P4:** design kit.
 
 ### Done when
-The app installs from a link and runs fully in airplane mode; events sync and appear in the facilitator heatmap; English and Telugu are complete with Urdu RTL working on core screens; UPI Simulator, Scam Inbox and Rescue Mission are complete.
+The app installs from a link and runs fully in airplane mode; events sync and appear in the facilitator heatmap within a minute; UPI Simulator and Scam Inbox are complete and injected into LifePath stages.
 
 ---
 
 ## Shared rules for all five
 
-- **Contracts first:** P2's types and runner, P1's design tokens, P5's scaffold and storage/outbox/i18n stubs, P3's Allocate and Triage stubs and P4's guardrail stubs are delivered before any feature work, so everyone can build against mock data.
-- **Changes to shared pieces** (`types.ts`, `concepts.json`, verbs, design system) need a review from that piece's owner.
-- **Simulated only:** no feature may ask for, store or analyse a student's real money, family finances or real messages.
+- **Contracts first (Phase 0):** P2's types and stub runner, P4's design kit and guardrail stubs, P5's scaffold and storage/outbox stubs, P3's Allocate, Triage and `t(key)` stubs, and P1's `Persona` shape and snapshot format. Everyone then builds against mock data.
+- **Screens are functional first.** Each person builds their own screens with the design kit; a shared final phase does visual polish across the whole app, so UI is never one person's bottleneck.
+- **Shared pieces** (`types.ts`, `concepts.json`, verbs, design kit, snapshot format) change only with a review from their owner.
+- **Simulated only:** no feature asks for, stores or analyses a student's real money, family finances or real messages.
 - **Guardrail:** no real fund, stock, bank, app or brand names; every projection shows a range and its assumptions.
 - **Definition of done for any use case:** plays inside the module runner, emits correct events, works offline, all strings keyed for translation, 2–3 check items, at least one unit test for its logic.
-- **If a slice falls behind,** its stretch items are the first to move to the "designed, shown in slides" list.
+- **If a slice falls behind,** its stretch items move to the "designed, shown in slides" list first; if MVP work slips, the person with the most stretch headroom (P3 or P4) picks up one item.
