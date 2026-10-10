@@ -1,7 +1,7 @@
 /** Shows whether an answer was correct, why, and whether a better option existed. */
 import { t } from '@/platform';
-import { Icon } from './Icon';
 import type { Feedback, ResponseFeedback } from './logic/feedback';
+import { Icon } from '@/ui';
 
 type Tone = { box: string; icon: 'check' | 'x' | 'alert' | 'search'; text: string };
 

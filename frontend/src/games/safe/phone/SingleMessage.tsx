@@ -6,8 +6,7 @@
 import { useEffect, useState } from 'react';
 import { t } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
-import { Button, Notice } from '@/ui';
-import { Icon } from './Icon';
+import { Button, Icon, Notice } from '@/ui';
 import { scoreRun } from './logic/scoring';
 import type { Scenario } from './logic/types';
 import { PhoneScreen } from './PhoneScreen';

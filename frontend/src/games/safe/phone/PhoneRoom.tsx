@@ -5,8 +5,7 @@
 import { useState } from 'react';
 import { t } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
-import { Button } from '@/ui';
-import { Icon } from './Icon';
+import { Button, Icon } from '@/ui';
 import { runMeta, scoreRun, type RunMeta } from './logic/scoring';
 import type { Scenario } from './logic/types';
 import { MissionPanel } from './MissionPanel';

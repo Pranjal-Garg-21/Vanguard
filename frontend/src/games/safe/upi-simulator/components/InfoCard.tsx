@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
-import { Button, Card } from '@/ui';
-import { Icon } from '../../phone/Icon';
+import { Button, Card, Icon } from '@/ui';
 
 /** A full-width card for the rule and refund chapters. */
 export function InfoCard({ title, rule, body, points, cta, onNext }: { title: string; rule?: string; body: string; points?: string[]; cta: string; onNext: () => void }) {

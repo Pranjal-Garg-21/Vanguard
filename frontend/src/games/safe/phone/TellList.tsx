@@ -1,8 +1,8 @@
 import { t } from '@/platform';
-import { Icon } from './Icon';
 import { tellReport } from './logic/runner';
 import type { RunState } from './logic/types';
 import { TELL_META } from './tells';
+import { Icon } from '@/ui';
 
 /** Found and missed red flags for one surface, each with why it matters. */
 export function TellList({ state, surfaceId, tone = 'dark' }: { state: RunState; surfaceId: string; tone?: 'dark' | 'phone' }) {

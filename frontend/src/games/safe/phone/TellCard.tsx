@@ -1,7 +1,7 @@
 import { t } from '@/platform';
-import { Icon } from './Icon';
 import { TELL_META } from './tells';
 import type { TellKind } from './logic/types';
+import { Icon } from '@/ui';
 
 /**
  * A collectible red-flag card in one of three states:

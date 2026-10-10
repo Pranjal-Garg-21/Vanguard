@@ -4,7 +4,7 @@
  */
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
-import { Button, Card, Notice } from '@/ui';
+import { Button, Card, Icon, Notice } from '@/ui';
 import { supabaseOrThrow } from './data';
 
 export function LoginScreen() {
@@ -100,8 +100,9 @@ export function LoginScreen() {
         </Card>
 
         <p className="mt-6 text-center text-sm">
-          <Link to="/" className="font-semibold text-brand underline">
-            ← Back to the student app
+          <Link to="/" className="inline-flex items-center gap-1 font-semibold text-brand underline">
+            <Icon name="arrowLeft" className="h-4 w-4" />
+            Back to the student app
           </Link>
         </p>
       </div>

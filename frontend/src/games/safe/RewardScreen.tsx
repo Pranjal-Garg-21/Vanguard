@@ -5,9 +5,8 @@
  */
 import { useEffect, useState } from 'react';
 import { t } from '@/platform';
-import { Button, Card, SectionLabel } from '@/ui';
+import { Button, Card, Icon, SectionLabel } from '@/ui';
 import { Confetti } from './phone/Confetti';
-import { Icon } from './phone/Icon';
 import { TellCard } from './phone/TellCard';
 import { rankProgress, type Gain, type Progress } from './logic/progress';
 import type { TellKind } from './phone/logic/types';

@@ -6,8 +6,8 @@
  */
 import type { ReactNode } from 'react';
 import { t } from '@/platform';
-import { Icon } from './Icon';
 import type { Lens, Segment, Surface } from './logic/types';
+import { Icon } from '@/ui';
 
 export type ViewProps = {
   lensOn: boolean;

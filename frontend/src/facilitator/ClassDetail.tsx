@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router';
-import { Notice, Spinner } from '@/ui';
+import { Icon, Notice, Spinner } from '@/ui';
 import { supabaseOrThrow, type ClassRow } from './data';
 import { InsightsTab } from './tabs/InsightsTab';
 import { JoinTab } from './tabs/JoinTab';
@@ -38,8 +38,9 @@ export function ClassDetail() {
   return (
     <div className="space-y-5">
       <div className="print:hidden">
-        <Link to="../.." relative="path" className="text-sm font-semibold text-brand">
-          ← Your classes
+        <Link to="../.." relative="path" className="inline-flex items-center gap-1 text-sm font-semibold text-brand">
+          <Icon name="arrowLeft" className="h-4 w-4" />
+          Your classes
         </Link>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <div>

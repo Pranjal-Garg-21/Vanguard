@@ -5,8 +5,7 @@
  */
 import type { ReactNode } from 'react';
 import { t } from '@/platform';
-import { Button } from '@/ui';
-import { Icon } from '../Icon';
+import { Button, Icon } from '@/ui';
 import { Lensable, RichText, type ViewProps } from '../Text';
 import type { Action, Surface } from '../logic/types';
 

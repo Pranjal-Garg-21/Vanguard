@@ -14,13 +14,14 @@ import {
   type ClassCheck,
   type Language,
 } from '@/platform';
-import { Button, Notice } from '@/ui';
+import { Button, Icon, Notice } from '@/ui';
 import { PicturePin } from './components/PicturePin';
 import { StudentScreen } from './components/StudentScreen';
 import { AVATARS, LANGUAGES } from './pictures';
 
 const STEPS = ['language', 'a11y', 'class', 'avatar', 'pin', 'confirm', 'done'] as const;
 type Step = (typeof STEPS)[number];
+import { Avatar } from './components/Avatar';
 
 const A11Y_OPTIONS: { key: keyof Accessibility }[] = [{ key: 'audio' }, { key: 'largeText' }, { key: 'reduceMotion' }, { key: 'timersOff' }];
 
@@ -92,8 +93,9 @@ export function SetupFlow() {
     <StudentScreen>
       {step !== 'done' && (
         <header className="mb-6 flex items-center justify-between">
-          <button type="button" className="min-h-11 px-2 font-semibold text-brand" onClick={back}>
-            ← {t('setup.steps.back')}
+          <button type="button" className="inline-flex min-h-11 items-center gap-1 px-2 font-semibold text-brand" onClick={back}>
+            <Icon name="arrowLeft" className="h-4 w-4" />
+            {t('setup.steps.back')}
           </button>
           <div className="flex gap-1.5" aria-label={t('setup.steps.progress', { current: index + 1, total: STEPS.length - 1 })}>
             {STEPS.slice(0, -1).map((s, i) => (
@@ -201,11 +203,11 @@ export function SetupFlow() {
                 type="button"
                 onClick={() => setAvatarId(a.id)}
                 aria-pressed={avatarId === a.id}
-                className={`flex aspect-square items-center justify-center rounded-xl border-2 bg-surface text-4xl transition active:scale-95 ${
+                className={`flex aspect-square items-center justify-center rounded-xl border-2 bg-surface transition active:scale-95 ${
                   avatarId === a.id ? 'border-brand ring-4 ring-brand/25' : 'border-line'
                 }`}
               >
-                {a.emoji}
+                <Avatar id={a.id} className="h-14 w-14" iconClassName="h-7 w-7" />
               </button>
             ))}
           </div>
@@ -249,7 +251,7 @@ export function SetupFlow() {
 
       {step === 'done' && (
         <div className="flex flex-col items-center pt-16 text-center">
-          <div className="text-7xl">{AVATARS.find((a) => a.id === avatarId)?.emoji}</div>
+          <Avatar id={avatarId} className="h-24 w-24" iconClassName="h-12 w-12" />
           <h1 className="mt-6 text-3xl font-extrabold">{t('setup.done.title', { name: name.trim() })}</h1>
           <p className="mt-3 text-lg text-ink-soft">{t('setup.done.body')}</p>
           <Button size="lg" className="mt-10 w-full" onClick={() => navigate('/home')}>

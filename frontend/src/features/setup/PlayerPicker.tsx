@@ -4,10 +4,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { listProfiles, t, unlockProfile, type ProfileSummary } from '@/platform';
-import { Notice } from '@/ui';
+import { Icon, Notice } from '@/ui';
 import { PicturePin } from './components/PicturePin';
 import { StudentScreen } from './components/StudentScreen';
-import { avatarEmoji } from './pictures';
+import { Avatar } from './components/Avatar';
 
 export function PlayerPicker() {
   const navigate = useNavigate();
@@ -52,11 +52,12 @@ export function PlayerPicker() {
   if (selected) {
     return (
       <StudentScreen>
-        <button type="button" className="mb-6 min-h-11 px-2 font-semibold text-brand" onClick={() => setSelected(null)}>
-          ← {t('setup.steps.back')}
+        <button type="button" className="mb-6 inline-flex min-h-11 items-center gap-1 px-2 font-semibold text-brand" onClick={() => setSelected(null)}>
+          <Icon name="arrowLeft" className="h-4 w-4" />
+          {t('setup.steps.back')}
         </button>
         <div className="text-center">
-          <div className="text-6xl">{avatarEmoji(selected.avatarId)}</div>
+          <Avatar id={selected.avatarId} className="mx-auto h-20 w-20" iconClassName="h-10 w-10" />
           <h1 className="mt-3 text-2xl font-extrabold">{t('setup.pin.enterTitle', { name: selected.displayName })}</h1>
         </div>
         <div className="mt-4 min-h-12">
@@ -90,7 +91,7 @@ export function PlayerPicker() {
             }}
             className="flex flex-col items-center gap-2 rounded-xl border border-line bg-surface p-3 transition active:scale-95 hover:border-brand"
           >
-            <span className="text-5xl">{avatarEmoji(p.avatarId)}</span>
+            <Avatar id={p.avatarId} className="h-14 w-14" iconClassName="h-7 w-7" />
             <span className="w-full truncate text-center font-semibold">{p.displayName}</span>
           </button>
         ))}
@@ -99,7 +100,7 @@ export function PlayerPicker() {
           onClick={() => navigate('/setup')}
           className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-line-strong p-3 text-ink-soft hover:border-brand"
         >
-          <span className="text-4xl">＋</span>
+          <Icon name="plus" className="h-9 w-9" />
           <span className="font-semibold">{t('setup.picker.newPlayer')}</span>
         </button>
       </div>

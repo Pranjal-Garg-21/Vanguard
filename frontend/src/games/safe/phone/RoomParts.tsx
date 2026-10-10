@@ -4,8 +4,7 @@
  */
 import type { ReactNode } from 'react';
 import { t } from '@/platform';
-import { Badge } from '@/ui';
-import { Icon } from './Icon';
+import { Badge, Icon } from '@/ui';
 
 export function RoomHeader({ title, brief, tags, progress }: { title: string; brief: string; tags: { label: string; tone?: 'neutral' | 'good' | 'warn' | 'bad' | 'info' }[]; progress: number }) {
   const pct = Math.round(Math.min(1, Math.max(0, progress)) * 100);

@@ -1,8 +1,7 @@
 /** The Pay app screens used before the scams start: link account, set PIN, scan a QR, pay, receipt. */
 import { useState } from 'react';
 import { t } from '@/platform';
-import { Button } from '@/ui';
-import { Icon } from '../../phone/Icon';
+import { Button, Icon } from '@/ui';
 import { rupees } from '../../phone/apps/PayApp';
 import { CANTEEN_AMOUNT, MAX_PIN_TRIES } from '../logic/flow';
 import { PinPad } from './PinPad';

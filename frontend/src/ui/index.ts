@@ -5,3 +5,4 @@
  */
 
 export { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from './components';
+export { Icon, type IconName } from './Icon';

@@ -1,7 +1,7 @@
 import { t } from '@/platform';
-import { Icon } from '../Icon';
 import { Lensable, type ViewProps } from '../Text';
 import type { Surface } from '../logic/types';
+import { Icon } from '@/ui';
 
 /**
  * A search results page. Each result is a choice: tapping it runs the
