@@ -4,10 +4,12 @@
  * activity log.
  */
 import { t } from '@/platform';
-import { Badge, ProgressBar, SectionLabel } from '@/ui';
+import { useEffect, useRef, useState } from 'react';
+import { ProgressBar, SectionLabel } from '@/ui';
+import { Icon } from './Icon';
 import { objectiveDone, surfaceOf } from './logic/runner';
 import type { HistoryEntry, RunState } from './logic/types';
-import { Icon } from './Icon';
+import { RoomHeader, TaskList } from './RoomParts';
 import { surfaceTitle } from './SurfaceView';
 
 const LEVEL = { 1: { label: 'Easy', tone: 'good' }, 2: { label: 'Medium', tone: 'warn' }, 3: { label: 'Hard', tone: 'bad' } } as const;
@@ -46,38 +48,48 @@ export function MissionPanel({ state }: { state: RunState }) {
   const answered = needing.filter((s) => state.acted[s.id]).length;
   const lines = state.history.map((e) => ({ e, line: logLine(state, e) })).filter((x) => x.line).slice(-12);
 
-  return (
-    <div className="space-y-5">
-      <div>
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge tone="info">{t('safe.ui.room')}</Badge>
-          <Badge tone={level.tone}>{level.label}</Badge>
-          <Badge>{script.mode === 'judge' ? 'Judge' : 'Act'}</Badge>
-        </div>
-        <h1 className="mt-2 text-2xl font-bold text-ink">{t(script.titleKey)}</h1>
-        <p className="mt-1 text-sm text-ink-soft">{t(script.briefKey)}</p>
-      </div>
+  // A short "task complete" banner whenever a new task is ticked off.
+  const doneIds = script.objectives.filter((o) => objectiveDone(state, o.when)).map((o) => o.id);
+  const seen = useRef<string[]>([]);
+  const [toast, setToast] = useState<string | null>(null);
+  const doneKey = doneIds.join(',');
+  useEffect(() => {
+    const fresh = doneIds.filter((id) => !seen.current.includes(id));
+    seen.current = doneIds;
+    if (fresh.length === 0) return;
+    const task = script.objectives.find((o) => o.id === fresh[0]);
+    setToast(task ? t(task.textKey) : null);
+    const id = window.setTimeout(() => setToast(null), 3200);
+    return () => window.clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doneKey]);
 
-      <div>
-        <div className="mb-1.5 flex items-center justify-between">
-          <SectionLabel>{t('safe.ui.tasks')}</SectionLabel>
-          <span className="font-mono text-xs text-muted">{done}/{script.objectives.length}</span>
+  return (
+    <div className="space-y-6">
+      {toast && (
+        <div role="status" className="flex animate-banner-in items-center gap-3 rounded-lg border border-brand bg-brand/15 p-3 text-sm">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand text-brand-ink"><Icon name="check" className="h-4 w-4" /></span>
+          <span>
+            <span className="block text-xs font-bold uppercase tracking-wider text-brand">{t('safe.ui.taskComplete')}</span>
+            <span className="text-ink">{toast}</span>
+          </span>
         </div>
-        <ProgressBar value={script.objectives.length ? done / script.objectives.length : 0} />
-        <ol className="mt-3 space-y-2">
-          {script.objectives.map((o, i) => {
-            const ok = objectiveDone(state, o.when);
-            return (
-              <li key={o.id} className={`flex items-start gap-3 rounded-lg border p-3 text-sm ${ok ? 'border-brand/50 bg-brand/10 text-ink' : 'border-line bg-surface text-ink-soft'}`}>
-                <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${ok ? 'bg-brand text-brand-ink' : 'bg-surface-3 text-muted'}`} aria-hidden>
-                  {ok ? <Icon name="check" className="h-3 w-3" /> : i + 1}
-                </span>
-                <span>{t(o.textKey)}<span className="sr-only">{ok ? ' (done)' : ''}</span></span>
-              </li>
-            );
-          })}
-        </ol>
-      </div>
+      )}
+      <RoomHeader
+        title={t(script.titleKey)}
+        brief={t(script.briefKey)}
+        progress={script.objectives.length ? done / script.objectives.length : 0}
+        tags={[{ label: t('safe.ui.room'), tone: 'info' }, { label: level.label, tone: level.tone }, { label: script.mode === 'judge' ? 'Judge' : 'Act' }]}
+      />
+
+      <TaskList
+        tasks={script.objectives.map((o) => ({
+          id: o.id,
+          title: t(o.textKey),
+          hint: t(`safe.hint.${o.when.split(':')[0]}`),
+          done: objectiveDone(state, o.when),
+        }))}
+      />
 
       {needing.length > 0 && (
         <div className="rounded-xl border border-line bg-surface p-4">
@@ -86,17 +98,17 @@ export function MissionPanel({ state }: { state: RunState }) {
             <span className="font-mono">{answered}/{needing.length}</span>
           </div>
           <ProgressBar value={answered / needing.length} />
-          <p className="mt-2 text-xs text-muted">{t('safe.ui.where')}</p>
+          {script.simulator === 'inbox' && <p className="mt-2 text-xs text-muted">{t('safe.ui.where')}</p>}
         </div>
       )}
 
       <div>
         <SectionLabel>{t('safe.ui.log')}</SectionLabel>
         <div className="mt-2 h-44 overflow-y-auto rounded-lg border border-line bg-black/40 p-3 font-mono text-xs leading-relaxed" role="log" aria-live="polite">
-          {lines.length === 0 && <p className="text-muted">$ …</p>}
+          {lines.length === 0 && <p className="text-muted">$ ...</p>}
           {lines.map(({ e, line }, i) => (
             <p key={i} className={line?.tone}>
-              <span className="text-muted">[{stamp(e.t)}]</span> <span className="text-brand">›</span> {line?.text}
+              <span className="text-muted">[{stamp(e.t)}]</span> <span className="text-brand">&rsaquo;</span> {line?.text}
             </p>
           ))}
         </div>

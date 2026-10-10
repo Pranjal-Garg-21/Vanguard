@@ -11,6 +11,7 @@ import { judgeFeedback, responseFeedback } from './logic/feedback';
 import { surfaceOf } from './logic/runner';
 import type { RunState } from './logic/types';
 import { formatClock, PhoneShell } from './PhoneShell';
+import { RoomLayout } from './RoomLayout';
 import { SurfaceBody, surfaceTitle } from './SurfaceView';
 import { TellList } from './TellList';
 
@@ -49,47 +50,50 @@ export function PostMortem({ state, onDone }: { state: RunState; onDone: () => v
   };
 
   return (
-    <div className="mx-auto grid max-w-6xl gap-6 p-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start lg:p-8">
-      <div className="space-y-4">
-        <div>
-          <p className="font-mono text-xs font-bold uppercase tracking-widest text-brand">{t('safe.ui.replay')}</p>
-          <h1 className="mt-1 text-2xl font-bold text-ink">{t('safe.ui.debrief')}</h1>
-          <p className="mt-1 font-mono text-xs text-muted">{t('safe.ui.step', { n: i + 1, total: frames.length })}</p>
-          <ProgressBar className="mt-2" value={(i + 1) / frames.length} />
+    <RoomLayout
+      drawerLabel={t('safe.ui.debrief')}
+      panel={
+        <div className="space-y-4">
+          <div>
+            <p className="font-mono text-xs font-bold uppercase tracking-widest text-brand">{t('safe.ui.replay')}</p>
+            <h1 className="mt-1 text-2xl font-bold text-ink">{t('safe.ui.debrief')}</h1>
+            <p className="mt-1 font-mono text-xs text-muted">{t('safe.ui.step', { n: i + 1, total: frames.length })}</p>
+            <ProgressBar className="mt-2" value={(i + 1) / frames.length} />
+          </div>
+
+          <Card>
+            {frame.kind === 'opened' && <p className="font-semibold text-ink">{t('safe.ui.youOpened', { what: surfaceTitle(surface) })}</p>}
+            {frame.kind === 'acted' && (
+              <>
+                <p className="font-semibold text-ink">{t('safe.ui.youDid', { what: action ? t(action.labelKey) : frame.action })}</p>
+                {action?.risk === 'risky' && !surface.respond && <div className="mt-2"><Notice tone="bad">{t('safe.summary.fooled')}</Notice></div>}
+                {surface.respond && (() => {
+                  const fb = responseFeedback(surface, frame.action);
+                  const better = fb?.best ? surface.actions?.find((a) => a.id === fb.best) : undefined;
+                  return fb && action ? <div className="mt-3"><FeedbackCard tone="dark" feedback={fb} yours={t(action.labelKey)} bestLabel={better ? t(better.labelKey) : undefined} vars={state.script.vars} /></div> : null;
+                })()}
+                {frame.auto && <p className="mt-2 text-sm text-muted">{t('safe.ui.auto')}</p>}
+              </>
+            )}
+            {frame.kind === 'judged' && surface.verdict && (() => {
+              const fb = judgeFeedback(surface, frame.verdict);
+              return <FeedbackCard tone="dark" feedback={fb} yours={t(`safe.verdict.${frame.verdict}`)} bestLabel={fb.best ? t(`safe.verdict.${fb.best}`) : undefined} vars={state.script.vars} />;
+            })()}
+          </Card>
+
+          <TellList state={state} surfaceId={frame.surface} />
+
+          <div className="flex flex-wrap gap-3">
+            <Button variant="secondary" disabled={i === 0} onClick={() => setI(i - 1)}>{t('safe.ui.prev')}</Button>
+            {i < frames.length - 1 ? <Button onClick={() => setI(i + 1)}>{t('safe.ui.next')}</Button> : <Button onClick={onDone}>{t('safe.ui.continue')}</Button>}
+            <Button variant="ghost" onClick={onDone}>{t('safe.ui.skipReplay')}</Button>
+          </div>
         </div>
-
-        <Card>
-          {frame.kind === 'opened' && <p className="font-semibold text-ink">{t('safe.ui.youOpened', { what: surfaceTitle(surface) })}</p>}
-          {frame.kind === 'acted' && (
-            <>
-              <p className="font-semibold text-ink">{t('safe.ui.youDid', { what: action ? t(action.labelKey) : frame.action })}</p>
-              {action?.risk === 'risky' && !surface.respond && <div className="mt-2"><Notice tone="bad">{t('safe.summary.fooled')}</Notice></div>}
-              {surface.respond && (() => {
-                const fb = responseFeedback(surface, frame.action);
-                const better = fb?.best ? surface.actions?.find((a) => a.id === fb.best) : undefined;
-                return fb && action ? <div className="mt-3"><FeedbackCard tone="dark" feedback={fb} yours={t(action.labelKey)} bestLabel={better ? t(better.labelKey) : undefined} vars={state.script.vars} /></div> : null;
-              })()}
-              {frame.auto && <p className="mt-2 text-sm text-muted">{t('safe.ui.auto')}</p>}
-            </>
-          )}
-          {frame.kind === 'judged' && surface.verdict && (() => {
-            const fb = judgeFeedback(surface, frame.verdict);
-            return <FeedbackCard tone="dark" feedback={fb} yours={t(`safe.verdict.${frame.verdict}`)} bestLabel={fb.best ? t(`safe.verdict.${fb.best}`) : undefined} vars={state.script.vars} />;
-          })()}
-        </Card>
-
-        <TellList state={state} surfaceId={frame.surface} />
-
-        <div className="flex flex-wrap gap-3">
-          <Button variant="secondary" disabled={i === 0} onClick={() => setI(i - 1)}>{t('safe.ui.prev')}</Button>
-          {i < frames.length - 1 ? <Button onClick={() => setI(i + 1)}>{t('safe.ui.next')}</Button> : <Button onClick={onDone}>{t('safe.ui.continue')}</Button>}
-          <Button variant="ghost" onClick={onDone}>{t('safe.ui.skipReplay')}</Button>
-        </div>
-      </div>
-
-      <PhoneShell clock={formatClock(state.script.phone.startTime, frame.t, state.script.phone.clockRate)} lensOn={false} onToggleLens={() => {}} compact>
+      }
+    >
+      <PhoneShell clock={formatClock(state.script.phone.startTime, frame.t, state.script.phone.clockRate)} lensOn={false} onToggleLens={() => {}} bare>
         <SurfaceBody surface={surface} view={view} />
       </PhoneShell>
-    </div>
+    </RoomLayout>
   );
 }
