@@ -6,7 +6,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
 import { logEvent, t } from '@/platform';
-import { Button, CheckIcon, ChevronIcon } from '@/ui';
+import { Badge, Button, Card, CheckIcon, ChevronIcon, ProgressBar } from '@/ui';
 import { InvestShell } from './InvestShell';
 import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
@@ -97,37 +97,28 @@ export function RoomPlayer({ room }: { room: Room }) {
     <InvestShell wide>
       <div className="grid gap-6 lg:grid-cols-[20rem_minmax(0,1fr)] lg:items-start">
         {/* Left: where you are */}
-        <aside className="space-y-4 lg:sticky lg:top-6">
-          <Link to="/learn/invest" className="inline-flex items-center gap-1 text-sm font-medium text-teal-800 hover:underline">
+        <aside className="space-y-4 lg:sticky lg:top-20">
+          <Link to="/learn/invest" className="inline-flex items-center gap-1 text-sm font-bold text-ink-soft hover:text-brand">
             <ChevronIcon dir="left" />
             {t('investui.room.all')}
           </Link>
 
-          <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <Card className="space-y-4">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wide text-teal-700">{t('investui.room.label')}</div>
-              <h1 className="mt-1 text-2xl font-extrabold leading-tight text-slate-900">{tx(room.titleKey)}</h1>
-              <p className="mt-2 text-sm text-slate-600">{tx(room.blurbKey)}</p>
+              <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('investui.room.label')}</div>
+              <h1 className="mt-1 text-2xl font-bold leading-tight">{tx(room.titleKey)}</h1>
+              <p className="mt-2 text-sm text-ink-soft">{tx(room.blurbKey)}</p>
             </div>
 
-            <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
-              <Chip>{t(`investui.room.difficulty.${room.difficulty}`)}</Chip>
-              <Chip>{t('investui.room.minutes', { n: room.estMinutes })}</Chip>
-              <Chip>{t('investui.list.points', { n: totalPoints })}</Chip>
+            <div className="flex flex-wrap gap-2">
+              <Badge tone="good">{t(`investui.room.difficulty.${room.difficulty}`)}</Badge>
+              <Badge>{t('investui.room.minutes', { n: room.estMinutes })}</Badge>
+              <Badge>{t('investui.list.points', { n: totalPoints })}</Badge>
             </div>
 
             <div>
-              <div
-                className="h-2 w-full rounded-full bg-slate-200"
-                role="progressbar"
-                aria-label={t('investui.room.progress', { done: tasksDone, total: room.tasks.length })}
-                aria-valuenow={tasksDone}
-                aria-valuemin={0}
-                aria-valuemax={room.tasks.length}
-              >
-                <div className="h-2 rounded-full bg-teal-600 transition-all" style={{ width: `${(tasksDone / room.tasks.length) * 100}%` }} />
-              </div>
-              <div className="mt-1.5 flex justify-between text-xs text-slate-600">
+              <ProgressBar value={tasksDone / room.tasks.length} />
+              <div className="mt-1.5 flex justify-between text-xs font-bold text-muted">
                 <span>{t('investui.room.progress', { done: tasksDone, total: room.tasks.length })}</span>
                 <span>{t('investui.room.pointsEarned', { earned, total: totalPoints })}</span>
               </div>
@@ -146,18 +137,18 @@ export function RoomPlayer({ room }: { room: Room }) {
                         onClick={() => go(i)}
                         aria-current={isActive ? 'step' : undefined}
                         className={`flex w-full items-center gap-3 rounded-lg border px-2.5 py-2 text-start transition-colors ${
-                          isActive ? 'border-teal-600 bg-teal-50' : 'border-transparent hover:bg-slate-50'
+                          isActive ? 'border-brand bg-surface-2' : 'border-transparent hover:bg-surface-2'
                         }`}
                       >
                         <span
-                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
-                            done ? 'bg-teal-700 text-white' : 'bg-slate-200 text-slate-700'
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm font-bold ${
+                            done ? 'bg-brand text-brand-ink' : 'bg-surface-3 text-ink-soft'
                           }`}
                         >
                           {done ? <CheckIcon className="h-4 w-4" /> : i + 1}
                         </span>
-                        <span className="hidden flex-1 text-sm font-semibold text-slate-900 lg:block">{tx(x.titleKey)}</span>
-                        <span className="hidden text-xs text-slate-500 lg:block">
+                        <span className="hidden flex-1 text-sm font-bold text-ink lg:block">{tx(x.titleKey)}</span>
+                        <span className="hidden text-xs text-muted lg:block">
                           {solved}/{x.questions.length}
                         </span>
                       </button>
@@ -166,16 +157,16 @@ export function RoomPlayer({ room }: { room: Room }) {
                 })}
               </ol>
             </nav>
-          </div>
+          </Card>
         </aside>
 
         {/* Right: the active task */}
         <section className="space-y-6">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:p-8">
-            <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">
+          <Card className="lg:p-8">
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand">
               {t('investui.room.task', { n: active + 1 })} / {room.tasks.length}
             </p>
-            <h2 className="mt-1 text-2xl font-bold text-slate-900 lg:text-3xl">{tx(task.titleKey)}</h2>
+            <h2 className="mt-1 text-2xl font-bold lg:text-3xl">{tx(task.titleKey)}</h2>
 
             <div className="mt-6 grid gap-8 xl:grid-cols-2">
               <div className="space-y-4">
@@ -185,7 +176,7 @@ export function RoomPlayer({ room }: { room: Room }) {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-sm font-bold uppercase tracking-wide text-slate-600">{t('investui.room.answerBelow')}</h3>
+                <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('investui.room.answerBelow')}</h3>
                 {task.questions.map((q) => (
                   <QuestionRow
                     key={q.id}
@@ -201,7 +192,7 @@ export function RoomPlayer({ room }: { room: Room }) {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center justify-between gap-3 border-t border-slate-100 pt-5">
+            <div className="mt-8 flex items-center justify-between gap-3 border-t border-line pt-5">
               <Button variant="secondary" disabled={active === 0} onClick={() => go(active - 1)}>
                 {t('investui.room.prevTask')}
               </Button>
@@ -211,13 +202,13 @@ export function RoomPlayer({ room }: { room: Room }) {
                 </Button>
               )}
             </div>
-          </div>
+          </Card>
 
           {roomDone && (
-            <div className="space-y-3 rounded-2xl border border-teal-200 bg-white p-6 text-center shadow-sm">
-              <h2 className="text-2xl font-extrabold text-slate-900">{t('investui.room.complete.title')}</h2>
-              <p className="text-lg text-slate-700">{t('investui.room.complete.body', { earned, total: totalPoints })}</p>
-              {earned < totalPoints && <p className="text-sm text-slate-600">{t('investui.room.complete.skipped')}</p>}
+            <Card className="space-y-3 border-brand text-center">
+              <h2 className="text-2xl font-bold text-brand">{t('investui.room.complete.title')}</h2>
+              <p className="text-lg">{t('investui.room.complete.body', { earned, total: totalPoints })}</p>
+              {earned < totalPoints && <p className="text-sm text-ink-soft">{t('investui.room.complete.skipped')}</p>}
               <div className="flex flex-col justify-center gap-3 pt-2 sm:flex-row">
                 {next && (
                   <Link to={`/learn/invest/${next.id}`}>
@@ -230,14 +221,10 @@ export function RoomPlayer({ room }: { room: Room }) {
                   {t('investui.room.restart')}
                 </Button>
               </div>
-            </div>
+            </Card>
           )}
         </section>
       </div>
     </InvestShell>
   );
-}
-
-function Chip({ children }: { children: React.ReactNode }) {
-  return <span className="rounded-full bg-slate-100 px-2.5 py-1">{children}</span>;
 }

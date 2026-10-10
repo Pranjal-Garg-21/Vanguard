@@ -60,11 +60,11 @@ export function CheckQuiz({
   return (
     <div className="space-y-4">
       <div className="flex items-baseline justify-between">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-teal-800">{t('investui.check.title')}</h2>
-        <span className="text-xs text-slate-500">{t('investui.check.question', { n: index + 1, total: items.length })}</span>
+        <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('investui.check.title')}</h2>
+        <span className="text-xs text-muted">{t('investui.check.question', { n: index + 1, total: items.length })}</span>
       </div>
 
-      <p className="text-lg font-semibold text-slate-900">
+      <p className="text-lg font-bold text-ink">
         <Markup text={tx(item.stemKey)} />
       </p>
 
@@ -73,22 +73,22 @@ export function CheckQuiz({
           const isPicked = picked?.id === option.id;
           const isRight = option.id === item.correct;
           const tone = !picked
-            ? 'border-slate-300 bg-white hover:bg-slate-50'
+            ? 'border-line-strong bg-surface-2 hover:border-brand'
             : isRight
-              ? 'border-emerald-500 bg-emerald-50'
+              ? 'border-brand bg-brand/10'
               : isPicked
-                ? 'border-amber-500 bg-amber-50'
-                : 'border-slate-200 bg-white opacity-60';
+                ? 'border-warn bg-warn/10'
+                : 'border-line bg-surface-2 opacity-60';
           return (
             <li key={option.id}>
               <button
                 type="button"
                 disabled={picked !== null}
                 onClick={() => pick(option)}
-                className={`flex min-h-14 w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-3 text-start text-base transition-colors ${tone}`}
+                className={`flex min-h-12 w-full items-center justify-between gap-3 rounded-lg border px-4 py-3 text-start text-base text-ink transition-colors ${tone}`}
               >
                 <span>{tx(option.textKey)}</span>
-                {picked && isRight && <CheckIcon className="h-5 w-5 text-emerald-700" />}
+                {picked && isRight && <CheckIcon className="h-5 w-5 text-brand" />}
               </button>
             </li>
           );
@@ -96,13 +96,13 @@ export function CheckQuiz({
       </ul>
 
       {picked && (
-        <div className="space-y-2 rounded-2xl bg-slate-50 p-4" aria-live="polite">
-          <p className={`font-bold ${wasRight ? 'text-emerald-700' : 'text-amber-700'}`}>
+        <div className={`space-y-2 rounded-lg border-l-4 bg-surface-2 p-4 ${wasRight ? 'border-brand' : 'border-warn'}`} aria-live="polite">
+          <p className={`font-bold ${wasRight ? 'text-brand' : 'text-warn'}`}>
             {wasRight ? t('investui.check.right') : t('investui.check.wrong')}
           </p>
-          {!wasRight && picked.feedbackKey && <p className="font-medium text-slate-900">{tx(picked.feedbackKey)}</p>}
-          <p className="text-slate-700">{tx(item.whyKey)}</p>
-          <Button size="lg" className="mt-2 w-full" onClick={next}>
+          {!wasRight && picked.feedbackKey && <p className="font-bold text-ink">{tx(picked.feedbackKey)}</p>}
+          <p className="text-ink-soft">{tx(item.whyKey)}</p>
+          <Button size="lg" className="mt-2 w-full sm:w-auto" onClick={next}>
             {index + 1 < items.length ? t('investui.btn.nextQuestion') : t('investui.btn.seeResults')}
           </Button>
         </div>

@@ -5,7 +5,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { Link, useParams } from 'react-router';
 import { t } from '@/platform';
-import { Button, ChevronIcon } from '@/ui';
+import { Button, Card, ChevronIcon, ProgressBar } from '@/ui';
 import { CheckQuiz } from './CheckQuiz';
 import { InvestShell } from './InvestShell';
 import { BlockCard } from './LessonCards';
@@ -33,7 +33,7 @@ export function LessonPlayer() {
 
 function BackLink() {
   return (
-    <Link to="/learn/invest" className="inline-flex items-center gap-1 text-sm font-medium text-teal-800 hover:underline">
+    <Link to="/learn/invest" className="inline-flex items-center gap-1 text-sm font-bold text-ink-soft hover:text-brand">
       <ChevronIcon dir="left" />
       {t('investui.btn.backToLessons')}
     </Link>
@@ -41,23 +41,12 @@ function BackLink() {
 }
 
 function Progress({ value }: { value: number }) {
-  return (
-    <div
-      className="h-2 w-full rounded-full bg-slate-200"
-      role="progressbar"
-      aria-valuenow={Math.round(value * 100)}
-      aria-valuemin={0}
-      aria-valuemax={100}
-    >
-      <div className="h-2 rounded-full bg-teal-600 transition-all" style={{ width: `${value * 100}%` }} />
-    </div>
-  );
+  return <ProgressBar value={value} />;
 }
 
 function Panel({ children }: { children: ReactNode }) {
-  return <div className="space-y-3 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">{children}</div>;
+  return <Card className="space-y-3 !p-6">{children}</Card>;
 }
-
 function LessonRun({ lesson }: { lesson: Lesson }) {
   const [level, setLevel] = useState<Level | null>(null);
   const [page, setPage] = useState(0);
@@ -88,24 +77,24 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
       <InvestShell>
         <BackLink />
         <Panel>
-          <h1 className="text-3xl font-extrabold text-slate-900">{tx(lesson.titleKey)}</h1>
-          <p className="text-lg text-slate-700">{tx(lesson.blurbKey)}</p>
-          <p className="text-sm text-slate-500">{t('investui.list.minutes', { n: lesson.estMinutes })}</p>
+          <h1 className="text-2xl font-bold">{tx(lesson.titleKey)}</h1>
+          <p className="text-lg text-ink-soft">{tx(lesson.blurbKey)}</p>
+          <p className="text-sm text-muted">{t('investui.list.minutes', { n: lesson.estMinutes })}</p>
         </Panel>
-        <h2 className="pt-2 font-semibold text-slate-900">{t('investui.intro.depth')}</h2>
+        <h2 className="pt-2 font-bold">{t('investui.intro.depth')}</h2>
         <div className="grid gap-3 sm:grid-cols-3">
           {([1, 2, 3] as Level[]).map((l) => (
             <button
               key={l}
               type="button"
               onClick={() => setLevel(l)}
-              className="flex min-h-20 items-center justify-between gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-start transition-colors hover:border-teal-600 hover:bg-teal-50"
+              className="flex min-h-20 items-center justify-between gap-3 rounded-lg border border-line-strong bg-surface px-4 py-3 text-start transition-colors hover:border-brand hover:bg-surface-2"
             >
               <span>
-                <span className="block text-lg font-bold text-slate-900">{t(`investui.level.${l}`)}</span>
-                <span className="block text-sm text-slate-600">{t(`investui.level.${l}.hint`)}</span>
+                <span className="block text-lg font-bold">{t(`investui.level.${l}`)}</span>
+                <span className="block text-sm text-ink-soft">{t(`investui.level.${l}.hint`)}</span>
               </span>
-              <ChevronIcon dir="right" className="h-5 w-5 shrink-0 text-teal-700" />
+              <ChevronIcon dir="right" className="h-5 w-5 shrink-0 text-brand" />
             </button>
           ))}
         </div>
@@ -145,9 +134,9 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
       <InvestShell>
         <Progress value={1} />
         <Panel>
-          <h1 className="text-3xl font-extrabold text-slate-900">{t('investui.summary.title')}</h1>
-          {score && <p className="text-lg text-slate-800">{t('investui.summary.score', { right: score.right, total: score.total })}</p>}
-          <p className="text-slate-700">{good ? t('investui.summary.good') : t('investui.summary.more')}</p>
+          <h1 className="text-2xl font-bold">{t('investui.summary.title')}</h1>
+          {score && <p className="text-lg">{t('investui.summary.score', { right: score.right, total: score.total })}</p>}
+          <p className="text-ink-soft">{good ? t('investui.summary.good') : t('investui.summary.more')}</p>
           <div className="flex flex-col gap-3 pt-3 sm:flex-row">
             {next && (
               <Link to={`/learn/invest/${next.id}`}>

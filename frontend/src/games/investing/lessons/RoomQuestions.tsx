@@ -27,33 +27,34 @@ export function QuestionRow(props: Props) {
   const { q, ctx, state } = props;
   const tx = (key: string) => fillTemplate(t(key), ctx);
   const done = state.solved || state.revealed;
+  const won = state.solved && !state.revealed;
 
   return (
-    <div className={`space-y-3 rounded-xl border p-4 ${done ? 'border-emerald-300 bg-emerald-50/40' : 'border-slate-200 bg-white'}`}>
+    <div className={`space-y-3 rounded-xl border p-4 ${done ? 'border-brand/50 bg-brand/5' : 'border-line bg-surface'}`}>
       <div className="flex items-start justify-between gap-3">
-        <p className="text-lg font-semibold text-slate-900">
+        <p className="text-lg font-bold text-ink">
           <Markup text={tx(q.promptKey)} />
         </p>
-        <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-bold ${state.solved && !state.revealed ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
-          {state.solved && !state.revealed ? t('investui.room.won', { n: q.points }) : t('investui.list.points', { n: q.points })}
+        <span className={`shrink-0 rounded-md px-2 py-0.5 text-xs font-bold uppercase tracking-wide ${won ? 'bg-brand text-brand-ink' : 'bg-surface-3 text-ink-soft'}`}>
+          {won ? t('investui.room.won', { n: q.points }) : t('investui.list.points', { n: q.points })}
         </span>
       </div>
 
-      {q.kind === 'number' ? <NumberInput {...props} tx={tx} /> : <ChoiceList {...props} tx={tx} />}
+      {q.kind === 'number' ? <NumberInput {...props} /> : <ChoiceList {...props} tx={tx} />}
 
       {!done && q.hintKey && (
         <div>
-          <button type="button" onClick={props.onHint} className="inline-flex items-center gap-1 text-sm font-semibold text-sky-800 hover:underline">
+          <button type="button" onClick={props.onHint} className="inline-flex items-center gap-1 text-sm font-bold text-info hover:underline">
             {state.hintShown ? t('investui.room.hideHint') : t('investui.room.hint')}
             <ChevronIcon dir={state.hintShown ? 'up' : 'down'} />
           </button>
-          {state.hintShown && <p className="mt-2 rounded-lg border border-sky-200 bg-sky-50 p-3 text-sky-900">{tx(q.hintKey)}</p>}
+          {state.hintShown && <p className="mt-2 rounded-lg border-l-4 border-info bg-info/10 p-3 text-ink">{tx(q.hintKey)}</p>}
         </div>
       )}
 
-      {state.solved && !state.revealed && (
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-emerald-900" aria-live="polite">
-          <p className="flex items-center gap-1.5 font-bold">
+      {won && (
+        <div className="rounded-lg border-l-4 border-brand bg-brand/10 p-3 text-ink" aria-live="polite">
+          <p className="flex items-center gap-1.5 font-bold text-brand">
             <CheckIcon />
             {t('investui.room.correct')}
           </p>
@@ -61,9 +62,9 @@ export function QuestionRow(props: Props) {
         </div>
       )}
       {state.revealed && (
-        <div className="rounded-lg bg-slate-100 p-3 text-slate-800" aria-live="polite">
+        <div className="rounded-lg border-l-4 border-line-strong bg-surface-2 p-3 text-ink" aria-live="polite">
           <p className="font-bold">{t('investui.room.revealed', { answer: answerText(q, ctx, tx) })}</p>
-          <p>{tx(q.explainKey)}</p>
+          <p className="text-ink-soft">{tx(q.explainKey)}</p>
         </div>
       )}
     </div>
@@ -76,7 +77,7 @@ function answerText(q: RoomQuestion, ctx: Ctx, tx: (k: string) => string): strin
   return right ? tx(right.textKey) : '';
 }
 
-function NumberInput({ q, state, onSubmitNumber, onReveal }: Props & { tx: (k: string) => string }) {
+function NumberInput({ q, state, onSubmitNumber, onReveal }: Props) {
   const [value, setValue] = useState('');
   const done = state.solved || state.revealed;
   const placeholder = t(`investui.room.placeholder.${q.unit ?? 'number'}`);
@@ -99,16 +100,16 @@ function NumberInput({ q, state, onSubmitNumber, onReveal }: Props & { tx: (k: s
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="min-h-12 min-w-40 flex-1 rounded-xl border border-slate-300 px-3 text-lg focus:border-teal-600 focus:outline-2 focus:outline-teal-600 disabled:bg-slate-100"
+          className="min-h-11 min-w-40 flex-1 rounded-lg border border-line-strong bg-surface-2 px-3 text-lg focus:border-brand focus:outline-2 focus:outline-brand disabled:opacity-60"
         />
         <Button type="submit" disabled={done || !value.trim()}>
           {t('investui.room.submit')}
         </Button>
       </form>
 
-      {!done && state.invalid && <p className="text-sm text-amber-800">{t('investui.room.invalid')}</p>}
+      {!done && state.invalid && <p className="text-sm text-warn">{t('investui.room.invalid')}</p>}
       {!done && !state.invalid && state.wrong > 0 && (
-        <p className="rounded-lg bg-amber-50 p-3 text-amber-900" aria-live="polite">
+        <p className="rounded-lg border-l-4 border-warn bg-warn/10 p-3 text-ink" aria-live="polite">
           {t('investui.room.tryAgain')}
         </p>
       )}
@@ -131,17 +132,22 @@ function ChoiceList({ q, state, onPickOption, onReveal, tx }: Props & { tx: (k: 
         {options.map((o) => {
           const isRight = o.id === q.correct;
           const wasWrong = state.wrongOptions.includes(o.id);
-          const tone = done && isRight ? 'border-emerald-500 bg-emerald-50' : wasWrong ? 'border-amber-500 bg-amber-50' : 'border-slate-300 bg-white hover:bg-slate-50';
+          const tone =
+            done && isRight
+              ? 'border-brand bg-brand/10'
+              : wasWrong
+                ? 'border-warn bg-warn/10'
+                : 'border-line-strong bg-surface-2 hover:border-brand';
           return (
             <li key={o.id}>
               <button
                 type="button"
                 disabled={done || wasWrong}
                 onClick={() => onPickOption(o.id)}
-                className={`flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-2 text-start transition-colors ${tone}`}
+                className={`flex min-h-11 w-full items-center justify-between gap-3 rounded-lg border px-4 py-2 text-start text-ink transition-colors ${tone}`}
               >
                 <span>{tx(o.textKey)}</span>
-                {done && isRight && <CheckIcon className="h-5 w-5 text-emerald-700" />}
+                {done && isRight && <CheckIcon className="h-5 w-5 text-brand" />}
               </button>
             </li>
           );
@@ -149,8 +155,8 @@ function ChoiceList({ q, state, onPickOption, onReveal, tx }: Props & { tx: (k: 
       </ul>
 
       {!done && state.wrong > 0 && (
-        <div className="space-y-1 rounded-lg bg-amber-50 p-3 text-amber-900" aria-live="polite">
-          {state.lastFeedbackKey && <p className="font-semibold">{tx(state.lastFeedbackKey)}</p>}
+        <div className="space-y-1 rounded-lg border-l-4 border-warn bg-warn/10 p-3 text-ink" aria-live="polite">
+          {state.lastFeedbackKey && <p className="font-bold">{tx(state.lastFeedbackKey)}</p>}
           <p>{t('investui.room.tryAgain')}</p>
         </div>
       )}

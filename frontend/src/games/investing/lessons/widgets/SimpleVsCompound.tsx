@@ -36,7 +36,7 @@ export function SimpleVsCompound({ principal, rate: initialRate, years: initialY
 
       <svg
         viewBox={`0 0 ${W} ${H}`}
-        className="w-full rounded-xl bg-slate-50"
+        className="w-full rounded-lg bg-surface-2"
         role="img"
         aria-label={t('investui.scp.summary', {
           years,
@@ -45,20 +45,20 @@ export function SimpleVsCompound({ principal, rate: initialRate, years: initialY
           extra: formatRupees(last.compound - last.simple),
         })}
       >
-        <path d={gap} className="fill-teal-200/70" />
-        <path d={line((p) => p.simple)} className="fill-none stroke-slate-500" strokeWidth="2.5" strokeDasharray="5 4" />
-        <path d={line((p) => p.compound)} className="fill-none stroke-teal-700" strokeWidth="3" />
-        <text x={PAD.left} y={H - 5} className="fill-slate-500" fontSize="10">0</text>
-        <text x={W - PAD.right} y={H - 5} textAnchor="end" className="fill-slate-500" fontSize="10">{years}</text>
+        <path d={gap} className="fill-brand/20" />
+        <path d={line((p) => p.simple)} className="fill-none stroke-muted" strokeWidth="2.5" strokeDasharray="5 4" />
+        <path d={line((p) => p.compound)} className="fill-none stroke-brand" strokeWidth="3" />
+        <text x={PAD.left} y={H - 5} className="fill-muted" fontSize="10">0</text>
+        <text x={W - PAD.right} y={H - 5} textAnchor="end" className="fill-muted" fontSize="10">{years}</text>
       </svg>
 
-      <div className="flex gap-4 text-sm">
-        <Legend className="bg-slate-500" label={t('investui.scp.simple')} value={formatRupees(last.simple)} />
-        <Legend className="bg-teal-700" label={t('investui.scp.compound')} value={formatRupees(last.compound)} />
+      <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
+        <Legend className="bg-muted" label={t('investui.scp.simple')} value={formatRupees(last.simple)} />
+        <Legend className="bg-brand" label={t('investui.scp.compound')} value={formatRupees(last.compound)} />
       </div>
 
-      <p className="rounded-xl bg-teal-50 p-3 text-center text-sm text-teal-900" aria-live="polite">
-        {t('investui.scp.extra')}: <strong>{formatRupees(last.compound - last.simple)}</strong> ({formatValue(ratePct / 100, 'percent')} for {years} years)
+      <p className="rounded-lg bg-surface-2 p-3 text-center text-sm text-ink" aria-live="polite">
+        {t('investui.scp.extra')}: <strong className="text-brand">{formatRupees(last.compound - last.simple)}</strong> ({formatValue(ratePct / 100, 'percent')} for {years} years)
       </p>
     </div>
   );
@@ -68,13 +68,13 @@ function Slider(props: { id: string; label: string; value: string; min: number; 
   return (
     <div>
       <div className="mb-1 flex justify-between text-sm">
-        <label htmlFor={props.id} className="text-slate-600">{props.label}</label>
-        <span className="font-bold text-teal-800">{props.value}</span>
+        <label htmlFor={props.id} className="text-ink-soft">{props.label}</label>
+        <span className="font-bold text-brand">{props.value}</span>
       </div>
       <input
         id={props.id}
         type="range"
-        className="h-3 w-full cursor-pointer accent-teal-700"
+        className="h-3 w-full cursor-pointer accent-brand"
         min={props.min}
         max={props.max}
         step={props.step}
@@ -88,9 +88,9 @@ function Slider(props: { id: string; label: string; value: string; min: number; 
 function Legend({ className, label, value }: { className: string; label: string; value: string }) {
   return (
     <div className="flex items-center gap-2">
-      <span className={`inline-block h-3 w-3 rounded-full ${className}`} />
-      <span className="text-slate-600">{label}</span>
-      <span className="font-bold">{value}</span>
+      <span className={`inline-block h-3 w-3 rounded-sm ${className}`} />
+      <span className="text-ink-soft">{label}</span>
+      <span className="font-bold text-ink">{value}</span>
     </div>
   );
 }

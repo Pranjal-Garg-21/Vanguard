@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { t } from '@/platform';
 import { Predict } from '@/runtime/verbs/predict';
-import { Button } from '@/ui';
+import { Button, Card } from '@/ui';
 import { formatRupees, formatValue, fillTemplate, type Computed } from './logic/calc';
 import { glossaryById } from './logic/content';
 import type { LessonBlock } from './logic/types';
@@ -11,15 +11,16 @@ import { ExploreWidget } from './widgets/ExploreWidget';
 
 type Ctx = Record<string, Computed>;
 
-const LABELS: Partial<Record<LessonBlock['type'], { key: string; tone: string }>> = {
-  note: { key: 'investui.card.note', tone: 'bg-slate-50' },
-  tradeoff: { key: 'investui.card.tradeoff', tone: 'bg-sky-50' },
-  misconception: { key: 'investui.card.mistake', tone: 'bg-amber-50' },
-  formula: { key: 'investui.card.formula', tone: 'bg-slate-100' },
-  explore: { key: 'investui.card.explore', tone: 'bg-teal-50' },
-  predict: { key: 'investui.card.predict', tone: 'bg-sky-50' },
-  steps: { key: 'investui.card.steps', tone: 'bg-white' },
-  jargon: { key: 'investui.card.words', tone: 'bg-white' },
+/** Label shown above a card, and a coloured left edge so card kinds are easy to tell apart. */
+const LABELS: Partial<Record<LessonBlock['type'], { key: string; edge: string }>> = {
+  note: { key: 'investui.card.note', edge: 'border-l-line-strong' },
+  tradeoff: { key: 'investui.card.tradeoff', edge: 'border-l-info' },
+  misconception: { key: 'investui.card.mistake', edge: 'border-l-warn' },
+  formula: { key: 'investui.card.formula', edge: 'border-l-xp' },
+  explore: { key: 'investui.card.explore', edge: 'border-l-brand' },
+  predict: { key: 'investui.card.predict', edge: 'border-l-info' },
+  steps: { key: 'investui.card.steps', edge: 'border-l-brand' },
+  jargon: { key: 'investui.card.words', edge: 'border-l-line-strong' },
 };
 
 export function BlockCard({ block, ctx, onPredictDone }: { block: LessonBlock; ctx: Ctx; onPredictDone: () => void }) {
@@ -27,16 +28,16 @@ export function BlockCard({ block, ctx, onPredictDone }: { block: LessonBlock; c
   const label = LABELS[block.type];
 
   return (
-    <section className={`space-y-3 rounded-2xl border border-slate-200 p-5 shadow-sm ${label?.tone ?? 'bg-white'}`}>
-      {label && <h2 className="text-xs font-bold uppercase tracking-wide text-teal-800">{t(label.key)}</h2>}
+    <Card className={`space-y-3 !p-5 ${label ? `border-l-4 ${label.edge}` : ''}`}>
+      {label && <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t(label.key)}</h2>}
 
       {block.textKey && block.type !== 'formula' && (
-        <p className={block.type === 'hook' ? 'text-xl font-semibold text-slate-900' : 'text-lg leading-relaxed text-slate-800'}>
+        <p className={block.type === 'hook' ? 'text-xl font-bold text-ink' : 'text-lg leading-relaxed text-ink'}>
           <Markup text={tx(block.textKey)} />
         </p>
       )}
       {block.type === 'formula' && block.textKey && (
-        <p className="font-mono text-base leading-relaxed text-slate-800">
+        <p className="font-mono text-base leading-relaxed text-ink">
           <Markup text={tx(block.textKey)} />
         </p>
       )}
@@ -45,7 +46,7 @@ export function BlockCard({ block, ctx, onPredictDone }: { block: LessonBlock; c
 
       {block.type === 'explore' && block.explore && (
         <div className="space-y-4">
-          <p className="text-lg text-slate-800">{tx(block.explore.promptKey)}</p>
+          <p className="text-lg text-ink">{tx(block.explore.promptKey)}</p>
           <ExploreWidget widget={block.explore.widget} params={resolveParams(block.explore.params, ctx)} />
         </div>
       )}
@@ -60,15 +61,15 @@ export function BlockCard({ block, ctx, onPredictDone }: { block: LessonBlock; c
             const g = glossaryById.get(id);
             if (!g) return null;
             return (
-              <div key={id} className="rounded-xl bg-slate-50 p-3">
-                <dt className="font-bold text-slate-900">{t(g.termKey)}</dt>
-                <dd className="text-slate-700">{t(g.defKey)}</dd>
+              <div key={id} className="rounded-lg bg-surface-2 p-3">
+                <dt className="font-bold text-ink">{t(g.termKey)}</dt>
+                <dd className="text-ink-soft">{t(g.defKey)}</dd>
               </div>
             );
           })}
         </dl>
       )}
-    </section>
+    </Card>
   );
 }
 
@@ -83,11 +84,9 @@ function Steps({ keys, tx }: { keys: string[]; tx: (key: string) => string }) {
     <div className="space-y-3">
       <ol className="space-y-2">
         {keys.slice(0, shown).map((key, i) => (
-          <li key={key} className="flex items-start gap-3 rounded-xl bg-slate-50 p-3 text-lg">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal-700 text-sm font-bold text-white">
-              {i + 1}
-            </span>
-            <span className="pt-0.5">
+          <li key={key} className="flex items-start gap-3 rounded-lg bg-surface-2 p-3 text-lg">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-brand text-sm font-bold text-brand-ink">{i + 1}</span>
+            <span className="pt-0.5 text-ink">
               <Markup text={tx(key)} />
             </span>
           </li>
