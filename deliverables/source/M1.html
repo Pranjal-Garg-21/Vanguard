@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html><head><meta charset="utf-8"><title>M1 Approach</title>
+<style>
+@page { size: A4; margin: 13mm 14mm; }
+* { box-sizing: border-box; }
+body { font-family: "Segoe UI", Arial, sans-serif; font-size: 9.6pt; line-height: 1.36; color: #1a1a1a; margin: 0; }
+.top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #1f4e79; padding-bottom: 4px; margin-bottom: 6px; }
+.team { font-weight: 700; font-size: 11pt; color: #1f4e79; }
+h1 { font-size: 15pt; margin: 0; }
+h2 { font-size: 11pt; color: #1f4e79; margin: 9px 0 3px; border-bottom: 1px solid #c9d6e3; padding-bottom: 1px; }
+p { margin: 3px 0; }
+ul { margin: 3px 0; padding-left: 16px; } li { margin: 1px 0; }
+table { border-collapse: collapse; width: 100%; margin: 4px 0; font-size: 8.8pt; }
+th, td { border: 1px solid #c9d6e3; padding: 2px 5px; vertical-align: top; text-align: left; }
+th { background: #eaf1f8; }
+.tag { font-style: italic; color: #444; }
+.flow { display: flex; gap: 4px; align-items: stretch; margin: 5px 0; font-size: 8.4pt; }
+.flow div.b { flex: 1; border: 1px solid #1f4e79; border-radius: 4px; padding: 3px 4px; background: #f4f8fc; text-align: center; }
+.flow div.a { align-self: center; color: #1f4e79; font-weight: 700; }
+.arch { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; font-size: 8.4pt; margin: 4px 0; }
+.arch div { border: 1px solid #9fb6cc; border-radius: 4px; padding: 3px 5px; background: #fafcfe; }
+.arch b { color: #1f4e79; }
+.wide { grid-column: span 3; text-align: center; background: #eef4ea !important; border-color: #8fb07a !important; }
+.pb { page-break-before: always; }
+</style></head><body>
+
+<div class="top"><span class="team">Team No.: 82</span><h1>M1 · Approach — PaisaPath</h1><span>Megathon X</span></div>
+
+<h2>1. Problem statement and our understanding</h2>
+<p><b>Problem (Vanguard India, Community Stewardship):</b> <i>"Empowering the Next Generation Through Financial Literacy."</i> The audience is Grade 11–12 students (16–18 years) in Hyderabad, reached through NGO partners (pilot of ~1,500 students), across five pillars: getting banked and digital payments, planning and budgeting, saving and borrowing, understanding investing, and staying safe from fraud.</p>
+<p><b>What we think the real problem is:</b></p>
+<ul>
+<li><b>Money lessons don't stick when they are lectures.</b> Students forget rules like "keep an emergency fund" or "never share your PIN" because they never feel what happens when they break them. With real money, consequences arrive weeks later and mistakes cost too much to learn from.</li>
+<li><b>The setting is hard:</b> low-end, often shared phones; patchy or no internet in classrooms; several languages (English, Telugu, Hindi, Urdu); and NGO facilitators who need to see where a class is stuck.</li>
+<li><b>Guardrails:</b> students are minors, so we must not collect real financial or family data. We must <b>educate, not recommend</b> investments (no real funds, stocks, banks or apps). Any projection must be shown as an assumption with a range, not a promise.</li>
+</ul>
+
+<h2>2. Idea / abstract</h2>
+<p><b>PaisaPath is a simulator, not a course.</b> <span class="tag">"Learn money by living it."</span> A student builds a fictional <b>character</b> through 10 picture-based questions (who they are, where their money comes from, their goal, their money personality). They then <b>live that character's financial life month by month for a simulated year</b>. The life starts at the very beginning, opening a bank account, and moves through stages in order:</p>
+<div class="flow">
+<div class="b"><b>S0</b> Get Banked</div><div class="a">→</div><div class="b"><b>S1</b> Digital Money (UPI)</div><div class="a">→</div><div class="b"><b>S2</b> First Money &amp; Budget</div><div class="a">→</div><div class="b"><b>S3</b> Save &amp; Track</div><div class="a">→</div><div class="b"><b>S4</b> Big Decisions &amp; Borrowing</div><div class="a">→</div><div class="b"><b>S5</b> Grow Money</div><div class="a">→</div><div class="b"><b>S6</b> Protect &amp; Look Ahead</div>
+</div>
+<p>A <b>Stay Safe thread</b> drops simulated scam events (fake KYC SMS, UPI collect requests, loan apps, "double your money" tips) into every stage. Students can get scammed, overspend or miss a goal <b>safely</b>. They can then <b>rewind</b> to a key decision, choose differently, and compare <b>Parallel Lives</b> side by side under the <i>same luck</i>, so they see that the decision made the difference, not chance.</p>
+<table>
+<tr><th style="width:22%">Mode</th><th>What it does</th></tr>
+<tr><td><b>LifePath</b> (main)</td><td>The 12-month persona life (S0–S6). Each stage ends with a short mastery gate.</td></tr>
+<tr><td><b>Rewind &amp; Parallel Lives</b></td><td>Branch from checkpoints and compare timelines, with a rule-based explanation and a "Future Me" projection to age 25.</td></tr>
+<tr><td><b>Arcade</b></td><td>Focused mini-games, e.g. Bank Counter, Jar Split budgeting, Debt Cost Ladder, Investing ABC lessons, Time Machine (500 futures), Stock Market and Mutual Fund simulators, UPI Simulator, Scam Inbox, The Call.</td></tr>
+<tr><td><b>Quick Play</b></td><td>5–10 minute scenarios and a 2-minute Daily Challenge with spaced review of weak concepts.</td></tr>
+<tr><td><b>Facilitator dashboard</b></td><td>Class code and QR, stage unlocks, a concept heatmap, top misconceptions with discussion prompts, stuck students.</td></tr>
+</table>
+<p><b>Why it fits the brief:</b> it is persona-led and relatable (local festivals, kirana, Irani chai), game-based, works offline on shared phones, supports several languages and audio, and is NGO-ready. Scaling comes through <b>content as data</b>: a teacher can add a scenario as JSON without a developer.</p>
+
+<div class="pb"></div>
+<div class="top"><span class="team">Team No.: 82</span><span>M1 · Approach — PaisaPath (page 2)</span></div>
+
+<h2>3. High-level approach and architecture</h2>
+<div class="arch">
+<div><b>UI layer</b> (React + TypeScript + Tailwind, PWA): onboarding, character builder, LifePath screens, Rewind viewer, Arcade games, facilitator dashboard. <i>No game logic in components.</i></div>
+<div><b>Core</b> (pure TypeScript): persona classifier, simulation engine <code>reduce(state, action) → state′ + events</code>, stage scheduler, <b>seeded RNG + event tape</b>, branch manager, fictional-asset market simulator with a Monte-Carlo runner, mastery model.</div>
+<div><b>Content packs</b> (static JSON): scenarios, life events, lessons, concepts and misconceptions, string bundles (EN/TE/HI/UR), audio. Checked by a schema validator.</div>
+<div><b>Local storage</b> (IndexedDB via Dexie): profiles with a picture-PIN (hashed), saves, timeline snapshots, an event outbox. <b>Fully playable offline.</b></div>
+<div><b>Service worker</b>: caches the app shell and content, and sends the outbox in the background when online. It never blocks play.</div>
+<div><b>Cloud</b> (Supabase: Postgres, row-level security, edge functions): classes, pseudonymous players, gameplay events, aggregates for facilitators.</div>
+<div class="wide"><b>Pipeline:</b> install via class QR → set up (language, accessibility, class code, avatar, picture-PIN; <i>no email or phone</i>) → 10-question character builder → persona + starting finances → pre-check → monthly LifePath loop → stage gates → rewind / Arcade / Quick Play → year-end review, Future Me and post-check → anonymous events sync → facilitator heatmap</div>
+</div>
+<p><b>Key design decisions</b></p>
+<ul>
+<li><b>Deterministic engine.</b> The same seed and the same choices always give the same state. This makes rewind, fair "same luck" comparisons, offline play and unit testing possible. Shocks, festivals, scams and market moves come from a seeded <i>event tape</i> that stays the same across branches.</li>
+<li><b>One learning loop for every activity:</b> Hook → Play → Result → Why? (misconception detection) → Concept → Try again → Check → Reward. Play uses eight reusable <b>verbs</b>: Choose, Allocate, Commit, Triage, Rank, Predict, Judge, Act in-situ.</li>
+<li><b>Mastery, not score.</b> Each concept has a mastery value from 0 to 1, updated by <code>m ← m + rate·(target − m)</code>, with red/amber/green status, hints when a student is stuck, and spaced review.</li>
+<li><b>Simulated-only and privacy-first.</b> We never touch the student's real money, messages or family finances. Investing screens use only fictional assets, show ranges and an assumptions drawer, and carry the banner <i>"Simulation based on assumptions. Not a prediction or advice."</i> There is no AI in the gameplay path; all explanations are rule-based and testable.</li>
+</ul>
+<p><b>Built so far:</b> project scaffold with CI (typecheck, lint, tests, build); the student setup flow, player picker and picture-PIN; the facilitator dashboard on Supabase with 7 RLS-protected tables; the offline storage and event outbox; the seeded market engine, financial math library and 500-futures runner; and the first interactive Investing ABC lessons with the Predict verb. <b>143 unit tests pass.</b> Next: the life engine and LifePath stages S0–S6, Rewind, the Everyday Money and Stay Safe games, and the remaining investing games.</p>
+
+<h2>4. Planned testing methodology</h2>
+<table>
+<tr><th style="width:24%">Level</th><th>What we test and how</th></tr>
+<tr><td><b>Unit tests</b> (Vitest, run in CI on every PR)</td><td>All core logic is pure functions, so it is tested directly: the engine reducer, financial math (compounding, inflation, EMI), the market simulator, mastery updates and lesson logic. The persona classifier is tested <b>exhaustively over every answer combination</b> to check that each one produces a valid persona and starting state.</td></tr>
+<tr><td><b>Determinism and replay</b></td><td>Same seed + same choices → identical serialized state in every game. Rewind tests check that tape events land in the same month in both timelines and that the original timeline is never changed.</td></tr>
+<tr><td><b>Content validation</b></td><td>A schema validator checks every scenario for missing strings, concepts or verbs in all languages. A <b>word-list test</b> fails the build if a real brand, bank, fund or company name appears in content.</td></tr>
+<tr><td><b>Simulation sanity checks</b></td><td>Monte-Carlo outputs are checked against closed-form expectations (mean growth, spread widening over time, crash recovery). Performance budget: 500 futures in under 1 s on a low-end phone (currently about 30 ms for 20 years × 500 futures on a laptop).</td></tr>
+<tr><td><b>Device and accessibility</b></td><td>Every screen at 360×640, with large text and in Urdu right-to-left; airplane-mode play → reconnect → the facilitator heatmap updates; first load under 3 MB; a test on a real low-end Android phone.</td></tr>
+<tr><td><b>Learning effectiveness</b></td><td>A pre-check and a post-check drawn from <b>separate item pools on the same concepts</b> measure learning gain on unseen items. We also track the misconception rates the "Why?" step detects. During the hackathon we will run quick hallway playtests with peers acting as 16–18 year olds and time each module (target: one LifePath month in 5–8 minutes).</td></tr>
+</table>
+
+</body></html>
