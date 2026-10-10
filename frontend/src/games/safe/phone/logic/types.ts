@@ -38,6 +38,10 @@ export type Action = {
   ignores?: string[];
   /** Closes the screen after this action (used by "what would have happened" cards). */
   close?: boolean;
+  /** Chat: what the student's reply says. It appears as an outgoing bubble in the conversation. */
+  say?: string;
+  /** Why this choice is right or wrong. Shown in the feedback card. */
+  noteKey?: string;
 };
 
 type Common = {
@@ -51,8 +55,12 @@ type Common = {
   explainKey?: string;
   /** Judge mode: the true answer. */
   verdict?: Verdict;
-  /** Act mode inbox: the run waits for the student to respond to this one. */
+  /** Act mode: the run waits for the student to respond to this one. */
   respond?: boolean;
+  /** The best action here. Used for feedback and scoring, even when it is a neutral step. */
+  best?: string;
+  /** Chat: surfaces with the same thread show as one conversation. */
+  thread?: string;
   /** Inbox: is this a real message? Used to count false alarms. */
   genuine?: boolean;
   misconception?: string;
@@ -67,12 +75,16 @@ export type Surface = Common &
     | { type: 'sms'; from: string; fromLens?: string; body: Segment[] }
     | { type: 'chat'; from: string; fromLens?: string; online?: boolean; body: Segment[] }
     | { type: 'mail'; fromName: string; fromAddress: string; fromLens?: string; subjectKey: string; body: Segment[] }
-    | { type: 'call'; caller: string; callerLens?: string; lines: Segment[] }
+    | { type: 'call'; caller: string; callerLens?: string; lines: Segment[]; /** Ringing screen (true) or an in-call transcript (false). */ ring?: boolean }
+    | { type: 'search'; query: string; results: SearchResult[] }
     | { type: 'page'; url: string; urlLens?: string; titleKey: string; body: Segment[]; fields?: { id: string; labelKey: string }[] }
     | { type: 'permission'; appKey: string; askKey: string }
     | { type: 'pay-request'; fromName: string; amount: number; noteKey: string; body: Segment[] }
   );
 export type SurfaceType = Surface['type'];
+
+/** A search result. Tapping it runs `action`. */
+export type SearchResult = { id: string; titleKey: string; url: string; urlLens?: string; snippetKey: string; ad?: boolean; action: string };
 
 export type Step = {
   id: string;
@@ -89,7 +101,7 @@ export type Objective = {
   when: string;
 };
 
-export type SimulatorId = 'upi' | 'inbox' | 'hunter' | 'call';
+export type SimulatorId = 'upi' | 'inbox' | 'hunter' | 'call' | 'chat' | 'loan' | 'rescue';
 
 export type Scenario = {
   id: string;
@@ -105,6 +117,9 @@ export type Scenario = {
   phone: { startBalance: number; startTime: string; /** Simulated minutes per real second (default 1/60). */ clockRate?: number };
   objectives: Objective[];
   steps: Step[];
+  /** The one-line rule to remember, and what to do instead. Shown on the summary. */
+  rule?: string;
+  instead?: string[];
 };
 
 export type HistoryEntry =
@@ -129,6 +144,8 @@ export type RunState = {
   inspected: string[];
   /** Surface → action taken. */
   acted: Record<string, string>;
+  /** Surfaces whose remaining options closed because the student moved on to what they unlocked. */
+  moved: string[];
   verdicts: Record<string, Verdict>;
   effects: Record<string, number>;
   history: HistoryEntry[];

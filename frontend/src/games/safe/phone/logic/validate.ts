@@ -30,6 +30,13 @@ export function validateScenario(s: Scenario): string[] {
     if (headLens && !lensIds.has(headLens)) errors.push(`${id}: header uses missing lens ${headLens}`);
 
     for (const a of surface.actions ?? []) for (const u of a.unlocks ?? []) if (!stepIds.has(u)) errors.push(`${id}: action ${a.id} unlocks missing step ${u}`);
+    if (surface.type === 'search') {
+      for (const r of surface.results) {
+        if (!actionIds.has(r.action)) errors.push(`${id}: search result ${r.id} runs missing action ${r.action}`);
+        if (r.urlLens && !lensIds.has(r.urlLens)) errors.push(`${id}: search result ${r.id} uses missing lens ${r.urlLens}`);
+      }
+    }
+    if (surface.best && !actionIds.has(surface.best)) errors.push(`${id}: best action ${surface.best} missing`);
     if (surface.timeout && !actionIds.has(surface.timeout.action)) errors.push(`${id}: timeout action ${surface.timeout.action} missing`);
 
     if (s.mode === 'judge' && !surface.verdict) errors.push(`${id}: judge item has no verdict`);

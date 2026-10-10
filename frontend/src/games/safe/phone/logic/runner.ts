@@ -33,6 +33,7 @@ export function createRun(script: Scenario, opts: { timersOff?: boolean } = {}):
       read: [],
       inspected: [],
       acted: {},
+      moved: [],
       verdicts: {},
       effects: {},
       history: [],
@@ -81,7 +82,7 @@ function expireTimeouts(state: RunState): RunState {
   let next = state;
   for (const id of state.inbox) {
     const surface = surfaceOf(state.script, id);
-    if (!surface?.timeout || next.acted[id] || next.ended) continue;
+    if (!surface?.timeout || next.acted[id] || next.moved.includes(id) || next.ended) continue;
     const startedAt = next.deliveredAt[id] ?? 0;
     if (next.now - startedAt >= surface.timeout.ms) next = act(next, id, surface.timeout.action, true);
   }
@@ -97,14 +98,16 @@ function act(state: RunState, surfaceId: string, actionId: string, auto = false)
   const surface = surfaceOf(state.script, surfaceId);
   const action: Action | undefined = surface?.actions?.find((a) => a.id === actionId);
   const used = state.history.some((h) => h.kind === 'acted' && h.surface === surfaceId && h.action === actionId);
-  if (!surface || !action || used || state.acted[surfaceId] || state.ended) return state;
+  if (!surface || !action || used || state.acted[surfaceId] || state.moved.includes(surfaceId) || state.ended) return state;
 
   const effects = { ...state.effects };
   for (const [path, amount] of Object.entries(action.effects ?? {})) effects[path] = (effects[path] ?? 0) + amount;
 
   // A neutral step (opening a link) doesn't close the surface: the student can still decide.
   const closes = action.risk !== 'neutral';
-  let next: RunState = { ...state, acted: closes ? { ...state.acted, [surfaceId]: actionId } : state.acted, effects };
+  // Moving on to what a neutral step unlocked closes this screen's other options, so the student can't go back and undo a decision.
+  const movesOn = !closes && (action.unlocks ?? []).length > 0;
+  let next: RunState = { ...state, acted: closes ? { ...state.acted, [surfaceId]: actionId } : state.acted, moved: movesOn ? [...state.moved, surfaceId] : state.moved, effects };
   next = push(next, { t: state.now, kind: 'acted', surface: surfaceId, action: actionId, ...(auto ? { auto } : {}) });
 
   const delay = action.delay ?? DEFAULT_DELAY;
@@ -114,7 +117,11 @@ function act(state: RunState, surfaceId: string, actionId: string, auto = false)
   next = { ...next, pending: [...next.pending, ...queued].sort((a, b) => a.at - b.at) };
 
   if (action.close && next.open === surfaceId) next = { ...next, open: null };
-  if (action.end) next = { ...next, ended: true, outcome: action.end, open: null };
+  if (action.end) {
+    // Ending well after money already left still counts as having lost money.
+    const lost = (next.effects['money.bank'] ?? 0) < 0;
+    next = { ...next, ended: true, outcome: lost ? 'fooled' : action.end, open: null };
+  }
   else if (next.open === surfaceId && isOverlay(state.script, surface)) next = { ...next, open: next.underlay, underlay: null };
   return finishIfDone(next);
 }
@@ -128,7 +135,11 @@ function finishIfDone(state: RunState): RunState {
   const needing = state.script.steps.filter((s) => s.surface.respond);
   if (needing.length === 0 || state.pending.length > 0) return state;
   if (!needing.every((s) => state.acted[s.id])) return state;
-  const fooled = needing.some((s) => s.surface.actions?.find((a) => a.id === state.acted[s.id])?.risk === 'risky' && !s.surface.genuine);
+  // Fooled only if a risky choice actually cost money; a wrong but harmless choice is just scored.
+  const fooled = needing.some((s) => {
+    const a = s.surface.actions?.find((x) => x.id === state.acted[s.id]);
+    return a?.risk === 'risky' && !s.surface.genuine && Object.keys(a.effects ?? {}).length > 0;
+  });
   return { ...state, ended: true, outcome: fooled ? 'fooled' : 'safe', open: null };
 }
 
