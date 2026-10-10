@@ -4,8 +4,8 @@
  * sends actions back; all the rules live in logic/runner.
  */
 import { useEffect, useRef, useState } from 'react';
-import { t } from '@/platform';
-import { Button } from '@/ui';
+import { t, useReadAloud } from '@/platform';
+import { AudioButton, Button } from '@/ui';
 import { IncomingCall } from './apps/CallScreen';
 import { PayHome } from './apps/PayApp';
 import { PermissionDialog } from './apps/PermissionDialog';
@@ -16,7 +16,7 @@ import { FeedbackCard } from './FeedbackCard';
 import { Icon, type IconName } from './Icon';
 import { buzz } from './usePhoneRun';
 import { formatClock, PhoneShell } from './PhoneShell';
-import { APP_OF, SurfaceBody, surfacePreview, surfaceTitle } from './SurfaceView';
+import { APP_OF, surfaceClipKey, surfaceKeys, SurfaceBody, surfacePreview, surfaceTitle } from './SurfaceView';
 import { LensReading, type ViewProps } from './Text';
 import { TellList } from './TellList';
 
@@ -75,6 +75,12 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact, on
   // Behind a call or permission dialog, keep showing what was open before.
   const baseId = overlay ? state.underlay : state.open;
   const open = baseId ? surfaceOf(script, baseId) : undefined;
+
+  // A student who ticked "Read things aloud" hears the message or the caller
+  // as soon as it opens, and it stops when they leave the screen. A call wins
+  // over whatever is behind it, because it is what the student is looking at.
+  const spoken = overlay ?? open;
+  useReadAloud(spoken ? surfaceKeys(spoken) : [], script.vars, spoken ? surfaceClipKey(spoken) : undefined);
 
   const view = (id: string, surface: Surface): ViewProps => {
     const timeout = surface.timeout;
@@ -176,6 +182,9 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact, on
           })}
         />
         <div className="px-4">
+          <div className="-mt-1 mb-1 flex justify-end text-phone-muted">
+            <AudioButton keys={surfaceKeys(open)} vars={script.vars} clipKey={surfaceClipKey(open)} />
+          </div>
           {!lensOn && state.inspected.length === 0 && state.read.length <= 1 && <p className="mb-3 flex items-start gap-2 rounded-lg bg-phone-link/10 p-2.5 text-xs text-phone-ink"><Icon name="search" className="mt-0.5 h-4 w-4 text-phone-link" />{t('safe.ui.lensHint')}</p>}
           {lensOn && <p className="mb-2 text-xs font-bold text-phone-link">{t('safe.ui.lensOn')}</p>}
           <LensReading surface={open} lensId={reading?.surface === id ? reading.lens : null} vars={script.vars} />

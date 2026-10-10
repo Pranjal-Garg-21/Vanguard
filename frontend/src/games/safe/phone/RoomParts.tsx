@@ -4,10 +4,10 @@
  */
 import type { ReactNode } from 'react';
 import { t } from '@/platform';
-import { Badge } from '@/ui';
+import { AudioButton, Badge } from '@/ui';
 import { Icon } from './Icon';
 
-export function RoomHeader({ title, brief, tags, progress }: { title: string; brief: string; tags: { label: string; tone?: 'neutral' | 'good' | 'warn' | 'bad' | 'info' }[]; progress: number }) {
+export function RoomHeader({ title, brief, tags, progress, speak }: { title: string; brief: string; tags: { label: string; tone?: 'neutral' | 'good' | 'warn' | 'bad' | 'info' }[]; progress: number; /** Keys for the title and brief, so they can be read aloud. */ speak?: string[] }) {
   const pct = Math.round(Math.min(1, Math.max(0, progress)) * 100);
   return (
     <div className="space-y-3">
@@ -16,7 +16,10 @@ export function RoomHeader({ title, brief, tags, progress }: { title: string; br
           <Badge key={tag.label} tone={tag.tone}>{tag.label}</Badge>
         ))}
       </div>
-      <h1 className="text-2xl font-bold text-ink">{title}</h1>
+      <div className="flex items-start gap-2">
+        <h1 className="flex-1 text-2xl font-bold text-ink">{title}</h1>
+        {speak && <AudioButton keys={speak} className="-my-1 text-ink-soft" />}
+      </div>
       <p className="text-sm text-ink-soft">{brief}</p>
       <div>
         <p className="mb-1 text-xs font-bold text-ink-soft">{t('safe.ui.roomProgress', { pct })}</p>
@@ -28,7 +31,7 @@ export function RoomHeader({ title, brief, tags, progress }: { title: string; br
   );
 }
 
-export type TaskItem = { id: string; title: string; hint?: string; done: boolean };
+export type TaskItem = { id: string; title: string; hint?: string; done: boolean; /** Keys for the task and its hint, so they can be read aloud. */ speak?: string[] };
 
 /** Numbered task cards. The first unfinished task starts open. */
 export function TaskList({ tasks }: { tasks: TaskItem[] }) {
@@ -48,7 +51,10 @@ export function TaskList({ tasks }: { tasks: TaskItem[] }) {
             </summary>
             {task.hint && (
               <div className="border-t border-line px-3.5 py-3 text-sm text-ink-soft">
-                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-muted">{t('safe.ui.hintLabel')}</p>
+                <p className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted">
+                  {t('safe.ui.hintLabel')}
+                  {task.speak && <AudioButton keys={task.speak} className="-my-2 ms-auto h-9 w-9" />}
+                </p>
                 {task.hint}
               </div>
             )}

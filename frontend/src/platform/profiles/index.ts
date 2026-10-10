@@ -6,6 +6,7 @@ import { ulid } from 'ulid';
 import { create } from 'zustand';
 import { db, type Accessibility, type Profile } from '../storage/db';
 import { DEVICE_SCOPE, getSetting, setSetting } from '../storage';
+import { DEFAULT_LANGUAGE, setLanguage } from '../i18n';
 
 export const MAX_PIN_ATTEMPTS = 3;
 export const LOCKOUT_MS = 30_000;
@@ -133,4 +134,21 @@ export async function resetPin(pid: string, pinPictures: string[]): Promise<void
 
 export async function setClassStatus(pid: string, classStatus: Profile['classStatus']): Promise<void> {
   await db.profiles.update(pid, { classStatus });
+}
+
+/**
+ * Every screen follows whoever is signed in: the language is the student's,
+ * not the phone's, so two students sharing a phone can read in different ones.
+ * Call once at app start. Returns a function that stops following.
+ *
+ * A language with no strings on the device is refused by setLanguage, so a
+ * student whose pack has not been downloaded keeps English rather than
+ * landing in a screen of raw keys (UC-PLAT-04).
+ */
+export function followProfileLanguage(): () => void {
+  const apply = (language: string | undefined) => setLanguage((language as Parameters<typeof setLanguage>[0]) ?? DEFAULT_LANGUAGE);
+  apply(useActiveProfile.getState().profile?.language);
+  return useActiveProfile.subscribe((state, previous) => {
+    if (state.profile?.language !== previous.profile?.language) apply(state.profile?.language);
+  });
 }

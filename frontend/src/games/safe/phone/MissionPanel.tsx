@@ -81,6 +81,7 @@ export function MissionPanel({ state }: { state: RunState }) {
         brief={t(script.briefKey)}
         progress={script.objectives.length ? done / script.objectives.length : 0}
         tags={[{ label: t('safe.ui.room'), tone: 'info' }, { label: level.label, tone: level.tone }, { label: script.mode === 'judge' ? 'Judge' : 'Act' }]}
+        speak={[script.titleKey, script.briefKey]}
       />
 
       <TaskList
@@ -89,6 +90,7 @@ export function MissionPanel({ state }: { state: RunState }) {
           title: t(o.textKey),
           hint: t(`safe.hint.${o.when.split(':')[0]}`),
           done: objectiveDone(state, o.when),
+          speak: [o.textKey, `safe.hint.${o.when.split(':')[0]}`],
         }))}
       />
 

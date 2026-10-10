@@ -1,5 +1,5 @@
 import { t } from '@/platform';
-import { Button, Card, SectionLabel } from '@/ui';
+import { AudioButton, Button, Card, SectionLabel } from '@/ui';
 import { foundKinds, summarise } from './logic/scoring';
 import { TELL_KINDS, type RunState } from './logic/types';
 import { TellCard } from './TellCard';
@@ -44,7 +44,10 @@ export function RoomComplete({ state, collected = [], onReplay, onRetry, onConti
 
       {state.script.rule && (
         <Card className="space-y-3 border-brand/40">
-          <SectionLabel>{t('safe.ui.remember')}</SectionLabel>
+          <div className="flex items-center gap-2">
+            <SectionLabel>{t('safe.ui.remember')}</SectionLabel>
+            <AudioButton keys={[state.script.rule, ...(state.script.instead ?? [])]} className="-my-2 ms-auto h-9 w-9 text-ink-soft" />
+          </div>
           <p className="text-lg font-bold leading-snug text-ink">{t(state.script.rule)}</p>
           {state.script.instead && (
             <div>
@@ -63,7 +66,7 @@ export function RoomComplete({ state, collected = [], onReplay, onRetry, onConti
       )}
 
       {(fooled || sum.balanceLost > 0) && (
-        <div className="rounded-lg border-l-4 border-bad bg-surface p-4">
+        <div className="rounded-lg border-s-4 border-bad bg-surface p-4">
           <h2 className="font-bold text-ink">{t('home.help.title')}</h2>
           <p className="text-sm text-ink-soft">{t('home.help.body')}</p>
         </div>

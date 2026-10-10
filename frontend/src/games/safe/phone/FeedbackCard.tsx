@@ -1,5 +1,6 @@
 /** Shows whether an answer was correct, why, and whether a better option existed. */
 import { t } from '@/platform';
+import { AudioButton } from '@/ui';
 import { Icon } from './Icon';
 import type { Feedback, ResponseFeedback } from './logic/feedback';
 
@@ -20,11 +21,14 @@ export function FeedbackCard({ feedback, yours, bestLabel, vars, tone: palette =
   const title = t(`safe.fb.title.${feedback.grade}`);
   const ink = palette === 'phone' ? 'text-phone-ink' : 'text-ink';
   const soft = palette === 'phone' ? 'text-phone-muted' : 'text-muted';
+  // The reason is the lesson, so it is the part worth hearing.
+  const spoken = [`safe.fb.title.${feedback.grade}`, ...(feedback.noteKey ? [feedback.noteKey] : []), ...(feedback.explainKey ? [feedback.explainKey] : [])];
   return (
-    <div className={`rounded-lg border-l-4 p-3 text-sm ${tone.box}`} role="status">
+    <div className={`rounded-lg border-s-4 p-3 text-sm ${tone.box}`} role="status">
       <p className={`flex items-center gap-1.5 font-bold ${tone.text}`}>
         <span className={kind === 'good' ? 'animate-star inline-flex' : 'inline-flex'}><Icon name={tone.icon} className="h-4 w-4" /></span>
         {title}
+        <AudioButton keys={spoken} vars={vars} className="-my-2 ms-auto h-9 w-9" />
       </p>
       {kind === 'good' && <p className={`mt-0.5 text-sm font-semibold ${tone.text}`}>{t(`safe.fb.cheer.${cheerIndex(yours)}`)}</p>}
       <p className={`mt-1 ${ink}`}>

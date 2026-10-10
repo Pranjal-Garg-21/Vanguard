@@ -76,3 +76,43 @@ export function surfacePreview(s: Surface, vars?: Record<string, string | number
   if (s.type === 'search') return '';
   return segs.map((x) => t(x.k, vars)).join('').slice(0, 70);
 }
+
+/**
+ * The keys of a surface's message, in reading order. Owner: P3.
+ *
+ * A body is split into segments so the Scam Lens can point at part of it, and
+ * the segments are not sentences on their own ("Please send it back " is one),
+ * so anything reading a message aloud has to join them.
+ */
+export function surfaceKeys(s: Surface): string[] {
+  const keys: string[] = [];
+  if (s.type === 'mail') keys.push(s.subjectKey);
+  if (s.type === 'page') keys.push(s.titleKey);
+  if (s.type === 'permission') keys.push(s.appKey, s.askKey);
+  if ('body' in s) keys.push(...s.body.map((x) => x.k));
+  if ('lines' in s) keys.push(...s.lines.map((x) => x.k));
+  if (s.type === 'pay-request') keys.push(s.noteKey);
+  return keys;
+}
+
+/** A surface's message as one sentence, with names and amounts filled in. */
+export function surfaceText(s: Surface, vars?: Record<string, string | number>): string {
+  return surfaceKeys(s)
+    .map((k) => t(k, vars))
+    .join('')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * The name a recording of this whole message would have: the text keys of a
+ * message share a prefix, so "safe.kyc01.sms.a" and its siblings become
+ * "safe.kyc01.sms". Recording the fragments separately would sound broken, so
+ * there is one clip per message.
+ */
+export function surfaceClipKey(s: Surface): string | undefined {
+  const first = surfaceKeys(s)[0];
+  if (!first) return undefined;
+  const parts = first.split('.');
+  return parts.length > 2 ? parts.slice(0, -1).join('.') : first;
+}
