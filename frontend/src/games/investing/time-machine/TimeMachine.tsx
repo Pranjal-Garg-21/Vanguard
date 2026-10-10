@@ -11,6 +11,7 @@ import { LabSlider } from '@/games/investing/lessons/widgets/controls';
 import { logEvent, t } from '@/platform';
 import { AssumptionsDrawer, Button, Card, ChevronIcon, FanChart, Notice, RangeDisplay } from '@/ui';
 import content from '@/content/scenarios/invest/time_machine.json';
+import { PathsGuide } from './PathsGuide';
 import { pickInsight, tenths, type InsightRule } from './logic/insight';
 import { defaultMix, MIX_IDS, setShare, type Mix } from './logic/mix';
 import { runTimeMachine, type TimeMachineParams, type TimeMachineRun } from './logic/run';
@@ -102,6 +103,8 @@ export function TimeMachine({ seed }: { seed?: number | string }) {
             <LabSlider id="tm-monthly" label={t('timemachine.plan.monthly')} shown={formatRupees(monthly)} min={0} max={5000} step={500} value={monthly} onChange={setMonthly} />
           </Card>
 
+          <PathsGuide />
+
           <Card className="space-y-4">
             <h2 className="font-bold">{t('timemachine.step.mix')}</h2>
             <p className="text-sm text-muted">{t('timemachine.mix.hint')}</p>
@@ -155,7 +158,7 @@ function Results({
 
       <Card className="space-y-4">
         <h2 className="text-lg font-bold">{t('timemachine.result.title')}</h2>
-        <FanChart percentiles={futures.percentiles} invested={futures.invested} inflation={inflation} />
+        <FanChart percentiles={futures.percentiles} invested={futures.invested} inflation={inflation} learnMoreHref="/learn/invest/lesson_inflation" />
         <RangeDisplay low={futures.summary.p5} median={futures.summary.median} high={futures.summary.p95} />
         <ul className="space-y-1 text-ink-soft">
           <li>{t('timemachine.result.put', { amount: formatRupees(futures.summary.invested) })}</li>

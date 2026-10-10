@@ -26,5 +26,12 @@
   "chart.axis.years": "Years",
   "chart.real.on": "Showing today's money (after inflation)",
   "chart.real.off": "Showing plain rupee amounts",
-  "chart.real.toggle": "Adjust for inflation"
+  "chart.real.toggle": "Adjust for inflation",
+  "real.hint": "Prices go up over time, so a rupee later buys less than a rupee today. Switch on the inflation adjustment to see what that does.",
+  "real.title": "Why did the chart change?",
+  "real.why": "Prices rise {rate} a year. So ₹1 in year {years} buys only what {worth} buys today. With the switch on, every amount is shown in today's money. That is why the lines sit lower, and the gap grows the further right you look.",
+  "real.end": "At the end, the middle outcome is {nominal} in plain rupees, but only about {real} in today's money.",
+  "real.dashed": "The dashed line drops too, because money you add later is also worth less than money you add now.",
+  "real.slow": "If a path grows slower than prices rise, its line can fall even while the plain amount goes up. That is how savings lose buying power.",
+  "real.learn": "Learn more in the Inflation room"
 }

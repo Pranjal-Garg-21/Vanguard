@@ -3,6 +3,7 @@ import rulesFile from '@/content/scenarios/invest/time_machine.json';
 import { t } from '@/platform';
 import { pickInsight, tenths, type InsightFacts, type InsightRule } from './insight';
 import { defaultMix, MIX_IDS, setShare, toWeights, type Mix } from './mix';
+import { typicalYear } from './paths';
 import { runTimeMachine } from './run';
 
 const rules = rulesFile.rules as InsightRule[];
@@ -123,5 +124,15 @@ describe('runTimeMachine', () => {
     const bumpy = runTimeMachine({ ...params, years: 2, mix: { steady_box: 0, mixed_basket: 0, bumpy_ride: 100 } });
     const steady = runTimeMachine({ ...params, years: 2, mix: { steady_box: 100, mixed_basket: 0, bumpy_ride: 0 } });
     expect(bumpy.facts.lossChance).toBeGreaterThan(steady.facts.lossChance);
+  });
+});
+
+describe('typicalYear', () => {
+  it('is a wider range for a bumpier path, and the steady path stays above the starting amount', () => {
+    const steady = typicalYear('steady_box');
+    const bumpy = typicalYear('bumpy_ride');
+    expect(steady.high - steady.low).toBeLessThan(bumpy.high - bumpy.low);
+    expect(steady.low).toBeGreaterThan(10000);
+    expect(bumpy.low).toBeLessThan(10000);
   });
 });

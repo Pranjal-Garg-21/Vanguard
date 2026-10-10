@@ -37,5 +37,12 @@
   "insight.default": "No one can promise one number. Look at the whole range, not just the middle line.",
   "back": "Back to Investing ABC",
   "open": "Open the Time Machine",
-  "open.hint": "Test your plan against 500 possible futures."
+  "open.hint": "Test your plan against 500 possible futures.",
+  "paths.title": "Meet the three paths",
+  "paths.intro": "Each path is a made-up place to keep money. They differ in how much they grow and how much they swing. Splitting means choosing how many of every 100 rupees go to each one.",
+  "paths.steady_box.what": "Like a savings box. Few surprises, but it grows slowly.",
+  "paths.mixed_basket.what": "Like a basket of many small things. One bad item hurts less, but the basket still rises and falls.",
+  "paths.bumpy_ride.what": "Like a few big bets. It can climb fast, and it can fall hard.",
+  "paths.year": "In a typical year, ₹10,000 ends between {low} and {high}.",
+  "paths.note": "A typical year means about 2 years out of 3. Some years fall outside it. These paths are made up for learning, not real products."
 }

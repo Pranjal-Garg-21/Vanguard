@@ -7,7 +7,8 @@
  * a legend names every mark. A text summary is available to screen readers.
  */
 import { useId, useState, type ReactNode } from 'react';
-import { formatRupees, type Percentiles } from '@/core/market';
+import { Link } from 'react-router';
+import { formatRupees, formatValue, type Percentiles } from '@/core/market';
 import { t } from '@/platform';
 import { bandPath, compactRupees, deflate, linePath, niceTicks } from './chart-math';
 
@@ -17,6 +18,8 @@ export interface FanChartProps {
   invested: number[];
   /** When given, shows an "Adjust for inflation" toggle that restates every amount in today's money. */
   inflation?: number;
+  /** Where to send a student who wants the full lesson on inflation. */
+  learnMoreHref?: string;
   className?: string;
 }
 
@@ -24,7 +27,7 @@ const W = 640;
 const H = 300;
 const PAD = { top: 12, right: 12, bottom: 34, left: 52 };
 
-export function FanChart({ percentiles, invested, inflation, className = '' }: FanChartProps) {
+export function FanChart({ percentiles, invested, inflation, learnMoreHref, className = '' }: FanChartProps) {
   const [real, setReal] = useState(false);
   const descId = useId();
   const adjust = (series: number[]) => (real && inflation !== undefined ? deflate(series, inflation) : series);
@@ -102,6 +105,26 @@ export function FanChart({ percentiles, invested, inflation, className = '' }: F
         <LegendItem swatch={<span className="w-5 border-t-[3px] border-brand" />} label={t('assume.chart.legend.median')} />
         <LegendItem swatch={<span className="w-5 border-t-2 border-dashed border-ink-soft" />} label={t('assume.chart.legend.invested')} />
       </ul>
+      {inflation !== undefined && (
+        <div className="space-y-2 rounded-lg border-l-4 border-info bg-surface-2 p-3 text-sm text-ink-soft" aria-live="polite">
+          {real ? (
+            <>
+              <p className="font-bold text-ink">{t('assume.real.title')}</p>
+              <p>{t('assume.real.why', { rate: formatValue(inflation, 'percent', 1), years: Number(years.toFixed(1)), worth: formatRupees(1 / Math.pow(1 + inflation, years), 2) })}</p>
+              <p>{t('assume.real.end', { nominal: formatRupees(percentiles.p50[months] ?? 0), real: formatRupees(p50[months] ?? 0) })}</p>
+              <p>{t('assume.real.dashed')}</p>
+              <p>{t('assume.real.slow')}</p>
+            </>
+          ) : (
+            <p>{t('assume.real.hint')}</p>
+          )}
+          {learnMoreHref && (
+            <Link to={learnMoreHref} className="inline-block font-bold text-brand hover:underline">
+              {t('assume.real.learn')}
+            </Link>
+          )}
+        </div>
+      )}
       <p id={descId} className="sr-only">
         {alt} {real ? t('assume.chart.real.on') : t('assume.chart.real.off')}
       </p>
