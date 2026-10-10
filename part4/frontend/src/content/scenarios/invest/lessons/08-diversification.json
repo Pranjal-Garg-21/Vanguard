@@ -1,0 +1,276 @@
+{
+  "id": "lesson_diversification",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 8,
+  "estMinutes": 12,
+  "difficulty": "medium",
+  "titleKey": "invest_diversification.title",
+  "blurbKey": "invest_diversification.blurb",
+  "concepts": ["diversification", "risk_return", "volatility_vs_loss", "pooled_funds"],
+  "misconceptions": ["one_stock_is_enough", "diversified_means_no_loss", "guaranteed_returns_exist"],
+  "vars": {
+    "total": { "value": 6000, "fmt": "rupees" },
+    "count": { "value": 6 },
+    "fall": { "value": 0.3, "fmt": "percent" },
+    "amt": { "value": 10000, "fmt": "rupees" },
+    "mMean": { "value": 0.1, "fmt": "percent", "round": 1 },
+    "mFee": { "value": 0.005, "fmt": "percent", "round": 1 },
+    "mVol": { "value": 0.1, "fmt": "percent", "round": 1 },
+    "bMean": { "value": 0.13, "fmt": "percent", "round": 1 },
+    "bFee": { "value": 0.005, "fmt": "percent", "round": 1 },
+    "bVol": { "value": 0.22, "fmt": "percent", "round": 1 }
+  },
+  "calcs": [
+    { "id": "each", "fn": "div", "args": ["$total", "$count"], "fmt": "rupees" },
+    { "id": "lossOne", "fn": "mul", "args": ["$total", "$fall"], "fmt": "rupees" },
+    { "id": "lossSplit", "fn": "div", "args": ["$lossOne", "$count"], "fmt": "rupees" },
+    { "id": "lossMarket", "fn": "identity", "args": ["$lossOne"], "fmt": "rupees" },
+    { "id": "mLow", "fn": "typicalLow", "args": ["$amt", "$mMean", "$mFee", "$mVol"], "fmt": "rupees" },
+    { "id": "mHigh", "fn": "typicalHigh", "args": ["$amt", "$mMean", "$mFee", "$mVol"], "fmt": "rupees" },
+    { "id": "mWidth", "fn": "sub", "args": ["$mHigh", "$mLow"], "fmt": "rupees" },
+    { "id": "bLow", "fn": "typicalLow", "args": ["$amt", "$bMean", "$bFee", "$bVol"], "fmt": "rupees" },
+    { "id": "bHigh", "fn": "typicalHigh", "args": ["$amt", "$bMean", "$bFee", "$bVol"], "fmt": "rupees" },
+    { "id": "bWidth", "fn": "sub", "args": ["$bHigh", "$bLow"], "fmt": "rupees" },
+    { "id": "narrower", "fn": "sub", "args": ["$bWidth", "$mWidth"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_diversification.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "egg_basket", "textKey": "invest_diversification.t1.hook" },
+        { "type": "define", "textKey": "invest_diversification.t1.define" },
+        { "type": "analogy", "visual": "egg_basket", "textKey": "invest_diversification.t1.analogy" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_diversification.q1.prompt",
+          "concept": "diversification",
+          "points": 10,
+          "hintKey": "invest_diversification.q1.hint",
+          "explainKey": "invest_diversification.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_diversification.q1.opt.a" },
+            { "id": "b", "textKey": "invest_diversification.q1.opt.b" },
+            { "id": "c", "textKey": "invest_diversification.q1.opt.c" },
+            { "id": "d", "textKey": "invest_diversification.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "invest_diversification.q2.prompt",
+          "concept": "diversification",
+          "points": 10,
+          "hintKey": "invest_diversification.q2.hint",
+          "explainKey": "invest_diversification.q2.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_diversification.q2.opt.a" },
+            { "id": "b", "textKey": "invest_diversification.q2.opt.b" },
+            { "id": "c", "textKey": "invest_diversification.q2.opt.c" },
+            { "id": "d", "textKey": "invest_diversification.q2.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_diversification.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_diversification.t2.define" },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "basket_split",
+            "promptKey": "invest_diversification.t2.explore",
+            "params": { "total": "$total", "fall": "$fall" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_diversification.q3.prompt",
+          "concept": "diversification",
+          "points": 15,
+          "hintKey": "invest_diversification.q3.hint",
+          "explainKey": "invest_diversification.q3.explain",
+          "answer": "lossOne",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_diversification.q4.prompt",
+          "concept": "diversification",
+          "points": 15,
+          "hintKey": "invest_diversification.q4.hint",
+          "explainKey": "invest_diversification.q4.explain",
+          "answer": "lossSplit",
+          "unit": "rupees"
+        },
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "invest_diversification.q5.prompt",
+          "concept": "diversification",
+          "points": 10,
+          "hintKey": "invest_diversification.q5.hint",
+          "explainKey": "invest_diversification.q5.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_diversification.q5.opt.a" },
+            { "id": "b", "textKey": "invest_diversification.q5.opt.b" },
+            { "id": "c", "textKey": "invest_diversification.q5.opt.c" },
+            { "id": "d", "textKey": "invest_diversification.q5.opt.d", "misconception": "diversified_means_no_loss", "feedbackKey": "invest_diversification.q5.fb.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_diversification.t3.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_diversification.t3.define" },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "basket_split",
+            "promptKey": "invest_diversification.t3.explore",
+            "params": { "total": "$total", "fall": "$fall" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "invest_diversification.q6.prompt",
+          "concept": "diversification",
+          "points": 15,
+          "hintKey": "invest_diversification.q6.hint",
+          "explainKey": "invest_diversification.q6.explain",
+          "answer": "lossMarket",
+          "unit": "rupees"
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "invest_diversification.q7.prompt",
+          "concept": "diversification",
+          "points": 15,
+          "hintKey": "invest_diversification.q7.hint",
+          "explainKey": "invest_diversification.q7.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_diversification.q7.opt.a" },
+            { "id": "b", "textKey": "invest_diversification.q7.opt.b", "misconception": "diversified_means_no_loss", "feedbackKey": "invest_diversification.q7.fb.b" },
+            { "id": "c", "textKey": "invest_diversification.q7.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_diversification.q7.fb.c" },
+            { "id": "d", "textKey": "invest_diversification.q7.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_diversification.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_diversification.t4.define" },
+        {
+          "type": "explore",
+          "explore": { "widget": "path_range", "promptKey": "invest_diversification.t4.explore", "params": { "amount": "$amt" } }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "invest_diversification.q8.prompt",
+          "concept": "diversification",
+          "points": 15,
+          "hintKey": "invest_diversification.q8.hint",
+          "explainKey": "invest_diversification.q8.explain",
+          "answer": "mWidth",
+          "unit": "rupees"
+        },
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "invest_diversification.q9.prompt",
+          "concept": "risk_return",
+          "points": 15,
+          "hintKey": "invest_diversification.q9.hint",
+          "explainKey": "invest_diversification.q9.explain",
+          "answer": "narrower",
+          "unit": "rupees"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "invest_diversification.q10.prompt",
+          "concept": "diversification",
+          "points": 10,
+          "hintKey": "invest_diversification.q10.hint",
+          "explainKey": "invest_diversification.q10.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_diversification.q10.opt.a" },
+            { "id": "b", "textKey": "invest_diversification.q10.opt.b" },
+            { "id": "c", "textKey": "invest_diversification.q10.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_diversification.q10.fb.c" },
+            { "id": "d", "textKey": "invest_diversification.q10.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "invest_diversification.t5.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_diversification.t5.define" },
+        { "type": "tradeoff", "textKey": "invest_diversification.t5.tradeoff" },
+        { "type": "jargon", "terms": ["diversification", "market_wide_fall"] }
+      ],
+      "questions": [
+        {
+          "id": "q11",
+          "kind": "choice",
+          "promptKey": "invest_diversification.q11.prompt",
+          "concept": "diversification",
+          "points": 10,
+          "hintKey": "invest_diversification.q11.hint",
+          "explainKey": "invest_diversification.q11.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_diversification.q11.opt.a" },
+            { "id": "b", "textKey": "invest_diversification.q11.opt.b", "misconception": "one_stock_is_enough", "feedbackKey": "invest_diversification.q11.fb.b" },
+            { "id": "c", "textKey": "invest_diversification.q11.opt.c" },
+            { "id": "d", "textKey": "invest_diversification.q11.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q12",
+          "kind": "choice",
+          "promptKey": "invest_diversification.q12.prompt",
+          "concept": "diversification",
+          "points": 10,
+          "hintKey": "invest_diversification.q12.hint",
+          "explainKey": "invest_diversification.q12.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_diversification.q12.opt.a" },
+            { "id": "b", "textKey": "invest_diversification.q12.opt.b" },
+            { "id": "c", "textKey": "invest_diversification.q12.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_diversification.q12.fb.c" },
+            { "id": "d", "textKey": "invest_diversification.q12.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": ["diversification", "market_wide_fall"]
+}

@@ -1,0 +1,120 @@
+{
+  "_note": "Stock Market Simulator content. Companies are fictional. News cards drive the scripted moments: a rumour (round 4), a market-wide drop (round 8) and one company failing (round 10). 'noise' cards move nothing on purpose.",
+  "cash": 10000,
+  "rounds": 12,
+  "dividendRounds": [6, 12],
+  "driftAnnual": 0.08,
+  "volClasses": { "low": 0.15, "medium": 0.28, "high": 0.5 },
+  "rumour": { "company": "deccan_farms", "round": 4 },
+  "drop": { "round": 8 },
+  "companies": [
+    { "id": "chaiwala", "ticker": "CHAI", "nameKey": "stockmarket.co.chaiwala.name", "taglineKey": "stockmarket.co.chaiwala.tag", "sector": "food", "startPrice": 100, "dividend": 2, "vol": "low" },
+    { "id": "deccan_farms", "ticker": "DFRM", "nameKey": "stockmarket.co.deccan_farms.name", "taglineKey": "stockmarket.co.deccan_farms.tag", "sector": "farming", "startPrice": 60, "dividend": 1.5, "vol": "medium" },
+    { "id": "hyd_repairs", "ticker": "HMR", "nameKey": "stockmarket.co.hyd_repairs.name", "taglineKey": "stockmarket.co.hyd_repairs.tag", "sector": "services", "startPrice": 40, "dividend": 1, "vol": "medium" },
+    { "id": "charminar_textiles", "ticker": "CTEX", "nameKey": "stockmarket.co.charminar_textiles.name", "taglineKey": "stockmarket.co.charminar_textiles.tag", "sector": "clothing", "startPrice": 80, "dividend": 2, "vol": "low" },
+    { "id": "musi_transport", "ticker": "MUSI", "nameKey": "stockmarket.co.musi_transport.name", "taglineKey": "stockmarket.co.musi_transport.tag", "sector": "transport", "startPrice": 120, "dividend": 3, "vol": "medium" },
+    { "id": "bhagya_tech", "ticker": "BHTK", "nameKey": "stockmarket.co.bhagya_tech.name", "taglineKey": "stockmarket.co.bhagya_tech.tag", "sector": "tech", "startPrice": 150, "dividend": 0, "vol": "high" }
+  ],
+  "news": [
+    { "round": 1, "id": "n1", "textKey": "stockmarket.news.n1", "tone": "open", "effects": [] },
+    { "round": 2, "id": "n2", "textKey": "stockmarket.news.n2", "tone": "good", "effects": [{ "target": "chaiwala", "pct": 0.08 }] },
+    { "round": 3, "id": "n3", "textKey": "stockmarket.news.n3", "tone": "noise", "effects": [] },
+    { "round": 4, "id": "n4", "textKey": "stockmarket.news.n4", "tone": "rumour", "effects": [{ "target": "deccan_farms", "pct": 0.14 }] },
+    { "round": 5, "id": "n5", "textKey": "stockmarket.news.n5", "tone": "bad", "effects": [{ "target": "deccan_farms", "pct": -0.12 }] },
+    { "round": 6, "id": "n6", "textKey": "stockmarket.news.n6", "tone": "dividend", "effects": [] },
+    { "round": 7, "id": "n7", "textKey": "stockmarket.news.n7", "tone": "good", "effects": [{ "target": "musi_transport", "pct": 0.1 }] },
+    { "round": 8, "id": "n8", "textKey": "stockmarket.news.n8", "tone": "bad", "effects": [{ "target": "market", "pct": -0.15 }] },
+    { "round": 9, "id": "n9", "textKey": "stockmarket.news.n9", "tone": "good", "effects": [{ "target": "hyd_repairs", "pct": 0.06 }, { "target": "charminar_textiles", "pct": -0.06 }] },
+    { "round": 10, "id": "n10", "textKey": "stockmarket.news.n10", "tone": "bad", "effects": [], "fail": "bhagya_tech" },
+    { "round": 11, "id": "n11", "textKey": "stockmarket.news.n11", "tone": "good", "effects": [{ "target": "market", "pct": 0.04 }] },
+    { "round": 12, "id": "n12", "textKey": "stockmarket.news.n12", "tone": "dividend", "effects": [] }
+  ],
+  "check": {
+    "vars": {
+      "shares": { "value": 10 },
+      "price": { "value": 100, "fmt": "rupees" },
+      "nowPrice": { "value": 112, "fmt": "rupees" },
+      "divPS": { "value": 2, "fmt": "rupees" },
+      "feeRate": { "value": 0.005, "fmt": "percent", "round": 1 },
+      "bigSpend": { "value": 10000, "fmt": "rupees" }
+    },
+    "calcs": [
+      { "id": "spent", "fn": "mul", "args": ["$shares", "$price"], "fmt": "rupees" },
+      { "id": "fee", "fn": "tradeFee", "args": ["$spent", "$feeRate"], "fmt": "rupees" },
+      { "id": "profit", "fn": "positionProfit", "args": ["$shares", "$price", "$nowPrice", "$divPS", "$fee"], "fmt": "rupees" },
+      { "id": "bigFee", "fn": "tradeFee", "args": ["$bigSpend", "$feeRate"], "fmt": "rupees" }
+    ],
+    "questions": [
+      {
+        "id": "c1",
+        "kind": "number",
+        "promptKey": "stockmarket.check.c1.prompt",
+        "concept": "dividends",
+        "points": 20,
+        "hintKey": "stockmarket.check.c1.hint",
+        "explainKey": "stockmarket.check.c1.explain",
+        "answer": "profit",
+        "unit": "rupees"
+      },
+      {
+        "id": "c2",
+        "kind": "number",
+        "promptKey": "stockmarket.check.c2.prompt",
+        "concept": "fees_cost",
+        "points": 15,
+        "hintKey": "stockmarket.check.c2.hint",
+        "explainKey": "stockmarket.check.c2.explain",
+        "answer": "bigFee",
+        "unit": "rupees"
+      },
+      {
+        "id": "c3",
+        "kind": "choice",
+        "promptKey": "stockmarket.check.c3.prompt",
+        "concept": "stock_basics",
+        "points": 10,
+        "hintKey": "stockmarket.check.c3.hint",
+        "explainKey": "stockmarket.check.c3.explain",
+        "options": [
+          { "id": "a", "textKey": "stockmarket.check.c3.opt.a" },
+          { "id": "b", "textKey": "stockmarket.check.c3.opt.b" },
+          { "id": "c", "textKey": "stockmarket.check.c3.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "stockmarket.check.c3.fb.c" },
+          { "id": "d", "textKey": "stockmarket.check.c3.opt.d" }
+        ],
+        "correct": "a"
+      },
+      {
+        "id": "c4",
+        "kind": "choice",
+        "promptKey": "stockmarket.check.c4.prompt",
+        "concept": "behaviour_gap",
+        "points": 15,
+        "hintKey": "stockmarket.check.c4.hint",
+        "explainKey": "stockmarket.check.c4.explain",
+        "options": [
+          { "id": "a", "textKey": "stockmarket.check.c4.opt.a" },
+          { "id": "b", "textKey": "stockmarket.check.c4.opt.b", "misconception": "chasing_hype", "feedbackKey": "stockmarket.check.c4.fb.b" },
+          { "id": "c", "textKey": "stockmarket.check.c4.opt.c" },
+          { "id": "d", "textKey": "stockmarket.check.c4.opt.d" }
+        ],
+        "correct": "a"
+      },
+      {
+        "id": "c5",
+        "kind": "choice",
+        "promptKey": "stockmarket.check.c5.prompt",
+        "concept": "diversification",
+        "points": 15,
+        "hintKey": "stockmarket.check.c5.hint",
+        "explainKey": "stockmarket.check.c5.explain",
+        "options": [
+          { "id": "a", "textKey": "stockmarket.check.c5.opt.a" },
+          { "id": "b", "textKey": "stockmarket.check.c5.opt.b", "misconception": "one_stock_is_enough", "feedbackKey": "stockmarket.check.c5.fb.b" },
+          { "id": "c", "textKey": "stockmarket.check.c5.opt.c" },
+          { "id": "d", "textKey": "stockmarket.check.c5.opt.d" }
+        ],
+        "correct": "a"
+      }
+    ]
+  }
+}

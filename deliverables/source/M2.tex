@@ -1,0 +1,79 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,margin=1.9cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+\pagestyle{empty}
+\setlist{itemsep=1.5pt,topsep=2pt,leftmargin=1.3em}
+\setlength{\parskip}{4pt}
+\renewcommand{\arraystretch}{1.12}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries M2 Report}\\[4pt]
+  {\large Team 82}
+\end{center}
+\vspace{-2pt}
+
+\section*{1\quad Current Approach and Changes Since M1}
+
+The core approach of M1 is unchanged: an offline-first React/TypeScript progressive web app, a pure and deterministic simulation core, scenarios stored as JSON, one learning loop (story, decision, consequence, ``why'', concept, check, reward), concept mastery, and a facilitator dashboard fed by pseudonymous events. The work was done in parallel on three code branches, now copied into folders of the same names in \texttt{main} (\texttt{part4/}, \texttt{p5-dashboard/}, \texttt{p3-paisapur/}). The branches themselves are kept. Where the implementation differs from M1:
+
+\begin{itemize}
+  \item \textbf{Main mode is now a town, not month screens.} Instead of month-by-month menus, the student walks a top-down tile town (\emph{Paisapur}) through a prologue and six chapters (bank, budget, save, borrow, invest, protect). The starting-life choices are made in a dialogue with an in-game guide in the prologue, instead of ten picture questions. The seven M1 stages became six chapters, each ending in a ``master's challenge'' gate; digital payments moved into the Stay Safe phone simulator. Rewind became a \emph{What-If Machine}, and a rival character whose life is re-simulated from the same seed provides the side-by-side comparison. Branch: \texttt{p3-paisapur}.
+  \item \textbf{Investing is richer than ``first lessons''.} Fourteen task-based rooms with typed answers, hints and points (profit/loss to scam spotting), sixteen interactive labs, a Time Machine (500 simulated futures shown as a range), a 12-week Stock Market Simulator with six fictional companies and a coach that never says what to buy, a Mutual Fund Challenge, and an Investing/Gambling/Scam sorter. A design kit (meter, coin stack, dialog, toast, \ldots) and a \texttt{/gallery} page were added. Branch: \texttt{part4}.
+  \item \textbf{``Scam inbox'' grew into phone simulators.} A simulated phone with SMS, chat, email, calls and search, a Scam Lens, a UPI Simulator (pay by QR, then a fake collect request), 6 new scenarios and a day-long inbox with shuffled content, plus XP, stars, ranks and badges. Branch: \texttt{p5-dashboard}.
+  \item \textbf{Sync and offline, a plan in M1, are now code.} The outbox uploads answers in batches of at most 200 with back-off and never twice, class unlocks come back down, and the app is installable and works offline. The facilitator Insights tab flags concepts a class finds hard (below 50\% with at least 6 answers) and has demo data. Branch: \texttt{p5-dashboard}.
+  \item \textbf{Mini-games.} Nine Everyday Money games (document hunt, bank counter, swipe sort, jar split, goal builder, spending detective, surprise month, debt ladder, rescue mission) and shared verbs (allocate, commit, rank, triage) were built and then wired into the story economy. Branch: \texttt{p3-paisapur}.
+  \item \textbf{Not as promised in M1.} Only English text exists: Telugu, Hindi and Urdu folders are empty, though the translation plumbing and right-to-left-safe layout classes are in place. ``Listen'' buttons use the browser voice, not recorded audio. The investing games and Stay Safe are not yet reachable from inside the town or registered in one shared game runner, because the branches have not been merged. No real-device or learning-gain data has been collected yet.
+\end{itemize}
+
+\section*{2\quad Experiments Run So Far and Results}
+
+All figures come from the final commit of each branch (Vitest, \texttt{tsc -b}, oxlint, production build), run in isolation.
+
+\begin{center}\small
+\begin{tabular}{@{}p{2.3cm}p{1.9cm}p{1.7cm}p{1.6cm}p{6.6cm}@{}}
+\toprule
+\textbf{Branch} & \textbf{Tests passed} & \textbf{Files} & \textbf{Types / lint} & \textbf{What the tests cover}\\
+\midrule
+\texttt{part4} & 678 / 678 & 32 & clean / 0 errors & finance maths, seeded market, 500-future runner, fund engine, 14 rooms and labs, three games, guardrails, brand names, colour contrast\\
+\texttt{p5-dashboard} & 191 / 191$^{*}$ & 15 & clean / 0 errors; build OK & phone script engine, 65 scenario checks, UPI flow, feedback, progress, sync outbox, PWA state, facilitator insights\\
+\texttt{p3-paisapur} & 245 / 245 & 31 & clean / 0 errors; build OK & money engine, story content and a bot that plays the whole year (24), rival, rewind, duels, mini-game command, nine games (render and logic), translation, verbs\\
+\bottomrule
+\end{tabular}
+\end{center}
+{\footnotesize $^{*}$Two sync tests need the Supabase variables set; without them 189 pass and 2 fail because the client reports ``disabled'' instead of ``offline''. Counts are per branch and not additive: the scaffold tests repeat. M1 reported 143 tests at that point.}
+
+\begin{itemize}
+  \item \textbf{Speed.} 500 futures of 20 years run in about 30\,ms (limit 250\,ms). Under heavy load (five suites at once) one run took 269\,ms and one sync test timed out; both pass when run alone, so these timing tests are load-sensitive and we will not claim a hard bound on a low-end phone until measured there.
+  \item \textbf{Fairness of the fund model.} The Mutual Fund engine is tested so that active and sector funds grow about the same as the index fund after cost, and no text calls any fund best.
+  \item \textbf{Determinism.} The same seed gives the same market and the same story outcome; the story bot completes all six chapters, and rewind leaves the original timeline unchanged.
+\end{itemize}
+
+\section*{3\quad Progress on Testing (against the M1 plan)}
+
+\begin{itemize}
+  \item \textbf{Done:} unit tests of pure logic; determinism and rewind; content validator and a word-list test with 157 brand-name checks; simulation checks against closed forms; guardrail tests (every investing route shows the simulation banner, no screen shows a lone projected number); colour tokens at 4.5:1 contrast (23 checks); a test that every number a room quotes matches the assumptions file.
+  \item \textbf{Partly done:} offline use is covered by unit tests of the outbox and PWA state, but not yet played in airplane mode on a phone and reconnected. Right-to-left and large-text switches exist in the gallery but are not yet checked on every screen.
+  \item \textbf{Not started:} the 360\,$\times$\,640 pass on real low-end phones, peer playtests with timing, and the pre-check/post-check learning-gain measurement.
+  \item \textbf{Known gaps:} a few lint warnings (impure \texttt{Date.now} in render, state set inside effects) and the load-sensitive timing tests above.
+\end{itemize}
+
+\section*{4\quad Plan for the Remaining Time}
+
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Merge the three branches into one app} (shared files: router, game registry, concept list, UI kit, translation files), then re-run all tests, types, lint and build as one suite.
+  \item \textbf{Connect the pieces:} open investing games from chapter 5 and Stay Safe from chapter 6 of the town, register them as mini-games in the shared runner, and log mastery events from all of them to the dashboard.
+  \item \textbf{Verify offline and sync} end to end: play in airplane mode, reconnect, and confirm the facilitator sees the data and unlocks flow back.
+  \item \textbf{Phone and accessibility pass} at 360\,$\times$\,640 with large text; fix the lint warnings and make the timing tests robust.
+  \item \textbf{Playtests and learning gain} with a few peers using a short pre/post quiz; fix what confuses them. Add Hindi, Telugu and Urdu text for the main flow if time allows; otherwise state this limit plainly.
+  \item \textbf{Final deliverables:} README with setup steps, MIT licence, final report, demo video, code zip and slides.
+\end{enumerate}
+
+\end{document}

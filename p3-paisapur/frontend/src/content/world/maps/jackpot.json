@@ -1,0 +1,31 @@
+{
+  "id": "jackpot",
+  "name": "maps.jackpot",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWW",
+    "WGGGWGGGW",
+    "WFFFFFFFW",
+    "WFFCCCFFW",
+    "WFFFFFFFW",
+    "WnFFFFFnW",
+    "WWWWEWWWW"
+  ],
+  "entry": {
+    "x": 4,
+    "y": 5,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "jackpot",
+      "sprite": "jackpot",
+      "x": 4,
+      "y": 2,
+      "facing": "down",
+      "script": "jackpot"
+    }
+  ],
+  "objects": [],
+  "triggers": []
+}

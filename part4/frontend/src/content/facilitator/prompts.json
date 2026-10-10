@@ -1,0 +1,22 @@
+{
+  "pin_needed_to_receive": {
+    "title": "“I need my PIN to receive money”",
+    "prompt": "Ask: when someone sends you money, what do you have to do? Show a collect request on the board and circle the word “requesting”. Agree on the rule: a PIN is only ever for paying, never for receiving.",
+    "activity": "UPI Simulator: The Collect Request"
+  },
+  "bank_will_call_for_otp": {
+    "title": "“The bank may ask for my OTP”",
+    "prompt": "Read a fake KYC message aloud. Ask who really sent it and how they could tell. Agree: a bank never asks for an OTP, PIN or password by call, SMS or link.",
+    "activity": "Scam Inbox: Your KYC Expires Today"
+  },
+  "guaranteed_returns_exist": {
+    "title": "“Some investments are guaranteed to double”",
+    "prompt": "Sort three offers on the board into investing, gambling or scam. Ask what words made something feel safe. Agree: real investing never promises a fixed high return.",
+    "activity": "Investing, Gambling or Scam?"
+  },
+  "too_late_to_report": {
+    "title": "“It’s too late to report a scam”",
+    "prompt": "Put the recovery steps in order together. Stress speed: call 1930 and the bank first, then report at cybercrime.gov.in.",
+    "activity": "Rescue Mission"
+  }
+}

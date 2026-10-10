@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Dark "hacker lab" look modelled on TryHackMe: deep navy
+ * panels, one lime accent, coloured difficulty-style tags.
+ * Use the semantic names (bg-surface, text-muted, bg-brand…) instead of raw
+ * Tailwind colours so the theme can change in one place.
+ */
+@theme {
+  --font-sans: "Ubuntu", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Ubuntu Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Surfaces, darkest to lightest */
+  --color-bg: #141c2e;
+  --color-surface: #1c2742;
+  --color-surface-2: #243252;
+  --color-surface-3: #2e3d60;
+  --color-line: #2a3856;
+  --color-line-strong: #3e4b69;
+
+  /* Text */
+  --color-ink: #f4f6fa;
+  --color-ink-soft: #c3cbdc;
+  --color-muted: #9aa5bd;
+
+  /* Accent: THM lime, with dark text on top */
+  --color-brand: #a3ea2a;
+  --color-brand-hover: #b8f550;
+  --color-brand-deep: #6fa80f;
+  --color-brand-ink: #141c2e;
+
+  /* Status / difficulty tags */
+  --color-good: #a3ea2a;
+  --color-warn: #ffb72b;
+  --color-bad: #ff6a7b;
+  --color-info: #3dc8f5;
+  --color-xp: #b57cff;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand text-brand-ink;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply text-ink placeholder:text-muted;
+  }
+
+  @media print {
+    body {
+      @apply bg-white text-black;
+      background-image: none;
+    }
+  }
+}
+
+/* Feedback in the games: a value that just changed glows briefly, and a new coach message slides in. */
+@keyframes flash-change {
+  from {
+    background-color: color-mix(in srgb, var(--color-brand) 40%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+@keyframes coach-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.flash-change {
+  animation: flash-change 1s ease-out;
+}
+.coach-in {
+  animation: coach-in 250ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flash-change,
+  .coach-in {
+    animation: none;
+  }
+}

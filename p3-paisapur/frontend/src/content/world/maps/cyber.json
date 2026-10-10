@@ -1,0 +1,31 @@
+{
+  "id": "cyber",
+  "name": "maps.cyber",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWW",
+    "WKKKWKKKW",
+    "WFFFFFFFW",
+    "WFFCCCFFW",
+    "WFFFFFFFW",
+    "WnFFFFFnW",
+    "WWWWEWWWW"
+  ],
+  "entry": {
+    "x": 4,
+    "y": 5,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "fatima",
+      "sprite": "fatima",
+      "x": 4,
+      "y": 2,
+      "facing": "down",
+      "script": "fatima"
+    }
+  ],
+  "objects": [],
+  "triggers": []
+}

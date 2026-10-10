@@ -1,0 +1,215 @@
+{
+  "id": "lesson_scams",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 14,
+  "estMinutes": 13,
+  "difficulty": "hard",
+  "titleKey": "invest_scams.title",
+  "blurbKey": "invest_scams.blurb",
+  "concepts": ["speculation_vs_investing", "red_flags", "risk_return", "default_risk"],
+  "misconceptions": ["guaranteed_returns_exist", "recruiting_is_normal_income", "speculation_is_investing"],
+  "vars": {
+    "monthly": { "value": 0.05, "fmt": "percent" },
+    "months": { "value": 12 },
+    "recruits": { "value": 3 },
+    "level": { "value": 6 },
+    "town": { "value": 10000 }
+  },
+  "calcs": [
+    { "id": "yearly", "fn": "mul", "args": ["$monthly", "$months"], "fmt": "percent" },
+    { "id": "atLvl", "fn": "membersAtLevel", "args": ["$recruits", "$level"], "fmt": "number", "round": 0 },
+    { "id": "everyone", "fn": "membersTotal", "args": ["$recruits", "$level"], "fmt": "number", "round": 0 }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_scams.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "phone_offer", "textKey": "invest_scams.t1.hook" },
+        { "type": "define", "textKey": "invest_scams.t1.define" },
+        { "type": "note", "textKey": "invest_scams.t1.note" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_scams.q1.prompt",
+          "concept": "speculation_vs_investing",
+          "points": 10,
+          "hintKey": "invest_scams.q1.hint",
+          "explainKey": "invest_scams.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_scams.q1.opt.a" },
+            { "id": "b", "textKey": "invest_scams.q1.opt.b" },
+            { "id": "c", "textKey": "invest_scams.q1.opt.c" }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "invest_scams.q2.prompt",
+          "concept": "speculation_vs_investing",
+          "points": 10,
+          "hintKey": "invest_scams.q2.hint",
+          "explainKey": "invest_scams.q2.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_scams.q2.opt.a" },
+            { "id": "b", "textKey": "invest_scams.q2.opt.b" },
+            { "id": "c", "textKey": "invest_scams.q2.opt.c" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q3",
+          "kind": "choice",
+          "promptKey": "invest_scams.q3.prompt",
+          "concept": "red_flags",
+          "points": 10,
+          "hintKey": "invest_scams.q3.hint",
+          "explainKey": "invest_scams.q3.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_scams.q3.opt.a" },
+            { "id": "b", "textKey": "invest_scams.q3.opt.b" },
+            { "id": "c", "textKey": "invest_scams.q3.opt.c" }
+          ],
+          "correct": "c"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_scams.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_scams.t2.define" },
+        { "type": "tradeoff", "textKey": "invest_scams.t2.tradeoff" }
+      ],
+      "questions": [
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_scams.q4.prompt",
+          "concept": "risk_return",
+          "points": 15,
+          "hintKey": "invest_scams.q4.hint",
+          "explainKey": "invest_scams.q4.explain",
+          "answer": "yearly",
+          "unit": "percent"
+        },
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "invest_scams.q5.prompt",
+          "concept": "red_flags",
+          "points": 10,
+          "hintKey": "invest_scams.q5.hint",
+          "explainKey": "invest_scams.q5.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_scams.q5.opt.a" },
+            { "id": "b", "textKey": "invest_scams.q5.opt.b", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_scams.q5.fb.b" },
+            { "id": "c", "textKey": "invest_scams.q5.opt.c" },
+            { "id": "d", "textKey": "invest_scams.q5.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_scams.t3.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_scams.t3.define" },
+        {
+          "type": "explore",
+          "explore": { "widget": "pyramid_growth", "promptKey": "invest_scams.t3.explore", "params": { "recruits": "$recruits", "town": "$town" } }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "invest_scams.q6.prompt",
+          "concept": "red_flags",
+          "points": 15,
+          "hintKey": "invest_scams.q6.hint",
+          "explainKey": "invest_scams.q6.explain",
+          "answer": "atLvl",
+          "unit": "number"
+        },
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "invest_scams.q7.prompt",
+          "concept": "red_flags",
+          "points": 15,
+          "hintKey": "invest_scams.q7.hint",
+          "explainKey": "invest_scams.q7.explain",
+          "answer": "everyone",
+          "unit": "number"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "invest_scams.q8.prompt",
+          "concept": "red_flags",
+          "points": 10,
+          "hintKey": "invest_scams.q8.hint",
+          "explainKey": "invest_scams.q8.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_scams.q8.opt.a" },
+            { "id": "b", "textKey": "invest_scams.q8.opt.b", "misconception": "recruiting_is_normal_income", "feedbackKey": "invest_scams.q8.fb.b" },
+            { "id": "c", "textKey": "invest_scams.q8.opt.c" },
+            { "id": "d", "textKey": "invest_scams.q8.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_scams.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_scams.t4.define" },
+        { "type": "note", "textKey": "invest_scams.t4.flags" },
+        { "type": "tradeoff", "textKey": "invest_scams.t4.tradeoff" },
+        { "type": "jargon", "terms": ["red_flag", "pyramid_scheme", "regulator", "speculation"] }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "invest_scams.q9.prompt",
+          "concept": "red_flags",
+          "points": 10,
+          "hintKey": "invest_scams.q9.hint",
+          "explainKey": "invest_scams.q9.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_scams.q9.opt.a" },
+            { "id": "b", "textKey": "invest_scams.q9.opt.b" },
+            { "id": "c", "textKey": "invest_scams.q9.opt.c" },
+            { "id": "d", "textKey": "invest_scams.q9.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "invest_scams.q10.prompt",
+          "concept": "speculation_vs_investing",
+          "points": 10,
+          "hintKey": "invest_scams.q10.hint",
+          "explainKey": "invest_scams.q10.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_scams.q10.opt.a" },
+            { "id": "b", "textKey": "invest_scams.q10.opt.b", "misconception": "speculation_is_investing", "feedbackKey": "invest_scams.q10.fb.b" },
+            { "id": "c", "textKey": "invest_scams.q10.opt.c" },
+            { "id": "d", "textKey": "invest_scams.q10.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": ["red_flag", "pyramid_scheme", "regulator", "speculation"]
+}

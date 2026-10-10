@@ -1,0 +1,112 @@
+{
+  "sheets": {
+    "town": "tiny-town",
+    "dungeon": "tiny-dungeon",
+    "urban": "rpg-urban"
+  },
+  "tiles": {
+    " ": { "layers": [], "solid": true },
+    ".": { "layers": ["town:0"] },
+    ",": { "layers": ["town:1"] },
+    "*": { "layers": ["town:2"] },
+    "T": { "layers": ["town:0", "town:4"], "solid": true },
+    "Y": { "layers": ["town:0", "town:3"], "solid": true },
+    "o": { "layers": ["town:0", "town:5"], "solid": true },
+    "=": { "layers": ["town:25"] },
+    "#": { "layers": ["town:0", "town:81"], "solid": true },
+    "|": { "layers": ["town:0", "town:59"], "solid": true },
+    "^": { "layers": ["urban:171"], "solid": true },
+    "~": { "layers": ["urban:198"], "solid": true },
+    "v": { "layers": ["urban:225"], "solid": true },
+    "H": { "layers": ["urban:198", "town:25"] },
+    "%": { "layers": ["town:40"] },
+    "l": { "layers": ["town:0", "urban:169"], "solid": true },
+    "m": { "layers": ["town:0", "urban:305"], "solid": true },
+    "b": { "layers": ["town:0", "urban:381"], "solid": true },
+    "s": { "layers": ["town:0", "town:83"], "solid": true },
+    "k": { "layers": ["town:0", "urban:382"], "solid": true },
+    "p": { "layers": ["urban:36"] },
+    "P": { "layers": ["urban:36", "urban:260"], "solid": true },
+    "h": { "layers": ["urban:36", "urban:329"], "solid": true },
+    "L": { "layers": ["urban:36", "urban:169"], "solid": true },
+    "j": { "layers": ["urban:36", "town:83"], "solid": true },
+
+    "W": { "layers": ["town:77"], "solid": true },
+    "w": { "layers": ["town:73"], "solid": true },
+    "F": { "layers": ["urban:109"] },
+    "f": { "layers": ["dungeon:48"] },
+    "C": { "layers": ["urban:109", "urban:386"], "solid": true, "counter": true },
+    "c": { "layers": ["dungeon:48", "dungeon:72"], "solid": true, "counter": true },
+    "t": { "layers": ["dungeon:48", "dungeon:72"], "solid": true },
+    "S": { "layers": ["dungeon:48", "dungeon:63"], "solid": true },
+    "K": { "layers": ["urban:109", "dungeon:75"], "solid": true },
+    "V": { "layers": ["urban:109", "urban:276"], "solid": true },
+    "X": { "layers": ["urban:109", "urban:277"], "solid": true },
+    "G": { "layers": ["urban:109", "urban:412"], "solid": true },
+    "D": { "layers": ["urban:109", "urban:300"], "solid": true },
+    "R": { "layers": ["dungeon:48", "urban:270"], "solid": true },
+    "Q": { "layers": ["urban:109", "dungeon:65"], "solid": true },
+    "q": { "layers": ["dungeon:48", "dungeon:73"], "solid": true },
+    "n": { "layers": ["urban:109", "urban:260"], "solid": true },
+    "N": { "layers": ["dungeon:48", "urban:260"], "solid": true },
+    "M": { "layers": ["town:77", "urban:414"], "solid": true },
+    "E": { "layers": ["urban:109", "town:78"], "exit": true },
+    "e": { "layers": ["dungeon:48", "town:74"], "exit": true }
+  },
+  "stamps": {
+    "house_red": {
+      "rows": [
+        ["town:52", "town:53", "town:54"],
+        ["town:64", "town:65", "town:66"],
+        ["town:72", "town:86", "town:75"]
+      ],
+      "door": [1, 2]
+    },
+    "shop_red": {
+      "rows": [
+        ["town:52", "town:53", "town:53", "town:53", "town:54"],
+        ["town:64", "town:65", "town:65", "town:65", "town:66"],
+        ["town:72", "town:84", "town:86", "town:84", "town:75"]
+      ],
+      "door": [2, 2]
+    },
+    "hall_grey": {
+      "rows": [
+        ["town:48", "town:49", "town:49", "town:49", "town:50"],
+        ["town:60", "town:61", "town:61", "town:61", "town:62"],
+        ["town:76", "town:88", "town:90", "town:88", "town:79"]
+      ],
+      "door": [2, 2]
+    },
+    "office_grey": {
+      "rows": [
+        ["town:48", "town:49", "town:50"],
+        ["town:60", "town:61", "town:62"],
+        ["town:76", "town:90", "town:79"]
+      ],
+      "door": [1, 2]
+    }
+  },
+  "sprites": {
+    "player_a": { "char": 0 },
+    "player_b": { "char": 1 },
+    "player_c": { "char": 5 },
+    "professor": { "char": 2 },
+    "mom": { "char": 1, "hue": 140 },
+    "kabir": { "char": 0, "hue": 190 },
+    "meena": { "char": 5, "hue": 0 },
+    "iyer": { "char": 4, "hue": 200 },
+    "anwar": { "char": 4 },
+    "shauq": { "char": 1, "hue": 280 },
+    "lakshmi": { "char": 5, "hue": 300 },
+    "worker": { "char": 3 },
+    "lender": { "char": 2, "hue": 320 },
+    "shady": { "char": 3, "hue": 250 },
+    "ravi": { "char": 2, "hue": 60 },
+    "clerk": { "char": 0, "hue": 90 },
+    "fatima": { "char": 5, "hue": 200 },
+    "jackpot": { "char": 4, "hue": 40 },
+    "townsfolk_a": { "char": 3, "hue": 120 },
+    "townsfolk_b": { "char": 1, "hue": 30 }
+  }
+}

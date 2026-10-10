@@ -1,0 +1,32 @@
+[
+  {
+    "id": "profit",
+    "termKey": "invest_profit_loss.glossary.profit.term",
+    "defKey": "invest_profit_loss.glossary.profit.def",
+    "lesson": "lesson_profit_loss"
+  },
+  {
+    "id": "loss",
+    "termKey": "invest_profit_loss.glossary.loss.term",
+    "defKey": "invest_profit_loss.glossary.loss.def",
+    "lesson": "lesson_profit_loss"
+  },
+  {
+    "id": "return",
+    "termKey": "invest_profit_loss.glossary.return.term",
+    "defKey": "invest_profit_loss.glossary.return.def",
+    "lesson": "lesson_profit_loss"
+  },
+  {
+    "id": "paper_gain",
+    "termKey": "invest_profit_loss.glossary.paper_gain.term",
+    "defKey": "invest_profit_loss.glossary.paper_gain.def",
+    "lesson": "lesson_profit_loss"
+  },
+  {
+    "id": "realised",
+    "termKey": "invest_profit_loss.glossary.realised.term",
+    "defKey": "invest_profit_loss.glossary.realised.def",
+    "lesson": "lesson_profit_loss"
+  }
+]

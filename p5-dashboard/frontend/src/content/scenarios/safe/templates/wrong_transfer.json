@@ -1,0 +1,261 @@
+{
+  "id": "wrong_transfer",
+  "simulator": "upi",
+  "mode": "act",
+  "concepts": [
+    "wrong_transfer"
+  ],
+  "level": 2,
+  "titleKey": "safe.wt.title",
+  "briefKey": "safe.wt.brief",
+  "phone": {
+    "startBalance": 3400,
+    "startTime": "19:10"
+  },
+  "rule": "safe.wt.rule",
+  "instead": [
+    "safe.wt.i1",
+    "safe.wt.i2",
+    "safe.wt.i3"
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.wt.o1",
+      "when": "read:1"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.wt.o2",
+      "when": "opened:bankapp"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.wt.o3",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "chat",
+      "at": 800,
+      "surface": {
+        "type": "chat",
+        "from": "{name}",
+        "fromLens": "name",
+        "online": false,
+        "concept": "wrong_transfer",
+        "misconception": "trust_sms_credit",
+        "best": "check_app",
+        "body": [
+          {
+            "k": "safe.wt.chat.a",
+            "lens": "sorry"
+          },
+          {
+            "k": "safe.wt.chat.b",
+            "lens": "ask"
+          },
+          {
+            "k": "safe.wt.chat.c",
+            "lens": "rush"
+          }
+        ],
+        "lens": [
+          {
+            "id": "name",
+            "revealKey": "safe.wt.lens.name"
+          },
+          {
+            "id": "sorry",
+            "revealKey": "safe.wt.lens.sorry"
+          },
+          {
+            "id": "ask",
+            "revealKey": "safe.wt.lens.ask",
+            "tell": "pulls"
+          },
+          {
+            "id": "rush",
+            "revealKey": "safe.wt.lens.rush",
+            "tell": "urgency"
+          }
+        ],
+        "tells": [
+          {
+            "id": "pulls",
+            "kind": "pulls_money",
+            "whyKey": "safe.wt.why.pulls"
+          },
+          {
+            "id": "urgency",
+            "kind": "urgency",
+            "whyKey": "safe.wt.why.urgency"
+          }
+        ],
+        "actions": [
+          {
+            "id": "check_app",
+            "labelKey": "safe.wt.a.check",
+            "risk": "neutral",
+            "unlocks": [
+              "bankapp"
+            ],
+            "delay": 700,
+            "say": "safe.wt.say.check",
+            "noteKey": "safe.wt.n.check"
+          },
+          {
+            "id": "pay_back",
+            "labelKey": "safe.wt.a.pay",
+            "risk": "risky",
+            "effects": {
+              "money.bank": 0
+            },
+            "end": "fooled",
+            "say": "safe.wt.say.pay",
+            "noteKey": "safe.wt.n.pay",
+            "misconception": "trust_sms_credit"
+          },
+          {
+            "id": "decline",
+            "labelKey": "safe.wt.a.decline",
+            "risk": "safe",
+            "end": "safe",
+            "say": "safe.wt.say.decline",
+            "noteKey": "safe.wt.n.decline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sms",
+      "at": 2400,
+      "surface": {
+        "type": "sms",
+        "from": "VM-BNKALT",
+        "fromLens": "sender",
+        "concept": "wrong_transfer",
+        "misconception": "trust_sms_credit",
+        "best": "check_app",
+        "body": [
+          {
+            "k": "safe.wt.sms.a",
+            "lens": "alert"
+          },
+          {
+            "k": "safe.wt.sms.b"
+          }
+        ],
+        "lens": [
+          {
+            "id": "sender",
+            "revealKey": "safe.wt.lens.sender",
+            "tell": "sender"
+          },
+          {
+            "id": "alert",
+            "revealKey": "safe.wt.lens.alert",
+            "tell": "alert"
+          }
+        ],
+        "tells": [
+          {
+            "id": "sender",
+            "kind": "pretends",
+            "whyKey": "safe.wt.why.sender"
+          },
+          {
+            "id": "alert",
+            "kind": "pretends",
+            "whyKey": "safe.wt.why.alert"
+          }
+        ],
+        "actions": [
+          {
+            "id": "check_app",
+            "labelKey": "safe.wt.a.check",
+            "risk": "neutral",
+            "unlocks": [
+              "bankapp"
+            ],
+            "delay": 700,
+            "noteKey": "safe.wt.n.check"
+          },
+          {
+            "id": "pay_back",
+            "labelKey": "safe.wt.a.pay",
+            "risk": "risky",
+            "effects": {
+              "money.bank": 0
+            },
+            "end": "fooled",
+            "noteKey": "safe.wt.n.pay",
+            "misconception": "trust_sms_credit"
+          },
+          {
+            "id": "ignore",
+            "labelKey": "safe.wt.a.ignore",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.wt.n.ignore"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bankapp",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.wt.app.title",
+        "foreground": true,
+        "concept": "wrong_transfer",
+        "best": "report",
+        "body": [
+          {
+            "k": "safe.wt.app.a",
+            "lens": "bal"
+          },
+          {
+            "k": "safe.wt.app.b"
+          }
+        ],
+        "lens": [
+          {
+            "id": "bal",
+            "revealKey": "safe.wt.lens.bal",
+            "tell": "nocredit"
+          }
+        ],
+        "tells": [
+          {
+            "id": "nocredit",
+            "kind": "pretends",
+            "whyKey": "safe.wt.why.nocredit"
+          }
+        ],
+        "actions": [
+          {
+            "id": "report",
+            "labelKey": "safe.wt.a.report",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.wt.n.report"
+          },
+          {
+            "id": "pay_anyway",
+            "labelKey": "safe.wt.a.anyway",
+            "risk": "risky",
+            "effects": {
+              "money.bank": 0
+            },
+            "end": "fooled",
+            "noteKey": "safe.wt.n.anyway",
+            "misconception": "trust_sms_credit"
+          }
+        ]
+      }
+    }
+  ]
+}

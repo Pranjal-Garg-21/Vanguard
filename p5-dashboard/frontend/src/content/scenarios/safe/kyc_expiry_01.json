@@ -1,0 +1,249 @@
+{
+  "id": "kyc_expiry_01",
+  "mode": "act",
+  "concepts": [
+    "fake_kyc"
+  ],
+  "level": 1,
+  "titleKey": "safe.kyc01.title",
+  "briefKey": "safe.kyc01.brief",
+  "phone": {
+    "startBalance": 6200,
+    "startTime": "10:42"
+  },
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.kyc01.o1",
+      "when": "opened:sms"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.kyc01.o2",
+      "when": "inspected:sender"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.kyc01.o3",
+      "when": "inspected:link"
+    },
+    {
+      "id": "o4",
+      "textKey": "safe.kyc01.o4",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "sms",
+      "at": 1500,
+      "surface": {
+        "type": "sms",
+        "from": "AX-BNKUPD",
+        "fromLens": "sender",
+        "concept": "fake_kyc",
+        "body": [
+          {
+            "k": "safe.kyc01.sms.a"
+          },
+          {
+            "k": "safe.kyc01.sms.today",
+            "lens": "today"
+          },
+          {
+            "k": "safe.kyc01.sms.b"
+          },
+          {
+            "k": "safe.kyc01.sms.link",
+            "lens": "link",
+            "action": "open_link"
+          }
+        ],
+        "lens": [
+          {
+            "id": "sender",
+            "revealKey": "safe.kyc01.lens.sender",
+            "tell": "sender"
+          },
+          {
+            "id": "today",
+            "revealKey": "safe.kyc01.lens.today",
+            "tell": "urgency"
+          },
+          {
+            "id": "link",
+            "revealKey": "safe.kyc01.lens.link",
+            "tell": "link"
+          }
+        ],
+        "tells": [
+          {
+            "id": "sender",
+            "kind": "pretends",
+            "whyKey": "safe.kyc01.why.sender"
+          },
+          {
+            "id": "urgency",
+            "kind": "urgency",
+            "whyKey": "safe.kyc01.why.urgency"
+          },
+          {
+            "id": "link",
+            "kind": "odd_link",
+            "whyKey": "safe.kyc01.why.link"
+          }
+        ],
+        "actions": [
+          {
+            "id": "open_link",
+            "labelKey": "safe.kyc01.a.open",
+            "risk": "neutral",
+            "unlocks": [
+              "page"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "ignore",
+            "labelKey": "safe.kyc01.a.ignore",
+            "risk": "safe",
+            "end": "safe"
+          },
+          {
+            "id": "block",
+            "labelKey": "safe.kyc01.a.block",
+            "risk": "safe",
+            "end": "safe"
+          },
+          {
+            "id": "ask_adult",
+            "labelKey": "safe.kyc01.a.ask",
+            "risk": "safe",
+            "end": "safe"
+          }
+        ],
+        "explainKey": "safe.kyc01.explain"
+      }
+    },
+    {
+      "id": "page",
+      "surface": {
+        "type": "page",
+        "url": "kyc-update.secure-bankverify.in/login",
+        "urlLens": "url",
+        "titleKey": "safe.kyc01.page.title",
+        "foreground": true,
+        "concept": "fake_kyc",
+        "misconception": "bank_asks_otp",
+        "body": [
+          {
+            "k": "safe.kyc01.page.a"
+          },
+          {
+            "k": "safe.kyc01.page.otp",
+            "lens": "otp"
+          },
+          {
+            "k": "safe.kyc01.page.autofill",
+            "lens": "autofill",
+            "action": "autofill"
+          }
+        ],
+        "fields": [
+          {
+            "id": "name",
+            "labelKey": "safe.kyc01.page.f.name"
+          },
+          {
+            "id": "otp",
+            "labelKey": "safe.kyc01.page.f.otp"
+          }
+        ],
+        "lens": [
+          {
+            "id": "url",
+            "revealKey": "safe.kyc01.lens.url",
+            "tell": "url"
+          },
+          {
+            "id": "otp",
+            "revealKey": "safe.kyc01.lens.otp",
+            "tell": "otp"
+          },
+          {
+            "id": "autofill",
+            "revealKey": "safe.kyc01.lens.autofill"
+          }
+        ],
+        "tells": [
+          {
+            "id": "url",
+            "kind": "odd_link",
+            "whyKey": "safe.kyc01.why.url"
+          },
+          {
+            "id": "otp",
+            "kind": "asks_secret",
+            "whyKey": "safe.kyc01.why.otp"
+          }
+        ],
+        "actions": [
+          {
+            "id": "autofill",
+            "labelKey": "safe.kyc01.a.autofill",
+            "risk": "neutral",
+            "unlocks": [
+              "perm"
+            ],
+            "delay": 300
+          },
+          {
+            "id": "submit_otp",
+            "labelKey": "safe.kyc01.a.submit",
+            "risk": "risky",
+            "effects": {
+              "money.bank": -4999
+            },
+            "end": "fooled",
+            "misconception": "bank_asks_otp"
+          },
+          {
+            "id": "close_page",
+            "labelKey": "safe.kyc01.a.close",
+            "risk": "safe",
+            "end": "safe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "perm",
+      "surface": {
+        "type": "permission",
+        "appKey": "safe.kyc01.perm.app",
+        "askKey": "safe.kyc01.perm.ask",
+        "concept": "fake_kyc",
+        "misconception": "sms_permission",
+        "actions": [
+          {
+            "id": "allow",
+            "labelKey": "safe.kyc01.a.allow",
+            "risk": "risky",
+            "effects": {
+              "money.bank": -4999
+            },
+            "end": "fooled",
+            "misconception": "sms_permission"
+          },
+          {
+            "id": "deny",
+            "labelKey": "safe.kyc01.a.deny",
+            "risk": "safe",
+            "end": "safe"
+          }
+        ]
+      }
+    }
+  ],
+  "simulator": "inbox"
+}

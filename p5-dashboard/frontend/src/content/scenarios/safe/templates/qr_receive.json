@@ -1,0 +1,149 @@
+{
+  "id": "qr_receive",
+  "simulator": "upi",
+  "mode": "act",
+  "concepts": [
+    "qr_scam"
+  ],
+  "level": 2,
+  "titleKey": "safe.qr01.title",
+  "briefKey": "safe.qr01.brief",
+  "phone": {
+    "startBalance": 3350,
+    "startTime": "18:20"
+  },
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.qr01.o1",
+      "when": "opened:chat"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.qr01.o2",
+      "when": "inspectedAny:1"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.qr01.o3",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "chat",
+      "at": 800,
+      "surface": {
+        "type": "chat",
+        "from": "Buyer",
+        "online": true,
+        "concept": "qr_scam",
+        "body": [
+          {
+            "k": "safe.qr01.chat.a"
+          },
+          {
+            "k": "safe.qr01.chat.b",
+            "lens": "scan",
+            "action": "scan"
+          }
+        ],
+        "lens": [
+          {
+            "id": "scan",
+            "revealKey": "safe.qr01.lens.scan",
+            "tell": "scan"
+          }
+        ],
+        "tells": [
+          {
+            "id": "scan",
+            "kind": "pulls_money",
+            "whyKey": "safe.qr01.why.scan"
+          }
+        ],
+        "actions": [
+          {
+            "id": "scan",
+            "labelKey": "safe.qr01.a.scan",
+            "risk": "neutral",
+            "unlocks": [
+              "pay"
+            ],
+            "delay": 900
+          },
+          {
+            "id": "decline",
+            "labelKey": "safe.qr01.a.decline",
+            "risk": "safe",
+            "end": "safe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pay",
+      "surface": {
+        "type": "pay-request",
+        "fromName": "Buyer",
+        "amount": 0,
+        "noteKey": "safe.qr01.pay.note",
+        "concept": "qr_scam",
+        "misconception": "scan_to_receive",
+        "foreground": true,
+        "body": [
+          {
+            "k": "safe.qr01.pay.a",
+            "lens": "direction"
+          },
+          {
+            "k": "safe.qr01.pay.pin",
+            "lens": "pin"
+          }
+        ],
+        "lens": [
+          {
+            "id": "direction",
+            "revealKey": "safe.qr01.lens.direction",
+            "tell": "direction"
+          },
+          {
+            "id": "pin",
+            "revealKey": "safe.qr01.lens.pin",
+            "tell": "pin"
+          }
+        ],
+        "tells": [
+          {
+            "id": "direction",
+            "kind": "pulls_money",
+            "whyKey": "safe.qr01.why.direction"
+          },
+          {
+            "id": "pin",
+            "kind": "asks_secret",
+            "whyKey": "safe.qr01.why.pin"
+          }
+        ],
+        "actions": [
+          {
+            "id": "enter_pin",
+            "labelKey": "safe.qr01.a.pin",
+            "risk": "risky",
+            "effects": {
+              "money.bank": 0
+            },
+            "end": "fooled",
+            "misconception": "scan_to_receive"
+          },
+          {
+            "id": "cancel",
+            "labelKey": "safe.qr01.a.cancel",
+            "risk": "safe",
+            "end": "safe"
+          }
+        ]
+      }
+    }
+  ]
+}

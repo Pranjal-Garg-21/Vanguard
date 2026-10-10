@@ -1,0 +1,259 @@
+{
+  "id": "lesson_funds",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 9,
+  "estMinutes": 14,
+  "difficulty": "medium",
+  "titleKey": "invest_funds.title",
+  "blurbKey": "invest_funds.blurb",
+  "concepts": ["pooled_funds", "sip_concept", "fees_cost", "diversification"],
+  "misconceptions": ["guaranteed_returns_exist", "sip_guarantees_profit", "higher_fee_means_better", "best_fund_exists", "past_returns_repeat"],
+  "vars": {
+    "people": { "value": 100 },
+    "each": { "value": 1000, "fmt": "rupees" },
+    "pool": { "value": 600000, "fmt": "rupees" },
+    "units": { "value": 5000 },
+    "buyAmt": { "value": 6000, "fmt": "rupees" },
+    "sipAmt": { "value": 2000, "fmt": "rupees" },
+    "nav1": { "value": 100, "fmt": "rupees" },
+    "nav2": { "value": 80, "fmt": "rupees" },
+    "nav3": { "value": 125, "fmt": "rupees" },
+    "nav4": { "value": 100, "fmt": "rupees" },
+    "sipM": { "value": 1000, "fmt": "rupees" },
+    "gross": { "value": 0.1, "fmt": "percent" },
+    "yrs": { "value": 10 },
+    "feeLow": { "value": 0.005, "fmt": "percent", "round": 1 },
+    "feeHigh": { "value": 0.02, "fmt": "percent" }
+  },
+  "calcs": [
+    { "id": "potTot", "fn": "mul", "args": ["$people", "$each"], "fmt": "rupees" },
+    { "id": "nav", "fn": "navPerUnit", "args": ["$pool", "$units"], "fmt": "rupees" },
+    { "id": "unitsGot", "fn": "unitsBought", "args": ["$buyAmt", "$nav"], "fmt": "number", "round": 0 },
+    { "id": "u1", "fn": "unitsBought", "args": ["$sipAmt", "$nav1"], "fmt": "number", "round": 1 },
+    { "id": "u2", "fn": "unitsBought", "args": ["$sipAmt", "$nav2"], "fmt": "number", "round": 1 },
+    { "id": "u3", "fn": "unitsBought", "args": ["$sipAmt", "$nav3"], "fmt": "number", "round": 1 },
+    { "id": "u4", "fn": "unitsBought", "args": ["$sipAmt", "$nav4"], "fmt": "number", "round": 1 },
+    { "id": "u12", "fn": "add", "args": ["$u1", "$u2"] },
+    { "id": "u123", "fn": "add", "args": ["$u12", "$u3"] },
+    { "id": "uTotal", "fn": "add", "args": ["$u123", "$u4"], "fmt": "number", "round": 0 },
+    { "id": "months", "fn": "mul", "args": ["$yrs", 12] },
+    { "id": "rLow", "fn": "sub", "args": ["$gross", "$feeLow"] },
+    { "id": "rHigh", "fn": "sub", "args": ["$gross", "$feeHigh"] },
+    { "id": "netLow", "fn": "futureValueMonthly", "args": ["$sipM", "$rLow", "$months"], "fmt": "rupees" },
+    { "id": "netHigh", "fn": "futureValueMonthly", "args": ["$sipM", "$rHigh", "$months"], "fmt": "rupees" },
+    { "id": "gap", "fn": "sub", "args": ["$netLow", "$netHigh"], "fmt": "rupees" },
+    { "id": "putIn", "fn": "mul", "args": ["$sipM", "$months"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_funds.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "thali", "textKey": "invest_funds.t1.hook" },
+        { "type": "define", "textKey": "invest_funds.t1.define" },
+        { "type": "define", "textKey": "invest_funds.t1.nav" },
+        { "type": "analogy", "visual": "thali", "textKey": "invest_funds.t1.analogy" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_funds.q1.prompt",
+          "concept": "pooled_funds",
+          "points": 10,
+          "hintKey": "invest_funds.q1.hint",
+          "explainKey": "invest_funds.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_funds.q1.opt.a" },
+            { "id": "b", "textKey": "invest_funds.q1.opt.b" },
+            { "id": "c", "textKey": "invest_funds.q1.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_funds.q1.fb.c" },
+            { "id": "d", "textKey": "invest_funds.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "invest_funds.q2.prompt",
+          "concept": "pooled_funds",
+          "points": 15,
+          "hintKey": "invest_funds.q2.hint",
+          "explainKey": "invest_funds.q2.explain",
+          "answer": "nav",
+          "unit": "rupees"
+        },
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_funds.q3.prompt",
+          "concept": "pooled_funds",
+          "points": 15,
+          "hintKey": "invest_funds.q3.hint",
+          "explainKey": "invest_funds.q3.explain",
+          "answer": "unitsGot",
+          "unit": "number"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_funds.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_funds.t2.define" },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "sip_units",
+            "promptKey": "invest_funds.t2.explore",
+            "params": { "amount": "$sipAmt", "nav1": "$nav1", "nav2": "$nav2", "nav3": "$nav3", "nav4": "$nav4" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_funds.q4.prompt",
+          "concept": "sip_concept",
+          "points": 15,
+          "hintKey": "invest_funds.q4.hint",
+          "explainKey": "invest_funds.q4.explain",
+          "answer": "u2",
+          "unit": "number"
+        },
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "invest_funds.q5.prompt",
+          "concept": "sip_concept",
+          "points": 15,
+          "hintKey": "invest_funds.q5.hint",
+          "explainKey": "invest_funds.q5.explain",
+          "answer": "uTotal",
+          "unit": "number"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "invest_funds.q6.prompt",
+          "concept": "sip_concept",
+          "points": 10,
+          "hintKey": "invest_funds.q6.hint",
+          "explainKey": "invest_funds.q6.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_funds.q6.opt.a" },
+            { "id": "b", "textKey": "invest_funds.q6.opt.b", "misconception": "sip_guarantees_profit", "feedbackKey": "invest_funds.q6.fb.b" },
+            { "id": "c", "textKey": "invest_funds.q6.opt.c" },
+            { "id": "d", "textKey": "invest_funds.q6.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_funds.t3.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_funds.t3.define" },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "fee_drag",
+            "promptKey": "invest_funds.t3.explore",
+            "params": { "monthly": "$sipM", "gross": "$gross", "years": "$yrs" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "invest_funds.q7.prompt",
+          "concept": "fees_cost",
+          "points": 20,
+          "hintKey": "invest_funds.q7.hint",
+          "explainKey": "invest_funds.q7.explain",
+          "answer": "gap",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "invest_funds.q8.prompt",
+          "concept": "fees_cost",
+          "points": 10,
+          "hintKey": "invest_funds.q8.hint",
+          "explainKey": "invest_funds.q8.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_funds.q8.opt.a" },
+            { "id": "b", "textKey": "invest_funds.q8.opt.b", "misconception": "higher_fee_means_better", "feedbackKey": "invest_funds.q8.fb.b" },
+            { "id": "c", "textKey": "invest_funds.q8.opt.c" },
+            { "id": "d", "textKey": "invest_funds.q8.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_funds.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_funds.t4.define" },
+        { "type": "tradeoff", "textKey": "invest_funds.t4.tradeoff" },
+        { "type": "jargon", "terms": ["mutual_fund", "nav", "unit", "sip", "expense_ratio", "index_fund"] }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "invest_funds.q9.prompt",
+          "concept": "pooled_funds",
+          "points": 10,
+          "hintKey": "invest_funds.q9.hint",
+          "explainKey": "invest_funds.q9.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_funds.q9.opt.a" },
+            { "id": "b", "textKey": "invest_funds.q9.opt.b" },
+            { "id": "c", "textKey": "invest_funds.q9.opt.c" },
+            { "id": "d", "textKey": "invest_funds.q9.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "invest_funds.q10.prompt",
+          "concept": "pooled_funds",
+          "points": 10,
+          "hintKey": "invest_funds.q10.hint",
+          "explainKey": "invest_funds.q10.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_funds.q10.opt.a" },
+            { "id": "b", "textKey": "invest_funds.q10.opt.b", "misconception": "past_returns_repeat", "feedbackKey": "invest_funds.q10.fb.b" },
+            { "id": "c", "textKey": "invest_funds.q10.opt.c", "misconception": "higher_fee_means_better", "feedbackKey": "invest_funds.q10.fb.c" },
+            { "id": "d", "textKey": "invest_funds.q10.opt.d", "misconception": "best_fund_exists", "feedbackKey": "invest_funds.q10.fb.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q11",
+          "kind": "choice",
+          "promptKey": "invest_funds.q11.prompt",
+          "concept": "sip_concept",
+          "points": 10,
+          "hintKey": "invest_funds.q11.hint",
+          "explainKey": "invest_funds.q11.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_funds.q11.opt.a" },
+            { "id": "b", "textKey": "invest_funds.q11.opt.b", "misconception": "sip_guarantees_profit", "feedbackKey": "invest_funds.q11.fb.b" },
+            { "id": "c", "textKey": "invest_funds.q11.opt.c" },
+            { "id": "d", "textKey": "invest_funds.q11.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": ["mutual_fund", "nav", "unit", "sip", "expense_ratio", "index_fund"]
+}

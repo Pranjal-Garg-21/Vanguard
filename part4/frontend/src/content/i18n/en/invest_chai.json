@@ -1,0 +1,73 @@
+{
+  "title": "Chai Price Time Travel",
+  "blurb": "Guess what a cup of chai will cost in ten years, and see what rising prices do to money in a box.",
+
+  "t1.title": "Chai through the years",
+  "t1.hook": "A cup of chai cost {p0} when Asha's grandfather was young. Then it was {p1}, then {p2}, and now {p3}. Your mission: understand why.",
+  "t1.define": "**Inflation** is the rise in prices over time. The same rupees buy less and less.",
+  "t1.analogy": "Think of a chai stall's price board. Each time the owner rubs out the old price and writes a new one, your rupee shrinks a little.",
+
+  "q1.prompt": "Chai went from {p0} to {p3} over the years. What is this rise in prices called?",
+  "q1.opt.a": "Inflation",
+  "q1.opt.b": "Interest",
+  "q1.opt.c": "Dividend",
+  "q1.opt.d": "Profit",
+  "q1.hint": "Reread the first card.",
+  "q1.explain": "A steady rise in prices over time is called inflation.",
+
+  "q2.prompt": "When prices rise, what happens to what 100 rupees can buy?",
+  "q2.opt.a": "It buys less",
+  "q2.opt.b": "It buys more",
+  "q2.opt.c": "It buys the same",
+  "q2.opt.d": "It depends only on the bank",
+  "q2.hint": "Think of the chai board.",
+  "q2.explain": "When prices rise, the same rupees buy less.",
+
+  "t2.title": "Guess the price",
+  "t2.define": "A model can estimate the future price by assuming prices rise at a steady rate. Real prices jump around, so treat the answer as a range, not a promise.",
+  "t2.formula": "Future price = price today × (1 + inflation)^years. Example: a ₹50 meal with 4% inflation for 3 years costs 50 × 1.04 × 1.04 × 1.04, about ₹56.",
+  "t2.predict": "What will one cup cost in {years} years, if prices keep rising about {infl} a year?",
+  "t2.reveal": "Prices rising {infl} a year turn {price} into about {future}. This is an estimate, built on a made-up steady rate.",
+
+  "q3.prompt": "Suppose prices rise {infMid} a year instead. What does a cup cost after {years} years? Type a number in rupees.",
+  "q3.hint": "Multiply {price} by 1.05, {years} times. A calculator helps.",
+  "q3.explain": "{price} grown at {infMid} a year for {years} years is about {midFuture}.",
+
+  "t3.title": "Money in a box",
+  "t3.hook": "Asha keeps {money} in a box at home. Not a rupee is ever taken out. Your mission: see what it can buy in the future.",
+  "t3.formula": "Value in today's money = amount ÷ (1 + inflation)^years. Example: ₹2,000 after 3 years of 4% inflation is worth 2,000 ÷ 1.04 ÷ 1.04 ÷ 1.04, about ₹1,778.",
+  "t3.explore": "Open the lab. Set the inflation to {infl} and slide the years to {years}. Watch the cups.",
+
+  "q4.prompt": "In the lab, how many whole cups does {money} buy after {years} years of {infl} inflation? Type a number.",
+  "q4.hint": "Read the cups for the later price in the lab.",
+  "q4.explain": "A cup then costs about {future}. {money} buys {cupsThen} whole cups, instead of {cupsNow} today.",
+
+  "q5.prompt": "In today's money, what is that {money} worth after {years} years of {infl} inflation? Type a number in rupees.",
+  "q5.hint": "Divide {money} by 1.06, {years} times.",
+  "q5.explain": "Prices rise, so the same {money} has the buying power of only about {realVal} of today's money.",
+
+  "q6.prompt": "Asha's {money} sits in the box and never loses a rupee. Is it safe from inflation?",
+  "q6.opt.a": "No. The rupees stay, but they buy less each year",
+  "q6.opt.b": "Yes, the same rupees mean the same value",
+  "q6.opt.c": "Yes, it grows by itself in the box",
+  "q6.opt.d": "Inflation only affects banks",
+  "q6.fb.b": "The number of rupees stays the same, but prices rise, so what they buy shrinks.",
+  "q6.hint": "Compare the cups today with the cups later.",
+  "q6.explain": "Money in a box keeps its rupees but loses buying power as prices rise.",
+
+  "t4.title": "Real return",
+  "t4.define": "Your **nominal return** is the percent your money grows. Your **real return** is what is left after inflation. It tells you if you can buy more, or less, than before.",
+  "t4.note": "A simple way to estimate it: the growth rate minus the inflation rate. The exact way divides one plus growth by one plus inflation.",
+
+  "q7.prompt": "A safe place pays {nominal} a year, and prices rise {infl}. About what is the real return? Type a percentage. Use a minus sign for a loss.",
+  "q7.hint": "Compare the growth with the rise in prices. Which is bigger?",
+  "q7.explain": "Money grows {nominal} but prices rise {infl}, so buying power changes by about {realRet} a year.",
+
+  "q8.prompt": "A real return below zero means...",
+  "q8.opt.a": "You can buy less than before, even if the number of rupees grew",
+  "q8.opt.b": "You lost rupees from your account",
+  "q8.opt.c": "Prices fell",
+  "q8.opt.d": "The bank failed",
+  "q8.hint": "Real return is about what your money can buy.",
+  "q8.explain": "A negative real return means buying power shrank, even when the rupee amount went up."
+}

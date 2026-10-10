@@ -1,0 +1,80 @@
+{
+  "_note": "P4's concept and misconception IDs. 'existing' are already in Implementation.md section 11. 'proposed' must be reviewed and merged into src/content/concepts.json by P2.",
+  "concepts": {
+    "existing": [
+      "inflation",
+      "simple_vs_compound",
+      "start_early",
+      "risk_return",
+      "volatility_vs_loss",
+      "behaviour_gap",
+      "time_horizon",
+      "uncertainty_ranges",
+      "diversification",
+      "stock_basics",
+      "bid_ask_liquidity",
+      "pooled_funds",
+      "fees_cost",
+      "sip_concept",
+      "property_costs",
+      "liquidity",
+      "gold_costs",
+      "asset_comparison",
+      "speculation_vs_investing"
+    ],
+    "proposed": [
+      "profit_loss",
+      "return_percent",
+      "paper_vs_realised",
+      "interest_simple",
+      "interest_compound",
+      "real_return",
+      "lending_as_investing",
+      "default_risk",
+      "bonds",
+      "bond_price_rates",
+      "dividends",
+      "exchange_basics",
+      "market_cap",
+      "etf",
+      "index_investing",
+      "commodities",
+      "commodity_exchange",
+      "red_flags"
+    ]
+  },
+  "misconceptions": {
+    "existing": [
+      "guaranteed_returns_exist",
+      "dip_means_loss",
+      "one_stock_is_enough",
+      "property_always_profits",
+      "gold_has_no_costs",
+      "recruiting_is_normal_income"
+    ],
+    "proposed": [
+      "fall_then_rise_same_pct_is_even",
+      "interest_always_simple",
+      "late_start_is_fine",
+      "money_in_box_is_safe",
+      "high_rate_is_free_bonus",
+      "bonds_are_risk_free",
+      "stock_price_equals_company_size",
+      "loss_only_if_sold",
+      "diversified_means_no_loss",
+      "sip_guarantees_profit",
+      "higher_fee_means_better",
+      "best_fund_exists",
+      "etf_means_no_risk",
+      "gold_always_goes_up",
+      "commodity_trading_is_easy_money",
+      "highest_return_is_best",
+      "past_returns_repeat",
+      "speculation_is_investing",
+      "it_always_comes_back",
+      "risk_means_only_loss",
+      "chasing_hype",
+      "panic_selling"
+    ]
+  }
+}

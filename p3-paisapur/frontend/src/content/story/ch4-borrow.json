@@ -1,0 +1,431 @@
+{
+ "prof_ch4": [
+  {
+   "once": "ch4_intro",
+   "do": [
+    {
+     "if": "flag:goal_done",
+     "then": [
+      {
+       "say": "story.c4.prof_already",
+       "who": "professor"
+      }
+     ]
+    },
+    {
+     "say": "story.c4.prof1",
+     "who": "professor"
+    },
+    {
+     "concept": "good_bad_debt"
+    },
+    {
+     "if": "goalKind:education",
+     "then": [
+      {
+       "say": "story.c4.prof_edu",
+       "who": "professor"
+      },
+      {
+       "concept": "education_loan"
+      }
+     ]
+    },
+    {
+     "if": "goalKind:asset",
+     "then": [
+      {
+       "say": "story.c4.prof_asset",
+       "who": "professor"
+      },
+      {
+       "concept": "assets_that_earn"
+      }
+     ]
+    },
+    {
+     "if": "goalKind:consumption",
+     "then": [
+      {
+       "say": "story.c4.prof_cons",
+       "who": "professor"
+      },
+      {
+       "concept": "depreciation"
+      }
+     ]
+    },
+    {
+     "if": "goalKind:quick",
+     "then": [
+      {
+       "say": "story.c4.prof_quick",
+       "who": "professor"
+      }
+     ]
+    },
+    {
+     "say": "story.c4.prof2",
+     "who": "professor"
+    },
+    {
+     "concept": "loan_basics"
+    },
+    {
+     "concept": "emi"
+    },
+    {
+     "say": "story.c4.prof3",
+     "who": "professor"
+    },
+    {
+     "objective": "objective.ch4_compare"
+    }
+   ]
+  },
+  {
+   "say": "story.c4.prof_hint",
+   "who": "professor"
+  }
+ ],
+ "iyer": [
+  {
+   "once": "iyer_intro",
+   "do": [
+    {
+     "say": "story.c4.iyer1",
+     "who": "iyer"
+    },
+    {
+     "concept": "credit_score"
+    },
+    {
+     "flag": "iyer_met"
+    }
+   ]
+  },
+  {
+   "checkpoint": "checkpoint.loan"
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.loan_calc",
+     "do": [
+      {
+       "open": "loan:bank"
+      }
+     ]
+    },
+    {
+     "label": "choice.edu_loan",
+     "when": "goalKind:education",
+     "do": [
+      {
+       "say": "story.c4.iyer_edu",
+       "who": "iyer"
+      },
+      {
+       "concept": "education_loan"
+      },
+      {
+       "open": "loan:education"
+      }
+     ]
+    },
+    {
+     "label": "choice.challenge",
+     "when": "chapter==4 && flag:lender_met && monthsInChapter>=2",
+     "do": [
+      {
+       "say": "story.c4.iyer_challenge",
+       "who": "iyer"
+      },
+      {
+       "quiz": [
+        "debt_total",
+        "debt_minimum",
+        "debt_score",
+        "debt_app"
+       ],
+       "pass": 3,
+       "then": [
+        {
+         "say": "story.c4.iyer_pass",
+         "who": "iyer"
+        },
+        {
+         "badge": "borrower"
+        },
+        {
+         "chapter": 5
+        },
+        {
+         "objective": "objective.ch5_prof"
+        }
+       ],
+       "else": [
+        {
+         "say": "story.c4.iyer_fail",
+         "who": "iyer"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "label": "choice.bye"
+    }
+   ],
+   "prompt": "story.c4.iyer_menu",
+   "who": "iyer"
+  },
+  {
+   "if": "chapter==4 && !flag:lender_met",
+   "then": [
+    {
+     "say": "story.c4.iyer_hint",
+     "who": "iyer"
+    }
+   ],
+   "else": [
+    {
+     "if": "chapter==4 && monthsInChapter<2",
+     "then": [
+      {
+       "say": "story.c4.iyer_wait",
+       "who": "iyer"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "lender": [
+  {
+   "once": "lender_intro",
+   "do": [
+    {
+     "say": "story.c4.lender1",
+     "who": "lender"
+    },
+    {
+     "say": "story.c4.lender2",
+     "who": "lender"
+    },
+    {
+     "concept": "informal_lending"
+    },
+    {
+     "minigame": "debt-ladder",
+     "level": 1,
+     "on": {
+      "br01.choose:family": [
+       {
+        "do": {
+         "type": "takeLoan",
+         "kind": "family",
+         "amount": 2000,
+         "months": 3
+        }
+       },
+       {
+        "say": "story.c4.ladder_family",
+        "who": "mom"
+       }
+      ],
+      "br01.choose:bank": [
+       {
+        "say": "story.c4.ladder_bank",
+        "who": "lender"
+       }
+      ],
+      "br01.choose:moneylender": [
+       {
+        "do": {
+         "type": "takeLoan",
+         "kind": "moneylender",
+         "amount": 2000,
+         "months": 3
+        }
+       },
+       {
+        "say": "story.c4.ladder_moneylender",
+        "who": "lender"
+       }
+      ],
+      "br01.choose:bnpl": [
+       {
+        "say": "story.c4.ladder_bnpl",
+        "who": "lender"
+       }
+      ],
+      "br01.choose:loan_app": [
+       {
+        "do": {
+         "type": "takeLoan",
+         "kind": "loanapp",
+         "amount": 2500,
+         "months": 3
+        }
+       },
+       {
+        "flag": "loanapp_done"
+       },
+       {
+        "say": "story.c4.ladder_app"
+       }
+      ],
+      "br01.choose:none": [
+       {
+        "say": "story.c4.ladder_none",
+        "who": "lender"
+       }
+      ]
+     }
+    },
+    {
+     "flag": "lender_met"
+    },
+    {
+     "objective": "objective.ch4_iyer"
+    }
+   ]
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.loan_calc",
+     "do": [
+      {
+       "open": "loan:moneylender"
+      }
+     ]
+    },
+    {
+     "label": "choice.bye"
+    }
+   ],
+   "prompt": "story.c4.lender_menu",
+   "who": "lender"
+  }
+ ],
+ "loanapp": [
+  {
+   "if": "flag:loanapp_done",
+   "then": [
+    {
+     "say": "story.c4.shady_again",
+     "who": "shady"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "checkpoint": "checkpoint.loanapp"
+  },
+  {
+   "say": "story.c4.shady1",
+   "who": "shady"
+  },
+  {
+   "duel": "loan_app",
+   "win": [
+    {
+     "say": "story.c4.shady_refused",
+     "who": "shady"
+    },
+    {
+     "do": {
+      "type": "meter",
+      "safety": 5
+     }
+    }
+   ],
+   "lose": [
+    {
+     "do": {
+      "type": "takeLoan",
+      "kind": "loanapp",
+      "amount": 5000,
+      "months": 3
+     }
+    },
+    {
+     "say": "story.c4.shady_installed",
+     "who": "shady"
+    },
+    {
+     "say": "story.c4.app_terms"
+    }
+   ]
+  },
+  {
+   "concept": "loan_app_trap"
+  },
+  {
+   "flag": "loanapp_done"
+  }
+ ],
+ "call_scam": [
+  {
+   "checkpoint": "checkpoint.call"
+  },
+  {
+   "toast": "toast.call"
+  },
+  {
+   "say": "story.c4.call1",
+   "who": "caller"
+  },
+  {
+   "duel": "bank_call",
+   "win": [
+    {
+     "say": "story.c4.call_hangup"
+    },
+    {
+     "do": {
+      "type": "meter",
+      "safety": 10
+     }
+    }
+   ],
+   "lose": [
+    {
+     "do": {
+      "type": "scamLoss",
+      "amount": 1000,
+      "reason": "scam:call"
+     }
+    },
+    {
+     "say": "story.c4.call_lost"
+    }
+   ]
+  },
+  {
+   "concept": "impersonation"
+  },
+  {
+   "flag": "call_done"
+  }
+ ],
+ "harass": [
+  {
+   "say": "story.c4.harass1",
+   "who": "phone"
+  },
+  {
+   "say": "story.c4.harass2"
+  },
+  {
+   "concept": "fraud_recovery"
+  },
+  {
+   "flag": "harass_seen"
+  }
+ ]
+}

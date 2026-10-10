@@ -1,0 +1,560 @@
+{
+  "goal_buy": [
+    {
+      "if": "flag:goal_done",
+      "then": [
+        {
+          "say": "story.goal.already"
+        },
+        {
+          "end": true
+        }
+      ]
+    },
+    {
+      "checkpoint": "checkpoint.goal"
+    },
+    {
+      "if": "goalGap<=0",
+      "then": [
+        {
+          "say": "story.goal.ready"
+        },
+        {
+          "choice": [
+            {
+              "label": "choice.goal_buy_yes",
+              "do": [
+                {
+                  "do": {
+                    "type": "buyGoal"
+                  }
+                },
+                {
+                  "toast": "toast.goal"
+                },
+                {
+                  "if": "flag:goal_on_loan",
+                  "then": [
+                    {
+                      "say": "story.goal.bought_loan"
+                    }
+                  ],
+                  "else": [
+                    {
+                      "say": "story.goal.bought_saved"
+                    }
+                  ]
+                },
+                {
+                  "concept": "delayed_gratification"
+                },
+                {
+                  "if": "goalKind:asset",
+                  "then": [
+                    {
+                      "say": "story.goal.done_asset"
+                    },
+                    {
+                      "concept": "assets_that_earn"
+                    }
+                  ]
+                },
+                {
+                  "if": "goalKind:education",
+                  "then": [
+                    {
+                      "say": "story.goal.done_education"
+                    }
+                  ]
+                },
+                {
+                  "if": "goalKind:consumption",
+                  "then": [
+                    {
+                      "say": "story.goal.done_consumption"
+                    },
+                    {
+                      "concept": "depreciation"
+                    }
+                  ]
+                },
+                {
+                  "if": "goalKind:quick",
+                  "then": [
+                    {
+                      "say": "story.goal.done_quick"
+                    }
+                  ]
+                },
+                {
+                  "call": "goal_next"
+                }
+              ]
+            },
+            {
+              "label": "choice.goal_buy_wait",
+              "do": [
+                {
+                  "say": "story.goal.wait"
+                }
+              ]
+            }
+          ],
+          "prompt": "story.goal.ready_q"
+        }
+      ],
+      "else": [
+        {
+          "say": "story.goal.not_enough"
+        },
+        {
+          "if": "chapter>=4",
+          "then": [
+            {
+              "say": "story.goal.loan_hint"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "goal_next": [
+    {
+      "say": "story.goal.next_intro",
+      "who": "professor"
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.goal_trip",
+          "when": "!done:trip",
+          "do": [
+            {
+              "do": {
+                "type": "setup",
+                "goal": "trip"
+              }
+            },
+            {
+              "say": "story.goal.next_set"
+            },
+            {
+              "objective": "objective.new_goal"
+            }
+          ]
+        },
+        {
+          "label": "choice.goal_cycle",
+          "when": "!done:cycle",
+          "do": [
+            {
+              "do": {
+                "type": "setup",
+                "goal": "cycle"
+              }
+            },
+            {
+              "say": "story.goal.next_set"
+            },
+            {
+              "objective": "objective.new_goal"
+            }
+          ]
+        },
+        {
+          "label": "choice.goal_fees",
+          "when": "!done:fees",
+          "do": [
+            {
+              "do": {
+                "type": "setup",
+                "goal": "fees"
+              }
+            },
+            {
+              "say": "story.goal.next_set"
+            },
+            {
+              "objective": "objective.new_goal"
+            }
+          ]
+        },
+        {
+          "label": "choice.goal_phone",
+          "when": "!done:phone",
+          "do": [
+            {
+              "do": {
+                "type": "setup",
+                "goal": "phone"
+              }
+            },
+            {
+              "say": "story.goal.next_set"
+            },
+            {
+              "objective": "objective.new_goal"
+            }
+          ]
+        },
+        {
+          "label": "choice.goal_stall",
+          "when": "!done:stall",
+          "do": [
+            {
+              "do": {
+                "type": "setup",
+                "goal": "stall"
+              }
+            },
+            {
+              "say": "story.goal.next_set"
+            },
+            {
+              "objective": "objective.new_goal"
+            }
+          ]
+        },
+        {
+          "label": "choice.goal_laptop",
+          "when": "!done:laptop",
+          "do": [
+            {
+              "do": {
+                "type": "setup",
+                "goal": "laptop"
+              }
+            },
+            {
+              "say": "story.goal.next_set"
+            },
+            {
+              "objective": "objective.new_goal"
+            }
+          ]
+        },
+        {
+          "label": "choice.goal_bike",
+          "when": "!done:bike",
+          "do": [
+            {
+              "do": {
+                "type": "setup",
+                "goal": "bike"
+              }
+            },
+            {
+              "say": "story.goal.next_set"
+            },
+            {
+              "objective": "objective.new_goal"
+            }
+          ]
+        },
+        {
+          "label": "choice.goal_rest",
+          "do": [
+            {
+              "say": "story.goal.rest"
+            }
+          ]
+        }
+      ],
+      "prompt": "story.goal.next_q"
+    }
+  ],
+  "festival_rush": [
+    {
+      "checkpoint": "checkpoint.windfall"
+    },
+    {
+      "say": "story.src.festival1"
+    },
+    {
+      "do": {
+        "type": "gain",
+        "amount": 1000,
+        "reason": "windfall"
+      }
+    },
+    {
+      "concept": "windfall"
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.windfall_all",
+          "log": {
+            "concept": "windfall",
+            "choice": "save_all",
+            "correct": true
+          },
+          "do": [
+            {
+              "do": {
+                "type": "toPot",
+                "amount": 1000
+              }
+            },
+            {
+              "say": "story.src.windfall_saved"
+            }
+          ]
+        },
+        {
+          "label": "choice.windfall_most",
+          "log": {
+            "concept": "windfall",
+            "choice": "save_most",
+            "correct": true
+          },
+          "do": [
+            {
+              "do": {
+                "type": "toPot",
+                "amount": 700
+              }
+            },
+            {
+              "do": {
+                "type": "meter",
+                "peace": 3
+              }
+            },
+            {
+              "say": "story.src.windfall_most"
+            }
+          ]
+        },
+        {
+          "label": "choice.windfall_spend",
+          "log": {
+            "concept": "windfall",
+            "choice": "spend_all",
+            "correct": false
+          },
+          "do": [
+            {
+              "do": {
+                "type": "spend",
+                "amount": 1000,
+                "reason": "buy:wants"
+              }
+            },
+            {
+              "do": {
+                "type": "meter",
+                "peace": 6
+              }
+            },
+            {
+              "say": "story.src.windfall_spent"
+            }
+          ]
+        }
+      ],
+      "prompt": "story.src.windfall_q"
+    },
+    {
+      "flag": "festival_done"
+    }
+  ],
+  "scholarship_lump": [
+    {
+      "checkpoint": "checkpoint.windfall"
+    },
+    {
+      "say": "story.src.lump1"
+    },
+    {
+      "do": {
+        "type": "gain",
+        "amount": 3000,
+        "reason": "scholarship"
+      }
+    },
+    {
+      "concept": "windfall"
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.lump_plan",
+          "log": {
+            "concept": "windfall",
+            "choice": "spread",
+            "correct": true
+          },
+          "do": [
+            {
+              "do": {
+                "type": "toPot",
+                "amount": 2000
+              }
+            },
+            {
+              "say": "story.src.lump_plan"
+            }
+          ]
+        },
+        {
+          "label": "choice.lump_spend",
+          "log": {
+            "concept": "windfall",
+            "choice": "spend",
+            "correct": false
+          },
+          "do": [
+            {
+              "do": {
+                "type": "spend",
+                "amount": 2500,
+                "reason": "buy:wants"
+              }
+            },
+            {
+              "do": {
+                "type": "meter",
+                "peace": 5
+              }
+            },
+            {
+              "say": "story.src.lump_spent"
+            }
+          ]
+        }
+      ],
+      "prompt": "story.src.windfall_q"
+    },
+    {
+      "flag": "scholarship_done"
+    }
+  ],
+  "grocery_week": [
+    {
+      "say": "story.src.grocery1",
+      "who": "mom"
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.grocery_list",
+          "log": {
+            "concept": "budgeting",
+            "choice": "list_compare",
+            "correct": true
+          },
+          "do": [
+            {
+              "say": "story.src.grocery_good",
+              "who": "mom"
+            },
+            {
+              "do": {
+                "type": "gain",
+                "amount": 150,
+                "reason": "gift"
+              }
+            }
+          ]
+        },
+        {
+          "label": "choice.grocery_first",
+          "log": {
+            "concept": "budgeting",
+            "choice": "first_brand",
+            "correct": false
+          },
+          "do": [
+            {
+              "say": "story.src.grocery_meh",
+              "who": "mom"
+            }
+          ]
+        },
+        {
+          "label": "choice.grocery_snacks",
+          "log": {
+            "concept": "needs_wants",
+            "choice": "snacks",
+            "correct": false
+          },
+          "do": [
+            {
+              "say": "story.src.grocery_bad",
+              "who": "mom"
+            },
+            {
+              "do": {
+                "type": "meter",
+                "trust": -5
+              }
+            }
+          ]
+        }
+      ],
+      "prompt": "story.src.grocery_q"
+    },
+    {
+      "flag": "grocery_done"
+    }
+  ],
+  "lean_month": [
+    {
+      "if": "source:tutoring",
+      "then": [
+        {
+          "say": "story.src.lean_tutoring"
+        },
+        {
+          "do": {
+            "type": "adjustIncome",
+            "in": 1,
+            "factor": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "if": "source:shop",
+      "then": [
+        {
+          "say": "story.src.lean_shop"
+        },
+        {
+          "do": {
+            "type": "adjustIncome",
+            "in": 1,
+            "factor": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "if": "source:allowance",
+      "then": [
+        {
+          "say": "story.src.lean_allowance",
+          "who": "mom"
+        },
+        {
+          "do": {
+            "type": "adjustIncome",
+            "in": 1,
+            "factor": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "concept": "irregular_income"
+    },
+    {
+      "say": "story.src.lean_tip"
+    },
+    {
+      "flag": "lean_done"
+    }
+  ]
+}

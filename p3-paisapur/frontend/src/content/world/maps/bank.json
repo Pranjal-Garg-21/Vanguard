@@ -1,0 +1,52 @@
+{
+  "id": "bank",
+  "name": "maps.bank",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWWWW",
+    "WQDDDWDDDQW",
+    "WFFFFFFFFFW",
+    "WCCCCCCCCCW",
+    "WFFFFFFFFFW",
+    "WnFFFFFFFnW",
+    "WFFFFFFFFFW",
+    "WWWWWEWWWWW"
+  ],
+  "entry": {
+    "x": 5,
+    "y": 6,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "meena",
+      "sprite": "meena",
+      "x": 3,
+      "y": 2,
+      "facing": "down",
+      "script": "meena"
+    },
+    {
+      "id": "iyer",
+      "sprite": "iyer",
+      "x": 7,
+      "y": 2,
+      "facing": "down",
+      "script": "iyer",
+      "when": "chapter>=4"
+    }
+  ],
+  "objects": [
+    {
+      "x": 1,
+      "y": 1,
+      "script": "atm"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "script": "atm"
+    }
+  ],
+  "triggers": []
+}

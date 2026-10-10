@@ -1,0 +1,273 @@
+{
+  "prof_ch5": [
+    {
+      "once": "ch5_intro",
+      "do": [
+        {
+          "say": "story.c5.prof1",
+          "who": "professor"
+        },
+        {
+          "concept": "real_return"
+        },
+        {
+          "say": "story.c5.prof2",
+          "who": "professor"
+        },
+        {
+          "objective": "objective.ch5_bonds"
+        }
+      ]
+    },
+    {
+      "say": "story.c5.prof_hint",
+      "who": "professor"
+    }
+  ],
+  "bondclerk": [
+    {
+      "once": "bond_intro",
+      "do": [
+        {
+          "say": "story.c5.bond1",
+          "who": "clerk"
+        },
+        {
+          "concept": "bonds"
+        },
+        {
+          "say": "story.c5.bond2",
+          "who": "clerk"
+        }
+      ]
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.buy_bonds",
+          "do": [
+            {
+              "open": "bonds"
+            }
+          ]
+        },
+        {
+          "label": "choice.bye"
+        }
+      ],
+      "prompt": "story.c5.bond_menu",
+      "who": "clerk"
+    },
+    {
+      "if": "bonds && !flag:bridge_built",
+      "then": [
+        {
+          "say": "story.c5.bond_thanks",
+          "who": "clerk"
+        },
+        {
+          "objective": "objective.ch5_sleep"
+        }
+      ]
+    }
+  ],
+  "bridge_open": [
+    {
+      "flag": "bridge_built"
+    },
+    {
+      "say": "story.c5.bridge_open"
+    },
+    {
+      "objective": "objective.ch5_exchange"
+    }
+  ],
+  "ravi": [
+    {
+      "once": "ravi_intro",
+      "do": [
+        {
+          "say": "story.c5.ravi1",
+          "who": "ravi"
+        },
+        {
+          "concept": "stocks"
+        },
+        {
+          "say": "story.c5.ravi2",
+          "who": "ravi"
+        },
+        {
+          "concept": "risk_return"
+        },
+        {
+          "concept": "diversification"
+        },
+        {
+          "objective": "objective.ch5_invest"
+        }
+      ]
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.trade",
+          "do": [
+            {
+              "open": "exchange"
+            }
+          ]
+        },
+        {
+          "label": "choice.ask_funds",
+          "do": [
+            {
+              "say": "story.c5.ravi_funds",
+              "who": "ravi"
+            },
+            {
+              "concept": "mutual_funds"
+            },
+            {
+              "concept": "index_etf"
+            },
+            {
+              "concept": "fees"
+            },
+            {
+              "say": "story.c5.ravi_sip",
+              "who": "ravi"
+            },
+            {
+              "concept": "sip"
+            }
+          ]
+        },
+        {
+          "label": "choice.ask_long",
+          "do": [
+            {
+              "say": "story.c5.ravi_long",
+              "who": "ravi"
+            },
+            {
+              "concept": "time_horizon"
+            },
+            {
+              "concept": "volatility"
+            }
+          ]
+        },
+        {
+          "label": "choice.challenge",
+          "when": "chapter==5 && invested && month>=10 || chapter==5 && monthsInChapter>=4",
+          "do": [
+            {
+              "say": "story.c5.ravi_challenge",
+              "who": "ravi"
+            },
+            {
+              "quiz": [
+                "inv_bond",
+                "inv_diversify",
+                "inv_horizon",
+                "inv_crash",
+                "inv_etf",
+                "inv_risk"
+              ],
+              "pass": 4,
+              "then": [
+                {
+                  "say": "story.c5.ravi_pass",
+                  "who": "ravi"
+                },
+                {
+                  "badge": "investor"
+                },
+                {
+                  "chapter": 6
+                },
+                {
+                  "objective": "objective.ch6_prof"
+                }
+              ],
+              "else": [
+                {
+                  "say": "story.c5.ravi_fail",
+                  "who": "ravi"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "choice.bye"
+        }
+      ],
+      "prompt": "story.c5.ravi_menu",
+      "who": "ravi"
+    },
+    {
+      "if": "chapter==5 && month<10 && monthsInChapter<4",
+      "then": [
+        {
+          "say": "story.c5.ravi_wait",
+          "who": "ravi"
+        }
+      ]
+    }
+  ],
+  "goldclerk": [
+    {
+      "once": "gold_intro",
+      "do": [
+        {
+          "say": "story.c5.gold1",
+          "who": "clerk"
+        },
+        {
+          "concept": "gold"
+        }
+      ]
+    },
+    {
+      "choice": [
+        {
+          "label": "choice.trade",
+          "do": [
+            {
+              "open": "exchange"
+            }
+          ]
+        },
+        {
+          "label": "choice.bye"
+        }
+      ],
+      "who": "clerk"
+    }
+  ],
+  "ticker": [
+    {
+      "open": "news"
+    }
+  ],
+  "plots": [
+    {
+      "once": "plots_intro",
+      "do": [
+        {
+          "say": "story.c5.plots1",
+          "who": "clerk"
+        },
+        {
+          "concept": "real_estate"
+        }
+      ]
+    },
+    {
+      "say": "story.c5.plots2",
+      "who": "clerk"
+    }
+  ]
+}

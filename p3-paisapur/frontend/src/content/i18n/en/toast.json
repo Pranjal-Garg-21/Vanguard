@@ -1,0 +1,14 @@
+{
+  "got_docs": "Received: ID card and address proof",
+  "got_journal": "Received: Money Journal",
+  "account_open": "Bank account opened!",
+  "sms": "📱 New message",
+  "call": "📞 Incoming call",
+  "saved": "Game saved",
+  "new_concept": "New in your Journal: {title}",
+  "badge": "Badge earned: {name}!",
+  "cash_up": "+₹{amount}",
+  "cash_down": "−₹{amount}",
+  "goal": "🎉 Goal reached!",
+  "checkpoint": "⏱ What-If checkpoint saved"
+}

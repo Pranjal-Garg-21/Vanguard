@@ -1,0 +1,114 @@
+{
+  "title": "Profit, loss and return",
+  "blurb": "A short mission: find out if Asha's samosa stall made money, and why a fall hurts more than a rise helps.",
+
+  "t1.title": "Meet Asha's stall",
+  "t1.hook": "Asha buys 50 samosas for {buy} and sells them all for {sell}. Your mission: work out if she did well.",
+  "t1.define": "**Profit** is what you keep after paying your costs. If you end up with less, that is a **loss**.",
+  "t1.analogy": "Think of a tea stall. You spend {buy} on supplies. Customers pay {sell}. The extra money is your profit.",
+
+  "q1.prompt": "Asha sold all her samosas for {sell}. She paid {buy} for them. What is her profit? Type a number in rupees.",
+  "q1.hint": "Profit = what she sold for minus what she paid.",
+  "q1.explain": "{sell} minus {buy} is {profit1}.",
+
+  "q2.prompt": "Which word means ending up with LESS money than you started with?",
+  "q2.opt.a": "Profit",
+  "q2.opt.b": "Loss",
+  "q2.opt.c": "Return",
+  "q2.opt.d": "Interest",
+  "q2.hint": "Think about the opposite of profit.",
+  "q2.explain": "Ending up with less money is a loss.",
+
+  "t2.title": "Return: comparing fairly",
+  "t2.define": "**Return** is profit as a percentage of what you put in. It lets you compare small and big amounts fairly.",
+  "t2.steps.1": "Asha's profit = {sell} - {buy} = {profit1}",
+  "t2.steps.2": "Return = profit ÷ what you paid, shown as a percentage",
+
+  "q3.prompt": "What is Asha's return on her samosas? Type a percentage.",
+  "q3.hint": "Divide her profit ({profit1}) by what she paid ({buy}). Then write it as a percentage.",
+  "q3.explain": "{profit1} ÷ {buy} is {ret1}.",
+
+  "q4.prompt": "Asha gains {g1} on {b1}. Imran gains {g2} on {b2}. Who had the higher return?",
+  "q4.opt.a": "Asha",
+  "q4.opt.b": "Imran, because he gained more rupees",
+  "q4.opt.c": "Both are equal",
+  "q4.opt.d": "They cannot be compared",
+  "q4.hint": "Return compares the gain to the amount put in. Work out each percentage.",
+  "q4.explain": "Asha earned {r1} and Imran earned {r2}. Imran made more rupees, but on a much bigger amount.",
+
+  "t3.title": "A bad day",
+  "t3.steps.1": "A bad day: Asha sells everything for just {lowSell}.",
+  "t3.steps.2": "She still paid {buy}, so she ends up with less than she started with.",
+  "t3.steps.3": "A profit below zero is a loss. We write it with a minus sign.",
+  "t3.paper": "A gain or loss on something you still hold is a **paper** gain or loss. It becomes **realised** only when you sell.",
+
+  "q5.prompt": "On the bad day she sells for {lowSell}. What is her profit? Use a minus sign for a loss.",
+  "q5.hint": "Selling price minus what she paid. The answer is below zero.",
+  "q5.explain": "{lowSell} minus {buy} is {loss1}. The minus sign means a loss.",
+
+  "q6.prompt": "What is her return on the bad day? Type a percentage with a minus sign.",
+  "q6.hint": "Divide the loss by what she paid, then write it as a percentage.",
+  "q6.explain": "{loss1} ÷ {buy} is {ret2}.",
+
+  "q7.prompt": "Ravi's shares are now worth {paperLoss} less than he paid. He has not sold them. What is this loss called?",
+  "q7.opt.a": "A paper loss",
+  "q7.opt.b": "A realised loss",
+  "q7.opt.c": "A profit",
+  "q7.opt.d": "A return",
+  "q7.hint": "Read the note above. Has he sold the shares?",
+  "q7.explain": "He still holds the shares, so the loss is only on paper. It becomes realised if he sells.",
+
+  "t4.title": "Lab: falls and rises",
+  "t4.explore": "Open the lab. Drag the slider to try different falls, then answer the questions below.",
+
+  "q8.prompt": "In the lab, drag the fall to {fall}. What rise do you need to get back to the start? Type a percentage.",
+  "q8.hint": "Use the slider. Read the big number at the bottom.",
+  "q8.explain": "After a fall of {fall} you hold {afterFall}. To get {startAmt} back, it must double: a rise of {needGain}.",
+
+  "q9.prompt": "Now drag the fall to {fall2}. What rise do you need? Type a percentage.",
+  "q9.hint": "Use the same slider. Watch how fast the big number grows.",
+  "q9.explain": "After a fall of {fall2} you need a rise of {needGain2}. Big falls are very hard to win back.",
+
+  "q10.prompt": "A price falls by {fall}, then rises by {fall}. Where does it end up compared with the start?",
+  "q10.opt.a": "Back at the start",
+  "q10.opt.b": "25% below the start",
+  "q10.opt.c": "25% above the start",
+  "q10.opt.d": "It cannot be known",
+  "q10.fb.a": "It feels even, but the rise is taken from the smaller amount, so it adds back less than you lost.",
+  "q10.hint": "Try {startAmt} in the lab. Compare the grey bar with the yellow bar.",
+  "q10.explain": "{startAmt} falls to {afterFall}, then rises to {afterRise}. That is 25% below the start.",
+
+  "t5.title": "Rupees or percent?",
+  "t5.tradeoff": "Percentages and rupees tell different stories. A big percentage on a small amount can be fewer rupees than a small percentage on a big amount. Always check both.",
+  "t5.mistake": "Many people think a fall of {fall} and a rise of {fall} cancel out. They do not. Remember the lab: you need a bigger rise to win it back.",
+
+  "q11.prompt": "How many rupees is a gain of {bigPct} on {bigBase}? Type a number.",
+  "q11.hint": "Multiply {bigBase} by {bigPct}.",
+  "q11.explain": "{bigPct} of {bigBase} is {bigGain}.",
+
+  "q12.prompt": "Which gain is more in rupees: {bigPct} on {bigBase}, or {smallPct} on {smallBase}?",
+  "q12.opt.a": "{bigPct} on {bigBase}",
+  "q12.opt.b": "{smallPct} on {smallBase}",
+  "q12.opt.c": "They are the same",
+  "q12.opt.d": "You cannot tell",
+  "q12.hint": "Work out both in rupees. The bigger percentage is not always the bigger gain.",
+  "q12.explain": "{bigPct} on {bigBase} is {bigGain}. {smallPct} on {smallBase} is only {smallGain}.",
+
+  "t6.title": "Challenge",
+  "t6.formula": "Return = (value now - value you paid) ÷ value you paid. To recover from a fall of x, you need a rise of x ÷ (1 - x).",
+
+  "q13.prompt": "Challenge: a share falls by {fall3}. What rise gets it back to the start? Type a percentage.",
+  "q13.hint": "After the fall you hold 80 out of every 100. How much more do you need on top of 80?",
+  "q13.explain": "You need 20 more on top of 80. That is a rise of {needGain3}.",
+
+  "glossary.profit.term": "Profit",
+  "glossary.profit.def": "Money left after paying all your costs.",
+  "glossary.loss.term": "Loss",
+  "glossary.loss.def": "When you end up with less money than you started with.",
+  "glossary.return.term": "Return",
+  "glossary.return.def": "Profit as a percentage of the money you put in.",
+  "glossary.paper_gain.term": "Paper gain or loss",
+  "glossary.paper_gain.def": "A gain or loss on something you still hold and have not sold.",
+  "glossary.realised.term": "Realised",
+  "glossary.realised.def": "A gain or loss that is locked in because you sold."
+}

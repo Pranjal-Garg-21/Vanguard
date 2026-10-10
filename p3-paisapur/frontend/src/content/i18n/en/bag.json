@@ -1,0 +1,38 @@
+{
+  "title": "Bag",
+  "pocket": {
+    "key": "Key items",
+    "things": "Your things",
+    "papers": "Papers"
+  },
+  "empty": "Nothing in this pocket yet.",
+  "use": "Use",
+  "cracked": "The screen has a crack across it.",
+  "hint": "◀ ▶ switch pocket · ▲ ▼ choose · B close",
+  "item": {
+    "wallet": { "name": "Wallet", "desc": "Your cash: {cash}. Cash is easy to spend and easy to lose. Use it to see everything you own and owe." },
+    "journal": { "name": "Money Journal", "desc": "Professor Arth's gift. {seen} money ideas written in so far." },
+    "documents": { "name": "ID card and address proof", "desc": "Your KYC documents. Show them only to the bank, never in reply to a message or call." },
+    "debit_card": { "name": "Debit card", "desc": "Linked to your savings account ({balance}). The PIN lives in your head, never on the card, never on the phone." },
+    "phone": { "name": "Old phone", "desc": "Calls and messages. No UPI yet: you need a bank account for that." },
+    "phone_upi": { "name": "Phone with UPI", "desc": "Pays by scanning a QR code. Recent UPI payments: {recent}. Remember: a PIN is only ever for paying." },
+    "badge_case": { "name": "Badge case", "desc": "{n} of 6 badges earned from Paisapur's Masters." },
+    "goal_trip": { "name": "Trip photos", "desc": "Your school trip, paid for in month {month} ({price}). Experiences don't resell, but nobody can take the memories back." },
+    "goal_cycle": { "name": "Geared cycle", "desc": "Bought in month {month} for {price}. Worth about {now} now: things lose value as they age." },
+    "goal_fees": { "name": "Coaching admission letter", "desc": "Fees of {price} paid in month {month}. Learning is an investment in what you can earn." },
+    "goal_phone": { "name": "New phone", "desc": "Bought in month {month} for {price}. It would sell for about {now} now. That's depreciation." },
+    "goal_stall": { "name": "Stall key", "desc": "Your market stall: {price} in month {month}, still worth about {now}, and earning ₹600 every month. An asset that pays you." },
+    "goal_laptop": { "name": "Laptop", "desc": "Bought in month {month} for {price}. Worth about {now} now, but what you learn on it keeps its value." },
+    "goal_bike": { "name": "Bike", "desc": "Bought in month {month} for {price}. Worth about {now} now, and it still needs fuel and servicing." },
+    "thing_sneakers": { "name": "Branded sneakers", "desc": "\"50% off!\" Bought for {price} in month {month}. Would sell for about {now} now." },
+    "thing_headphones": { "name": "Wireless headphones", "desc": "Bought for {price} in month {month}. Worth about {now} now." },
+    "thing_poster": { "name": "Cricket poster", "desc": "Bought for {price} in month {month}. Priceless to you, about {now} to anyone else." },
+    "receipt": { "name": "Receipt: {item}", "desc": "Month {month}: {item}, {price}, including {gst} of GST ({rate}%). Tax is part of almost every price you pay." },
+    "fd": { "name": "Fixed deposit receipt", "desc": "{amount} locked until month {month}. Worth {now} today, growing every month." },
+    "bond": { "name": "Town bond certificate", "desc": "You lent the town {amount} for the bridge. Repaid with interest in month {month}. Worth {now} today." },
+    "loan": { "name": "Loan agreement: {kind}", "desc": "You still owe {balance}. EMI {emi} for {months} more months at {rate}% a month. Missed payments so far: {missed}." },
+    "card_statement": { "name": "Credit card statement", "desc": "Balance {balance} at {rate}% a month. Paying only the minimum keeps this debt alive for a long time." },
+    "statement": { "name": "Investment statement", "desc": "{count} holdings across {kinds} kinds of investment. Worth {value} today; you put in {invested}." },
+    "policy": { "name": "Insurance policy", "desc": "₹100 a month protects your things from fire and disaster. You hope you never need it." }
+  }
+}

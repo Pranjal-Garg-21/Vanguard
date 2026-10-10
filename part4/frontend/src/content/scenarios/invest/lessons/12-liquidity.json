@@ -1,0 +1,201 @@
+{
+  "id": "lesson_liquidity",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 12,
+  "estMinutes": 12,
+  "difficulty": "medium",
+  "titleKey": "invest_liquidity.title",
+  "blurbKey": "invest_liquidity.blurb",
+  "concepts": ["liquidity", "asset_comparison", "property_costs", "time_horizon"],
+  "misconceptions": ["highest_return_is_best", "property_always_profits"],
+  "vars": {
+    "amt": { "value": 100000, "fmt": "rupees" },
+    "bumpySell": { "value": 0.005, "fmt": "percent", "round": 1 },
+    "propSell": { "value": 0.06, "fmt": "percent" },
+    "goldSell": { "value": 0.03, "fmt": "percent" }
+  },
+  "calcs": [
+    { "id": "bumpyCost", "fn": "mul", "args": ["$amt", "$bumpySell"], "fmt": "rupees" },
+    { "id": "propKeep", "fn": "sub", "args": [1, "$propSell"] },
+    { "id": "propGot", "fn": "mul", "args": ["$amt", "$propKeep"], "fmt": "rupees" },
+    { "id": "goldCost", "fn": "mul", "args": ["$amt", "$goldSell"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_liquidity.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "cash_and_house", "textKey": "invest_liquidity.t1.hook" },
+        { "type": "define", "textKey": "invest_liquidity.t1.define" },
+        { "type": "analogy", "visual": "cash_and_house", "textKey": "invest_liquidity.t1.analogy" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_liquidity.q1.prompt",
+          "concept": "liquidity",
+          "points": 10,
+          "hintKey": "invest_liquidity.q1.hint",
+          "explainKey": "invest_liquidity.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_liquidity.q1.opt.a" },
+            { "id": "b", "textKey": "invest_liquidity.q1.opt.b" },
+            { "id": "c", "textKey": "invest_liquidity.q1.opt.c" },
+            { "id": "d", "textKey": "invest_liquidity.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "invest_liquidity.q2.prompt",
+          "concept": "liquidity",
+          "points": 10,
+          "hintKey": "invest_liquidity.q2.hint",
+          "explainKey": "invest_liquidity.q2.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_liquidity.q2.opt.a" },
+            { "id": "b", "textKey": "invest_liquidity.q2.opt.b" },
+            { "id": "c", "textKey": "invest_liquidity.q2.opt.c" },
+            { "id": "d", "textKey": "invest_liquidity.q2.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_liquidity.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_liquidity.t2.define" },
+        {
+          "type": "explore",
+          "explore": { "widget": "cash_speed", "promptKey": "invest_liquidity.t2.explore", "params": { "amount": "$amt" } }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_liquidity.q3.prompt",
+          "concept": "liquidity",
+          "points": 15,
+          "hintKey": "invest_liquidity.q3.hint",
+          "explainKey": "invest_liquidity.q3.explain",
+          "answer": "bumpyCost",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_liquidity.q4.prompt",
+          "concept": "property_costs",
+          "points": 15,
+          "hintKey": "invest_liquidity.q4.hint",
+          "explainKey": "invest_liquidity.q4.explain",
+          "answer": "propGot",
+          "unit": "rupees"
+        },
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "invest_liquidity.q5.prompt",
+          "concept": "liquidity",
+          "points": 10,
+          "hintKey": "invest_liquidity.q5.hint",
+          "explainKey": "invest_liquidity.q5.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_liquidity.q5.opt.a" },
+            { "id": "b", "textKey": "invest_liquidity.q5.opt.b" },
+            { "id": "c", "textKey": "invest_liquidity.q5.opt.c" },
+            { "id": "d", "textKey": "invest_liquidity.q5.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_liquidity.t3.title",
+      "blocks": [
+        { "type": "hook", "textKey": "invest_liquidity.t3.hook" },
+        { "type": "define", "textKey": "invest_liquidity.t3.define" }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "invest_liquidity.q6.prompt",
+          "concept": "time_horizon",
+          "points": 10,
+          "hintKey": "invest_liquidity.q6.hint",
+          "explainKey": "invest_liquidity.q6.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_liquidity.q6.opt.a" },
+            { "id": "b", "textKey": "invest_liquidity.q6.opt.b" },
+            { "id": "c", "textKey": "invest_liquidity.q6.opt.c" },
+            { "id": "d", "textKey": "invest_liquidity.q6.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "invest_liquidity.q7.prompt",
+          "concept": "liquidity",
+          "points": 15,
+          "hintKey": "invest_liquidity.q7.hint",
+          "explainKey": "invest_liquidity.q7.explain",
+          "answer": "goldCost",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_liquidity.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_liquidity.t4.define" },
+        { "type": "tradeoff", "textKey": "invest_liquidity.t4.tradeoff" },
+        { "type": "jargon", "terms": ["liquidity", "sell_cost"] }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "invest_liquidity.q8.prompt",
+          "concept": "asset_comparison",
+          "points": 10,
+          "hintKey": "invest_liquidity.q8.hint",
+          "explainKey": "invest_liquidity.q8.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_liquidity.q8.opt.a" },
+            { "id": "b", "textKey": "invest_liquidity.q8.opt.b", "misconception": "highest_return_is_best", "feedbackKey": "invest_liquidity.q8.fb.b" },
+            { "id": "c", "textKey": "invest_liquidity.q8.opt.c" },
+            { "id": "d", "textKey": "invest_liquidity.q8.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "invest_liquidity.q9.prompt",
+          "concept": "property_costs",
+          "points": 10,
+          "hintKey": "invest_liquidity.q9.hint",
+          "explainKey": "invest_liquidity.q9.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_liquidity.q9.opt.a" },
+            { "id": "b", "textKey": "invest_liquidity.q9.opt.b", "misconception": "property_always_profits", "feedbackKey": "invest_liquidity.q9.fb.b" },
+            { "id": "c", "textKey": "invest_liquidity.q9.opt.c" },
+            { "id": "d", "textKey": "invest_liquidity.q9.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": ["liquidity", "sell_cost"]
+}

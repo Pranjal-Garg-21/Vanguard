@@ -1,0 +1,71 @@
+[
+  {
+    "id": "q_collect",
+    "concept": "upi_collect",
+    "promptKey": "safe.upi.check.q1.prompt",
+    "whyKey": "safe.upi.check.q1.why",
+    "options": [
+      {
+        "id": "enter",
+        "textKey": "safe.upi.check.q1.a",
+        "correct": false
+      },
+      {
+        "id": "decline",
+        "textKey": "safe.upi.check.q1.b",
+        "correct": true
+      },
+      {
+        "id": "ask_again",
+        "textKey": "safe.upi.check.q1.c",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": "q_pin",
+    "concept": "pin_secrecy",
+    "promptKey": "safe.upi.check.q2.prompt",
+    "whyKey": "safe.upi.check.q2.why",
+    "options": [
+      {
+        "id": "send",
+        "textKey": "safe.upi.check.q2.a",
+        "correct": true
+      },
+      {
+        "id": "receive",
+        "textKey": "safe.upi.check.q2.b",
+        "correct": false
+      },
+      {
+        "id": "both",
+        "textKey": "safe.upi.check.q2.c",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": "q_refund",
+    "concept": "refunds_failed_txn",
+    "promptKey": "safe.upi.check.q3.prompt",
+    "whyKey": "safe.upi.check.q3.why",
+    "options": [
+      {
+        "id": "auto",
+        "textKey": "safe.upi.check.q3.a",
+        "correct": true
+      },
+      {
+        "id": "call",
+        "textKey": "safe.upi.check.q3.b",
+        "correct": false
+      },
+      {
+        "id": "repay",
+        "textKey": "safe.upi.check.q3.c",
+        "correct": false
+      }
+    ]
+  }
+]

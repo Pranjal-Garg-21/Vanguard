@@ -1,0 +1,287 @@
+{
+  "id": "digital_arrest",
+  "simulator": "call",
+  "mode": "act",
+  "concepts": [
+    "authority_impersonation"
+  ],
+  "level": 3,
+  "titleKey": "safe.da.title",
+  "briefKey": "safe.da.brief",
+  "phone": {
+    "startBalance": 12000,
+    "startTime": "14:35"
+  },
+  "rule": "safe.da.rule",
+  "instead": [
+    "safe.da.i1",
+    "safe.da.i2",
+    "safe.da.i3"
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.da.o1",
+      "when": "read:1"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.da.o2",
+      "when": "inspectedAny:1"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.da.o3",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "c1",
+      "surface": {
+        "type": "call",
+        "caller": "+91 11xxx xx901",
+        "ring": true,
+        "lines": [
+          {
+            "k": "safe.da.c1"
+          }
+        ],
+        "actions": [
+          {
+            "id": "answer",
+            "labelKey": "safe.da.a.answer",
+            "risk": "neutral",
+            "unlocks": [
+              "c2"
+            ],
+            "delay": 600
+          },
+          {
+            "id": "decline",
+            "labelKey": "safe.da.a.decline",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.da.n.decline"
+          }
+        ],
+        "foreground": true,
+        "concept": "authority_impersonation",
+        "misconception": "authority_demands_money",
+        "lens": [
+          {
+            "id": "number",
+            "revealKey": "safe.da.lens.number"
+          }
+        ]
+      },
+      "at": 800
+    },
+    {
+      "id": "c2",
+      "surface": {
+        "type": "call",
+        "caller": "+91 11xxx xx901",
+        "ring": false,
+        "lines": [
+          {
+            "k": "safe.da.c2.a"
+          },
+          {
+            "k": "safe.da.c2.b",
+            "lens": "arrest"
+          },
+          {
+            "k": "safe.da.c2.c",
+            "lens": "secret"
+          }
+        ],
+        "actions": [
+          {
+            "id": "comply",
+            "labelKey": "safe.da.a.comply",
+            "risk": "risky",
+            "unlocks": [
+              "c3"
+            ],
+            "delay": 800,
+            "noteKey": "safe.da.n.comply"
+          },
+          {
+            "id": "verify",
+            "labelKey": "safe.da.a.verify",
+            "risk": "neutral",
+            "unlocks": [
+              "c2b"
+            ],
+            "delay": 800,
+            "noteKey": "safe.da.n.verify"
+          },
+          {
+            "id": "hangup",
+            "labelKey": "safe.da.a.hangup",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.da.n.hangup"
+          }
+        ],
+        "foreground": true,
+        "concept": "authority_impersonation",
+        "misconception": "authority_demands_money",
+        "lens": [
+          {
+            "id": "arrest",
+            "revealKey": "safe.da.lens.arrest",
+            "tell": "arrest"
+          },
+          {
+            "id": "secret",
+            "revealKey": "safe.da.lens.secret",
+            "tell": "secret"
+          }
+        ],
+        "tells": [
+          {
+            "id": "arrest",
+            "kind": "pretends",
+            "whyKey": "safe.da.why.arrest"
+          },
+          {
+            "id": "secret",
+            "kind": "secrecy",
+            "whyKey": "safe.da.why.secret"
+          }
+        ],
+        "best": "hangup"
+      }
+    },
+    {
+      "id": "c2b",
+      "surface": {
+        "type": "call",
+        "caller": "+91 11xxx xx901",
+        "ring": false,
+        "lines": [
+          {
+            "k": "safe.da.c2b",
+            "lens": "threat"
+          }
+        ],
+        "actions": [
+          {
+            "id": "comply",
+            "labelKey": "safe.da.a.comply",
+            "risk": "risky",
+            "unlocks": [
+              "c3"
+            ],
+            "delay": 800,
+            "noteKey": "safe.da.n.comply"
+          },
+          {
+            "id": "hangup",
+            "labelKey": "safe.da.a.hangup",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.da.n.hangup"
+          }
+        ],
+        "foreground": true,
+        "concept": "authority_impersonation",
+        "misconception": "authority_demands_money",
+        "lens": [
+          {
+            "id": "threat",
+            "revealKey": "safe.da.lens.threat",
+            "tell": "threat"
+          }
+        ],
+        "tells": [
+          {
+            "id": "threat",
+            "kind": "urgency",
+            "whyKey": "safe.da.why.threat"
+          }
+        ],
+        "best": "hangup"
+      }
+    },
+    {
+      "id": "c3",
+      "surface": {
+        "type": "call",
+        "caller": "+91 11xxx xx901",
+        "ring": false,
+        "lines": [
+          {
+            "k": "safe.da.c3.a",
+            "lens": "safeacct"
+          },
+          {
+            "k": "safe.da.c3.b",
+            "lens": "clock"
+          }
+        ],
+        "actions": [
+          {
+            "id": "transfer",
+            "labelKey": "safe.da.a.transfer",
+            "risk": "risky",
+            "effects": {
+              "money.bank": 0
+            },
+            "end": "fooled",
+            "noteKey": "safe.da.n.transfer",
+            "misconception": "authority_demands_money"
+          },
+          {
+            "id": "hangup",
+            "labelKey": "safe.da.a.hangup",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.da.n.hangup"
+          },
+          {
+            "id": "lapse",
+            "labelKey": "safe.da.a.lapse",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.da.n.lapse"
+          }
+        ],
+        "foreground": true,
+        "concept": "authority_impersonation",
+        "misconception": "authority_demands_money",
+        "lens": [
+          {
+            "id": "safeacct",
+            "revealKey": "safe.da.lens.safeacct",
+            "tell": "safeacct"
+          },
+          {
+            "id": "clock",
+            "revealKey": "safe.da.lens.clock",
+            "tell": "clock"
+          }
+        ],
+        "tells": [
+          {
+            "id": "safeacct",
+            "kind": "pulls_money",
+            "whyKey": "safe.da.why.safeacct"
+          },
+          {
+            "id": "clock",
+            "kind": "urgency",
+            "whyKey": "safe.da.why.clock"
+          }
+        ],
+        "best": "hangup",
+        "timeout": {
+          "ms": 20000,
+          "action": "lapse"
+        }
+      }
+    }
+  ]
+}

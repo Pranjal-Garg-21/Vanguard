@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  },
+  "overrides": [
+    {
+      "files": ["src/core/**", "src/**/logic/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{
+            "group": ["react", "react-*", "dexie", "@supabase/**", "@/platform", "@/platform/**", "@/ui", "@/ui/**", "@/app/**", "@/features/**", "@/games/**", "@/runtime", "@/runtime/**", "@/facilitator/**"],
+            "message": "core/ and logic/ folders must stay pure: no React, storage, network or UI imports."
+          }]
+        }]
+      }
+    },
+    {
+      "files": ["src/ui/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{
+            "group": ["dexie", "@supabase/**", "@/app/**", "@/features/**", "@/games/**", "@/runtime", "@/runtime/**", "@/facilitator/**"],
+            "message": "ui/ is presentational: it may use @/platform for i18n and audio only."
+          }]
+        }]
+      }
+    },
+    {
+      "files": ["src/app/**", "src/features/**", "src/games/**", "src/runtime/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{
+            "group": ["dexie", "@supabase/**", "@/platform/**"],
+            "message": "Use the public API from '@/platform'. Only src/platform touches IndexedDB or Supabase."
+          }]
+        }]
+      }
+    }
+  ]
+}

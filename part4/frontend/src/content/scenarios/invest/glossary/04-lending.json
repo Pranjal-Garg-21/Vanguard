@@ -1,0 +1,5 @@
+[
+  { "id": "borrower", "termKey": "invest_lending.glossary.borrower.term", "defKey": "invest_lending.glossary.borrower.def", "lesson": "lesson_lending" },
+  { "id": "lender", "termKey": "invest_lending.glossary.lender.term", "defKey": "invest_lending.glossary.lender.def", "lesson": "lesson_lending" },
+  { "id": "default", "termKey": "invest_lending.glossary.default.term", "defKey": "invest_lending.glossary.default.def", "lesson": "lesson_lending" }
+]

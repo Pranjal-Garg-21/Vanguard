@@ -1,0 +1,32 @@
+{
+  "id": "zaroorat",
+  "name": "maps.zaroorat",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWWWW",
+    "WVXVXVXVXVW",
+    "WFFFFFFFFFW",
+    "WFFFFFFCCCW",
+    "WVFFFFFFFFW",
+    "WXFFFFFFFnW",
+    "WFFFFFFFFFW",
+    "WWWWWEWWWWW"
+  ],
+  "entry": {
+    "x": 5,
+    "y": 6,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "anwar",
+      "sprite": "anwar",
+      "x": 8,
+      "y": 2,
+      "facing": "down",
+      "script": "anwar"
+    }
+  ],
+  "objects": [],
+  "triggers": []
+}

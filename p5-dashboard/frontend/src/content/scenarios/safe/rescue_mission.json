@@ -1,0 +1,371 @@
+{
+  "id": "rescue_mission",
+  "simulator": "rescue",
+  "mode": "act",
+  "concepts": [
+    "fraud_recovery"
+  ],
+  "level": 1,
+  "titleKey": "safe.rm.title",
+  "briefKey": "safe.rm.brief",
+  "phone": {
+    "startBalance": 3400,
+    "startTime": "15:20"
+  },
+  "rule": "safe.rm.rule",
+  "instead": [
+    "safe.rm.i1",
+    "safe.rm.i2",
+    "safe.rm.i3"
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.rm.o1",
+      "when": "read:1"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.rm.o2",
+      "when": "acted:call_1930"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.rm.o3",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "r1",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.rm.r1.title",
+        "foreground": true,
+        "respond": true,
+        "concept": "fraud_recovery",
+        "misconception": "fraud_recovery_mistake",
+        "best": "call_bank",
+        "explainKey": "safe.rm.r1.explain",
+        "body": [
+          {
+            "k": "safe.rm.r1.body"
+          }
+        ],
+        "actions": [
+          {
+            "id": "call_bank",
+            "labelKey": "safe.rm.r1.a1",
+            "risk": "safe",
+            "noteKey": "safe.rm.r1.n1",
+            "unlocks": [
+              "r2"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "post",
+            "labelKey": "safe.rm.r1.a2",
+            "risk": "risky",
+            "noteKey": "safe.rm.r1.n2",
+            "unlocks": [
+              "r2"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "delete_msgs",
+            "labelKey": "safe.rm.r1.a3",
+            "risk": "risky",
+            "noteKey": "safe.rm.r1.n3",
+            "unlocks": [
+              "r2"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "wait",
+            "labelKey": "safe.rm.r1.a4",
+            "risk": "risky",
+            "noteKey": "safe.rm.r1.n4",
+            "unlocks": [
+              "r2"
+            ],
+            "delay": 700
+          }
+        ]
+      },
+      "at": 400
+    },
+    {
+      "id": "r2",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.rm.r2.title",
+        "foreground": true,
+        "respond": true,
+        "concept": "fraud_recovery",
+        "misconception": "fraud_recovery_mistake",
+        "best": "call_1930",
+        "explainKey": "safe.rm.r2.explain",
+        "body": [
+          {
+            "k": "safe.rm.r2.body"
+          }
+        ],
+        "actions": [
+          {
+            "id": "call_1930",
+            "labelKey": "safe.rm.r2.a1",
+            "risk": "safe",
+            "noteKey": "safe.rm.r2.n1",
+            "unlocks": [
+              "r3"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "email_random",
+            "labelKey": "safe.rm.r2.a2",
+            "risk": "risky",
+            "noteKey": "safe.rm.r2.n2",
+            "unlocks": [
+              "r3"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "skip",
+            "labelKey": "safe.rm.r2.a3",
+            "risk": "risky",
+            "noteKey": "safe.rm.r2.n3",
+            "unlocks": [
+              "r3"
+            ],
+            "delay": 700
+          }
+        ]
+      }
+    },
+    {
+      "id": "r3",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.rm.r3.title",
+        "foreground": true,
+        "respond": true,
+        "concept": "fraud_recovery",
+        "misconception": "fraud_recovery_mistake",
+        "best": "keep",
+        "explainKey": "safe.rm.r3.explain",
+        "body": [
+          {
+            "k": "safe.rm.r3.body"
+          }
+        ],
+        "actions": [
+          {
+            "id": "keep",
+            "labelKey": "safe.rm.r3.a1",
+            "risk": "safe",
+            "noteKey": "safe.rm.r3.n1",
+            "unlocks": [
+              "r4"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "delete",
+            "labelKey": "safe.rm.r3.a2",
+            "risk": "risky",
+            "noteKey": "safe.rm.r3.n2",
+            "unlocks": [
+              "r4"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "forward",
+            "labelKey": "safe.rm.r3.a3",
+            "risk": "safe",
+            "noteKey": "safe.rm.r3.n3",
+            "unlocks": [
+              "r4"
+            ],
+            "delay": 700
+          }
+        ]
+      }
+    },
+    {
+      "id": "r4",
+      "surface": {
+        "type": "sms",
+        "from": "+91 98xxx xx455",
+        "fromLens": "sender",
+        "foreground": true,
+        "respond": true,
+        "concept": "fraud_recovery",
+        "misconception": "fraud_recovery_mistake",
+        "best": "refuse",
+        "explainKey": "safe.rm.r4.explain",
+        "body": [
+          {
+            "k": "safe.rm.r4.a",
+            "lens": "claim"
+          },
+          {
+            "k": "safe.rm.r4.b",
+            "lens": "fee"
+          }
+        ],
+        "lens": [
+          {
+            "id": "sender",
+            "revealKey": "safe.rm.r4.l.sender"
+          },
+          {
+            "id": "claim",
+            "revealKey": "safe.rm.r4.l.claim",
+            "tell": "claim"
+          },
+          {
+            "id": "fee",
+            "revealKey": "safe.rm.r4.l.fee",
+            "tell": "fee"
+          }
+        ],
+        "tells": [
+          {
+            "id": "claim",
+            "kind": "too_good",
+            "whyKey": "safe.rm.r4.w.claim"
+          },
+          {
+            "id": "fee",
+            "kind": "pulls_money",
+            "whyKey": "safe.rm.r4.w.fee"
+          }
+        ],
+        "actions": [
+          {
+            "id": "refuse",
+            "labelKey": "safe.rm.r4.a1",
+            "risk": "safe",
+            "noteKey": "safe.rm.r4.n1",
+            "unlocks": [
+              "r5"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "pay_fee",
+            "labelKey": "safe.rm.r4.a2",
+            "risk": "risky",
+            "noteKey": "safe.rm.r4.n2",
+            "effects": {
+              "money.bank": -1000
+            },
+            "unlocks": [
+              "r5"
+            ],
+            "delay": 700
+          }
+        ]
+      }
+    },
+    {
+      "id": "r5",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.rm.r5.title",
+        "foreground": true,
+        "respond": true,
+        "concept": "fraud_recovery",
+        "misconception": "fraud_recovery_mistake",
+        "best": "secure",
+        "explainKey": "safe.rm.r5.explain",
+        "body": [
+          {
+            "k": "safe.rm.r5.body"
+          }
+        ],
+        "actions": [
+          {
+            "id": "secure",
+            "labelKey": "safe.rm.r5.a1",
+            "risk": "safe",
+            "noteKey": "safe.rm.r5.n1",
+            "unlocks": [
+              "r6"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "ignore",
+            "labelKey": "safe.rm.r5.a2",
+            "risk": "risky",
+            "noteKey": "safe.rm.r5.n2",
+            "unlocks": [
+              "r6"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "share_otp",
+            "labelKey": "safe.rm.r5.a3",
+            "risk": "risky",
+            "noteKey": "safe.rm.r5.n3",
+            "unlocks": [
+              "r6"
+            ],
+            "delay": 700
+          }
+        ]
+      }
+    },
+    {
+      "id": "r6",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.rm.r6.title",
+        "foreground": true,
+        "respond": true,
+        "concept": "fraud_recovery",
+        "misconception": "fraud_recovery_mistake",
+        "best": "portal",
+        "explainKey": "safe.rm.r6.explain",
+        "body": [
+          {
+            "k": "safe.rm.r6.body"
+          }
+        ],
+        "actions": [
+          {
+            "id": "portal",
+            "labelKey": "safe.rm.r6.a1",
+            "risk": "safe",
+            "noteKey": "safe.rm.r6.n1"
+          },
+          {
+            "id": "friend",
+            "labelKey": "safe.rm.r6.a2",
+            "risk": "risky",
+            "noteKey": "safe.rm.r6.n2"
+          },
+          {
+            "id": "later",
+            "labelKey": "safe.rm.r6.a3",
+            "risk": "risky",
+            "noteKey": "safe.rm.r6.n3"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,700 @@
+{
+ "crack": [
+  {
+   "checkpoint": "checkpoint.crack"
+  },
+  {
+   "say": "story.c3.crack1"
+  },
+  {
+   "minigame": "surprise-month",
+   "level": 1,
+   "params": {
+    "shock": "screen",
+    "amount": 1500
+   },
+   "apply": true,
+   "on": {
+    "sm03.choose:emergency_jar": [
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_paid"
+     }
+    ],
+    "sm03.choose:family": [
+     {
+      "do": {
+       "type": "takeLoan",
+       "kind": "family",
+       "amount": 1500,
+       "months": 5
+      }
+     },
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_mom",
+      "who": "mom"
+     }
+    ],
+    "sm03.choose:loan_app": [
+     {
+      "do": {
+       "type": "takeLoan",
+       "kind": "loanapp",
+       "amount": 1875,
+       "months": 3
+      }
+     },
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_app"
+     }
+    ],
+    "sm03.choose:skip_need": [
+     {
+      "say": "story.c3.crack_skip"
+     }
+    ],
+    "sm03.choose:sell": [
+     {
+      "do": {
+       "type": "gain",
+       "amount": 1500,
+       "reason": "sold"
+      }
+     },
+     {
+      "do": {
+       "type": "payFromSavings",
+       "amount": 1500,
+       "reason": "repair:phone"
+      }
+     },
+     {
+      "say": "story.c3.crack_sold"
+     }
+    ]
+   }
+  },
+  {
+   "flag": "phone_cracked"
+  },
+  {
+   "objective": "objective.ch3_lakshmi"
+  }
+ ],
+ "lakshmi": [
+  {
+   "once": "lakshmi_intro",
+   "do": [
+    {
+     "say": "story.c3.lakshmi1",
+     "who": "lakshmi"
+    },
+    {
+     "say": "story.c3.lakshmi2",
+     "who": "lakshmi"
+    },
+    {
+     "concept": "compound_interest"
+    },
+    {
+     "say": "story.c3.lakshmi3",
+     "who": "lakshmi"
+    },
+    {
+     "concept": "rule_of_72"
+    },
+    {
+     "say": "story.c3.lakshmi4",
+     "who": "lakshmi"
+    },
+    {
+     "concept": "fixed_deposit"
+    },
+    {
+     "say": "story.c3.lakshmi5",
+     "who": "lakshmi"
+    },
+    {
+     "concept": "net_worth"
+    },
+    {
+     "flag": "met_lakshmi"
+    },
+    {
+     "objective": "objective.ch3_fund"
+    }
+   ]
+  },
+  {
+   "if": "chapter==3",
+   "then": [
+    {
+     "if": "fundMonths>=3 && monthsInChapter>=2 || monthsInChapter>=4",
+     "then": [
+      {
+       "say": "story.c3.lakshmi_ready",
+       "who": "lakshmi"
+      },
+      {
+       "choice": [
+        {
+         "label": "choice.challenge_yes",
+         "do": [
+          {
+           "quiz": [
+            "save_emergency",
+            "save_compound",
+            "save_72",
+            "save_inflation"
+           ],
+           "pass": 3,
+           "then": [
+            {
+             "say": "story.c3.lakshmi_pass",
+             "who": "lakshmi"
+            },
+            {
+             "badge": "saver"
+            },
+            {
+             "chapter": 4
+            },
+            {
+             "objective": "objective.ch4_prof"
+            }
+           ],
+           "else": [
+            {
+             "say": "story.c3.lakshmi_fail",
+             "who": "lakshmi"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "label": "choice.not_yet"
+        }
+       ],
+       "who": "lakshmi"
+      }
+     ],
+     "else": [
+      {
+       "say": "story.c3.lakshmi_notyet",
+       "who": "lakshmi"
+      }
+     ]
+    }
+   ],
+   "else": [
+    {
+     "say": "story.c3.lakshmi_later",
+     "who": "lakshmi"
+    }
+   ]
+  }
+ ],
+ "job_scam": [
+  {
+   "checkpoint": "checkpoint.job"
+  },
+  {
+   "toast": "toast.sms"
+  },
+  {
+   "say": "story.c3.jobsms",
+   "who": "phone"
+  },
+  {
+   "duel": "job_task",
+   "win": [
+    {
+     "say": "story.c3.job_ignore"
+    },
+    {
+     "do": {
+      "type": "meter",
+      "safety": 5
+     }
+    }
+   ],
+   "lose": [
+    {
+     "do": {
+      "type": "scamLoss",
+      "amount": 500,
+      "reason": "scam:job"
+     }
+    },
+    {
+     "say": "story.c3.job_paid"
+    }
+   ]
+  },
+  {
+   "concept": "job_scam"
+  },
+  {
+   "flag": "job_scam_done"
+  }
+ ],
+ "kabir": [
+  {
+   "if": "chapter>=2 && flag:kabir_talked",
+   "then": [
+    {
+     "choice": [
+      {
+       "label": "choice.compare_kabir",
+       "do": [
+        {
+         "open": "rival"
+        },
+        {
+         "end": true
+        }
+       ]
+      },
+      {
+       "label": "choice.just_chat"
+      }
+     ],
+     "who": "kabir"
+    }
+   ]
+  },
+  {
+   "flag": "kabir_talked"
+  },
+  {
+   "if": "chapter==1",
+   "then": [
+    {
+     "say": "story.c1.kabir",
+     "who": "kabir"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "chapter==2",
+   "then": [
+    {
+     "once": "kabir_sale",
+     "do": [
+      {
+       "checkpoint": "checkpoint.sneakers"
+      },
+      {
+       "say": "story.c2.kabir1",
+       "who": "kabir"
+      },
+      {
+       "choice": [
+        {
+         "label": "choice.kabir_buy",
+         "log": {
+          "concept": "opportunity_cost",
+          "choice": "follow_friend",
+          "correct": false,
+          "misconception": "sale_means_saving"
+         },
+         "do": [
+          {
+           "say": "story.c2.kabir_buy",
+           "who": "kabir"
+          }
+         ]
+        },
+        {
+         "label": "choice.kabir_budget",
+         "log": {
+          "concept": "opportunity_cost",
+          "choice": "check_budget",
+          "correct": true
+         },
+         "do": [
+          {
+           "say": "story.c2.kabir_budget",
+           "who": "kabir"
+          }
+         ]
+        }
+       ],
+       "prompt": "story.common.what_do"
+      },
+      {
+       "end": true
+      }
+     ]
+    },
+    {
+     "say": "story.c2.kabir_later",
+     "who": "kabir"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "chapter==3",
+   "then": [
+    {
+     "once": "kabir_borrow",
+     "do": [
+      {
+       "checkpoint": "checkpoint.lend"
+      },
+      {
+       "say": "story.c3.kabir1",
+       "who": "kabir"
+      },
+      {
+       "choice": [
+        {
+         "label": "choice.lend_500",
+         "when": "cash>=500",
+         "do": [
+          {
+           "do": {
+            "type": "spend",
+            "amount": 500,
+            "reason": "lend:kabir"
+           }
+          },
+          {
+           "flag": "lent_kabir"
+          },
+          {
+           "do": {
+            "type": "meter",
+            "trust": 5
+           }
+          },
+          {
+           "say": "story.c3.kabir_thanks",
+           "who": "kabir"
+          }
+         ]
+        },
+        {
+         "label": "choice.lend_200",
+         "when": "cash>=200",
+         "do": [
+          {
+           "do": {
+            "type": "spend",
+            "amount": 200,
+            "reason": "lend:kabir"
+           }
+          },
+          {
+           "flag": "lent_kabir_small"
+          },
+          {
+           "say": "story.c3.kabir_thanks",
+           "who": "kabir"
+          }
+         ]
+        },
+        {
+         "label": "choice.lend_no",
+         "do": [
+          {
+           "say": "story.c3.kabir_no",
+           "who": "kabir"
+          }
+         ]
+        }
+       ],
+       "prompt": "story.common.what_do"
+      },
+      {
+       "concept": "lending_to_friends"
+      },
+      {
+       "end": true
+      }
+     ]
+    },
+    {
+     "say": "story.c3.kabir_later",
+     "who": "kabir"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "chapter==4",
+   "then": [
+    {
+     "if": "flag:lent_kabir",
+     "then": [
+      {
+       "once": "kabir_repaid",
+       "do": [
+        {
+         "say": "story.c4.kabir_repay",
+         "who": "kabir"
+        },
+        {
+         "do": {
+          "type": "gain",
+          "amount": 500,
+          "reason": "repaid:kabir"
+         }
+        },
+        {
+         "do": {
+          "type": "meter",
+          "trust": 10
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "if": "flag:lent_kabir_small",
+     "then": [
+      {
+       "once": "kabir_repaid_small",
+       "do": [
+        {
+         "say": "story.c4.kabir_repay",
+         "who": "kabir"
+        },
+        {
+         "do": {
+          "type": "gain",
+          "amount": 200,
+          "reason": "repaid:kabir"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "once": "kabir_loanapp",
+     "do": [
+      {
+       "say": "story.c4.kabir1",
+       "who": "kabir"
+      },
+      {
+       "say": "story.c4.kabir2",
+       "who": "kabir"
+      },
+      {
+       "choice": [
+        {
+         "label": "choice.kabir_report",
+         "log": {
+          "concept": "loan_app_trap",
+          "choice": "report",
+          "correct": true
+         },
+         "do": [
+          {
+           "say": "story.c4.kabir_report",
+           "who": "kabir"
+          }
+         ]
+        },
+        {
+         "label": "choice.kabir_another",
+         "log": {
+          "concept": "loan_app_trap",
+          "choice": "borrow_more",
+          "correct": false,
+          "misconception": "debt_is_free_money"
+         },
+         "do": [
+          {
+           "say": "story.c4.kabir_another",
+           "who": "kabir"
+          }
+         ]
+        }
+       ],
+       "prompt": "story.common.what_do"
+      },
+      {
+       "end": true
+      }
+     ]
+    },
+    {
+     "say": "story.c4.kabir_later",
+     "who": "kabir"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "chapter==5",
+   "then": [
+    {
+     "once": "kabir_tips",
+     "do": [
+      {
+       "say": "story.c5.kabir1",
+       "who": "kabir"
+      },
+      {
+       "choice": [
+        {
+         "label": "choice.kabir_warn",
+         "log": {
+          "concept": "tips_rumours",
+          "choice": "warn",
+          "correct": true
+         },
+         "do": [
+          {
+           "say": "story.c5.kabir_warn",
+           "who": "kabir"
+          }
+         ]
+        },
+        {
+         "label": "choice.kabir_join",
+         "log": {
+          "concept": "tips_rumours",
+          "choice": "join",
+          "correct": false,
+          "misconception": "tips_are_reliable"
+         },
+         "do": [
+          {
+           "say": "story.c5.kabir_join",
+           "who": "kabir"
+          }
+         ]
+        }
+       ],
+       "prompt": "story.common.what_do"
+      },
+      {
+       "concept": "tips_rumours"
+      },
+      {
+       "end": true
+      }
+     ]
+    },
+    {
+     "say": "story.c5.kabir_later",
+     "who": "kabir"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "say": "story.c6.kabir",
+   "who": "kabir"
+  }
+ ],
+ "prof_ch3": [
+  {
+   "once": "spend_detective",
+   "do": [
+    {
+     "say": "story.c3.prof_leaks",
+     "who": "professor"
+    },
+    {
+     "minigame": "spending-detective",
+     "level": 1
+    },
+    {
+     "concept": "expense_tracking"
+    }
+   ]
+  },
+  {
+   "if": "goalKind:education",
+   "then": [
+    {
+     "once": "scholarship_test",
+     "do": [
+      {
+       "say": "story.c3.prof_scholarship",
+       "who": "professor"
+      },
+      {
+       "concept": "scholarships"
+      },
+      {
+       "quiz": [
+        "save_inflation",
+        "budget_rule"
+       ],
+       "pass": 1,
+       "then": [
+        {
+         "say": "story.c3.scholarship_won",
+         "who": "professor"
+        },
+        {
+         "do": {
+          "type": "gain",
+          "amount": 1500,
+          "reason": "scholarship"
+         }
+        },
+        {
+         "do": {
+          "type": "toPot",
+          "amount": 1500
+         }
+        }
+       ],
+       "else": [
+        {
+         "say": "story.c3.scholarship_lost",
+         "who": "professor"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "story.c3.prof_hint",
+   "who": "professor"
+  }
+ ]
+}

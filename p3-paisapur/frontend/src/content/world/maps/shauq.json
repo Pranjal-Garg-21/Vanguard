@@ -1,0 +1,41 @@
+{
+  "id": "shauq",
+  "name": "maps.shauq",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWWWW",
+    "WGGGGGGGGGW",
+    "WFFFFFFFFFW",
+    "WFFFFFFCCCW",
+    "WGFFFFFFFFW",
+    "WGFFFFFFFnW",
+    "WFFFFFFFFFW",
+    "WWWWWEWWWWW"
+  ],
+  "entry": {
+    "x": 5,
+    "y": 6,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "shauq_owner",
+      "sprite": "shauq",
+      "x": 8,
+      "y": 2,
+      "facing": "down",
+      "script": "shauq"
+    },
+    {
+      "id": "kabir_shop",
+      "sprite": "kabir",
+      "x": 3,
+      "y": 4,
+      "facing": "up",
+      "script": "kabir",
+      "when": "chapter==2"
+    }
+  ],
+  "objects": [],
+  "triggers": []
+}

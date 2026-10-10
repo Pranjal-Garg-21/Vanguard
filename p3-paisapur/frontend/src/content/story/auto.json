@@ -1,0 +1,72 @@
+{
+  "auto": [
+    {
+      "script": "intro",
+      "map": "home",
+      "when": "!flag:intro_done"
+    },
+    {
+      "script": "prologue_lab",
+      "map": "lab",
+      "when": "!flag:met_prof"
+    },
+    {
+      "script": "overwhelmed",
+      "when": "flag:overwhelmed"
+    },
+    {
+      "script": "harass",
+      "when": "flag:harassed && !flag:harass_seen"
+    },
+    {
+      "script": "scam_kyc",
+      "map": "paisapur",
+      "when": "flag:account_open && !flag:scam_kyc_done"
+    },
+    {
+      "script": "collect_scam",
+      "map": "paisapur",
+      "when": "flag:told_mom && !flag:collect_done"
+    },
+    {
+      "script": "crack",
+      "map": "home",
+      "when": "chapter==3 && !flag:phone_cracked"
+    },
+    {
+      "script": "job_scam",
+      "map": "paisapur",
+      "when": "chapter==3 && flag:met_lakshmi && !flag:job_scam_done"
+    },
+    {
+      "script": "call_scam",
+      "map": "paisapur",
+      "when": "chapter==4 && flag:iyer_met && !flag:call_done"
+    },
+    {
+      "script": "fire",
+      "map": "paisapur",
+      "when": "chapter==6 && flag:insurance_seen && !flag:fire_done"
+    },
+    {
+      "script": "scholarship_lump",
+      "map": "paisapur",
+      "when": "chapter==2 && stage:college && !flag:scholarship_done"
+    },
+    {
+      "script": "festival_rush",
+      "map": "paisapur",
+      "when": "chapter==2 && source:shop && monthsInChapter>=1 && !flag:festival_done"
+    },
+    {
+      "script": "grocery_week",
+      "map": "home",
+      "when": "chapter==2 && source:allowance && monthsInChapter>=1 && !flag:grocery_done"
+    },
+    {
+      "script": "lean_month",
+      "map": "paisapur",
+      "when": "chapter==3 && flag:phone_cracked && !flag:lean_done"
+    }
+  ]
+}

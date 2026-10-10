@@ -1,0 +1,62 @@
+{
+  "welcome": {
+    "title": "PaisaPath",
+    "tagline": "Live someone’s money life for a year. Make mistakes safely, rewind, and try again.",
+    "start": "Start a new player",
+    "returning": "I already play on this phone",
+    "facilitator": "I’m a facilitator"
+  },
+  "steps": {
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "progress": "Step {current} of {total}"
+  },
+  "language": {
+    "title": "Choose your language",
+    "note": "Only English text is ready right now. Other languages are coming soon."
+  },
+  "a11y": {
+    "title": "Make it easy for you",
+    "audio": "Read things aloud",
+    "largeText": "Bigger text",
+    "reduceMotion": "Less movement",
+    "timersOff": "No timers",
+    "timersOffHint": "Timers are shown but never run out"
+  },
+  "class": {
+    "title": "Join your class",
+    "hint": "Type the 6-letter code your facilitator shared.",
+    "checking": "Checking code…",
+    "valid": "You’re joining {name}",
+    "invalid": "We couldn’t find that code. Check it with your facilitator.",
+    "unchecked": "You’re offline. We’ll confirm this code later.",
+    "noClass": "Play without a class"
+  },
+  "avatar": {
+    "title": "Pick your player",
+    "nameLabel": "Your nickname",
+    "namePlaceholder": "e.g. Sana",
+    "nameHint": "Use a nickname. Don’t use your full real name."
+  },
+  "pin": {
+    "createTitle": "Make a secret picture code",
+    "createHint": "Tap 4 pictures. Remember the order!",
+    "confirmTitle": "Tap the same 4 pictures again",
+    "mismatch": "That didn’t match. Let’s try again.",
+    "coverTip": "Tip: cover the screen with your hand so nobody sees your code.",
+    "clear": "Clear",
+    "enterTitle": "Hi {name}! Tap your picture code",
+    "wrong": "Not quite. {left} tries left.",
+    "locked": "Too many tries. Wait {seconds} seconds."
+  },
+  "done": {
+    "title": "You’re all set, {name}!",
+    "body": "Next, you’ll build the character whose life you’ll live.",
+    "go": "Let’s go"
+  },
+  "picker": {
+    "title": "Who’s playing?",
+    "newPlayer": "New player"
+  }
+}

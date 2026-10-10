@@ -1,0 +1,112 @@
+{
+  "title": "Spreading your money",
+  "blurb": "Why one failure hurts less when money is spread out, and what spreading cannot fix.",
+
+  "t1.title": "Many baskets",
+  "t1.hook": "Asha has {total} and six mini-businesses to choose from. They are a farm, a tea stall, a repair shop, a cloth shop, a bus and a tech start-up. Heavy rain hits the farm. Your mission: see how splitting helps.",
+  "t1.define": "**Diversification** means spreading money across different things, so one failure hurts less.",
+  "t1.analogy": "Carry all your eggs in one basket and one trip breaks them all. Spread them over several baskets, and one fall breaks only a few.",
+
+  "q1.prompt": "What is diversification?",
+  "q1.opt.a": "Spreading money across different things",
+  "q1.opt.b": "Putting everything in the best thing",
+  "q1.opt.c": "Selling whenever the price falls",
+  "q1.opt.d": "Paying lower fees",
+  "q1.hint": "Think of the eggs and the baskets.",
+  "q1.explain": "Diversification is spreading money across different things.",
+
+  "q2.prompt": "Asha puts all {total} into the farm. What is the main danger?",
+  "q2.opt.a": "If the farm does badly, her whole amount takes the hit",
+  "q2.opt.b": "The farm will certainly fail",
+  "q2.opt.c": "She will pay no tax on it",
+  "q2.opt.d": "Rain always helps farms",
+  "q2.hint": "Where is all of her money sitting?",
+  "q2.explain": "With everything in one place, a bad result there hits her whole amount.",
+
+  "t2.title": "Try the split",
+  "t2.define": "Let us test it. Hold your {total} in equal slices and let one business fall. Then change how many businesses share the money.",
+  "t2.explore": "Open the lab. Set the fall to {fall}. Choose how many businesses share your {total}, with \"One business falls\" selected.",
+
+  "q3.prompt": "In the lab, hold just 1 business and set the fall to {fall}. What is your loss? Type a number in rupees.",
+  "q3.hint": "Your whole amount sits in the business that fell.",
+  "q3.explain": "All {total} is in it, and it falls {fall}. The loss is {lossOne}.",
+
+  "q4.prompt": "Now split across all 6 businesses, with one falling {fall}. What is your loss? Type a number in rupees.",
+  "q4.hint": "Only one slice sits in the business that fell.",
+  "q4.explain": "Each business holds {each}. Only that slice falls {fall}, so the loss is {lossSplit}.",
+
+  "q5.prompt": "Why is the loss smaller when you split?",
+  "q5.opt.a": "Only a small slice sits in the business that fell",
+  "q5.opt.b": "The business that fell recovers faster",
+  "q5.opt.c": "Fees are lower with more businesses",
+  "q5.opt.d": "Spreading removes all risk",
+  "q5.fb.d": "Spreading lowers the damage from one failure. It does not remove risk, as the next task shows.",
+  "q5.hint": "Compare how much money sits in the business that fell.",
+  "q5.explain": "A small slice in the business that fell means a small loss.",
+
+  "t3.title": "What spreading cannot do",
+  "t3.define": "Spreading helps when **one** thing goes wrong. It cannot help much when a fall hits **everything** at once, like a market-wide scare.",
+  "t3.explore": "Open the lab again. Pick \"The whole market falls\" and set the fall to {fall}. Try different splits.",
+
+  "q6.prompt": "In the lab, let the whole market fall {fall} and split across all 6 businesses. What is your loss? Type a number in rupees.",
+  "q6.hint": "When everything falls, every slice falls.",
+  "q6.explain": "Every slice falls {fall}, so the loss is {lossMarket}, whether you hold one business or six.",
+
+  "q7.prompt": "Asha now holds all six businesses. Which statement is correct?",
+  "q7.opt.a": "She can still lose money, for example if everything falls together",
+  "q7.opt.b": "She cannot lose money any more",
+  "q7.opt.c": "She will earn more than anyone with one business",
+  "q7.opt.d": "Her fees have disappeared",
+  "q7.fb.b": "Spreading lowers the damage from one failure. A fall that hits everything still costs her.",
+  "q7.fb.c": "Nobody can promise that. Spreading can lower the swings, but it does not guarantee more profit.",
+  "q7.hint": "Remember what happened when the whole market fell.",
+  "q7.explain": "Spreading lowers the risk from one failure. It cannot remove a fall that hits everything.",
+
+  "t4.title": "The Mixed Basket",
+  "t4.define": "The **Mixed Basket** path holds many different things in one. Its average growth is a little lower than the Bumpy Ride's. Its swings are much smaller.",
+  "t4.explore": "Open the lab. Compare the Mixed Basket and the Bumpy Ride for {amt}.",
+
+  "q8.prompt": "Pick the Mixed Basket with {amt}. How many rupees wide is its typical-year range? Type a number in rupees.",
+  "q8.hint": "High end minus low end.",
+  "q8.explain": "The range runs from {mLow} to {mHigh}. It is {mWidth} wide.",
+
+  "q9.prompt": "How many rupees narrower is the Mixed Basket's range than the Bumpy Ride's? Type a number in rupees.",
+  "q9.hint": "Find both widths in the lab and subtract.",
+  "q9.explain": "The Bumpy Ride's range is {bWidth} wide and the Mixed Basket's is {mWidth}. The gap is {narrower}.",
+
+  "q10.prompt": "Why is the Mixed Basket's range narrower?",
+  "q10.opt.a": "Its money is spread over many things, which smooths the swings",
+  "q10.opt.b": "It holds fewer things than the Bumpy Ride",
+  "q10.opt.c": "It is guaranteed not to fall",
+  "q10.opt.d": "It charges no fee",
+  "q10.fb.c": "No path is guaranteed. The Mixed Basket still has bad years. Its range is just narrower.",
+  "q10.hint": "Think about the six businesses and the one that fell.",
+  "q10.explain": "Spreading over many things smooths the swings. That is why the range is narrower.",
+
+  "t5.title": "Not too many",
+  "t5.define": "More is not always better. Holding 40 things you do not understand is not the goal. Know what you hold, and watch the costs.",
+  "t5.tradeoff": "Spreading lowers the damage from one failure. It also lowers the chance of one big winner. It is a trade-off.",
+
+  "q11.prompt": "A friend says one hot company is all anyone needs. What is the problem?",
+  "q11.opt.a": "If that one company fails, your whole amount is hit",
+  "q11.opt.b": "One hot company is enough, so there is no problem",
+  "q11.opt.c": "A single company can never rise",
+  "q11.opt.d": "Companies do not charge fees",
+  "q11.fb.b": "One company can fall or fail, and then your whole amount takes the hit.",
+  "q11.hint": "Think of the farm, with all the money in it.",
+  "q11.explain": "A single company can fail, and with all the money in it, you take the whole hit.",
+
+  "q12.prompt": "Which sentence about spreading money is true?",
+  "q12.opt.a": "It lowers the damage from one failure but cannot remove all risk",
+  "q12.opt.b": "More items always means better results",
+  "q12.opt.c": "It guarantees a profit",
+  "q12.opt.d": "It means never checking what you hold",
+  "q12.fb.c": "Nothing guarantees a profit. Spreading only lowers the damage from one failure.",
+  "q12.hint": "Remember both what spreading can do and what it cannot.",
+  "q12.explain": "Spreading helps with one failure. It cannot remove every risk, and it guarantees nothing.",
+
+  "glossary.diversification.term": "Diversification",
+  "glossary.diversification.def": "Spreading money across different things so one failure hurts less.",
+  "glossary.market_wide_fall.term": "Market-wide fall",
+  "glossary.market_wide_fall.def": "A fall that hits almost everything at once."
+}

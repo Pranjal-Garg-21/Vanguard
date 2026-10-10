@@ -1,0 +1,6 @@
+[
+  { "id": "inflation", "termKey": "invest_inflation.glossary.inflation.term", "defKey": "invest_inflation.glossary.inflation.def", "lesson": "lesson_inflation" },
+  { "id": "buying_power", "termKey": "invest_inflation.glossary.buying_power.term", "defKey": "invest_inflation.glossary.buying_power.def", "lesson": "lesson_inflation" },
+  { "id": "nominal_return", "termKey": "invest_inflation.glossary.nominal_return.term", "defKey": "invest_inflation.glossary.nominal_return.def", "lesson": "lesson_inflation" },
+  { "id": "real_return", "termKey": "invest_inflation.glossary.real_return.term", "defKey": "invest_inflation.glossary.real_return.def", "lesson": "lesson_inflation" }
+]

@@ -1,0 +1,10 @@
+[
+  { "id": "share", "termKey": "invest_stocks.glossary.share.term", "defKey": "invest_stocks.glossary.share.def", "lesson": "lesson_stocks" },
+  { "id": "dividend", "termKey": "invest_stocks.glossary.dividend.term", "defKey": "invest_stocks.glossary.dividend.def", "lesson": "lesson_stocks" },
+  { "id": "exchange", "termKey": "invest_stocks.glossary.exchange.term", "defKey": "invest_stocks.glossary.exchange.def", "lesson": "lesson_stocks" },
+  { "id": "market_cap", "termKey": "invest_stocks.glossary.market_cap.term", "defKey": "invest_stocks.glossary.market_cap.def", "lesson": "lesson_stocks" },
+  { "id": "bid", "termKey": "invest_stocks.glossary.bid.term", "defKey": "invest_stocks.glossary.bid.def", "lesson": "lesson_stocks" },
+  { "id": "ask", "termKey": "invest_stocks.glossary.ask.term", "defKey": "invest_stocks.glossary.ask.def", "lesson": "lesson_stocks" },
+  { "id": "spread", "termKey": "invest_stocks.glossary.spread.term", "defKey": "invest_stocks.glossary.spread.def", "lesson": "lesson_stocks" },
+  { "id": "liquidity", "termKey": "invest_stocks.glossary.liquidity.term", "defKey": "invest_stocks.glossary.liquidity.def", "lesson": "lesson_stocks" }
+]
