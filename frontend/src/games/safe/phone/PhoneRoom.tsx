@@ -2,7 +2,7 @@
  * One full play-through of a script: brief → play → (replay) → summary.
  * Both verbs (Judge, Act in-situ) are thin wrappers over this.
  */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { t } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
 import { Button } from '@/ui';
@@ -43,14 +43,6 @@ function Attempt({ script, mode, timersOff, embedded, top, collected, onComplete
   const { state, dispatch } = usePhoneRun(script, { timersOff, paused: phase !== 'play' });
 
 
-  // Let the student see the money move before the debrief.
-  useEffect(() => {
-    if (phase !== 'play' || !state.ended) return;
-    const delay = script.mode === 'act' && state.outcome === 'fooled' ? 1600 : 900;
-    const id = window.setTimeout(() => setPhase(script.mode === 'act' ? 'replay' : 'summary'), delay);
-    return () => window.clearTimeout(id);
-  }, [phase, state.ended, state.outcome, script.mode]);
-
   if (phase === 'brief') {
     return (
       <div className="mx-auto max-w-xl space-y-4 p-6 pt-12 text-center">
@@ -69,7 +61,7 @@ function Attempt({ script, mode, timersOff, embedded, top, collected, onComplete
 
   return (
     <RoomLayout top={top} panel={<MissionPanel state={state} />} drawerLabel={t('safe.ui.tasks')}>
-      <PhoneScreen state={state} dispatch={dispatch} lensOn={lensOn} onToggleLens={() => setLensOn((v) => !v)} />
+      <PhoneScreen state={state} dispatch={dispatch} lensOn={lensOn} onToggleLens={() => setLensOn((v) => !v)} onFinish={() => setPhase(script.mode === 'act' ? 'replay' : 'summary')} />
     </RoomLayout>
   );
 }

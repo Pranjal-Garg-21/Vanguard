@@ -34,6 +34,8 @@ export function createRun(script: Scenario, opts: { timersOff?: boolean } = {}):
       inspected: [],
       acted: {},
       moved: [],
+      reading: null,
+      awaiting: [],
       verdicts: {},
       effects: {},
       history: [],
@@ -63,6 +65,11 @@ function deliverDue(state: RunState): RunState {
     );
     const overlay = isOverlay(next.script, surface);
     if (surface.foreground || overlay) {
+      // The student is reading feedback: let them finish, and open this one when they press Continue.
+      if (next.reading) {
+        next = { ...next, awaiting: [...next.awaiting, due.step] };
+        continue;
+      }
       if (overlay) next = { ...next, underlay: next.open };
       next = openSurface(next, due.step);
     }
@@ -117,12 +124,18 @@ function act(state: RunState, surfaceId: string, actionId: string, auto = false)
   next = { ...next, pending: [...next.pending, ...queued].sort((a, b) => a.at - b.at) };
 
   if (action.close && next.open === surfaceId) next = { ...next, open: null };
+
+  // An action with feedback to read keeps its screen open until the student presses Continue.
+  const stays = !!action.noteKey && next.open === surfaceId && !action.end && (action.unlocks ?? []).length > 0;
+  if (stays) next = { ...next, reading: surfaceId };
+
   if (action.end) {
-    // Ending well after money already left still counts as having lost money.
+    // Ending well after money already left still counts as having lost money. The last screen stays open so the feedback can be read.
     const lost = (next.effects['money.bank'] ?? 0) < 0;
-    next = { ...next, ended: true, outcome: lost ? 'fooled' : action.end, open: null };
+    next = { ...next, ended: true, outcome: lost ? 'fooled' : action.end };
+  } else if (!stays && next.open === surfaceId && isOverlay(state.script, surface)) {
+    next = { ...next, open: next.underlay, underlay: null };
   }
-  else if (next.open === surfaceId && isOverlay(state.script, surface)) next = { ...next, open: next.underlay, underlay: null };
   return finishIfDone(next);
 }
 
@@ -140,7 +153,7 @@ function finishIfDone(state: RunState): RunState {
     const a = s.surface.actions?.find((x) => x.id === state.acted[s.id]);
     return a?.risk === 'risky' && !s.surface.genuine && Object.keys(a.effects ?? {}).length > 0;
   });
-  return { ...state, ended: true, outcome: fooled ? 'fooled' : 'safe', open: null };
+  return { ...state, ended: true, outcome: fooled ? 'fooled' : 'safe' };
 }
 
 function judge(state: RunState, surfaceId: string, verdict: 'legit' | 'suspicious' | 'scam'): RunState {
@@ -151,13 +164,33 @@ function judge(state: RunState, surfaceId: string, verdict: 'legit' | 'suspiciou
   return next;
 }
 
+/** The student has read the feedback: close an overlay and open whatever was waiting. */
+function proceed(state: RunState): RunState {
+  if (!state.reading) return state;
+  let next: RunState = { ...state, reading: null };
+  const current = next.open ? surfaceOf(next.script, next.open) : undefined;
+  if (current && isOverlay(next.script, current)) next = { ...next, open: next.underlay, underlay: null };
+  const [first, ...rest] = next.awaiting;
+  next = { ...next, awaiting: rest };
+  if (first) {
+    const surface = surfaceOf(next.script, first);
+    if (surface && isOverlay(next.script, surface)) next = { ...next, underlay: next.open };
+    next = openSurface(next, first);
+  }
+  return next;
+}
+
 export function reduce(state: RunState, action: RunAction): RunState {
   switch (action.type) {
     case 'tick':
       return advance(state, action.ms);
+    case 'continue':
+      return proceed(state);
     case 'open':
-      return openSurface(state, action.surface);
+      return openSurface(proceed(state), action.surface);
     case 'close':
+      // Going back while reading counts as continuing, so a waiting screen is never lost.
+      if (state.reading) return proceed(state);
       return state.open ? { ...state, open: null } : state;
     case 'inspect': {
       const key = `${action.surface}:${action.lens}`;

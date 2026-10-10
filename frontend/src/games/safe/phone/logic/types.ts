@@ -146,6 +146,10 @@ export type RunState = {
   acted: Record<string, string>;
   /** Surfaces whose remaining options closed because the student moved on to what they unlocked. */
   moved: string[];
+  /** The screen the student is reading feedback on. Next screens wait until they press Continue. */
+  reading: string | null;
+  /** Screens that arrived while the student was reading, in order, waiting to open. */
+  awaiting: string[];
   verdicts: Record<string, Verdict>;
   effects: Record<string, number>;
   history: HistoryEntry[];
@@ -156,6 +160,7 @@ export type RunState = {
 
 export type RunAction =
   | { type: 'tick'; ms: number }
+  | { type: 'continue' }
   | { type: 'open'; surface: string }
   | { type: 'close' }
   | { type: 'inspect'; surface: string; lens: string }

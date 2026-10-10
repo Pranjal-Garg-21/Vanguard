@@ -86,7 +86,10 @@
     "typing": "Typing",
     "allTasks": "All tasks complete",
     "cardCollected": "Collected",
-    "cardUnlock": "Find it with the Scam Lens"
+    "cardUnlock": "Find it with the Scam Lens",
+    "seeWhatHappened": "See what happened",
+    "seeResults": "See your results",
+    "finished": "All done"
   },
   "verdict": {
     "legit": "Legit",

@@ -13,7 +13,7 @@ import type { Action, Surface } from '../logic/types';
 type Call = Extract<Surface, { type: 'call' }>;
 
 /** Buttons come from the script's actions, so which one is risky is data. */
-export function IncomingCall({ surface, view, actions, onAct, lensNode }: { surface: Call; view: ViewProps; actions: Action[]; onAct: (id: string) => void; lensNode?: ReactNode }) {
+export function IncomingCall({ surface, view, actions, onAct, lensNode, after, onContinue, continueLabel }: { surface: Call; view: ViewProps; actions: Action[]; onAct: (id: string) => void; lensNode?: ReactNode; after?: ReactNode; onContinue?: () => void; continueLabel?: string }) {
   const secs = view.remainingMs === undefined ? null : Math.ceil(view.remainingMs / 1000);
   if (surface.ring) {
     return (
@@ -25,12 +25,19 @@ export function IncomingCall({ surface, view, actions, onAct, lensNode }: { surf
           </p>
         </div>
         <span className="flex h-24 w-24 animate-ring items-center justify-center rounded-full bg-brand text-brand-ink"><Icon name="phone" className="h-10 w-10" /></span>
-        <div className="flex w-full flex-col gap-2">
-          {actions.map((a) => (
-            <Button key={a.id} variant="secondary" className="w-full" onClick={() => onAct(a.id)}>{t(a.labelKey)}</Button>
-          ))}
-        </div>
-        {lensNode && <div className="mt-3 w-full text-phone-ink">{lensNode}</div>}
+        {after ? (
+          <div className="w-full space-y-3 text-phone-ink">
+            {after}
+            {onContinue && <Button className="w-full" onClick={onContinue}>{continueLabel}</Button>}
+          </div>
+        ) : (
+          <div className="flex w-full flex-col gap-2">
+            {actions.map((a) => (
+              <Button key={a.id} variant="secondary" className="w-full" onClick={() => onAct(a.id)}>{t(a.labelKey)}</Button>
+            ))}
+          </div>
+        )}
+        {lensNode && !after && <div className="mt-3 w-full text-phone-ink">{lensNode}</div>}
       </div>
     );
   }
@@ -55,12 +62,19 @@ export function IncomingCall({ surface, view, actions, onAct, lensNode }: { surf
       <div className="mt-4 rounded-2xl rounded-tl-sm bg-white/10 px-4 py-3 text-[15px] leading-relaxed">
         <RichText segments={surface.lines} surface={surface} view={view} />
       </div>
-      {lensNode && <div className="mt-3 text-phone-ink">{lensNode}</div>}
-      <div className="mt-auto flex flex-col gap-2 pt-5">
-        {actions.map((a) => (
-          <Button key={a.id} variant="secondary" className="w-full" onClick={() => onAct(a.id)}>{t(a.labelKey)}</Button>
-        ))}
-      </div>
+      {lensNode && !after && <div className="mt-3 text-phone-ink">{lensNode}</div>}
+      {after ? (
+        <div className="mt-auto space-y-3 pt-5 text-phone-ink">
+          {after}
+          {onContinue && <Button className="w-full" onClick={onContinue}>{continueLabel}</Button>}
+        </div>
+      ) : (
+        <div className="mt-auto flex flex-col gap-2 pt-5">
+          {actions.map((a) => (
+            <Button key={a.id} variant="secondary" className="w-full" onClick={() => onAct(a.id)}>{t(a.labelKey)}</Button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -38,9 +38,11 @@ type Props = {
   lensOn: boolean;
   onToggleLens: () => void;
   compact?: boolean;
+  /** Called when the student is ready to leave a finished run. */
+  onFinish?: () => void;
 };
 
-export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: Props) {
+export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact, onFinish }: Props) {
   const [app, setApp] = useState<AppId | 'home'>('home');
   const [reading, setReading] = useState<{ surface: string; lens: string } | null>(null);
   const [banner, setBanner] = useState<string | null>(null);
@@ -119,8 +121,42 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
     });
   };
 
+  /** What the student chose on a screen, whether it was right, and why. */
+  const feedbackNode = (id: string, surface: Surface, dark = false): React.ReactNode => {
+    const lastAct = [...state.history].reverse().find((h) => h.kind === 'acted' && h.surface === id);
+    if (!lastAct || lastAct.kind !== 'acted') return null;
+    const chosen = surface.actions?.find((a) => a.id === lastAct.action);
+    const fb = responseFeedback(surface, lastAct.action);
+    if (fb && chosen) {
+      const better = fb.best ? surface.actions?.find((a) => a.id === fb.best) : undefined;
+      return (
+        <div className="mt-4 space-y-3">
+          <FeedbackCard feedback={fb} yours={t(chosen.labelKey)} bestLabel={better ? t(better.labelKey) : undefined} vars={script.vars} tone={dark ? 'dark' : 'phone'} />
+          {state.acted[id] && (surface.tells?.length ?? 0) > 0 && <TellList state={state} surfaceId={id} tone={dark ? 'dark' : 'phone'} />}
+        </div>
+      );
+    }
+    if (!state.acted[id]) return null;
+    return <p className="mt-3 text-xs text-phone-muted">{lastAct.auto ? t('safe.ui.auto') : t('safe.ui.youDid', { what: t(chosen?.labelKey ?? '') })}</p>;
+  };
+
+  // The student decides when to move on, so there is time to read the feedback.
+  const finishLabel = script.mode === 'judge' ? t('safe.ui.seeResults') : t('safe.ui.seeWhatHappened');
+  const continueButton = (id: string): React.ReactNode => {
+    if (state.reading === id) return <Button className="mt-4 w-full" onClick={() => dispatch({ type: 'continue' })}>{t('safe.ui.continue')}</Button>;
+    if (state.ended && onFinish && state.open === id) return <Button className="mt-4 w-full" onClick={onFinish}>{finishLabel}</Button>;
+    return null;
+  };
+
   let content: React.ReactNode;
-  if (open) {
+  if (state.ended && !open && onFinish) {
+    content = (
+      <div className="flex h-full flex-col items-center justify-center gap-4 p-6 text-center text-phone-ink">
+        <p className="text-lg font-bold">{t('safe.ui.finished')}</p>
+        <Button onClick={onFinish}>{finishLabel}</Button>
+      </div>
+    );
+  } else if (open) {
     const id = baseId as string;
     const v = view(id, open);
     const verdict = state.verdicts[id];
@@ -164,6 +200,7 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
                 return <FeedbackCard feedback={fb} yours={t(`safe.verdict.${verdict}`)} bestLabel={fb.best ? t(`safe.verdict.${fb.best}`) : undefined} vars={script.vars} />;
               })()}
               <TellList state={state} surfaceId={id} tone="phone" />
+              {continueButton(id)}
             </div>
           )}
 
@@ -182,23 +219,8 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
               ))}
             </div>
           )}
-          {isAct && (() => {
-            const lastAct = [...state.history].reverse().find((h) => h.kind === 'acted' && h.surface === id);
-            if (!lastAct || lastAct.kind !== 'acted') return null;
-            const chosen = open.actions?.find((a) => a.id === lastAct.action);
-            const fb = responseFeedback(open, lastAct.action);
-            if (fb && chosen) {
-              const better = fb.best ? open.actions?.find((a) => a.id === fb.best) : undefined;
-              return (
-                <div className="mt-4 space-y-3">
-                  <FeedbackCard feedback={fb} yours={t(chosen.labelKey)} bestLabel={better ? t(better.labelKey) : undefined} vars={script.vars} />
-                  {state.acted[id] && (open.tells?.length ?? 0) > 0 && <TellList state={state} surfaceId={id} tone="phone" />}
-                </div>
-              );
-            }
-            if (!state.acted[id]) return null;
-            return <p className="mt-3 text-xs text-phone-muted">{lastAct.auto ? t('safe.ui.auto') : t('safe.ui.youDid', { what: t(chosen?.labelKey ?? '') })}</p>;
-          })()}
+          {isAct && feedbackNode(id, open)}
+          {continueButton(id)}
         </div>
       </div>
     );
@@ -260,6 +282,10 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
     </button>
   );
 
+  // An overlay (a call or a permission prompt) shows its feedback and a Continue button once answered.
+  const overlayReview = !!overlay && (state.reading === state.open || state.ended) && !!state.history.some((h) => h.kind === 'acted' && h.surface === state.open);
+  const overlayContinue = state.reading === state.open ? () => dispatch({ type: 'continue' }) : onFinish;
+  const overlayLabel = state.reading === state.open ? t('safe.ui.continue') : finishLabel;
   const canBack = !overlay && (!!state.open || app !== 'home');
   return (
     <PhoneShell
@@ -273,8 +299,29 @@ export function PhoneScreen({ state, dispatch, lensOn, onToggleLens, compact }: 
       scrollKey={`${baseId ?? app}`}
     >
       {content}
-      {overlay?.type === 'call' && <IncomingCall surface={overlay} view={view(state.open as string, overlay)} actions={overlay.actions ?? []} lensNode={reading?.surface === state.open ? <LensReading surface={overlay} lensId={reading.lens} vars={script.vars} /> : undefined} onAct={(a) => dispatch({ type: 'act', surface: state.open as string, action: a })} />}
-      {overlay?.type === 'permission' && <PermissionDialog appKey={overlay.appKey} askKey={overlay.askKey} actions={overlay.actions ?? []} onAct={(a) => dispatch({ type: 'act', surface: state.open as string, action: a })} />}
+      {overlay?.type === 'call' && (
+        <IncomingCall
+          surface={overlay}
+          view={view(state.open as string, overlay)}
+          actions={overlay.actions ?? []}
+          lensNode={reading?.surface === state.open ? <LensReading surface={overlay} lensId={reading.lens} vars={script.vars} /> : undefined}
+          onAct={(a) => dispatch({ type: 'act', surface: state.open as string, action: a })}
+          after={overlayReview ? feedbackNode(state.open as string, overlay, true) : undefined}
+          onContinue={overlayContinue}
+          continueLabel={overlayLabel}
+        />
+      )}
+      {overlay?.type === 'permission' && (
+        <PermissionDialog
+          appKey={overlay.appKey}
+          askKey={overlay.askKey}
+          actions={overlay.actions ?? []}
+          onAct={(a) => dispatch({ type: 'act', surface: state.open as string, action: a })}
+          after={overlayReview ? feedbackNode(state.open as string, overlay) : undefined}
+          onContinue={overlayContinue}
+          continueLabel={overlayLabel}
+        />
+      )}
     </PhoneShell>
   );
 }

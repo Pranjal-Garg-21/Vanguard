@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import kyc from '../../../../content/scenarios/safe/kyc_expiry_01.json';
 import collectTemplate from '../../../../content/scenarios/safe/templates/collect_request.json';
 import { collectRequestVariant } from '../../upi-simulator/logic/variants';
+import wrongTransferTemplate from '../../../../content/scenarios/safe/templates/wrong_transfer.json';
+import digitalArrestTemplate from '../../../../content/scenarios/safe/templates/digital_arrest.json';
+import { applyVariant } from './variants';
 import inbox from '../../../../content/scenarios/safe/inbox_judge_01.json';
 import { bankBalance, createRun, foundTells, objectiveDone, reduce, replay, tellReport } from './runner';
 import { judgedSafely, scoreRun, summarise } from './scoring';
@@ -178,5 +181,57 @@ describe('replay', () => {
     ];
     expect(replay(KYC, log)).toEqual(replay(KYC, log));
     expect(replay(KYC, log).outcome).toBe('safe');
+  });
+});
+
+describe('reading feedback before moving on', () => {
+  const wrongTransfer = applyVariant(wrongTransferTemplate as unknown as Scenario, 1, { pools: { name: ['Vikram S.'], amount: [2000] }, derive: () => ({ newbal: '5,400' }) });
+  const arrest = applyVariant(digitalArrestTemplate as unknown as Scenario, 1, { pools: { officer: ['Inspector Rao'], amount: [6000] } });
+  const wait = { type: 'tick', ms: 5000 } as const;
+
+  it('keeps the screen open until Continue when an action has feedback and unlocks the next one', () => {
+    let s = run(createRun(wrongTransfer), { type: 'tick', ms: 800 }, { type: 'open', surface: 'chat' }, { type: 'act', surface: 'chat', action: 'check_app' }, wait);
+    expect(s.reading).toBe('chat');
+    expect(s.open).toBe('chat'); // still on the feedback
+    expect(s.inbox).toContain('bankapp'); // it has arrived
+    expect(s.awaiting).toEqual(['bankapp']); // but is waiting
+    s = run(s, { type: 'continue' });
+    expect(s.open).toBe('bankapp');
+    expect(s.reading).toBeNull();
+    expect(s.awaiting).toEqual([]);
+  });
+
+  it('does not wait when the action has no feedback', () => {
+    const s = run(createRun(KYC), { type: 'tick', ms: 1500 }, { type: 'open', surface: 'sms' }, { type: 'act', surface: 'sms', action: 'open_link' }, { type: 'tick', ms: 800 });
+    expect(s.reading).toBeNull();
+    expect(s.open).toBe('page');
+  });
+
+  it('going back while reading continues instead of losing the waiting screen', () => {
+    let s = run(createRun(wrongTransfer), { type: 'tick', ms: 800 }, { type: 'open', surface: 'chat' }, { type: 'act', surface: 'chat', action: 'check_app' }, wait);
+    s = run(s, { type: 'close' });
+    expect(s.open).toBe('bankapp');
+  });
+
+  it('keeps a call on screen to show its feedback, then moves to the next call stage', () => {
+    let s = run(createRun(arrest), { type: 'tick', ms: 800 }, { type: 'act', surface: 'c1', action: 'answer' }, { type: 'tick', ms: 1000 });
+    expect(s.open).toBe('c2');
+    s = run(s, { type: 'act', surface: 'c2', action: 'comply' }, wait);
+    expect(s.reading).toBe('c2');
+    expect(s.open).toBe('c2'); // the overlay stays so the note can be read
+    expect(s.awaiting).toEqual(['c3']);
+    s = run(s, { type: 'continue' });
+    expect(s.open).toBe('c3');
+  });
+
+  it('keeps the last screen open when the run ends, so the final feedback can be read', () => {
+    const s = run(createRun(KYC), { type: 'tick', ms: 1500 }, { type: 'open', surface: 'sms' }, { type: 'act', surface: 'sms', action: 'ignore' });
+    expect(s.ended).toBe(true);
+    expect(s.open).toBe('sms');
+  });
+
+  it('ignores Continue when nothing is being read', () => {
+    const s = run(createRun(KYC), { type: 'tick', ms: 1500 });
+    expect(run(s, { type: 'continue' })).toEqual(s);
   });
 });
