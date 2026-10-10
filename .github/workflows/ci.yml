@@ -23,3 +23,14 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+
+  content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Dependency-free, so it needs no install step. Checks concept IDs, verb
+      # names, effect paths and that every string key exists in every language.
+      - run: node tools/authoring/validate.mjs

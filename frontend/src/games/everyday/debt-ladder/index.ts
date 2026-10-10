@@ -1,12 +1,19 @@
 /**
- * Debt Cost Ladder (S4): rank borrowing options by true cost.
+ * Debt Cost Ladder (S4): compare borrowing options by the total paid back.
  * Use case: UC-BR-01 · Owner: P3
- *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
  */
+import content from '@/content/scenarios/borrow/debt-ladder.json';
+import { defineGame } from '../shared/game';
+import { DebtLadder } from './DebtLadder';
 
-export {};
+export { DebtLadder } from './DebtLadder';
+
+export const debtLadder = defineGame({
+  id: content.id,
+  useCase: 'UC-BR-01',
+  verbs: ['rank', 'choose'],
+  concepts: content.concepts,
+  levels: [1, 2, 3],
+  checkpoint: content.checkpoint,
+  Component: DebtLadder,
+});

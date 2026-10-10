@@ -1,0 +1,146 @@
+{
+  "prompt": "Need, or want? Sort each one.",
+  "summary": "You sorted eight things, and talked through the ones that could go either way.",
+  "bucket": {
+    "need": "Need",
+    "want": "Want"
+  },
+  "bus_pass": {
+    "text": "Monthly bus pass",
+    "why": "Without it you cannot get to class. That makes it a need."
+  },
+  "sneakers_new": {
+    "text": "New sneakers, the ones everyone is wearing",
+    "why": "Your shoes still work. New ones would be nice, but nothing stops if you wait."
+  },
+  "phone_recharge": {
+    "text": "Phone recharge",
+    "why": "It depends on what the phone is for. Hold that thought.",
+    "context": "Phone recharge — and your classes are online this month.",
+    "why2": "Same item, different answer. When class happens on the phone, the recharge becomes a need."
+  },
+  "biryani_friends": {
+    "text": "Biryani with friends",
+    "why": "This one is genuinely both. You could skip it, but friendships need feeding too. The question is how often, not whether."
+  },
+  "exam_fee": {
+    "text": "Exam fee",
+    "why": "Miss this and you miss the exam. A need, and one with a deadline."
+  },
+  "gaming_skin": {
+    "text": "A skin for your game",
+    "why": "Fun, and nothing breaks without it. That is what makes it a want."
+  },
+  "notebook": {
+    "text": "Notebook for class",
+    "why": "Small, cheap, and you cannot do the work without it."
+  },
+  "umbrella": {
+    "text": "Umbrella, and the rains have started",
+    "why": "Getting soaked on the way to class means missed days. Cheap now, expensive later."
+  },
+  "movie_ticket": {
+    "text": "Movie ticket",
+    "why": "A want — and wants are allowed. That is what the Wants jar is for."
+  },
+  "haircut": {
+    "text": "Haircut",
+    "why": "Both, depending on the month. Before an interview it is closer to a need. Every two weeks, less so."
+  },
+  "medicine_fever": {
+    "text": "Medicine for a fever",
+    "why": "Health first. Waiting on this usually costs more."
+  },
+  "birthday_gift": {
+    "text": "Birthday gift for a close friend",
+    "why": "Both. Relationships matter, and so does the size of the gift. A cheaper gift is still a gift."
+  },
+  "cricket_bat": {
+    "text": "A new cricket bat",
+    "why": "A want. If you play every weekend it is a well-loved want, but still a want."
+  },
+  "tiffin_box": {
+    "text": "A tiffin box",
+    "why": "Depends on what you eat at midday. Hold that thought.",
+    "context": "A tiffin box — and canteen food costs you ₹60 every day.",
+    "why2": "₹180 once, against ₹60 a day. Here the tiffin box pays for itself in three days."
+  },
+  "earphones": {
+    "text": "Earphones",
+    "why": "Usually a want. But it depends what you use them for.",
+    "context": "Earphones — yours broke, and your classes are online.",
+    "why2": "When you cannot hear the class, they stop being a luxury."
+  },
+  "hostel_mess": {
+    "text": "Hostel mess fee",
+    "why": "Food and a roof. This is the clearest kind of need."
+  },
+  "lab_manual": {
+    "text": "Lab manual for this semester",
+    "why": "Required for the course, so it is a need — but ask a senior before buying new."
+  },
+  "bedsheet": {
+    "text": "A bedsheet for the hostel",
+    "why": "You have to sleep somewhere. Basic, and a need."
+  },
+  "fest_ticket": {
+    "text": "College fest ticket",
+    "why": "A want. A good one — just one that belongs in the Wants jar, not the Needs jar."
+  },
+  "coaching_fees": {
+    "text": "Entrance coaching fees",
+    "why": "This one is hard, and it should be. It is a want if free material would do, and closer to a need if that coaching is your route to the course you want. Either answer is defensible."
+  },
+  "auto_fare_late": {
+    "text": "Auto fare home",
+    "why": "Depends when. Hold that thought.",
+    "context": "Auto fare home — it is 10pm and the last bus has gone.",
+    "why2": "Getting home safely is a need. Safety is never the thing to save on."
+  },
+  "phone_upgrade": {
+    "text": "Upgrading to the new phone",
+    "why": "Your phone works. This is a want wearing a need's clothes."
+  },
+  "laptop_repair": {
+    "text": "Laptop repair",
+    "why": "Depends what the laptop is for. Hold that thought.",
+    "context": "Laptop repair — and your submissions are all online.",
+    "why2": "When your marks depend on it, the repair is a need. Get a quote first."
+  },
+  "chai_daily": {
+    "text": "Chai at the corner shop, every day this month",
+    "why": "₹20 feels like nothing. Every day, it is ₹440 a month. Small and often is still big."
+  },
+  "photocopy_notes": {
+    "text": "Photocopying a senior's notes",
+    "why": "Cheap, and it is the material you study from. A need."
+  },
+  "household_share": {
+    "text": "Your share of the household expenses",
+    "why": "Your family counts on it. This is a need, and it is the first thing to plan for."
+  },
+  "sibling_fee": {
+    "text": "Your sister's school fee",
+    "why": "A need, and a fixed one. It arrives the same month every year, so plan for it."
+  },
+  "lpg_cylinder": {
+    "text": "A gas cylinder for the house",
+    "why": "Cooking gas is a need. It is also predictable — you know roughly when the next one is due."
+  },
+  "festival_clothes": {
+    "text": "New clothes for the festival",
+    "why": "Both, and that is honest. Festivals matter. The question is the amount, not whether."
+  },
+  "petrol_work": {
+    "text": "Petrol to get to work",
+    "why": "This is what earns you the rest of the money. A need."
+  },
+  "ott_subscription": {
+    "text": "Streaming subscription",
+    "why": "₹199 a month is ₹2,388 a year. A want — worth checking you still watch it."
+  },
+  "parent_checkup": {
+    "text": "A health check-up for your mother",
+    "why": "A need. Check-ups cost less than what they catch."
+  }
+}

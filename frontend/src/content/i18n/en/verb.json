@@ -1,0 +1,59 @@
+{
+  "triage": {
+    "all_agreed": "You and I sorted every card the same way. Nice work.",
+    "another_way": "This one could go either way. Here's another way to see it.",
+    "done": "Check my folder",
+    "not_this_one": "Not this one. Try another.",
+    "remaining": {
+      "one": "{count} card left",
+      "other": "{count} cards left"
+    },
+    "summary_title": "Let's look at a few of these",
+    "you_sorted": "You put this in {bucket}."
+  },
+  "allocate": {
+    "remaining": "{amount, rupees} left to share out",
+    "put_here": "Put it here",
+    "take_back": "Take it back",
+    "all_of_it": "All {amount, rupees}",
+    "nothing_left": "You have shared out all of it.",
+    "bills_covered": "Bills covered",
+    "bill_uncovered": "Your {bill} won't be covered. Change your plan?",
+    "short_by": "This jar is short by {amount, rupees}.",
+    "allocate_all_first": "Share out the rest before you continue.",
+    "continue_anyway": "Continue anyway"
+  },
+  "commit": {
+    "how_much": "How much each month?",
+    "how_long": "For how long?",
+    "until_i_stop": "Until I stop",
+    "n_months": {
+      "one": "{count} month",
+      "other": "{count} months"
+    },
+    "share_of_income": "That is {percent}% of what you get each month.",
+    "reach_goal_in": {
+      "one": "You reach {amount, rupees} in {count} month.",
+      "other": "You reach {amount, rupees} in {count} months."
+    },
+    "total_over_term": "That adds up to {amount, rupees} in total.",
+    "heavy_warning": "That is a big share of your money. It will still come out on a lean month.",
+    "confirm_question": "Once this is set, it comes out every month — even when money is tight. Set it?",
+    "confirm_yes": "Yes, set it",
+    "confirm_change": "Let me change it",
+    "set_it": "Set it"
+  },
+  "rank": {
+    "check_order": "Check my order",
+    "result_title": "Here is the real order",
+    "perfect": "Exactly right. You put every one in the right place.",
+    "top_pick_cost": "Your first pick costs {amount, rupees} more than the cheapest one.",
+    "out_of_order": {
+      "one": "{count} pair was the wrong way round.",
+      "other": "{count} pairs were the wrong way round."
+    },
+    "elapsed": "Time taken: {seconds}s",
+    "move_up": "Move {item} up",
+    "move_down": "Move {item} down"
+  }
+}

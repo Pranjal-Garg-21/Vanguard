@@ -9,6 +9,7 @@ import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
 import { StudentEntry } from './StudentEntry';
 import { Dashboard } from '@/features/home';
+import { ArcadeRoute } from '@/features/arcade';
 
 // Lazy so students never download the dashboard.
 const FacilitatorApp = lazy(() => import('@/facilitator/FacilitatorApp'));
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
   { path: '/who', element: <PlayerPicker /> },
   { path: '/join/:code', element: <JoinLink /> },
   { path: '/home', element: <Dashboard /> },
+  { path: '/arcade', element: <ArcadeRoute /> },
   { path: '/dev', element: <DevHome /> },
   {
     path: '/facilitator/*',

@@ -9,6 +9,7 @@ export * from './profiles';
 export * from './telemetry';
 export * from './sync';
 export * from './i18n';
+export * from './i18n/hooks';
 export * from './classes';
 export { getSupabase, isSupabaseConfigured } from './supabase/client';
 export type { Accessibility, Profile } from './storage/db';

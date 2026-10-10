@@ -1,0 +1,101 @@
+{
+  "_comment": "UC-BR-01 Debt Cost Ladder. Implementation.md 12.6: the character needs ₹2,000 for 3 months and ranks four sources by TOTAL REPAID, not by instalment — that is the whole lesson, and the misconception compare_emi_not_total is exactly the trap. The trap is load-bearing: buy-now-pay-later stretches to SIX months, so it has the smallest monthly payment of the four and the second-largest total. Ordering by instalment and ordering by total must stay different or the misconception cannot occur; games.test.ts asserts this. Totals are tuned to the plan's own example figures (₹2,000 vs ₹2,600 vs ₹3,100+). No real lender, app or brand is named anywhere.",
+  "_owner": "P3",
+  "_useCase": "UC-BR-01",
+  "id": "debt-ladder",
+  "pillar": "borrow",
+  "stage": [
+    "S4"
+  ],
+  "verb": "rank",
+  "checkpoint": true,
+  "principal": 2000,
+  "months": 3,
+  "promptKey": "br01.prompt",
+  "hookKey": "br01.hook",
+  "concepts": [
+    "true_cost_of_debt",
+    "bnpl"
+  ],
+  "options": [
+    {
+      "id": "family",
+      "textKey": "br01.family.text",
+      "value": 2000,
+      "revealKey": "br01.family.reveal",
+      "monthlyPayment": 667,
+      "months": 3,
+      "concepts": {
+        "true_cost_of_debt": 0.9
+      },
+      "chooseEffects": {
+        "human.trust": -5
+      },
+      "missedPaymentKey": "br01.family.missed",
+      "missedEffects": {
+        "human.trust": -15
+      }
+    },
+    {
+      "id": "bnpl",
+      "textKey": "br01.bnpl.text",
+      "value": 2400,
+      "revealKey": "br01.bnpl.reveal",
+      "monthlyPayment": 400,
+      "months": 6,
+      "concepts": {
+        "bnpl": 0.9,
+        "true_cost_of_debt": 0.8
+      },
+      "misconception": "compare_emi_not_total",
+      "missedPaymentKey": "br01.bnpl.missed",
+      "missedEffects": {
+        "human.peaceOfMind": -10
+      }
+    },
+    {
+      "id": "moneylender",
+      "textKey": "br01.moneylender.text",
+      "value": 2600,
+      "revealKey": "br01.moneylender.reveal",
+      "monthlyPayment": 867,
+      "months": 3,
+      "concepts": {
+        "true_cost_of_debt": 0.9
+      },
+      "missedPaymentKey": "br01.moneylender.missed",
+      "missedEffects": {
+        "human.peaceOfMind": -15
+      }
+    },
+    {
+      "id": "loan_app",
+      "textKey": "br01.loan_app.text",
+      "value": 3100,
+      "revealKey": "br01.loan_app.reveal",
+      "monthlyPayment": 1033,
+      "months": 3,
+      "concepts": {
+        "true_cost_of_debt": 0.9
+      },
+      "misconception": "debt_is_free_money",
+      "chooseEffects": {
+        "human.safety": -10
+      },
+      "missedPaymentKey": "br01.loan_app.missed",
+      "missedEffects": {
+        "human.safety": -15,
+        "human.peaceOfMind": -15
+      },
+      "flags": {
+        "fellForLoanApp": true
+      }
+    }
+  ],
+  "conceptCard": {
+    "textKey": "br01.concept.total_cost",
+    "icon": "ladder"
+  },
+  "chooseKey": "br01.choose",
+  "summaryKey": "br01.summary"
+}

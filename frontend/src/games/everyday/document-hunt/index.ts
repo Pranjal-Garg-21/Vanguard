@@ -1,12 +1,19 @@
 /**
  * Document Hunt (S0): find the right documents to open a bank account.
  * Use case: UC-BANK-01 · Owner: P3
- *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
  */
+import content from '@/content/scenarios/bank/document-hunt.json';
+import { defineGame } from '../shared/game';
+import { DocumentHunt } from './DocumentHunt';
 
-export {};
+export { DocumentHunt } from './DocumentHunt';
+export { characterAge, deckForAge, ADULT_AGE, type DocCard } from './logic/deck';
+
+export const documentHunt = defineGame({
+  id: content.id,
+  useCase: 'UC-BANK-01',
+  verbs: ['triage'],
+  concepts: content.concepts,
+  levels: [1, 2, 3],
+  Component: DocumentHunt,
+});

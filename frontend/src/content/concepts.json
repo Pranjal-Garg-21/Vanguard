@@ -1,4 +1,42 @@
 {
-  "concepts": [],
-  "misconceptions": []
+  "concepts": [
+    "account_types",
+    "bnpl",
+    "budget_jars",
+    "context_dependence",
+    "credit_score",
+    "education_financing",
+    "emergency_fund",
+    "emi",
+    "expense_tracking",
+    "fixed_vs_variable",
+    "goal_setting",
+    "impulse_buying",
+    "interest_basics",
+    "irregular_income",
+    "kyc_documents",
+    "lending_boundaries",
+    "minimum_balance_fees",
+    "needs_vs_wants",
+    "nominee",
+    "opportunity_cost",
+    "pay_yourself_first",
+    "peer_pressure",
+    "pin_secrecy",
+    "recovery_steps",
+    "risk_pooling",
+    "true_cost_of_debt",
+    "unit_price",
+    "where_to_keep_money",
+    "why_bank_account"
+  ],
+  "misconceptions": [
+    "compare_emi_not_total",
+    "debt_is_free_money",
+    "everything_i_want_is_need",
+    "fun_is_bad",
+    "save_what_is_left",
+    "small_spends_dont_matter",
+    "too_late_to_report"
+  ]
 }

@@ -1,0 +1,37 @@
+{
+  "everyday": {
+    "title": "Everyday Money",
+    "blurb": "Banking, budgeting, saving and borrowing. Practise freely — nothing here changes your character's money."
+  },
+  "difficulty": "Difficulty",
+  "level": {
+    "1": "Easy",
+    "2": "Medium",
+    "3": "Hard"
+  },
+  "level_n": "Level {count}",
+  "play": "Play",
+  "quit": "Leave",
+  "back_to_games": "Back to games",
+  "what_you_practised": "What you practised",
+  "worth_another_look": "Worth another look",
+  "no_effects": "This was practice. Your character's money and meters are unchanged — only what you learned carries over.",
+  "game": {
+    "document-hunt": {
+      "title": "Document Hunt",
+      "blurb": "Find what the bank actually needs to open an account in your name."
+    },
+    "swipe-sort": {
+      "title": "Need or Want?",
+      "blurb": "Sort spending into needs and wants — and find out why context changes the answer."
+    },
+    "debt-ladder": {
+      "title": "The Cost of Borrowing",
+      "blurb": "You need ₹2,000 for three months. Four ways to get it. Which costs least?"
+    },
+    "rescue-mission": {
+      "title": "Rescue Mission",
+      "blurb": "A friend lost money to a fake job site. What do you do, and in what order?"
+    }
+  }
+}

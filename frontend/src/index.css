@@ -63,3 +63,259 @@
     }
   }
 }
+
+/*
+ * Everyday Money games and the four verbs. Owner: P3.
+ *
+ * The verb and game components ship plain semantic class hooks rather than
+ * Tailwind utilities baked into the JSX, because P4 owns the design kit and
+ * will restyle them. Styling them here means that restyle is one file, not
+ * nine components, and the markup stays presentation-agnostic.
+ */
+@layer components {
+  .triage,
+  .allocate,
+  .rank,
+  .game,
+  .arcade {
+    @apply flex flex-col gap-4 text-ink;
+  }
+
+  .triage h2,
+  .arcade h1 {
+    @apply text-xl font-bold;
+  }
+  .triage h3,
+  .rank h3,
+  .game h3,
+  .arcade h2 {
+    @apply text-lg font-bold;
+  }
+  .triage p,
+  .allocate p,
+  .rank p,
+  .game p,
+  .arcade p {
+    @apply text-ink-soft;
+  }
+
+  /* Buttons match ui/Button's secondary variant, with the brand lime for the
+     pressed state so a chosen level or selected card reads at a glance. */
+  .triage button,
+  .allocate button,
+  .rank button,
+  .game button,
+  .arcade button {
+    @apply min-h-11 rounded-lg border border-line-strong bg-surface-2 px-4 py-2
+           text-left font-bold text-ink transition
+           hover:border-brand hover:text-brand
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand
+           disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .triage button[aria-pressed='true'],
+  .allocate button[aria-pressed='true'],
+  .rank button[aria-pressed='true'],
+  .arcade button[aria-pressed='true'] {
+    @apply border-brand bg-brand text-brand-ink hover:text-brand-ink;
+  }
+
+  .triage fieldset,
+  .allocate fieldset,
+  .commit fieldset,
+  .arcade fieldset {
+    @apply flex flex-col gap-2;
+  }
+  .arcade legend,
+  .allocate legend {
+    @apply pb-2 text-xs font-bold uppercase tracking-wide text-muted;
+  }
+
+  /* --- Arcade ----------------------------------------------------------- */
+  .arcade__levels {
+    @apply grid grid-cols-3 gap-2;
+  }
+  .arcade__levels button {
+    @apply text-center;
+  }
+  .arcade__games {
+    @apply flex flex-col gap-3;
+  }
+  .arcade__card {
+    @apply flex flex-col gap-2 rounded-xl border border-line bg-surface p-5;
+  }
+  .arcade__concepts {
+    @apply flex flex-wrap gap-1.5;
+  }
+  .arcade__concepts li {
+    @apply rounded-md bg-surface-3 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-ink-soft;
+  }
+  .arcade__bar {
+    @apply flex items-center gap-3 border-b border-line pb-3 text-sm text-muted;
+  }
+  .arcade__bar span:first-of-type {
+    @apply flex-1 font-bold text-ink;
+  }
+  .arcade__dot {
+    @apply ml-2 inline-block h-2.5 w-2.5 rounded-full align-middle;
+  }
+  .arcade__dot[data-status='green'] {
+    @apply bg-good;
+  }
+  .arcade__dot[data-status='amber'] {
+    @apply bg-warn;
+  }
+  .arcade__dot[data-status='red'] {
+    @apply bg-bad;
+  }
+  .arcade--result ul li {
+    @apply border-b border-line py-2;
+  }
+  .arcade__sandbox-note {
+    @apply rounded-lg border-l-4 border-brand bg-brand/10 p-3 text-sm;
+  }
+
+  /* --- Triage ----------------------------------------------------------- */
+  .triage__card {
+    @apply flex flex-col items-center gap-2 rounded-xl border border-line bg-surface p-6 text-center;
+  }
+  .triage__card h3 {
+    @apply text-balance;
+  }
+  .triage__card > p {
+    @apply text-2xl font-bold tabular-nums text-ink;
+  }
+  .triage__card button {
+    @apply min-h-0 w-auto px-3 py-1;
+  }
+  .triage__context {
+    @apply text-base font-normal text-balance text-warn;
+  }
+  .triage__buckets {
+    @apply grid grid-cols-2 gap-3;
+  }
+  .triage__buckets button {
+    @apply justify-center text-center;
+  }
+  .triage--queue > p[aria-live] {
+    @apply font-mono text-xs text-muted;
+  }
+  .triage__items {
+    @apply grid grid-cols-2 gap-2;
+  }
+  .triage__items button {
+    @apply h-full justify-center text-center text-sm;
+  }
+  .triage__items p[role='alert'] {
+    @apply mt-1 text-sm text-balance text-bad;
+  }
+  .triage--board .triage__buckets {
+    @apply grid-cols-1;
+  }
+  .triage--board .triage__buckets > div {
+    @apply rounded-lg border border-dashed border-line-strong p-3;
+  }
+  .triage--board .triage__buckets ul {
+    @apply mt-2 flex flex-wrap gap-1.5;
+  }
+  .triage--board .triage__buckets ul li {
+    @apply rounded-md bg-surface-3 px-2 py-0.5 text-xs;
+  }
+  .triage--summary li {
+    @apply border-b border-line py-3;
+  }
+
+  /* --- Allocate --------------------------------------------------------- */
+  .allocate__remaining {
+    @apply text-lg font-bold tabular-nums text-brand;
+  }
+  .allocate__tray {
+    @apply flex flex-wrap gap-2;
+  }
+  .allocate__tray button {
+    @apply tabular-nums;
+  }
+  .allocate__jars {
+    @apply flex flex-col gap-3;
+  }
+  .allocate__jar {
+    @apply flex flex-col gap-2 rounded-xl border border-line bg-surface p-4;
+  }
+  .allocate__jar > p {
+    @apply text-xl font-bold tabular-nums text-ink;
+  }
+  .allocate__bills li {
+    @apply text-sm tabular-nums text-muted;
+  }
+  .allocate__overflow {
+    @apply rounded-lg border-l-4 border-bad bg-bad/10 p-2 text-sm text-ink;
+  }
+  .allocate__covered {
+    @apply text-sm font-bold text-good;
+  }
+  .allocate input[type='range'] {
+    @apply w-full accent-[var(--color-brand)];
+  }
+
+  /* --- Commit ----------------------------------------------------------- */
+  .commit__amount,
+  .commit__duration {
+    @apply flex flex-wrap gap-2;
+  }
+  .commit__confirm {
+    @apply flex flex-col gap-2 rounded-xl border border-brand bg-brand/10 p-4;
+  }
+
+  /* --- Rank ------------------------------------------------------------- */
+  .rank__list {
+    @apply flex list-none flex-col gap-2 p-0;
+  }
+  .rank__list li {
+    @apply flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2;
+    counter-increment: rank;
+  }
+  .rank__list {
+    counter-reset: rank;
+  }
+  .rank__list li::before {
+    @apply w-4 flex-none font-mono text-xs text-muted;
+    content: counter(rank);
+  }
+  .rank__list li > span:first-of-type {
+    @apply flex-1;
+  }
+  .rank__list li button {
+    @apply min-h-9 w-10 flex-none justify-center px-0 text-center;
+  }
+  .rank__ladder {
+    @apply flex list-none flex-col gap-2 p-0;
+  }
+  .rank__ladder li {
+    @apply rounded-lg border border-line border-l-4 border-l-good bg-surface px-3 py-2;
+  }
+  .rank__ladder li[data-moved='true'] {
+    @apply border-l-warn;
+  }
+  .rank__ladder li span {
+    @apply font-bold tabular-nums;
+  }
+
+  /* --- Games ------------------------------------------------------------ */
+  .game--br01 ul {
+    @apply flex list-none flex-col gap-2 p-0;
+  }
+  .game--br01 ul button {
+    @apply flex flex-col items-start gap-1;
+  }
+  .game--br01 ul button span {
+    @apply text-sm font-normal tabular-nums text-muted;
+  }
+  .help-card {
+    @apply rounded-xl border border-brand bg-brand/10 p-4;
+  }
+  .help-card ol {
+    @apply my-2 list-decimal pl-5;
+  }
+  .help-card li {
+    @apply py-0.5 text-sm;
+  }
+}

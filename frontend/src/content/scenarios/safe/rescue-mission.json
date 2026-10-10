@@ -1,0 +1,107 @@
+{
+  "_comment": "UC-SAFE-10 Rescue Mission. Owned by P3 (not P5) because it is built on the Rank verb — see work_division P3.6. Step order is exactly the sequence in Implementation.md 12.8. Hard rule from that section: the game asks NOTHING about the student's own real experiences, and the friend Imran is the one who lost the money, never the student. The clock shows that acting fast matters; it is never a countdown and never pressures.",
+  "_owner": "P3",
+  "_useCase": "UC-SAFE-10",
+  "id": "rescue-mission",
+  "pillar": "safe",
+  "stage": [
+    "S6"
+  ],
+  "verb": "rank",
+  "timed": true,
+  "costUnit": "none",
+  "promptKey": "safe10.prompt",
+  "hookKey": "safe10.hook",
+  "concepts": [
+    "recovery_steps"
+  ],
+  "steps": [
+    {
+      "id": "call_1930",
+      "textKey": "safe10.call_1930.text",
+      "audioKey": "safe10.call_1930.text",
+      "value": 1,
+      "revealKey": "safe10.call_1930.why",
+      "concepts": {
+        "recovery_steps": 0.9
+      },
+      "misconception": "too_late_to_report"
+    },
+    {
+      "id": "bank_block",
+      "textKey": "safe10.bank_block.text",
+      "audioKey": "safe10.bank_block.text",
+      "value": 2,
+      "revealKey": "safe10.bank_block.why",
+      "concepts": {
+        "recovery_steps": 0.9
+      }
+    },
+    {
+      "id": "portal",
+      "textKey": "safe10.portal.text",
+      "audioKey": "safe10.portal.text",
+      "value": 3,
+      "revealKey": "safe10.portal.why",
+      "concepts": {
+        "recovery_steps": 0.9
+      }
+    },
+    {
+      "id": "evidence",
+      "textKey": "safe10.evidence.text",
+      "audioKey": "safe10.evidence.text",
+      "value": 4,
+      "revealKey": "safe10.evidence.why",
+      "concepts": {
+        "recovery_steps": 0.8
+      }
+    },
+    {
+      "id": "trusted_adult",
+      "textKey": "safe10.trusted_adult.text",
+      "audioKey": "safe10.trusted_adult.text",
+      "value": 5,
+      "revealKey": "safe10.trusted_adult.why",
+      "concepts": {
+        "recovery_steps": 0.8
+      }
+    },
+    {
+      "id": "warn_others",
+      "textKey": "safe10.warn_others.text",
+      "audioKey": "safe10.warn_others.text",
+      "value": 6,
+      "revealKey": "safe10.warn_others.why",
+      "concepts": {
+        "recovery_steps": 0.8
+      }
+    }
+  ],
+  "_recoveryModel": "Recovery chance is driven by order accuracy and by how quickly the first step is taken. The golden-hour figure is the reason 1930 comes first.",
+  "recovery": {
+    "baseChance": 0.2,
+    "accuracyWeight": 0.5,
+    "speedWeight": 0.3,
+    "fastSeconds": 45,
+    "slowSeconds": 180
+  },
+  "conceptCard": {
+    "textKey": "safe10.concept.recovery",
+    "icon": "shield"
+  },
+  "helpCard": {
+    "_comment": "Saved to the dashboard as the static, offline Help card (Implementation.md 3.1 and 12.8). Asks nothing, records nothing.",
+    "titleKey": "safe10.helpcard.title",
+    "stepKeys": [
+      "safe10.call_1930.text",
+      "safe10.bank_block.text",
+      "safe10.portal.text",
+      "safe10.evidence.text",
+      "safe10.trusted_adult.text",
+      "safe10.warn_others.text"
+    ],
+    "footerKey": "safe10.helpcard.footer"
+  },
+  "summaryKey": "safe10.summary"
+}

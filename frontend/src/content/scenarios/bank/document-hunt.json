@@ -1,0 +1,137 @@
+{
+  "_comment": "UC-BANK-01 Document Hunt. Implementation.md 12.6 lists these eight items and requires that wrong items bounce back with a spoken reason. L1 shows only 5 items. The guardian ID is required for under-18 characters and is filtered in by the game, which knows the persona's age.",
+  "_owner": "P3",
+  "_useCase": "UC-BANK-01",
+  "id": "document-hunt",
+  "pillar": "bank",
+  "stage": [
+    "S0"
+  ],
+  "verb": "triage",
+  "layout": "board",
+  "bounceWrong": true,
+  "promptKey": "bank01.prompt",
+  "buckets": [
+    {
+      "id": "folder",
+      "labelKey": "bank01.bucket.folder",
+      "emoji": "📁"
+    },
+    {
+      "id": "leave",
+      "labelKey": "bank01.bucket.leave",
+      "emoji": "🗄️"
+    }
+  ],
+  "concepts": [
+    "kyc_documents",
+    "why_bank_account"
+  ],
+  "cards": [
+    {
+      "id": "aadhaar",
+      "textKey": "bank01.aadhaar.text",
+      "imageKey": "doc_aadhaar",
+      "audioKey": "bank01.aadhaar.text",
+      "correctBucket": "folder",
+      "explainKey": "bank01.aadhaar.why",
+      "concepts": {
+        "kyc_documents": 0.9
+      }
+    },
+    {
+      "id": "photo",
+      "textKey": "bank01.photo.text",
+      "imageKey": "doc_photo",
+      "audioKey": "bank01.photo.text",
+      "correctBucket": "folder",
+      "explainKey": "bank01.photo.why",
+      "concepts": {
+        "kyc_documents": 0.8
+      }
+    },
+    {
+      "id": "school_id",
+      "textKey": "bank01.school_id.text",
+      "imageKey": "doc_school_id",
+      "audioKey": "bank01.school_id.text",
+      "correctBucket": "folder",
+      "explainKey": "bank01.school_id.why",
+      "concepts": {
+        "kyc_documents": 0.8
+      }
+    },
+    {
+      "id": "sibling_id",
+      "textKey": "bank01.sibling_id.text",
+      "imageKey": "doc_sibling_id",
+      "audioKey": "bank01.sibling_id.why",
+      "correctBucket": "leave",
+      "explainKey": "bank01.sibling_id.why",
+      "concepts": {
+        "kyc_documents": 0.9
+      }
+    },
+    {
+      "id": "cinema_ticket",
+      "textKey": "bank01.cinema_ticket.text",
+      "imageKey": "doc_cinema_ticket",
+      "audioKey": "bank01.cinema_ticket.why",
+      "correctBucket": "leave",
+      "explainKey": "bank01.cinema_ticket.why",
+      "concepts": {
+        "kyc_documents": 0.8
+      }
+    },
+    {
+      "id": "guardian_id",
+      "textKey": "bank01.guardian_id.text",
+      "imageKey": "doc_guardian_id",
+      "audioKey": "bank01.guardian_id.text",
+      "correctBucket": "folder",
+      "explainKey": "bank01.guardian_id.why",
+      "concepts": {
+        "kyc_documents": 0.9,
+        "account_types": 0.7
+      },
+      "requiresMinor": true
+    },
+    {
+      "id": "electricity_bill",
+      "textKey": "bank01.electricity_bill.text",
+      "imageKey": "doc_electricity_bill",
+      "audioKey": "bank01.electricity_bill.text",
+      "correctBucket": "folder",
+      "explainKey": "bank01.electricity_bill.why",
+      "concepts": {
+        "kyc_documents": 0.8
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "pan",
+      "textKey": "bank01.pan.text",
+      "imageKey": "doc_pan",
+      "audioKey": "bank01.pan.text",
+      "correctBucket": "folder",
+      "explainKey": "bank01.pan.why",
+      "concepts": {
+        "kyc_documents": 0.9
+      },
+      "minLevel": 2,
+      "_note": "A minor account does not require PAN. The game drops this card for under-18 characters so the bounce reason stays truthful."
+    }
+  ],
+  "conceptCard": {
+    "textKey": "bank01.concept.kyc",
+    "icon": "id-card"
+  },
+  "alternateFlow": {
+    "_comment": "Implementation.md 12.6: a seeded branch where the character is missing a document. Handled by the game, not the verb.",
+    "missingDocument": {
+      "triggerKey": "bank01.missing.hook",
+      "resolveAfterMonths": 1,
+      "textKey": "bank01.missing.explain"
+    }
+  }
+}
