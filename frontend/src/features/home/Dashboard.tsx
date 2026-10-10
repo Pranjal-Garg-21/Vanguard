@@ -9,6 +9,7 @@ import { Link, Navigate, useNavigate } from 'react-router';
 import {
   loadActiveProfile,
   recentEvents,
+  dismissNewUnlocks,
   refreshSyncStatus,
   switchPlayer,
   t,
@@ -18,7 +19,7 @@ import {
 } from '@/platform';
 import { ARCADE_SECTIONS, STAGES } from '@/content/stages';
 import { avatarEmoji } from '@/features/setup';
-import { Badge, Button, Card, ProgressBar, SectionLabel, Spinner } from '@/ui';
+import { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from '@/ui';
 import { summariseEvents } from './stats';
 
 const NAV = ['dashboard', 'learn', 'practice', 'compete'] as const;
@@ -44,6 +45,11 @@ export function Dashboard() {
   if (!profile) return <Navigate to="/" replace />;
 
   const stats = summariseEvents(events);
+  const opened: string[] = [];
+  for (const target of sync.newUnlocks) {
+    const name = STAGES.find((s) => s.id === target)?.name ?? ARCADE_SECTIONS.find((a) => a.id === target)?.name;
+    if (name) opened.push(name);
+  }
   const syncLabel = sync.state === 'pending' ? t('home.sync.pending', { count: sync.pending }) : t(`home.sync.${sync.state}`);
 
   return (
@@ -98,6 +104,15 @@ export function Dashboard() {
           <h1 className="text-2xl font-bold">{t('home.greeting', { name: profile.displayName })}</h1>
           <Badge tone={sync.state === 'synced' ? 'good' : sync.state === 'error' ? 'bad' : 'neutral'}>{syncLabel}</Badge>
         </div>
+
+        {opened.length > 0 && (
+          <Notice tone="info">
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-bold">{t('home.newUnlock', { names: opened.join(', ') })}</span>
+              <button type="button" className="text-sm font-bold text-brand" onClick={dismissNewUnlocks}>{t('home.dismiss')}</button>
+            </div>
+          </Notice>
+        )}
 
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           <Stat label={t('home.stats.streak')} value={stats.streak} />

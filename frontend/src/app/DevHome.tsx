@@ -10,6 +10,7 @@ import {
   logEvent,
   recentEvents,
   refreshSyncStatus,
+  syncNow,
   useSyncStatus,
   type GameEvent,
   type ProfileSummary,
@@ -41,13 +42,17 @@ export function DevHome() {
 
       <section className="space-y-1">
         <p>Supabase: {isSupabaseConfigured() ? 'configured' : 'not configured (see frontend/.env.example)'}</p>
-        <p>Sync: {sync.state} · {sync.pending} pending</p>
+        <p>Sync: {sync.state} · {sync.pending} pending{sync.lastSyncAt ? ` · last ${new Date(sync.lastSyncAt).toLocaleTimeString()}` : ''}</p>
+        {sync.lastError && <p className="text-bad">Last error: {sync.lastError}</p>}
         <p>Active profile: {profile ? profile.displayName : 'none'}</p>
       </section>
 
       <nav className="flex flex-wrap gap-3">
         <Link className="rounded bg-brand px-3 py-2 font-bold text-brand-ink" to="/setup">Setup (P5)</Link>
         <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/facilitator">Facilitator (P5)</Link>
+        <button className="rounded border border-line-strong px-3 py-2" onClick={async () => { await syncNow({ force: true }); await refresh(); }}>
+          Sync now
+        </button>
         <button className="rounded border border-line-strong px-3 py-2 disabled:opacity-50" disabled={!profile} onClick={logTestEvent}>
           Log test event
         </button>

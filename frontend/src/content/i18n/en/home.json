@@ -64,5 +64,7 @@
   "practiceTitle": "Practice",
   "locked": "Locked",
   "soon": "Coming soon",
-  "play": "Play"
+  "play": "Play",
+  "newUnlock": "New: {names} is open.",
+  "dismiss": "Dismiss"
 }
