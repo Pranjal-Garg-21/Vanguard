@@ -2,7 +2,7 @@
  * Shared-device login (UC-SYS-04): avatar grid → picture-PIN. Owner: P5.
  */
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { listProfiles, t, unlockProfile, type ProfileSummary } from '@/platform';
 import { Notice } from '@/ui';
 import { PicturePin } from './components/PicturePin';
@@ -69,7 +69,15 @@ export function PlayerPicker() {
   }
 
   return (
-    <StudentScreen>
+    <StudentScreen
+      footer={
+        <p className="text-center text-sm">
+          <Link className="font-semibold text-brand underline" to="/facilitator">
+            {t('setup.welcome.facilitator')}
+          </Link>
+        </p>
+      }
+    >
       <h1 className="mt-4 text-3xl font-extrabold tracking-tight">{t('setup.picker.title')}</h1>
       <div className="mt-8 grid grid-cols-3 gap-4">
         {profiles.map((p) => (

@@ -246,13 +246,28 @@ function validateEffects(effects, where, label) {
 
 const scenarioFiles = walk(join(APP, 'content/scenarios'), (f) => f.endsWith('.json'));
 
+// A file under a `pools/` folder is a bag of items a script draws from (the
+// Scam Inbox pool, the UPI check questions), not a script, so it has no id of
+// its own. Its text keys are still checked.
+const isPool = (file) => rel(file).split(/[\\/]/).includes('pools');
+
 for (const file of scenarioFiles) {
   const where = rel(file);
   const scenario = readJson(file);
   if (!scenario) continue;
 
-  if (!scenario.id) err(where, 'missing "id"');
-  if (!scenario.pillar) warn(where, 'missing "pillar"');
+  if (!scenario.id && !isPool(file)) err(where, 'missing "id"');
+  // The folder under content/scenarios is the pillar, so a file only needs the
+  // field when it sits somewhere else or disagrees with its folder. The Safe
+  // pillar has two folders: scenarios/safe holds Stay Safe phone scripts and
+  // scenarios/protect holds Everyday Money games, because Stay Safe loads its
+  // folder with a glob and the two file shapes are different.
+  const folderPillar = rel(file).split(/[\\/]/).at(4);
+  const samePillar = (a, b) => a === b || (a === 'safe' && b === 'protect') || (a === 'protect' && b === 'safe');
+  if (!scenario.pillar && !folderPillar) warn(where, 'missing "pillar"');
+  if (scenario.pillar && folderPillar && !samePillar(scenario.pillar, folderPillar)) {
+    warn(where, `pillar "${scenario.pillar}" but the file sits in ${folderPillar}/`);
+  }
 
   if (scenario.verb && !VERBS.has(scenario.verb)) {
     err(where, `unknown verb "${scenario.verb}" — expected one of [${[...VERBS]}]`);

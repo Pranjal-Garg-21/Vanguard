@@ -42,7 +42,7 @@
   },
   "stats": {
     "streak": "Day streak",
-    "xp": "XP",
+    "xp": "Points",
     "answers": "Answers",
     "concepts": "Concepts learned"
   },
@@ -63,5 +63,8 @@
   "stagesTitle": "LifePath stages",
   "practiceTitle": "Practice",
   "locked": "Locked",
-  "soon": "Coming soon"
+  "soon": "Coming soon",
+  "play": "Play",
+  "newUnlock": "New: {names} is open.",
+  "dismiss": "Dismiss"
 }

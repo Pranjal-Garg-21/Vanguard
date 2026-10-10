@@ -43,7 +43,8 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
       setError(error?.message ?? 'Could not create the class.');
       return;
     }
-    navigate(`../class/${data.id}`, { replace: true });
+    // Land on the join code and QR sheet, which is what the facilitator needs next.
+    navigate(`../class/${data.id}?tab=join`, { replace: true });
   };
 
   const input = 'mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 focus:border-brand focus:outline-none';

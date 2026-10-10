@@ -5,7 +5,7 @@
  * Built here rather than in games/safe/ because it runs on the Rank verb
  * (work_division §P3.6).
  */
-import content from '@/content/scenarios/safe/rescue-mission.json';
+import content from '@/content/scenarios/protect/rescue-mission.json';
 import { defineGame } from '../shared/game';
 import { RescueMission } from './RescueMission';
 

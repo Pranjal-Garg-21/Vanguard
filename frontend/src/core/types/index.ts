@@ -48,6 +48,10 @@ export type MiniGameChoice = {
   choiceId: string;
   correct?: boolean;
   ms: number;
+  /** Optional: the concept this choice tests, when a game covers several. */
+  concept?: ConceptId;
+  /** Optional: the misconception a wrong choice reveals. */
+  misconception?: MisconceptionId;
 };
 
 export type MiniGameResult = {

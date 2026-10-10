@@ -25,8 +25,12 @@ export const SCRIPTS: Scripts = collect();
 
 export const AUTOS: AutoScript[] = autoJson.auto;
 
-export type ConceptDef = { id: string; pillar: string; chapter: number; icon: string };
+/** `game` names the game that teaches it, when that is not the Paisapur story. */
+export type ConceptDef = { id: string; pillar: string; chapter: number; icon: string; game?: string };
 export const CONCEPTS: ConceptDef[] = conceptsJson.concepts;
+
+/** The concepts the story is responsible for teaching. */
+export const STORY_CONCEPTS: ConceptDef[] = CONCEPTS.filter((c) => !c.game);
 export const MISCONCEPTIONS: string[] = conceptsJson.misconceptions;
 
 export type QuizQuestion = {

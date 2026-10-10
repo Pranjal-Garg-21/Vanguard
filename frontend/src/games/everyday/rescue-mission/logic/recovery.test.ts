@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { recoveryChance } from './recovery';
 import { scoreOrder, type RankItem } from '@/runtime/verbs/rank';
-import rescue from '@/content/scenarios/safe/rescue-mission.json';
+import rescue from '@/content/scenarios/protect/rescue-mission.json';
 
 const steps: RankItem[] = rescue.steps.map((s) => ({
   id: s.id,

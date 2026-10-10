@@ -4,7 +4,9 @@
 
 /* "Farm village" theme: warm, pixel-art look inspired by cozy farming games. */
 @theme {
-  --font-pixel: "Pixelify Sans", ui-monospace, "Courier New", monospace;
+  /* Pixelify has no Indic glyphs, so the Noto faces catch Telugu, Hindi and
+     Urdu text that lands in a pixel-styled panel. */
+  --font-pixel: "Pixelify Sans", "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Nastaliq Urdu", ui-monospace, "Courier New", monospace;
 
   --color-sky: #8fd3f4;
   --color-sky-deep: #5bb5e8;
@@ -79,8 +81,8 @@ body {
  * ui/components.tsx and the facilitator pages use them heavily.
  */
 @theme {
-  --font-sans: "Ubuntu", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Ubuntu Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "Ubuntu", "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Nastaliq Urdu", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Ubuntu Mono", "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Nastaliq Urdu", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Surfaces, darkest to lightest */
   --color-bg: #141c2e;
@@ -106,6 +108,29 @@ body {
   --color-bad: #ff5468;
   --color-info: #3dc8f5;
   --color-xp: #b57cff;
+
+  /* Fake phone (Stay Safe rooms): a light screen so it reads as a real phone on the dark page */
+  --color-phone-bezel: #0a0f1d;
+  --color-phone-screen: #f2f4f8;
+  --color-phone-card: #ffffff;
+  --color-phone-ink: #1a2133;
+  --color-phone-muted: #6b7489;
+  --color-phone-line: #dde2ec;
+  --color-phone-link: #1a6dff;
+  --color-phone-bubble: #e4e8f1;
+
+  --animate-banner-in: banner-in 0.35s ease-out both;
+  --animate-ring: ring 1s ease-in-out infinite;
+}
+
+@keyframes banner-in {
+  from { transform: translateY(-120%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes ring {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgb(163 234 42 / 0.5); }
+  50% { transform: scale(1.06); box-shadow: 0 0 0 14px rgb(163 234 42 / 0); }
 }
 
 @utility theme-dark {
@@ -529,4 +554,51 @@ body {
   .plan__long {
     @apply text-sm;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Right half of a room: a dark "device" stage the phone sits on, like a virtual desktop. */
+.device-stage {
+  background-color: #10182b;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgb(163 234 42 / 0.09), transparent 55%),
+    linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+}
+
+@keyframes star-pop {
+  0% { transform: scale(0.3) rotate(-25deg); opacity: 0; }
+  60% { transform: scale(1.25) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+@keyframes rise-in {
+  from { transform: translateY(14px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-star { animation: star-pop 0.55s ease-out both; }
+.animate-rise { animation: rise-in 0.5s ease-out both; }
+
+/* Confetti burst: pieces start at the middle of the window, pop up, then fall. */
+.confetti {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  border-radius: 2px;
+  opacity: 0;
+  animation-name: confetti-burst;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  animation-fill-mode: forwards;
+}
+@keyframes confetti-burst {
+  0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+  45% { transform: translate(calc(var(--dx) * 0.75), var(--dy1)) rotate(calc(var(--rot) * 0.5)); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy2)) rotate(var(--rot)); opacity: 0; }
 }

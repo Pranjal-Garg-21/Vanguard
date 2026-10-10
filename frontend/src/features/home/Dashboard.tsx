@@ -5,10 +5,11 @@
  * until LifePath, Arcade and Progress land).
  */
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 import {
   loadActiveProfile,
   recentEvents,
+  dismissNewUnlocks,
   refreshSyncStatus,
   switchPlayer,
   t,
@@ -18,7 +19,7 @@ import {
 } from '@/platform';
 import { ARCADE_SECTIONS, STAGES } from '@/content/stages';
 import { avatarEmoji } from '@/features/setup';
-import { Badge, Button, Card, ProgressBar, SectionLabel, Spinner } from '@/ui';
+import { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from '@/ui';
 import { summariseEvents } from './stats';
 
 const NAV = ['dashboard', 'learn', 'practice', 'compete'] as const;
@@ -44,6 +45,11 @@ export function Dashboard() {
   if (!profile) return <Navigate to="/" replace />;
 
   const stats = summariseEvents(events);
+  const opened: string[] = [];
+  for (const target of sync.newUnlocks) {
+    const name = STAGES.find((s) => s.id === target)?.name ?? ARCADE_SECTIONS.find((a) => a.id === target)?.name;
+    if (name) opened.push(name);
+  }
   const syncLabel = sync.state === 'pending' ? t('home.sync.pending', { count: sync.pending }) : t(`home.sync.${sync.state}`);
 
   return (
@@ -75,7 +81,7 @@ export function Dashboard() {
               <span className="text-brand">{stats.streak}</span> <span className="text-muted">d</span>
             </span>
             <span title={t('home.stats.xp')}>
-              <span className="text-brand">{stats.xp}</span> <span className="text-muted">XP</span>
+              <span className="text-brand">{stats.xp}</span> <span className="text-muted">{t('home.stats.xp')}</span>
             </span>
             <button
               type="button"
@@ -98,6 +104,15 @@ export function Dashboard() {
           <h1 className="text-2xl font-bold">{t('home.greeting', { name: profile.displayName })}</h1>
           <Badge tone={sync.state === 'synced' ? 'good' : sync.state === 'error' ? 'bad' : 'neutral'}>{syncLabel}</Badge>
         </div>
+
+        {opened.length > 0 && (
+          <Notice tone="info">
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-bold">{t('home.newUnlock', { names: opened.join(', ') })}</span>
+              <button type="button" className="text-sm font-bold text-brand" onClick={dismissNewUnlocks}>{t('home.dismiss')}</button>
+            </div>
+          </Notice>
+        )}
 
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           <Stat label={t('home.stats.streak')} value={stats.streak} />
@@ -149,14 +164,26 @@ export function Dashboard() {
             <section className="space-y-3">
               <SectionLabel>{t('home.practiceTitle')}</SectionLabel>
               <div className="grid gap-3 sm:grid-cols-3">
-                {ARCADE_SECTIONS.map((a) => (
-                  <div key={a.id} className="flex flex-col gap-2 rounded-xl border border-line bg-surface p-4">
-                    <Badge>{a.level}</Badge>
-                    <h3 className="font-bold">{a.name}</h3>
-                    <p className="flex-1 text-sm text-muted">{a.blurb}</p>
-                    <span className="text-xs font-bold text-muted uppercase">{t('home.soon')}</span>
-                  </div>
-                ))}
+                {ARCADE_SECTIONS.map((a) => {
+                  const playable = a.id === 'arcade.safe';
+                  const body = (
+                    <>
+                      <Badge>{a.level}</Badge>
+                      <h3 className="font-bold">{a.name}</h3>
+                      <p className="flex-1 text-sm text-muted">{a.blurb}</p>
+                      <span className={`text-xs font-bold uppercase ${playable ? 'text-brand' : 'text-muted'}`}>{playable ? t('home.play') : t('home.soon')}</span>
+                    </>
+                  );
+                  return playable ? (
+                    <Link key={a.id} to="/safe" className="flex flex-col gap-2 rounded-xl border border-line-strong bg-surface p-4 transition hover:border-brand">
+                      {body}
+                    </Link>
+                  ) : (
+                    <div key={a.id} className="flex flex-col gap-2 rounded-xl border border-line bg-surface p-4">
+                      {body}
+                    </div>
+                  );
+                })}
               </div>
             </section>
           </div>

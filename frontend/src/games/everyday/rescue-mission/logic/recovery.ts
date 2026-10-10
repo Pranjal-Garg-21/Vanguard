@@ -5,7 +5,7 @@
  * rendering, rather than being buried in a component.
  */
 
-import content from '@/content/scenarios/safe/rescue-mission.json';
+import content from '@/content/scenarios/protect/rescue-mission.json';
 
 export type RecoveryModel = typeof content.recovery;
 

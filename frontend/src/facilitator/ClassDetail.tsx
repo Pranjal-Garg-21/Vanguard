@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, useParams, useSearchParams } from 'react-router';
 import { Notice, Spinner } from '@/ui';
 import { supabaseOrThrow, type ClassRow } from './data';
 import { InsightsTab } from './tabs/InsightsTab';
@@ -16,7 +16,10 @@ type TabId = (typeof TABS)[number]['id'];
 export function ClassDetail() {
   const { id = '' } = useParams();
   const [cls, setCls] = useState<ClassRow | null | undefined>(undefined);
-  const [tab, setTab] = useState<TabId>('insights');
+  const [params] = useSearchParams();
+  const requested = params.get('tab');
+  const firstTab: TabId = TABS.some((t) => t.id === requested) ? (requested as TabId) : 'insights';
+  const [tab, setTab] = useState<TabId>(firstTab);
 
   useEffect(() => {
     supabaseOrThrow()
@@ -25,9 +28,7 @@ export function ClassDetail() {
       .eq('id', id)
       .maybeSingle()
       .then(({ data }) => {
-        const row = data as ClassRow | null;
-        setCls(row);
-        if (row) setTab('insights');
+        setCls(data as ClassRow | null);
       });
   }, [id]);
 

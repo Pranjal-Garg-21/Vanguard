@@ -1,4 +1,9 @@
 {
+  "account_takeover": {
+    "title": "When a friend's account is stolen",
+    "body": "A message that really comes from your friend's account may not come from your friend. A stolen account is used to ask their contacts for money, because the name and photo make it feel safe. Verify on a different channel before sending anything.",
+    "example": "\"Emergency, send ₹3,000, I'll return it tomorrow\" from your friend's number. Call them. If they do not pick up, do not send."
+  },
   "assets_that_earn": {
     "title": "Assets that earn money",
     "body": "Some things you buy put money in your pocket: a stall that sells, tools for paid work, a course that raises your pay. Others take money out: running costs, repairs, EMIs. Borrowing for an asset can make sense only if what it earns comfortably covers the repayments.",
@@ -73,6 +78,16 @@
     "title": "Where it actually went",
     "body": "Small amounts do not feel like spending, so they never get counted. Counting them is the only way to see them. The problem is almost never one big purchase.",
     "example": "₹20 of chai a day is ₹440 a month, and ₹5,280 a year. Nobody remembers spending ₹5,280 on chai."
+  },
+  "fake_kyc": {
+    "title": "Fake KYC updates",
+    "body": "KYC means the bank already knows who you are. A real bank never asks you to finish it through a link in an SMS, and never asks for your PIN or OTP to do it. A message that says your account closes today unless you tap a link is the scam, not the deadline.",
+    "example": "\"KYC expired. Account blocked in 24 hours. Update here.\" Nothing is expiring. Open your bank's own app, or walk into the branch and ask."
+  },
+  "fake_support": {
+    "title": "Fake customer care numbers",
+    "body": "Scammers buy ads and seed search results with helpline numbers that look official. Whoever answers will ask you to install a screen-sharing app, read out an OTP, or make a small \"test\" payment. Real support never needs any of those.",
+    "example": "Your payment failed, so you search for the helpline and call the first number. Use the number printed inside the official app instead."
   },
   "fees": {
     "title": "Fees eat returns",
@@ -234,6 +249,11 @@
     "body": "A Ponzi scheme pays early investors with money from new investors, not real profits. It looks like it works, until new money stops and it collapses. Most people lose everything.",
     "example": "\"Double Dhamaka\" pays the first members on time. That's what makes everyone else join."
   },
+  "qr_scam": {
+    "title": "QR codes only send money",
+    "body": "Scanning a QR code and entering your PIN pays money out. Nothing you scan and approve can pull money in. Anyone who sends a QR code so they can \"pay you\" is trying to take money from you.",
+    "example": "A buyer sends a QR code to pay for your cycle. Scanning it and entering your PIN sends them the money. Ask them to pay to your UPI ID instead."
+  },
   "real_estate": {
     "title": "Property (real estate)",
     "body": "Land and houses can grow in value and earn rent, but they cost a lot, take time to sell (illiquid), and come with taxes, paperwork and upkeep.",
@@ -243,6 +263,11 @@
     "title": "Real return",
     "body": "Your real return is what you earn after inflation. If savings pay 3.5% and prices rise 6%, your money is actually losing buying power.",
     "example": "Real return ≈ interest rate − inflation. 7% FD − 6% inflation ≈ 1% real growth."
+  },
+  "red_flags": {
+    "title": "Reading the red flags",
+    "body": "Almost every scam message carries the same few tells: a deadline, a threat, a reward you did not earn, a link that is nearly the right address, a request for a secret, and a stranger who wants the conversation moved somewhere private. Spotting two of them together is usually enough.",
+    "example": "\"Congratulations, you won. Claim in 2 hours. Share OTP to confirm.\" A prize you never entered, a clock, and a request for a secret: three flags in one line."
   },
   "risk_return": {
     "title": "Risk and return",
@@ -323,5 +348,10 @@
     "title": "Windfalls and lump sums",
     "body": "A windfall is unexpected or one-off money: a festival bonus, a gift, a scholarship paid all at once. Because it isn't part of your regular budget, it's easy to spend it all. A good rule: save most of it, enjoy a little.",
     "example": "A ₹3,000 scholarship arrives once a term. Treat it as three to six months of money, not one good weekend."
+  },
+  "wrong_transfer": {
+    "title": "The \"sent by mistake\" trick",
+    "body": "A stranger says money landed in your account by accident and begs you to send it back fast. Often nothing arrived, or it arrived from a stolen account and will be reversed, leaving you short by whatever you sent. Check your own balance first, and let the bank move the money back.",
+    "example": "Your balance has not changed, but the message insists ₹2,000 came in. Do not send anything. Tell the bank and let them sort it out."
   }
 }

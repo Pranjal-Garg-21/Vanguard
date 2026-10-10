@@ -20,7 +20,7 @@ import { Rank, type RankDetail, type RankItem } from '@/runtime/verbs/rank';
 import type { VerbOutcome } from '@/runtime/verbs/types';
 import { combine, type GameProps } from '../shared/game';
 import { conceptMap } from '@/runtime/verbs/types';
-import content from '@/content/scenarios/safe/rescue-mission.json';
+import content from '@/content/scenarios/protect/rescue-mission.json';
 import { recoveryChance } from './logic/recovery';
 
 export function RescueMission({ ctx, onComplete }: GameProps) {

@@ -1,0 +1,173 @@
+{
+  "id": "collect_request",
+  "mode": "act",
+  "concepts": [
+    "upi_collect"
+  ],
+  "level": 1,
+  "titleKey": "safe.collect01.title",
+  "briefKey": "safe.collect01.brief",
+  "phone": {
+    "startBalance": 3400,
+    "startTime": "17:05"
+  },
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.collect01.o1",
+      "when": "opened:chat"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.collect01.o2",
+      "when": "opened:request"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.collect01.o3",
+      "when": "inspectedAny:2"
+    },
+    {
+      "id": "o4",
+      "textKey": "safe.collect01.o4",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "chat",
+      "at": 800,
+      "surface": {
+        "type": "chat",
+        "from": "Rahul K.",
+        "online": true,
+        "concept": "upi_collect",
+        "body": [
+          {
+            "k": "safe.collect01.chat.a"
+          },
+          {
+            "k": "safe.collect01.chat.b",
+            "lens": "promise"
+          }
+        ],
+        "lens": [
+          {
+            "id": "promise",
+            "revealKey": "safe.collect01.lens.promise"
+          }
+        ],
+        "actions": [
+          {
+            "id": "wait",
+            "labelKey": "safe.collect01.a.wait",
+            "risk": "neutral",
+            "unlocks": [
+              "request"
+            ],
+            "delay": 2000
+          }
+        ]
+      }
+    },
+    {
+      "id": "request",
+      "surface": {
+        "type": "pay-request",
+        "fromName": "RAHUL K.",
+        "amount": 1200,
+        "noteKey": "safe.collect01.req.note",
+        "concept": "upi_collect",
+        "misconception": "pin_needed_to_receive",
+        "foreground": true,
+        "timeout": {
+          "ms": 15000,
+          "action": "expire"
+        },
+        "body": [
+          {
+            "k": "safe.collect01.req.who",
+            "lens": "payee"
+          },
+          {
+            "k": "safe.collect01.req.a",
+            "lens": "wording"
+          },
+          {
+            "k": "safe.collect01.req.pin",
+            "lens": "pin"
+          }
+        ],
+        "lens": [
+          {
+            "id": "payee",
+            "revealKey": "safe.collect01.lens.payee",
+            "tell": "mismatch"
+          },
+          {
+            "id": "wording",
+            "revealKey": "safe.collect01.lens.wording",
+            "tell": "pulls"
+          },
+          {
+            "id": "pin",
+            "revealKey": "safe.collect01.lens.pin",
+            "tell": "pin"
+          },
+          {
+            "id": "timer",
+            "revealKey": "safe.collect01.lens.timer",
+            "tell": "timer"
+          }
+        ],
+        "tells": [
+          {
+            "id": "pulls",
+            "kind": "pulls_money",
+            "whyKey": "safe.collect01.why.pulls"
+          },
+          {
+            "id": "pin",
+            "kind": "asks_secret",
+            "whyKey": "safe.collect01.why.pin"
+          },
+          {
+            "id": "mismatch",
+            "kind": "pretends",
+            "whyKey": "safe.collect01.why.mismatch"
+          },
+          {
+            "id": "timer",
+            "kind": "urgency",
+            "whyKey": "safe.collect01.why.timer"
+          }
+        ],
+        "actions": [
+          {
+            "id": "enter_pin",
+            "labelKey": "safe.collect01.a.pin",
+            "risk": "risky",
+            "effects": {
+              "money.bank": -1200
+            },
+            "end": "fooled",
+            "misconception": "pin_needed_to_receive"
+          },
+          {
+            "id": "decline",
+            "labelKey": "safe.collect01.a.decline",
+            "risk": "safe",
+            "end": "safe"
+          },
+          {
+            "id": "expire",
+            "labelKey": "safe.collect01.a.expire",
+            "risk": "safe",
+            "end": "safe"
+          }
+        ]
+      }
+    }
+  ],
+  "simulator": "upi"
+}

@@ -48,6 +48,35 @@ Where each key goes:
 
 `backend/.env` is git-ignored; `backend/.env.example` is the committed template. To make the CLI use these values, load them first: `set -a; source .env; set +a`.
 
+## Set up a facilitator and a demo class
+
+Facilitators cannot sign themselves up. An admin adds them once:
+
+1. In the Supabase dashboard open **Authentication, Users, Add user, Create new user**, enter the facilitator's email and tick *Auto confirm user*.
+2. Copy that user's **UID**, then in the **SQL Editor** run:
+   ```sql
+   insert into public.facilitators (id, display_name) values ('<the UID>', 'Their name');
+   ```
+3. The facilitator opens `/facilitator`, enters their email, and signs in with the code or link from the email.
+4. **Optional, for a demo:** run the whole of `supabase/demo_seed.sql` once in the SQL Editor, then:
+   ```sql
+   select seed_demo_class('<the UID>');
+   ```
+   This adds a class called "Demo class (sample data)" with 24 made-up students and about 1,600 answers, so the dashboard is not empty. Remove it again with `select unseed_demo_class('<the UID>');`.
+
+## Check that sync can work
+
+The student app uploads events to the `ingest` function. From the project folder, this should print `200` (a `404` means the function is not deployed yet):
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" -X OPTIONS "https://<your-project-ref>.supabase.co/functions/v1/ingest" \
+  -H "Origin: http://localhost:5173" -H "Access-Control-Request-Method: POST"
+```
+
+A class only accepts events once a facilitator has created it **and** confirmed consent (`classes.consent_confirmed = true`). An unknown or unconfirmed join code makes `ingest` answer `404`, and the app then marks that code as invalid and stops sending.
+
+In the app, open `/dev` and press **Sync now** to see the sync state, the number of events waiting and the last error.
+
 ## Run locally (optional, needs Docker)
 
 ```bash

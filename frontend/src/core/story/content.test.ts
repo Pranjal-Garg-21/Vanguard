@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { newLife, type Action } from '@/core/engine';
 import { buildingAt, LEGEND, tileAt, type MapDef } from '@/core/world';
 import { PAISAPUR } from '@/core/world/paisapur';
-import { AUTOS, BADGES, CONCEPTS, MISCONCEPTIONS, PANELS, QUIZ, SCRIPTS } from './content';
+import { AUTOS, BADGES, CONCEPTS, MISCONCEPTIONS, PANELS, QUIZ, SCRIPTS, STORY_CONCEPTS } from './content';
 import { DUELS } from './duel';
 import { evalCond, walkSteps, type Step } from './index';
 
@@ -111,10 +111,12 @@ describe('concepts and quiz', () => {
     }
   });
 
+  // Stay Safe teaches a few concepts of its own (marked `game` in
+  // concepts.json); the story only answers for the rest.
   it('every concept is taught somewhere in the story', () => {
     const taught = new Set<string>();
     for (const steps of Object.values(SCRIPTS)) walkSteps(steps, (s) => 'concept' in s && taught.add(s.concept));
-    expect(CONCEPTS.filter((c) => !taught.has(c.id)).map((c) => c.id)).toEqual([]);
+    expect(STORY_CONCEPTS.filter((c) => !taught.has(c.id)).map((c) => c.id)).toEqual([]);
   });
 });
 

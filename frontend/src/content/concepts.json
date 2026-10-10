@@ -355,6 +355,48 @@
       "icon": "🚑"
     },
     {
+      "id": "fake_kyc",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "📄",
+      "game": "safe"
+    },
+    {
+      "id": "red_flags",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "🚩",
+      "game": "safe"
+    },
+    {
+      "id": "wrong_transfer",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "↩️",
+      "game": "safe"
+    },
+    {
+      "id": "qr_scam",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "🔳",
+      "game": "safe"
+    },
+    {
+      "id": "account_takeover",
+      "pillar": "safe",
+      "chapter": 3,
+      "icon": "👥",
+      "game": "safe"
+    },
+    {
+      "id": "fake_support",
+      "pillar": "safe",
+      "chapter": 4,
+      "icon": "☎️",
+      "game": "safe"
+    },
+    {
       "id": "income_tax",
       "pillar": "plan",
       "chapter": 6,

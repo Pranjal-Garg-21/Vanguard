@@ -6,7 +6,7 @@
 import { describe, expect, it } from 'vitest';
 import { GOAL_DEFS, monthlyNeeds, netWorth, newLife, reduce, type Action, type GoalId, type IncomeSource, type LifeState } from '@/core/engine';
 import { simulateKabir } from '@/core/rival';
-import { AUTOS, CONCEPTS, quizById, SCRIPTS } from './content';
+import { AUTOS, quizById, SCRIPTS, STORY_CONCEPTS } from './content';
 import { pendingAuto, runScript, type Host } from './index';
 
 type Setup = { goal: GoalId; source: IncomeSource; stage?: 'school' | 'college'; loseDuels?: boolean };
@@ -225,7 +225,7 @@ describe('a full year in Paisapur', () => {
         expect(kabir.goal.id).toBe(s.goalsDone[0] ?? s.goal.id);
         expect(netWorth(kabir)).toBeLessThan(netWorth(s));
         // The year taught most of the Journal (some lessons sit behind optional branches).
-        expect(Object.keys(s.journal).length).toBeGreaterThan(CONCEPTS.length * 0.75);
+        expect(Object.keys(s.journal).length).toBeGreaterThan(STORY_CONCEPTS.length * 0.75);
       });
     }
   }
