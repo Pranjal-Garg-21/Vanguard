@@ -1,0 +1,14 @@
+{
+  "glossary.interest.term": "Interest",
+  "glossary.interest.def": "The price paid for using someone else's money.",
+  "glossary.principal.term": "Principal",
+  "glossary.principal.def": "The original amount of money you save or borrow.",
+  "glossary.simple_interest.term": "Simple interest",
+  "glossary.simple_interest.def": "Interest paid only on the original amount.",
+  "glossary.compound_interest.term": "Compound interest",
+  "glossary.compound_interest.def": "Interest paid on the original amount and on earlier interest.",
+  "glossary.rate.term": "Rate",
+  "glossary.rate.def": "The interest charged or earned, as a percentage per year.",
+  "glossary.rule_of_72.term": "Rule of 72",
+  "glossary.rule_of_72.def": "Divide 72 by the rate to estimate years to double."
+}

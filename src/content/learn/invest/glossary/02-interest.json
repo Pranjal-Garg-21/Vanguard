@@ -1,0 +1,8 @@
+[
+  { "id": "interest", "termKey": "glossary.interest.term", "defKey": "glossary.interest.def", "lesson": "lesson_interest" },
+  { "id": "principal", "termKey": "glossary.principal.term", "defKey": "glossary.principal.def", "lesson": "lesson_interest" },
+  { "id": "simple_interest", "termKey": "glossary.simple_interest.term", "defKey": "glossary.simple_interest.def", "lesson": "lesson_interest" },
+  { "id": "compound_interest", "termKey": "glossary.compound_interest.term", "defKey": "glossary.compound_interest.def", "lesson": "lesson_interest" },
+  { "id": "rate", "termKey": "glossary.rate.term", "defKey": "glossary.rate.def", "lesson": "lesson_interest" },
+  { "id": "rule_of_72", "termKey": "glossary.rule_of_72.term", "defKey": "glossary.rule_of_72.def", "lesson": "lesson_interest" }
+]

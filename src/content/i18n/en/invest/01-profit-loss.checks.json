@@ -1,0 +1,36 @@
+{
+  "check.profit_loss_01.stem": "Ravi buys a cap for {buy} and sells it for {sell}. What is his profit?",
+  "check.profit_loss_01.opt.a": "{answer}",
+  "check.profit_loss_01.opt.b": "{sell}",
+  "check.profit_loss_01.opt.c": "{buy}",
+  "check.profit_loss_01.opt.d": "{sum}",
+  "check.profit_loss_01.why": "Profit is what you sell for minus what you paid. {sell} minus {buy} is {answer}.",
+
+  "check.profit_loss_02.stem": "Sana buys shares worth {buy}. Later they are worth {now}. What is her return?",
+  "check.profit_loss_02.opt.a": "{answer}",
+  "check.profit_loss_02.opt.b": "30%",
+  "check.profit_loss_02.opt.c": "300%",
+  "check.profit_loss_02.opt.d": "13%",
+  "check.profit_loss_02.why": "Return is profit divided by what you paid. Here {profit} divided by {buy} is {answer}. Dividing by the new value is a common slip.",
+
+  "check.profit_loss_03.stem": "Asha gains {g1} on {b1}. Imran gains {g2} on {b2}. Who had the higher return?",
+  "check.profit_loss_03.opt.a": "Asha: {r1} against {r2}",
+  "check.profit_loss_03.opt.b": "Imran, because he gained more rupees",
+  "check.profit_loss_03.opt.c": "Both are equal",
+  "check.profit_loss_03.opt.d": "They cannot be compared",
+  "check.profit_loss_03.why": "Return compares the gain to the amount put in. Asha earned {r1} and Imran earned {r2}. Imran made more rupees, but on a much bigger amount.",
+
+  "check.profit_loss_04.stem": "A price falls by {fall}. What rise brings it back to where it started?",
+  "check.profit_loss_04.opt.a": "{answer}",
+  "check.profit_loss_04.opt.b": "{fall}",
+  "check.profit_loss_04.opt.c": "25%",
+  "check.profit_loss_04.opt.d": "150%",
+  "check.profit_loss_04.why": "After a fall of {fall} you hold half of what you started with. To double it again you need a rise of {answer}.",
+
+  "check.profit_loss_05.stem": "A price falls by {fall}. What rise is needed to get back to the start?",
+  "check.profit_loss_05.opt.a": "{fall}",
+  "check.profit_loss_05.opt.b": "{answer}",
+  "check.profit_loss_05.opt.c": "30%",
+  "check.profit_loss_05.opt.d": "80%",
+  "check.profit_loss_05.why": "A fall of {fall} leaves you with 80 out of every 100. To get back to 100, you need 20 more on top of 80. That is a rise of {answer}."
+}

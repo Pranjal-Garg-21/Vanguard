@@ -1,0 +1,12 @@
+{
+  "glossary.profit.term": "Profit",
+  "glossary.profit.def": "Money left after paying all your costs.",
+  "glossary.loss.term": "Loss",
+  "glossary.loss.def": "When you end up with less money than you started with.",
+  "glossary.return.term": "Return",
+  "glossary.return.def": "Profit as a percentage of the money you put in.",
+  "glossary.paper_gain.term": "Paper gain or loss",
+  "glossary.paper_gain.def": "A gain or loss on something you still hold and have not sold.",
+  "glossary.realised.term": "Realised",
+  "glossary.realised.def": "A gain or loss that is locked in because you sold."
+}

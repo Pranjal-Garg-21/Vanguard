@@ -1,0 +1,7 @@
+[
+  { "id": "profit", "termKey": "glossary.profit.term", "defKey": "glossary.profit.def", "lesson": "lesson_profit_loss" },
+  { "id": "loss", "termKey": "glossary.loss.term", "defKey": "glossary.loss.def", "lesson": "lesson_profit_loss" },
+  { "id": "return", "termKey": "glossary.return.term", "defKey": "glossary.return.def", "lesson": "lesson_profit_loss" },
+  { "id": "paper_gain", "termKey": "glossary.paper_gain.term", "defKey": "glossary.paper_gain.def", "lesson": "lesson_profit_loss" },
+  { "id": "realised", "termKey": "glossary.realised.term", "defKey": "glossary.realised.def", "lesson": "lesson_profit_loss" }
+]

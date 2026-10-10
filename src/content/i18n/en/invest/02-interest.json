@@ -1,0 +1,13 @@
+{
+  "lesson.interest.hook": "Sana puts {P} in a savings plan that pays {r} a year. How much will she have after {years} years?",
+  "lesson.interest.define": "**Interest** is the price of using money. **Simple interest** is paid only on the money you started with. **Compound interest** is paid on your money and on the interest you already earned.",
+  "lesson.interest.analogy": "Picture two mango trees. The first gives fruit only from its own branches. The second drops seeds, and every seed grows into a new tree that gives fruit too. Compound interest is the second tree.",
+  "lesson.interest.worked": "With simple interest, Sana has {simple} after {years} years. With compound interest she has {comp}. The extra {extra} is interest earned on interest.",
+  "lesson.interest.predict.q": "You save {monthly} every month for {years} years at {sipRate} a year. You put in {put}. What will it be worth?",
+  "lesson.interest.predict.explain": "It is worth about {sip}. Different rates give different results, so a fair range is {sipLo} to {sipHi}. Everything above {put} is interest, and much of it is interest on interest.",
+  "lesson.interest.early": "Two friends save {monthly} a month at {sipRate} a year. Asha starts at {startEarly} and Ravi starts at {startLate}. Both stop at {stopAge}. Asha puts in {putEarly} and ends with {early}. Ravi puts in {putLate} and ends with {late}. Asha ends with about {ratio} times as much money, though she saved only {putRatio} times as much.",
+  "lesson.interest.tradeoff": "Compounding rewards patience. Starting early can matter more than saving extra later. The same effect works against you on a loan, where interest on interest makes the debt grow.",
+  "lesson.interest.mistake.flat": "Some people think interest is always a flat percentage of the money they put in. Most savings plans and loans use compound interest, so the amount grows faster over time.",
+  "lesson.interest.mistake.late": "Some people think starting ten years later is almost the same. It is not. Ravi starts only {gap} years later, but he ends with far less than half of Asha's money.",
+  "lesson.interest.formula": "Simple: A = P × (1 + r × t). Compound, once a year: A = P × (1 + r)^t. Rule of 72: years to double ≈ 72 ÷ rate. At {ratePct}%, money doubles in about {double} years."
+}
