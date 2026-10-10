@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "currency": "INR",
+  "disclaimerKey": "banner.simulation",
+  "inflation": {
+    "base": 0.06,
+    "low": 0.04,
+    "high": 0.08,
+    "labelKey": "assume.inflation"
+  },
+  "assets": {
+    "steady_box": {
+      "kind": "deposit_like",
+      "meanAnnual": 0.065,
+      "volAnnual": 0.015,
+      "fee": 0,
+      "labelKey": "asset.steady_box"
+    },
+    "mixed_basket": {
+      "kind": "diversified",
+      "meanAnnual": 0.1,
+      "volAnnual": 0.1,
+      "fee": 0.005,
+      "labelKey": "asset.mixed_basket"
+    },
+    "bumpy_ride": {
+      "kind": "concentrated",
+      "meanAnnual": 0.13,
+      "volAnnual": 0.22,
+      "fee": 0.005,
+      "labelKey": "asset.bumpy_ride"
+    },
+    "gold": {
+      "kind": "commodity",
+      "meanAnnual": 0.08,
+      "volAnnual": 0.14,
+      "fee": 0,
+      "labelKey": "asset.gold"
+    },
+    "property": {
+      "kind": "real_asset",
+      "meanAnnual": 0.08,
+      "volAnnual": 0.06,
+      "fee": 0,
+      "labelKey": "asset.property"
+    }
+  },
+  "funds": {
+    "index_basket": { "style": "index", "costYearly": 0.005, "labelKey": "fund.index_basket" },
+    "active_growth": { "style": "active", "costYearly": 0.02, "labelKey": "fund.active_growth" },
+    "sector_focus": { "style": "sector", "costYearly": 0.015, "labelKey": "fund.sector_focus" },
+    "index_etf": { "style": "etf", "costYearly": 0.004, "tradingCost": 0.001, "labelKey": "fund.index_etf" }
+  },
+  "costs": {
+    "tradeFee": 0.005,
+    "makingCharge": 0.12,
+    "propertySellCost": 0.06,
+    "propertyUpfront": 0.08
+  },
+  "simulation": {
+    "futuresRuns": 500,
+    "maxMonthlyMove": 0.6,
+    "regimes": {
+      "calm": { "driftMult": 1.0, "volMult": 1.0 },
+      "boom": { "driftMult": 1.6, "volMult": 1.2 },
+      "crash": { "driftMult": -2.0, "volMult": 2.0 }
+    },
+    "regimeTransitions": {
+      "calm": { "calm": 0.9, "boom": 0.07, "crash": 0.03 },
+      "boom": { "calm": 0.7, "boom": 0.25, "crash": 0.05 },
+      "crash": { "calm": 0.6, "boom": 0.1, "crash": 0.3 }
+    }
+  }
+}

@@ -214,7 +214,7 @@ Fourteen topics, in teaching order. For each: the key ideas, the analogy and wor
 
 **Ideas:** prices rise over time, so the same rupees buy less. **Real return** = nominal return − inflation (approximately). A savings number going up can still mean you got poorer.
 **Analogy:** chai ₹5 → ₹20 across a generation.
-**Worked example:** ₹1,000 buys 50 chais at ₹20. At 6% inflation for 10 years chai costs about ₹36, so the same ₹1,000 buys about 28 cups. If the money earned 4% in a safe place, its **real** return is about −2%.
+**Worked example:** ₹1,000 buys 50 chais at ₹20. At 6% inflation for 10 years chai costs about ₹36, so the same ₹1,000 buys 27 whole cups (27.9 exactly). If the money earned 4% in a safe place, its **real** return is about −2%.
 **Misconception:** `money_in_box_is_safe`.
 **Practice:** Chai Price Time Travel (UC-INV-01); every projection offers an inflation-adjusted toggle.
 **Student can:** say why "safe" is not the same as "keeps its value", and compute a real return.
@@ -470,7 +470,7 @@ Pure TypeScript, no UI, no React, fully unit tested. Lives in `src/games/investi
 
 ### 8.1 Rules
 
-- Money is handled in **paise as integers** inside the engine and converted to ₹ at the display edge, to avoid floating-point drift in compounding.
+- Money is plain rupee numbers. Values that stand for a real payment (a bond coupon, a trade fee shown to the student) are rounded to paise with `round2`; chained calculations stay unrounded and are rounded only at the display edge. (Changed from the original "paise integers" idea: float error is negligible at student amounts, and `10000 × 0.07 = 700.0000000000001` showed rounding is only needed where a payment is shown.)
 - Every function states its compounding convention in its doc comment.
 - Every worked example in a lesson is **generated from these functions in a test** (the lesson JSON stores inputs, the test checks the stated outputs). No number in a lesson can silently disagree with the math.
 
