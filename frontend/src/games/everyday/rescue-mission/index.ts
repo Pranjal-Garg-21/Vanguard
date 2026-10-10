@@ -1,12 +1,22 @@
 /**
- * Rescue Mission (S6): order the steps after losing money to fraud.
+ * Rescue Mission (S6): the order to act in when money is lost to fraud.
  * Use case: UC-SAFE-10 · Owner: P3
  *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
+ * Built here rather than in games/safe/ because it runs on the Rank verb
+ * (work_division §P3.6).
  */
+import content from '@/content/scenarios/safe/rescue-mission.json';
+import { defineGame } from '../shared/game';
+import { RescueMission } from './RescueMission';
 
-export {};
+export { RescueMission } from './RescueMission';
+export { recoveryChance, type RecoveryModel } from './logic/recovery';
+
+export const rescueMission = defineGame({
+  id: content.id,
+  useCase: 'UC-SAFE-10',
+  verbs: ['rank'],
+  concepts: content.concepts,
+  levels: [1, 2, 3],
+  Component: RescueMission,
+});

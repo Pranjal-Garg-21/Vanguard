@@ -4,8 +4,9 @@
  */
 import type { MiniGame } from '@/core/types';
 import { exampleGame } from './example';
+import { everydayGames } from './everyday';
 
-const games: MiniGame[] = [exampleGame];
+const games: MiniGame[] = [exampleGame, ...everydayGames];
 
 const byId = new Map(games.map((g) => [g.id, g]));
 

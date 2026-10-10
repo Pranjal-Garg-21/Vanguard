@@ -4,7 +4,7 @@
  */
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, useParams } from 'react-router';
-import { ArcadeHub } from '@/features/arcade';
+import { ArcadeHub, ArcadeRoute } from '@/features/arcade';
 import { Landing } from '@/features/landing';
 import { BaselineFlow } from '@/features/onboarding';
 import { PaisapurGame } from '@/features/paisapur';
@@ -12,7 +12,7 @@ import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
 import { TileInspector } from './TileInspector';
-import { StudentHome } from './StudentHome';
+import { Dashboard } from '@/features/home';
 
 // Lazy so students never download the dashboard.
 const FacilitatorApp = lazy(() => import('@/facilitator/FacilitatorApp'));
@@ -27,13 +27,15 @@ export const router = createBrowserRouter([
   { path: '/', element: <Landing /> },
   { path: '/onboarding', element: <BaselineFlow /> },
   { path: '/arcade', element: <ArcadeHub /> },
+  // The Everyday Money section of the Arcade (P3). ArcadeHub links here.
+  { path: '/arcade/everyday', element: <ArcadeRoute /> },
   { path: '/play', element: <PaisapurGame /> },
   { path: '/village', element: <Navigate to="/play" replace /> },
   { path: '/welcome', element: <WelcomeScreen /> },
   { path: '/setup', element: <SetupFlow /> },
   { path: '/who', element: <PlayerPicker /> },
   { path: '/join/:code', element: <JoinLink /> },
-  { path: '/home', element: <StudentHome /> },
+  { path: '/home', element: <Dashboard /> },
   { path: '/dev', element: <DevHome /> },
   { path: '/dev/tiles', element: <TileInspector /> },
   {

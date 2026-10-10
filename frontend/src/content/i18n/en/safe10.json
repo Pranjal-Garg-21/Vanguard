@@ -1,0 +1,43 @@
+{
+  "hook": "Your friend Imran just paid ₹2,000 for a job registration fee. The website has disappeared. He is sitting next to you, and he does not know what to do.",
+  "prompt": "Help him. Put the steps in the order he should do them.",
+  "summary": "You know the order now. The first hour matters most.",
+  "call_1930": {
+    "text": "Call 1930",
+    "why": "First, always. 1930 is the national cybercrime helpline. The sooner they have the details, the better the chance the money can be frozen before it moves on."
+  },
+  "bank_block": {
+    "text": "Tell the bank and block the card or account",
+    "why": "Second. The bank can stop anything else leaving the account while the rest is sorted out."
+  },
+  "portal": {
+    "text": "Report it at cybercrime.gov.in",
+    "why": "Third. This creates the official record. The phone call is fast; the portal makes it formal."
+  },
+  "evidence": {
+    "text": "Save screenshots of everything",
+    "why": "The messages, the website, the payment. Save them before they vanish — fake sites are taken down quickly."
+  },
+  "trusted_adult": {
+    "text": "Tell a parent, teacher or trusted adult",
+    "why": "Not a step to skip out of embarrassment. Losing money to a scam is not a sign of being foolish — these are designed by people who do this full time."
+  },
+  "warn_others": {
+    "text": "Warn friends and family",
+    "why": "The same fake site is being sent to other people right now. One message from you can stop the next one."
+  },
+  "concept": {
+    "recovery": "If money is lost to fraud, call 1930 first and report at cybercrime.gov.in. Acting in the first hour gives the best chance of getting it back."
+  },
+  "result": {
+    "fast": "You moved fast and got the order right. That gives Imran the best chance of seeing his ₹2,000 again.",
+    "good_order": "The order was right. Next time, even faster — the first hour matters most.",
+    "wrong_order": "Close. Look at what goes first: the helpline call comes before everything else, because it is what can still stop the money.",
+    "chance": "Chance of recovering the money: {percent}%",
+    "saved": "These steps are now saved on your home screen. They work without internet."
+  },
+  "helpcard": {
+    "title": "If money is lost to fraud",
+    "footer": "1930 is free to call. cybercrime.gov.in is the official portal. It is never too late to report."
+  }
+}

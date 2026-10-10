@@ -10,5 +10,6 @@
   "one_loan": "You already have a bank loan.",
   "already": "You already have this.",
   "worked": "You've already worked this month.",
-  "unknown": "That didn't work."
+  "unknown": "That didn't work.",
+  "missing_game": "That activity is not available yet ({id})."
 }

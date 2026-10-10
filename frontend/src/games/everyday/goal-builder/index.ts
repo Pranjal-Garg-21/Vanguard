@@ -1,12 +1,27 @@
 /**
- * Goal Builder (S2): plan months to a savings goal.
+ * Goal Builder (S2): turn the character's goal into a plan with a date.
  * Use case: UC-PB-03 · Owner: P3
- *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
  */
+import content from '@/content/scenarios/plan/goal-builder.json';
+import { defineGame } from '../shared/game';
+import { GoalBuilder } from './GoalBuilder';
 
-export {};
+export { GoalBuilder } from './GoalBuilder';
+export {
+  buildPlan,
+  festivalFor,
+  scorePrediction,
+  predictionOptions,
+  FESTIVALS,
+  LIFEPATH_MONTHS,
+  type GoalPlan,
+} from './logic/timeline';
+
+export const goalBuilder = defineGame({
+  id: content.id,
+  useCase: 'UC-PB-03',
+  verbs: ['commit', 'predict'],
+  concepts: content.concepts,
+  levels: [1, 2, 3],
+  Component: GoalBuilder,
+});

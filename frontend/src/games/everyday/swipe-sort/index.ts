@@ -1,12 +1,19 @@
 /**
- * Needs vs Wants Swipe Sort (S2).
+ * Needs vs Wants Swipe Sort (S2): sort spending, and see that context matters.
  * Use case: UC-PB-01 · Owner: P3
- *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
  */
+import content from '@/content/scenarios/plan/swipe-sort.json';
+import { defineGame } from '../shared/game';
+import { SwipeSort } from './SwipeSort';
 
-export {};
+export { SwipeSort } from './SwipeSort';
+export { detectFunIsBad, FUN_CARDS, type FunRecord } from './logic/fun';
+
+export const swipeSort = defineGame({
+  id: content.id,
+  useCase: 'UC-PB-01',
+  verbs: ['triage'],
+  concepts: content.concepts,
+  levels: [1, 2, 3],
+  Component: SwipeSort,
+});

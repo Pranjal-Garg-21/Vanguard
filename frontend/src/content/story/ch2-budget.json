@@ -1,474 +1,492 @@
 {
-  "prof_ch2": [
+ "prof_ch2": [
+  {
+   "once": "ch2_intro",
+   "do": [
     {
-      "once": "ch2_intro",
-      "do": [
-        {
-          "say": "story.c2.prof1",
-          "who": "professor"
-        },
-        {
-          "concept": "needs_wants"
-        },
-        {
-          "say": "story.c2.prof2",
-          "who": "professor"
-        },
-        {
-          "concept": "budgeting"
-        },
-        {
-          "say": "story.c2.prof3",
-          "who": "professor"
-        },
-        {
-          "concept": "opportunity_cost"
-        },
-        {
-          "if": "!flag:goal_done",
-          "then": [
-            {
-              "say": "story.c2.prof_plan",
-              "who": "professor"
-            }
-          ]
-        },
-        {
-          "say": "story.c2.prof_whatif",
-          "who": "professor"
-        },
-        {
-          "say": "story.c2.prof4",
-          "who": "professor"
-        },
-        {
-          "objective": "objective.ch2_month"
-        }
-      ]
+     "say": "story.c2.prof1",
+     "who": "professor"
     },
     {
-      "if": "monthsInChapter>=1",
-      "then": [
-        {
-          "once": "pyf_lesson",
-          "do": [
-            {
-              "checkpoint": "checkpoint.autosave"
-            },
-            {
-              "say": "story.c2.prof_pyf1",
-              "who": "professor"
-            },
-            {
-              "concept": "pay_yourself_first"
-            },
-            {
-              "choice": [
-                {
-                  "label": "choice.autosave_100",
-                  "log": {
-                    "concept": "pay_yourself_first",
-                    "choice": "autosave_100",
-                    "correct": true
-                  },
-                  "do": [
-                    {
-                      "do": {
-                        "type": "setAutoSave",
-                        "amount": 100
-                      }
-                    },
-                    {
-                      "say": "story.c2.pyf_set",
-                      "who": "professor"
-                    }
-                  ]
-                },
-                {
-                  "label": "choice.autosave_200",
-                  "log": {
-                    "concept": "pay_yourself_first",
-                    "choice": "autosave_200",
-                    "correct": true
-                  },
-                  "do": [
-                    {
-                      "do": {
-                        "type": "setAutoSave",
-                        "amount": 200
-                      }
-                    },
-                    {
-                      "say": "story.c2.pyf_set",
-                      "who": "professor"
-                    }
-                  ]
-                },
-                {
-                  "label": "choice.autosave_300",
-                  "log": {
-                    "concept": "pay_yourself_first",
-                    "choice": "autosave_300",
-                    "correct": true
-                  },
-                  "do": [
-                    {
-                      "do": {
-                        "type": "setAutoSave",
-                        "amount": 300
-                      }
-                    },
-                    {
-                      "say": "story.c2.pyf_set",
-                      "who": "professor"
-                    }
-                  ]
-                },
-                {
-                  "label": "choice.autosave_none",
-                  "log": {
-                    "concept": "pay_yourself_first",
-                    "choice": "none",
-                    "correct": false,
-                    "misconception": "save_what_is_left"
-                  },
-                  "do": [
-                    {
-                      "say": "story.c2.pyf_later",
-                      "who": "professor"
-                    }
-                  ]
-                }
-              ],
-              "prompt": "story.c2.q_autosave",
-              "who": "professor"
-            },
-            {
-              "objective": "objective.ch2_month2"
-            }
-          ]
-        }
-      ]
+     "concept": "needs_wants"
     },
     {
-      "say": "story.c2.prof_hint",
-      "who": "professor"
+     "minigame": "swipe-sort",
+     "level": 1
+    },
+    {
+     "concept": "context_dependence"
+    },
+    {
+     "say": "story.c2.prof2",
+     "who": "professor"
+    },
+    {
+     "concept": "budgeting"
+    },
+    {
+     "minigame": "jar-split",
+     "level": 1
+    },
+    {
+     "concept": "fixed_vs_variable"
+    },
+    {
+     "say": "story.c2.prof3",
+     "who": "professor"
+    },
+    {
+     "concept": "opportunity_cost"
+    },
+    {
+     "minigame": "goal-builder",
+     "level": 1
+    },
+    {
+     "if": "!flag:goal_done",
+     "then": [
+      {
+       "say": "story.c2.prof_plan",
+       "who": "professor"
+      }
+     ]
+    },
+    {
+     "say": "story.c2.prof_whatif",
+     "who": "professor"
+    },
+    {
+     "say": "story.c2.prof4",
+     "who": "professor"
+    },
+    {
+     "objective": "objective.ch2_month"
     }
-  ],
-  "anwar": [
+   ]
+  },
+  {
+   "if": "monthsInChapter>=1",
+   "then": [
     {
-      "once": "anwar_intro",
-      "do": [
+     "once": "pyf_lesson",
+     "do": [
+      {
+       "checkpoint": "checkpoint.autosave"
+      },
+      {
+       "say": "story.c2.prof_pyf1",
+       "who": "professor"
+      },
+      {
+       "concept": "pay_yourself_first"
+      },
+      {
+       "choice": [
         {
-          "say": "story.c2.anwar1",
-          "who": "anwar"
+         "label": "choice.autosave_100",
+         "log": {
+          "concept": "pay_yourself_first",
+          "choice": "autosave_100",
+          "correct": true
+         },
+         "do": [
+          {
+           "do": {
+            "type": "setAutoSave",
+            "amount": 100
+           }
+          },
+          {
+           "say": "story.c2.pyf_set",
+           "who": "professor"
+          }
+         ]
         },
         {
-          "say": "story.c2.anwar2",
-          "who": "anwar"
+         "label": "choice.autosave_200",
+         "log": {
+          "concept": "pay_yourself_first",
+          "choice": "autosave_200",
+          "correct": true
+         },
+         "do": [
+          {
+           "do": {
+            "type": "setAutoSave",
+            "amount": 200
+           }
+          },
+          {
+           "say": "story.c2.pyf_set",
+           "who": "professor"
+          }
+         ]
         },
         {
-          "concept": "gst"
+         "label": "choice.autosave_300",
+         "log": {
+          "concept": "pay_yourself_first",
+          "choice": "autosave_300",
+          "correct": true
+         },
+         "do": [
+          {
+           "do": {
+            "type": "setAutoSave",
+            "amount": 300
+           }
+          },
+          {
+           "say": "story.c2.pyf_set",
+           "who": "professor"
+          }
+         ]
+        },
+        {
+         "label": "choice.autosave_none",
+         "log": {
+          "concept": "pay_yourself_first",
+          "choice": "none",
+          "correct": false,
+          "misconception": "save_what_is_left"
+         },
+         "do": [
+          {
+           "say": "story.c2.pyf_later",
+           "who": "professor"
+          }
+         ]
         }
-      ]
-    },
-    {
-      "if": "month>=2",
-      "then": [
-        {
-          "once": "inflation_seen",
-          "do": [
-            {
-              "say": "story.c2.anwar_inflation",
-              "who": "anwar"
-            },
-            {
-              "concept": "inflation"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "choice": [
-        {
-          "label": "choice.shop",
-          "do": [
-            {
-              "open": "shop:zaroorat"
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_buy",
-          "when": "goalAt:anwar && !flag:goal_done",
-          "do": [
-            {
-              "call": "goal_buy"
-            }
-          ]
-        },
-        {
-          "label": "choice.challenge",
-          "when": "chapter==2 && monthsInChapter>=2",
-          "do": [
-            {
-              "say": "story.c2.anwar_challenge",
-              "who": "anwar"
-            },
-            {
-              "quiz": [
-                "budget_needs",
-                "budget_rule",
-                "budget_sale",
-                "budget_first"
-              ],
-              "pass": 3,
-              "then": [
-                {
-                  "say": "story.c2.anwar_pass",
-                  "who": "anwar"
-                },
-                {
-                  "badge": "budget"
-                },
-                {
-                  "chapter": 3
-                },
-                {
-                  "objective": "objective.ch3_home"
-                }
-              ],
-              "else": [
-                {
-                  "say": "story.c2.anwar_fail",
-                  "who": "anwar"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "label": "choice.bye"
-        }
-      ],
-      "prompt": "story.c2.anwar_menu",
-      "who": "anwar"
+       ],
+       "prompt": "story.c2.q_autosave",
+       "who": "professor"
+      },
+      {
+       "objective": "objective.ch2_month2"
+      }
+     ]
     }
-  ],
-  "shauq": [
+   ]
+  },
+  {
+   "say": "story.c2.prof_hint",
+   "who": "professor"
+  }
+ ],
+ "anwar": [
+  {
+   "once": "anwar_intro",
+   "do": [
     {
-      "once": "shauq_intro",
-      "do": [
-        {
-          "say": "story.c2.shauq1",
-          "who": "shauq"
-        },
-        {
-          "concept": "sales_tricks"
-        }
-      ]
+     "say": "story.c2.anwar1",
+     "who": "anwar"
     },
     {
-      "if": "chapter==2 && goalKind:consumption && !flag:goal_done && account",
-      "then": [
-        {
-          "once": "emi_offer",
-          "do": [
-            {
-              "checkpoint": "checkpoint.emi_offer"
-            },
-            {
-              "say": "story.c2.shauq_emi",
-              "who": "shauq"
-            },
-            {
-              "choice": [
-                {
-                  "label": "choice.emi_take",
-                  "log": {
-                    "concept": "delayed_gratification",
-                    "choice": "buy_now_card",
-                    "correct": false,
-                    "misconception": "buy_now_pay_later_is_free"
-                  },
-                  "do": [
-                    {
-                      "do": {
-                        "type": "buyGoal",
-                        "onCard": true
-                      }
-                    },
-                    {
-                      "toast": "toast.goal"
-                    },
-                    {
-                      "say": "story.c2.emi_taken",
-                      "who": "shauq"
-                    }
-                  ]
-                },
-                {
-                  "label": "choice.emi_save",
-                  "log": {
-                    "concept": "delayed_gratification",
-                    "choice": "save_first",
-                    "correct": true
-                  },
-                  "do": [
-                    {
-                      "say": "story.c2.emi_saved",
-                      "who": "shauq"
-                    }
-                  ]
-                }
-              ],
-              "prompt": "story.common.what_do"
-            },
-            {
-              "concept": "delayed_gratification"
-            }
-          ]
-        }
-      ]
+     "say": "story.c2.anwar2",
+     "who": "anwar"
     },
     {
-      "if": "chapter>=4",
-      "then": [
-        {
-          "once": "bnpl_offer",
-          "do": [
-            {
-              "checkpoint": "checkpoint.card"
-            },
-            {
-              "say": "story.c4.shauq_bnpl",
-              "who": "shauq"
-            },
-            {
-              "concept": "bnpl"
-            },
-            {
-              "concept": "credit_card"
-            },
-            {
-              "choice": [
-                {
-                  "label": "choice.card_yes",
-                  "when": "account",
-                  "log": {
-                    "concept": "credit_card",
-                    "choice": "took_card",
-                    "correct": false
-                  },
-                  "do": [
-                    {
-                      "do": {
-                        "type": "takeLoan",
-                        "kind": "card",
-                        "amount": 1200,
-                        "months": 0
-                      }
-                    },
-                    {
-                      "do": {
-                        "type": "meter",
-                        "peace": 6
-                      }
-                    },
-                    {
-                      "say": "story.c4.card_yes",
-                      "who": "shauq"
-                    }
-                  ]
-                },
-                {
-                  "label": "choice.card_no",
-                  "log": {
-                    "concept": "credit_card",
-                    "choice": "declined",
-                    "correct": true
-                  },
-                  "do": [
-                    {
-                      "say": "story.c4.card_no",
-                      "who": "shauq"
-                    }
-                  ]
-                }
-              ],
-              "prompt": "story.common.what_do"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "choice": [
-        {
-          "label": "choice.shop",
-          "do": [
-            {
-              "open": "shop:shauq"
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_buy",
-          "when": "goalAt:shauq && !flag:goal_done",
-          "do": [
-            {
-              "call": "goal_buy"
-            }
-          ]
-        },
-        {
-          "label": "choice.bye"
-        }
-      ],
-      "prompt": "story.c2.shauq_menu",
-      "who": "shauq"
+     "concept": "gst"
     }
-  ],
-  "jobs": [
+   ]
+  },
+  {
+   "if": "month>=2",
+   "then": [
     {
-      "if": "worked",
-      "then": [
-        {
-          "say": "story.c2.jobs_done",
-          "who": "worker"
-        },
-        {
-          "end": true
-        }
-      ]
-    },
-    {
-      "say": "story.c2.jobs1",
-      "who": "worker"
-    },
-    {
-      "choice": [
-        {
-          "label": "choice.work_yes",
-          "do": [
-            {
-              "do": {
-                "type": "work",
-                "amount": 300
-              }
-            },
-            {
-              "say": "story.c2.jobs_paid",
-              "who": "worker"
-            }
-          ]
-        },
-        {
-          "label": "choice.not_now"
-        }
-      ],
-      "who": "worker"
+     "once": "inflation_seen",
+     "do": [
+      {
+       "say": "story.c2.anwar_inflation",
+       "who": "anwar"
+      },
+      {
+       "concept": "inflation"
+      }
+     ]
     }
-  ]
+   ]
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.shop",
+     "do": [
+      {
+       "open": "shop:zaroorat"
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_buy",
+     "when": "goalAt:anwar && !flag:goal_done",
+     "do": [
+      {
+       "call": "goal_buy"
+      }
+     ]
+    },
+    {
+     "label": "choice.challenge",
+     "when": "chapter==2 && monthsInChapter>=2",
+     "do": [
+      {
+       "say": "story.c2.anwar_challenge",
+       "who": "anwar"
+      },
+      {
+       "quiz": [
+        "budget_needs",
+        "budget_rule",
+        "budget_sale",
+        "budget_first"
+       ],
+       "pass": 3,
+       "then": [
+        {
+         "say": "story.c2.anwar_pass",
+         "who": "anwar"
+        },
+        {
+         "badge": "budget"
+        },
+        {
+         "chapter": 3
+        },
+        {
+         "objective": "objective.ch3_home"
+        }
+       ],
+       "else": [
+        {
+         "say": "story.c2.anwar_fail",
+         "who": "anwar"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "label": "choice.bye"
+    }
+   ],
+   "prompt": "story.c2.anwar_menu",
+   "who": "anwar"
+  }
+ ],
+ "shauq": [
+  {
+   "once": "shauq_intro",
+   "do": [
+    {
+     "say": "story.c2.shauq1",
+     "who": "shauq"
+    },
+    {
+     "concept": "sales_tricks"
+    }
+   ]
+  },
+  {
+   "if": "chapter==2 && goalKind:consumption && !flag:goal_done && account",
+   "then": [
+    {
+     "once": "emi_offer",
+     "do": [
+      {
+       "checkpoint": "checkpoint.emi_offer"
+      },
+      {
+       "say": "story.c2.shauq_emi",
+       "who": "shauq"
+      },
+      {
+       "choice": [
+        {
+         "label": "choice.emi_take",
+         "log": {
+          "concept": "delayed_gratification",
+          "choice": "buy_now_card",
+          "correct": false,
+          "misconception": "buy_now_pay_later_is_free"
+         },
+         "do": [
+          {
+           "do": {
+            "type": "buyGoal",
+            "onCard": true
+           }
+          },
+          {
+           "toast": "toast.goal"
+          },
+          {
+           "say": "story.c2.emi_taken",
+           "who": "shauq"
+          }
+         ]
+        },
+        {
+         "label": "choice.emi_save",
+         "log": {
+          "concept": "delayed_gratification",
+          "choice": "save_first",
+          "correct": true
+         },
+         "do": [
+          {
+           "say": "story.c2.emi_saved",
+           "who": "shauq"
+          }
+         ]
+        }
+       ],
+       "prompt": "story.common.what_do"
+      },
+      {
+       "concept": "delayed_gratification"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "if": "chapter>=4",
+   "then": [
+    {
+     "once": "bnpl_offer",
+     "do": [
+      {
+       "checkpoint": "checkpoint.card"
+      },
+      {
+       "say": "story.c4.shauq_bnpl",
+       "who": "shauq"
+      },
+      {
+       "concept": "bnpl"
+      },
+      {
+       "concept": "credit_card"
+      },
+      {
+       "choice": [
+        {
+         "label": "choice.card_yes",
+         "when": "account",
+         "log": {
+          "concept": "credit_card",
+          "choice": "took_card",
+          "correct": false
+         },
+         "do": [
+          {
+           "do": {
+            "type": "takeLoan",
+            "kind": "card",
+            "amount": 1200,
+            "months": 0
+           }
+          },
+          {
+           "do": {
+            "type": "meter",
+            "peace": 6
+           }
+          },
+          {
+           "say": "story.c4.card_yes",
+           "who": "shauq"
+          }
+         ]
+        },
+        {
+         "label": "choice.card_no",
+         "log": {
+          "concept": "credit_card",
+          "choice": "declined",
+          "correct": true
+         },
+         "do": [
+          {
+           "say": "story.c4.card_no",
+           "who": "shauq"
+          }
+         ]
+        }
+       ],
+       "prompt": "story.common.what_do"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.shop",
+     "do": [
+      {
+       "open": "shop:shauq"
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_buy",
+     "when": "goalAt:shauq && !flag:goal_done",
+     "do": [
+      {
+       "call": "goal_buy"
+      }
+     ]
+    },
+    {
+     "label": "choice.bye"
+    }
+   ],
+   "prompt": "story.c2.shauq_menu",
+   "who": "shauq"
+  }
+ ],
+ "jobs": [
+  {
+   "if": "worked",
+   "then": [
+    {
+     "say": "story.c2.jobs_done",
+     "who": "worker"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "say": "story.c2.jobs1",
+   "who": "worker"
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.work_yes",
+     "do": [
+      {
+       "do": {
+        "type": "work",
+        "amount": 300
+       }
+      },
+      {
+       "say": "story.c2.jobs_paid",
+       "who": "worker"
+      }
+     ]
+    },
+    {
+     "label": "choice.not_now"
+    }
+   ],
+   "who": "worker"
+  }
+ ]
 }

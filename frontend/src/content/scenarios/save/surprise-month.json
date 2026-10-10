@@ -1,0 +1,87 @@
+{
+  "_comment": "UC-SM-03 Surprise Month. 12.6: a tape shock arrives; with a buffer the character pays calmly and earns the Emergency Ready badge, without one they choose between four bad options. Marked checkpoint because P1's Rewind uses it as the favourite branch point. The shock is chosen to actually hurt the character it lands on — a contributor's shock lands on someone else in the family, which is the version they will recognise.",
+  "_owner": "P3",
+  "_useCase": "UC-SM-03",
+  "id": "surprise-month",
+  "pillar": "save",
+  "stage": ["S3"],
+  "verb": "choose",
+  "checkpoint": true,
+  "concepts": ["emergency_fund"],
+
+  "shocks": [
+    {
+      "id": "screen",
+      "amount": 2000,
+      "hookKey": "sm03.shock.screen.hook",
+      "personaFilter": { "lifeStage": ["school_student", "college_student"] }
+    },
+    {
+      "id": "medicine",
+      "amount": 1500,
+      "hookKey": "sm03.shock.medicine.hook",
+      "personaFilter": { "circumstance": ["family_contributor", "part_time_earner"] }
+    },
+    {
+      "id": "trip",
+      "amount": 1200,
+      "hookKey": "sm03.shock.trip.hook",
+      "personaFilter": { "lifeStage": ["school_student", "college_student"] }
+    },
+    {
+      "id": "vehicle",
+      "amount": 1800,
+      "hookKey": "sm03.shock.vehicle.hook",
+      "personaFilter": { "circumstance": ["young_entrepreneur"] }
+    },
+    { "id": "fees", "amount": 1600, "hookKey": "sm03.shock.fees.hook" }
+  ],
+
+  "options": [
+    {
+      "id": "emergency_jar",
+      "textKey": "sm03.option.emergency_jar.text",
+      "resultKey": "sm03.option.emergency_jar.result",
+      "needsBuffer": true,
+      "concepts": { "emergency_fund": 0.9 },
+      "effects": { "human.peaceOfMind": 5 },
+      "badge": "emergency_ready"
+    },
+    {
+      "id": "family",
+      "textKey": "sm03.option.family.text",
+      "resultKey": "sm03.option.family.result",
+      "concepts": { "emergency_fund": 0.5 },
+      "effects": { "human.trust": -10, "human.peaceOfMind": -5 }
+    },
+    {
+      "id": "loan_app",
+      "textKey": "sm03.option.loan_app.text",
+      "resultKey": "sm03.option.loan_app.result",
+      "concepts": { "emergency_fund": 0.2 },
+      "misconception": "debt_is_free_money",
+      "effects": { "human.safety": -15, "human.peaceOfMind": -10 },
+      "flags": { "fellForLoanApp": true }
+    },
+    {
+      "id": "skip_need",
+      "textKey": "sm03.option.skip_need.text",
+      "resultKey": "sm03.option.skip_need.result",
+      "concepts": { "emergency_fund": 0.4 },
+      "effects": { "human.peaceOfMind": -15 }
+    },
+    {
+      "id": "sell",
+      "textKey": "sm03.option.sell.text",
+      "resultKey": "sm03.option.sell.result",
+      "concepts": { "emergency_fund": 0.4 },
+      "effects": { "human.peaceOfMind": -10 }
+    }
+  ],
+
+  "_reflection": "12.6: the student sets an emergency target and the Emergency jar then appears in Jar Split. One month of needs is the plan's own suggestion.",
+  "targetMonthsOfNeeds": [0.5, 1, 2],
+
+  "conceptCard": { "textKey": "sm03.concept.emergency", "icon": "shield" },
+  "summaryKey": "sm03.summary"
+}

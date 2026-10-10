@@ -6,6 +6,7 @@
  * option, answer a quiz, use a shop). Owner: P2.
  */
 import { emergencyFund, GOAL_DEFS, goalFunds, needsBought, needsCost, type Action, type LifeState } from '@/core/engine';
+import type { Level, MiniGameResult } from '@/core/types';
 import type { Pos } from '@/core/world';
 
 // ── Conditions ──────────────────────────────────────────────────────────
@@ -153,6 +154,12 @@ export type Step =
   | { log: LogSpec }
   | { toast: string }
   | { duel: string; win?: Step[]; lose?: Step[] }
+  /**
+   * Hands over to a registered MiniGame (GAME_DESIGN §"Script commands"). The
+   * game teaches its own concepts, so what it reports comes back as Journal
+   * progress; `then` runs once the player is out of it.
+   */
+  | { minigame: string; level?: Level; then?: Step[] }
   | { checkpoint: string }
   | { end: true };
 
@@ -174,6 +181,8 @@ export interface Host {
   toast(text: string): void;
   /** A Scam Duel; resolves with who won. */
   duel(id: string): Promise<'win' | 'lose'>;
+  /** Runs a registered MiniGame and resolves with what the player did in it. */
+  minigame(id: string, level: Level): Promise<MiniGameResult>;
   /** Saves a What-If checkpoint for the scene being played. */
   checkpoint(label: string): void;
 }
@@ -244,6 +253,19 @@ async function runStep(scripts: Scripts, step: Step, host: Host, depth: number):
     const result = await host.duel(step.duel);
     return runSteps(scripts, (result === 'win' ? step.win : step.lose) ?? [], host, depth + 1);
   }
+  if ('minigame' in step) {
+    const result = await host.minigame(step.minigame, step.level ?? 1);
+    // A mini-game's conceptDeltas are mastery targets (§10.3), so a high
+    // target means the player showed they understood it. That is the same
+    // signal a right answer gives, so it moves the Journal the same way.
+    for (const [concept, target] of Object.entries(result.conceptDeltas)) {
+      host.dispatch({ type: 'learn', concept, correct: target >= 0.7 });
+    }
+    for (const misconception of result.misconceptions) {
+      host.log({ concept: step.minigame, choice: step.minigame, correct: false, misconception });
+    }
+    return runSteps(scripts, step.then ?? [], host, depth + 1);
+  }
   if ('checkpoint' in step) return host.checkpoint(step.checkpoint);
   if ('end' in step) throw END;
 }
@@ -262,6 +284,7 @@ export function walkSteps(steps: Step[], visit: (s: Step) => void): void {
       walkSteps(s.lose ?? [], visit);
     }
     if ('once' in s) walkSteps(s.do, visit);
+    if ('minigame' in s) walkSteps(s.then ?? [], visit);
   }
 }
 

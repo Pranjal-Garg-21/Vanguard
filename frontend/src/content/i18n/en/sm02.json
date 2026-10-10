@@ -1,0 +1,58 @@
+{
+  "_comment": "UC-SM-02 Spending Detective. Tone rule: the leak is never described as greed or stupidity. Twenty rupees is genuinely nothing — the surprise is only what it becomes when multiplied, and that surprise is the whole lesson.",
+
+  "hook": "You had money at the start of the month. You have very little now, and you cannot point at a single thing you bought.",
+  "prompt": "Go through the month. Which of these happened again and again, and which happened once?",
+  "summary": "You found where the money actually went.",
+
+  "bucket": {
+    "often": "Again and again",
+    "one_off": "Just once"
+  },
+
+  "category": {
+    "chai": "Chai and snacks",
+    "games": "Games and apps",
+    "recharge": "Recharges",
+    "delivery": "Food delivered",
+    "transport": "Autos and buses",
+    "other": "Everything else"
+  },
+
+  "txn": {
+    "chai": "Chai at the corner shop",
+    "samosa": "Samosa",
+    "game_topup": "Game top-up",
+    "recharge": "Phone recharge",
+    "delivery": "Food delivered",
+    "auto": "Auto fare",
+    "print": "Printouts",
+    "cinema": "Cinema ticket",
+    "gift": "A gift",
+    "repair": "Small repair",
+    "times": "{count} times this month"
+  },
+
+  "chart": {
+    "title": "Where it went",
+    "total": "Total out: {amount}",
+    "small_total": "The small, repeated ones came to {amount}.",
+    "guess": "You thought the small things were about {amount}."
+  },
+
+  "leak": {
+    "title": "The biggest repeat",
+    "monthly": "{name}: {amount} a month",
+    "annual": "{name} is {monthly} a month. Over a year that is {annual}.",
+    "rank_prompt": "Put these in order, biggest drain first.",
+    "pick": "Pick one to cut back on — not stop, just halve.",
+    "projection": "Halving {name} saves {saved} over the next {months} months.",
+    "nothing": "Nothing here repeats enough to be a leak. That is genuinely good."
+  },
+
+  "concept": {
+    "tracking": "Small amounts do not feel like spending, so they never get counted. Counting them is the only way to see them."
+  },
+
+  "simulated": "Every payment here is made up for this game. Nothing is read from your phone."
+}

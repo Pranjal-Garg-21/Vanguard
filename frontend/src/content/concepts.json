@@ -359,6 +359,36 @@
       "pillar": "plan",
       "chapter": 6,
       "icon": "🏛️"
+    },
+    {
+      "id": "context_dependence",
+      "pillar": "plan",
+      "chapter": 0,
+      "icon": "🔄"
+    },
+    {
+      "id": "expense_tracking",
+      "pillar": "save",
+      "chapter": 0,
+      "icon": "🧾"
+    },
+    {
+      "id": "fixed_vs_variable",
+      "pillar": "plan",
+      "chapter": 0,
+      "icon": "📊"
+    },
+    {
+      "id": "minimum_balance_fees",
+      "pillar": "bank",
+      "chapter": 0,
+      "icon": "⚠️"
+    },
+    {
+      "id": "nominee",
+      "pillar": "bank",
+      "chapter": 0,
+      "icon": "👥"
     }
   ],
   "misconceptions": [
@@ -380,6 +410,11 @@
     "guaranteed_returns_real",
     "pay_to_get_job",
     "buy_now_pay_later_is_free",
-    "all_debt_is_bad"
+    "all_debt_is_bad",
+    "compare_emi_not_total",
+    "everything_i_want_is_need",
+    "fun_is_bad",
+    "small_spends_dont_matter",
+    "too_late_to_report"
   ]
 }

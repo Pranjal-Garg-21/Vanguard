@@ -23,6 +23,19 @@ const prefer = (o: Setup) => [
   'choice.buy_bonds', 'choice.trade', 'choice.kabir_warn', 'choice.ponzi_ask', 'choice.ins_buy',
 ];
 
+/** What each mini-game teaches. Mirrors each game's index.ts. */
+const MINIGAME_CONCEPTS: Record<string, string[]> = {
+  'document-hunt': ['kyc', 'why_bank'],
+  'bank-counter': ['why_bank', 'savings_account', 'minimum_balance_fees', 'nominee', 'pin_secrecy'],
+  'swipe-sort': ['needs_wants', 'context_dependence'],
+  'jar-split': ['budgeting', 'fixed_vs_variable'],
+  'goal-builder': ['goal_setting'],
+  'spending-detective': ['expense_tracking'],
+  'surprise-month': ['emergency_fund'],
+  'debt-ladder': ['loan_basics', 'bnpl'],
+  'rescue-mission': ['fraud_recovery'],
+};
+
 function bot(start: LifeState, setup: Setup) {
   const PREFER = prefer(setup);
   const duels: string[] = [];
@@ -43,6 +56,22 @@ function bot(start: LifeState, setup: Setup) {
       return labels.length - 1;
     },
     concept: async () => {},
+    /**
+     * The bot cannot press buttons in a React mini-game, so it stands in for a
+     * player who played it competently: the concepts that game teaches come
+     * back at a mastery target that counts as understood.
+     *
+     * The map is written out here rather than read from the registry because
+     * `core/` must not import `@/games` (the games pull in React). Keeping it
+     * local also means this stays a test of whether the *story* is
+     * completable; the games have their own tests.
+     */
+    minigame: async (id) => ({
+      choices: [],
+      conceptDeltas: Object.fromEntries((MINIGAME_CONCEPTS[id] ?? []).map((c) => [c, 0.9])),
+      misconceptions: [],
+      summaryKey: `${id}.summary`,
+    }),
     quiz: async (ids) =>
       ids.map((id) => {
         const q = quizById(id)!;

@@ -1,714 +1,718 @@
 {
-  "intro": [
+ "intro": [
+  {
+   "say": "story.p.intro1"
+  },
+  {
+   "say": "story.p.intro2"
+  },
+  {
+   "flag": "intro_done"
+  },
+  {
+   "call": "mom"
+  }
+ ],
+ "mom": [
+  {
+   "if": "chapter==0",
+   "then": [
     {
-      "say": "story.p.intro1"
+     "say": "story.p.mom_bday",
+     "who": "mom"
     },
     {
-      "say": "story.p.intro2"
+     "say": "story.p.mom_prof",
+     "who": "mom"
     },
     {
-      "flag": "intro_done"
+     "objective": "objective.meet_prof"
     },
     {
-      "call": "mom"
+     "end": true
     }
-  ],
-  "mom": [
+   ]
+  },
+  {
+   "if": "flag:need_docs && !flag:has_docs",
+   "then": [
     {
-      "if": "chapter==0",
-      "then": [
-        {
-          "say": "story.p.mom_bday",
-          "who": "mom"
-        },
-        {
-          "say": "story.p.mom_prof",
-          "who": "mom"
-        },
-        {
-          "objective": "objective.meet_prof"
-        },
-        {
-          "end": true
-        }
-      ]
+     "say": "story.c1.mom_docs",
+     "who": "mom"
     },
     {
-      "if": "flag:need_docs && !flag:has_docs",
-      "then": [
-        {
-          "say": "story.c1.mom_docs",
-          "who": "mom"
-        },
-        {
-          "flag": "has_docs"
-        },
-        {
-          "toast": "toast.got_docs"
-        },
-        {
-          "objective": "objective.back_to_bank"
-        },
-        {
-          "end": true
-        }
-      ]
+     "minigame": "document-hunt",
+     "level": 1
     },
     {
-      "if": "flag:scam_kyc_done && !flag:told_mom",
-      "then": [
-        {
-          "say": "story.c1.mom_proud",
-          "who": "mom"
-        },
-        {
-          "say": "story.c1.mom_buyer",
-          "who": "mom"
-        },
-        {
-          "flag": "told_mom"
-        },
-        {
-          "objective": "objective.buyer_outside"
-        },
-        {
-          "end": true
-        }
-      ]
+     "flag": "has_docs"
     },
     {
-      "if": "chapter==1",
-      "then": [
-        {
-          "say": "story.c1.mom_generic",
-          "who": "mom"
-        }
-      ]
+     "toast": "toast.got_docs"
     },
     {
-      "if": "chapter==2",
-      "then": [
-        {
-          "say": "story.c2.mom_list",
-          "who": "mom"
-        }
-      ]
+     "objective": "objective.back_to_bank"
     },
     {
-      "if": "chapter==3",
-      "then": [
-        {
-          "say": "story.c3.mom",
-          "who": "mom"
-        }
-      ]
-    },
-    {
-      "if": "chapter==4",
-      "then": [
-        {
-          "say": "story.c4.mom",
-          "who": "mom"
-        }
-      ]
-    },
-    {
-      "if": "chapter>=5",
-      "then": [
-        {
-          "say": "story.c5.mom",
-          "who": "mom"
-        }
-      ]
-    },
-    {
-      "if": "chapter>=3 && !loan:family || goalAt:mom && !flag:goal_done && chapter>=2",
-      "then": [
-        {
-          "choice": [
-            {
-              "label": "choice.goal_buy",
-              "when": "goalAt:mom && !flag:goal_done && chapter>=2",
-              "do": [
-                {
-                  "call": "goal_buy"
-                }
-              ]
-            },
-            {
-              "label": "choice.mom_borrow",
-              "when": "chapter>=3 && !loan:family",
-              "do": [
-                {
-                  "say": "story.common.mom_borrow",
-                  "who": "mom"
-                },
-                {
-                  "do": {
-                    "type": "takeLoan",
-                    "kind": "family",
-                    "amount": 1000,
-                    "months": 5
-                  }
-                },
-                {
-                  "say": "story.common.mom_borrow_yes",
-                  "who": "mom"
-                }
-              ]
-            },
-            {
-              "label": "choice.bye"
-            }
-          ],
-          "who": "mom"
-        }
-      ]
+     "end": true
     }
-  ],
-  "prologue_lab": [
+   ]
+  },
+  {
+   "if": "flag:scam_kyc_done && !flag:told_mom",
+   "then": [
     {
-      "say": "story.p.prof1",
-      "who": "professor"
+     "say": "story.c1.mom_proud",
+     "who": "mom"
     },
     {
-      "say": "story.p.prof2",
-      "who": "professor"
+     "say": "story.c1.mom_buyer",
+     "who": "mom"
     },
     {
-      "say": "story.p.prof3",
-      "who": "professor"
+     "flag": "told_mom"
     },
     {
-      "choice": [
+     "objective": "objective.buyer_outside"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "chapter==1",
+   "then": [
+    {
+     "say": "story.c1.mom_generic",
+     "who": "mom"
+    }
+   ]
+  },
+  {
+   "if": "chapter==2",
+   "then": [
+    {
+     "say": "story.c2.mom_list",
+     "who": "mom"
+    }
+   ]
+  },
+  {
+   "if": "chapter==3",
+   "then": [
+    {
+     "say": "story.c3.mom",
+     "who": "mom"
+    }
+   ]
+  },
+  {
+   "if": "chapter==4",
+   "then": [
+    {
+     "say": "story.c4.mom",
+     "who": "mom"
+    }
+   ]
+  },
+  {
+   "if": "chapter>=5",
+   "then": [
+    {
+     "say": "story.c5.mom",
+     "who": "mom"
+    }
+   ]
+  },
+  {
+   "if": "chapter>=3 && !loan:family || goalAt:mom && !flag:goal_done && chapter>=2",
+   "then": [
+    {
+     "choice": [
+      {
+       "label": "choice.goal_buy",
+       "when": "goalAt:mom && !flag:goal_done && chapter>=2",
+       "do": [
         {
-          "label": "choice.look_a",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "look": "player_a"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.look_b",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "look": "player_b"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.look_c",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "look": "player_c"
-              }
-            }
-          ]
+         "call": "goal_buy"
         }
-      ],
-      "prompt": "story.p.q_look",
-      "who": "professor"
-    },
-    {
-      "choice": [
+       ]
+      },
+      {
+       "label": "choice.mom_borrow",
+       "when": "chapter>=3 && !loan:family",
+       "do": [
         {
-          "label": "choice.stage_school",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "lifeStage": "school"
-              }
-            }
-          ]
+         "say": "story.common.mom_borrow",
+         "who": "mom"
         },
         {
-          "label": "choice.stage_college",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "lifeStage": "college"
-              }
-            }
-          ]
+         "do": {
+          "type": "takeLoan",
+          "kind": "family",
+          "amount": 1000,
+          "months": 5
+         }
+        },
+        {
+         "say": "story.common.mom_borrow_yes",
+         "who": "mom"
         }
-      ],
-      "prompt": "story.p.q_stage",
-      "who": "professor"
-    },
-    {
-      "choice": [
-        {
-          "label": "choice.source_allowance",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "source": "allowance"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.source_tutoring",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "source": "tutoring"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.source_shop",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "source": "shop"
-              }
-            }
-          ]
-        }
-      ],
-      "prompt": "story.p.q_source",
-      "who": "professor"
-    },
-    {
-      "say": "story.p.prof_income",
-      "who": "professor"
-    },
-    {
-      "concept": "income"
-    },
-    {
-      "choice": [
-        {
-          "label": "choice.goal_trip",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "goal": "trip"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_cycle",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "goal": "cycle"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_fees",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "goal": "fees"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_phone",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "goal": "phone"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_stall",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "goal": "stall"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_laptop",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "goal": "laptop"
-              }
-            }
-          ]
-        },
-        {
-          "label": "choice.goal_bike",
-          "do": [
-            {
-              "do": {
-                "type": "setup",
-                "goal": "bike"
-              }
-            }
-          ]
-        }
-      ],
-      "prompt": "story.p.q_goal",
-      "who": "professor"
-    },
-    {
-      "say": "story.p.prof_goal",
-      "who": "professor"
-    },
-    {
-      "if": "goalKind:quick",
-      "then": [
-        {
-          "say": "story.p.goal_quick",
-          "who": "professor"
-        }
-      ]
-    },
-    {
-      "if": "goalKind:education",
-      "then": [
-        {
-          "say": "story.p.goal_education",
-          "who": "professor"
-        }
-      ]
-    },
-    {
-      "if": "goalKind:asset",
-      "then": [
-        {
-          "say": "story.p.goal_asset",
-          "who": "professor"
-        }
-      ]
-    },
-    {
-      "if": "goalKind:consumption",
-      "then": [
-        {
-          "say": "story.p.goal_consumption",
-          "who": "professor"
-        }
-      ]
-    },
-    {
-      "concept": "goal_setting"
-    },
-    {
-      "say": "story.p.prof_gift",
-      "who": "professor"
-    },
-    {
-      "do": {
-        "type": "gain",
-        "amount": 1000,
-        "reason": "gift"
+       ]
+      },
+      {
+       "label": "choice.bye"
       }
-    },
-    {
-      "toast": "toast.got_journal"
-    },
-    {
-      "flag": "kabir_in_lab"
-    },
-    {
-      "say": "story.p.kabir1",
-      "who": "kabir"
-    },
-    {
-      "say": "story.p.prof_kabir",
-      "who": "professor"
-    },
-    {
-      "say": "story.p.kabir2",
-      "who": "kabir"
-    },
-    {
-      "flag": "kabir_in_lab",
-      "value": false
-    },
-    {
-      "say": "story.p.prof_bank",
-      "who": "professor"
-    },
-    {
-      "say": "story.p.prof_controls",
-      "who": "professor"
-    },
-    {
-      "flag": "met_prof"
-    },
-    {
-      "chapter": 1
-    },
-    {
-      "objective": "objective.open_account"
+     ],
+     "who": "mom"
     }
-  ],
-  "professor": [
+   ]
+  }
+ ],
+ "prologue_lab": [
+  {
+   "say": "story.p.prof1",
+   "who": "professor"
+  },
+  {
+   "say": "story.p.prof2",
+   "who": "professor"
+  },
+  {
+   "say": "story.p.prof3",
+   "who": "professor"
+  },
+  {
+   "choice": [
     {
-      "if": "!flag:met_prof",
-      "then": [
-        {
-          "call": "prologue_lab"
-        },
-        {
-          "end": true
-        }
-      ]
-    },
-    {
-      "if": "flag:game_complete",
-      "then": [
-        {
-          "call": "prof_end"
-        },
-        {
-          "end": true
-        }
-      ]
-    },
-    {
-      "if": "chapter==1",
-      "then": [
-        {
-          "say": "story.c1.prof_hint",
-          "who": "professor"
-        }
-      ]
-    },
-    {
-      "if": "chapter==2",
-      "then": [
-        {
-          "call": "prof_ch2"
-        }
-      ]
-    },
-    {
-      "if": "chapter==3",
-      "then": [
-        {
-          "call": "prof_ch3"
-        }
-      ]
-    },
-    {
-      "if": "chapter==4",
-      "then": [
-        {
-          "call": "prof_ch4"
-        }
-      ]
-    },
-    {
-      "if": "chapter==5",
-      "then": [
-        {
-          "call": "prof_ch5"
-        }
-      ]
-    },
-    {
-      "if": "chapter==6",
-      "then": [
-        {
-          "call": "prof_ch6"
-        }
-      ]
-    },
-    {
-      "choice": [
-        {
-          "label": "choice.open_journal",
-          "do": [
-            {
-              "open": "journal"
-            }
-          ]
-        },
-        {
-          "label": "choice.compare_kabir",
-          "when": "chapter>=2",
-          "do": [
-            {
-              "open": "rival"
-            }
-          ]
-        },
-        {
-          "label": "choice.bye"
-        }
-      ],
-      "who": "professor"
-    }
-  ],
-  "bed": [
-    {
-      "if": "chapter<2",
-      "then": [
-        {
-          "say": "story.common.bed_early"
-        },
-        {
-          "end": true
-        }
-      ]
-    },
-    {
-      "if": "!needs",
-      "then": [
-        {
-          "say": "story.common.bed_needs"
-        },
-        {
-          "choice": [
-            {
-              "label": "choice.sleep_anyway"
-            },
-            {
-              "label": "choice.not_yet",
-              "do": [
-                {
-                  "end": true
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "else": [
-        {
-          "choice": [
-            {
-              "label": "choice.sleep"
-            },
-            {
-              "label": "choice.not_yet",
-              "do": [
-                {
-                  "end": true
-                }
-              ]
-            }
-          ],
-          "prompt": "story.common.bed_prompt"
-        }
-      ]
-    },
-    {
-      "sleep": true
-    },
-    {
-      "if": "chapter==2 && monthsInChapter==1 && !flag:pyf_lesson",
-      "then": [
-        {
-          "say": "story.c2.after_month1"
-        },
-        {
-          "objective": "objective.ch2_pyf"
-        }
-      ]
-    },
-    {
-      "if": "chapter==2 && monthsInChapter>=2",
-      "then": [
-        {
-          "objective": "objective.anwar_challenge"
-        }
-      ]
-    },
-    {
-      "if": "chapter==3 && fundMonths>=3 && flag:met_lakshmi",
-      "then": [
-        {
-          "objective": "objective.lakshmi_challenge"
-        }
-      ]
-    },
-    {
-      "if": "chapter==5 && !flag:bridge_built && bonds",
-      "then": [
-        {
-          "call": "bridge_open"
-        }
-      ]
-    },
-    {
-      "if": "chapter==5 && !flag:bridge_built && monthsInChapter>=2",
-      "then": [
-        {
-          "call": "bridge_open"
-        }
-      ]
-    }
-  ],
-  "home_shelf": [
-    {
-      "say": "story.common.shelf"
-    }
-  ],
-  "overwhelmed": [
-    {
-      "say": "story.common.overwhelmed1"
-    },
-    {
-      "say": "story.common.overwhelmed2",
-      "who": "mom"
-    },
-    {
-      "if": "!loan:family",
-      "then": [
-        {
-          "do": {
-            "type": "takeLoan",
-            "kind": "family",
-            "amount": 1000,
-            "months": 5
-          }
-        }
-      ]
-    },
-    {
-      "do": {
-        "type": "meter",
-        "peace": 50
+     "label": "choice.look_a",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "look": "player_a"
+       }
       }
+     ]
     },
     {
-      "flag": "overwhelmed",
-      "value": false
+     "label": "choice.look_b",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "look": "player_b"
+       }
+      }
+     ]
     },
     {
-      "say": "story.common.overwhelmed3",
-      "who": "mom"
-    },
-    {
-      "concept": "emergency_fund"
+     "label": "choice.look_c",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "look": "player_c"
+       }
+      }
+     ]
     }
-  ]
+   ],
+   "prompt": "story.p.q_look",
+   "who": "professor"
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.stage_school",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "lifeStage": "school"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.stage_college",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "lifeStage": "college"
+       }
+      }
+     ]
+    }
+   ],
+   "prompt": "story.p.q_stage",
+   "who": "professor"
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.source_allowance",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "source": "allowance"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.source_tutoring",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "source": "tutoring"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.source_shop",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "source": "shop"
+       }
+      }
+     ]
+    }
+   ],
+   "prompt": "story.p.q_source",
+   "who": "professor"
+  },
+  {
+   "say": "story.p.prof_income",
+   "who": "professor"
+  },
+  {
+   "concept": "income"
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.goal_trip",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "goal": "trip"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_cycle",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "goal": "cycle"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_fees",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "goal": "fees"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_phone",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "goal": "phone"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_stall",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "goal": "stall"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_laptop",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "goal": "laptop"
+       }
+      }
+     ]
+    },
+    {
+     "label": "choice.goal_bike",
+     "do": [
+      {
+       "do": {
+        "type": "setup",
+        "goal": "bike"
+       }
+      }
+     ]
+    }
+   ],
+   "prompt": "story.p.q_goal",
+   "who": "professor"
+  },
+  {
+   "say": "story.p.prof_goal",
+   "who": "professor"
+  },
+  {
+   "if": "goalKind:quick",
+   "then": [
+    {
+     "say": "story.p.goal_quick",
+     "who": "professor"
+    }
+   ]
+  },
+  {
+   "if": "goalKind:education",
+   "then": [
+    {
+     "say": "story.p.goal_education",
+     "who": "professor"
+    }
+   ]
+  },
+  {
+   "if": "goalKind:asset",
+   "then": [
+    {
+     "say": "story.p.goal_asset",
+     "who": "professor"
+    }
+   ]
+  },
+  {
+   "if": "goalKind:consumption",
+   "then": [
+    {
+     "say": "story.p.goal_consumption",
+     "who": "professor"
+    }
+   ]
+  },
+  {
+   "concept": "goal_setting"
+  },
+  {
+   "say": "story.p.prof_gift",
+   "who": "professor"
+  },
+  {
+   "do": {
+    "type": "gain",
+    "amount": 1000,
+    "reason": "gift"
+   }
+  },
+  {
+   "toast": "toast.got_journal"
+  },
+  {
+   "flag": "kabir_in_lab"
+  },
+  {
+   "say": "story.p.kabir1",
+   "who": "kabir"
+  },
+  {
+   "say": "story.p.prof_kabir",
+   "who": "professor"
+  },
+  {
+   "say": "story.p.kabir2",
+   "who": "kabir"
+  },
+  {
+   "flag": "kabir_in_lab",
+   "value": false
+  },
+  {
+   "say": "story.p.prof_bank",
+   "who": "professor"
+  },
+  {
+   "say": "story.p.prof_controls",
+   "who": "professor"
+  },
+  {
+   "flag": "met_prof"
+  },
+  {
+   "chapter": 1
+  },
+  {
+   "objective": "objective.open_account"
+  }
+ ],
+ "professor": [
+  {
+   "if": "!flag:met_prof",
+   "then": [
+    {
+     "call": "prologue_lab"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "flag:game_complete",
+   "then": [
+    {
+     "call": "prof_end"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "chapter==1",
+   "then": [
+    {
+     "say": "story.c1.prof_hint",
+     "who": "professor"
+    }
+   ]
+  },
+  {
+   "if": "chapter==2",
+   "then": [
+    {
+     "call": "prof_ch2"
+    }
+   ]
+  },
+  {
+   "if": "chapter==3",
+   "then": [
+    {
+     "call": "prof_ch3"
+    }
+   ]
+  },
+  {
+   "if": "chapter==4",
+   "then": [
+    {
+     "call": "prof_ch4"
+    }
+   ]
+  },
+  {
+   "if": "chapter==5",
+   "then": [
+    {
+     "call": "prof_ch5"
+    }
+   ]
+  },
+  {
+   "if": "chapter==6",
+   "then": [
+    {
+     "call": "prof_ch6"
+    }
+   ]
+  },
+  {
+   "choice": [
+    {
+     "label": "choice.open_journal",
+     "do": [
+      {
+       "open": "journal"
+      }
+     ]
+    },
+    {
+     "label": "choice.compare_kabir",
+     "when": "chapter>=2",
+     "do": [
+      {
+       "open": "rival"
+      }
+     ]
+    },
+    {
+     "label": "choice.bye"
+    }
+   ],
+   "who": "professor"
+  }
+ ],
+ "bed": [
+  {
+   "if": "chapter<2",
+   "then": [
+    {
+     "say": "story.common.bed_early"
+    },
+    {
+     "end": true
+    }
+   ]
+  },
+  {
+   "if": "!needs",
+   "then": [
+    {
+     "say": "story.common.bed_needs"
+    },
+    {
+     "choice": [
+      {
+       "label": "choice.sleep_anyway"
+      },
+      {
+       "label": "choice.not_yet",
+       "do": [
+        {
+         "end": true
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "else": [
+    {
+     "choice": [
+      {
+       "label": "choice.sleep"
+      },
+      {
+       "label": "choice.not_yet",
+       "do": [
+        {
+         "end": true
+        }
+       ]
+      }
+     ],
+     "prompt": "story.common.bed_prompt"
+    }
+   ]
+  },
+  {
+   "sleep": true
+  },
+  {
+   "if": "chapter==2 && monthsInChapter==1 && !flag:pyf_lesson",
+   "then": [
+    {
+     "say": "story.c2.after_month1"
+    },
+    {
+     "objective": "objective.ch2_pyf"
+    }
+   ]
+  },
+  {
+   "if": "chapter==2 && monthsInChapter>=2",
+   "then": [
+    {
+     "objective": "objective.anwar_challenge"
+    }
+   ]
+  },
+  {
+   "if": "chapter==3 && fundMonths>=3 && flag:met_lakshmi",
+   "then": [
+    {
+     "objective": "objective.lakshmi_challenge"
+    }
+   ]
+  },
+  {
+   "if": "chapter==5 && !flag:bridge_built && bonds",
+   "then": [
+    {
+     "call": "bridge_open"
+    }
+   ]
+  },
+  {
+   "if": "chapter==5 && !flag:bridge_built && monthsInChapter>=2",
+   "then": [
+    {
+     "call": "bridge_open"
+    }
+   ]
+  }
+ ],
+ "home_shelf": [
+  {
+   "say": "story.common.shelf"
+  }
+ ],
+ "overwhelmed": [
+  {
+   "say": "story.common.overwhelmed1"
+  },
+  {
+   "say": "story.common.overwhelmed2",
+   "who": "mom"
+  },
+  {
+   "if": "!loan:family",
+   "then": [
+    {
+     "do": {
+      "type": "takeLoan",
+      "kind": "family",
+      "amount": 1000,
+      "months": 5
+     }
+    }
+   ]
+  },
+  {
+   "do": {
+    "type": "meter",
+    "peace": 50
+   }
+  },
+  {
+   "flag": "overwhelmed",
+   "value": false
+  },
+  {
+   "say": "story.common.overwhelmed3",
+   "who": "mom"
+  },
+  {
+   "concept": "emergency_fund"
+  }
+ ]
 }

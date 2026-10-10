@@ -59,7 +59,8 @@
     "qr_lost": "You scan and enter your PIN. \"Paid ₹800 to CycleBuyer.\" Wait... PAID? Entering your PIN sends money. It never receives it.",
     "qr_refuse": "\"I don't need a PIN to receive money. Send it to my UPI ID instead,\" you say.",
     "buyer_run": "Uh... never mind! Gotta go!",
-    "kabir": "I already spent my ₹1,000. Snacks, a game top-up... and some other stuff. It went so fast!"
+    "kabir": "I already spent my ₹1,000. Snacks, a game top-up... and some other stuff. It went so fast!",
+    "meena_form": "“Now the form. Take your time with the nominee line — people rush it and regret it.”"
   },
   "c2": {
     "prof1": "The Banked badge! Splendid. Now comes the real test: a month. Money arrives, money leaves. First lesson: needs and wants.",
@@ -124,7 +125,8 @@
     "kabir_later": "I'm trying this budget thing. It's harder than it looks!",
     "prof_scholarship": "Good news for a learner like you: the coaching centre gives merit scholarships. Answer my two questions and I'll recommend you!",
     "scholarship_won": "Splendid! The centre is giving you ₹1,500. I've put it straight into your goal pot: money you never have to repay.",
-    "scholarship_lost": "Not this time. Scholarships come round every year, so keep applying, to many of them."
+    "scholarship_lost": "Not this time. Scholarships come round every year, so keep applying, to many of them.",
+    "prof_leaks": "“Before you chase more money, find out where the money you already have is going. Most of it leaves in twenty-rupee pieces.”"
   },
   "c4": {
     "prof1": "Many people borrow for big things. Borrowing isn't always bad, but there is good debt and bad debt.",

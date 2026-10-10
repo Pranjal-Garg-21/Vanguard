@@ -1,12 +1,24 @@
 /**
- * Jar Split (S2): split income into Needs / Wants / Future jars.
+ * Jar Split (S2): the first monthly budget.
  * Use case: UC-PB-02 · Owner: P3
- *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
  */
+import content from '@/content/scenarios/plan/jar-split.json';
+import { defineGame } from '../shared/game';
+import { JarSplit } from './JarSplit';
 
-export {};
+export { JarSplit } from './JarSplit';
+export {
+  buildStatement,
+  settleBills,
+  HEAVY_NEEDS_SHARE,
+  type MonthEndStatement,
+} from './logic/statement';
+
+export const jarSplit = defineGame({
+  id: content.id,
+  useCase: 'UC-PB-02',
+  verbs: ['allocate'],
+  concepts: content.concepts,
+  levels: [1, 2, 3],
+  Component: JarSplit,
+});

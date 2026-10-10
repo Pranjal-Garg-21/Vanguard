@@ -1,223 +1,238 @@
 {
-  "income": {
-    "title": "Income",
-    "body": "Income is money that comes in: an allowance, wages from work, a scholarship, or profit from a business. Some income is fixed (the same every month) and some is irregular (it changes month to month).",
-    "example": "Tutoring pays ₹1,000 in a quiet month and ₹2,400 in exam season. Plan with the low number, not the high one."
-  },
-  "goal_setting": {
-    "title": "Money goals",
-    "body": "A good goal is specific (what), has a number (how much) and a deadline (by when). Split it into a monthly amount so you know if you're on track.",
-    "example": "\"A ₹8,000 phone in 10 months\" means saving ₹800 a month. \"Save some money\" is a wish, not a goal."
-  },
-  "why_bank": {
-    "title": "Why keep money in a bank",
-    "body": "Cash at home can be lost, stolen or spent on a whim. A bank keeps it safe, pays you interest, and lets you pay digitally. In India, deposits are insured up to ₹5 lakh per person per bank if a bank fails.",
-    "example": "₹1,000 under the mattress is still ₹1,000 next year, if nobody takes it. In a savings account it earns a little extra and is protected."
-  },
-  "kyc": {
-    "title": "KYC: Know Your Customer",
-    "body": "Before opening an account, a bank must check who you are with an identity proof and an address proof, plus a photo. Students under 18 can open a minor account with a parent or guardian.",
-    "example": "Real banks ask for KYC at the branch or in their official app. They never ask you to \"update KYC\" through a link in an SMS."
-  },
-  "savings_account": {
-    "title": "Savings account",
-    "body": "A savings account is for keeping money safely and taking it out when you need it. It pays a small interest rate. A current account is for businesses that make many payments and usually pays no interest.",
-    "example": "Your Paisapur Bank savings account pays 3.5% a year: ₹10,000 kept all year earns about ₹350."
-  },
-  "simple_interest": {
-    "title": "Interest",
-    "body": "Interest is the price of money. When you save, the bank pays you interest. When you borrow, you pay interest. Simple interest = principal × rate × time.",
-    "example": "₹1,000 at 6% a year for 2 years earns ₹1,000 × 0.06 × 2 = ₹120 of simple interest."
-  },
-  "upi_basics": {
-    "title": "UPI payments",
-    "body": "UPI moves money instantly between bank accounts using a phone. To pay, you scan a QR code or enter a UPI ID, check the name, then enter your secret UPI PIN.",
-    "example": "Always check the name that appears before you enter the PIN. A wrong name means stop."
-  },
-  "pin_secrecy": {
-    "title": "PINs, OTPs and passwords are only yours",
-    "body": "Your PIN, OTP and passwords are the keys to your money. No bank officer, delivery person or friend ever needs them. Anyone who asks is trying to take your money.",
-    "example": "\"Sir, tell me the OTP to stop the fraud\" is the fraud."
-  },
-  "phishing": {
-    "title": "Phishing messages",
-    "body": "Phishing messages pretend to be a bank, a company or the government to make you click a link or share details. Their tells: urgency, threats, strange links, spelling mistakes, and asking for secrets.",
-    "example": "\"Your account will be BLOCKED today. Update KYC at this link\" has urgency, a threat and a link. Delete it and call the bank's official number."
-  },
-  "upi_collect": {
-    "title": "A PIN is for paying, never for receiving",
-    "body": "You never need to enter your UPI PIN, scan a QR code or approve a request to receive money. If entering your PIN is needed, money is leaving your account.",
-    "example": "A \"buyer\" sends a QR code and says \"scan it to receive ₹1,500\". Scanning and entering the PIN would send them ₹1,500."
-  },
-  "needs_wants": {
-    "title": "Needs and wants",
-    "body": "Needs are things you must have to live, study and work: food, transport, basic phone recharge, school supplies. Wants make life nicer but you can live without them. Some things are a need at one price and a want at another.",
-    "example": "A bus pass is a need. Branded sneakers when your shoes are fine are a want."
-  },
-  "budgeting": {
-    "title": "Budgeting with jars",
-    "body": "A budget is a plan for your money before you spend it. A simple version is the 50/30/20 rule: about 50% for needs, 30% for wants and 20% for saving. Adjust the numbers to your life, but always plan saving first.",
-    "example": "With ₹1,500: about ₹750 for needs, ₹450 for wants, ₹300 saved."
-  },
-  "opportunity_cost": {
-    "title": "Opportunity cost",
-    "body": "Every rupee can only be spent once. The opportunity cost of a choice is the best thing you gave up to make it.",
-    "example": "The ₹1,800 sneakers cost you more than ₹1,800: they also cost 2 months of progress towards your phone."
-  },
-  "sales_tricks": {
-    "title": "Sale tricks",
-    "body": "Shops use tricks to make you buy: \"today only\", \"50% off\" a price that was inflated first, \"buy 2 get 1\", and easy EMIs. A sale only saves money if you were going to buy the thing anyway.",
-    "example": "\"₹3,600 → ₹1,800!\" If you didn't need sneakers, you didn't save ₹1,800. You spent ₹1,800."
-  },
-  "gst": {
-    "title": "GST: tax on what you buy",
-    "body": "Goods and Services Tax is added to most things you buy and goes to the government. Since 2025 most items are taxed at 5% or 18%, and some basics like fresh fruit and notebooks at 0%. The shelf price usually already includes GST.",
-    "example": "A ₹150 recharge with 18% GST includes about ₹23 of tax. Your bill shows it."
-  },
-  "pay_yourself_first": {
-    "title": "Pay yourself first",
-    "body": "Don't save whatever is left at the end of the month: there is usually nothing left. Move your saving out the day money arrives, ideally automatically, then live on the rest.",
-    "example": "A standing instruction to move ₹200 into your goal pot every month means you save without having to remember."
-  },
-  "inflation": {
-    "title": "Inflation",
-    "body": "Inflation is prices rising over time, so the same money buys less. In India prices have often risen around 4–6% a year. Money that earns less than inflation is quietly shrinking.",
-    "example": "Chai that cost ₹10 a few years ago costs ₹15–20 now. Watch Zaroorat Store's prices creep up month by month."
-  },
-  "emergency_fund": {
-    "title": "Emergency fund",
-    "body": "An emergency fund is money kept only for surprises: a broken phone, a medical bill, a lost job. Aim for 3–6 months of needs, in a place you can reach quickly, like a savings account.",
-    "example": "With ₹800 of needs a month, 3 months is ₹2,400. When the phone screen cracks, you pay and stay calm."
-  },
-  "compound_interest": {
-    "title": "Compound interest",
-    "body": "With compound interest, you earn interest on your interest too. The longer you leave it, the faster it grows. Time matters more than the amount you start with.",
-    "example": "₹10,000 at 8% a year becomes about ₹21,600 in 10 years and about ₹46,600 in 20. The second 10 years earn more than the first."
-  },
-  "rule_of_72": {
-    "title": "The rule of 72",
-    "body": "Divide 72 by a yearly interest rate to estimate how many years money takes to double. It works for growth (savings) and for debt (what you owe).",
-    "example": "At 8%, money doubles in about 72 ÷ 8 = 9 years. A card charging 36% a year doubles your debt in about 2 years."
-  },
-  "fixed_deposit": {
-    "title": "Fixed deposit (FD)",
-    "body": "In a fixed deposit you lock money in a bank for a set time at a higher interest rate than a savings account. Breaking it early usually costs a penalty. A recurring deposit (RD) does the same with a fixed amount every month.",
-    "example": "Paisapur Bank pays 7% a year on FDs vs 3.5% on savings. Good for money you won't need for a while; not for your emergency fund."
-  },
-  "lending_to_friends": {
-    "title": "Lending to friends and family",
-    "body": "Only lend what you could afford to never get back. Agree on when it will be repaid. Saying no kindly is allowed.",
-    "example": "Lending ₹500 out of ₹3,000 is fine. Lending your whole emergency fund is not."
-  },
-  "net_worth": {
-    "title": "Net worth: assets minus liabilities",
-    "body": "Assets are what you own that has value (cash, savings, investments, a plot of land). Liabilities are what you owe (loans, card balances). Net worth = assets − liabilities. It's the real score of your finances.",
-    "example": "A ₹30,000 bike bought with a ₹30,000 loan adds a ₹30,000 asset that loses value and a ₹30,000 debt that grows with interest."
-  },
-  "job_scam": {
-    "title": "Fake job and task scams",
-    "body": "Real jobs pay you; they never ask you to pay to join. \"Earn ₹5,000 a day liking videos\" offers are scams that pay a little at first to win trust, then ask for bigger \"deposits\".",
-    "example": "\"Pay ₹500 registration fee to start the part-time job\" is the tell."
-  },
-  "good_bad_debt": {
-    "title": "Good debt and bad debt",
-    "body": "Debt can help when it pays for something that grows your income or value (like education) at a fair rate you can afford. It hurts when it pays for wants, comes at a high rate, or the repayments squeeze your needs.",
-    "example": "An education loan for a course that raises your earning power can be good debt. A loan for a party is bad debt."
-  },
-  "loan_basics": {
-    "title": "How a loan works",
-    "body": "A loan has a principal (the amount borrowed), an interest rate, a tenure (how long) and sometimes fees. The total cost is everything you pay back minus what you received.",
-    "example": "Borrow ₹10,000 at 1% a month for 12 months: you pay back about ₹10,660. The ₹660 is the cost of borrowing."
-  },
-  "emi": {
-    "title": "EMI: equated monthly instalment",
-    "body": "An EMI is the fixed amount you repay every month, covering both interest and principal. A longer tenure means a smaller EMI but more total interest. Always compare total cost, not just the EMI.",
-    "example": "₹30,000 at 1% a month: 12 months = ₹2,665 EMI (₹31,980 total); 24 months = ₹1,412 EMI (₹33,890 total)."
-  },
-  "credit_score": {
-    "title": "Credit score",
-    "body": "A credit score (in India, usually 300 to 900) shows lenders how reliably you repay. Paying on time raises it; missing payments drops it fast. A good score gets you loans at better rates later.",
-    "example": "Every on-time EMI nudges your score up. One missed EMI can undo months of good behaviour."
-  },
-  "credit_card": {
-    "title": "Credit cards and the minimum payment trap",
-    "body": "A credit card is a short loan. Pay the full bill on time and it's free. Pay only the minimum and the rest is charged interest of around 3–4% a month (over 40% a year), so a small balance can last years.",
-    "example": "₹10,000 on a card, paying only the minimum, can take years to clear and cost thousands in interest."
+  "assets_that_earn": {
+    "title": "Assets that earn money",
+    "body": "Some things you buy put money in your pocket: a stall that sells, tools for paid work, a course that raises your pay. Others take money out: running costs, repairs, EMIs. Borrowing for an asset can make sense only if what it earns comfortably covers the repayments.",
+    "example": "A ₹10,000 stall that earns ₹600 a month pays for itself in under a year and a half."
   },
   "bnpl": {
     "title": "Buy now, pay later",
     "body": "BNPL splits a purchase into instalments. It feels free, but late fees and interest can follow, it counts as borrowing, and it makes it easy to buy wants you can't afford today.",
     "example": "\"Headphones for ₹300 a month!\" is still ₹1,200 of headphones, and a debt."
   },
-  "informal_lending": {
-    "title": "Moneylenders and informal loans",
-    "body": "Informal lenders are fast and need no papers, but often charge 3–10% a month (36–120% a year) and may use pressure to collect. Banks and registered lenders are slower but much cheaper and follow rules.",
-    "example": "5% a month sounds small. On ₹10,000 that's ₹500 every month, ₹6,000 a year."
-  },
-  "loan_app_trap": {
-    "title": "Predatory loan apps",
-    "body": "Illegal loan apps promise instant money with no checks, then cut huge \"processing fees\", charge very high interest, and harass you and your contacts. Only borrow from lenders registered with the regulator, and never give an app access to your contacts and photos.",
-    "example": "\"₹5,000 instantly!\" You receive ₹4,000 and owe ₹5,000 plus 4% a month."
-  },
-  "impersonation": {
-    "title": "Impersonation calls",
-    "body": "Scammers call pretending to be a bank, the police, a courier or a relative in trouble. They create panic so you act before you think. Hang up and call back on the official number yourself.",
-    "example": "\"This is your bank. There's fraud on your account, tell me the OTP to block it.\" Hang up."
-  },
   "bonds": {
     "title": "Bonds: lending to a government or company",
     "body": "When you buy a bond, you lend money to a government or company for a fixed time and they pay you a fixed interest rate. Government bonds are among the safest investments; returns are lower than stocks but steadier.",
     "example": "Paisapur's town bond pays 8% a year for 1 year. The town uses the money to rebuild the bridge."
   },
-  "stocks": {
-    "title": "Stocks: owning a piece of a company",
-    "body": "A share (stock) is a small piece of ownership in a company. If the company does well, the price can rise and it may share profits as dividends. If it does badly, the price can fall a lot.",
-    "example": "Buying 1 share of Pearl City Power makes you a tiny owner of the power company."
+  "budgeting": {
+    "title": "Budgeting with jars",
+    "body": "A budget is a plan for your money before you spend it. A simple version is the 50/30/20 rule: about 50% for needs, 30% for wants and 20% for saving. Adjust the numbers to your life, but always plan saving first.",
+    "example": "With ₹1,500: about ₹750 for needs, ₹450 for wants, ₹300 saved."
   },
-  "risk_return": {
-    "title": "Risk and return",
-    "body": "Investments that can earn more usually can also lose more. Safe options (savings, FDs, government bonds) earn less; riskier ones (stocks) can earn more over long periods but swing a lot along the way.",
-    "example": "FD: 7%, steady. Stocks: maybe +25% one year and −15% the next."
+  "compound_interest": {
+    "title": "Compound interest",
+    "body": "With compound interest, you earn interest on your interest too. The longer you leave it, the faster it grows. Time matters more than the amount you start with.",
+    "example": "₹10,000 at 8% a year becomes about ₹21,600 in 10 years and about ₹46,600 in 20. The second 10 years earn more than the first."
+  },
+  "context_dependence": {
+    "title": "The same thing can be either",
+    "body": "Whether something is a need depends on your life, not on the object. The same item can be a want one month and a need the next, and nobody can tell you which from outside.",
+    "example": "A phone recharge is a want — until your classes move online, and then it is how you attend school."
+  },
+  "credit_card": {
+    "title": "Credit cards and the minimum payment trap",
+    "body": "A credit card is a short loan. Pay the full bill on time and it's free. Pay only the minimum and the rest is charged interest of around 3–4% a month (over 40% a year), so a small balance can last years.",
+    "example": "₹10,000 on a card, paying only the minimum, can take years to clear and cost thousands in interest."
+  },
+  "credit_score": {
+    "title": "Credit score",
+    "body": "A credit score (in India, usually 300 to 900) shows lenders how reliably you repay. Paying on time raises it; missing payments drops it fast. A good score gets you loans at better rates later.",
+    "example": "Every on-time EMI nudges your score up. One missed EMI can undo months of good behaviour."
+  },
+  "delayed_gratification": {
+    "title": "Waiting pays (delayed gratification)",
+    "body": "Buying something now with credit feels great today and costs more tomorrow. Saving for it first means you pay only the price, and you often find you wanted it less than you thought.",
+    "example": "A ₹8,000 phone on a card, paying the minimum, can end up costing ₹10,000 or more. Saved for over 10 months, it costs ₹8,000."
+  },
+  "depreciation": {
+    "title": "Depreciation: things lose value",
+    "body": "Phones, bikes and gadgets are worth less every year you own them. If you borrow to buy them, you keep paying for something that keeps shrinking.",
+    "example": "A ₹30,000 bike may be worth about ₹25,000 after a year, while a 2-year loan on it still has a year of EMIs left."
   },
   "diversification": {
     "title": "Diversification",
     "body": "Don't put all your eggs in one basket. Spreading money across many companies and kinds of assets means one bad investment can't sink you.",
     "example": "If Gully Gadgets crashes, someone with all their money in it loses badly; someone holding 50 companies barely notices."
   },
-  "mutual_funds": {
-    "title": "Mutual funds",
-    "body": "A mutual fund pools money from many people and a professional manager invests it in many stocks or bonds. You get instant diversification with a small amount, but you pay a yearly fee.",
-    "example": "Star Picks Fund charges 1.5% a year to try to beat the market. Most active funds don't, over the long run."
+  "education_loan": {
+    "title": "Education loans",
+    "body": "Education loans pay for courses and degrees, often at lower interest than other loans, and repayment usually starts after the course. They can be good debt when the course really improves what you can earn. Always try scholarships first.",
+    "example": "Paisapur Bank's education loan charges 0.8% a month, cheaper than its regular 1% and far cheaper than a moneylender's 5%."
   },
-  "index_etf": {
-    "title": "Index funds and ETFs",
-    "body": "An index fund simply buys every company in a market index (like the top companies of a stock exchange) instead of picking. An ETF is a fund you buy and sell on the exchange like a share. Both are usually cheap and well diversified.",
-    "example": "The Deccan 5 Index ETF holds all five Deccan companies for a fee of just 0.2% a year."
+  "emergency_fund": {
+    "title": "Emergency fund",
+    "body": "An emergency fund is money kept only for surprises: a broken phone, a medical bill, a lost job. Aim for 3–6 months of needs, in a place you can reach quickly, like a savings account.",
+    "example": "With ₹800 of needs a month, 3 months is ₹2,400. When the phone screen cracks, you pay and stay calm."
   },
-  "sip": {
-    "title": "SIP: investing a fixed amount every month",
-    "body": "A Systematic Investment Plan invests the same amount every month, whatever the market does. You buy more units when prices are low and fewer when high, and you build the habit.",
-    "example": "₹500 a month into an index fund for 10 years. Some months are up, some down; the habit does the work."
+  "emi": {
+    "title": "EMI: equated monthly instalment",
+    "body": "An EMI is the fixed amount you repay every month, covering both interest and principal. A longer tenure means a smaller EMI but more total interest. Always compare total cost, not just the EMI.",
+    "example": "₹30,000 at 1% a month: 12 months = ₹2,665 EMI (₹31,980 total); 24 months = ₹1,412 EMI (₹33,890 total)."
   },
-  "time_horizon": {
-    "title": "Time horizon",
-    "body": "When will you need the money? Money for the next few months belongs somewhere safe (savings, FD). Money for 5+ years can ride out the ups and downs of stocks.",
-    "example": "Next month's bus pass: savings account. Money for when you are 30: an index fund can make sense."
-  },
-  "volatility": {
-    "title": "Ups and downs (volatility)",
-    "body": "Markets go up and down, sometimes sharply. Selling in a panic after a fall locks in the loss. People who stay invested for years have historically been rewarded, but nothing is guaranteed.",
-    "example": "The Deccan market falls 15% in a month. The patient investor holds; the panicked one sells at the bottom."
+  "expense_tracking": {
+    "title": "Where it actually went",
+    "body": "Small amounts do not feel like spending, so they never get counted. Counting them is the only way to see them. The problem is almost never one big purchase.",
+    "example": "₹20 of chai a day is ₹440 a month, and ₹5,280 a year. Nobody remembers spending ₹5,280 on chai."
   },
   "fees": {
     "title": "Fees eat returns",
     "body": "A small yearly fee looks harmless, but it's taken every year from your whole investment, and compounds against you. Always check the fee (expense ratio).",
     "example": "Over 20 years, a 1.5% fee can eat roughly a quarter of what you would have had with a 0.2% fee."
   },
+  "fixed_deposit": {
+    "title": "Fixed deposit (FD)",
+    "body": "In a fixed deposit you lock money in a bank for a set time at a higher interest rate than a savings account. Breaking it early usually costs a penalty. A recurring deposit (RD) does the same with a fixed amount every month.",
+    "example": "Paisapur Bank pays 7% a year on FDs vs 3.5% on savings. Good for money you won't need for a while; not for your emergency fund."
+  },
+  "fixed_vs_variable": {
+    "title": "Fixed and changing costs",
+    "body": "Some costs are the same every month and arrive whether you plan for them or not — rent, a bus pass, a fee. Others move. Cover the fixed ones first; they are the ones that bite.",
+    "example": "Your sister's school fee arrives the same month every year. It is never a surprise, only an un-planned-for one."
+  },
+  "fraud_recovery": {
+    "title": "If you get scammed",
+    "body": "Act fast: call your bank to block your account or card, report it on India's cybercrime helpline 1930 or cybercrime.gov.in, change your passwords, and tell someone you trust. The faster you report, the better the chance of recovery.",
+    "example": "Scammed at 9 pm? Call the bank and 1930 the same night. Don't wait for morning."
+  },
+  "goal_setting": {
+    "title": "Money goals",
+    "body": "A good goal is specific (what), has a number (how much) and a deadline (by when). Split it into a monthly amount so you know if you're on track.",
+    "example": "\"A ₹8,000 phone in 10 months\" means saving ₹800 a month. \"Save some money\" is a wish, not a goal."
+  },
   "gold": {
     "title": "Gold",
     "body": "Gold often holds value when other things fall, and families in India have long saved in it. But it pays no interest, jewellery has making charges, and its price swings too. Many people keep only a small part of their money in gold.",
     "example": "Buying a ₹6,000 gold coin as jewellery may cost ₹6,600 with making charges, and sell back for less."
+  },
+  "good_bad_debt": {
+    "title": "Good debt and bad debt",
+    "body": "Debt can help when it pays for something that grows your income or value (like education) at a fair rate you can afford. It hurts when it pays for wants, comes at a high rate, or the repayments squeeze your needs.",
+    "example": "An education loan for a course that raises your earning power can be good debt. A loan for a party is bad debt."
+  },
+  "gst": {
+    "title": "GST: tax on what you buy",
+    "body": "Goods and Services Tax is added to most things you buy and goes to the government. Since 2025 most items are taxed at 5% or 18%, and some basics like fresh fruit and notebooks at 0%. The shelf price usually already includes GST.",
+    "example": "A ₹150 recharge with 18% GST includes about ₹23 of tax. Your bill shows it."
+  },
+  "identity_protection": {
+    "title": "Protecting your identity",
+    "body": "Keep your ID numbers, photos of documents, passwords and OTPs private. Use different passwords, turn on screen locks, and don't install apps from links.",
+    "example": "A photo of your ID card sent to a stranger can be used to open loans in your name."
+  },
+  "impersonation": {
+    "title": "Impersonation calls",
+    "body": "Scammers call pretending to be a bank, the police, a courier or a relative in trouble. They create panic so you act before you think. Hang up and call back on the official number yourself.",
+    "example": "\"This is your bank. There's fraud on your account, tell me the OTP to block it.\" Hang up."
+  },
+  "income": {
+    "title": "Income",
+    "body": "Income is money that comes in: an allowance, wages from work, a scholarship, or profit from a business. Some income is fixed (the same every month) and some is irregular (it changes month to month).",
+    "example": "Tutoring pays ₹1,000 in a quiet month and ₹2,400 in exam season. Plan with the low number, not the high one."
+  },
+  "income_tax": {
+    "title": "Income tax",
+    "body": "When you start earning, part of your income above a basic limit goes to the government as income tax, in slabs: higher income pays a higher rate on the part above each slab. Taxes pay for roads, schools and hospitals.",
+    "example": "Most students pay no income tax because their income is below the limit, but they still pay GST on purchases."
+  },
+  "index_etf": {
+    "title": "Index funds and ETFs",
+    "body": "An index fund simply buys every company in a market index (like the top companies of a stock exchange) instead of picking. An ETF is a fund you buy and sell on the exchange like a share. Both are usually cheap and well diversified.",
+    "example": "The Deccan 5 Index ETF holds all five Deccan companies for a fee of just 0.2% a year."
+  },
+  "inflation": {
+    "title": "Inflation",
+    "body": "Inflation is prices rising over time, so the same money buys less. In India prices have often risen around 4–6% a year. Money that earns less than inflation is quietly shrinking.",
+    "example": "Chai that cost ₹10 a few years ago costs ₹15–20 now. Watch Zaroorat Store's prices creep up month by month."
+  },
+  "informal_lending": {
+    "title": "Moneylenders and informal loans",
+    "body": "Informal lenders are fast and need no papers, but often charge 3–10% a month (36–120% a year) and may use pressure to collect. Banks and registered lenders are slower but much cheaper and follow rules.",
+    "example": "5% a month sounds small. On ₹10,000 that's ₹500 every month, ₹6,000 a year."
+  },
+  "insurance": {
+    "title": "Insurance: sharing risk",
+    "body": "Insurance pools small payments (premiums) from many people to pay the few who face a big loss. You pay a little for sure to avoid a huge loss maybe. Health and term life insurance protect families from disasters.",
+    "example": "₹100 a month for insurance feels wasted until the month your stall burns down."
+  },
+  "irregular_income": {
+    "title": "When income changes",
+    "body": "Tutoring, shop sales and gig work rise and fall. Even an allowance can shrink when the family has a hard month. Plan with your lowest normal month and let good months fill your savings.",
+    "example": "If you earn ₹1,000 in a bad month and ₹2,400 in a good one, budget for ₹1,000 and save the rest."
+  },
+  "job_scam": {
+    "title": "Fake job and task scams",
+    "body": "Real jobs pay you; they never ask you to pay to join. \"Earn ₹5,000 a day liking videos\" offers are scams that pay a little at first to win trust, then ask for bigger \"deposits\".",
+    "example": "\"Pay ₹500 registration fee to start the part-time job\" is the tell."
+  },
+  "kyc": {
+    "title": "KYC: Know Your Customer",
+    "body": "Before opening an account, a bank must check who you are with an identity proof and an address proof, plus a photo. Students under 18 can open a minor account with a parent or guardian.",
+    "example": "Real banks ask for KYC at the branch or in their official app. They never ask you to \"update KYC\" through a link in an SMS."
+  },
+  "lending_to_friends": {
+    "title": "Lending to friends and family",
+    "body": "Only lend what you could afford to never get back. Agree on when it will be repaid. Saying no kindly is allowed.",
+    "example": "Lending ₹500 out of ₹3,000 is fine. Lending your whole emergency fund is not."
+  },
+  "loan_app_trap": {
+    "title": "Predatory loan apps",
+    "body": "Illegal loan apps promise instant money with no checks, then cut huge \"processing fees\", charge very high interest, and harass you and your contacts. Only borrow from lenders registered with the regulator, and never give an app access to your contacts and photos.",
+    "example": "\"₹5,000 instantly!\" You receive ₹4,000 and owe ₹5,000 plus 4% a month."
+  },
+  "loan_basics": {
+    "title": "How a loan works",
+    "body": "A loan has a principal (the amount borrowed), an interest rate, a tenure (how long) and sometimes fees. The total cost is everything you pay back minus what you received.",
+    "example": "Borrow ₹10,000 at 1% a month for 12 months: you pay back about ₹10,660. The ₹660 is the cost of borrowing."
+  },
+  "minimum_balance_fees": {
+    "title": "Minimum balance",
+    "body": "A minimum balance is money you must leave sitting in the account at all times. Dip below it, even once, and the bank takes a fee. It is not a saving — it is money you cannot use.",
+    "example": "₹1,000 locked away out of a ₹800 allowance is not a savings plan. It is a monthly fine waiting to happen."
+  },
+  "mutual_funds": {
+    "title": "Mutual funds",
+    "body": "A mutual fund pools money from many people and a professional manager invests it in many stocks or bonds. You get instant diversification with a small amount, but you pay a yearly fee.",
+    "example": "Star Picks Fund charges 1.5% a year to try to beat the market. Most active funds don't, over the long run."
+  },
+  "needs_wants": {
+    "title": "Needs and wants",
+    "body": "Needs are things you must have to live, study and work: food, transport, basic phone recharge, school supplies. Wants make life nicer but you can live without them. Some things are a need at one price and a want at another.",
+    "example": "A bus pass is a need. Branded sneakers when your shoes are fine are a want."
+  },
+  "net_worth": {
+    "title": "Net worth: assets minus liabilities",
+    "body": "Assets are what you own that has value (cash, savings, investments, a plot of land). Liabilities are what you owe (loans, card balances). Net worth = assets − liabilities. It's the real score of your finances.",
+    "example": "A ₹30,000 bike bought with a ₹30,000 loan adds a ₹30,000 asset that loses value and a ₹30,000 debt that grows with interest."
+  },
+  "nominee": {
+    "title": "Nominee",
+    "body": "A nominee is the person the bank hands your money to if something happens to you. It takes one line on the form. Without it, your family needs court papers to reach money that was always theirs.",
+    "example": "One line at the counter, or months of paperwork later. Same money either way."
+  },
+  "opportunity_cost": {
+    "title": "Opportunity cost",
+    "body": "Every rupee can only be spent once. The opportunity cost of a choice is the best thing you gave up to make it.",
+    "example": "The ₹1,800 sneakers cost you more than ₹1,800: they also cost 2 months of progress towards your phone."
+  },
+  "pay_yourself_first": {
+    "title": "Pay yourself first",
+    "body": "Don't save whatever is left at the end of the month: there is usually nothing left. Move your saving out the day money arrives, ideally automatically, then live on the rest.",
+    "example": "A standing instruction to move ₹200 into your goal pot every month means you save without having to remember."
+  },
+  "phishing": {
+    "title": "Phishing messages",
+    "body": "Phishing messages pretend to be a bank, a company or the government to make you click a link or share details. Their tells: urgency, threats, strange links, spelling mistakes, and asking for secrets.",
+    "example": "\"Your account will be BLOCKED today. Update KYC at this link\" has urgency, a threat and a link. Delete it and call the bank's official number."
+  },
+  "pin_secrecy": {
+    "title": "PINs, OTPs and passwords are only yours",
+    "body": "Your PIN, OTP and passwords are the keys to your money. No bank officer, delivery person or friend ever needs them. Anyone who asks is trying to take your money.",
+    "example": "\"Sir, tell me the OTP to stop the fraud\" is the fraud."
+  },
+  "ponzi": {
+    "title": "Ponzi and pyramid schemes",
+    "body": "A Ponzi scheme pays early investors with money from new investors, not real profits. It looks like it works, until new money stops and it collapses. Most people lose everything.",
+    "example": "\"Double Dhamaka\" pays the first members on time. That's what makes everyone else join."
   },
   "real_estate": {
     "title": "Property (real estate)",
@@ -229,74 +244,84 @@
     "body": "Your real return is what you earn after inflation. If savings pay 3.5% and prices rise 6%, your money is actually losing buying power.",
     "example": "Real return ≈ interest rate − inflation. 7% FD − 6% inflation ≈ 1% real growth."
   },
-  "tips_rumours": {
-    "title": "Tips and rumours",
-    "body": "\"Buy this stock now, it will double!\" tips on social media or chat groups are often wrong, and sometimes a scam where the tipster sells to you. Decide with facts, not hype.",
-    "example": "A Telegram channel pushes Gully Gadgets. The people who bought early sell to everyone who joins late."
+  "risk_return": {
+    "title": "Risk and return",
+    "body": "Investments that can earn more usually can also lose more. Safe options (savings, FDs, government bonds) earn less; riskier ones (stocks) can earn more over long periods but swing a lot along the way.",
+    "example": "FD: 7%, steady. Stocks: maybe +25% one year and −15% the next."
   },
-  "insurance": {
-    "title": "Insurance: sharing risk",
-    "body": "Insurance pools small payments (premiums) from many people to pay the few who face a big loss. You pay a little for sure to avoid a huge loss maybe. Health and term life insurance protect families from disasters.",
-    "example": "₹100 a month for insurance feels wasted until the month your stall burns down."
+  "rule_of_72": {
+    "title": "The rule of 72",
+    "body": "Divide 72 by a yearly interest rate to estimate how many years money takes to double. It works for growth (savings) and for debt (what you owe).",
+    "example": "At 8%, money doubles in about 72 ÷ 8 = 9 years. A card charging 36% a year doubles your debt in about 2 years."
   },
-  "ponzi": {
-    "title": "Ponzi and pyramid schemes",
-    "body": "A Ponzi scheme pays early investors with money from new investors, not real profits. It looks like it works, until new money stops and it collapses. Most people lose everything.",
-    "example": "\"Double Dhamaka\" pays the first members on time. That's what makes everyone else join."
+  "sales_tricks": {
+    "title": "Sale tricks",
+    "body": "Shops use tricks to make you buy: \"today only\", \"50% off\" a price that was inflated first, \"buy 2 get 1\", and easy EMIs. A sale only saves money if you were going to buy the thing anyway.",
+    "example": "\"₹3,600 → ₹1,800!\" If you didn't need sneakers, you didn't save ₹1,800. You spent ₹1,800."
   },
-  "too_good_to_be_true": {
-    "title": "Too good to be true",
-    "body": "Guaranteed high returns, no risk, and pressure to decide fast: that combination is a scam. Real investments never guarantee to double your money quickly.",
-    "example": "\"Guaranteed 10% a week!\" That's over 14,000% a year. No honest investment does that."
-  },
-  "identity_protection": {
-    "title": "Protecting your identity",
-    "body": "Keep your ID numbers, photos of documents, passwords and OTPs private. Use different passwords, turn on screen locks, and don't install apps from links.",
-    "example": "A photo of your ID card sent to a stranger can be used to open loans in your name."
-  },
-  "fraud_recovery": {
-    "title": "If you get scammed",
-    "body": "Act fast: call your bank to block your account or card, report it on India's cybercrime helpline 1930 or cybercrime.gov.in, change your passwords, and tell someone you trust. The faster you report, the better the chance of recovery.",
-    "example": "Scammed at 9 pm? Call the bank and 1930 the same night. Don't wait for morning."
-  },
-  "income_tax": {
-    "title": "Income tax",
-    "body": "When you start earning, part of your income above a basic limit goes to the government as income tax, in slabs: higher income pays a higher rate on the part above each slab. Taxes pay for roads, schools and hospitals.",
-    "example": "Most students pay no income tax because their income is below the limit, but they still pay GST on purchases."
-  },
-  "delayed_gratification": {
-    "title": "Waiting pays (delayed gratification)",
-    "body": "Buying something now with credit feels great today and costs more tomorrow. Saving for it first means you pay only the price, and you often find you wanted it less than you thought.",
-    "example": "A ₹8,000 phone on a card, paying the minimum, can end up costing ₹10,000 or more. Saved for over 10 months, it costs ₹8,000."
-  },
-  "windfall": {
-    "title": "Windfalls and lump sums",
-    "body": "A windfall is unexpected or one-off money: a festival bonus, a gift, a scholarship paid all at once. Because it isn't part of your regular budget, it's easy to spend it all. A good rule: save most of it, enjoy a little.",
-    "example": "A ₹3,000 scholarship arrives once a term. Treat it as three to six months of money, not one good weekend."
-  },
-  "irregular_income": {
-    "title": "When income changes",
-    "body": "Tutoring, shop sales and gig work rise and fall. Even an allowance can shrink when the family has a hard month. Plan with your lowest normal month and let good months fill your savings.",
-    "example": "If you earn ₹1,000 in a bad month and ₹2,400 in a good one, budget for ₹1,000 and save the rest."
+  "savings_account": {
+    "title": "Savings account",
+    "body": "A savings account is for keeping money safely and taking it out when you need it. It pays a small interest rate. A current account is for businesses that make many payments and usually pays no interest.",
+    "example": "Your Paisapur Bank savings account pays 3.5% a year: ₹10,000 kept all year earns about ₹350."
   },
   "scholarships": {
     "title": "Scholarships",
     "body": "A scholarship is money for studies that you don't pay back. Government schemes, colleges, NGOs and companies offer them for merit, need or both. Apply early and to many; it's the cheapest money there is.",
     "example": "A ₹1,500 merit scholarship covers almost a third of a ₹5,000 course, with nothing to repay."
   },
-  "depreciation": {
-    "title": "Depreciation: things lose value",
-    "body": "Phones, bikes and gadgets are worth less every year you own them. If you borrow to buy them, you keep paying for something that keeps shrinking.",
-    "example": "A ₹30,000 bike may be worth about ₹25,000 after a year, while a 2-year loan on it still has a year of EMIs left."
+  "simple_interest": {
+    "title": "Interest",
+    "body": "Interest is the price of money. When you save, the bank pays you interest. When you borrow, you pay interest. Simple interest = principal × rate × time.",
+    "example": "₹1,000 at 6% a year for 2 years earns ₹1,000 × 0.06 × 2 = ₹120 of simple interest."
   },
-  "education_loan": {
-    "title": "Education loans",
-    "body": "Education loans pay for courses and degrees, often at lower interest than other loans, and repayment usually starts after the course. They can be good debt when the course really improves what you can earn. Always try scholarships first.",
-    "example": "Paisapur Bank's education loan charges 0.8% a month, cheaper than its regular 1% and far cheaper than a moneylender's 5%."
+  "sip": {
+    "title": "SIP: investing a fixed amount every month",
+    "body": "A Systematic Investment Plan invests the same amount every month, whatever the market does. You buy more units when prices are low and fewer when high, and you build the habit.",
+    "example": "₹500 a month into an index fund for 10 years. Some months are up, some down; the habit does the work."
   },
-  "assets_that_earn": {
-    "title": "Assets that earn money",
-    "body": "Some things you buy put money in your pocket: a stall that sells, tools for paid work, a course that raises your pay. Others take money out: running costs, repairs, EMIs. Borrowing for an asset can make sense only if what it earns comfortably covers the repayments.",
-    "example": "A ₹10,000 stall that earns ₹600 a month pays for itself in under a year and a half."
+  "stocks": {
+    "title": "Stocks: owning a piece of a company",
+    "body": "A share (stock) is a small piece of ownership in a company. If the company does well, the price can rise and it may share profits as dividends. If it does badly, the price can fall a lot.",
+    "example": "Buying 1 share of Pearl City Power makes you a tiny owner of the power company."
+  },
+  "time_horizon": {
+    "title": "Time horizon",
+    "body": "When will you need the money? Money for the next few months belongs somewhere safe (savings, FD). Money for 5+ years can ride out the ups and downs of stocks.",
+    "example": "Next month's bus pass: savings account. Money for when you are 30: an index fund can make sense."
+  },
+  "tips_rumours": {
+    "title": "Tips and rumours",
+    "body": "\"Buy this stock now, it will double!\" tips on social media or chat groups are often wrong, and sometimes a scam where the tipster sells to you. Decide with facts, not hype.",
+    "example": "A Telegram channel pushes Gully Gadgets. The people who bought early sell to everyone who joins late."
+  },
+  "too_good_to_be_true": {
+    "title": "Too good to be true",
+    "body": "Guaranteed high returns, no risk, and pressure to decide fast: that combination is a scam. Real investments never guarantee to double your money quickly.",
+    "example": "\"Guaranteed 10% a week!\" That's over 14,000% a year. No honest investment does that."
+  },
+  "upi_basics": {
+    "title": "UPI payments",
+    "body": "UPI moves money instantly between bank accounts using a phone. To pay, you scan a QR code or enter a UPI ID, check the name, then enter your secret UPI PIN.",
+    "example": "Always check the name that appears before you enter the PIN. A wrong name means stop."
+  },
+  "upi_collect": {
+    "title": "A PIN is for paying, never for receiving",
+    "body": "You never need to enter your UPI PIN, scan a QR code or approve a request to receive money. If entering your PIN is needed, money is leaving your account.",
+    "example": "A \"buyer\" sends a QR code and says \"scan it to receive ₹1,500\". Scanning and entering the PIN would send them ₹1,500."
+  },
+  "volatility": {
+    "title": "Ups and downs (volatility)",
+    "body": "Markets go up and down, sometimes sharply. Selling in a panic after a fall locks in the loss. People who stay invested for years have historically been rewarded, but nothing is guaranteed.",
+    "example": "The Deccan market falls 15% in a month. The patient investor holds; the panicked one sells at the bottom."
+  },
+  "why_bank": {
+    "title": "Why keep money in a bank",
+    "body": "Cash at home can be lost, stolen or spent on a whim. A bank keeps it safe, pays you interest, and lets you pay digitally. In India, deposits are insured up to ₹5 lakh per person per bank if a bank fails.",
+    "example": "₹1,000 under the mattress is still ₹1,000 next year, if nobody takes it. In a savings account it earns a little extra and is protected."
+  },
+  "windfall": {
+    "title": "Windfalls and lump sums",
+    "body": "A windfall is unexpected or one-off money: a festival bonus, a gift, a scholarship paid all at once. Because it isn't part of your regular budget, it's easy to spend it all. A good rule: save most of it, enjoy a little.",
+    "example": "A ₹3,000 scholarship arrives once a term. Treat it as three to six months of money, not one good weekend."
   }
 }

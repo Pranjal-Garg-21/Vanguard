@@ -1,0 +1,40 @@
+{
+  "_comment": "UC-PB-02 Jar Split. Tone rule: the feedback never tells a student to want less. When needs eat the income that is a fact about their life, not a mistake they made.",
+  "hook": "Your money for the month has arrived. Decide where it goes before it decides for you.",
+  "prompt": "Share it out between the three jars. The bills are already attached to Needs.",
+  "summary": "You made a plan for the month.",
+  "jar": {
+    "needs": "Needs",
+    "wants": "Wants",
+    "future": "Future",
+    "emergency": "Emergency"
+  },
+  "bill": {
+    "bus_pass": "Bus pass",
+    "food": "Food for the month",
+    "household": "Your share at home",
+    "materials": "Stock for the shop",
+    "mess": "Hostel mess fee",
+    "recharge": "Phone recharge",
+    "rent_share": "Your share of the rent",
+    "transport": "Getting to class"
+  },
+  "concept": {
+    "jars": "Split your money the moment it arrives: what you must pay, what you choose to spend, and what you keep."
+  },
+  "statement": {
+    "title": "How the month went",
+    "income": "Money in: {amount}",
+    "paid": "Paid: {bill} · {amount}",
+    "missed": "Not covered: {bill} · {amount}",
+    "future": "Kept for later: {amount}",
+    "needs_share": "Needs took {percent}% of your money."
+  },
+  "verdict": {
+    "missed_bills": "Some bills did not get paid this month. Those do not disappear — they arrive again next month, usually bigger.",
+    "heavy_needs": "Most of your money has to go to needs. That is not a mistake, it is your situation — and even {amount} in Future is a strong start.",
+    "nothing_future": "Everything is spoken for, and nothing was kept. Try moving even one coin to Future and see how the month feels.",
+    "good": "Bills covered, and {amount} kept for later. That is what a working plan looks like.",
+    "all_future": "You kept almost everything. That is impressive — but a month with no Wants at all is hard to repeat. A plan you can stick to beats a perfect one."
+  }
+}

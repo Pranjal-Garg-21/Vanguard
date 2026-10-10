@@ -9,6 +9,8 @@ import { Navigate, useNavigate } from 'react-router';
 import { check, newLife, normalize, reduce, type Action, type LifeState } from '@/core/engine';
 import { makeSeed } from '@/core/random';
 import { evalCond, pendingAuto, runScript, type Host, type QuizResult } from '@/core/story';
+import type { Level, MiniGameResult } from '@/core/types';
+import { contextFromLife, getUiGame } from '@/games/adapter';
 import { AUTOS, SCRIPTS, type Panel } from '@/core/story/content';
 import { duelById } from '@/core/story/duel';
 import { addCheckpoint, rewind, type Checkpoint, type OtherLife } from '@/core/timeline';
@@ -49,7 +51,8 @@ type Overlay =
   | { kind: 'panel'; panel: Panel }
   | { kind: 'night'; before: LifeState }
   | { kind: 'menu'; screen: MenuScreen | null }
-  | { kind: 'duel'; id: string };
+  | { kind: 'duel'; id: string }
+  | { kind: 'minigame'; id: string; level: Level };
 
 const KEY_DIRS: Record<string, Dir> = {
   ArrowUp: 'up',
@@ -289,6 +292,7 @@ export function PaisapurGame() {
       if (key === 'toast.goal') audio.jingle('goal');
     },
     duel: (id) => ask<'win' | 'lose'>({ kind: 'duel', id }),
+    minigame: (id, level) => ask<MiniGameResult>({ kind: 'minigame', id, level }),
     checkpoint: (label) => {
       const start = sceneStart.current;
       if (!start) return;
@@ -602,6 +606,19 @@ export function PaisapurGame() {
             }}
           />
         );
+      case 'minigame': {
+        const game = getUiGame(overlay.id);
+        // A script naming a game that is not registered is a content bug, not
+        // a reason to trap the player in the scene. The validator catches it
+        // before it ships; this keeps the story moving if one slips through.
+        if (!game) return <MissingGame id={overlay.id} onClose={() => answer(emptyResult())} />;
+        const Play = game.Component;
+        return (
+          <div className="minigame w-full max-w-md">
+            <Play ctx={contextFromLife(life, { level: overlay.level })} onComplete={(r) => answer(r)} />
+          </div>
+        );
+      }
       case 'concept':
         return <ConceptCard id={overlay.id} onDone={() => answer()} />;
       case 'quiz':
@@ -695,6 +712,22 @@ export function PaisapurGame() {
         <p className="mt-2 hidden text-center text-xs text-slate-400 md:block">{t('paisapur.keys_hint')}</p>
       </div>
       {panel && <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/60 p-2 text-[#2b2b2b]">{panel}</div>}
+    </div>
+  );
+}
+
+/** An empty result, so a missing game still resolves the script's promise. */
+function emptyResult(): MiniGameResult {
+  return { choices: [], conceptDeltas: {}, misconceptions: [], summaryKey: 'errors.missing_game' };
+}
+
+function MissingGame({ id, onClose }: { id: string; onClose: () => void }) {
+  return (
+    <div className="minigame w-full max-w-md bg-parchment p-4 text-ink">
+      <p>{t('errors.missing_game', { id })}</p>
+      <button type="button" className="pixel-frame mt-3 bg-parchment px-4 py-2 font-bold" onClick={onClose}>
+        {t('common.continue')}
+      </button>
     </div>
   );
 }

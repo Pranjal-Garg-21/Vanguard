@@ -1,395 +1,408 @@
 {
-  "meena": [
+ "meena": [
+  {
+   "if": "!account",
+   "then": [
     {
-      "if": "!account",
-      "then": [
-        {
-          "once": "meena_intro",
-          "do": [
-            {
-              "say": "story.c1.meena1",
-              "who": "meena"
-            },
-            {
-              "concept": "why_bank"
-            }
-          ]
-        },
-        {
-          "if": "!flag:has_docs",
-          "then": [
-            {
-              "say": "story.c1.meena_docs",
-              "who": "meena"
-            },
-            {
-              "concept": "kyc"
-            },
-            {
-              "flag": "need_docs"
-            },
-            {
-              "objective": "objective.get_docs"
-            },
-            {
-              "end": true
-            }
-          ]
-        },
-        {
-          "say": "story.c1.meena_has_docs",
-          "who": "meena"
-        },
-        {
-          "choice": [
-            {
-              "label": "choice.acc_savings",
-              "log": {
-                "concept": "savings_account",
-                "choice": "savings",
-                "correct": true
-              },
-              "do": [
-                {
-                  "say": "story.c1.meena_savings",
-                  "who": "meena"
-                }
-              ]
-            },
-            {
-              "label": "choice.acc_current",
-              "log": {
-                "concept": "savings_account",
-                "choice": "current",
-                "correct": false
-              },
-              "do": [
-                {
-                  "say": "story.c1.meena_current",
-                  "who": "meena"
-                }
-              ]
-            },
-            {
-              "label": "choice.acc_none",
-              "log": {
-                "concept": "why_bank",
-                "choice": "cash_home",
-                "correct": false,
-                "misconception": "cash_at_home_safe"
-              },
-              "do": [
-                {
-                  "say": "story.c1.meena_none",
-                  "who": "meena"
-                }
-              ]
-            }
-          ],
-          "prompt": "story.c1.q_account",
-          "who": "meena"
-        },
-        {
-          "concept": "savings_account"
-        },
-        {
-          "do": {
-            "type": "openAccount"
-          }
-        },
-        {
-          "flag": "account_open"
-        },
-        {
-          "toast": "toast.account_open"
-        },
-        {
-          "choice": [
-            {
-              "label": "choice.dep_500",
-              "when": "cash>=500",
-              "do": [
-                {
-                  "do": {
-                    "type": "deposit",
-                    "amount": 500
-                  }
-                }
-              ]
-            },
-            {
-              "label": "choice.dep_1000",
-              "when": "cash>=1000",
-              "do": [
-                {
-                  "do": {
-                    "type": "deposit",
-                    "amount": 1000
-                  }
-                }
-              ]
-            },
-            {
-              "label": "choice.dep_1200",
-              "when": "cash>=1200",
-              "do": [
-                {
-                  "do": {
-                    "type": "deposit",
-                    "amount": 1200
-                  }
-                }
-              ]
-            },
-            {
-              "label": "choice.dep_none"
-            }
-          ],
-          "prompt": "story.c1.q_deposit",
-          "who": "meena"
-        },
-        {
-          "say": "story.c1.meena_interest",
-          "who": "meena"
-        },
-        {
-          "concept": "simple_interest"
-        },
-        {
-          "say": "story.c1.meena_card",
-          "who": "meena"
-        },
-        {
-          "concept": "pin_secrecy"
-        },
-        {
-          "say": "story.c1.meena_upi",
-          "who": "meena"
-        },
-        {
-          "do": {
-            "type": "enableUpi"
-          }
-        },
-        {
-          "concept": "upi_basics"
-        },
-        {
-          "say": "story.c1.meena_done",
-          "who": "meena"
-        },
-        {
-          "objective": "objective.tell_mom"
-        },
-        {
-          "end": true
-        }
-      ]
+     "once": "meena_intro",
+     "do": [
+      {
+       "say": "story.c1.meena1",
+       "who": "meena"
+      },
+      {
+       "concept": "why_bank"
+      }
+     ]
     },
     {
-      "if": "!badge:banked",
-      "then": [
-        {
-          "if": "!flag:collect_done",
-          "then": [
-            {
-              "say": "story.c1.meena_wait",
-              "who": "meena"
-            },
-            {
-              "end": true
-            }
-          ]
-        },
-        {
-          "say": "story.c1.meena_challenge",
-          "who": "meena"
-        },
-        {
-          "choice": [
-            {
-              "label": "choice.challenge_yes",
-              "do": [
-                {
-                  "quiz": [
-                    "bank_kyc",
-                    "bank_type",
-                    "bank_pin",
-                    "bank_receive"
-                  ],
-                  "pass": 3,
-                  "then": [
-                    {
-                      "say": "story.c1.meena_pass",
-                      "who": "meena"
-                    },
-                    {
-                      "badge": "banked"
-                    },
-                    {
-                      "chapter": 2
-                    },
-                    {
-                      "objective": "objective.ch2_prof"
-                    },
-                    {
-                      "say": "story.c1.meena_next",
-                      "who": "meena"
-                    }
-                  ],
-                  "else": [
-                    {
-                      "say": "story.c1.meena_fail",
-                      "who": "meena"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "label": "choice.not_yet"
-            }
-          ],
-          "who": "meena"
-        },
-        {
-          "end": true
-        }
-      ]
+     "if": "!flag:has_docs",
+     "then": [
+      {
+       "say": "story.c1.meena_docs",
+       "who": "meena"
+      },
+      {
+       "concept": "kyc"
+      },
+      {
+       "flag": "need_docs"
+      },
+      {
+       "objective": "objective.get_docs"
+      },
+      {
+       "end": true
+      }
+     ]
     },
     {
-      "say": "story.c1.meena_help",
-      "who": "meena"
+     "say": "story.c1.meena_has_docs",
+     "who": "meena"
     },
     {
-      "choice": [
+     "choice": [
+      {
+       "label": "choice.acc_savings",
+       "log": {
+        "concept": "savings_account",
+        "choice": "savings",
+        "correct": true
+       },
+       "do": [
         {
-          "label": "choice.use_bank",
-          "do": [
-            {
-              "open": "bank"
-            }
-          ]
-        },
-        {
-          "label": "choice.bye"
+         "say": "story.c1.meena_savings",
+         "who": "meena"
         }
-      ],
-      "who": "meena"
+       ]
+      },
+      {
+       "label": "choice.acc_current",
+       "log": {
+        "concept": "savings_account",
+        "choice": "current",
+        "correct": false
+       },
+       "do": [
+        {
+         "say": "story.c1.meena_current",
+         "who": "meena"
+        }
+       ]
+      },
+      {
+       "label": "choice.acc_none",
+       "log": {
+        "concept": "why_bank",
+        "choice": "cash_home",
+        "correct": false,
+        "misconception": "cash_at_home_safe"
+       },
+       "do": [
+        {
+         "say": "story.c1.meena_none",
+         "who": "meena"
+        }
+       ]
+      }
+     ],
+     "prompt": "story.c1.q_account",
+     "who": "meena"
+    },
+    {
+     "concept": "savings_account"
+    },
+    {
+     "say": "story.c1.meena_form"
+    },
+    {
+     "minigame": "bank-counter",
+     "level": 1
+    },
+    {
+     "concept": "nominee"
+    },
+    {
+     "concept": "minimum_balance_fees"
+    },
+    {
+     "do": {
+      "type": "openAccount"
+     }
+    },
+    {
+     "flag": "account_open"
+    },
+    {
+     "toast": "toast.account_open"
+    },
+    {
+     "choice": [
+      {
+       "label": "choice.dep_500",
+       "when": "cash>=500",
+       "do": [
+        {
+         "do": {
+          "type": "deposit",
+          "amount": 500
+         }
+        }
+       ]
+      },
+      {
+       "label": "choice.dep_1000",
+       "when": "cash>=1000",
+       "do": [
+        {
+         "do": {
+          "type": "deposit",
+          "amount": 1000
+         }
+        }
+       ]
+      },
+      {
+       "label": "choice.dep_1200",
+       "when": "cash>=1200",
+       "do": [
+        {
+         "do": {
+          "type": "deposit",
+          "amount": 1200
+         }
+        }
+       ]
+      },
+      {
+       "label": "choice.dep_none"
+      }
+     ],
+     "prompt": "story.c1.q_deposit",
+     "who": "meena"
+    },
+    {
+     "say": "story.c1.meena_interest",
+     "who": "meena"
+    },
+    {
+     "concept": "simple_interest"
+    },
+    {
+     "say": "story.c1.meena_card",
+     "who": "meena"
+    },
+    {
+     "concept": "pin_secrecy"
+    },
+    {
+     "say": "story.c1.meena_upi",
+     "who": "meena"
+    },
+    {
+     "do": {
+      "type": "enableUpi"
+     }
+    },
+    {
+     "concept": "upi_basics"
+    },
+    {
+     "say": "story.c1.meena_done",
+     "who": "meena"
+    },
+    {
+     "objective": "objective.tell_mom"
+    },
+    {
+     "end": true
     }
-  ],
-  "scam_kyc": [
+   ]
+  },
+  {
+   "if": "!badge:banked",
+   "then": [
     {
-      "checkpoint": "checkpoint.kyc"
+     "if": "!flag:collect_done",
+     "then": [
+      {
+       "say": "story.c1.meena_wait",
+       "who": "meena"
+      },
+      {
+       "end": true
+      }
+     ]
     },
     {
-      "toast": "toast.sms"
+     "say": "story.c1.meena_challenge",
+     "who": "meena"
     },
     {
-      "say": "story.c1.sms_kyc",
-      "who": "phone"
-    },
-    {
-      "duel": "kyc_sms",
-      "win": [
+     "choice": [
+      {
+       "label": "choice.challenge_yes",
+       "do": [
         {
-          "say": "story.c1.sms_ignore"
-        },
-        {
-          "do": {
-            "type": "meter",
-            "safety": 10
+         "quiz": [
+          "bank_kyc",
+          "bank_type",
+          "bank_pin",
+          "bank_receive"
+         ],
+         "pass": 3,
+         "then": [
+          {
+           "say": "story.c1.meena_pass",
+           "who": "meena"
+          },
+          {
+           "badge": "banked"
+          },
+          {
+           "chapter": 2
+          },
+          {
+           "objective": "objective.ch2_prof"
+          },
+          {
+           "say": "story.c1.meena_next",
+           "who": "meena"
           }
-        }
-      ],
-      "lose": [
-        {
-          "say": "story.c1.sms_click1"
-        },
-        {
-          "do": {
-            "type": "scamLoss",
-            "amount": 500,
-            "reason": "scam:kyc"
+         ],
+         "else": [
+          {
+           "say": "story.c1.meena_fail",
+           "who": "meena"
           }
-        },
-        {
-          "say": "story.c1.sms_click2"
+         ]
         }
-      ]
+       ]
+      },
+      {
+       "label": "choice.not_yet"
+      }
+     ],
+     "who": "meena"
     },
     {
-      "concept": "phishing"
-    },
-    {
-      "flag": "scam_kyc_done"
+     "end": true
     }
-  ],
-  "collect_scam": [
+   ]
+  },
+  {
+   "say": "story.c1.meena_help",
+   "who": "meena"
+  },
+  {
+   "choice": [
     {
-      "checkpoint": "checkpoint.qr"
+     "label": "choice.use_bank",
+     "do": [
+      {
+       "open": "bank"
+      }
+     ]
     },
     {
-      "say": "story.c1.buyer1",
-      "who": "stranger"
-    },
-    {
-      "duel": "qr_buyer",
-      "win": [
-        {
-          "say": "story.c1.qr_refuse"
-        },
-        {
-          "say": "story.c1.buyer_run",
-          "who": "stranger"
-        },
-        {
-          "do": {
-            "type": "meter",
-            "safety": 10
-          }
-        }
-      ],
-      "lose": [
-        {
-          "do": {
-            "type": "scamLoss",
-            "amount": 800,
-            "reason": "scam:qr"
-          }
-        },
-        {
-          "say": "story.c1.qr_lost"
-        },
-        {
-          "say": "story.c1.buyer_run",
-          "who": "stranger"
-        }
-      ]
-    },
-    {
-      "concept": "upi_collect"
-    },
-    {
-      "flag": "collect_done"
-    },
-    {
-      "objective": "objective.meena_challenge"
+     "label": "choice.bye"
     }
-  ],
-  "atm": [
+   ],
+   "who": "meena"
+  }
+ ],
+ "scam_kyc": [
+  {
+   "checkpoint": "checkpoint.kyc"
+  },
+  {
+   "toast": "toast.sms"
+  },
+  {
+   "say": "story.c1.sms_kyc",
+   "who": "phone"
+  },
+  {
+   "duel": "kyc_sms",
+   "win": [
     {
-      "if": "account",
-      "then": [
-        {
-          "open": "bank"
-        }
-      ],
-      "else": [
-        {
-          "say": "story.common.atm_no"
-        }
-      ]
+     "say": "story.c1.sms_ignore"
+    },
+    {
+     "do": {
+      "type": "meter",
+      "safety": 10
+     }
     }
-  ]
+   ],
+   "lose": [
+    {
+     "say": "story.c1.sms_click1"
+    },
+    {
+     "do": {
+      "type": "scamLoss",
+      "amount": 500,
+      "reason": "scam:kyc"
+     }
+    },
+    {
+     "say": "story.c1.sms_click2"
+    }
+   ]
+  },
+  {
+   "concept": "phishing"
+  },
+  {
+   "flag": "scam_kyc_done"
+  }
+ ],
+ "collect_scam": [
+  {
+   "checkpoint": "checkpoint.qr"
+  },
+  {
+   "say": "story.c1.buyer1",
+   "who": "stranger"
+  },
+  {
+   "duel": "qr_buyer",
+   "win": [
+    {
+     "say": "story.c1.qr_refuse"
+    },
+    {
+     "say": "story.c1.buyer_run",
+     "who": "stranger"
+    },
+    {
+     "do": {
+      "type": "meter",
+      "safety": 10
+     }
+    }
+   ],
+   "lose": [
+    {
+     "do": {
+      "type": "scamLoss",
+      "amount": 800,
+      "reason": "scam:qr"
+     }
+    },
+    {
+     "say": "story.c1.qr_lost"
+    },
+    {
+     "say": "story.c1.buyer_run",
+     "who": "stranger"
+    }
+   ]
+  },
+  {
+   "concept": "upi_collect"
+  },
+  {
+   "flag": "collect_done"
+  },
+  {
+   "objective": "objective.meena_challenge"
+  }
+ ],
+ "atm": [
+  {
+   "if": "account",
+   "then": [
+    {
+     "open": "bank"
+    }
+   ],
+   "else": [
+    {
+     "say": "story.common.atm_no"
+    }
+   ]
+  }
+ ]
 }
