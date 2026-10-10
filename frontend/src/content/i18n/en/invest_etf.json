@@ -1,0 +1,88 @@
+{
+  "title": "ETFs: a basket on the exchange",
+  "blurb": "How an ETF differs from a mutual fund, what its price does during the day, and what trading costs.",
+
+  "t1.title": "A basket you can trade",
+  "t1.hook": "Asha has met mutual funds. Now she hears about ETFs. Your mission: find out what an ETF is, and how it differs from the fund she knows.",
+  "t1.define": "An **ETF**, short for exchange-traded fund, is a basket of many things that trades on an exchange, like a share.",
+  "t1.analogy": "Picture a ready-made thali you can swap with a friend at any time of day. A mutual fund's thali is handed out only once a day.",
+
+  "q1.prompt": "What is an ETF?",
+  "q1.opt.a": "A basket of many things that trades on an exchange like a share",
+  "q1.opt.b": "A loan you give to one company",
+  "q1.opt.c": "A savings plan with a guaranteed return",
+  "q1.opt.d": "One share of a single company",
+  "q1.fb.c": "No ETF can guarantee a return. Its value moves with what is inside the basket.",
+  "q1.hint": "Reread the first card.",
+  "q1.explain": "An ETF is a basket that trades on an exchange, just like a share does.",
+
+  "q2.prompt": "What is the main difference from a typical mutual fund?",
+  "q2.opt.a": "An ETF is bought and priced during the day, like a share",
+  "q2.opt.b": "An ETF holds only one company",
+  "q2.opt.c": "An ETF is safer because it is on an exchange",
+  "q2.opt.d": "An ETF is not a basket at all",
+  "q2.fb.c": "Being on an exchange does not make it safer. What is inside the basket decides the risk.",
+  "q2.hint": "Think about the thali swapped at any time of day.",
+  "q2.explain": "The main difference is how it is bought and priced: during the day, like a share.",
+
+  "t2.title": "Price during the day",
+  "t2.define": "A mutual fund has one price a day, the day-end NAV. An ETF has a market price that moves while the exchange is open. Each ETF purchase also has a small **trading cost**.",
+  "t2.explore": "Open the lab. Pick a time to buy the ETF and compare the units with the mutual fund.",
+
+  "q3.prompt": "In the lab, buy the ETF at the 10am price. How many units does {amt} buy? Type a number.",
+  "q3.hint": "Your money divided by the 10am price.",
+  "q3.explain": "{amt} divided by {p1} is {etfUnits1} units.",
+
+  "q4.prompt": "How many units does the same {amt} buy in the mutual fund at its day-end price? Type a number.",
+  "q4.hint": "Your money divided by the day-end price.",
+  "q4.explain": "{amt} divided by {nav} is {fundUnits} units.",
+
+  "q5.prompt": "What is the trading cost on the ETF purchase? Type a number in rupees.",
+  "q5.hint": "Read the trading cost under the ETF in the lab.",
+  "q5.explain": "The cost is {cost} of {amt}, which is {etfFee}.",
+
+  "t3.title": "The same risk story",
+  "t3.define": "An ETF is a wrapper. What is inside decides the risk. An ETF that follows an **index**, a list of companies, rises and falls with that list.",
+  "t3.note": "Many index ETFs cost little each year. They still carry the ups and downs of what they hold.",
+
+  "q6.prompt": "An ETF holds many companies. What does that mean for risk?",
+  "q6.opt.a": "One failing company hurts less, but the ETF can still fall with the whole list",
+  "q6.opt.b": "It has no risk at all",
+  "q6.opt.c": "It has more risk than a single share",
+  "q6.opt.d": "It can only rise",
+  "q6.fb.b": "An ETF can fall whenever what it holds falls. Spreading lowers one risk, not all.",
+  "q6.fb.d": "Nothing can only rise. Prices of what the ETF holds can fall, and so can the ETF.",
+  "q6.hint": "Remember what spreading across many things can and cannot do.",
+  "q6.explain": "Many companies in one basket soften one failure, but the whole list can still fall.",
+
+  "q7.prompt": "What does an index ETF follow?",
+  "q7.opt.a": "A list of companies",
+  "q7.opt.b": "One manager's guess about tomorrow",
+  "q7.opt.c": "The price of gold only",
+  "q7.opt.d": "A bank's interest rate",
+  "q7.hint": "Reread the first card of this task.",
+  "q7.explain": "An index ETF follows an index, which is a list of companies.",
+
+  "t4.title": "Small regular amounts",
+  "t4.define": "A SIP into a mutual fund is easy to set up. With an ETF, every purchase is its own trade, and each trade has a small cost.",
+  "t4.tradeoff": "An ETF lets you pick the moment to buy. A mutual fund makes small regular buying simple. Which suits you depends on how you plan to invest.",
+
+  "q8.prompt": "Asha buys {perBuy} of an ETF each month for {buys} months. Each buy costs {cost} of the amount. What is the total trading cost? Type a number in rupees.",
+  "q8.hint": "The cost of one buy, times the number of buys.",
+  "q8.explain": "Each buy costs {oneCost}. Over {buys} buys the cost is {planCost}.",
+
+  "q9.prompt": "Which statement is correct?",
+  "q9.opt.a": "Each ETF purchase is a trade, so many small buys add up in trading costs",
+  "q9.opt.b": "ETFs have no costs at all",
+  "q9.opt.c": "Mutual funds can be bought on the exchange all day",
+  "q9.opt.d": "An ETF price never changes during the day",
+  "q9.hint": "Think about what a trade costs.",
+  "q9.explain": "Every ETF purchase is a trade with a small cost, so frequent small buys add up.",
+
+  "glossary.etf.term": "ETF",
+  "glossary.etf.def": "A basket of many things that trades on an exchange like a share.",
+  "glossary.index.term": "Index",
+  "glossary.index.def": "A list of companies used to measure or follow the market.",
+  "glossary.trading_cost.term": "Trading cost",
+  "glossary.trading_cost.def": "The small fee charged each time you buy or sell."
+}

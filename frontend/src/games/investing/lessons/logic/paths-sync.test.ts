@@ -51,3 +51,20 @@ describe('spreading', () => {
     expect(r.left).toBeCloseTo(5700);
   });
 });
+
+describe('liquidity numbers quoted by the liquidity room agree with assumptions.json', () => {
+  it('sell costs match', () => {
+    const room = rooms.find((r) => r.id === 'lesson_liquidity')!;
+    expect(room.vars!.bumpySell!.value).toBe(assumptions.liquidity.bumpy_ride!.sellCost);
+    expect(room.vars!.propSell!.value).toBe(assumptions.liquidity.property!.sellCost);
+    expect(room.vars!.goldSell!.value).toBe(assumptions.liquidity.gold!.sellCost);
+  });
+  it('property is the slowest and costliest way to get cash', () => {
+    const l = assumptions.liquidity;
+    for (const [id, v] of Object.entries(l)) {
+      if (id === 'property') continue;
+      expect(l.property!.days).toBeGreaterThan(v.days);
+      expect(l.property!.sellCost).toBeGreaterThanOrEqual(v.sellCost);
+    }
+  });
+});

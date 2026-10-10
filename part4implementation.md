@@ -15,8 +15,8 @@
 | Financial math library | `core/market/finance/` | Done, tested |
 | Seeded RNG, market engine, 500-futures runner | `core/market/` | Done, tested (20 years × 500 futures ≈ 30 ms) |
 | Lesson format, calculator, validator | `games/investing/lessons/logic/` | Done, tested |
-| Lesson content (rooms 1-6: profit/loss, interest, inflation, lending, bonds, stocks) | `content/scenarios/invest/{lessons,glossary}/`, `content/i18n/en/invest_*.json` | Done. All six are rooms; each plays end to end in the real UI. Lessons 7-14 (risk, diversification, funds, ETFs, gold, liquidity, horizon, scams) still to write |
-| Lab widgets | `games/investing/lessons/widgets/` | 8 labs: fall_rise, simple_vs_compound, start_early, inflation_cups, lender_outcomes, bond_schedule, bond_price, position_lab (maths in `logic/explore.ts`, tested) |
+| Lesson content (rooms 1-14: profit/loss, interest, inflation, lending, bonds, stocks, risk, diversification, funds, ETFs, gold, liquidity, time horizon, scams) | `content/scenarios/invest/{lessons,glossary}/`, `content/i18n/en/invest_*.json` | Done. All 14 are rooms and pass the validator. Rooms 7-8 teach the three Time Machine paths and are linked from it. Still to do: reviewer sign-off (D12), check items / S5 gate |
+| Lab widgets | `games/investing/lessons/widgets/` | 16 labs: fall_rise, simple_vs_compound, start_early, inflation_cups, lender_outcomes, bond_schedule, bond_price, position_lab, path_range, basket_split, sip_units, fee_drag, etf_buy, making_charge, cash_speed, horizon_range, pyramid_growth (maths in `logic/explore.ts` and `core/market/finance`, tested). Numbers a room quotes for a path or for liquidity are checked against `assumptions.json` by `paths-sync.test.ts` |
 | Saved progress | `games/investing/lessons/useSavedProgress.ts`, `logic/room.ts` | Done. Saved per player through `saveGame`; the list shows New / In progress / Completed and marks "Up next"; reopening continues at the first unfinished task |
 | Predict verb | `runtime/verbs/predict/` | Done (slider version; options version comes with lesson 4) |
 | `SimBanner` | `ui/SimBanner.tsx` | Done |

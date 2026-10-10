@@ -1,0 +1,5 @@
+[
+  { "id": "time_horizon", "termKey": "invest_horizon.glossary.time_horizon.term", "defKey": "invest_horizon.glossary.time_horizon.def", "lesson": "lesson_horizon" },
+  { "id": "projection", "termKey": "invest_horizon.glossary.projection.term", "defKey": "invest_horizon.glossary.projection.def", "lesson": "lesson_horizon" },
+  { "id": "assumption", "termKey": "invest_horizon.glossary.assumption.term", "defKey": "invest_horizon.glossary.assumption.def", "lesson": "lesson_horizon" }
+]

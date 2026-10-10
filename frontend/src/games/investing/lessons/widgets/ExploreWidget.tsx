@@ -1,13 +1,20 @@
 /** Picks the right explore widget from a lesson's `explore.widget` id (ids are listed in logic/explore.ts). */
 import { BondPrice } from './BondPrice';
 import { BondSchedule } from './BondSchedule';
+import { CashSpeed } from './CashSpeed';
+import { EtfBuy } from './EtfBuy';
 import { FallRise } from './FallRise';
+import { FeeDrag } from './FeeDrag';
+import { HorizonRange } from './HorizonRange';
 import { InflationCups } from './InflationCups';
 import { BasketSplit } from './BasketSplit';
 import { LenderOutcomes } from './LenderOutcomes';
+import { MakingCharge } from './MakingCharge';
 import { PathRange } from './PathRange';
 import { PositionLab } from './PositionLab';
+import { PyramidGrowth } from './PyramidGrowth';
 import { SimpleVsCompound } from './SimpleVsCompound';
+import { SipUnits } from './SipUnits';
 import { StartEarly } from './StartEarly';
 
 export function ExploreWidget({ widget, params: p }: { widget: string; params: Record<string, number> }) {
@@ -32,6 +39,20 @@ export function ExploreWidget({ widget, params: p }: { widget: string; params: R
       return <PathRange amount={p.amount ?? 10000} />;
     case 'basket_split':
       return <BasketSplit total={p.total ?? 6000} fall={p.fall ?? 0.3} />;
+    case 'sip_units':
+      return <SipUnits amount={p.amount ?? 2000} navs={[p.nav1 ?? 100, p.nav2 ?? 80, p.nav3 ?? 125, p.nav4 ?? 100]} />;
+    case 'fee_drag':
+      return <FeeDrag monthly={p.monthly ?? 1000} gross={p.gross ?? 0.1} years={p.years ?? 10} />;
+    case 'etf_buy':
+      return <EtfBuy amount={p.amount ?? 10000} nav={p.nav ?? 101} prices={[p.p1 ?? 99, p.p2 ?? 100, p.p3 ?? 102]} cost={p.cost ?? 0.001} />;
+    case 'making_charge':
+      return <MakingCharge price={p.price ?? 60000} charge={p.charge ?? 0.12} />;
+    case 'cash_speed':
+      return <CashSpeed amount={p.amount ?? 100000} />;
+    case 'horizon_range':
+      return <HorizonRange amount={p.amount ?? 10000} />;
+    case 'pyramid_growth':
+      return <PyramidGrowth recruits={p.recruits ?? 3} town={p.town ?? 10000} />;
     default:
       return null;
   }

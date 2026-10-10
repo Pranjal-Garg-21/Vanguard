@@ -24,6 +24,8 @@ export interface Assumptions {
   inflation: { base: number; low: number; high: number; labelKey: string };
   assets: Record<string, AssetAssumption>;
   funds: Record<string, FundAssumption>;
+  /** Days to turn an asset into cash, and the share lost to selling it (fictional, for the liquidity lesson). */
+  liquidity: Record<string, { days: number; sellCost: number }>;
   costs: { tradeFee: number; makingCharge: number; propertySellCost: number; propertyUpfront: number };
   simulation: {
     futuresRuns: number;

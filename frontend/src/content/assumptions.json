@@ -46,10 +46,27 @@
     }
   },
   "funds": {
-    "index_basket": { "style": "index", "costYearly": 0.005, "labelKey": "fund.index_basket" },
-    "active_growth": { "style": "active", "costYearly": 0.02, "labelKey": "fund.active_growth" },
-    "sector_focus": { "style": "sector", "costYearly": 0.015, "labelKey": "fund.sector_focus" },
-    "index_etf": { "style": "etf", "costYearly": 0.004, "tradingCost": 0.001, "labelKey": "fund.index_etf" }
+    "index_basket": {
+      "style": "index",
+      "costYearly": 0.005,
+      "labelKey": "fund.index_basket"
+    },
+    "active_growth": {
+      "style": "active",
+      "costYearly": 0.02,
+      "labelKey": "fund.active_growth"
+    },
+    "sector_focus": {
+      "style": "sector",
+      "costYearly": 0.015,
+      "labelKey": "fund.sector_focus"
+    },
+    "index_etf": {
+      "style": "etf",
+      "costYearly": 0.004,
+      "tradingCost": 0.001,
+      "labelKey": "fund.index_etf"
+    }
   },
   "costs": {
     "tradeFee": 0.005,
@@ -61,14 +78,57 @@
     "futuresRuns": 500,
     "maxMonthlyMove": 0.6,
     "regimes": {
-      "calm": { "driftMult": 1.0, "volMult": 1.0 },
-      "boom": { "driftMult": 1.6, "volMult": 1.2 },
-      "crash": { "driftMult": -2.0, "volMult": 2.0 }
+      "calm": {
+        "driftMult": 1.0,
+        "volMult": 1.0
+      },
+      "boom": {
+        "driftMult": 1.6,
+        "volMult": 1.2
+      },
+      "crash": {
+        "driftMult": -2.0,
+        "volMult": 2.0
+      }
     },
     "regimeTransitions": {
-      "calm": { "calm": 0.9, "boom": 0.07, "crash": 0.03 },
-      "boom": { "calm": 0.7, "boom": 0.25, "crash": 0.05 },
-      "crash": { "calm": 0.6, "boom": 0.1, "crash": 0.3 }
+      "calm": {
+        "calm": 0.9,
+        "boom": 0.07,
+        "crash": 0.03
+      },
+      "boom": {
+        "calm": 0.7,
+        "boom": 0.25,
+        "crash": 0.05
+      },
+      "crash": {
+        "calm": 0.6,
+        "boom": 0.1,
+        "crash": 0.3
+      }
+    }
+  },
+  "liquidity": {
+    "steady_box": {
+      "days": 1,
+      "sellCost": 0
+    },
+    "mixed_basket": {
+      "days": 3,
+      "sellCost": 0.005
+    },
+    "bumpy_ride": {
+      "days": 2,
+      "sellCost": 0.005
+    },
+    "gold": {
+      "days": 2,
+      "sellCost": 0.03
+    },
+    "property": {
+      "days": 90,
+      "sellCost": 0.06
     }
   }
 }
