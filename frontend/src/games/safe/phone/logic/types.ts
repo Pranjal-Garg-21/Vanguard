@@ -101,7 +101,7 @@ export type Objective = {
   when: string;
 };
 
-export type SimulatorId = 'upi' | 'inbox' | 'hunter' | 'call' | 'chat' | 'loan' | 'rescue';
+export type SimulatorId = 'upi' | 'inbox' | 'hunter' | 'call' | 'chat' | 'loan' | 'rescue' | 'custom';
 
 export type Scenario = {
   id: string;

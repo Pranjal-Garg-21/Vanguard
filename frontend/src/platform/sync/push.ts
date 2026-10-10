@@ -4,6 +4,7 @@
  * Events are append-only and the server ignores duplicates, so a retry is
  * always safe. Owner: P5.
  */
+import type { CustomScenarioRow } from '@shared/custom/scenario.ts';
 import { MAX_BATCH_SIZE, type IngestRequest, type IngestResponse, type Unlock } from '@shared/sync/protocol.ts';
 import { db, type OutboxEvent } from '../storage/db';
 import { setClassStatus } from '../profiles';
@@ -11,7 +12,7 @@ import { setClassStatus } from '../profiles';
 export type TransportResult = { ok: true; data: IngestResponse } | { ok: false; status: number | null; message: string };
 export type Transport = (request: IngestRequest) => Promise<TransportResult>;
 
-export type ClassUpdate = { classCode: string; unlocks: Unlock[]; focus: string | null };
+export type ClassUpdate = { classCode: string; unlocks: Unlock[]; focus: string | null; scenarios: CustomScenarioRow[] | null };
 
 export type PushOutcome = {
   sent: number;
@@ -97,7 +98,7 @@ export async function pushOutbox(transport: Transport, options: PushOptions = {}
         return outcome;
       }
 
-      const { accepted, rejected, unlocks, focus } = result.data;
+      const { accepted, rejected, unlocks, focus, scenarios } = result.data;
       const acceptedSet = new Set(accepted);
       const rejectedSet = new Set(rejected.map((r) => r.eid));
       await setStatus(batch.filter((e) => acceptedSet.has(e.eid)), 'sent');
@@ -108,10 +109,34 @@ export async function pushOutbox(transport: Transport, options: PushOptions = {}
       outcome.rejected += rejected.length;
 
       if (profile.classStatus === 'pending' && profile.classCode === classCode) await setClassStatus(pid, 'valid');
-      outcome.classUpdates = [...outcome.classUpdates.filter((u) => u.classCode !== classCode), { classCode, unlocks, focus }];
+      outcome.classUpdates = [...outcome.classUpdates.filter((u) => u.classCode !== classCode), { classCode, unlocks, focus, scenarios: scenarios ?? null }];
 
       if (i + batchSize < events.length) await yieldToUi(); // keep the page responsive for big backlogs
     }
+  }
+  // Even a student with nothing to send needs to hear back: new unlocks, a new focus, scenarios the facilitator published.
+  const contacted = new Set(outcome.classUpdates.map((u) => u.classCode));
+  const toAsk = new Map<string, { pid: string; displayName: string; status: string }>();
+  for (const profile of profiles.values()) {
+    if (!profile.classCode || profile.classStatus === 'invalid' || contacted.has(profile.classCode) || outcome.unknownClasses.includes(profile.classCode)) continue;
+    if (!toAsk.has(profile.classCode)) toAsk.set(profile.classCode, { pid: profile.pid, displayName: profile.displayName, status: profile.classStatus });
+  }
+  for (const [classCode, who] of toAsk) {
+    if (options.shouldContinue && !options.shouldContinue()) break;
+    const result = await transport({ classCode, player: { pid: who.pid, displayName: who.displayName }, events: [] });
+    if (!result.ok) {
+      if (result.status === 404) {
+        outcome.unknownClasses.push(classCode);
+        await setClassStatus(who.pid, 'invalid');
+        continue;
+      }
+      outcome.failed = true;
+      outcome.message = result.message;
+      break;
+    }
+    if (who.status === 'pending') await setClassStatus(who.pid, 'valid');
+    const { unlocks, focus, scenarios } = result.data;
+    outcome.classUpdates.push({ classCode, unlocks, focus, scenarios: scenarios ?? null });
   }
   return outcome;
 }

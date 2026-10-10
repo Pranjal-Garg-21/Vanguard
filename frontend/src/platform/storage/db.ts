@@ -5,6 +5,7 @@
  */
 import Dexie, { type Table } from 'dexie';
 import type { GameEvent } from '@shared/telemetry/event.ts';
+import type { CustomScenarioRow } from '@shared/custom/scenario.ts';
 import type { Unlock } from '@shared/sync/protocol.ts';
 
 export type Accessibility = {
@@ -46,6 +47,9 @@ export type ContentMeta = { packId: string; version: string; updatedAt: number }
 
 export type ClassInfo = { code: string; name: string | null; unlocks: Unlock[]; focus: string | null; updatedAt: number };
 
+/** A scenario a facilitator published for the student's class, kept on the phone so it plays offline. */
+export type StoredCustomScenario = CustomScenarioRow & { classCode: string; updatedAt: number };
+
 export class PaisaDB extends Dexie {
   profiles!: Table<Profile, string>;
   saves!: Table<Save, [string, string]>;
@@ -54,6 +58,7 @@ export class PaisaDB extends Dexie {
   settings!: Table<Setting, [string, string]>;
   contentMeta!: Table<ContentMeta, string>;
   classCache!: Table<ClassInfo, string>;
+  customScenarios!: Table<StoredCustomScenario, string>;
 
   constructor(name = 'paisapath') {
     super(name);
@@ -66,6 +71,8 @@ export class PaisaDB extends Dexie {
       contentMeta: 'packId',
       classCache: 'code',
     });
+    // Version 2: scenarios made by the class facilitator.
+    this.version(2).stores({ customScenarios: 'id, classCode' });
   }
 }
 

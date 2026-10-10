@@ -5,10 +5,12 @@ import { supabaseOrThrow, type ClassRow } from './data';
 import { InsightsTab } from './tabs/InsightsTab';
 import { JoinTab } from './tabs/JoinTab';
 import { PlanTab } from './tabs/PlanTab';
+import { ScenariosTab } from './scenarios/ScenariosTab';
 
 const TABS = [
   { id: 'insights', label: 'Insights' },
   { id: 'plan', label: 'Plan' },
+  { id: 'scenarios', label: 'Scenarios' },
   { id: 'join', label: 'Join code' },
 ] as const;
 type TabId = (typeof TABS)[number]['id'];
@@ -69,6 +71,7 @@ export function ClassDetail() {
 
       {tab === 'insights' && <InsightsTab cls={cls} />}
       {tab === 'plan' && <PlanTab cls={cls} onFocusChange={(focus) => setCls({ ...cls, focus })} />}
+      {tab === 'scenarios' && <ScenariosTab cls={cls} />}
       {tab === 'join' && <JoinTab cls={cls} />}
     </div>
   );

@@ -86,6 +86,14 @@ async function saveClassUpdates(updates: ClassUpdate[]): Promise<string[]> {
     for (const unlock of u.unlocks) if (!known.has(unlock.target)) opened.push(unlock.target);
     const row: ClassInfo = { code: u.classCode, name: before?.name ?? null, unlocks: u.unlocks, focus: u.focus, updatedAt: Date.now() };
     await db.classCache.put(row);
+    // Scenarios the facilitator made: keep exactly what is published now, so an unpublished one disappears.
+    if (u.scenarios) {
+      const now = Date.now();
+      await db.transaction('rw', db.customScenarios, async () => {
+        await db.customScenarios.where('classCode').equals(u.classCode).delete();
+        await db.customScenarios.bulkPut(u.scenarios!.map((s) => ({ ...s, classCode: u.classCode, updatedAt: now })));
+      });
+    }
   }
   return opened;
 }

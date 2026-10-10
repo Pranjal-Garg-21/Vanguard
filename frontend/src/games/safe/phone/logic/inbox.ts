@@ -23,10 +23,21 @@ export type InboxOptions = { seed: number; count?: number; level?: 1 | 2 | 3 };
 
 const RESPONSES = ['block', 'ignore', 'open', 'ask'] as const;
 
-function responsesFor(item: PoolItem): Action[] {
-  const scam = item.kind === 'scam';
-  const isCall = item.surface.type === 'call';
-  const label = (r: (typeof RESPONSES)[number]) => (isCall && r === 'open' ? 'safe.inbox.a.callback' : `safe.inbox.a.${r}`);
+export type ResponseSpec = {
+  id: string;
+  kind: 'scam' | 'genuine';
+  /** Rupees lost if a student opens a scam. 0 or absent means no money moves. */
+  loss?: number;
+  /** A "what would have happened" card follows opening a scam. */
+  whatIf: boolean;
+  isCall?: boolean;
+  misconception?: string;
+};
+
+/** The four ways to respond to a message: block, ignore, open or reply, ask an adult. */
+export function responseActions(spec: ResponseSpec): Action[] {
+  const scam = spec.kind === 'scam';
+  const label = (r: (typeof RESPONSES)[number]) => (spec.isCall && r === 'open' ? 'safe.inbox.a.callback' : `safe.inbox.a.${r}`);
   return RESPONSES.map((r): Action => {
     if (r === 'open') {
       return scam
@@ -34,10 +45,9 @@ function responsesFor(item: PoolItem): Action[] {
             id: 'open',
             labelKey: label(r),
             risk: 'risky',
-            effects: { 'money.bank': -(item.whatIf?.loss ?? 0) },
-            unlocks: [`${item.id}__whatif`],
-            delay: 400,
-            ...(item.misconception ? { misconception: item.misconception } : {}),
+            ...(spec.loss && spec.loss > 0 ? { effects: { 'money.bank': -spec.loss } } : {}),
+            ...(spec.whatIf ? { unlocks: [`${spec.id}__whatif`], delay: 400 } : {}),
+            ...(spec.misconception ? { misconception: spec.misconception } : {}),
           }
         : { id: 'open', labelKey: label(r), risk: 'safe' };
     }
@@ -48,6 +58,10 @@ function responsesFor(item: PoolItem): Action[] {
     }
     return { id: r, labelKey: label(r), risk: 'safe' };
   });
+}
+
+function responsesFor(item: PoolItem): Action[] {
+  return responseActions({ id: item.id, kind: item.kind, loss: item.whatIf?.loss ?? 0, whatIf: true, isCall: item.surface.type === 'call', misconception: item.misconception });
 }
 
 /** One day: mostly scams, at least one real message, in an order that depends on the seed. */

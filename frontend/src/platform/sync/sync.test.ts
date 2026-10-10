@@ -7,6 +7,8 @@ import { db } from '../storage/db';
 import { logEvent, recentEvents } from '../telemetry';
 import { backoffMs, KEEP_SENT_DAYS, pruneSent, pushOutbox, resetStuckSending, type Transport } from './push';
 import { getClassUnlocks, syncNow, uploadableCount, useSyncStatus } from './index';
+import { getCustomScenario, listCustomScenarios } from '../custom';
+import type { CustomScenarioRow } from '@shared/custom/scenario.ts';
 
 beforeEach(async () => {
   await resetDb();
@@ -42,9 +44,10 @@ describe('pushing the outbox', () => {
     expect(calls[0]).toMatchObject({ classCode: 'HYD007', player: { displayName: 'Test player' } });
     expect(await statuses()).toEqual(['sent', 'sent', 'sent']);
     expect(await recentEvents()).toHaveLength(3); // the dashboard still reads them
-    // A second push has nothing to send.
+    // A second push has no events to send, only a check-in for news (unlocks, scenarios).
     expect((await pushOutbox(transport)).sent).toBe(0);
-    expect(calls).toHaveLength(1);
+    expect(calls).toHaveLength(2);
+    expect(calls[1]?.events).toEqual([]);
   });
 
   it('sends the oldest first, in batches of at most 200', async () => {
@@ -248,5 +251,57 @@ describe('syncNow', () => {
     const results = await Promise.all([syncNow({ force: true, transport: slow }), syncNow({ force: true, transport: slow })]);
     expect(results.filter((r) => r.ran && r.sent > 0)).toHaveLength(1);
     expect(calls.flatMap((c) => c.events)).toHaveLength(3);
+  });
+});
+
+describe('class news without any answers to send', () => {
+  const scenario = (id: string, version = 1): CustomScenarioRow => ({
+    id, version, title: `Scenario ${id}`, brief: 'Read each message.', concept: 'fake_kyc', language: 'en',
+    body: { v: 1, messages: [{ id: 'm1', channel: 'sms', kind: 'scam', from: 'AX-TEST', body: 'Pay now', flags: [{ start: 0, end: 7, kind: 'urgency', why: 'Rushing you.' }], explain: 'A scam.' }] },
+  });
+
+  it('asks the server even when there is nothing to upload, and saves unlocks and scenarios', async () => {
+    await joinedPlayer();
+    const server = fakeServer({ unlocks: [{ target: 'S2', fromDate: null }], scenarios: [scenario('a'), scenario('b')] });
+    const result = await syncNow({ force: true, transport: server.transport, now: 5_000 });
+    expect(result).toMatchObject({ ran: true, sent: 0, failed: false, newUnlocks: ['S2'] });
+    expect(server.calls).toHaveLength(1);
+    expect(server.calls[0]?.events).toEqual([]);
+    expect((await listCustomScenarios('hyd007')).map((s) => s.id).sort()).toEqual(['a', 'b']);
+    expect((await getCustomScenario('a'))?.title).toBe('Scenario a');
+  });
+
+  it('keeps only what is published now, so an unpublished scenario disappears and an edit replaces the old copy', async () => {
+    await joinedPlayer();
+    await syncNow({ force: true, transport: fakeServer({ scenarios: [scenario('a'), scenario('b')] }).transport, now: 1_000 });
+    await syncNow({ force: true, transport: fakeServer({ scenarios: [scenario('a', 2)] }).transport, now: 2_000 });
+    const rows = await listCustomScenarios('HYD007');
+    expect(rows.map((r) => [r.id, r.version])).toEqual([['a', 2]]);
+    // An older server that sends no scenarios field leaves what is saved alone.
+    await syncNow({ force: true, transport: fakeServer({ scenarios: undefined }).transport, now: 3_000 });
+    expect(await listCustomScenarios('HYD007')).toHaveLength(1);
+  });
+
+  it('only shows a class its own scenarios', async () => {
+    await joinedPlayer('AAA111');
+    await syncNow({ force: true, transport: fakeServer({ scenarios: [scenario('a')] }).transport, now: 1_000 });
+    expect(await listCustomScenarios('AAA111')).toHaveLength(1);
+    expect(await listCustomScenarios('BBB222')).toEqual([]);
+    expect(await listCustomScenarios(null)).toEqual([]);
+  });
+
+  it('marks the class invalid when the server does not know it', async () => {
+    const p = await joinedPlayer('NOPE22');
+    const unknown: Transport = async () => ({ ok: false, status: 404, message: 'unknown class code' });
+    const outcome = await pushOutbox(unknown);
+    expect(outcome.unknownClasses).toEqual(['NOPE22']);
+    expect((await db.profiles.get(p.pid))?.classStatus).toBe('invalid');
+  });
+
+  it('does not ask for a player who has no class', async () => {
+    await createTestProfile({ classCode: null });
+    const { calls, transport } = fakeServer();
+    await pushOutbox(transport);
+    expect(calls).toHaveLength(0);
   });
 });

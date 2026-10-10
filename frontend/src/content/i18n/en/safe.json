@@ -589,7 +589,16 @@
     "roomsNote": "Practice rooms you have completed",
     "achievements": "Achievements",
     "achievementsNote": "Unlocked by milestones, such as your first room",
-    "levelNote": "Level {n} of {total}"
+    "levelNote": "Level {n} of {total}",
+    "custom": {
+      "title": "From your facilitator",
+      "blurb": "Practice made by your facilitator for your class.",
+      "count": "{n} to practise",
+      "new": "{n} new",
+      "none": "Your facilitator has not shared any practice yet.",
+      "badge": "From your facilitator",
+      "messages": "messages"
+    }
   },
   "fb": {
     "title": {

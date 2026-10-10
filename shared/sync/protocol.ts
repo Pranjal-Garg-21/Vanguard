@@ -2,6 +2,7 @@
  * Request and response shapes for the ingest function, shared by the
  * frontend sync engine and the backend. Owner: P5.
  */
+import type { CustomScenarioRow } from '../custom/scenario.ts';
 import type { GameEvent } from '../telemetry/event.ts';
 
 export const MAX_BATCH_SIZE = 200;
@@ -24,4 +25,6 @@ export type IngestResponse = {
   rejected: { eid: string; errors: string[] }[];
   unlocks: Unlock[];
   focus: string | null;
+  /** Scenarios the facilitator has published for this class. Absent from older servers. */
+  scenarios?: CustomScenarioRow[];
 };
