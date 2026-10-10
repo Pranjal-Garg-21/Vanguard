@@ -5,6 +5,30 @@
 
 ---
 
+## Build status (updated as work lands)
+
+**Where things live now.** P5's scaffold landed, so everything is under `frontend/src/`. The folder names in §7 below are the *original* plan; use this table instead.
+
+| Piece | Location | State |
+|---|---|---|
+| Assumptions config | `content/assumptions.json`, `core/market/assumptions.ts` | Done |
+| Financial math library | `core/market/finance/` | Done, tested |
+| Seeded RNG, market engine, 500-futures runner | `core/market/` | Done, tested (20 years × 500 futures ≈ 30 ms) |
+| Lesson format, calculator, validator | `games/investing/lessons/logic/` | Done, tested |
+| Lesson content (lessons 1–2) | `content/scenarios/invest/{lessons,checks,glossary}/`, `content/i18n/en/invest_*.json` | Lessons 1–2 done; 3–6 next |
+| Predict verb | `runtime/verbs/predict/` | Done (slider version; options version comes with lesson 4) |
+| `SimBanner` | `ui/SimBanner.tsx` | Done |
+| Investing ABC screens | `games/investing/lessons/` (routes `/learn/invest`, `/learn/invest/:lessonId`) | Done, viewed in browser |
+| Explore widgets | `games/investing/lessons/widgets/` | `fall_rise`, `simple_vs_compound` done |
+| Design kit, `RangeDisplay`, `FanChart`, `AssumptionsDrawer` | `ui/` | Not started |
+| Games (Chai Price, Garden, Time Machine, Stock Market, Mutual Fund, Invest-or-Scam) | `games/investing/<game>/` | Not started |
+
+**Lesson format additions (since §13).** Blocks can now be `explore` (a hands-on widget), `steps` (a worked example revealed one line per tap); any block can carry a `visual`; a wrong option that exposes a misconception must carry a `feedbackKey` (names the specific mistake first). The validator enforces: every lesson has an explore block, every analogy has a picture, cards are 45 words or fewer, sentences 22 words or fewer, definitions 15 words or fewer. Strings live one file per lesson: `invest_<lesson>.json`, used as `t('invest_<lesson>.<key>')`.
+
+**To see it:** `cd frontend && npm install && npm run dev`, then open `http://localhost:5173/learn/invest` (also linked from `/dev`).
+
+---
+
 ## Contents
 
 1. [Scope, status and what changed](#1-scope-status-and-what-changed)
