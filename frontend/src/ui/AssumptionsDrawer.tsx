@@ -11,6 +11,10 @@ import { Button } from './components';
 export interface AssumptionsDrawerProps {
   /** Which assets to list (ids from assumptions.json). Defaults to all of them. */
   assetIds?: string[];
+  /** Show the inflation section. Default true; games that do not use inflation turn it off. */
+  showInflation?: boolean;
+  /** Extra lines under "What this uses", for numbers the game takes from elsewhere (a fee, a price model). */
+  notes?: string[];
   /** When given, the student can change the inflation rate and see the chart move. */
   inflation?: { value: number; onChange: (next: number) => void };
   className?: string;
@@ -18,7 +22,7 @@ export interface AssumptionsDrawerProps {
 
 const pct = (n: number) => formatValue(n, 'percent', 1);
 
-export function AssumptionsDrawer({ assetIds, inflation, className = '' }: AssumptionsDrawerProps) {
+export function AssumptionsDrawer({ assetIds, showInflation = true, notes, inflation, className = '' }: AssumptionsDrawerProps) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const chipRef = useRef<HTMLButtonElement>(null);
@@ -69,6 +73,7 @@ export function AssumptionsDrawer({ assetIds, inflation, className = '' }: Assum
               <p className="text-sm text-ink-soft">{t('assume.intro')}</p>
             </header>
 
+            {ids.length > 0 && (
             <section className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('assume.rates.title')}</h3>
               <ul className="space-y-2">
@@ -86,7 +91,20 @@ export function AssumptionsDrawer({ assetIds, inflation, className = '' }: Assum
                 })}
               </ul>
             </section>
+            )}
 
+            {notes && notes.length > 0 && (
+              <section className="space-y-2">
+                <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('assume.notes.title')}</h3>
+                <ul className="list-disc space-y-1 ps-5 text-ink-soft">
+                  {notes.map((n) => (
+                    <li key={n}>{n}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {showInflation && (
             <section className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('assume.inflation.title')}</h3>
               <p className="text-ink">{t('assume.inflation.row', { rate: pct(inflationNow) })}</p>
@@ -105,6 +123,7 @@ export function AssumptionsDrawer({ assetIds, inflation, className = '' }: Assum
                 </label>
               )}
             </section>
+            )}
 
             <section className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('assume.ignores.title')}</h3>

@@ -5,18 +5,17 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
-import { logEvent, t } from '@/platform';
+import { t } from '@/platform';
 import { Badge, Button, Card, CheckIcon, ChevronIcon, ProgressBar } from '@/ui';
 import { InvestShell } from './InvestShell';
 import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
 import { rooms } from './logic/content';
-import { checkNumberAnswer, emptyQuestionState, roomPoints, roomQuestions, type ProgressMap, type QuestionState } from './logic/room';
-import type { Room, RoomQuestion } from './logic/types';
+import { roomPoints, roomQuestions, type ProgressMap } from './logic/room';
+import type { Room } from './logic/types';
 import { PredictStep } from './PredictStep';
 import { QuestionRow } from './RoomQuestions';
-
-const LEVEL = 2;
+import { useQuestionRunner } from './useQuestionRunner';
 
 export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initial?: ProgressMap; onChange?: (answers: ProgressMap) => void }) {
   const ctx = useMemo(() => runCalcs(room.vars, room.calcs), [room]);
@@ -24,7 +23,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
   const questions = useMemo(() => roomQuestions(room), [room]);
   const totalPoints = roomPoints(room);
 
-  const [answers, setAnswers] = useState<Record<string, QuestionState>>(initial);
+  const { answers, stateOf, isDone, earnedFor, submitNumber, pickOption, toggleHint, reveal, reset } = useQuestionRunner(room.id, ctx, initial);
   // Reopening a room continues at the first task that is not finished yet.
   const [active, setActive] = useState(() => {
     const firstOpen = room.tasks.findIndex((x) => !x.questions.every((q) => initial[q.id]?.solved || initial[q.id]?.revealed));
@@ -41,62 +40,12 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
     onChange?.(answers);
   }, [answers, onChange]);
 
-  const stateOf = (q: RoomQuestion) => answers[q.id] ?? emptyQuestionState();
-  const isDone = (q: RoomQuestion) => stateOf(q).solved || stateOf(q).revealed;
   const taskDone = (index: number) => room.tasks[index]!.questions.every(isDone);
   const tasksDone = room.tasks.filter((_, i) => taskDone(i)).length;
-  const earned = questions.reduce((sum, q) => sum + (stateOf(q).solved && !stateOf(q).revealed ? q.points : 0), 0);
+  const earned = questions.reduce((sum, q) => sum + earnedFor(q), 0);
   const roomDone = tasksDone === room.tasks.length;
   const next = rooms.find((l) => l.order === room.order + 1);
   const task = room.tasks[active]!;
-
-  const update = (q: RoomQuestion, change: (s: QuestionState) => QuestionState) =>
-    setAnswers((prev) => ({ ...prev, [q.id]: change(prev[q.id] ?? emptyQuestionState()) }));
-
-  const log = (q: RoomQuestion, choice: string, correct?: boolean, misconception?: string) =>
-    void logEvent({
-      mode: 'arcade',
-      activity: room.id,
-      concept: q.concept,
-      choice,
-      level: LEVEL,
-      ...(correct !== undefined ? { correct } : {}),
-      ...(misconception ? { misconception } : {}),
-    });
-
-  const submitNumber = (q: RoomQuestion, value: string) => {
-    const result = checkNumberAnswer(value, ctx[q.answer ?? '']?.raw ?? NaN, q.unit, q.tolerance);
-    if (result === 'invalid') return update(q, (s) => ({ ...s, invalid: true }));
-    log(q, `${q.id}_typed`, result === 'correct');
-    update(q, (s) => (result === 'correct' ? { ...s, solved: true, invalid: false } : { ...s, wrong: s.wrong + 1, invalid: false }));
-  };
-
-  const pickOption = (q: RoomQuestion, optionId: string) => {
-    const option = q.options?.find((o) => o.id === optionId);
-    if (!option) return;
-    const correct = optionId === q.correct;
-    log(q, `${q.id}_${optionId}`, correct, option.misconception);
-    update(q, (s) =>
-      correct
-        ? { ...s, solved: true }
-        : {
-            ...s,
-            wrong: s.wrong + 1,
-            wrongOptions: [...s.wrongOptions, optionId],
-            ...(option.feedbackKey ? { lastFeedbackKey: option.feedbackKey } : {}),
-          },
-    );
-  };
-
-  const toggleHint = (q: RoomQuestion) => {
-    if (!stateOf(q).hintShown) log(q, `${q.id}_hint`);
-    update(q, (s) => ({ ...s, hintShown: !s.hintShown }));
-  };
-
-  const reveal = (q: RoomQuestion) => {
-    log(q, `${q.id}_reveal`, false);
-    update(q, (s) => ({ ...s, revealed: true }));
-  };
 
   const go = (index: number) => {
     setActive(index);
@@ -104,7 +53,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
   };
 
   const restart = () => {
-    setAnswers({});
+    reset();
     go(0);
   };
 

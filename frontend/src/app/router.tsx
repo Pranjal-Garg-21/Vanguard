@@ -6,6 +6,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, useParams } from 'react-router';
 import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
 import { LessonList, LessonPlayer } from '@/games/investing/lessons';
+import { StockMarket } from '@/games/investing/stock-market';
 import { TimeMachine } from '@/games/investing/time-machine';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
   { path: '/dev', element: <DevHome /> },
   { path: '/learn/invest', element: <LessonList /> },
   { path: '/learn/invest/time-machine', element: <TimeMachine /> },
+  { path: '/learn/invest/stock-market', element: <StockMarket /> },
   { path: '/learn/invest/:lessonId', element: <LessonPlayer /> },
   {
     path: '/facilitator/*',
