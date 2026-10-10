@@ -63,3 +63,34 @@ export function totalValue(p: Portfolio, prices: Record<string, number>): number
 }
 
 export const holdingsValue = (p: Portfolio, prices: Record<string, number>) => round2(totalValue(p, prices) - p.cash);
+
+/** Average price you paid per share still held, replaying your trades (fees left out). 0 if you hold none. */
+export function avgCost(trades: Trade[], id: string): number {
+  let qty = 0;
+  let cost = 0;
+  for (const t of trades) {
+    if (t.id !== id) continue;
+    if (t.side === 'buy') {
+      qty += t.qty;
+      cost += t.qty * t.price;
+    } else if (qty > 0) {
+      cost -= (cost / qty) * t.qty;
+      qty -= t.qty;
+    }
+  }
+  return qty > 0 ? cost / qty : 0;
+}
+
+export interface Position {
+  shares: number;
+  avgCost: number;
+  value: number;
+  /** Value now minus what you paid for the shares you still hold. Not locked in until you sell. */
+  paper: number;
+}
+
+export function positionOf(p: Portfolio, id: string, price: number): Position {
+  const shares = p.shares[id] ?? 0;
+  const avg = avgCost(p.trades, id);
+  return { shares, avgCost: avg, value: round2(shares * price), paper: round2(shares * (price - avg)) };
+}

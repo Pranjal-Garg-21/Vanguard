@@ -2,56 +2,68 @@
  * Stock Market Simulator: twelve weekly rounds of news, prices and your own buy / sell / hold choices.
  * Use case UC-INV-07 · Owner: P4 · Route: /learn/invest/stock-market
  *
- * Fictional companies, a seeded market (a class sharing a code sees the same weeks) and a debrief that
- * compares your result with the same market played quietly. Nothing here is a recommendation.
+ * Split screen: "Your money" and a coach on one side, the market on the other. Every move updates your money
+ * and the coach says what it did. Fictional companies, a seeded market, and nothing here is a recommendation.
  */
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { formatValue } from '@/core/market';
 import { InvestShell } from '@/games/investing/lessons/InvestShell';
 import { logEvent, t } from '@/platform';
 import { AssumptionsDrawer, Button, Card, ChevronIcon, ProgressBar } from '@/ui';
 import raw from '@/content/scenarios/invest/stock_market.json';
+import { CoachDock, CoachFeed, type Turn } from './CoachFeed';
 import { Debrief } from './Debrief';
-import { money, price as fmtPrice, signedMoney } from './format';
 import { pricesAt } from './logic/analysis';
+import { commentsAfterTrade, commentsAfterWeek, type Comment } from './logic/coach';
+import { money, signedMoney } from './logic/format';
 import { buildMarket, changeAt, newsForRound, priceAt } from './logic/market';
-import { buy, feeRate, holdingsValue, isError, newPortfolio, payDividends, sell, totalValue } from './logic/portfolio';
+import { buy, feeRate, isError, newPortfolio, payDividends, sell, totalValue } from './logic/portfolio';
 import type { MarketConfig, Portfolio } from './logic/types';
 import { MarketTable, type Row } from './MarketTable';
+import { MoneyPanel } from './MoneyPanel';
 import { NewsCard } from './NewsCard';
 
 const config = raw as unknown as MarketConfig;
+const MAX_TURNS = 8;
 
 export function StockMarket({ seed = 'stock-market' }: { seed?: number | string }) {
   const market = useMemo(() => buildMarket(config, seed), [seed]);
   const [phase, setPhase] = useState<'intro' | 'play' | 'debrief'>('intro');
   const [round, setRound] = useState(1);
   const [portfolio, setPortfolio] = useState<Portfolio>(() => newPortfolio(config.cash));
-  const [message, setMessage] = useState<{ tone: 'ok' | 'warn'; text: string } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [turns, setTurns] = useState<Turn[]>([]);
+  const turnId = useRef(0);
 
   const prices = pricesAt(config, market, round);
   const news = newsForRound(config, round);
   const failedIds = new Set(config.news.filter((n) => n.fail && n.round <= round).map((n) => n.fail!));
+  const changes = Object.fromEntries(config.companies.map((c) => [c.id, changeAt(market, c.id, round)]));
   const rows: Row[] = config.companies.map((company) => ({
     company,
     history: market.prices[company.id]!.slice(0, round),
     now: priceAt(market, company.id, round),
-    change: changeAt(market, company.id, round),
+    change: changes[company.id] ?? 0,
     failed: failedIds.has(company.id),
   }));
   const total = totalValue(portfolio, prices);
   const gain = total - config.cash;
   const nameOf = (id: string) => t(config.companies.find((c) => c.id === id)!.nameKey);
+  const feeText = formatValue(feeRate(), 'percent', 1);
 
-  const log = (choice: string, extra: { correct?: boolean; misconception?: string; concept?: string } = {}) =>
+  const addTurn = (turnRound: number, comments: Comment[]) => {
+    if (comments.length === 0) return;
+    setTurns((prev) => [{ id: ++turnId.current, round: turnRound, comments }, ...prev].slice(0, MAX_TURNS));
+  };
+
+  const log = (choice: string, extra: { misconception?: string; concept?: string } = {}) =>
     void logEvent({
       mode: 'arcade',
       activity: 'stock_market',
       concept: extra.concept ?? 'stock_basics',
       choice,
       level: 2,
-      ...(extra.correct !== undefined ? { correct: extra.correct } : {}),
       ...(extra.misconception ? { misconception: extra.misconception } : {}),
     });
 
@@ -59,17 +71,16 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
     const p = prices[id] ?? 0;
     const next = side === 'buy' ? buy(portfolio, round, id, qty, p) : sell(portfolio, round, id, qty, p);
     if (isError(next)) {
-      setMessage({ tone: 'warn', text: t(`stockmarket.err.${next}`) });
+      setError(t(`stockmarket.err.${next}`));
       return;
     }
+    setError(null);
     const last = next.trades[next.trades.length - 1]!;
-    const gross = last.qty * last.price;
-    const fee = last.fee;
     setPortfolio(next);
-    setMessage({
-      tone: 'ok',
-      text: t(`stockmarket.done.${side}`, { qty, name: nameOf(id), total: fmtPrice(side === 'buy' ? gross + fee : gross - fee), fee: fmtPrice(fee) }),
-    });
+    addTurn(
+      round,
+      commentsAfterTrade({ config, round, side, id, qty, price: last.price, fee: last.fee, before: portfolio, after: next, prices, changes, news, failedIds, name: nameOf }),
+    );
     const onRumour = side === 'buy' && round === config.rumour.round && id === config.rumour.company;
     const inDrop = side === 'sell' && round === config.drop.round;
     log(`${side}_${id}_w${round}`, {
@@ -79,27 +90,37 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
   };
 
   const endWeek = () => {
-    setMessage(null);
+    setError(null);
     if (round >= config.rounds) {
-      const final = summariseLog(portfolio, prices);
-      log(`end_${final}`, { concept: 'profit_loss' });
+      log(`end_${Math.round((gain / config.cash) * 100)}`, { concept: 'profit_loss' });
       setPhase('debrief');
       window.scrollTo({ top: 0 });
       return;
     }
     const next = round + 1;
     const paid = payDividends(portfolio, config, next);
+    addTurn(
+      next,
+      commentsAfterWeek({
+        config,
+        round: next,
+        portfolio,
+        prevPrices: prices,
+        prices: pricesAt(config, market, next),
+        dividendsPaid: paid.dividends - portfolio.dividends,
+        news: newsForRound(config, next),
+        name: nameOf,
+      }),
+    );
     setPortfolio(paid);
-    if (paid.dividends > portfolio.dividends) {
-      setMessage({ tone: 'ok', text: t('stockmarket.dividend.paid', { amount: money(paid.dividends - portfolio.dividends) }) });
-    }
     setRound(next);
   };
 
   const replay = () => {
     setPortfolio(newPortfolio(config.cash));
     setRound(1);
-    setMessage(null);
+    setError(null);
+    setTurns([]);
     setPhase('intro');
     window.scrollTo({ top: 0 });
   };
@@ -118,8 +139,9 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
           <h2 className="font-bold">{t('stockmarket.intro.title')}</h2>
           <ul className="list-disc space-y-1 ps-5 text-ink">
             <li>{t('stockmarket.intro.1')}</li>
-            <li>{t('stockmarket.intro.2', { fee: formatValue(feeRate(), 'percent', 1) })}</li>
+            <li>{t('stockmarket.intro.2', { fee: feeText })}</li>
             <li>{t('stockmarket.intro.3')}</li>
+            <li>{t('stockmarket.intro.5')}</li>
             <li>{t('stockmarket.intro.4')}</li>
           </ul>
           <Button size="lg" onClick={() => setPhase('play')}>
@@ -129,8 +151,24 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
       )}
 
       {phase === 'play' && news && (
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
-          <div className="space-y-4">
+        <div className="grid gap-6 pb-28 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:items-start lg:pb-0">
+          {/* Left on a laptop: your money, and what your last move did to it */}
+          <aside className="order-2 space-y-4 lg:order-1 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:pe-1">
+            <MoneyPanel
+              config={config}
+              portfolio={portfolio}
+              prices={prices}
+              between={
+                <div className="hidden lg:block">
+                  <CoachFeed turns={turns} />
+                </div>
+              }
+            />
+            <AssumptionsDrawer assetIds={[]} showInflation={false} notes={[t('stockmarket.assume.fee', { fee: feeText }), t('stockmarket.assume.prices')]} />
+          </aside>
+
+          {/* Right: the market */}
+          <div className="order-1 space-y-4 lg:order-2">
             <div className="space-y-2">
               <div className="flex items-baseline justify-between gap-3">
                 <h1 className="text-2xl font-bold">{t('stockmarket.round', { n: round, total: config.rounds })}</h1>
@@ -139,8 +177,8 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
               <ProgressBar value={(round - 1) / config.rounds} />
             </div>
 
-            {/* On a phone the full panel sits at the bottom, so keep the numbers that matter in view. */}
-            <div className="sticky top-14 z-[5] grid grid-cols-3 gap-2 bg-bg py-2 lg:hidden" aria-label={t('stockmarket.stat.total')}>
+            {/* On a phone the money panel sits lower down, so keep the numbers that matter in view. */}
+            <div className="sticky top-14 z-[5] grid grid-cols-3 gap-2 bg-bg py-2 lg:hidden">
               <MiniStat label={t('stockmarket.stat.total')} value={money(total)} />
               <MiniStat label={t('stockmarket.stat.gain')} value={signedMoney(gain)} tone={gain < 0 ? 'bad' : gain > 0 ? 'good' : 'plain'} />
               <MiniStat label={t('stockmarket.stat.cash')} value={money(portfolio.cash)} />
@@ -148,12 +186,9 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
 
             <NewsCard news={news} vars={{ cash: money(config.cash) }} />
 
-            {message && (
-              <p
-                role="status"
-                className={`rounded-lg border-l-4 p-3 text-ink ${message.tone === 'ok' ? 'border-brand bg-brand/10' : 'border-warn bg-warn/10'}`}
-              >
-                {message.text}
+            {error && (
+              <p role="alert" className="rounded-lg border-l-4 border-warn bg-warn/10 p-3 text-ink">
+                {error}
               </p>
             )}
 
@@ -163,42 +198,13 @@ export function StockMarket({ seed = 'stock-market' }: { seed?: number | string 
               {round >= config.rounds ? t('stockmarket.end.last') : t('stockmarket.end.week', { n: round })}
             </Button>
           </div>
-
-          <aside className="space-y-3 lg:sticky lg:top-20">
-            <Card className="space-y-3">
-              <Stat label={t('stockmarket.stat.total')} value={money(total)} big />
-              <Stat label={t('stockmarket.stat.gain')} value={signedMoney(gain)} tone={gain < 0 ? 'bad' : gain > 0 ? 'good' : 'plain'} />
-              <Stat label={t('stockmarket.stat.cash')} value={money(portfolio.cash)} />
-              <Stat label={t('stockmarket.stat.shares')} value={money(holdingsValue(portfolio, prices))} />
-              <Stat label={t('stockmarket.stat.fees')} value={money(portfolio.fees)} />
-              <Stat label={t('stockmarket.stat.dividends')} value={money(portfolio.dividends)} />
-            </Card>
-            <AssumptionsDrawer
-              assetIds={[]}
-              showInflation={false}
-              notes={[t('stockmarket.assume.fee', { fee: formatValue(feeRate(), 'percent', 1) }), t('stockmarket.assume.prices')]}
-            />
-          </aside>
         </div>
       )}
 
+      {phase === 'play' && <CoachDock turn={turns[0]} />}
+
       {phase === 'debrief' && <Debrief config={config} market={market} portfolio={portfolio} seed={seed} onReplay={replay} />}
     </InvestShell>
-  );
-}
-
-/** Whole-percent gain for the "game ended" event, as a telemetry-safe string such as 4 or -7. */
-function summariseLog(p: Portfolio, prices: Record<string, number>): string {
-  return String(Math.round(((totalValue(p, prices) - config.cash) / config.cash) * 100));
-}
-
-function Stat({ label, value, tone = 'plain', big = false }: { label: string; value: string; tone?: 'plain' | 'good' | 'bad'; big?: boolean }) {
-  const colour = tone === 'good' ? 'text-brand' : tone === 'bad' ? 'text-bad' : 'text-ink';
-  return (
-    <div className="flex items-baseline justify-between gap-3">
-      <span className="text-sm text-ink-soft">{label}</span>
-      <span className={`${big ? 'text-2xl' : 'text-lg'} font-bold ${colour}`}>{value}</span>
-    </div>
   );
 }
 

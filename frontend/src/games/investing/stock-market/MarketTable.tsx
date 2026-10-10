@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { t } from '@/platform';
 import { Badge, Button, Card } from '@/ui';
-import { price as fmtPrice, signedPct } from './format';
+import { price as fmtPrice, signedPct } from './logic/format';
 import type { Company, Portfolio } from './logic/types';
 
 const QTYS = [1, 5, 10, 25];

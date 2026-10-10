@@ -6,7 +6,7 @@ import { QuestionRow } from '@/games/investing/lessons/RoomQuestions';
 import { useQuestionRunner } from '@/games/investing/lessons/useQuestionRunner';
 import { t } from '@/platform';
 import { AssumptionsDrawer, Button, Card, RangeDisplay } from '@/ui';
-import { money, price, signedMoney, signedPct } from './format';
+import { money, price, signedMoney, signedPct } from './logic/format';
 import { behaviour, diversification, movesByCompany, pricesAt, spreadAndHold, summarise } from './logic/analysis';
 import { nextWeeksRange } from './logic/market';
 import { feeRate } from './logic/portfolio';
