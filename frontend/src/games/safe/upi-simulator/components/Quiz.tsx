@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { t } from '@/platform';
 import { Button, Card, Notice, ProgressBar } from '@/ui';
-import { Confetti } from '../../phone/Confetti';
 
 export type QuizQuestion = {
   id: string;
@@ -17,7 +16,6 @@ export function Quiz({ questions, onFinish }: { questions: QuizQuestion[]; onFin
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
-  const [burst, setBurst] = useState(0);
   const q = questions[i];
   if (!q) return null;
   const last = i === questions.length - 1;
@@ -27,7 +25,6 @@ export function Quiz({ questions, onFinish }: { questions: QuizQuestion[]; onFin
     setPicked(optionId);
     const opt = q.options.find((o) => o.id === optionId);
     setAnswers((a) => [...a, { id: q.id, concept: q.concept, correct: !!opt?.correct, choice: optionId }]);
-    if (opt?.correct) setBurst((n) => n + 1);
   };
   const next = () => {
     if (last) return onFinish(answers);
@@ -37,7 +34,6 @@ export function Quiz({ questions, onFinish }: { questions: QuizQuestion[]; onFin
 
   return (
     <div className="mx-auto max-w-xl space-y-4 p-4 pt-10">
-      <Confetti trigger={burst} count={36} />
       <div>
         <p className="font-mono text-xs text-muted">{t('safe.upi.check.of', { n: i + 1, total: questions.length })}</p>
         <ProgressBar className="mt-2" value={(i + (picked ? 1 : 0)) / questions.length} />

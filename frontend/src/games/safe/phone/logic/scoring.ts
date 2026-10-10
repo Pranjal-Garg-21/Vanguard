@@ -3,8 +3,7 @@
  * Owner: P5.
  */
 import type { MiniGameChoice, MiniGameResult, PlayMode } from '@/core/types';
-import { judgeFeedback, responseFeedback } from './feedback';
-import { bankBalance, objectiveDone, surfaceOf, tellReport } from './runner';
+import { bankBalance, surfaceOf, tellReport } from './runner';
 import type { RunState, TellKind, Verdict } from './types';
 
 /**
@@ -124,24 +123,6 @@ export function summarise(state: RunState): RunSummary {
     handledTotal,
     falseAlarms,
   };
-}
-
-/**
- * Counts the moments worth celebrating so far: each best or exact answer and
- * each task ticked off. When this number goes up, the room fires confetti.
- */
-export function celebrationScore(state: RunState): number {
-  let n = state.script.objectives.filter((o) => objectiveDone(state, o.when)).length;
-  for (const e of state.history) {
-    const surface = surfaceOf(state.script, e.surface);
-    if (!surface) continue;
-    if (e.kind === 'acted') {
-      const fb = responseFeedback(surface, e.action);
-      if (fb?.grade === 'best') n += 1;
-    }
-    if (e.kind === 'judged' && surface.verdict && judgeFeedback(surface, e.verdict).grade === 'exact') n += 1;
-  }
-  return n;
 }
 
 /** Facts about a finished run that the hub needs for XP, cards and badges. */

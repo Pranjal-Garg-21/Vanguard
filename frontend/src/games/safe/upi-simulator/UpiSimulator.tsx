@@ -8,6 +8,7 @@ import { useMemo, useReducer } from 'react';
 import { t } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
 import { Button, Card, ProgressBar } from '@/ui';
+import { Confetti } from '../phone/Confetti';
 import { Icon } from '../phone/Icon';
 import { PhoneRoom } from '../phone/PhoneRoom';
 import { PhoneShell } from '../phone/PhoneShell';
@@ -99,6 +100,7 @@ export function UpiSimulator({ seed = 1, mode = 'arcade', timersOff = false, onC
     const scored = Object.values(flow.tally).reduce<[number, number]>(([g, n], [good, total]) => [g + good, n + total], [0, 0]);
     return (
       <div className="mx-auto max-w-2xl space-y-6 p-4 pt-10 text-center">
+        <Confetti trigger={1} count={70} />
         <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/15 text-brand"><Icon name="shield" className="h-8 w-8" /></span>
         <h1 className="text-3xl font-bold text-ink">{t('safe.upi.done.title')}</h1>
         <p className="mx-auto max-w-md text-ink-soft">{t('safe.upi.done.body')}</p>

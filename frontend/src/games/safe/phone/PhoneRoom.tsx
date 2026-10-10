@@ -7,8 +7,7 @@ import { t } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
 import { Button } from '@/ui';
 import { Icon } from './Icon';
-import { celebrationScore, runMeta, scoreRun, type RunMeta } from './logic/scoring';
-import { Confetti } from './Confetti';
+import { runMeta, scoreRun, type RunMeta } from './logic/scoring';
 import type { Scenario } from './logic/types';
 import { MissionPanel } from './MissionPanel';
 import { PhoneScreen } from './PhoneScreen';
@@ -27,28 +26,22 @@ export type PhoneRoomProps = {
   embedded?: boolean;
   /** A strip shown above the room (the UPI simulator's task bar). */
   top?: React.ReactNode;
+  /** Red-flag cards the student already owns from earlier rooms. */
+  collected?: string[];
 };
 
 type Phase = 'brief' | 'play' | 'replay' | 'summary';
 
-export function PhoneRoom({ script, mode = 'arcade', timersOff = false, embedded = false, top, onComplete }: PhoneRoomProps) {
+export function PhoneRoom({ script, mode = 'arcade', timersOff = false, embedded = false, top, collected, onComplete }: PhoneRoomProps) {
   const [attempt, setAttempt] = useState(0);
-  return <Attempt key={`${script.id}:${attempt}`} script={script} mode={mode} timersOff={timersOff} embedded={embedded} top={top} onComplete={onComplete} onRetry={() => setAttempt((n) => n + 1)} />;
+  return <Attempt key={`${script.id}:${attempt}`} script={script} mode={mode} timersOff={timersOff} embedded={embedded} top={top} collected={collected} onComplete={onComplete} onRetry={() => setAttempt((n) => n + 1)} />;
 }
 
-function Attempt({ script, mode, timersOff, embedded, top, onComplete, onRetry }: Omit<Required<PhoneRoomProps>, 'top'> & { top?: React.ReactNode; onRetry: () => void }) {
+function Attempt({ script, mode, timersOff, embedded, top, collected, onComplete, onRetry }: Omit<Required<PhoneRoomProps>, 'top' | 'collected'> & { top?: React.ReactNode; collected?: string[]; onRetry: () => void }) {
   const [phase, setPhase] = useState<Phase>(embedded ? 'play' : 'brief');
   const [lensOn, setLensOn] = useState(false);
   const { state, dispatch } = usePhoneRun(script, { timersOff, paused: phase !== 'play' });
 
-  // Confetti whenever the student gets something right or finishes a task.
-  const score = celebrationScore(state);
-  const [seenScore, setSeenScore] = useState(0);
-  const [burst, setBurst] = useState(0);
-  if (score > seenScore) {
-    setSeenScore(score);
-    setBurst((n) => n + 1);
-  }
 
   // Let the student see the money move before the debrief.
   useEffect(() => {
@@ -71,12 +64,11 @@ function Attempt({ script, mode, timersOff, embedded, top, onComplete, onRetry }
   }
   if (phase === 'replay') return <PostMortem state={state} onDone={() => (embedded ? onComplete(scoreRun(state, mode), runMeta(state)) : setPhase('summary'))} />;
   if (phase === 'summary') {
-    return <RoomComplete state={state} onReplay={() => setPhase('replay')} onRetry={onRetry} onContinue={() => onComplete(scoreRun(state, mode), runMeta(state))} />;
+    return <RoomComplete state={state} collected={collected} onReplay={() => setPhase('replay')} onRetry={onRetry} onContinue={() => onComplete(scoreRun(state, mode), runMeta(state))} />;
   }
 
   return (
     <RoomLayout top={top} panel={<MissionPanel state={state} />} drawerLabel={t('safe.ui.tasks')}>
-      <Confetti trigger={burst} />
       <PhoneScreen state={state} dispatch={dispatch} lensOn={lensOn} onToggleLens={() => setLensOn((v) => !v)} />
     </RoomLayout>
   );

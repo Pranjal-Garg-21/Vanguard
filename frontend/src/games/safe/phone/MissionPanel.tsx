@@ -57,8 +57,9 @@ export function MissionPanel({ state }: { state: RunState }) {
     const fresh = doneIds.filter((id) => !seen.current.includes(id));
     seen.current = doneIds;
     if (fresh.length === 0) return;
-    const task = script.objectives.find((o) => o.id === fresh[0]);
-    setToast(task ? t(task.textKey) : null);
+    // Only celebrate when every task is done, not on each small step.
+    if (doneIds.length < script.objectives.length) return;
+    setToast(t('safe.ui.allTasks'));
     const id = window.setTimeout(() => setToast(null), 3200);
     return () => window.clearTimeout(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
