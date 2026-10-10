@@ -5,7 +5,7 @@
  */
 import { useState, type ReactNode } from 'react';
 import { t } from '@/platform';
-import { Button } from './components';
+import { Button } from '@/components/ui/button';
 import { AudioButton } from './kit';
 
 export interface PagerPage {

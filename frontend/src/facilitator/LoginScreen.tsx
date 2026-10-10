@@ -4,7 +4,7 @@
  */
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
-import { Button, Card, Notice } from '@/ui';
+import { Button, Card, Alert } from '@/ui';
 import { supabaseOrThrow } from './data';
 
 export function LoginScreen() {
@@ -67,16 +67,16 @@ export function LoginScreen() {
                   className="mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 focus:border-brand focus:outline-none"
                 />
               </label>
-              {error && <Notice tone="bad">{error}</Notice>}
+              {error && <Alert variant="bad">{error}</Alert>}
               <Button type="submit" className="w-full" disabled={busy || !email}>
                 {busy ? 'Sending…' : 'Email me a sign-in link'}
               </Button>
             </form>
           ) : (
             <form onSubmit={verify} className="space-y-4">
-              <Notice tone="info">
+              <Alert variant="info">
                 We emailed <strong>{email}</strong>. Open the link on this device, or enter the code from the email.
-              </Notice>
+              </Alert>
               <label className="block">
                 <span className="font-semibold">Code</span>
                 <input
@@ -88,7 +88,7 @@ export function LoginScreen() {
                   className="mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 text-center font-mono text-2xl tracking-widest focus:border-brand focus:outline-none"
                 />
               </label>
-              {error && <Notice tone="bad">{error}</Notice>}
+              {error && <Alert variant="bad">{error}</Alert>}
               <Button type="submit" className="w-full" disabled={busy || code.length < 6}>
                 {busy ? 'Checking…' : 'Sign in'}
               </Button>

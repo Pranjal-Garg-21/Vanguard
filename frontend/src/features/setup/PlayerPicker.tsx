@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { listProfiles, t, unlockProfile, type ProfileSummary } from '@/platform';
-import { Notice } from '@/ui';
+import { Alert } from '@/ui';
 import { PicturePin } from './components/PicturePin';
 import { StudentScreen } from './components/StudentScreen';
 import { avatarEmoji } from './pictures';
@@ -60,8 +60,8 @@ export function PlayerPicker() {
           <h1 className="mt-3 text-2xl font-extrabold">{t('setup.pin.enterTitle', { name: selected.displayName })}</h1>
         </div>
         <div className="mt-4 min-h-12">
-          {locked && <Notice tone="bad">{t('setup.pin.locked', { seconds: secondsLeft })}</Notice>}
-          {!locked && message && <Notice tone="bad">{message}</Notice>}
+          {locked && <Alert variant="bad">{t('setup.pin.locked', { seconds: secondsLeft })}</Alert>}
+          {!locked && message && <Alert variant="bad">{message}</Alert>}
         </div>
         <PicturePin resetKey={attempt} disabled={locked} onComplete={tryPin} />
       </StudentScreen>

@@ -96,7 +96,7 @@ export function Dashboard() {
       <main className="mx-auto max-w-5xl space-y-6 px-4 py-6">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h1 className="text-2xl font-bold">{t('home.greeting', { name: profile.displayName })}</h1>
-          <Badge tone={sync.state === 'synced' ? 'good' : sync.state === 'error' ? 'bad' : 'neutral'}>{syncLabel}</Badge>
+          <Badge variant={sync.state === 'synced' ? 'good' : sync.state === 'error' ? 'bad' : 'neutral'}>{syncLabel}</Badge>
         </div>
 
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -140,7 +140,7 @@ export function Dashboard() {
                       <h3 className="font-bold">{s.name}</h3>
                       <p className="truncate text-sm text-muted">{s.blurb}</p>
                     </div>
-                    <Badge tone={i === 0 ? 'good' : 'neutral'}>{i === 0 ? t('home.soon') : t('home.locked')}</Badge>
+                    <Badge variant={i === 0 ? 'good' : 'neutral'}>{i === 0 ? t('home.soon') : t('home.locked')}</Badge>
                   </li>
                 ))}
               </ol>

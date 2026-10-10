@@ -87,7 +87,7 @@ export function Results({ fundId, plan, seed, onAgain }: { fundId: string; plan:
                   {Object.entries(all).map(([id, r]) => (
                     <tr key={id} className="border-t border-line">
                       <td className="py-2 font-bold text-ink">
-                        {fundName(id)} {id === fundId && <Badge tone="good">{t('mutualfund.pick.chosen')}</Badge>}
+                        {fundName(id)} {id === fundId && <Badge variant="good">{t('mutualfund.pick.chosen')}</Badge>}
                       </td>
                       <td className="py-2 text-end text-ink">{formatRupees(r.finalValue)}</td>
                       <td className="py-2 text-end text-ink-soft">{formatRupees(r.costDrag)}</td>

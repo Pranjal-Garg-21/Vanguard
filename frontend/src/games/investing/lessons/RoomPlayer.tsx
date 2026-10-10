@@ -75,7 +75,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <Badge tone="good">{t(`investui.room.difficulty.${room.difficulty}`)}</Badge>
+              <Badge variant="good">{t(`investui.room.difficulty.${room.difficulty}`)}</Badge>
               <Badge>{t('investui.room.minutes', { n: room.estMinutes })}</Badge>
               <Badge>{t('investui.list.points', { n: totalPoints })}</Badge>
             </div>
@@ -155,7 +155,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
                 {t('investui.room.prevTask')}
               </Button>
               {active < room.tasks.length - 1 && (
-                <Button variant={taskDone(active) ? 'primary' : 'secondary'} onClick={() => go(active + 1)}>
+                <Button variant={taskDone(active) ? 'default' : 'secondary'} onClick={() => go(active + 1)}>
                   {t('investui.room.nextTask')}
                 </Button>
               )}

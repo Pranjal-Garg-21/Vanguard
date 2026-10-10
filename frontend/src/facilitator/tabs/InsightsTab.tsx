@@ -3,7 +3,7 @@
  * switches to class_concept_daily when the aggregate job lands (Phase 7).
  */
 import { useEffect, useMemo, useState } from 'react';
-import { Badge, Card, Notice, Spinner } from '@/ui';
+import { Badge, Card, Alert, Spinner } from '@/ui';
 import prompts from '@/content/facilitator/prompts.json';
 import { humanise, supabaseOrThrow, timeAgo, type ClassRow, type EventRow, type PlayerRow } from '../data';
 
@@ -42,7 +42,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
 
   const stats = useMemo(() => (events && players ? summarise(events, players) : null), [events, players]);
 
-  if (error) return <Notice tone="bad">{error}</Notice>;
+  if (error) return <Alert variant="bad">{error}</Alert>;
   if (!stats || !players) return <Spinner />;
 
   if (players.length === 0) {
@@ -66,7 +66,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
       </div>
 
       {stats.totalEvents === 0 ? (
-        <Notice tone="info">Students have joined but no answers have synced yet. Data appears after their phones go online.</Notice>
+        <Alert variant="info">Students have joined but no answers have synced yet. Data appears after their phones go online.</Alert>
       ) : (
         <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
           <Card>
@@ -85,7 +85,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
                       <div className="h-3 flex-1 overflow-hidden rounded-full bg-surface-2">
                         <div className={`h-full rounded-full ${band(c.rate).bar}`} style={{ width: `${Math.round(c.rate * 100)}%` }} />
                       </div>
-                      <Badge tone={band(c.rate).tone}>{Math.round(c.rate * 100)}%</Badge>
+                      <Badge variant={band(c.rate).tone}>{Math.round(c.rate * 100)}%</Badge>
                     </>
                   )}
                 </div>
@@ -111,7 +111,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
                       <span className="font-semibold">
                         {i + 1}. {p?.title ?? humanise(m.id)}
                       </span>
-                      <Badge tone="warn">{m.students} students</Badge>
+                      <Badge variant="warn">{m.students} students</Badge>
                     </div>
                     {p && (
                       <>
@@ -135,7 +135,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
             return (
               <div key={p.pid} className="flex min-h-11 items-center justify-between gap-3">
                 <span className="font-medium">{p.display_name}</span>
-                <Badge tone={stale ? 'warn' : 'good'}>{timeAgo(p.last_sync)}</Badge>
+                <Badge variant={stale ? 'warn' : 'good'}>{timeAgo(p.last_sync)}</Badge>
               </div>
             );
           })}

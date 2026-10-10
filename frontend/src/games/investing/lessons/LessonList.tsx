@@ -61,7 +61,7 @@ export function LessonList() {
 
       {upNext && (
         <Card className="space-y-3 border-brand">
-          <Badge tone="good">{t('investui.list.upnext')}</Badge>
+          <Badge variant="good">{t('investui.list.upnext')}</Badge>
           <h2 className="text-2xl font-bold">{title(upNext)}</h2>
           <p className="max-w-2xl text-lg text-ink-soft">{blurb(upNext)}</p>
           {upSummary && upSummary.status !== 'new' && (
@@ -79,7 +79,7 @@ export function LessonList() {
       {recommended && (
         <Card className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <Badge tone="info">{t('investui.game.recommended')}</Badge>
+            <Badge variant="info">{t('investui.game.recommended')}</Badge>
             <p className="mt-1 font-bold text-ink">{t(recommended.game.titleKey)}</p>
             <p className="text-sm text-ink-soft">{t(recommended.game.hintKey)}</p>
           </div>
@@ -116,8 +116,8 @@ export function LessonList() {
                             {t('investui.list.minutes', { n: r.estMinutes })} · {t('investui.list.points', { n: roomPoints(r) })}
                           </span>
                         </span>
-                        {s?.status === 'done' && <Badge tone="good">{t('investui.list.status.done')}</Badge>}
-                        {s?.status === 'started' && <Badge tone="info">{t('investui.list.status.started')}</Badge>}
+                        {s?.status === 'done' && <Badge variant="good">{t('investui.list.status.done')}</Badge>}
+                        {s?.status === 'started' && <Badge variant="info">{t('investui.list.status.started')}</Badge>}
                         <ChevronIcon dir="right" className="h-4 w-4 text-muted" />
                       </Link>
                     </li>
@@ -175,8 +175,8 @@ function GameTile({ state }: { state: GameState }) {
         <span className="block font-bold text-ink">{name}</span>
         <span className="block text-sm text-ink-soft">{t(game.hintKey)}</span>
       </span>
-      {recommended && <Badge tone="info">{t('investui.game.recommended')}</Badge>}
-      {played && <Badge tone="good">{t('investui.game.played')}</Badge>}
+      {recommended && <Badge variant="info">{t('investui.game.recommended')}</Badge>}
+      {played && <Badge variant="good">{t('investui.game.played')}</Badge>}
       <ChevronIcon dir="right" className="h-4 w-4 text-muted" />
     </Link>
   );

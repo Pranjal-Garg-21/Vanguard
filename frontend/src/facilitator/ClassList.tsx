@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { Badge, Button, Card, Notice, Spinner } from '@/ui';
+import { Badge, Button, Card, Alert, Spinner } from '@/ui';
 import { LANGUAGE_NAMES, supabaseOrThrow, type ClassRow } from './data';
 
 type ClassWithCount = ClassRow & { players: { count: number }[] };
@@ -29,7 +29,7 @@ export function ClassList() {
         </Link>
       </div>
 
-      {error && <Notice tone="bad">{error}</Notice>}
+      {error && <Alert variant="bad">{error}</Alert>}
       {classes === null && <Spinner />}
 
       {classes?.length === 0 && (
@@ -56,12 +56,12 @@ export function ClassList() {
                   <span className="rounded-lg bg-surface-2 px-2 py-1 font-mono text-sm font-bold tracking-wider">{c.join_code}</span>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <Badge tone="info">
+                  <Badge variant="info">
                     {students}
                     {c.expected_size ? ` / ${c.expected_size}` : ''} students
                   </Badge>
                   <Badge>{LANGUAGE_NAMES[c.language] ?? c.language}</Badge>
-                  {c.focus && <Badge tone="warn">Focus: {c.focus}</Badge>}
+                  {c.focus && <Badge variant="warn">Focus: {c.focus}</Badge>}
                 </div>
               </Card>
             </Link>

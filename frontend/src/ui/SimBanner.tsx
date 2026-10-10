@@ -3,15 +3,15 @@
  * Owner: P4. Part of the design kit.
  */
 import { t } from '@/platform';
-import { Notice } from './components';
+import { Alert } from '@/components/ui/alert';
 
 export function SimBanner() {
   return (
     <div role="note">
-      <Notice tone="warn">
+      <Alert variant="warn">
         <span className="font-bold text-warn">Note: </span>
         {t('investui.banner')}
-      </Notice>
+      </Alert>
     </div>
   );
 }

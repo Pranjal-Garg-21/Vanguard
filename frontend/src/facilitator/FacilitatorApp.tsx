@@ -4,7 +4,7 @@
  */
 import { Route, Routes } from 'react-router';
 import { isSupabaseConfigured } from '@/platform';
-import { Card, Notice, Spinner } from '@/ui';
+import { Card, Alert, Spinner } from '@/ui';
 import { ClassDetail } from './ClassDetail';
 import { ClassList } from './ClassList';
 import { CreateClass } from './CreateClass';
@@ -16,10 +16,10 @@ export default function FacilitatorApp() {
   if (!isSupabaseConfigured()) {
     return (
       <Centered>
-        <Notice>
+        <Alert>
           Supabase is not configured. Copy <code>frontend/.env.example</code> to <code>frontend/.env.local</code>, fill in the
           URL and key, and restart <code>npm run dev</code>.
-        </Notice>
+        </Alert>
       </Centered>
     );
   }

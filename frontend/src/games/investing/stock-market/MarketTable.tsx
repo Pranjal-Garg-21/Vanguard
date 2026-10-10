@@ -39,7 +39,7 @@ export function MarketTable({
               <div className="space-y-0.5">
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="text-lg font-bold">{t(r.company.nameKey)}</h3>
-                  {r.failed && <Badge tone="bad">{t('stockmarket.shut')}</Badge>}
+                  {r.failed && <Badge variant="bad">{t('stockmarket.shut')}</Badge>}
                 </div>
                 <p className="text-sm text-ink-soft">{t(r.company.taglineKey)}</p>
               </div>

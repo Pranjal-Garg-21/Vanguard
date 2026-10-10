@@ -18,7 +18,7 @@ import {
   FanChart,
   LockedTile,
   Meter,
-  Notice,
+  Alert,
   Pager,
   ProgressBar,
   RangeDisplay,
@@ -72,23 +72,23 @@ export function Gallery() {
               <Button>Primary</Button>
               <Button variant="secondary">Secondary</Button>
               <Button variant="ghost">Ghost</Button>
-              <Button variant="danger">Danger</Button>
+              <Button variant="destructive">Danger</Button>
               <Button disabled>Disabled</Button>
             </div>
             <Button size="lg" className="w-full">
               Large, full width
             </Button>
           </Item>
-          <Item name="Card, Badge, Notice" use="Card groups one idea. Badge is a tiny label. Notice is a short message with a coloured edge.">
+          <Item name="Card, Badge, Alert" use="Card groups one idea. Badge is a tiny label. Alert is a short message with a coloured edge.">
             <div className="flex flex-wrap gap-2">
               <Badge>Neutral</Badge>
-              <Badge tone="good">Good</Badge>
-              <Badge tone="info">Info</Badge>
-              <Badge tone="bad">Bad</Badge>
+              <Badge variant="good">Good</Badge>
+              <Badge variant="info">Info</Badge>
+              <Badge variant="bad">Bad</Badge>
             </div>
-            <Notice tone="info">Info: something worth knowing.</Notice>
-            <Notice tone="warn">Warn: be careful here.</Notice>
-            <Notice tone="bad">Bad: this did not work.</Notice>
+            <Alert variant="info">Info: something worth knowing.</Alert>
+            <Alert variant="warn">Warn: be careful here.</Alert>
+            <Alert variant="bad">Bad: this did not work.</Alert>
           </Item>
           <Item name="ProgressBar, Meter, Spinner" use="ProgressBar for steps done. Meter for a value with a name (cash, trust). Spinner while loading.">
             <ProgressBar value={0.4} />

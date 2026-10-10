@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router';
-import { Notice, Spinner } from '@/ui';
+import { Alert, Spinner } from '@/ui';
 import { supabaseOrThrow, type ClassRow } from './data';
 import { InsightsTab } from './tabs/InsightsTab';
 import { JoinTab } from './tabs/JoinTab';
@@ -32,7 +32,7 @@ export function ClassDetail() {
   }, [id]);
 
   if (cls === undefined) return <Spinner />;
-  if (cls === null) return <Notice tone="bad">Class not found, or it belongs to another facilitator.</Notice>;
+  if (cls === null) return <Alert variant="bad">Class not found, or it belongs to another facilitator.</Alert>;
 
   return (
     <div className="space-y-5">

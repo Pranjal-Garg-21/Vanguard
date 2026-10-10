@@ -14,7 +14,7 @@ import {
   type ClassCheck,
   type Language,
 } from '@/platform';
-import { Button, Notice } from '@/ui';
+import { Button, Alert } from '@/ui';
 import { PicturePin } from './components/PicturePin';
 import { StudentScreen } from './components/StudentScreen';
 import { AVATARS, LANGUAGES } from './pictures';
@@ -169,10 +169,10 @@ export function SetupFlow() {
           <div className="mt-4 min-h-12">
             {classCheck === 'checking' && <p className="text-center text-muted">{t('setup.class.checking')}</p>}
             {classCheck && classCheck !== 'checking' && classCheck.status === 'valid' && (
-              <Notice tone="info">{t('setup.class.valid', { name: classCheck.name })}</Notice>
+              <Alert variant="info">{t('setup.class.valid', { name: classCheck.name })}</Alert>
             )}
-            {classCheck && classCheck !== 'checking' && classCheck.status === 'invalid' && <Notice tone="bad">{t('setup.class.invalid')}</Notice>}
-            {classCheck && classCheck !== 'checking' && classCheck.status === 'unchecked' && <Notice>{t('setup.class.unchecked')}</Notice>}
+            {classCheck && classCheck !== 'checking' && classCheck.status === 'invalid' && <Alert variant="bad">{t('setup.class.invalid')}</Alert>}
+            {classCheck && classCheck !== 'checking' && classCheck.status === 'unchecked' && <Alert>{t('setup.class.unchecked')}</Alert>}
           </div>
           <div className="mt-6 flex flex-col gap-3">
             <Button size="lg" disabled={!classValid} onClick={() => go('avatar')}>
@@ -228,7 +228,7 @@ export function SetupFlow() {
 
       {step === 'pin' && (
         <StepBody title={t('setup.pin.createTitle')} subtitle={t('setup.pin.createHint')}>
-          {pinError && <div className="mb-4"><Notice tone="bad">{t('setup.pin.mismatch')}</Notice></div>}
+          {pinError && <div className="mb-4"><Alert variant="bad">{t('setup.pin.mismatch')}</Alert></div>}
           <PicturePin
             resetKey={`create-${pinAttempt}`}
             onComplete={(pictures) => {

@@ -1,7 +1,7 @@
 /** UC-FAC-01: create a class, confirm consent, get a join code. */
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Button, Card, Notice } from '@/ui';
+import { Button, Card, Alert } from '@/ui';
 import { LANGUAGE_NAMES, supabaseOrThrow } from './data';
 
 const CONSENT_ITEMS = [
@@ -98,7 +98,7 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
           ))}
         </Card>
 
-        {error && <Notice tone="bad">{error}</Notice>}
+        {error && <Alert variant="bad">{error}</Alert>}
         <Button type="submit" size="lg" className="w-full" disabled={busy || !name.trim() || !allConsented}>
           {busy ? 'Creating…' : 'Create class and get join code'}
         </Button>

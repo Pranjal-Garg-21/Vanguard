@@ -27,7 +27,7 @@ export function PickStep({ fundId, onPick }: { fundId: string | null; onPick: (i
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h3 className="text-lg font-bold text-ink">{t(f.labelKey)}</h3>
-                <Badge tone={chosen ? 'good' : 'neutral'}>{chosen ? t('mutualfund.pick.chosen') : t(`mutualfund.style.${f.style}`)}</Badge>
+                <Badge variant={chosen ? 'good' : 'neutral'}>{chosen ? t('mutualfund.pick.chosen') : t(`mutualfund.style.${f.style}`)}</Badge>
               </div>
               <p className="mt-2 text-ink-soft">{t(`mutualfund.fund.${id}.what`)}</p>
               <p className="mt-2 text-sm font-bold text-ink">{t('mutualfund.pick.cost', { cost: formatValue(f.costYearly, 'percent', 1) })}</p>

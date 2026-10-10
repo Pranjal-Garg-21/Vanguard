@@ -1,15 +1,18 @@
 /**
  * Design kit pieces beyond the starter set in components.tsx: Meter, CoinStack, BottomSheet, Dialog, LockedTile,
- * Toast and AudioButton. All use the colour tokens in index.css and logical (start/end) spacing so right-to-left works.
+ * Toast and AudioButton. Built on the shadcn primitives in src/components/ui. All use the colour tokens in index.css and logical (start/end) spacing so right-to-left works.
  * Owner: P4. See the /gallery page for every state.
  */
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
 import { t } from '@/platform';
-import { Button } from './components';
 
 /* ------------------------------------------------------------------ Meter */
 
-const METER_TONES = { brand: 'bg-brand', info: 'bg-info', warn: 'bg-warn', bad: 'bg-bad', xp: 'bg-xp' } as const;
+const METER_TONES = { brand: 'bg-primary', info: 'bg-info', warn: 'bg-warn', bad: 'bg-destructive', xp: 'bg-xp' } as const;
 
 /** A labelled meter (cash, trust, a goal). The number is always written, so colour is never the only signal. */
 export function Meter({
@@ -34,7 +37,7 @@ export function Meter({
         <span className="font-bold text-ink">{valueText ?? `${pct}%`}</span>
       </div>
       <div className="h-3 overflow-hidden rounded-full bg-surface-3" role="meter" aria-label={label} aria-valuemin={0} aria-valuemax={max} aria-valuenow={value} aria-valuetext={valueText ?? `${pct}%`}>
-        <div className={`h-full rounded-full ${METER_TONES[tone]} transition-[width] duration-500`} style={{ width: `${pct}%` }} />
+        <div className={cn('h-full rounded-full transition-[width] duration-500', METER_TONES[tone])} style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
@@ -60,66 +63,28 @@ export function CoinStack({ amount, unit = 1000, maxCoins = 10, label }: { amoun
 
 /* ------------------------------------------------------------ BottomSheet */
 
-/** Keeps focus inside while open, closes on Escape, and gives focus back to what opened it. */
-function useModal(open: boolean, onClose: () => void) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!open) return;
-    const previous = document.activeElement as HTMLElement | null;
-    const first = ref.current?.querySelector<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    first?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key !== 'Tab' || !ref.current) return;
-      const items = [...ref.current.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')].filter((el) => !el.hasAttribute('disabled'));
-      if (items.length === 0) return;
-      const a = items[0]!;
-      const z = items[items.length - 1]!;
-      if (e.shiftKey && document.activeElement === a) {
-        e.preventDefault();
-        z.focus();
-      } else if (!e.shiftKey && document.activeElement === z) {
-        e.preventDefault();
-        a.focus();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      previous?.focus();
-    };
-  }, [open, onClose]);
-  return ref;
-}
-
+/** A panel that rises from the bottom. Built on shadcn's Sheet (Radix): focus stays inside, Escape closes, focus goes back. */
 export function BottomSheet({ open, onClose, title, children }: { open: boolean; onClose: () => void; title: string; children: ReactNode }) {
-  const ref = useModal(open, onClose);
-  if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60" onClick={onClose}>
-      <div
-        ref={ref}
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        onClick={(e) => e.stopPropagation()}
-        className="max-h-[85vh] w-full max-w-2xl space-y-4 overflow-y-auto rounded-t-2xl border border-line bg-surface p-5 sm:p-6"
-      >
-        <h2 className="text-xl font-bold text-ink">{title}</h2>
+    <Sheet open={open} onOpenChange={(o) => !o && onClose()}>
+      <SheetContent aria-describedby={undefined}>
+        <SheetHeader>
+          <SheetTitle>{title}</SheetTitle>
+        </SheetHeader>
         {children}
-        <div className="flex justify-end">
-          <Button variant="secondary" onClick={onClose}>
-            {t('ui.close')}
-          </Button>
-        </div>
-      </div>
-    </div>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button variant="secondary">{t('ui.close')}</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 }
 
 /* ----------------------------------------------------------------- Dialog */
 
-/** A small centred question with two choices, for things that cannot be undone ("Start over?"). */
+/** A small centred question with two choices, for things that cannot be undone ("Start over?"). Built on shadcn's AlertDialog. */
 export function Dialog({
   open,
   title,
@@ -137,21 +102,19 @@ export function Dialog({
   onConfirm: () => void;
   onCancel: () => void;
 }) {
-  const ref = useModal(open, onCancel);
-  if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onCancel}>
-      <div ref={ref} role="alertdialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()} className="w-full max-w-md space-y-4 rounded-2xl border border-line bg-surface p-6">
-        <h2 className="text-xl font-bold text-ink">{title}</h2>
-        <p className="text-ink-soft">{body}</p>
-        <div className="flex flex-wrap justify-end gap-3">
-          <Button variant="secondary" onClick={onCancel}>
-            {cancelLabel}
-          </Button>
-          <Button onClick={onConfirm}>{confirmLabel}</Button>
-        </div>
-      </div>
-    </div>
+    <AlertDialog open={open} onOpenChange={(o) => !o && onCancel()}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{body}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>{confirmLabel}</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
 
