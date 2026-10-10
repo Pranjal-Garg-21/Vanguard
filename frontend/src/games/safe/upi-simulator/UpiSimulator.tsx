@@ -17,6 +17,8 @@ import collectTemplate from '../../../content/scenarios/safe/templates/collect_r
 import qrTemplate from '../../../content/scenarios/safe/templates/qr_receive.json';
 import checkPool from '../../../content/scenarios/safe/pools/upi_check.json';
 import type { Scenario } from '../phone/logic/types';
+import { shuffleChoices } from '../phone/logic/shuffle';
+import type { RunMeta } from '../phone/logic/scoring';
 import { InfoCard } from './components/InfoCard';
 import { LinkAccountScreen, PaidScreen, PayPinScreen, PayScanScreen, SetPinScreen } from './components/PayScreens';
 import { Quiz, type QuizQuestion } from './components/Quiz';
@@ -31,13 +33,13 @@ export type UpiSimulatorProps = {
   seed?: number;
   mode?: PlayMode;
   timersOff?: boolean;
-  onComplete: (result: MiniGameResult) => void;
+  onComplete: (result: MiniGameResult, meta: RunMeta) => void;
 };
 
 function TaskBar({ chapter }: { chapter: Parameters<typeof taskIndex>[0] }) {
   const i = taskIndex(chapter);
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-4 lg:px-8">
+    <div className="border-b border-line bg-surface px-4 py-3 lg:px-6">
       <p className="font-mono text-xs text-muted">{t('safe.upi.step', { n: i + 1, total: TASKS.length })} · {t(TASKS[i]?.titleKey ?? '')}</p>
       <ProgressBar className="mt-2" value={(i + 1) / TASKS.length} />
     </div>
@@ -48,9 +50,9 @@ export function UpiSimulator({ seed = 1, mode = 'arcade', timersOff = false, onC
   const [flow, dispatch] = useReducer(reduce, undefined, createFlow);
   const { chapter } = flow;
 
-  const collect = useMemo(() => collectRequestVariant(collectTemplate as unknown as Scenario, seed, START_BALANCE - CANTEEN_AMOUNT), [seed]);
+  const collect = useMemo(() => shuffleChoices(collectRequestVariant(collectTemplate as unknown as Scenario, seed, START_BALANCE - CANTEEN_AMOUNT), seed), [seed]);
   const qrBalance = flow.balance;
-  const qr = useMemo(() => qrReceiveVariant(qrTemplate as unknown as Scenario, seed, qrBalance), [seed, qrBalance]);
+  const qr = useMemo(() => shuffleChoices(qrReceiveVariant(qrTemplate as unknown as Scenario, seed, qrBalance), seed), [seed, qrBalance]);
 
   if (chapter === 'intro') {
     return (
@@ -66,18 +68,12 @@ export function UpiSimulator({ seed = 1, mode = 'arcade', timersOff = false, onC
 
   if (chapter === 'collect') {
     return (
-      <>
-        <TaskBar chapter={chapter} />
-        <PhoneRoom key="collect" embedded mode="lifepath" timersOff={timersOff} script={collect} onComplete={(result) => dispatch({ type: 'script', chapter: 'collect', result })} />
-      </>
+      <PhoneRoom key="collect" embedded top={<TaskBar chapter={chapter} />} mode="lifepath" timersOff={timersOff} script={collect} onComplete={(result, meta) => dispatch({ type: 'script', chapter: 'collect', result, meta })} />
     );
   }
   if (chapter === 'qr') {
     return (
-      <>
-        <TaskBar chapter={chapter} />
-        <PhoneRoom key="qr" embedded mode="lifepath" timersOff={timersOff} script={qr} onComplete={(result) => dispatch({ type: 'script', chapter: 'qr', result })} />
-      </>
+      <PhoneRoom key="qr" embedded top={<TaskBar chapter={chapter} />} mode="lifepath" timersOff={timersOff} script={qr} onComplete={(result, meta) => dispatch({ type: 'script', chapter: 'qr', result, meta })} />
     );
   }
   if (chapter === 'rule') {
@@ -111,7 +107,7 @@ export function UpiSimulator({ seed = 1, mode = 'arcade', timersOff = false, onC
           <Card className="p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">{t('safe.upi.done.check')}</p><p className="mt-1 text-2xl font-bold tabular-nums text-info">{scored[0]}/{scored[1]}</p></Card>
           <Card className="p-4"><p className="text-xs font-bold uppercase tracking-wider text-muted">{t('safe.upi.done.pinHabit')}</p><p className="mt-1 text-lg font-bold text-ink">{result.misconceptions.includes('pin_uncovered') ? t('safe.upi.done.notCovered') : t('safe.upi.done.covered')}</p></Card>
         </div>
-        <Button size="lg" onClick={() => onComplete(result)}>{t('safe.ui.continue')}</Button>
+        <Button size="lg" onClick={() => onComplete(result, { kinds: flow.kinds, fooled: flow.fooled, falseAlarms: 0 })}>{t('safe.ui.continue')}</Button>
       </div>
     );
   }
@@ -126,7 +122,7 @@ export function UpiSimulator({ seed = 1, mode = 'arcade', timersOff = false, onC
 
   return (
     <RoomLayout panel={<UpiPanel chapter={chapter} balance={flow.balance} />} drawerLabel={t('safe.ui.tasks')}>
-      <PhoneShell clock="17:05" lensOn={false} onToggleLens={() => {}} compact>
+      <PhoneShell clock="17:05" lensOn={false} onToggleLens={() => {}} bare>
         {screen}
       </PhoneShell>
     </RoomLayout>

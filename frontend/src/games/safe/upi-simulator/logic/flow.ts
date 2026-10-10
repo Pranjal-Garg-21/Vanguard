@@ -44,6 +44,9 @@ export type FlowState = {
   tally: Record<string, [number, number]>;
   /** Money lost to scams, as a negative number, for LifePath. */
   effects: Record<string, number>;
+  /** Red-flag kinds found in the two scam chapters, and whether either cost money. */
+  kinds: string[];
+  fooled: boolean;
   message: string | null;
 };
 
@@ -53,7 +56,7 @@ export type FlowEvent =
   | { type: 'setPin'; pin: string; covered: boolean }
   | { type: 'scan' }
   | { type: 'pay'; pin: string; covered: boolean }
-  | { type: 'script'; chapter: 'collect' | 'qr'; result: MiniGameResult }
+  | { type: 'script'; chapter: 'collect' | 'qr'; result: MiniGameResult; meta?: { kinds: string[]; fooled: boolean } }
   | { type: 'check'; answers: { id: string; concept: string; correct: boolean; choice: string }[] };
 
 export function createFlow(): FlowState {
@@ -67,6 +70,8 @@ export function createFlow(): FlowState {
     misconceptions: [],
     tally: {},
     effects: {},
+    kinds: [],
+    fooled: false,
     message: null,
   };
 }
@@ -131,6 +136,8 @@ export function reduce(state: FlowState, event: FlowEvent): FlowState {
         misconceptions: [...state.misconceptions, ...result.misconceptions],
         tally,
         effects,
+        kinds: [...new Set([...state.kinds, ...(event.meta?.kinds ?? [])])],
+        fooled: state.fooled || (event.meta?.fooled ?? false),
         balance: state.balance + (result.effects?.['money.bank'] ?? 0),
         chapter: event.chapter === 'collect' ? 'rule' : 'refund',
       };
