@@ -4,10 +4,14 @@
  */
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, useParams } from 'react-router';
+import { ArcadeHub } from '@/features/arcade';
+import { Landing } from '@/features/landing';
+import { BaselineFlow } from '@/features/onboarding';
 import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
+import { VillageGame } from '@/features/village';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
-import { StudentEntry } from './StudentEntry';
+import { TileInspector } from './TileInspector';
 import { StudentHome } from './StudentHome';
 
 // Lazy so students never download the dashboard.
@@ -20,13 +24,17 @@ function JoinLink() {
 }
 
 export const router = createBrowserRouter([
-  { path: '/', element: <StudentEntry /> },
+  { path: '/', element: <Landing /> },
+  { path: '/onboarding', element: <BaselineFlow /> },
+  { path: '/arcade', element: <ArcadeHub /> },
+  { path: '/village', element: <VillageGame /> },
   { path: '/welcome', element: <WelcomeScreen /> },
   { path: '/setup', element: <SetupFlow /> },
   { path: '/who', element: <PlayerPicker /> },
   { path: '/join/:code', element: <JoinLink /> },
   { path: '/home', element: <StudentHome /> },
   { path: '/dev', element: <DevHome /> },
+  { path: '/dev/tiles', element: <TileInspector /> },
   {
     path: '/facilitator/*',
     element: (

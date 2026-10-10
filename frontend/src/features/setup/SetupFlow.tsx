@@ -258,7 +258,7 @@ export function SetupFlow() {
           <div className="text-7xl">{AVATARS.find((a) => a.id === avatarId)?.emoji}</div>
           <h1 className="mt-6 text-3xl font-extrabold">{t('setup.done.title', { name: name.trim() })}</h1>
           <p className="mt-3 text-lg text-slate-600">{t('setup.done.body')}</p>
-          <Button size="lg" className="mt-10 w-full" onClick={() => navigate('/home')}>
+          <Button size="lg" className="mt-10 w-full" onClick={() => navigate('/onboarding')}>
             {t('setup.done.go')}
           </Button>
         </div>

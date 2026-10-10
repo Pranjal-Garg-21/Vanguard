@@ -1,0 +1,29 @@
+{
+  "title": "PaisaPath",
+  "tagline": "Live a money life. Make mistakes safely. Grow.",
+  "welcomeBack": "Welcome back, {name}!",
+  "sceneLabel": "A small village with houses, trees and a path",
+  "simulator": {
+    "title": "Enter the Simulator",
+    "body": "Live a character’s money life month by month."
+  },
+  "minigames": {
+    "title": "Play Minigames",
+    "body": "Short games on saving, scams, investing and more."
+  },
+  "facilitator": "I’m a facilitator",
+  "arcade": {
+    "title": "Minigames",
+    "body": "Pick a game. More are being built.",
+    "soon": "Coming soon",
+    "back": "Back to the village",
+    "games": {
+      "documentHunt": "Document Hunt",
+      "jarSplit": "Jar Split",
+      "scamInbox": "Scam Inbox",
+      "upiSimulator": "UPI Simulator",
+      "compoundingGarden": "Compounding Garden",
+      "stockMarket": "Stock Market"
+    }
+  }
+}

@@ -1,3 +1,67 @@
 @import "tailwindcss";
 
 /* Design tokens are added here by P4 (src/ui). */
+
+/* "Farm village" theme: warm, pixel-art look inspired by cozy farming games. */
+@theme {
+  --font-pixel: "Pixelify Sans", ui-monospace, "Courier New", monospace;
+
+  --color-sky: #8fd3f4;
+  --color-sky-deep: #5bb5e8;
+  --color-grass: #6bbf59;
+  --color-grass-dark: #3f8f3a;
+  --color-soil: #8b5a2b;
+  --color-wood: #c68642;
+  --color-wood-dark: #7a4a1c;
+  --color-parchment: #fff1c9;
+  --color-parchment-dark: #e8c98a;
+  --color-ink: #3b2412;
+  --color-gold: #f5c542;
+}
+
+/* Hard, stepped outline instead of a soft border: the "pixel" look. */
+@utility pixel-frame {
+  box-shadow:
+    0 -4px 0 0 var(--color-ink),
+    0 4px 0 0 var(--color-ink),
+    -4px 0 0 0 var(--color-ink),
+    4px 0 0 0 var(--color-ink);
+}
+
+/* Same outline plus a drop shadow, for things that should look raised. */
+@utility pixel-raised {
+  box-shadow:
+    0 -4px 0 0 var(--color-ink),
+    0 4px 0 0 var(--color-ink),
+    -4px 0 0 0 var(--color-ink),
+    4px 0 0 0 var(--color-ink),
+    8px 8px 0 0 rgb(59 36 18 / 0.35);
+}
+
+@utility pixel-text-shadow {
+  text-shadow:
+    3px 3px 0 var(--color-ink),
+    -1px -1px 0 var(--color-ink),
+    1px -1px 0 var(--color-ink),
+    -1px 1px 0 var(--color-ink);
+}
+
+body {
+  font-family: var(--font-pixel);
+}
+
+/* Motion is decoration only, and is switched off for people who ask for less. */
+@keyframes pixel-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pixel-drift {
+  from { transform: translateX(-20vw); }
+  to { transform: translateX(120vw); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pixel-float { animation: pixel-float 2s steps(4) infinite; }
+  .pixel-drift { animation: pixel-drift 60s linear infinite; }
+}

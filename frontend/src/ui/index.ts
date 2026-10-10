@@ -5,3 +5,5 @@
  */
 
 export { Badge, Button, Card, Notice, Spinner } from './components';
+export { PixelButton, PixelOption, PixelPanel, PixelProgress } from './pixel';
+export * from './tiles';

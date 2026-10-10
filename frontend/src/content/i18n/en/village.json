@@ -1,0 +1,53 @@
+{
+  "title": "The Village",
+  "menu": "Menu",
+  "outside": "Outside",
+  "hint": "Move with the arrow keys or the pad. Walk through a door to go in. Walk into the counter to talk.",
+  "close": "Back to the shop",
+  "comingSoon": "Coming soon",
+  "activityLabel": "Activity",
+  "pad": {
+    "up": "Move up",
+    "down": "Move down",
+    "left": "Move left",
+    "right": "Move right"
+  },
+  "buildings": {
+    "grocery": {
+      "label": "Kirana",
+      "name": "Kirana Store",
+      "blurb": "Everyday shopping for the home. Small prices add up fast.",
+      "activity": "Family Market Trip"
+    },
+    "food": {
+      "label": "Tiffin",
+      "name": "Tiffin Centre",
+      "blurb": "Eating out is a small spend that repeats every day.",
+      "activity": "Spending Detective"
+    },
+    "clothing": {
+      "label": "Clothes",
+      "name": "Clothing Store",
+      "blurb": "A big sale feels like saving. Does it really save money?",
+      "activity": "The 70%-Off Sale"
+    },
+    "stationery": {
+      "label": "Stationery",
+      "name": "Stationery Shop",
+      "blurb": "Books and pens are needs. What about the fancy ones?",
+      "activity": "Needs vs Wants"
+    },
+    "stockmarket": {
+      "label": "Stocks",
+      "name": "Stock Market",
+      "blurb": "Prices go up and down. Learn how risk and return work, with pretend companies.",
+      "activity": "Stock Market Simulator"
+    },
+    "bank": {
+      "label": "Bank",
+      "name": "Bank",
+      "blurb": "Open an account and keep your money safe.",
+      "activity": "Bank Counter"
+    }
+  }
+}

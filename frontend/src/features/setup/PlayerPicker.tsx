@@ -36,7 +36,7 @@ export function PlayerPicker() {
     if (!selected) return;
     const result = await unlockProfile(selected.pid, pictures);
     if (result.ok) {
-      navigate('/home');
+      navigate('/');
       return;
     }
     setAttempt((n) => n + 1);
