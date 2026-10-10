@@ -1,0 +1,522 @@
+[
+  {
+    "id": "bank",
+    "kind": "genuine",
+    "tactic": "bank_alert",
+    "level": 1,
+    "concept": "red_flags",
+    "surface": {
+      "type": "sms",
+      "from": "VM-BANKTX",
+      "fromLens": "sender",
+      "body": [
+        {
+          "k": "safe.inbox01.bank.a",
+          "lens": "amount"
+        },
+        {
+          "k": "safe.inbox01.bank.b"
+        }
+      ],
+      "lens": [
+        {
+          "id": "sender",
+          "revealKey": "safe.inbox01.bank.l.sender"
+        },
+        {
+          "id": "amount",
+          "revealKey": "safe.inbox01.bank.l.amount"
+        }
+      ],
+      "explainKey": "safe.inbox01.bank.explain"
+    }
+  },
+  {
+    "id": "mom",
+    "kind": "scam",
+    "tactic": "impersonation",
+    "level": 1,
+    "concept": "impersonation",
+    "surface": {
+      "type": "chat",
+      "from": "Mom (new number)",
+      "fromLens": "name",
+      "online": true,
+      "body": [
+        {
+          "k": "safe.inbox01.mom.a",
+          "lens": "name"
+        },
+        {
+          "k": "safe.inbox01.mom.b",
+          "lens": "urgent"
+        },
+        {
+          "k": "safe.inbox01.mom.c",
+          "lens": "secret"
+        }
+      ],
+      "lens": [
+        {
+          "id": "name",
+          "revealKey": "safe.inbox01.mom.l.name",
+          "tell": "pretends"
+        },
+        {
+          "id": "urgent",
+          "revealKey": "safe.inbox01.mom.l.urgent",
+          "tell": "urgency"
+        },
+        {
+          "id": "secret",
+          "revealKey": "safe.inbox01.mom.l.secret",
+          "tell": "secrecy"
+        }
+      ],
+      "tells": [
+        {
+          "id": "pretends",
+          "kind": "pretends",
+          "whyKey": "safe.inbox01.mom.w.pretends"
+        },
+        {
+          "id": "urgency",
+          "kind": "urgency",
+          "whyKey": "safe.inbox01.mom.w.urgency"
+        },
+        {
+          "id": "secrecy",
+          "kind": "secrecy",
+          "whyKey": "safe.inbox01.mom.w.secrecy"
+        }
+      ],
+      "explainKey": "safe.inbox01.mom.explain"
+    },
+    "misconception": "trust_familiar_name",
+    "whatIf": {
+      "loss": 5000,
+      "url": null
+    }
+  },
+  {
+    "id": "friend",
+    "kind": "genuine",
+    "tactic": "friend",
+    "level": 1,
+    "concept": "red_flags",
+    "surface": {
+      "type": "chat",
+      "from": "Aman",
+      "fromLens": "name",
+      "online": false,
+      "body": [
+        {
+          "k": "safe.inbox01.friend.a",
+          "lens": "name"
+        }
+      ],
+      "lens": [
+        {
+          "id": "name",
+          "revealKey": "safe.inbox01.friend.l.name"
+        }
+      ],
+      "explainKey": "safe.inbox01.friend.explain"
+    }
+  },
+  {
+    "id": "job",
+    "kind": "scam",
+    "tactic": "job",
+    "level": 1,
+    "concept": "job_scam",
+    "surface": {
+      "type": "mail",
+      "fromName": "HR Desk",
+      "fromAddress": "jobs@quick-hire-india.example",
+      "fromLens": "addr",
+      "subjectKey": "safe.inbox01.job.subject",
+      "body": [
+        {
+          "k": "safe.inbox01.job.a",
+          "lens": "pay"
+        },
+        {
+          "k": "safe.inbox01.job.b",
+          "lens": "fee"
+        }
+      ],
+      "lens": [
+        {
+          "id": "addr",
+          "revealKey": "safe.inbox01.job.l.addr"
+        },
+        {
+          "id": "pay",
+          "revealKey": "safe.inbox01.job.l.pay",
+          "tell": "too_good"
+        },
+        {
+          "id": "fee",
+          "revealKey": "safe.inbox01.job.l.fee",
+          "tell": "fee"
+        }
+      ],
+      "tells": [
+        {
+          "id": "too_good",
+          "kind": "too_good",
+          "whyKey": "safe.inbox01.job.w.too_good"
+        },
+        {
+          "id": "fee",
+          "kind": "pulls_money",
+          "whyKey": "safe.inbox01.job.w.fee"
+        }
+      ],
+      "explainKey": "safe.inbox01.job.explain"
+    },
+    "misconception": "pay_to_get_job",
+    "whatIf": {
+      "loss": 999
+    }
+  },
+  {
+    "id": "call",
+    "kind": "scam",
+    "tactic": "impersonation",
+    "level": 1,
+    "concept": "impersonation",
+    "surface": {
+      "type": "call",
+      "caller": "+91 98xxx xx210",
+      "callerLens": "number",
+      "lines": [
+        {
+          "k": "safe.inbox01.call.a",
+          "lens": "claim"
+        },
+        {
+          "k": "safe.inbox01.call.b",
+          "lens": "urgent"
+        },
+        {
+          "k": "safe.inbox01.call.c",
+          "lens": "otp"
+        }
+      ],
+      "lens": [
+        {
+          "id": "number",
+          "revealKey": "safe.inbox01.call.l.number"
+        },
+        {
+          "id": "claim",
+          "revealKey": "safe.inbox01.call.l.claim",
+          "tell": "pretends"
+        },
+        {
+          "id": "urgent",
+          "revealKey": "safe.inbox01.call.l.urgent",
+          "tell": "urgency"
+        },
+        {
+          "id": "otp",
+          "revealKey": "safe.inbox01.call.l.otp",
+          "tell": "otp"
+        }
+      ],
+      "tells": [
+        {
+          "id": "pretends",
+          "kind": "pretends",
+          "whyKey": "safe.inbox01.call.w.pretends"
+        },
+        {
+          "id": "urgency",
+          "kind": "urgency",
+          "whyKey": "safe.inbox01.call.w.urgency"
+        },
+        {
+          "id": "otp",
+          "kind": "asks_secret",
+          "whyKey": "safe.inbox01.call.w.otp"
+        }
+      ],
+      "explainKey": "safe.inbox01.call.explain"
+    },
+    "misconception": "bank_asks_otp",
+    "whatIf": {
+      "loss": 8000
+    }
+  },
+  {
+    "id": "parcel",
+    "kind": "scam",
+    "tactic": "fake_link",
+    "level": 1,
+    "concept": "red_flags",
+    "surface": {
+      "type": "sms",
+      "from": "TX-PARCEL",
+      "fromLens": "sender",
+      "body": [
+        {
+          "k": "safe.inbox01.parcel.a"
+        },
+        {
+          "k": "safe.inbox01.parcel.link",
+          "lens": "link"
+        }
+      ],
+      "lens": [
+        {
+          "id": "sender",
+          "revealKey": "safe.inbox01.parcel.l.sender"
+        },
+        {
+          "id": "link",
+          "revealKey": "safe.inbox01.parcel.l.link",
+          "tell": "link"
+        }
+      ],
+      "tells": [
+        {
+          "id": "link",
+          "kind": "odd_link",
+          "whyKey": "safe.inbox01.parcel.w.link"
+        }
+      ],
+      "explainKey": "safe.inbox01.parcel.explain"
+    },
+    "misconception": "click_unknown_link",
+    "whatIf": {
+      "loss": 3500
+    }
+  },
+  {
+    "id": "kyc",
+    "kind": "scam",
+    "tactic": "fake_kyc",
+    "level": 1,
+    "concept": "fake_kyc",
+    "surface": {
+      "type": "sms",
+      "from": "AX-BNKUPD",
+      "fromLens": "sender",
+      "body": [
+        {
+          "k": "safe.kyc01.sms.a"
+        },
+        {
+          "k": "safe.kyc01.sms.today",
+          "lens": "today"
+        },
+        {
+          "k": "safe.kyc01.sms.b"
+        },
+        {
+          "k": "safe.kyc01.sms.link",
+          "lens": "link"
+        }
+      ],
+      "lens": [
+        {
+          "id": "sender",
+          "revealKey": "safe.kyc01.lens.sender",
+          "tell": "sender"
+        },
+        {
+          "id": "today",
+          "revealKey": "safe.kyc01.lens.today",
+          "tell": "urgency"
+        },
+        {
+          "id": "link",
+          "revealKey": "safe.kyc01.lens.link",
+          "tell": "link"
+        }
+      ],
+      "tells": [
+        {
+          "id": "sender",
+          "kind": "pretends",
+          "whyKey": "safe.kyc01.why.sender"
+        },
+        {
+          "id": "urgency",
+          "kind": "urgency",
+          "whyKey": "safe.kyc01.why.urgency"
+        },
+        {
+          "id": "link",
+          "kind": "odd_link",
+          "whyKey": "safe.kyc01.why.link"
+        }
+      ],
+      "explainKey": "safe.kyc01.explain"
+    },
+    "misconception": "bank_will_call_for_otp",
+    "whatIf": {
+      "loss": 4999,
+      "url": "kyc-update.secure-bankverify.in/login"
+    }
+  },
+  {
+    "id": "prize",
+    "kind": "scam",
+    "tactic": "prize",
+    "level": 1,
+    "concept": "prize_scam",
+    "surface": {
+      "type": "sms",
+      "from": "VK-WINNER",
+      "fromLens": "sender",
+      "body": [
+        {
+          "k": "safe.pool.prize.a",
+          "lens": "prize"
+        },
+        {
+          "k": "safe.pool.prize.b",
+          "lens": "fee"
+        },
+        {
+          "k": "safe.pool.prize.c",
+          "lens": "urgent"
+        }
+      ],
+      "lens": [
+        {
+          "id": "sender",
+          "revealKey": "safe.pool.prize.l.sender"
+        },
+        {
+          "id": "prize",
+          "revealKey": "safe.pool.prize.l.prize",
+          "tell": "too_good"
+        },
+        {
+          "id": "fee",
+          "revealKey": "safe.pool.prize.l.fee",
+          "tell": "fee"
+        },
+        {
+          "id": "urgent",
+          "revealKey": "safe.pool.prize.l.urgent",
+          "tell": "urgency"
+        }
+      ],
+      "tells": [
+        {
+          "id": "too_good",
+          "kind": "too_good",
+          "whyKey": "safe.pool.prize.w.too_good"
+        },
+        {
+          "id": "fee",
+          "kind": "pulls_money",
+          "whyKey": "safe.pool.prize.w.fee"
+        },
+        {
+          "id": "urgency",
+          "kind": "urgency",
+          "whyKey": "safe.pool.prize.w.urgency"
+        }
+      ],
+      "explainKey": "safe.pool.prize.explain"
+    },
+    "misconception": "pay_to_win",
+    "whatIf": {
+      "loss": 499
+    }
+  },
+  {
+    "id": "task",
+    "kind": "scam",
+    "tactic": "job",
+    "level": 2,
+    "concept": "job_scam",
+    "surface": {
+      "type": "chat",
+      "from": "Priya (recruiter)",
+      "fromLens": "name",
+      "online": true,
+      "body": [
+        {
+          "k": "safe.pool.task.a",
+          "lens": "earn"
+        },
+        {
+          "k": "safe.pool.task.b",
+          "lens": "details"
+        }
+      ],
+      "lens": [
+        {
+          "id": "name",
+          "revealKey": "safe.pool.task.l.name"
+        },
+        {
+          "id": "earn",
+          "revealKey": "safe.pool.task.l.earn",
+          "tell": "too_good"
+        },
+        {
+          "id": "details",
+          "revealKey": "safe.pool.task.l.details",
+          "tell": "asks_secret"
+        }
+      ],
+      "tells": [
+        {
+          "id": "too_good",
+          "kind": "too_good",
+          "whyKey": "safe.pool.task.w.too_good"
+        },
+        {
+          "id": "asks_secret",
+          "kind": "asks_secret",
+          "whyKey": "safe.pool.task.w.asks_secret"
+        }
+      ],
+      "explainKey": "safe.pool.task.explain"
+    },
+    "misconception": "task_job_deposit",
+    "whatIf": {
+      "loss": 2000
+    }
+  },
+  {
+    "id": "school",
+    "kind": "genuine",
+    "tactic": "school",
+    "level": 1,
+    "concept": "red_flags",
+    "surface": {
+      "type": "sms",
+      "from": "VM-SCHOOL",
+      "fromLens": "sender",
+      "body": [
+        {
+          "k": "safe.pool.school.a",
+          "lens": "office"
+        },
+        {
+          "k": "safe.pool.school.b"
+        }
+      ],
+      "lens": [
+        {
+          "id": "sender",
+          "revealKey": "safe.pool.school.l.sender"
+        },
+        {
+          "id": "office",
+          "revealKey": "safe.pool.school.l.office"
+        }
+      ],
+      "explainKey": "safe.pool.school.explain"
+    }
+  }
+]
