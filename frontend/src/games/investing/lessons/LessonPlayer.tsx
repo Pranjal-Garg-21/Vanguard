@@ -1,6 +1,6 @@
 /**
  * Plays one Investing ABC lesson. Every lesson is a room (TryHackMe-style), so this finds the
- * room and hands it to RoomLoader. Route: /learn/invest/:lessonId. Owner: P4.
+ * room and hands it to RoomLoader. Route: /learn/:pillar/:lessonId (and /learn/invest/:lessonId). Owner: P4.
  */
 import { Link, useParams } from 'react-router';
 import { t } from '@/platform';
@@ -16,9 +16,9 @@ export function LessonPlayer() {
     return (
       <InvestShell>
         <p>Lesson not found.</p>
-        <Link to="/learn/invest" className="inline-flex items-center gap-1 text-sm font-bold text-ink-soft hover:text-brand">
+        <Link to="/learn" className="inline-flex items-center gap-1 text-sm font-bold text-ink-soft hover:text-brand">
           <ChevronIcon dir="left" />
-          {t('investui.btn.backToLessons')}
+          {t('learn.all')}
         </Link>
       </InvestShell>
     );

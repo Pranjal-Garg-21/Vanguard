@@ -3,6 +3,7 @@
  * No React here, so it can be tested and reused by the games later.
  */
 import { assumptions, runFutures } from '@/core/market';
+import type { LabSpec } from './types';
 import {
   bondPrice,
   breakevenGain,
@@ -45,6 +46,7 @@ export const EXPLORE_WIDGETS = [
   'cash_speed',
   'horizon_range',
   'pyramid_growth',
+  'slider_lab',
 ] as const;
 export type ExploreWidgetId = (typeof EXPLORE_WIDGETS)[number];
 
@@ -65,6 +67,18 @@ export const VISUALS = [
   'cash_and_house',
   'long_road',
   'phone_offer',
+  'budget_jars',
+  'payslip',
+  'monthly_bills',
+  'goal_ladder',
+  'umbrella',
+  'passbook',
+  'bank_counter',
+  'documents',
+  'loan_ledger',
+  'emi_calendar',
+  'card_bill',
+  'friend_loan',
 ] as const;
 export type VisualId = (typeof VISUALS)[number];
 
@@ -227,4 +241,28 @@ export function horizonRange(amount: number, assetId: string, years: number) {
 /** pyramid_growth: if every member must recruit `recruits` new people, who must join at `level` and how many in all. */
 export function pyramidGrowth(recruits: number, level: number) {
   return { atLevel: membersAtLevel(recruits, level), total: membersTotal(recruits, level) };
+}
+
+/** The numbers a `slider_lab` works with: starting values for the sliders, then each readout in order. */
+export function evalLab(
+  lab: LabSpec,
+  params: Record<string, number>,
+  values: Record<string, number>,
+  lookup: (name: string) => (...a: number[]) => number,
+): Record<string, number> {
+  const scope: Record<string, number> = { ...params };
+  for (const s of lab.sliders) scope[s.id] = values[s.id] ?? params[s.id] ?? s.min;
+  const out: Record<string, number> = {};
+  for (const r of lab.readouts) {
+    const args = r.args.map((a) => {
+      if (typeof a === 'number') return a;
+      const v = scope[a];
+      if (v === undefined) throw new Error(`Lab readout ${r.id} refers to unknown name ${a}`);
+      return v;
+    });
+    const value = lookup(r.fn)(...args);
+    scope[r.id] = value;
+    out[r.id] = value;
+  }
+  return out;
 }

@@ -48,6 +48,7 @@ export function DevHome() {
       <nav className="flex flex-wrap gap-3">
         <Link className="rounded bg-brand px-3 py-2 font-bold text-brand-ink" to="/setup">Setup (P5)</Link>
         <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/facilitator">Facilitator (P5)</Link>
+        <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/learn">Learn: all topics (P4)</Link>
         <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/learn/invest">Investing ABC (P4)</Link>
         <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/arcade">Arcade (P4)</Link>
         <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/gallery">Design kit gallery (P4)</Link>

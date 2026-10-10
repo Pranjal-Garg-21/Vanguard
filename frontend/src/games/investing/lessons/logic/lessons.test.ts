@@ -1,9 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { fillTemplate, runCalcs, type Computed } from './calc';
 import { EXPLORE_WIDGETS, VISUALS } from './explore';
-import { games, glossary, glossaryById, knownConcepts, knownMisconceptions, rooms, strings } from './content';
+import { allRooms, games, glossary, glossaryById, knownConcepts, knownMisconceptions, rooms, strings } from './content';
+import { PILLARS } from './types';
+import { lookup } from './calc';
+import { evalLab } from './explore';
 
-const everyRoom = [...rooms, ...games];
+const everyRoom = [...allRooms, ...games];
 import { checkNumberAnswer, expectedDisplay, roomPoints, roomQuestions } from './room';
 import type { LessonBlock, Room } from './types';
 
@@ -42,7 +45,10 @@ describe('lessons exist', () => {
   it('has at least one lesson, with unique ids and order', () => {
     expect(rooms.length).toBeGreaterThan(0);
     expect(new Set(everyRoom.map((l) => l.id)).size).toBe(everyRoom.length);
-    expect(new Set(rooms.map((l) => l.order)).size).toBe(rooms.length);
+    for (const pillar of PILLARS) {
+      const inPillar = allRooms.filter((r) => r.pillar === pillar);
+      expect(new Set(inPillar.map((l) => l.order)).size, `${pillar}: lesson order numbers must be unique`).toBe(inPillar.length);
+    }
     expect(new Set(games.map((l) => l.order)).size).toBe(games.length);
   });
   it('keeps games out of the lesson path (their order is after every lesson)', () => {
@@ -64,6 +70,8 @@ function roomKeys(room: Room): string[] {
       if (b.textKey) keys.push(b.textKey);
       keys.push(...(b.stepKeys ?? []));
       if (b.explore) keys.push(b.explore.promptKey);
+      for (const s of b.explore?.lab?.sliders ?? []) keys.push(s.labelKey);
+      for (const r of b.explore?.lab?.readouts ?? []) keys.push(r.labelKey);
     }
     for (const q of task.questions) {
       keys.push(q.promptKey, q.explainKey);
@@ -101,7 +109,7 @@ describe.each(everyRoom.map((r) => [r.id, r] as const))('room %s', (_id, room) =
 
   it('has a sensible shape', () => {
     expect(room.kind).toBe('room');
-    expect(room.pillar).toBe('invest');
+    expect(PILLARS).toContain(room.pillar);
     expect(['easy', 'medium', 'hard']).toContain(room.difficulty);
     expect(room.tasks.length).toBeGreaterThanOrEqual(4);
     expect(room.tasks.length).toBeLessThanOrEqual(8);
@@ -153,6 +161,17 @@ describe.each(everyRoom.map((r) => [r.id, r] as const))('room %s', (_id, room) =
       expect((EXPLORE_WIDGETS as readonly string[]).includes(b.explore!.widget), `unknown widget ${b.explore!.widget}`).toBe(true);
       for (const [name, ref] of Object.entries(b.explore!.params)) {
         expect(ref.startsWith('$') && c[ref.slice(1)], `explore param ${name} -> ${ref} does not resolve`).toBeTruthy();
+      }
+      if (b.explore!.widget === 'slider_lab') {
+        const lab = b.explore!.lab;
+        expect(lab, 'a slider_lab needs a lab spec').toBeTruthy();
+        expect(lab!.sliders.length).toBeGreaterThan(0);
+        expect(lab!.readouts.length).toBeGreaterThan(0);
+        for (const sl of lab!.sliders) expect(sl.min).toBeLessThan(sl.max);
+        const params = Object.fromEntries(Object.entries(b.explore!.params).map(([k, ref]) => [k, c[ref.slice(1)]!.raw]));
+        // Runs without throwing at the start values and at both ends of every slider (unknown names or functions would throw).
+        expect(() => evalLab(lab!, params, {}, lookup)).not.toThrow();
+        for (const sl of lab!.sliders) for (const v of [sl.min, sl.max]) expect(() => evalLab(lab!, params, { [sl.id]: v }, lookup), `${sl.id}=${v}`).not.toThrow();
       }
     }
     for (const b of blocks) {
@@ -256,7 +275,7 @@ describe('glossary', () => {
       str(g.termKey, g.id);
       const def = str(g.defKey, g.id);
       expect(words(def), `definition of ${g.id} too long`).toBeLessThanOrEqual(MAX_DEFINITION_WORDS);
-      expect(rooms.some((l) => l.id === g.lesson), `glossary ${g.id} points to unknown lesson ${g.lesson}`).toBe(true);
+      expect(allRooms.some((l) => l.id === g.lesson), `glossary ${g.id} points to unknown lesson ${g.lesson}`).toBe(true);
     }
   });
 });

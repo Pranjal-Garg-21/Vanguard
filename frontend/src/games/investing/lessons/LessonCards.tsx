@@ -71,7 +71,7 @@ export function BlockCard({ block, ctx }: { block: LessonBlock; ctx: Ctx }) {
       {block.type === 'explore' && block.explore && (
         <div className="space-y-4">
           <p className="text-lg text-ink">{tx(block.explore.promptKey)}</p>
-          <ExploreWidget widget={block.explore.widget} params={resolveParams(block.explore.params, ctx)} />
+          <ExploreWidget widget={block.explore.widget} params={resolveParams(block.explore.params, ctx)} lab={block.explore.lab} />
         </div>
       )}
 

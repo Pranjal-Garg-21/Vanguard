@@ -1,0 +1,35 @@
+{
+  "title": "Learn",
+  "subtitle": "Short lessons on how money works, one topic at a time.",
+  "all": "All topics",
+  "soon": "Coming soon",
+  "empty": "Lessons for this topic are on the way.",
+  "notFound": "Topic not found.",
+  "count": "{done} of {total} done",
+  "pillar": {
+    "bank": {
+      "name": "Banking",
+      "blurb": "Opening an account, what you need to bring, and what a bank can do for you."
+    },
+    "plan": {
+      "name": "Planning",
+      "blurb": "Needs and wants, a budget that works, and goals you can reach."
+    },
+    "save": {
+      "name": "Saving",
+      "blurb": "Paying yourself first, an emergency fund, and where to keep your money."
+    },
+    "borrow": {
+      "name": "Borrowing",
+      "blurb": "What a loan really costs, EMIs, and how to compare your options."
+    },
+    "invest": {
+      "name": "Investing",
+      "blurb": "Interest, risk and time, using made-up assets."
+    },
+    "safe": {
+      "name": "Staying safe",
+      "blurb": "Spot scams and protect your accounts. Taught by P5."
+    }
+  }
+}

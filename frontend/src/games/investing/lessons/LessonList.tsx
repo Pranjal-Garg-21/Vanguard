@@ -7,22 +7,18 @@
  */
 import { Link } from 'react-router';
 import { t } from '@/platform';
-import { Badge, Button, Card, ChevronIcon, LockedTile, ProgressBar } from '@/ui';
+import { Badge, Button, Card, ChevronIcon, LockedTile } from '@/ui';
 import section from '@/content/scenarios/invest/section.json';
 import { useGamesDone } from '../shared/gameSave';
 import { InvestShell } from './InvestShell';
-import { fillTemplate, runCalcs } from './logic/calc';
+import { LessonGrid, lessonTitle as title } from './LessonGrid';
 import { games as gameRooms, lessonById, rooms } from './logic/content';
-import { roomPoints, type RoomSummary } from './logic/room';
 import { gameStates, type GameState, type SectionGame } from './logic/section';
-import type { Room } from './logic/types';
 import { useRoomSummaries } from './useSavedProgress';
 
 const SECTION_GAMES = section.games as SectionGame[];
 const PAGE_GAME_IDS = SECTION_GAMES.filter((g) => g.kind === 'page').map((g) => g.id);
 
-const title = (r: Room) => fillTemplate(t(r.titleKey), runCalcs(r.vars, r.calcs));
-const blurb = (r: Room) => fillTemplate(t(r.blurbKey), runCalcs(r.vars, r.calcs));
 
 export function LessonList() {
   const summaries = useRoomSummaries(rooms);
@@ -62,54 +58,7 @@ export function LessonList() {
         </Card>
       )}
 
-      <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {rooms.map((lesson) => {
-          const summary: RoomSummary | undefined = summaries?.[lesson.id];
-          const isUpNext = lesson.id === upNext?.id;
-          const action =
-            summary?.status === 'done' ? t('investui.list.review') : summary?.status === 'started' ? t('investui.list.continue') : t('investui.list.start');
-          return (
-            <li key={lesson.id}>
-              <Link to={`/learn/invest/${lesson.id}`} className="block h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
-                <Card className={`flex h-full flex-col gap-3 transition-colors hover:border-brand ${isUpNext ? 'border-brand' : ''}`}>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-md bg-brand text-base font-bold text-brand-ink" aria-hidden="true">
-                      {lesson.order}
-                    </span>
-                    <span className="flex flex-wrap justify-end gap-2">
-                      {isUpNext && <Badge variant="good">{t('investui.list.upnext')}</Badge>}
-                      {summary?.status === 'done' && <Badge variant="good">{t('investui.list.status.done')}</Badge>}
-                      {summary?.status === 'started' && <Badge variant="info">{t('investui.list.status.started')}</Badge>}
-                    </span>
-                  </div>
-                  <div className="flex-1">
-                    <h2 className="text-lg font-bold">{title(lesson)}</h2>
-                    <p className="mt-1 text-sm text-ink-soft">{blurb(lesson)}</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge>{t('investui.list.minutes', { n: lesson.estMinutes })}</Badge>
-                    <Badge>{t('investui.list.points', { n: roomPoints(lesson) })}</Badge>
-                    <Badge>{t(`investui.room.difficulty.${lesson.difficulty}`)}</Badge>
-                  </div>
-                  {summary && summary.status !== 'new' && (
-                    <div>
-                      <ProgressBar value={summary.tasksDone / summary.tasksTotal} />
-                      <div className="mt-1.5 flex justify-between text-xs font-bold text-muted">
-                        <span>{t('investui.list.tasks', { done: summary.tasksDone, total: summary.tasksTotal })}</span>
-                        <span>{t('investui.list.earned', { earned: summary.earned, total: summary.total })}</span>
-                      </div>
-                    </div>
-                  )}
-                  <span className="inline-flex items-center gap-1 text-sm font-bold text-brand">
-                    {action}
-                    <ChevronIcon dir="right" />
-                  </span>
-                </Card>
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
+      <LessonGrid lessons={rooms} summaries={summaries ?? undefined} upNextId={upNext?.id} />
 
       <div className="space-y-3">
         <details className="rounded-xl border border-line bg-surface" open>

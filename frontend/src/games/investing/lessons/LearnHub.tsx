@@ -1,0 +1,56 @@
+/**
+ * Every topic section in one place: Banking, Planning, Saving, Borrowing and Investing (Staying safe is taught by P5 and
+ * shown as coming soon). Route: /learn. Owner: P4.
+ */
+import { Link } from 'react-router';
+import { t } from '@/platform';
+import { Badge, Card, ProgressBar } from '@/ui';
+import { InvestShell } from './InvestShell';
+import { roomsFor } from './logic/content';
+import { PILLARS } from './logic/types';
+import { useRoomSummaries } from './useSavedProgress';
+
+const SECTIONS = PILLARS.map((p) => ({ id: p, lessons: roomsFor(p) }));
+const ALL = SECTIONS.flatMap((s) => s.lessons);
+
+export function LearnHub() {
+  const summaries = useRoomSummaries(ALL);
+  return (
+    <InvestShell wide hub>
+      <header className="space-y-1 pb-1">
+        <h1 className="text-2xl font-bold">{t('learn.title')}</h1>
+        <p className="max-w-3xl text-ink-soft">{t('learn.subtitle')}</p>
+      </header>
+      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {SECTIONS.map(({ id, lessons }) => {
+          const done = lessons.filter((l) => summaries?.[l.id]?.status === 'done').length;
+          return (
+            <li key={id}>
+              <Link to={`/learn/${id}`} className="block h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+                <Card className="flex h-full flex-col gap-3 transition-colors hover:border-brand">
+                  <h2 className="text-lg font-bold">{t(`learn.pillar.${id}.name`)}</h2>
+                  <p className="flex-1 text-sm text-ink-soft">{t(`learn.pillar.${id}.blurb`)}</p>
+                  {lessons.length > 0 ? (
+                    <div className="space-y-1">
+                      <ProgressBar value={done / lessons.length} />
+                      <p className="text-xs font-bold text-muted">{t('learn.count', { done, total: lessons.length })}</p>
+                    </div>
+                  ) : (
+                    <Badge>{t('learn.soon')}</Badge>
+                  )}
+                </Card>
+              </Link>
+            </li>
+          );
+        })}
+        <li>
+          <Card className="flex h-full flex-col gap-3 border-dashed opacity-80">
+            <h2 className="text-lg font-bold">{t('learn.pillar.safe.name')}</h2>
+            <p className="flex-1 text-sm text-ink-soft">{t('learn.pillar.safe.blurb')}</p>
+            <Badge>{t('learn.soon')}</Badge>
+          </Card>
+        </li>
+      </ul>
+    </InvestShell>
+  );
+}

@@ -58,11 +58,11 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
   };
 
   return (
-    <InvestShell wide>
+    <InvestShell wide pillar={room.pillar}>
       <div className="grid gap-6 lg:grid-cols-[20rem_minmax(0,1fr)] lg:items-start">
         {/* Left: where you are */}
         <aside className="space-y-4 lg:sticky lg:top-20">
-          <Link to="/learn/invest" className="inline-flex items-center gap-1 text-sm font-bold text-ink-soft hover:text-brand">
+          <Link to={`/learn/${room.pillar}`} className="inline-flex items-center gap-1 text-sm font-bold text-ink-soft hover:text-brand">
             <ChevronIcon dir="left" />
             {t('investui.room.all')}
           </Link>

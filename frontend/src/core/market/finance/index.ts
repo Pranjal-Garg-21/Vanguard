@@ -7,3 +7,4 @@ export * from './funds';
 export * from './gold';
 export * from './risk';
 export * from './schemes';
+export * from './everyday';

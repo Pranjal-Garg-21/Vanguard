@@ -34,6 +34,37 @@ export type BlockType =
   | 'explore'
   | 'steps';
 
+/** The topic sections lessons are grouped into. P5's Stay Safe section is not here: P5 teaches that one. */
+export type Pillar = 'invest' | 'bank' | 'plan' | 'save' | 'borrow';
+export const PILLARS: readonly Pillar[] = ['bank', 'plan', 'save', 'borrow', 'invest'];
+
+/** One slider in a `slider_lab`. Its starting value is the explore param with the same id (the slider's min when absent). */
+export interface LabSlider {
+  id: string;
+  labelKey: string;
+  min: number;
+  max: number;
+  step: number;
+  fmt?: Fmt;
+}
+
+/** One result shown by a `slider_lab`, worked out live from the sliders with a calc function. */
+export interface LabReadout {
+  id: string;
+  labelKey: string;
+  fn: string;
+  /** Numbers, or names: a slider id, an explore param name, or the id of an earlier readout. */
+  args: (number | string)[];
+  fmt?: Fmt;
+  tone?: 'plain' | 'good' | 'bad';
+}
+
+/** A lab made only from data: sliders in, live readouts out. Lets a lesson add a hands-on lab without new code. */
+export interface LabSpec {
+  sliders: LabSlider[];
+  readouts: LabReadout[];
+}
+
 /** A hands-on widget inside a lesson ("play with the numbers"). */
 export interface ExploreSpec {
   widget: string;
@@ -41,6 +72,8 @@ export interface ExploreSpec {
   promptKey: string;
   /** Starting values, as "" references to the lesson's vars/calcs. */
   params: Record<string, string>;
+  /** Required when `widget` is "slider_lab". */
+  lab?: LabSpec;
 }
 
 export interface LessonBlock {
@@ -132,7 +165,7 @@ export interface RoomTask {
 export interface Room {
   id: string;
   kind: 'room';
-  pillar: 'invest';
+  pillar: Pillar;
   order: number;
   estMinutes: number;
   difficulty: 'easy' | 'medium' | 'hard';

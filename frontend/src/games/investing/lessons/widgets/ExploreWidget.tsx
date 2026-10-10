@@ -15,10 +15,14 @@ import { PositionLab } from './PositionLab';
 import { PyramidGrowth } from './PyramidGrowth';
 import { SimpleVsCompound } from './SimpleVsCompound';
 import { SipUnits } from './SipUnits';
+import { SliderLab } from './SliderLab';
 import { StartEarly } from './StartEarly';
+import type { LabSpec } from '../logic/types';
 
-export function ExploreWidget({ widget, params: p }: { widget: string; params: Record<string, number> }) {
+export function ExploreWidget({ widget, params: p, lab }: { widget: string; params: Record<string, number>; lab?: LabSpec }) {
   switch (widget) {
+    case 'slider_lab':
+      return lab ? <SliderLab lab={lab} params={p} /> : null;
     case 'fall_rise':
       return <FallRise start={p.start ?? 1000} fall={p.fall ?? 0.5} />;
     case 'simple_vs_compound':

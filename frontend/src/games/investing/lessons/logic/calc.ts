@@ -13,7 +13,7 @@ const helpers: Record<string, (...a: number[]) => number> = {
 };
 
 type Fn = (...a: number[]) => number;
-const lookup = (name: string): Fn => {
+export const lookup = (name: string): Fn => {
   const fn = helpers[name] ?? ((finance as unknown) as Record<string, Fn>)[name];
   if (typeof fn !== 'function') throw new Error(`Unknown calc function: ${name}`);
   return fn;

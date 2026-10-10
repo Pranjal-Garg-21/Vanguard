@@ -9,7 +9,7 @@ export function RoomLoader({ room }: { room: Room }) {
   const { loaded, initial, save } = useSavedProgress(room);
   if (!loaded) {
     return (
-      <InvestShell>
+      <InvestShell pillar={room.pillar}>
         <Spinner />
       </InvestShell>
     );
