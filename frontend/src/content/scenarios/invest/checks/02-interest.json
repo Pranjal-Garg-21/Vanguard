@@ -1,0 +1,225 @@
+[
+  {
+    "id": "interest_01",
+    "lesson": "lesson_interest",
+    "concept": "simple_vs_compound",
+    "level": 1,
+    "stemKey": "invest_interest.check.interest_01.stem",
+    "options": [
+      {
+        "id": "a",
+        "textKey": "invest_interest.check.interest_01.opt.a"
+      },
+      {
+        "id": "b",
+        "textKey": "invest_interest.check.interest_01.opt.b"
+      },
+      {
+        "id": "c",
+        "textKey": "invest_interest.check.interest_01.opt.c",
+        "misconception": "interest_always_simple"
+      },
+      {
+        "id": "d",
+        "textKey": "invest_interest.check.interest_01.opt.d"
+      }
+    ],
+    "correct": "a",
+    "whyKey": "invest_interest.check.interest_01.why"
+  },
+  {
+    "id": "interest_02",
+    "lesson": "lesson_interest",
+    "concept": "interest_simple",
+    "level": 2,
+    "stemKey": "invest_interest.check.interest_02.stem",
+    "vars": {
+      "P": {
+        "value": 5000,
+        "fmt": "rupees"
+      },
+      "r": {
+        "value": 0.06,
+        "fmt": "percent"
+      },
+      "years": {
+        "value": 3
+      }
+    },
+    "calcs": [
+      {
+        "id": "answer",
+        "fn": "simpleInterest",
+        "args": [
+          "$P",
+          "$r",
+          "$years"
+        ],
+        "fmt": "rupees"
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "textKey": "invest_interest.check.interest_02.opt.a"
+      },
+      {
+        "id": "b",
+        "textKey": "invest_interest.check.interest_02.opt.b"
+      },
+      {
+        "id": "c",
+        "textKey": "invest_interest.check.interest_02.opt.c"
+      },
+      {
+        "id": "d",
+        "textKey": "invest_interest.check.interest_02.opt.d"
+      }
+    ],
+    "correct": "a",
+    "whyKey": "invest_interest.check.interest_02.why"
+  },
+  {
+    "id": "interest_03",
+    "lesson": "lesson_interest",
+    "concept": "interest_compound",
+    "level": 2,
+    "stemKey": "invest_interest.check.interest_03.stem",
+    "vars": {
+      "rate": {
+        "value": 0.09,
+        "fmt": "percent"
+      }
+    },
+    "calcs": [
+      {
+        "id": "ratePct",
+        "fn": "mul",
+        "args": [
+          "$rate",
+          100
+        ]
+      },
+      {
+        "id": "answer",
+        "fn": "ruleOf72",
+        "args": [
+          "$ratePct"
+        ],
+        "round": 0
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "textKey": "invest_interest.check.interest_03.opt.a"
+      },
+      {
+        "id": "b",
+        "textKey": "invest_interest.check.interest_03.opt.b"
+      },
+      {
+        "id": "c",
+        "textKey": "invest_interest.check.interest_03.opt.c"
+      },
+      {
+        "id": "d",
+        "textKey": "invest_interest.check.interest_03.opt.d"
+      }
+    ],
+    "correct": "a",
+    "whyKey": "invest_interest.check.interest_03.why"
+  },
+  {
+    "id": "interest_04",
+    "lesson": "lesson_interest",
+    "concept": "start_early",
+    "level": 2,
+    "stemKey": "invest_interest.check.interest_04.stem",
+    "options": [
+      {
+        "id": "a",
+        "textKey": "invest_interest.check.interest_04.opt.a",
+        "misconception": "late_start_is_fine"
+      },
+      {
+        "id": "b",
+        "textKey": "invest_interest.check.interest_04.opt.b",
+        "misconception": "late_start_is_fine"
+      },
+      {
+        "id": "c",
+        "textKey": "invest_interest.check.interest_04.opt.c"
+      },
+      {
+        "id": "d",
+        "textKey": "invest_interest.check.interest_04.opt.d"
+      }
+    ],
+    "correct": "c",
+    "whyKey": "invest_interest.check.interest_04.why"
+  },
+  {
+    "id": "interest_05",
+    "lesson": "lesson_interest",
+    "concept": "interest_compound",
+    "level": 3,
+    "stemKey": "invest_interest.check.interest_05.stem",
+    "vars": {
+      "P": {
+        "value": 10000,
+        "fmt": "rupees"
+      },
+      "r": {
+        "value": 0.1,
+        "fmt": "percent"
+      },
+      "years": {
+        "value": 2
+      }
+    },
+    "calcs": [
+      {
+        "id": "answer",
+        "fn": "compoundAmount",
+        "args": [
+          "$P",
+          "$r",
+          "$years"
+        ],
+        "fmt": "rupees"
+      },
+      {
+        "id": "simple",
+        "fn": "simpleAmount",
+        "args": [
+          "$P",
+          "$r",
+          "$years"
+        ],
+        "fmt": "rupees"
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "textKey": "invest_interest.check.interest_05.opt.a"
+      },
+      {
+        "id": "b",
+        "textKey": "invest_interest.check.interest_05.opt.b",
+        "misconception": "interest_always_simple"
+      },
+      {
+        "id": "c",
+        "textKey": "invest_interest.check.interest_05.opt.c"
+      },
+      {
+        "id": "d",
+        "textKey": "invest_interest.check.interest_05.opt.d"
+      }
+    ],
+    "correct": "a",
+    "whyKey": "invest_interest.check.interest_05.why"
+  }
+]

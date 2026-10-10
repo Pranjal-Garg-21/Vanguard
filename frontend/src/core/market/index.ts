@@ -1,6 +1,11 @@
 /**
- * Seeded asset returns and Monte Carlo runner.
- * Owner: P4
+ * Seeded asset returns, the financial math library and the Monte Carlo runner.
+ * Pure logic: no React, no storage, no network. Owner: P4
  */
 
-export {};
+export * from './assumptions';
+export * from './finance';
+export * from './montecarlo';
+export * from './regimes';
+export * from './rng';
+export * from './simulate';
