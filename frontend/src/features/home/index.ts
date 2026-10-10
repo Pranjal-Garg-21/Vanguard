@@ -1,6 +1,1 @@
-/**
- * Home dashboard.
- * Owner: P2
- */
-
-export {};
+export { Dashboard } from './Dashboard';

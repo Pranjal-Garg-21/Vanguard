@@ -52,7 +52,7 @@ export function PlayerPicker() {
   if (selected) {
     return (
       <StudentScreen>
-        <button type="button" className="mb-6 min-h-11 px-2 font-semibold text-teal-800" onClick={() => setSelected(null)}>
+        <button type="button" className="mb-6 min-h-11 px-2 font-semibold text-brand" onClick={() => setSelected(null)}>
           ← {t('setup.steps.back')}
         </button>
         <div className="text-center">
@@ -80,7 +80,7 @@ export function PlayerPicker() {
               setSelected(p);
               setMessage(null);
             }}
-            className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm transition active:scale-95 hover:border-teal-600"
+            className="flex flex-col items-center gap-2 rounded-xl border border-line bg-surface p-3 transition active:scale-95 hover:border-brand"
           >
             <span className="text-5xl">{avatarEmoji(p.avatarId)}</span>
             <span className="w-full truncate text-center font-semibold">{p.displayName}</span>
@@ -89,7 +89,7 @@ export function PlayerPicker() {
         <button
           type="button"
           onClick={() => navigate('/setup')}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 p-3 text-slate-600 hover:border-teal-600"
+          className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-line-strong p-3 text-ink-soft hover:border-brand"
         >
           <span className="text-4xl">＋</span>
           <span className="font-semibold">{t('setup.picker.newPlayer')}</span>

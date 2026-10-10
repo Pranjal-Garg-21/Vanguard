@@ -4,6 +4,6 @@
  * Owner: P4
  */
 
-export { Badge, Button, Card, Notice, Spinner } from './components';
+export { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from './components';
 export { CheckIcon, ChevronIcon } from './icons';
 export { SimBanner } from './SimBanner';

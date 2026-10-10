@@ -9,7 +9,7 @@ import { LessonList, LessonPlayer } from '@/games/investing/lessons';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
 import { StudentEntry } from './StudentEntry';
-import { StudentHome } from './StudentHome';
+import { Dashboard } from '@/features/home';
 
 // Lazy so students never download the dashboard.
 const FacilitatorApp = lazy(() => import('@/facilitator/FacilitatorApp'));
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
   { path: '/setup', element: <SetupFlow /> },
   { path: '/who', element: <PlayerPicker /> },
   { path: '/join/:code', element: <JoinLink /> },
-  { path: '/home', element: <StudentHome /> },
+  { path: '/home', element: <Dashboard /> },
   { path: '/dev', element: <DevHome /> },
   { path: '/learn/invest', element: <LessonList /> },
   { path: '/learn/invest/:lessonId', element: <LessonPlayer /> },
