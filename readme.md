@@ -34,6 +34,16 @@ The app runs without any keys. To connect it to Supabase, copy `frontend/.env.ex
 
 CI runs typecheck, lint, tests and build on every pull request.
 
+| Page | What it is |
+|---|---|
+| `/` | Sends students to welcome, player picker or home |
+| `/welcome`, `/setup` | First launch: language, accessibility, class code, avatar, picture-PIN |
+| `/who` | Player picker on a shared phone |
+| `/join/ABC123` | Link inside the class QR; opens setup with the code filled in |
+| `/home` | Temporary student home (P2 replaces it) |
+| `/facilitator` | Facilitator login, classes, plan, insights |
+| `/dev` | Developer page: Supabase status and outbox events |
+
 ## Documents
 
 - [Implementation.md](Implementation.md): product and design spec

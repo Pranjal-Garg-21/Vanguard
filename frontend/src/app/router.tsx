@@ -1,22 +1,36 @@
 /**
- * All routes in one place. Owner: P2 (P5 owns /setup and /facilitator).
+ * All routes in one place. Owner: P2 (P5 owns setup, /who, /join and /facilitator).
  * Add your feature's route here with a PR.
  */
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Navigate, useParams } from 'react-router';
+import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
+import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
-import { SetupScreen } from '@/features/setup/SetupScreen';
+import { StudentEntry } from './StudentEntry';
+import { StudentHome } from './StudentHome';
 
 // Lazy so students never download the dashboard.
 const FacilitatorApp = lazy(() => import('@/facilitator/FacilitatorApp'));
 
+/** Link inside the class QR code: /join/ABC123 opens setup with the code filled in. */
+function JoinLink() {
+  const { code = '' } = useParams();
+  return <Navigate to={`/setup?code=${encodeURIComponent(code)}`} replace />;
+}
+
 export const router = createBrowserRouter([
-  { path: '/', element: <DevHome /> },
-  { path: '/setup', element: <SetupScreen /> },
+  { path: '/', element: <StudentEntry /> },
+  { path: '/welcome', element: <WelcomeScreen /> },
+  { path: '/setup', element: <SetupFlow /> },
+  { path: '/who', element: <PlayerPicker /> },
+  { path: '/join/:code', element: <JoinLink /> },
+  { path: '/home', element: <StudentHome /> },
+  { path: '/dev', element: <DevHome /> },
   {
     path: '/facilitator/*',
     element: (
-      <Suspense fallback={<p className="p-4">Loading…</p>}>
+      <Suspense fallback={<Spinner />}>
         <FacilitatorApp />
       </Suspense>
     ),

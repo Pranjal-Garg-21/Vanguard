@@ -22,10 +22,15 @@ Students never touch the database directly. Their phones call the `ingest` funct
    npx supabase login
    npx supabase link --project-ref <your-project-ref>
    ```
-4. **Create the tables:**
+4. **Create the tables**, either with the CLI:
    ```bash
    npx supabase db push
    ```
+   or by hand in the dashboard's **SQL Editor**: open each file in `supabase/migrations/`, paste it and click **Run**, **in filename order**:
+   1. `20261010000000_init.sql`: all tables, join-code generator, row-level security
+   2. `20261010000001_check_join_code.sql`: lets the student app check a class code
+
+   Run each file only once. Later migrations get higher numbers; run only the new ones.
 5. **Deploy the function:**
    ```bash
    npx supabase functions deploy ingest
@@ -55,4 +60,17 @@ npx supabase functions serve ingest
 
 ## Adding a facilitator
 
-Public sign-up is off locally (`config.toml`). On the hosted project, also turn off **Allow new users to sign up** in the Authentication settings. Create the user in **Authentication → Users** in the Supabase dashboard, then add a row to `public.facilitators` with the same `id`.
+There are no shared logins and no passwords. Each facilitator signs in with their own email and receives a sign-in link (or code). Only registered emails can sign in.
+
+1. **Authentication → Users → Add user → Send invitation** (or "Create new user"), with their email.
+2. In the **SQL Editor**, register them as a facilitator:
+   ```sql
+   insert into public.facilitators (id, display_name)
+   select id, 'Their name' from auth.users where email = 'them@example.com';
+   ```
+3. They open `/facilitator`, enter their email and click the link in the email.
+
+Settings to check once on the hosted project:
+- **Authentication → Sign In / Providers:** turn off **Allow new users to sign up** (public sign-up is already off locally in `config.toml`).
+- **Authentication → URL Configuration:** add `http://localhost:5173/**` (and your deployed URL later) to **Redirect URLs**, so the email link returns to the app.
+- To get a 6-digit code in the email as well as the link, add `{{ .Token }}` to the **Magic Link** email template.
