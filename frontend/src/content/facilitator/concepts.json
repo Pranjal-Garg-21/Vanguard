@@ -1,0 +1,17 @@
+{
+  "upi_collect": { "name": "Collect requests (UPI)", "room": "UPI Simulator" },
+  "qr_scam": { "name": "Scan-to-receive QR trick", "room": "UPI Simulator" },
+  "pin_secrecy": { "name": "Keeping your PIN secret", "room": "UPI Simulator" },
+  "refunds_failed_txn": { "name": "Failed payments and refunds", "room": "UPI Simulator" },
+  "wrong_transfer": { "name": "Sent-by-mistake trick", "room": "UPI Simulator" },
+  "fake_kyc": { "name": "Fake KYC messages", "room": "Scam Inbox" },
+  "red_flags": { "name": "Spotting red flags", "room": "Scam Inbox and Red Flag Hunter" },
+  "prize_scam": { "name": "Prize and lottery scams", "room": "Scam Inbox" },
+  "job_scam": { "name": "Fake job offers", "room": "Scam Inbox" },
+  "impersonation": { "name": "Pretending to be someone you know", "room": "Scam Inbox" },
+  "account_takeover": { "name": "Hacked friend accounts", "room": "Chat Traps" },
+  "authority_impersonation": { "name": "Fake police and officials", "room": "The Call" },
+  "fake_support": { "name": "Fake customer care", "room": "The Call" },
+  "loan_app": { "name": "Predatory loan apps", "room": "Loan App Trap" },
+  "fraud_recovery": { "name": "What to do after a scam", "room": "Rescue Mission" }
+}

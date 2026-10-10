@@ -28,11 +28,11 @@ export const router = createBrowserRouter([
   { path: '/who', element: <PlayerPicker /> },
   { path: '/join/:code', element: <JoinLink /> },
   { path: '/home', element: <Dashboard /> },
-  { path: '/dev', element: <DevHome /> },
+  // Developer tools only exist in development builds, so the final demo has no debug pages.
+  ...(import.meta.env.DEV ? [{ path: '/dev', element: <DevHome /> }, { path: '/dev/phone', element: <PhoneLab /> }] : []),
   { path: '/safe', element: <SafeHub /> },
   { path: '/safe/:sim', element: <SafeHub /> },
   { path: '/safe/:sim/:entry', element: <SafeHub /> },
-  { path: '/dev/phone', element: <PhoneLab /> },
   {
     path: '/facilitator/*',
     element: (
@@ -41,4 +41,6 @@ export const router = createBrowserRouter([
       </Suspense>
     ),
   },
+  // Anything else (including the developer pages in a production build) goes home.
+  { path: '*', element: <Navigate to="/" replace /> },
 ]);
