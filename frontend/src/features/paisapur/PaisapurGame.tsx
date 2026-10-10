@@ -614,7 +614,8 @@ export function PaisapurGame() {
         if (!game) return <MissingGame id={overlay.id} onClose={() => answer(emptyResult())} />;
         const Play = game.Component;
         return (
-          <div className="minigame w-full max-w-md">
+          // Games are styled for a light page; give them a parchment panel over the dark overlay.
+          <div className="minigame pixel-raised max-h-[92dvh] w-full max-w-xl overflow-y-auto bg-parchment p-4 text-ink">
             {/* Keyed so a game that opens twice starts over rather than
                 resuming the state of the previous time it ran. */}
             <Play
