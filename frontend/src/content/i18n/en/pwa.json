@@ -1,0 +1,10 @@
+{
+  "offlineReady": "Ready to use without internet. You can open the app any time, even with no signal.",
+  "needRefresh": "A new version of the app is ready.",
+  "update": "Update now",
+  "offline": "You are offline. Everything you do is saved on this phone and sent when you are back online.",
+  "installBody": "Add PaisaPath to your home screen so it opens like an app.",
+  "install": "Install",
+  "iosHint": "To install, tap the Share button, then Add to Home Screen.",
+  "dismiss": "Dismiss"
+}
