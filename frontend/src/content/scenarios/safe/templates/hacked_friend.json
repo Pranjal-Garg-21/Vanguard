@@ -1,0 +1,297 @@
+{
+  "id": "hacked_friend",
+  "simulator": "chat",
+  "mode": "act",
+  "concepts": [
+    "account_takeover"
+  ],
+  "level": 2,
+  "titleKey": "safe.hf.title",
+  "briefKey": "safe.hf.brief",
+  "phone": {
+    "startBalance": 6000,
+    "startTime": "11:20"
+  },
+  "rule": "safe.hf.rule",
+  "instead": [
+    "safe.hf.i1",
+    "safe.hf.i2",
+    "safe.hf.i3"
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.hf.o1",
+      "when": "read:1"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.hf.o2",
+      "when": "inspectedAny:1"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.hf.o3",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "m1",
+      "surface": {
+        "type": "chat",
+        "from": "{name}",
+        "fromLens": "name",
+        "online": true,
+        "thread": "t",
+        "concept": "account_takeover",
+        "misconception": "trust_familiar_account",
+        "body": [
+          {
+            "k": "safe.hf.m1"
+          }
+        ],
+        "lens": [
+          {
+            "id": "name",
+            "revealKey": "safe.hf.lens.name"
+          }
+        ],
+        "actions": [
+          {
+            "id": "help",
+            "labelKey": "safe.hf.a.help",
+            "risk": "neutral",
+            "unlocks": [
+              "m2"
+            ],
+            "delay": 1500,
+            "say": "safe.hf.say.help"
+          },
+          {
+            "id": "ignore",
+            "labelKey": "safe.hf.a.ignore",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.hf.n.ignore"
+          }
+        ]
+      },
+      "at": 800
+    },
+    {
+      "id": "m2",
+      "surface": {
+        "type": "chat",
+        "from": "{name}",
+        "fromLens": "name",
+        "online": true,
+        "thread": "t",
+        "concept": "account_takeover",
+        "misconception": "trust_familiar_account",
+        "body": [
+          {
+            "k": "safe.hf.m2.a"
+          },
+          {
+            "k": "safe.hf.m2.b",
+            "lens": "ask"
+          },
+          {
+            "k": "safe.hf.m2.c",
+            "lens": "newnum"
+          },
+          {
+            "k": "safe.hf.m2.d",
+            "lens": "nocall"
+          }
+        ],
+        "lens": [
+          {
+            "id": "name",
+            "revealKey": "safe.hf.lens.name"
+          },
+          {
+            "id": "ask",
+            "revealKey": "safe.hf.lens.ask",
+            "tell": "pulls"
+          },
+          {
+            "id": "newnum",
+            "revealKey": "safe.hf.lens.newnum",
+            "tell": "newnum"
+          },
+          {
+            "id": "nocall",
+            "revealKey": "safe.hf.lens.nocall",
+            "tell": "nocall"
+          }
+        ],
+        "actions": [
+          {
+            "id": "send",
+            "labelKey": "safe.hf.a.send",
+            "risk": "risky",
+            "effects": {
+              "money.bank": 0
+            },
+            "end": "fooled",
+            "say": "safe.hf.say.send",
+            "noteKey": "safe.hf.n.send",
+            "misconception": "trust_familiar_account"
+          },
+          {
+            "id": "question",
+            "labelKey": "safe.hf.a.question",
+            "risk": "neutral",
+            "unlocks": [
+              "m3"
+            ],
+            "delay": 1500,
+            "say": "safe.hf.say.question",
+            "noteKey": "safe.hf.n.question"
+          },
+          {
+            "id": "call",
+            "labelKey": "safe.hf.a.call",
+            "risk": "neutral",
+            "unlocks": [
+              "callres"
+            ],
+            "delay": 800,
+            "noteKey": "safe.hf.n.call"
+          },
+          {
+            "id": "refuse",
+            "labelKey": "safe.hf.a.refuse",
+            "risk": "safe",
+            "end": "safe",
+            "say": "safe.hf.say.refuse",
+            "noteKey": "safe.hf.n.refuse"
+          }
+        ],
+        "tells": [
+          {
+            "id": "pulls",
+            "kind": "pulls_money",
+            "whyKey": "safe.hf.why.pulls"
+          },
+          {
+            "id": "newnum",
+            "kind": "pretends",
+            "whyKey": "safe.hf.why.newnum"
+          },
+          {
+            "id": "nocall",
+            "kind": "secrecy",
+            "whyKey": "safe.hf.why.nocall"
+          }
+        ],
+        "foreground": true,
+        "best": "call"
+      }
+    },
+    {
+      "id": "m3",
+      "surface": {
+        "type": "chat",
+        "from": "{name}",
+        "fromLens": "name",
+        "online": true,
+        "thread": "t",
+        "concept": "account_takeover",
+        "misconception": "trust_familiar_account",
+        "body": [
+          {
+            "k": "safe.hf.m3",
+            "lens": "dodge"
+          }
+        ],
+        "lens": [
+          {
+            "id": "name",
+            "revealKey": "safe.hf.lens.name"
+          },
+          {
+            "id": "dodge",
+            "revealKey": "safe.hf.lens.dodge",
+            "tell": "dodge"
+          }
+        ],
+        "actions": [
+          {
+            "id": "send",
+            "labelKey": "safe.hf.a.send",
+            "risk": "risky",
+            "effects": {
+              "money.bank": 0
+            },
+            "end": "fooled",
+            "say": "safe.hf.say.send",
+            "noteKey": "safe.hf.n.send",
+            "misconception": "trust_familiar_account"
+          },
+          {
+            "id": "call",
+            "labelKey": "safe.hf.a.call",
+            "risk": "neutral",
+            "unlocks": [
+              "callres"
+            ],
+            "delay": 800,
+            "noteKey": "safe.hf.n.call"
+          },
+          {
+            "id": "stop",
+            "labelKey": "safe.hf.a.stop",
+            "risk": "safe",
+            "end": "safe",
+            "say": "safe.hf.say.refuse",
+            "noteKey": "safe.hf.n.refuse"
+          }
+        ],
+        "tells": [
+          {
+            "id": "dodge",
+            "kind": "pretends",
+            "whyKey": "safe.hf.why.dodge"
+          }
+        ],
+        "foreground": true,
+        "best": "call"
+      }
+    },
+    {
+      "id": "callres",
+      "surface": {
+        "type": "call",
+        "caller": "{name} (saved number)",
+        "ring": false,
+        "foreground": true,
+        "concept": "account_takeover",
+        "best": "warn",
+        "lines": [
+          {
+            "k": "safe.hf.call"
+          }
+        ],
+        "actions": [
+          {
+            "id": "warn",
+            "labelKey": "safe.hf.a.warn",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.hf.n.warn"
+          },
+          {
+            "id": "done",
+            "labelKey": "safe.hf.a.done",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.hf.n.done"
+          }
+        ]
+      }
+    }
+  ]
+}
