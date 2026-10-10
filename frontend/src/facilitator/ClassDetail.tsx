@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, useParams, useSearchParams } from 'react-router';
 import { Notice, Spinner } from '@/ui';
 import { supabaseOrThrow, type ClassRow } from './data';
 import { InsightsTab } from './tabs/InsightsTab';
@@ -16,7 +16,10 @@ type TabId = (typeof TABS)[number]['id'];
 export function ClassDetail() {
   const { id = '' } = useParams();
   const [cls, setCls] = useState<ClassRow | null | undefined>(undefined);
-  const [tab, setTab] = useState<TabId>('insights');
+  const [params] = useSearchParams();
+  const requested = params.get('tab');
+  const firstTab: TabId = TABS.some((t) => t.id === requested) ? (requested as TabId) : 'insights';
+  const [tab, setTab] = useState<TabId>(firstTab);
 
   useEffect(() => {
     supabaseOrThrow()
@@ -25,9 +28,7 @@ export function ClassDetail() {
       .eq('id', id)
       .maybeSingle()
       .then(({ data }) => {
-        const row = data as ClassRow | null;
-        setCls(row);
-        if (row) setTab('insights');
+        setCls(data as ClassRow | null);
       });
   }, [id]);
 
@@ -37,18 +38,18 @@ export function ClassDetail() {
   return (
     <div className="space-y-5">
       <div className="print:hidden">
-        <Link to="../.." relative="path" className="text-sm font-semibold text-teal-800">
+        <Link to="../.." relative="path" className="text-sm font-semibold text-brand">
           ← Your classes
         </Link>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h1 className="text-2xl font-extrabold">{cls.name}</h1>
-            {cls.centre && <p className="text-slate-500">{cls.centre}</p>}
+            {cls.centre && <p className="text-muted">{cls.centre}</p>}
           </div>
-          <span className="rounded-xl bg-white px-3 py-2 font-mono text-xl font-bold tracking-widest shadow-sm">{cls.join_code}</span>
+          <span className="rounded-xl bg-surface px-3 py-2 font-mono text-xl font-bold tracking-widest">{cls.join_code}</span>
         </div>
 
-        <nav className="mt-5 flex gap-1 border-b border-slate-200" role="tablist">
+        <nav className="mt-5 flex gap-1 border-b border-line" role="tablist">
           {TABS.map((t) => (
             <button
               key={t.id}
@@ -56,7 +57,7 @@ export function ClassDetail() {
               aria-selected={tab === t.id}
               onClick={() => setTab(t.id)}
               className={`-mb-px min-h-11 border-b-2 px-4 font-semibold ${
-                tab === t.id ? 'border-teal-700 text-teal-800' : 'border-transparent text-slate-500 hover:text-slate-800'
+                tab === t.id ? 'border-brand text-brand' : 'border-transparent text-muted hover:text-ink'
               }`}
             >
               {t.label}

@@ -1,0 +1,21 @@
+{
+  "title": "Your life vs Kabir's",
+  "intro": "Kabir lives the same year as you: same town, same market, same bad luck, and the same goal ({goal}). The difference is that he always takes the tempting choice.",
+  "you": "You",
+  "kabir": "Kabir",
+  "chart_label": "Line chart of net worth by month, you versus Kabir",
+  "chart_soon": "The chart appears after your first month.",
+  "ahead": "You're {amount} better off than Kabir.",
+  "behind": "Kabir is {amount} ahead of you, for now. Look at his debts.",
+  "diary": "What Kabir did",
+  "nothing_yet": "Nothing big yet. Give it a month.",
+  "numbers": "Kabir's debt: {debt} · savings: {savings} · lost to scams: {scams} · credit score: {score}",
+  "beat": {
+    "sneakers": "Bought ₹1,800 \"50% off\" sneakers he didn't need.",
+    "goal_now": "Bought his goal straight away on credit instead of saving for it.",
+    "crack_loanapp": "His phone cracked too. No emergency fund, so he took a loan-app loan.",
+    "moneylender": "Borrowed from the moneylender to pay off the loan app.",
+    "tips": "Put all his money into Gully Gadgets because of a chat-group tip.",
+    "ponzi": "Joined Double Dhamaka and lost his money."
+  }
+}

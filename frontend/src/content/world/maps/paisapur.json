@@ -1,0 +1,251 @@
+{
+  "id": "paisapur",
+  "name": "maps.paisapur",
+  "rows": [
+    "YTTYTTYTTYTTYTTYTTYTTYTT==TYTo",
+    "T.,.*..,....,....,.*....==.,.T",
+    "^^^^^^^^^^^^^^^^^^^^^^^^HH^^^^",
+    "vvvvvvvvvvvvvvvvvvvvvvvvHHvvvv",
+    "T.*......,,......*.....s==...o",
+    "T.......................==...T",
+    "Y.......................==...T",
+    "T.......................==...T",
+    "T..o.=.s.ols.=....l.=.s.==.l.o",
+    "Y....=.......=......=...==...T",
+    "T============================T",
+    "T=.,.......*...b=s.,...*.,..=T",
+    "Y=T.............=.........k.=o",
+    "T=Y.............=........o..=T",
+    "T=..............=..........k=T",
+    "Y=.,.=.sl...=.sl=..=.sl.*.,.=T",
+    "T============================o",
+    "T.,....*.=....,......s=......T",
+    "Y........=.......#####%#####TT",
+    "T..Y.....=.....T.|%%%%%%%%%|.T",
+    "T.......m=.....o.|%%%%%%%%%|.o",
+    "Y...s.=======....|%%%%%%%%%|YT",
+    "T.*.,.....*..,.,*###########.T",
+    "TTTTYTTTYTTTYTTTYTTTYTTTYTTTYT"
+  ],
+  "buildings": [
+    {
+      "id": "lab",
+      "stamp": "hall_grey",
+      "x": 3,
+      "y": 5,
+      "to": "lab"
+    },
+    {
+      "id": "bank",
+      "stamp": "hall_grey",
+      "x": 11,
+      "y": 5,
+      "to": "bank"
+    },
+    {
+      "id": "bond",
+      "stamp": "office_grey",
+      "x": 19,
+      "y": 5,
+      "to": "bondoffice",
+      "when": "chapter>=5",
+      "closed": "signs.closed_bond"
+    },
+    {
+      "id": "zaroorat",
+      "stamp": "shop_red",
+      "x": 3,
+      "y": 12,
+      "to": "zaroorat",
+      "when": "chapter>=2",
+      "closed": "signs.closed_early"
+    },
+    {
+      "id": "shauq",
+      "stamp": "shop_red",
+      "x": 10,
+      "y": 12,
+      "to": "shauq",
+      "when": "chapter>=2",
+      "closed": "signs.closed_early"
+    },
+    {
+      "id": "lender",
+      "stamp": "house_red",
+      "x": 18,
+      "y": 12,
+      "to": "lender",
+      "when": "chapter>=4",
+      "closed": "signs.closed_lender"
+    },
+    {
+      "id": "home",
+      "stamp": "house_red",
+      "x": 5,
+      "y": 18,
+      "to": "home"
+    },
+    {
+      "id": "kabirhome",
+      "stamp": "house_red",
+      "x": 11,
+      "y": 18,
+      "closed": "signs.kabir_home"
+    }
+  ],
+  "warps": [
+    {
+      "x": 24,
+      "y": 0,
+      "to": "deccan",
+      "tx": 11,
+      "ty": 14,
+      "facing": "up"
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "to": "deccan",
+      "tx": 12,
+      "ty": 14,
+      "facing": "up"
+    }
+  ],
+  "blockers": [
+    {
+      "x": 24,
+      "y": 3,
+      "tile": "urban:221",
+      "unless": "flag:bridge_built",
+      "text": "signs.bridge_broken"
+    },
+    {
+      "x": 25,
+      "y": 3,
+      "tile": "urban:221",
+      "unless": "flag:bridge_built",
+      "text": "signs.bridge_broken"
+    }
+  ],
+  "signs": [
+    {
+      "x": 7,
+      "y": 8,
+      "text": "signs.lab"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "text": "signs.bank"
+    },
+    {
+      "x": 22,
+      "y": 8,
+      "text": "signs.bond"
+    },
+    {
+      "x": 7,
+      "y": 15,
+      "text": "signs.zaroorat"
+    },
+    {
+      "x": 14,
+      "y": 15,
+      "text": "signs.shauq"
+    },
+    {
+      "x": 21,
+      "y": 15,
+      "text": "signs.lender"
+    },
+    {
+      "x": 17,
+      "y": 11,
+      "text": "signs.jobs"
+    },
+    {
+      "x": 21,
+      "y": 17,
+      "text": "signs.plots"
+    },
+    {
+      "x": 4,
+      "y": 21,
+      "text": "signs.home"
+    },
+    {
+      "x": 23,
+      "y": 4,
+      "text": "signs.bridge"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "kabir_square",
+      "sprite": "kabir",
+      "x": 14,
+      "y": 11,
+      "facing": "down",
+      "script": "kabir",
+      "when": "chapter>=1 && chapter<=4"
+    },
+    {
+      "id": "lakshmi",
+      "sprite": "lakshmi",
+      "x": 19,
+      "y": 11,
+      "facing": "down",
+      "script": "lakshmi",
+      "when": "chapter>=3"
+    },
+    {
+      "id": "worker",
+      "sprite": "worker",
+      "x": 18,
+      "y": 11,
+      "facing": "down",
+      "script": "jobs",
+      "when": "chapter>=2"
+    },
+    {
+      "id": "shady",
+      "sprite": "shady",
+      "x": 27,
+      "y": 13,
+      "facing": "left",
+      "script": "loanapp",
+      "when": "chapter>=4 && !flag:loanapp_gone"
+    },
+    {
+      "id": "oldman",
+      "sprite": "townsfolk_a",
+      "x": 23,
+      "y": 9,
+      "facing": "down",
+      "script": "townsfolk_bridge"
+    },
+    {
+      "id": "auntie",
+      "sprite": "townsfolk_b",
+      "x": 13,
+      "y": 21,
+      "facing": "left",
+      "script": "townsfolk_auntie"
+    },
+    {
+      "id": "plotsign_guy",
+      "sprite": "clerk",
+      "x": 23,
+      "y": 17,
+      "facing": "down",
+      "script": "plots",
+      "when": "chapter>=5"
+    }
+  ],
+  "triggers": [],
+  "start": {
+    "x": 6,
+    "y": 21,
+    "facing": "down"
+  }
+}

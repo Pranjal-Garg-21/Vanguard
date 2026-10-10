@@ -10,11 +10,13 @@ import {
   JOIN_CODE_LENGTH,
   normaliseJoinCode,
   t,
+  useLanguage,
+  setLanguage as applyLanguage,
   type Accessibility,
   type ClassCheck,
   type Language,
 } from '@/platform';
-import { Button, Notice } from '@/ui';
+import { AudioButton, Button, Notice } from '@/ui';
 import { PicturePin } from './components/PicturePin';
 import { StudentScreen } from './components/StudentScreen';
 import { AVATARS, LANGUAGES } from './pictures';
@@ -34,6 +36,8 @@ export function SetupFlow() {
   const [params] = useSearchParams();
   const codeFromLink = normaliseJoinCode(params.get('code') ?? '');
 
+  // Subscribes this screen to the language, so picking one redraws the rest of setup.
+  useLanguage();
   const [step, setStep] = useState<Step>('language');
   const [language, setLanguage] = useState<Language>('en');
   const [a11y, setA11y] = useState<Accessibility>({ audio: false, largeText: false, reduceMotion: false, timersOff: false });
@@ -109,7 +113,7 @@ export function SetupFlow() {
       )}
 
       {step === 'language' && (
-        <StepBody title={t('setup.language.title')}>
+        <StepBody title={t('setup.language.title')} speak={['setup.language.title', 'setup.language.note']}>
           <div className="grid grid-cols-2 gap-3">
             {LANGUAGES.map((l) => (
               <button
@@ -117,6 +121,9 @@ export function SetupFlow() {
                 type="button"
                 onClick={() => {
                   setLanguage(l.id);
+                  // The rest of setup is read in the language just chosen, so a
+                  // student who cannot read English is not stuck on screen two.
+                  applyLanguage(l.id);
                   go('a11y');
                 }}
                 className={`flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border-2 bg-white shadow-sm transition active:scale-95 ${
@@ -135,7 +142,7 @@ export function SetupFlow() {
       )}
 
       {step === 'a11y' && (
-        <StepBody title={t('setup.a11y.title')}>
+        <StepBody title={t('setup.a11y.title')} speak={['setup.a11y.title', 'setup.a11y.audio', 'setup.a11y.largeText', 'setup.a11y.reduceMotion', 'setup.a11y.timersOff', 'setup.a11y.timersOffHint']}>
           <div className="space-y-3">
             {A11Y_OPTIONS.map(({ key, icon }) => (
               <label key={key} className="flex min-h-16 cursor-pointer items-center gap-4 rounded-2xl border border-slate-200 bg-white px-4 shadow-sm">
@@ -160,7 +167,7 @@ export function SetupFlow() {
       )}
 
       {step === 'class' && (
-        <StepBody title={t('setup.class.title')} subtitle={t('setup.class.hint')}>
+        <StepBody title={t('setup.class.title')} subtitle={t('setup.class.hint')} speak={['setup.class.title', 'setup.class.hint']}>
           <input
             autoFocus
             inputMode="text"
@@ -199,7 +206,7 @@ export function SetupFlow() {
       )}
 
       {step === 'avatar' && (
-        <StepBody title={t('setup.avatar.title')}>
+        <StepBody title={t('setup.avatar.title')} speak={['setup.avatar.title', 'setup.avatar.nameLabel', 'setup.avatar.nameHint']}>
           <div className="grid grid-cols-4 gap-3">
             {AVATARS.map((a) => (
               <button
@@ -233,7 +240,7 @@ export function SetupFlow() {
       )}
 
       {step === 'pin' && (
-        <StepBody title={t('setup.pin.createTitle')} subtitle={t('setup.pin.createHint')}>
+        <StepBody title={t('setup.pin.createTitle')} subtitle={t('setup.pin.createHint')} speak={['setup.pin.createTitle', 'setup.pin.createHint']}>
           {pinError && <div className="mb-4"><Notice tone="bad">{t('setup.pin.mismatch')}</Notice></div>}
           <PicturePin
             resetKey={`create-${pinAttempt}`}
@@ -248,7 +255,7 @@ export function SetupFlow() {
       )}
 
       {step === 'confirm' && (
-        <StepBody title={t('setup.pin.confirmTitle')}>
+        <StepBody title={t('setup.pin.confirmTitle')} speak={['setup.pin.confirmTitle']}>
           <PicturePin resetKey={`confirm-${pinAttempt}`} disabled={saving} onComplete={confirmPin} />
         </StepBody>
       )}
@@ -258,7 +265,7 @@ export function SetupFlow() {
           <div className="text-7xl">{AVATARS.find((a) => a.id === avatarId)?.emoji}</div>
           <h1 className="mt-6 text-3xl font-extrabold">{t('setup.done.title', { name: name.trim() })}</h1>
           <p className="mt-3 text-lg text-slate-600">{t('setup.done.body')}</p>
-          <Button size="lg" className="mt-10 w-full" onClick={() => navigate('/home')}>
+          <Button size="lg" className="mt-10 w-full" onClick={() => navigate('/onboarding')}>
             {t('setup.done.go')}
           </Button>
         </div>
@@ -267,10 +274,19 @@ export function SetupFlow() {
   );
 }
 
-function StepBody({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
+/**
+ * `speak` is the keys of the title and any hint. Setup is the first thing a
+ * student sees, so it has to work for someone who cannot read it: the speaker
+ * button is here on every step, before the "Read things aloud" setting even
+ * exists on their profile.
+ */
+function StepBody({ title, subtitle, children, speak }: { title: string; subtitle?: string; children: ReactNode; speak?: string[] }) {
   return (
     <section>
-      <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">{title}</h1>
+      <div className="flex items-start gap-2">
+        <h1 className="flex-1 text-3xl font-extrabold tracking-tight text-slate-900">{title}</h1>
+        {speak && <AudioButton keys={speak} className="-mt-1 text-teal-800" />}
+      </div>
       {subtitle && <p className="mt-2 text-lg text-slate-600">{subtitle}</p>}
       <div className="mt-6">{children}</div>
     </section>

@@ -1,0 +1,42 @@
+{
+  "id": "home",
+  "name": "maps.home",
+  "interior": true,
+  "rows": [
+    "wwwwwwwww",
+    "wwwwwwwww",
+    "fRffffftf",
+    "fffffffqf",
+    "fffffffff",
+    "NffffffSf",
+    "wwwwewwww"
+  ],
+  "entry": {
+    "x": 4,
+    "y": 5,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "mom",
+      "sprite": "mom",
+      "x": 5,
+      "y": 3,
+      "facing": "down",
+      "script": "mom"
+    }
+  ],
+  "objects": [
+    {
+      "x": 1,
+      "y": 2,
+      "script": "bed"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "script": "home_shelf"
+    }
+  ],
+  "triggers": []
+}

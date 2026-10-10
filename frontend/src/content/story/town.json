@@ -1,0 +1,86 @@
+{
+  "lab_terminal": [
+    {
+      "say": "story.common.terminal"
+    },
+    {
+      "open": "journal"
+    }
+  ],
+  "lab_books": [
+    {
+      "say": "story.common.books"
+    }
+  ],
+  "townsfolk_bridge": [
+    {
+      "if": "flag:bridge_built",
+      "then": [
+        {
+          "say": "story.town.bridge_after",
+          "who": "townsfolk"
+        }
+      ],
+      "else": [
+        {
+          "say": "story.town.bridge_before",
+          "who": "townsfolk"
+        }
+      ]
+    }
+  ],
+  "townsfolk_auntie": [
+    {
+      "if": "chapter<3",
+      "then": [
+        {
+          "say": "story.town.auntie1",
+          "who": "townsfolk"
+        }
+      ],
+      "else": [
+        {
+          "say": "story.town.auntie2",
+          "who": "townsfolk"
+        }
+      ]
+    }
+  ],
+  "townsfolk_city": [
+    {
+      "say": "story.town.city",
+      "who": "townsfolk"
+    }
+  ],
+  "townsfolk_trader": [
+    {
+      "say": "story.town.trader",
+      "who": "townsfolk"
+    }
+  ],
+  "whatif": [
+    {
+      "if": "chapter<2",
+      "then": [
+        {
+          "say": "story.whatif.not_ready"
+        },
+        {
+          "end": true
+        }
+      ]
+    },
+    {
+      "once": "whatif_intro",
+      "do": [
+        {
+          "say": "story.whatif.intro",
+          "who": "professor"
+        }
+      ]
+    },
+    {
+      "open": "whatif"
+    }
+  ]
+}

@@ -31,7 +31,7 @@ export function PicturePin({
           <span
             key={i}
             className={`flex h-12 w-12 items-center justify-center rounded-full border-2 text-xl ${
-              i < picked.length ? 'border-teal-700 bg-teal-700 text-white' : 'border-slate-300 bg-white'
+              i < picked.length ? 'border-brand bg-brand text-brand-ink' : 'border-line-strong bg-surface'
             }`}
           >
             {i < picked.length ? '●' : ''}
@@ -47,7 +47,7 @@ export function PicturePin({
             disabled={disabled}
             onClick={() => tap(p.id)}
             aria-label={p.id}
-            className="flex aspect-square items-center justify-center rounded-2xl border border-slate-200 bg-white text-4xl shadow-sm transition active:scale-95 hover:border-teal-600 disabled:opacity-40"
+            className="flex aspect-square items-center justify-center rounded-xl border border-line bg-surface text-4xl transition active:scale-95 hover:border-brand disabled:opacity-40"
           >
             {p.emoji}
           </button>
@@ -55,7 +55,7 @@ export function PicturePin({
       </div>
 
       <div className="flex justify-center">
-        <button type="button" className="text-sm font-semibold text-teal-800 underline" onClick={() => setPicked([])}>
+        <button type="button" className="text-sm font-semibold text-brand underline" onClick={() => setPicked([])}>
           {t('setup.pin.clear')}
         </button>
       </div>

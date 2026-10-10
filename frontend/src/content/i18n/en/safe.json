@@ -1,0 +1,1137 @@
+{
+  "ui": {
+    "room": "Stay Safe",
+    "tasks": "Missions",
+    "log": "Activity log",
+    "lens": "Scam Lens",
+    "lensOn": "Lens on: tap anything to inspect it",
+    "lensHint": "Tap the Scam Lens, then tap parts of a message to see what is really behind them.",
+    "lensReveal": "What it really is",
+    "lensFound": "Red flag found",
+    "lensNothing": "Nothing suspicious here",
+    "home": "Home",
+    "back": "Back",
+    "noMessages": "No messages yet",
+    "balance": "Bank balance",
+    "history": "Recent",
+    "start": "Start mission",
+    "restart": "Try again",
+    "continue": "Continue",
+    "timersOff": "Timers are off, so take your time.",
+    "timer": "{s}s left",
+    "from": "From",
+    "to": "To",
+    "online": "online",
+    "incoming": "Incoming call",
+    "decline": "Decline",
+    "accept": "Accept",
+    "newMessage": "New message",
+    "simulated": "Simulation: no real money, no real people",
+    "clock": "Simulated time",
+    "verdictQ": "What is this?",
+    "yourCall": "Your call",
+    "itWas": "It was",
+    "found": "Found",
+    "missed": "Missed",
+    "noTells": "No red flags. This one is fine.",
+    "done": "Mission complete",
+    "failed": "You were tricked, and that is OK",
+    "debrief": "Debrief",
+    "replay": "Replay",
+    "step": "Step {n} of {total}",
+    "prev": "Previous",
+    "next": "Next",
+    "skipReplay": "Skip to summary",
+    "cards": "Red-flag cards",
+    "cardsHint": "Use the Scam Lens to find red flags. Each type you find unlocks a card, and your cards are saved.",
+    "newCard": "New card",
+    "moneyLost": "Money lost in the simulation",
+    "tellsFound": "Red flags spotted",
+    "judgedRight": "Judged safely",
+    "youDid": "You chose: {what}",
+    "auto": "The timer ran out, so nothing was sent.",
+    "dismiss": "Dismiss",
+    "logDelivered": "new message",
+    "logPage": "page loaded",
+    "logOpened": "opened",
+    "logLens": "lens",
+    "logAction": "action",
+    "logVerdict": "verdict",
+    "youOpened": "You opened: {what}",
+    "roomsTitle": "Stay Safe rooms",
+    "roomsSub": "Practise spotting scams on a fake phone. No real money, no real people.",
+    "backHome": "Back to dashboard",
+    "playRoom": "Play room",
+    "singleMessage": "Single message",
+    "logFlag": "red flag",
+    "inbox": "Scam Inbox",
+    "falseAlarms": "Real messages blocked by mistake",
+    "handled": "Handled safely",
+    "whatIfBadge": "Simulated outcome",
+    "clockDay": "Day view",
+    "simulators": "Simulators",
+    "needsReply": "Needs response",
+    "answered": "Responded",
+    "progressInbox": "Responses given",
+    "where": "New messages can arrive in Messages, Chat, Mail and Phone. A number on an app shows what you have not opened.",
+    "roomProgress": "Room progress: {pct}%",
+    "device": "Simulated phone",
+    "taskN": "Task {n}",
+    "hintLabel": "How to do this",
+    "inCall": "In call",
+    "ad": "Ad",
+    "remember": "Remember",
+    "doInstead": "What to do instead",
+    "taskComplete": "Task complete",
+    "typing": "Typing",
+    "allTasks": "All tasks complete",
+    "cardCollected": "Collected",
+    "cardUnlock": "Find it with the Scam Lens",
+    "seeWhatHappened": "See what happened",
+    "seeResults": "See your results",
+    "finished": "All done"
+  },
+  "verdict": {
+    "legit": "Legit",
+    "suspicious": "Suspicious",
+    "scam": "Scam"
+  },
+  "tell": {
+    "urgency": {
+      "name": "Urgency",
+      "hint": "Hurry, or something bad happens."
+    },
+    "too_good": {
+      "name": "Too good to be true",
+      "hint": "A big prize for no effort."
+    },
+    "asks_secret": {
+      "name": "Asks for a secret",
+      "hint": "OTP, PIN or password."
+    },
+    "pretends": {
+      "name": "Pretends to be someone",
+      "hint": "A bank, a relative, an officer."
+    },
+    "secrecy": {
+      "name": "Keep it secret",
+      "hint": "Don't tell anyone."
+    },
+    "odd_link": {
+      "name": "Strange link",
+      "hint": "An address that is not the real one."
+    },
+    "pulls_money": {
+      "name": "Pulls money out",
+      "hint": "You pay when you expected to receive."
+    }
+  },
+  "summary": {
+    "safe": "You stayed safe. Nothing was lost.",
+    "fooled": "You were fooled this time. Here is how to spot it next time.",
+    "judge": "You went through the whole inbox. See which red flags you caught."
+  },
+  "kyc01": {
+    "title": "The KYC message",
+    "brief": "A message arrives about your bank account. Decide what to do. Use the Scam Lens before you trust anything.",
+    "o1": "Open the new message",
+    "o2": "Inspect who sent it with the Scam Lens",
+    "o3": "Inspect the link before tapping it",
+    "o4": "Finish the mission safely",
+    "sms": {
+      "a": "Dear customer, your KYC expires ",
+      "today": "today.",
+      "b": " Update now or your account will be blocked: ",
+      "link": "bit.ly/kyc-now"
+    },
+    "lens": {
+      "sender": "A made-up sender code. Real banks use a registered sender ID that clearly carries their name, and anyone can fake a look-alike.",
+      "today": "'Today' creates panic so you act before you think. Real KYC updates give you weeks and a letter.",
+      "link": "A short link hides where it goes. Banks do not ask you to update KYC through a link in an SMS.",
+      "url": "This address is not your bank's website. It only imitates the look of one.",
+      "otp": "An OTP proves it is you. Anyone who asks you to type it into a website is trying to be you.",
+      "autofill": "A helper that reads your messages sounds convenient. It lets the tricksters read your OTPs too."
+    },
+    "why": {
+      "sender": "The sender name looked official but anyone can choose a look-alike. Check the bank app or call the number on your card.",
+      "urgency": "Scammers rush you. Real banks do not block accounts 'today' by SMS.",
+      "link": "Never update KYC through a link in a message. Go to the branch or the bank's own app.",
+      "url": "The web address was not your bank's. Look carefully at the part before the last dot.",
+      "otp": "An OTP is for you only. A bank never asks you to type it on a website or tell anyone."
+    },
+    "a": {
+      "open": "Tap the link",
+      "ignore": "Ignore it",
+      "block": "Block and report",
+      "ask": "Ask a trusted adult",
+      "autofill": "Autofill my OTP",
+      "submit": "Submit with OTP",
+      "close": "Close the page",
+      "allow": "Allow",
+      "deny": "Don't allow"
+    },
+    "page": {
+      "title": "Update your KYC",
+      "a": "To keep your account active, enter your name and the OTP we just sent. ",
+      "otp": "Enter the OTP from your SMS. ",
+      "autofill": "Autofill my OTP",
+      "f": {
+        "name": "Full name",
+        "otp": "OTP"
+      }
+    },
+    "perm": {
+      "app": "KYC Helper",
+      "ask": "Allow KYC Helper to read your text messages?"
+    },
+    "explain": "This is a scam. Banks do not ask for KYC through a link in an SMS, and the urgent deadline is meant to stop you thinking."
+  },
+  "collect01": {
+    "title": "The cricket bat buyer",
+    "brief": "You listed your old cricket bat for sale. A buyer says they are sending the money. Stay alert before you touch the PIN pad.",
+    "o1": "Read the buyer's chat",
+    "o2": "Open the payment request",
+    "o3": "Inspect the wording with the Scam Lens",
+    "o4": "Finish the mission safely",
+    "chat": {
+      "a": "Hi, I want the {item} for ₹{amount}. ",
+      "b": "Sending the money now."
+    },
+    "req": {
+      "note": "{item}",
+      "who": "{payee} ",
+      "a": "is requesting ₹{amount} from you. ",
+      "pin": "Enter your UPI PIN to accept."
+    },
+    "lens": {
+      "promise": "They say they are sending money, but the next screen will ask you to pay them.",
+      "payee": "The chat was with {buyer}. This request comes from {payee}. A real buyer's name matches.",
+      "wording": "'Is requesting' means money is pulled out of your account. A payment you receive never says that.",
+      "pin": "You only type your PIN to send money. To receive money you never need it.",
+      "timer": "A countdown is pressure. A genuine payment is never lost by thinking for a minute."
+    },
+    "why": {
+      "pulls": "Read the first line of a payment screen. 'Requesting' means money leaves your account.",
+      "pin": "Receiving money never needs your PIN. If a screen asks for it, money is going out.",
+      "mismatch": "The name on the request did not match the buyer you chatted with. Check names before you pay.",
+      "timer": "The timer is a pressure tactic. Scammers want you to act before you think."
+    },
+    "a": {
+      "wait": "Wait for the money",
+      "pin": "Enter PIN to accept",
+      "decline": "Decline the request",
+      "expire": "Let it expire"
+    }
+  },
+  "inbox01": {
+    "title": "Red Flag Hunter",
+    "brief": "Six items arrived. Open each one, use the Scam Lens, then say whether it is Legit, Suspicious or a Scam.",
+    "o1": "Open the first message",
+    "o2": "Use the Scam Lens on a name",
+    "o3": "Judge all six items",
+    "bank": {
+      "a": "₹250 debited at Canteen on your account.",
+      "b": " If this was not you, call the number on the back of your card.",
+      "l": {
+        "sender": "A registered sender that matches your bank. Real alerts look like this.",
+        "amount": "It only tells you what happened. There is no link and nothing to enter."
+      },
+      "explain": "This is real. It only informs you of a payment you made, asks for nothing, and has no link. It also tells you to use the number on your card."
+    },
+    "mom": {
+      "a": "Hi, it's Mom. My phone broke, this is my new number. ",
+      "b": "Please send ₹5,000 to this number right now, it's urgent. ",
+      "c": "Don't tell Papa.",
+      "l": {
+        "name": "The number is not saved in your contacts. Anyone can type 'Mom' as a name.",
+        "urgent": "'Right now' stops you from calling to check.",
+        "secret": "Secrets stop you asking someone who would spot the trick."
+      },
+      "w": {
+        "pretends": "Call your real parent on the old number before sending anything.",
+        "urgency": "A real emergency can wait one phone call.",
+        "secrecy": "'Don't tell anyone' is the loudest warning sign."
+      },
+      "explain": "This is a scam. It uses a familiar name from an unknown number, creates urgency, and asks you to keep it secret. Always call the person on the number you already have."
+    },
+    "friend": {
+      "a": "Bro, class trip money is due Friday. Pay at the school office, not online.",
+      "l": {
+        "name": "A saved contact you know. It asks nothing risky."
+      },
+      "explain": "This is real. It is from a saved contact, it has no link, and it sends you to pay in person at the school office."
+    },
+    "job": {
+      "subject": "Job confirmed: pay registration fee",
+      "a": "Congratulations! You are selected for a work-from-home job at ₹40,000 a month. No interview needed. ",
+      "b": "Pay a ₹999 registration fee to confirm.",
+      "l": {
+        "addr": "A made-up company address with no real website behind it.",
+        "pay": "Good pay with no interview is almost never real.",
+        "fee": "A real employer never asks you to pay to get hired."
+      },
+      "w": {
+        "too_good": "High pay for no work or interview is bait.",
+        "fee": "Real jobs pay you. If you are asked to pay first, walk away."
+      },
+      "explain": "This is a scam. High pay with no interview and a fee to get hired are the two classic signs of a job scam."
+    },
+    "call": {
+      "a": "Sir, I am calling from the bank's fraud team. ",
+      "b": "Your card will be blocked in 10 minutes. ",
+      "c": "Tell me the OTP you just received to stop it.",
+      "l": {
+        "number": "An ordinary mobile number. Banks do not call from private mobiles.",
+        "claim": "Anyone can say they are from the bank. Hang up and call the number on your card.",
+        "urgent": "'In 10 minutes' is pressure to stop you thinking.",
+        "otp": "No bank ever needs your OTP over a call."
+      },
+      "w": {
+        "pretends": "Hang up and call the bank yourself on the number printed on your card.",
+        "urgency": "Pressure is a tool. Real banks give you time.",
+        "otp": "Never read out an OTP. It only helps the person asking."
+      },
+      "explain": "This is a scam. A caller who claims to be the bank and asks for your OTP is never genuine, because no bank needs your OTP."
+    },
+    "parcel": {
+      "a": "Your parcel is held. Pay ₹12 customs fee: ",
+      "link": "tinyurl.com/pk-fee",
+      "l": {
+        "sender": "A courier-like code. You are not expecting a parcel, so it could be anyone.",
+        "link": "A short link hides where it goes. The fee is small so you do not think twice."
+      },
+      "w": {
+        "link": "Small fees on strange links collect your card details. Check on the courier's own app."
+      },
+      "explain": "This is suspicious. A short link and a small fee are warning signs, but nothing proves that the parcel is fake. Do not tap it; check the courier's own app first."
+    }
+  },
+  "pool": {
+    "prize": {
+      "a": "Congratulations! You have won ₹25,000 in the lucky draw. ",
+      "b": "Pay a ₹499 processing fee to claim it ",
+      "c": "within 2 hours.",
+      "l": {
+        "sender": "A prize-style sender code. You never entered any draw, so there is nothing to win.",
+        "prize": "You cannot win a draw you never entered. Big prizes for nothing are bait.",
+        "fee": "A real prize never asks you to pay first. The fee is the whole trick.",
+        "urgent": "A short deadline pushes you to pay before you check."
+      },
+      "w": {
+        "too_good": "A prize from a draw you never entered is bait.",
+        "fee": "Real winnings never come with a fee. Paying is how you lose money.",
+        "urgency": "The deadline stops you from checking with someone first."
+      },
+      "explain": "This is a scam. You cannot win a draw you never entered, and a real prize never asks for a fee first."
+    },
+    "task": {
+      "a": "Part-time job: like videos and earn ₹3,000 a day from home. ",
+      "b": "Send your bank details and we will start today.",
+      "l": {
+        "name": "A stranger using a friendly name. You did not apply anywhere.",
+        "earn": "₹3,000 a day for liking videos is not a real wage.",
+        "details": "A genuine employer does not need your bank login or PIN to start."
+      },
+      "w": {
+        "too_good": "Very high pay for very little work is bait.",
+        "asks_secret": "Never send bank details or codes to someone you do not know."
+      },
+      "explain": "This is a scam. Very high pay for liking videos, plus a request for your bank details, are signs of a task scam."
+    },
+    "school": {
+      "a": "School fee for term 2 is due on 15 November. Pay at the school office. ",
+      "b": "The school never asks for your PIN or OTP.",
+      "l": {
+        "sender": "A registered sender that matches your school. It does not ask for anything urgent.",
+        "office": "It sends you to the school office, not to a link. Genuine messages let you verify in person."
+      },
+      "explain": "This is real. It is from the school's registered sender, it asks for nothing urgent, and it sends you to the office rather than a link."
+    }
+  },
+  "whatif": {
+    "title": "What would have happened",
+    "mom": "You sent ₹5,000 to the new number. Your real mother had never changed her number, and the money was gone within the minute.",
+    "job": "You paid the ₹999 registration fee. There was no job, and a second message asked for more fees.",
+    "call": "You read out the OTP. ₹8,000 left your account before the call ended.",
+    "parcel": "The page asked for your card number. A few hours later ₹3,500 was spent from your account.",
+    "kyc": "The fake form asked for your OTP. You typed it in and ₹4,999 left your account.",
+    "prize": "You paid ₹499. A second message then asked for ₹2,000 as 'tax'. The prize never arrived.",
+    "task": "They paid ₹100 for liking videos, then asked for a ₹2,000 'deposit' to unlock bigger tasks. The deposit was never returned."
+  },
+  "inbox": {
+    "title": "A day in your inbox",
+    "brief": "Messages arrive through the day in Messages, Chat, Mail and Phone. For each one, decide how to respond. Some are real, so do not block everything.",
+    "o1": "Open your first message",
+    "o2": "Use the Scam Lens on something",
+    "o3": "Respond to every message",
+    "a": {
+      "block": "Block and report",
+      "ignore": "Ignore",
+      "open": "Open or reply",
+      "ask": "Ask a trusted adult",
+      "callback": "Call back"
+    },
+    "next": "Continue"
+  },
+  "qr01": {
+    "title": "Scan to receive",
+    "brief": "A buyer wants to pay you and sends a QR code. Think about what scanning a code really does.",
+    "o1": "Read the buyer's message",
+    "o2": "Inspect the message with the Scam Lens",
+    "o3": "Finish the mission safely",
+    "chat": {
+      "a": "I will pay you now. ",
+      "b": "Scan this code to receive the money."
+    },
+    "lens": {
+      "scan": "Scanning a QR code starts a payment from you. It never receives money.",
+      "direction": "The screen shows you paying, not receiving.",
+      "pin": "Asking for your PIN confirms that money is leaving."
+    },
+    "why": {
+      "scan": "You never scan anything to receive money. Share your UPI ID or QR instead.",
+      "direction": "Check which way the money moves before you confirm anything.",
+      "pin": "A PIN means money is leaving your account."
+    },
+    "a": {
+      "scan": "Scan the code",
+      "decline": "Decline and share my own UPI ID",
+      "pin": "Enter PIN to pay",
+      "cancel": "Cancel the payment"
+    },
+    "pay": {
+      "note": "Payment",
+      "a": "You are about to pay ₹{amount}. ",
+      "pin": "Enter your UPI PIN to confirm."
+    }
+  },
+  "upi": {
+    "title": "UPI Simulator",
+    "brief": "Set up UPI, pay a canteen by QR, then face a payment request that tries to take your money. One rule matters most: you never need your PIN to receive money.",
+    "cta": "Start the simulator",
+    "task": {
+      "setup": "Set up Pay",
+      "pay": "Pay the canteen",
+      "collect": "Sell an old item",
+      "qr": "Scan to receive",
+      "check": "Quick check"
+    },
+    "step": "Task {n} of {total}",
+    "balance": "Balance",
+    "link": {
+      "title": "Link your bank account",
+      "body": "The savings account from the bank counter is ready to link to Pay.",
+      "account": "Savings account",
+      "number": "ending 4821",
+      "cta": "Link account"
+    },
+    "pin": {
+      "setTitle": "Set your UPI PIN",
+      "setHelp": "Choose four digits only you know. Avoid 1234 or repeated digits.",
+      "enterTitle": "Enter your UPI PIN",
+      "enterHelp": "Your PIN confirms this payment.",
+      "weak": "That PIN is too easy to guess. Choose another.",
+      "wrong": "Wrong PIN. Tries left: {n}.",
+      "locked": "Too many wrong tries, so the payment was cancelled. Scan again.",
+      "observer": "Someone is standing close behind you.",
+      "cover": "Cover the keypad",
+      "covered": "Keypad covered",
+      "delete": "Delete",
+      "uncovered": "You typed your PIN while someone could see it. Next time, cover the keypad first."
+    },
+    "scan": {
+      "title": "Pay the canteen",
+      "help": "Point the camera at the canteen's QR code.",
+      "cta": "Scan QR code",
+      "payee": "Campus Canteen",
+      "amount": "You are paying ₹{amount}",
+      "proceed": "Proceed to pay"
+    },
+    "paid": {
+      "title": "Payment successful",
+      "body": "₹{amount} paid to Campus Canteen.",
+      "balance": "Balance now",
+      "cta": "Next: sell an old item"
+    },
+    "rule": {
+      "title": "Rule card",
+      "rule": "You never need a PIN to receive money.",
+      "body": "Your PIN is only for sending money. If a screen asks for it while money is supposed to be coming to you, money is going out instead.",
+      "cta": "Continue"
+    },
+    "refund": {
+      "title": "When a payment fails",
+      "body": "If money is deducted but the payment fails, your bank reverses it automatically within a few working days.",
+      "p1": "Nobody needs to call you to arrange a refund.",
+      "p2": "Nobody needs your PIN, OTP or a screen-sharing app.",
+      "p3": "If it does not return, contact your bank using the number on your card.",
+      "cta": "Go to the quick check"
+    },
+    "check": {
+      "title": "Quick check",
+      "of": "Question {n} of {total}",
+      "next": "Next question",
+      "finish": "Finish",
+      "q1": {
+        "prompt": "A buyer says they are sending money. A screen asks for your UPI PIN to accept it. What do you do?",
+        "a": "Enter the PIN to accept the money",
+        "b": "Decline the request",
+        "c": "Ask them to send it again",
+        "why": "Accepting money never needs a PIN. A request that asks for one is pulling money out."
+      },
+      "q2": {
+        "prompt": "When do you need your UPI PIN?",
+        "a": "Only when you send money",
+        "b": "When you receive money",
+        "c": "For both sending and receiving",
+        "why": "The PIN authorises money leaving your account. Receiving never needs it."
+      },
+      "q3": {
+        "prompt": "A payment failed but the money was deducted. What happens?",
+        "a": "The bank reverses it automatically",
+        "b": "Call the number a stranger sends and share an OTP",
+        "c": "Pay again to fix it",
+        "why": "Failed payments are reversed by the bank. Nobody legitimate asks for your PIN or OTP to refund you."
+      }
+    },
+    "done": {
+      "title": "UPI Simulator complete",
+      "body": "You have practised paying safely, spotting a collect request, and recognising a QR trick.",
+      "pinHabit": "PIN habit",
+      "covered": "Keypad covered",
+      "notCovered": "Keypad not covered",
+      "moneyLost": "Money lost to scams",
+      "check": "Check score"
+    },
+    "summary": "UPI Simulator complete",
+    "hint": {
+      "setup": "Link the savings account, then choose a four-digit PIN that only you know.",
+      "pay": "Scan the canteen's QR code, check the amount, and confirm with your PIN.",
+      "collect": "A buyer wants to pay you for something you are selling. Read the request carefully before you do anything.",
+      "qr": "A buyer sends a QR code and says to scan it to receive money. Think about what scanning does.",
+      "check": "Answer three short questions about what you just practised."
+    }
+  },
+  "hub": {
+    "title": "Stay Safe",
+    "sub": "Seven simulators, each built around a different kind of trap. Pick one to practise, or follow the path. Everything here is simulated: no real money, no real people.",
+    "choose": "Choose what to practise",
+    "modes": "Ways to play",
+    "available": "Available",
+    "soon": "Coming soon",
+    "entries": "{n} ways to play",
+    "full": "Full game",
+    "quick": "Quick play",
+    "single": "Single scenario",
+    "back": "All simulators",
+    "upi": {
+      "title": "UPI Simulator",
+      "blurb": "Set up Pay, pay by QR, and learn the one rule that stops collect-request and QR scams: you never need a PIN to receive money."
+    },
+    "inbox": {
+      "title": "Scam Inbox",
+      "blurb": "A day of messages from banks, recruiters and relatives. Decide how to respond to each one, without blocking the real ones."
+    },
+    "hunter": {
+      "title": "Red Flag Hunter",
+      "blurb": "Inspect messages, calls and emails with the Scam Lens and label each one Legit, Suspicious or Scam."
+    },
+    "call": {
+      "title": "The Call",
+      "blurb": "Phone calls from people who claim to be the police, your bank or support. Practise staying calm, verifying and hanging up."
+    },
+    "entry": {
+      "upi_full": "The full walkthrough",
+      "collect": "The collect request",
+      "qr": "Scan to receive",
+      "wrong_transfer": "Sent by mistake",
+      "inbox_day": "A day in your inbox",
+      "kyc": "The KYC message",
+      "hunter": "Morning inbox review",
+      "digital_arrest": "Digital arrest",
+      "customer_care": "Fake customer care",
+      "hacked_friend": "Hacked friend",
+      "loan_trap": "The instant loan",
+      "rescue_mission": "After a scam"
+    },
+    "profile": "Your progress",
+    "xp": "Points",
+    "badges": "Achievements",
+    "cards": "Red-flag cards found",
+    "rooms": "Rooms finished",
+    "continue": "Continue",
+    "recommended": "Recommended",
+    "completed": "Completed",
+    "notStarted": "Not started",
+    "upTo": "Up to {n} points",
+    "best": "Best score: {n}%",
+    "collection": "Your collection",
+    "earned": "Earned",
+    "locked": "Locked",
+    "pathTitle": "Up next for you",
+    "chat": {
+      "title": "Chat Traps",
+      "blurb": "Conversations where a familiar name asks for money. Learn to verify through another channel before you help."
+    },
+    "loan": {
+      "title": "Loan App Trap",
+      "blurb": "An instant loan offer, a list of permissions and what happens next. See why the app wants your contacts."
+    },
+    "rescue": {
+      "title": "Rescue Mission",
+      "blurb": "You have just lost money to a scam. Choose the right steps in the right order, fast."
+    },
+    "cardsHint": "Find each type of red flag with the Scam Lens in any room to unlock its card.",
+    "level": "Your level",
+    "points": "Points",
+    "pointsNote": "Earned by finishing rooms and spotting red flags",
+    "roomsFinished": "Rooms finished",
+    "roomsNote": "Practice rooms you have completed",
+    "achievements": "Achievements",
+    "achievementsNote": "Unlocked by milestones, such as your first room",
+    "levelNote": "Level {n} of {total}"
+  },
+  "fb": {
+    "title": {
+      "exact": "Correct! Great eye.",
+      "safe": "Correct, with a better option",
+      "wrong": "Incorrect",
+      "best": "Correct! Well done.",
+      "ok": "Correct, with a better option",
+      "info": "Keep this in mind"
+    },
+    "yours": "Your answer",
+    "best": "Best answer",
+    "why": "Why",
+    "judge": {
+      "scam_suspicious": "Suspicious keeps you safe. Scam is the stronger call, because this message has clear red flags and no good reason to trust it.",
+      "suspicious_scam": "Scam is a cautious, safe call. Suspicious is more accurate: there is a warning sign but nothing proves it is fake, so the right step is to check through an official app or number.",
+      "unsafe": "This is not a safe call. The message has red flags, and treating it as legit could lead you to tap the link, pay or share a code.",
+      "false_alarm": "This message is real. Calling real messages scams means you might ignore alerts and dates that matter. Doubting everything is a risk too."
+    },
+    "inbox": {
+      "scam": {
+        "block": "Blocking and reporting is the best response. It stops this sender and helps warn others.",
+        "ignore": "Ignoring is safe. Blocking and reporting is better, because ignoring leaves the scammer free to try someone else.",
+        "ask": "Asking a trusted adult is a good habit and safe. Once you are sure, blocking and reporting is the best next step.",
+        "open": "Opening or replying gives the scammer what they want. The next card shows what would have happened."
+      },
+      "genuine": {
+        "open": "This message is real, so opening it is the best response.",
+        "ask": "Checking with a trusted adult is safe. This one was real, so you could also have opened it.",
+        "ignore": "Ignoring is safe, but this message was real. Ignoring it could mean missing something important.",
+        "block": "This is a false alarm. The message was real, and blocking a real sender means you stop getting messages you need."
+      }
+    },
+    "cheer": {
+      "0": "Exactly right.",
+      "1": "Sharp thinking.",
+      "2": "That is how a scam-proof person decides.",
+      "3": "Nice work. Keep going."
+    }
+  },
+  "hint": {
+    "opened": "Open the app that shows a number badge on the home screen, then tap the message.",
+    "read": "Open the app that shows a number badge on the home screen, then tap the message.",
+    "inspected": "Turn on the Scam Lens at the bottom of the phone, then tap a part of the message to see what is really behind it.",
+    "inspectedAny": "Turn on the Scam Lens at the bottom of the phone, then tap a part of a message to see what is really behind it.",
+    "judged": "Open the item, then choose Legit, Suspicious or Scam.",
+    "ended": "Respond to every message. When the run finishes you get a replay and a summary.",
+    "acted": "Choose one of the options on the phone. Think about what each one would really do before you tap."
+  },
+  "wt": {
+    "title": "Sent by mistake",
+    "brief": "Someone you do not know says they sent you money by mistake and asks you to return it. Check what is really true before you touch your PIN.",
+    "o1": "Read the message",
+    "o2": "Check your bank app before paying",
+    "o3": "Finish the mission safely",
+    "rule": "Never return money you did not expect. Check your bank app, not a message, and let the bank handle a wrong transfer.",
+    "i1": "Open your own bank app and look at the balance and transaction list.",
+    "i2": "If money really arrived by mistake, tell your bank and let them reverse it.",
+    "i3": "Do not send money to a stranger who asks for it back.",
+    "chat": {
+      "a": "Hi, I am very sorry. I sent ₹{amount} to your number by mistake. ",
+      "b": "Please send it back to this number ",
+      "c": "right now, I need it for my rent."
+    },
+    "sms": {
+      "a": "Credit alert: ₹{amount} received from {name}. ",
+      "b": "Available balance: ₹{newbal}."
+    },
+    "app": {
+      "title": "Account summary",
+      "a": "Available balance: ₹3,400. ",
+      "b": "Recent: Canteen, minus ₹50. No credit of ₹{amount} found."
+    },
+    "lens": {
+      "name": "This person is not in your contacts. Fraudsters message random numbers and claim a wrong transfer.",
+      "sorry": "A polite apology makes it feel like an honest mistake. It is the hook.",
+      "ask": "Sending money yourself is the trap. A real wrong transfer is reversed by the bank, not by you paying someone.",
+      "rush": "Pressure to act right now leaves no time to check.",
+      "sender": "A look-alike sender. Your real bank alerts come from the sender name you already know.",
+      "alert": "An SMS alone does not prove that money arrived. Only your bank app or passbook does.",
+      "bal": "Your balance did not change and there is no credit in the list, so no money arrived."
+    },
+    "why": {
+      "pulls": "Money you did not expect is never returned by paying a stranger. Your bank reverses real wrong transfers.",
+      "urgency": "A deadline stops you checking.",
+      "sender": "A made-up alert sender can imitate a bank. Check the app, not the SMS.",
+      "alert": "A message saying money arrived is not proof. The app shows the truth.",
+      "nocredit": "Your bank app showed no credit. The alert was fake, and paying would have lost real money."
+    },
+    "a": {
+      "check": "Check my bank app",
+      "pay": "Send the money back",
+      "decline": "Refuse and tell them to contact their bank",
+      "ignore": "Ignore the message",
+      "report": "Do not pay. Block the sender and report",
+      "anyway": "Pay anyway to be safe"
+    },
+    "say": {
+      "check": "Let me check my balance first.",
+      "pay": "Sending it back now.",
+      "decline": "I will not send money. Please contact your bank."
+    },
+    "n": {
+      "check": "Good move. Checking your own bank app is the only way to know whether money arrived.",
+      "pay": "The credit was fake, so you paid a stranger from your real balance. Never return money based on a message.",
+      "decline": "Safe. Refusing is fine, though checking your bank app first would also show the credit was fake.",
+      "ignore": "Safe. Checking the bank app first would also show the alert was fake.",
+      "report": "Best. You confirmed no money arrived, refused to pay and reported the sender.",
+      "anyway": "Paying anyway sends real money to a stranger. There was nothing to return."
+    }
+  },
+  "hf": {
+    "title": "Hacked friend",
+    "brief": "A friend messages you for urgent money. The account looks exactly like theirs. Decide how to check before you help.",
+    "o1": "Read the conversation",
+    "o2": "Use the Scam Lens on something",
+    "o3": "Finish the mission safely",
+    "rule": "A familiar name on a chat is not proof of who is typing. Check through another channel before you send money.",
+    "i1": "Call your friend on the number you already have.",
+    "i2": "Ask a question only they could answer.",
+    "i3": "Warn your other friends and report the hacked account.",
+    "m1": "Hey! Are you free? I need a small favour.",
+    "m2": {
+      "a": "My UPI is stuck and I am in a meeting. ",
+      "b": "Can you send ₹{amount} ",
+      "c": "to this new number? ",
+      "d": "Do not call, my phone is on silent. I will return it tonight."
+    },
+    "m3": "Haha I forgot, just send it quickly, I am getting late.",
+    "call": "I never sent you any messages. My account was hacked this morning. Please do not send anything, and tell the others.",
+    "lens": {
+      "name": "Same name and photo as your friend. A hacked account looks exactly like the real one.",
+      "ask": "A request for money is the point of the message.",
+      "newnum": "They ask you to pay a number that is not their usual one.",
+      "nocall": "Telling you not to call stops you from checking.",
+      "dodge": "They could not answer a question only your friend would know."
+    },
+    "why": {
+      "pulls": "Urgent money requests over chat are the classic sign of a hacked account.",
+      "newnum": "A friend asking you to pay a different number than usual is a warning sign.",
+      "nocall": "Do not call is meant to stop you verifying.",
+      "dodge": "A real friend would remember. Dodging a personal question is a warning sign."
+    },
+    "a": {
+      "help": "Sure, what do you need?",
+      "ignore": "Ignore the message",
+      "send": "Send the money",
+      "question": "Ask a question only they would know",
+      "call": "Call them on their saved number",
+      "refuse": "Say you will call first",
+      "stop": "Stop replying and call them",
+      "warn": "Warn friends and report the hacked account",
+      "done": "Thank them and end the call"
+    },
+    "say": {
+      "help": "Sure, what do you need?",
+      "send": "Sending now.",
+      "question": "What did we eat at the canteen last Friday?",
+      "refuse": "I will call you first."
+    },
+    "n": {
+      "ignore": "Safe. Ignoring avoids the risk, though you could also have checked with your friend.",
+      "send": "You paid someone who had taken over your friend's account. Never send money on chat alone.",
+      "question": "A good test. A question only your friend can answer is easy for them and impossible for a scammer.",
+      "call": "Best. Calling a number you already have is the surest way to check.",
+      "refuse": "Safe. Saying you will call first is the right instinct.",
+      "warn": "Best. Warning others and reporting the account stops more people losing money.",
+      "done": "Safe. Telling your friends as well would help stop the scam."
+    }
+  },
+  "da": {
+    "title": "Digital arrest",
+    "brief": "A caller claims to be from the police and says you are under arrest. Stay calm and decide what to do.",
+    "o1": "Read what the caller says",
+    "o2": "Inspect the call with the Scam Lens",
+    "o3": "Finish the call safely",
+    "rule": "No police or agency arrests anyone over a phone or video call, and no one needs your money in a safe account. Hang up and verify.",
+    "i1": "Hang up and call 1930, the cybercrime helpline.",
+    "i2": "Never stay on a call that tells you to keep it secret.",
+    "i3": "Tell a trusted adult before you do anything.",
+    "c1": "Incoming call from an unknown number.",
+    "c2": {
+      "a": "This is {officer} from the cyber crime branch. ",
+      "b": "A parcel in your name contains illegal items, and you are under digital arrest. ",
+      "c": "Stay on this call and do not tell anyone."
+    },
+    "c2b": "No time for that. If you hang up, a warrant will be issued within the hour. Stay on the line.",
+    "c3": {
+      "a": "To clear your name, move ₹{amount} from your account to the government safe account for verification. ",
+      "b": "You have twenty minutes."
+    },
+    "lens": {
+      "number": "A private mobile number. Police and agencies do not call from personal numbers to arrest anyone.",
+      "arrest": "There is no such thing as digital arrest. Police cannot arrest anyone over a phone or video call.",
+      "secret": "A request for secrecy is meant to stop you asking anyone who would spot the trick.",
+      "threat": "Threats and deadlines create panic so you do not check.",
+      "safeacct": "No agency uses a safe account. Anyone who asks you to move money to one is a fraudster.",
+      "clock": "A twenty-minute deadline is pressure, not procedure."
+    },
+    "why": {
+      "arrest": "Digital arrest does not exist in law. Police cannot arrest you over a call.",
+      "secret": "Secrecy keeps you away from people who would help.",
+      "threat": "A threat of a warrant is a pressure tactic.",
+      "safeacct": "No government body asks for money in a safe account.",
+      "clock": "The deadline is invented to stop you thinking."
+    },
+    "a": {
+      "answer": "Answer the call",
+      "decline": "Decline the call",
+      "comply": "Stay on the call and do as told",
+      "verify": "Say you will check with the police station on its official number",
+      "hangup": "Hang up and report it on 1930",
+      "transfer": "Transfer the money",
+      "lapse": "Let the clock run out"
+    },
+    "n": {
+      "decline": "Safe. Declining a call from an unknown number is always allowed.",
+      "comply": "Staying on the line and following the caller gives the fraudster control.",
+      "verify": "Good instinct. Verifying through an official number is the right habit, but the fraudster will push back.",
+      "hangup": "Best. Hanging up ends the pressure, and 1930 is where to report it.",
+      "transfer": "You moved real money to a fraudster's account. No agency has a safe account.",
+      "lapse": "Safe. You let the deadline pass and nothing happened, which shows it was invented."
+    }
+  },
+  "cc": {
+    "title": "Fake customer care",
+    "brief": "A refund has not arrived and you search for the helpline. Choose carefully, because anyone can pay to appear at the top of a search.",
+    "o1": "Look at the search results",
+    "o2": "Check where a result really goes with the Scam Lens",
+    "o3": "Finish the mission safely",
+    "rule": "The helpline you find in a search is not always the real one. Use the help section inside the official app.",
+    "i1": "Open the app and use its own Help section.",
+    "i2": "Never install a screen-sharing app for a stranger.",
+    "i3": "Never read out an OTP or PIN to anyone, including support.",
+    "r1": {
+      "title": "QuickPay Customer Care: 24x7 helpline",
+      "snip": "Call now for instant refund support and account help."
+    },
+    "r2": {
+      "title": "QuickPay Help Centre",
+      "snip": "Raise a ticket from the app. Support never asks for your PIN or OTP."
+    },
+    "r3": {
+      "title": "Forum: Is QuickPay support a scam?",
+      "snip": "A user shared a support number that worked for them."
+    },
+    "lens": {
+      "u1": "Anyone can pay to put an advertisement here. This website is not the one inside your QuickPay app.",
+      "u2": "This address matches the one in the QuickPay app's Help section.",
+      "u3": "Anyone can post on a forum, including fraudsters leaving numbers.",
+      "remote": "Screen-sharing apps give the caller control of your phone and let them see your PIN and OTP.",
+      "otp": "A genuine agent never needs your OTP, which exists to prove it is you."
+    },
+    "why": {
+      "ad": "Ads look like results but anyone can buy one. Check the address against the app.",
+      "forum": "Numbers shared on forums can be planted by fraudsters.",
+      "remote": "A screen-sharing app lets the caller see your PIN and OTP and control your phone.",
+      "otp": "A support agent never needs the code that proves it is you."
+    },
+    "call": {
+      "a": "Thank you for calling QuickPay support. ",
+      "b": "To fix your refund, install the QuickSupport app so I can see your screen. ",
+      "c": "Then read me the six-digit code you receive."
+    },
+    "off": {
+      "title": "Raise a refund ticket",
+      "a": "Open the app, go to Help and raise a ticket for the payment. Refunds are credited automatically. Support never asks for your PIN or OTP, or to install another app."
+    },
+    "a": {
+      "ad": "Call the first result, the advertisement",
+      "official": "Open the Help Centre result that matches the app",
+      "forum": "Use the number from the forum",
+      "install": "Install the app and read out the code",
+      "refuse": "Refuse and hang up. Use only the app's own help",
+      "done": "Raise the ticket in the app"
+    },
+    "n": {
+      "ad": "The advertisement was not the real support. Paid ads can sit above the official result.",
+      "official": "Best. You picked the address that matches the app and avoided the paid ad.",
+      "forum": "A number from a forum can be planted by a fraudster. Use the app's own help.",
+      "install": "You let a stranger control your phone and read your OTP. ₹6,000 was taken.",
+      "refuse": "Best. Refusing and using only the app's help keeps your accounts safe.",
+      "done": "Best. A ticket in the app is the official route, and refunds are credited automatically."
+    }
+  },
+  "ln": {
+    "title": "Loan app trap",
+    "brief": "An SMS offers an instant loan with no documents. Decide at each step, and watch what the app asks for.",
+    "o1": "Read the offer",
+    "o2": "Inspect the app listing with the Scam Lens",
+    "o3": "Finish the mission safely",
+    "rule": "A genuine lender does not need your contacts or photos. Threats and harassment over a loan are illegal. Report them on 1930.",
+    "i1": "Use only lenders registered with the RBI, and check them on the RBI website.",
+    "i2": "Deny permissions that have nothing to do with a loan.",
+    "i3": "If you are harassed, report to 1930 and the cybercrime portal. Do not pay more.",
+    "sms": {
+      "a": "Need cash today? ",
+      "b": "Instant loan up to ₹10,000, no documents, in 5 minutes. ",
+      "link": "qc-loans.example/apply"
+    },
+    "store": {
+      "title": "QuickCash Loan",
+      "a": "Rating 4.8 from 12 reviews. ",
+      "b": "Developer: not registered. ",
+      "c": "Needs access to: contacts, photos, messages, location."
+    },
+    "perm": {
+      "app": "QuickCash Loan"
+    },
+    "perm1": {
+      "ask": "Allow QuickCash Loan to access your contacts?"
+    },
+    "perm2": {
+      "ask": "Allow QuickCash Loan to access your photos and files?"
+    },
+    "denied": {
+      "title": "Application stopped",
+      "a": "The app says you cannot continue without access. A genuine lender would not need it. You stopped before sharing anything private."
+    },
+    "offer": {
+      "title": "Loan approved",
+      "a": "₹10,000 approved. ",
+      "b": "₹3,500 is taken as a processing fee, so you receive ₹6,500. ",
+      "c": "Repay ₹12,000 in 7 days."
+    },
+    "tl": {
+      "title": "What happens next",
+      "a": "Day 3: Reminder calls start, even though the loan is not due. ",
+      "b": "Day 8: The app messages your contacts, calling you a fraud. ",
+      "c": "Day 9: Your photos are edited and threats follow."
+    },
+    "lens": {
+      "sender": "A look-alike sender. Genuine lenders name themselves clearly.",
+      "nodocs": "A real lender always checks documents. No documents is bait.",
+      "link": "A short link to an unknown site is not a safe place to apply.",
+      "rating": "Twelve reviews that all sound alike. Reviews can be bought.",
+      "dev": "No registered company or RBI details. This lender is not regulated.",
+      "perms": "A real lender does not need your contacts, photos or messages. These are used for threats later.",
+      "fee": "Fees are taken before you receive the money, so you get less than you owe.",
+      "repay": "₹12,000 back in 7 days on a ₹6,500 payout is an enormous interest rate."
+    },
+    "why": {
+      "nodocs": "Skipping documents means there is no real check, which is how these apps hide.",
+      "link": "Never apply through a link in a message.",
+      "rating": "Few and similar reviews are a warning sign.",
+      "dev": "Check the lender on the RBI list. This one is not registered.",
+      "perms": "Contacts and photos are used for harassment when you cannot pay.",
+      "fee": "The fee reduces your payout while the repayment stays high.",
+      "repay": "The repayment is far above what you received."
+    },
+    "a": {
+      "open": "Open the link",
+      "block": "Block and report",
+      "ignore": "Ignore",
+      "install": "Install the app",
+      "back": "Go back and do not install",
+      "allow": "Allow",
+      "deny": "Deny",
+      "accept": "Accept the loan",
+      "cancel": "Cancel the application",
+      "report": "Report it to 1930 and the cybercrime portal",
+      "paymore": "Pay the extra amount they demand",
+      "done": "Continue"
+    },
+    "n": {
+      "block": "Best. Blocking and reporting stops the sender and warns others.",
+      "ignore": "Safe. Blocking and reporting would also help others.",
+      "install": "Be careful: the next screens will ask for private access.",
+      "back": "Best. Not installing keeps your data safe.",
+      "allow1": "Contacts are used to threaten and shame you later. A lender has no need for them.",
+      "allow2": "Photos can be edited and used for blackmail. There is no loan reason to give them.",
+      "deny": "Best. Denying a permission that has nothing to do with a loan stops the harassment before it starts.",
+      "accept": "You received less than promised and the repayment is far above it. The app now has your contacts and photos.",
+      "cancel": "You stopped the loan, though the app may already have your data. Report it and block it.",
+      "report": "Best. Harassment over a loan is illegal. Reporting is the right step, and you should not pay more.",
+      "paymore": "Paying more does not end it. The demands continue because they hold your data."
+    }
+  },
+  "rm": {
+    "title": "Rescue mission",
+    "brief": "You clicked a fake KYC link, and ₹4,999 left your account ten minutes ago. Act fast. Every choice matters, and so does the order.",
+    "o1": "Make your first move",
+    "o2": "Report it on 1930",
+    "o3": "Finish the rescue",
+    "rule": "After a fraud, speed matters: tell your bank, call 1930, keep the evidence, and never pay a stranger to recover your money.",
+    "i1": "Call your bank's official number and ask to block your card and UPI.",
+    "i2": "Call 1930 and file a complaint on the cybercrime portal.",
+    "i3": "Keep screenshots and details of the transaction. Never pay a recovery agent.",
+    "r1": {
+      "title": "First move",
+      "body": "₹4,999 has left your account. What do you do first?",
+      "a1": "Call my bank's official number and ask them to block my card and UPI",
+      "a2": "Post about it on social media",
+      "a3": "Delete the messages so I stop thinking about it",
+      "a4": "Wait a few days to see if the money comes back",
+      "n1": "Best. The first minutes matter. Your bank can block further payments and start a dispute.",
+      "n2": "Posting does not recover money, and scammers watch for it. Tell your bank first.",
+      "n3": "Deleting removes the evidence you need. Keep it.",
+      "n4": "Waiting lets the money move on. Speed matters.",
+      "explain": "Fast action with your bank gives the best chance of stopping or tracing the money."
+    },
+    "r2": {
+      "title": "Report it",
+      "body": "Within the first hour, where do you report the fraud?",
+      "a1": "Call 1930, the cybercrime helpline, and give the transaction details",
+      "a2": "Email a support address I found on a website",
+      "a3": "Skip reporting because the bank will sort it out",
+      "n1": "Best. 1930 can alert banks to freeze the money in time.",
+      "n2": "A random email address is not official and wastes time.",
+      "n3": "The bank alone cannot trace the fraudster. A report on 1930 helps freeze funds.",
+      "explain": "1930 is the national cybercrime helpline. Reporting within the first hour gives the best chance of freezing the money."
+    },
+    "r3": {
+      "title": "Keep the evidence",
+      "body": "What do you do with the messages, the link and the screens?",
+      "a1": "Keep them, take screenshots and note the time and amount",
+      "a2": "Delete them",
+      "a3": "Forward them to friends as a warning",
+      "n1": "Best. Evidence supports your complaint and helps the bank and police.",
+      "n2": "Deleting destroys evidence. Keep everything.",
+      "n3": "Warn friends in your own words, but keep the originals yourself and do not forward the link.",
+      "explain": "Screenshots, times, amounts and numbers are what the bank and police use."
+    },
+    "r4": {
+      "a": "We can recover your lost money within 24 hours. ",
+      "b": "Pay a ₹1,000 fee to start.",
+      "l": {
+        "sender": "An unknown mobile number that knows about your loss. Fraudsters watch for victims.",
+        "claim": "No stranger can guarantee to recover money. This is a second scam.",
+        "fee": "A genuine recovery never asks for an upfront fee."
+      },
+      "w": {
+        "claim": "Guaranteed recovery by a stranger is a lie.",
+        "fee": "A fee up front is how recovery scams work."
+      },
+      "a1": "Refuse and block the number",
+      "a2": "Pay the ₹1,000 fee",
+      "n1": "Best. Recovery scams target people who have just lost money.",
+      "n2": "You lost more money. Recovery agents who ask for a fee are fraudsters.",
+      "explain": "Fraudsters buy lists of victims. A genuine recovery never charges a fee up front."
+    },
+    "r5": {
+      "title": "Secure your accounts",
+      "body": "The fraudster may now have your OTP, PIN or passwords. What do you do?",
+      "a1": "Change my UPI PIN and passwords, and check which devices are logged in",
+      "a2": "Ignore it, the money is already gone",
+      "a3": "Share my OTP with a helper who called",
+      "n1": "Best. Changing them stops further access.",
+      "n2": "The fraudster may still have access. Change everything now.",
+      "n3": "Never share an OTP with anyone. That is how the first fraud happened.",
+      "explain": "Assume anything you typed or shared could be used again."
+    },
+    "r6": {
+      "title": "File the complaint",
+      "body": "How do you make this official?",
+      "a1": "File a complaint on the cybercrime portal and ask my bank for a reference number",
+      "a2": "Tell a friend and leave it there",
+      "a3": "Do it next month when I have time",
+      "n1": "Best. A formal complaint starts the process and gives you a record.",
+      "n2": "Telling a friend is good support, but it does not start an investigation.",
+      "n3": "Delay reduces the chance of recovering the money.",
+      "explain": "A complaint number is what the bank and police use to act."
+    }
+  },
+  "rank": {
+    "rookie": "Rookie",
+    "watchful": "Watchful",
+    "sharp": "Sharp-eyed",
+    "proof": "Scam-proof",
+    "guardian": "Guardian"
+  },
+  "badge": {
+    "first_room": {
+      "name": "First room",
+      "desc": "Finish your first room."
+    },
+    "flawless": {
+      "name": "Flawless",
+      "desc": "Finish a room with a perfect score and no money lost."
+    },
+    "card_collector": {
+      "name": "Card collector",
+      "desc": "Find all seven red-flag cards."
+    },
+    "streak_3": {
+      "name": "Three-day streak",
+      "desc": "Play on three days in a row."
+    },
+    "all_rooms": {
+      "name": "Every room",
+      "desc": "Finish every room in Stay Safe."
+    },
+    "sim_upi": {
+      "name": "UPI expert",
+      "desc": "Finish every UPI Simulator room."
+    },
+    "sim_inbox": {
+      "name": "Inbox defender",
+      "desc": "Finish every Scam Inbox room."
+    },
+    "sim_hunter": {
+      "name": "Red-flag hunter",
+      "desc": "Finish Red Flag Hunter."
+    },
+    "sim_call": {
+      "name": "Cool on the call",
+      "desc": "Finish every call room."
+    },
+    "sim_chat": {
+      "name": "Chat detective",
+      "desc": "Finish every chat room."
+    },
+    "sim_loan": {
+      "name": "Loan-wise",
+      "desc": "Finish the loan app room."
+    },
+    "sim_rescue": {
+      "name": "First responder",
+      "desc": "Finish the rescue mission."
+    }
+  },
+  "reward": {
+    "title": "Room complete",
+    "stars": "{n} of 3 stars",
+    "xp": "points",
+    "rank": "Your level",
+    "toNext": "{n} more points to reach {rank}",
+    "top": "You have reached the top level",
+    "rankUp": "Level up",
+    "newBadge": "New achievement",
+    "newCards": "New red-flag cards",
+    "next": "Next room",
+    "replay": "Play again",
+    "back": "Back to {name}",
+    "allDone": "You have played every room",
+    "line": {
+      "performance": "Your score",
+      "firstClear": "First time bonus",
+      "moreStars": "Extra stars (+{n})",
+      "newCards": "New red-flag cards ({n})"
+    },
+    "noXp": "No new points this time. Beat your best score to earn more.",
+    "total": "{n} points in total"
+  }
+}

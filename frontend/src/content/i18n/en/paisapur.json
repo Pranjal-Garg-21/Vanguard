@@ -1,0 +1,333 @@
+{
+  "canvas_label": "Paisapur game view: {place}",
+  "keys_hint": "Move: arrow keys or WASD · Talk / confirm: Z, Enter or Space · Back: X or Esc · Menu: M",
+  "choose": "Choose an option",
+  "close": "Close",
+  "off": "Off",
+  "months": "{n} months",
+  "sim_banner": "Simulation based on assumptions. Not a prediction or advice. All companies are fictional.",
+  "hud": {
+    "month": "Month {n}",
+    "cash": "Cash in hand",
+    "bank": "Money in the bank (including your goal pot)",
+    "fund_months": "Months of needs your savings cover",
+    "peace": "Peace",
+    "menu": "MENU"
+  },
+  "pad": {
+    "up": "Walk up",
+    "down": "Walk down",
+    "left": "Walk left",
+    "right": "Walk right",
+    "a": "A: talk or confirm",
+    "b": "B: back",
+    "menu": "MENU"
+  },
+  "concept": {
+    "new": "New in your Money Journal",
+    "example": "Example:",
+    "got_it": "Got it!"
+  },
+  "quiz": {
+    "title": "Challenge · question {n} of {total}",
+    "right": "Correct!",
+    "wrong": "Not quite.",
+    "next": "Next question",
+    "finish": "Finish"
+  },
+  "goal": {
+    "phone": "new phone",
+    "laptop": "laptop",
+    "bike": "bike",
+    "fees": "coaching course",
+    "trip": "school trip",
+    "cycle": "geared cycle",
+    "stall": "market stall"
+  },
+  "item": {
+    "bus_pass": "Monthly bus pass",
+    "recharge": "Phone recharge",
+    "notebooks": "Notebooks",
+    "groceries": "Groceries (your share)",
+    "mess_fee": "College mess fee",
+    "soap": "Soap",
+    "fruit": "Fresh fruit",
+    "chai": "Cutting chai",
+    "sneakers": "Branded sneakers",
+    "game_topup": "Game top-up",
+    "headphones": "Wireless headphones",
+    "movie": "Movie ticket",
+    "snacks": "Chips and cold drink",
+    "poster": "Cricket poster"
+  },
+  "shop": {
+    "need": "need",
+    "want": "want",
+    "on_list": "on this month's list",
+    "list_left": "Still on this month's needs list: {items}",
+    "list_done": "You've bought everything on this month's needs list. ✔",
+    "pay_with": "Pay with:",
+    "cash": "Cash ({amount})",
+    "upi": "UPI ({amount})",
+    "gst": "incl. {rate}% GST ({amount})",
+    "opportunity": "That's {pct}% of your {goal}.",
+    "buy": "Buy",
+    "bought": "Bought"
+  },
+  "bank": {
+    "cash": "Cash in hand",
+    "balance": "Savings account",
+    "pot": "Goal pot ({goal})",
+    "interest_note": "Savings earn {rate}% a year, credited monthly. Your goal pot earns it too.",
+    "deposit": "Deposit cash",
+    "withdraw": "Withdraw cash",
+    "autosave": "Pay yourself first",
+    "autosave_note": "Each month, as soon as income arrives, this amount moves into your goal pot.",
+    "fd": "Fixed deposit",
+    "fd_note": "Lock money for a while at {rate}% a year. It comes back with interest when it matures.",
+    "fd_open": "{amount} → {value}",
+    "fd_row": "FD of {amount}, matures in month {month}",
+    "loans": "Your loans",
+    "loan_note": "EMI {emi} · {months} months left · {rate}% a month",
+    "card_note": "Paying only the minimum, this balance would take about {months} months to clear.",
+    "repay": "Repay {amount}",
+    "repay_all": "Repay all",
+    "score": "Credit score (300–900)",
+    "statement": "Statement"
+  },
+  "lender": {
+    "bank": "Bank loan",
+    "moneylender": "Moneylender loan",
+    "loanapp": "InstaPaisa app loan",
+    "family": "Loan from Mom",
+    "card": "Credit card",
+    "education": "Education loan"
+  },
+  "loan": {
+    "title_bank": "Paisapur Bank · Loan calculator",
+    "title_moneylender": "Sahukar's terms",
+    "intro_bank": "Bank loan: {monthly}% a month ({yearly}% a year), 1% processing fee. Needs a decent credit score.",
+    "intro_moneylender": "Moneylender: {monthly}% a month ({yearly}% a year). No papers, no questions, cash today.",
+    "amount": "How much?",
+    "tenure": "For how long?",
+    "emi": "Monthly payment (EMI)",
+    "received": "You receive",
+    "total": "You repay in total",
+    "interest": "Cost of borrowing",
+    "doubling": "Rule of 72: at this rate, an unpaid debt doubles in about {years} years.",
+    "emi_vs_income": "This EMI is {pct}% of next month's income.",
+    "take": "Take this loan",
+    "just_looking": "Just looking",
+    "confirm": "You'll repay {total} over {months} months. The EMI comes out of your account every month. Sign?",
+    "sign": "Sign",
+    "cancel": "Cancel",
+    "title_education": "Paisapur Bank · Education loan",
+    "intro_education": "Education loan: {monthly}% a month ({yearly}% a year), no processing fee. For courses and study tools."
+  },
+  "bonds": {
+    "intro": "Town bonds pay {rate}% a year, returned in {months} months. You're lending the town money to rebuild the bridge.",
+    "buy": "Lend {amount} → get {value}",
+    "row": "Bond of {amount}, matures in month {month}",
+    "note": "Bonds can't be cashed early here. Lend only money you won't need for a year."
+  },
+  "ex": {
+    "bank": "Available in your bank",
+    "portfolio": "Your investments",
+    "fee": "Yearly fee: {fee}%",
+    "holding": "You hold {value} (you put in {invested}, {pct})",
+    "buy": "Buy {amount}",
+    "sell_half": "Sell half",
+    "sell_all": "Sell all",
+    "sip": "Monthly SIP into the Deccan 5 Index ETF",
+    "sip_note": "A fixed amount goes in every month, whatever the market does."
+  },
+  "asset_kind": {
+    "stock": "company share",
+    "etf": "index ETF",
+    "fund": "active mutual fund",
+    "gold": "gold"
+  },
+  "asset": {
+    "pearl": {
+      "name": "Pearl City Power",
+      "about": "Sells electricity. Steady, slow-growing."
+    },
+    "tiffin": {
+      "name": "Tiffin Tech",
+      "about": "A food-delivery app. Fast-growing, big swings."
+    },
+    "lakeview": {
+      "name": "Lakeview Cement",
+      "about": "Builds roads and bridges. Rises and falls with the economy."
+    },
+    "gully": {
+      "name": "Gully Gadgets",
+      "about": "Cheap phones. Popular in chat-group tips. Very risky."
+    },
+    "bonalu": {
+      "name": "Bonalu Bikes",
+      "about": "Makes scooters. Solid, middle-of-the-road."
+    },
+    "index": {
+      "name": "Deccan 5 Index ETF",
+      "about": "Holds all five Deccan companies equally. Diversified and cheap."
+    },
+    "active": {
+      "name": "Star Picks Fund",
+      "about": "A manager picks companies, trying to beat the index."
+    },
+    "gold": {
+      "name": "Gold (1 gram)",
+      "about": "Holds value when other things fall. Pays no interest."
+    }
+  },
+  "news": {
+    "title": "Deccan Exchange news board",
+    "mood_up": "Markets are cheerful this month.",
+    "mood_down": "Markets fell this month. Long faces on the trading floor.",
+    "mood_flat": "A quiet month on the Exchange.",
+    "up": "{name} jumped {pct} this month.",
+    "down": "{name} fell {pct} this month.",
+    "rumour": "Overheard: \"My cousin's Telegram group says Gully Gadgets will go 10x by Diwali!\"",
+    "note": "One month's move says little about the long run."
+  },
+  "night": {
+    "title": "Good morning! Month {n} begins",
+    "missed_needs": "You skipped needs last month. Going without made the month harder.",
+    "worth": "Net worth",
+    "peace": "Peace of mind",
+    "needs_next": "This month's needs will cost",
+    "wake": "Start the month"
+  },
+  "reason": {
+    "gift": "Birthday gift",
+    "income": "Income",
+    "deposit": "Deposit",
+    "withdraw": "Withdrawal",
+    "buy": "Shopping",
+    "autosave": "Pay yourself first",
+    "interest": "Savings interest",
+    "fd_open": "Fixed deposit opened",
+    "fd_mature": "Fixed deposit matured",
+    "bond_buy": "Town bonds bought",
+    "bond_mature": "Town bonds repaid",
+    "loan": "Loan received",
+    "repay": "Loan repayment",
+    "emi": "EMI and card payments",
+    "late_fee": "Late payment fees",
+    "invest": "Investments bought",
+    "sell": "Investments sold",
+    "scam": "Lost to a scam",
+    "premium": "Insurance premium",
+    "work": "Odd job",
+    "repair": "Phone repair",
+    "lend": "Lent to a friend",
+    "repaid": "Friend repaid you",
+    "ponzi": "Double Dhamaka",
+    "fire": "Fire damage",
+    "recovered": "Money recovered by police",
+    "spend": "Spending",
+    "windfall": "Festival bonus",
+    "scholarship": "Scholarship",
+    "goal": "Goal purchase",
+    "sold": "Sold something"
+  },
+  "menu": {
+    "title": "Menu",
+    "objective": "Now:",
+    "journal": "Money Journal",
+    "wallet": "Wallet",
+    "badges": "Badges",
+    "save": "Save",
+    "quit": "Save and quit",
+    "bag": "Bag",
+    "sound": "Sound"
+  },
+  "journal": {
+    "count": "{seen} of {total} ideas discovered · {mastered} mastered ⭐",
+    "mastered": "Mastered"
+  },
+  "chapter": {
+    "0": "Prologue · Your birthday",
+    "1": "Chapter 1 · The Account",
+    "2": "Chapter 2 · Needs and Wants",
+    "3": "Chapter 3 · The Storm",
+    "4": "Chapter 4 · Borrowing",
+    "5": "Chapter 5 · The Bridge",
+    "6": "Chapter 6 · Double Dhamaka"
+  },
+  "badge": {
+    "banked": {
+      "name": "Banked",
+      "icon": "🏦",
+      "from": "Meena Rao"
+    },
+    "budget": {
+      "name": "Budget",
+      "icon": "🫙",
+      "from": "Anwar Chacha"
+    },
+    "saver": {
+      "name": "Saver",
+      "icon": "🛟",
+      "from": "Lakshmi Aunty"
+    },
+    "borrower": {
+      "name": "Smart Borrower",
+      "icon": "📄",
+      "from": "Mr. Iyer"
+    },
+    "investor": {
+      "name": "Investor",
+      "icon": "📈",
+      "from": "Ravi Sharma"
+    },
+    "shield": {
+      "name": "Shield",
+      "icon": "🛡️",
+      "from": "Insp. Fatima"
+    }
+  },
+  "wallet": {
+    "assets": "What you own",
+    "liabilities": "What you owe",
+    "no_account": "No account yet",
+    "fds": "Fixed deposits",
+    "bonds": "Town bonds",
+    "investments": "Investments",
+    "debts": "Debts",
+    "net_worth": "Net worth",
+    "month": "Each month",
+    "income": "Expected income",
+    "needs": "Needs",
+    "fund": "Emergency fund",
+    "fund_months": "{n} months of needs",
+    "meters": "Peace · Safety · Trust",
+    "meter_values": "{peace} · {safety} · {trust}",
+    "goals_done": "Goals reached"
+  },
+  "year": {
+    "title": "{name}'s year",
+    "months": "Months lived",
+    "started": "You started with",
+    "badges": "Badges",
+    "concepts": "Money ideas",
+    "concepts_value": "{seen} of {total} discovered, {mastered} mastered",
+    "debt_note": "You still have some debt. Paying it off is the best guaranteed return there is.",
+    "free_note": "You finish the year debt-free. That's a strong start to adult life."
+  },
+  "building": {
+    "lab": "Money Lab",
+    "bank": "Bank",
+    "bond": "Bond Office",
+    "zaroorat": "Zaroorat",
+    "shauq": "Shauq Bazaar",
+    "lender": "Sahukar",
+    "home": "Home",
+    "kabirhome": "Kabir's",
+    "exchange": "Exchange",
+    "insurance": "Insurance",
+    "cyber": "Cyber Cell",
+    "jackpot": "Dhamaka"
+  }
+}

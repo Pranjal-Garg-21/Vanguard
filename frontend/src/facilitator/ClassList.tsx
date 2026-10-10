@@ -34,9 +34,8 @@ export function ClassList() {
 
       {classes?.length === 0 && (
         <Card className="py-12 text-center">
-          <div className="text-5xl">🏫</div>
           <h2 className="mt-3 text-lg font-bold">No classes yet</h2>
-          <p className="mt-1 text-slate-600">Create a class to get a join code and QR for your students.</p>
+          <p className="mt-1 text-ink-soft">Create a class to get a join code and QR for your students.</p>
           <Link to="new" className="mt-5 inline-block">
             <Button>Create your first class</Button>
           </Link>
@@ -48,13 +47,13 @@ export function ClassList() {
           const students = c.players[0]?.count ?? 0;
           return (
             <Link key={c.id} to={`class/${c.id}`} className="block">
-              <Card className="h-full transition hover:border-teal-600">
+              <Card className="h-full transition hover:border-brand">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-lg font-bold">{c.name}</h2>
-                    {c.centre && <p className="text-sm text-slate-500">{c.centre}</p>}
+                    {c.centre && <p className="text-sm text-muted">{c.centre}</p>}
                   </div>
-                  <span className="rounded-lg bg-slate-100 px-2 py-1 font-mono text-sm font-bold tracking-wider">{c.join_code}</span>
+                  <span className="rounded-lg bg-surface-2 px-2 py-1 font-mono text-sm font-bold tracking-wider">{c.join_code}</span>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Badge tone="info">

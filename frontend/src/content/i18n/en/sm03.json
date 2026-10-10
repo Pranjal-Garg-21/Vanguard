@@ -1,0 +1,59 @@
+{
+  "_comment": "UC-SM-03 Surprise Month. Tone rule: a character without a buffer has not been foolish. Most people have no buffer — that is why the game exists. None of the four fallback options is mocked, and none is called wrong; they have different costs, and the costs are shown.",
+
+  "summary": "A surprise arrived, and you found out what a buffer is for.",
+
+  "shock": {
+    "screen": { "hook": "Your phone slipped out of your pocket at the bus stop. The screen is a spider web. Repair: {amount}." },
+    "medicine": { "hook": "Your mother has been putting off seeing a doctor. The medicine comes to {amount}, and it cannot wait another month." },
+    "trip": { "hook": "The college trip is compulsory — it is part of the course. {amount}, due Friday." },
+    "vehicle": { "hook": "The bike you use for deliveries has stopped. Until it is fixed you earn nothing. Repair: {amount}." },
+    "fees": { "hook": "A fee you forgot about is due this week: {amount}." }
+  },
+
+  "buffer": {
+    "have": "You have {amount} set aside for exactly this.",
+    "none": "You check what you have set aside for surprises. There is nothing there."
+  },
+
+  "option": {
+    "emergency_jar": {
+      "text": "Pay it from your emergency money",
+      "result": "You paid it and carried on with your day. Nothing else in your month changed. This is the entire point of an emergency fund — not that it earns anything, but that a bad week stays a bad week instead of becoming a bad year."
+    },
+    "family": {
+      "text": "Ask family for the money",
+      "result": "They found it. They also asked what happened to the money you earn, and you did not enjoy explaining. It cost you nothing in rupees and something real in how you felt at dinner."
+    },
+    "loan_app": {
+      "text": "Use an instant loan app",
+      "result": "The money arrived in four minutes. So did the app's access to your contacts. You now owe more than you borrowed, on a deadline you did not choose."
+    },
+    "skip_need": {
+      "text": "Skip something you need this month",
+      "result": "You stopped topping up the bus pass and walked. It worked, and it cost you an hour a day and most of your energy. Skipping a need is a loan you take out from yourself."
+    },
+    "sell": {
+      "text": "Sell something you own",
+      "result": "You sold it for less than it was worth, because you needed the money today and the buyer knew it. Selling in a hurry is always selling cheap."
+    }
+  },
+
+  "reflect": {
+    "question": "How much set aside would have made this a non-event?",
+    "option": "{amount} — about {label}",
+    "half_month": "half a month of your needs",
+    "one_month": "one month of your needs",
+    "two_months": "two months of your needs",
+    "saved": "Your Emergency jar is open. It will appear next time you plan your month.",
+    "already": "Your buffer did its job. You can top it back up next month."
+  },
+
+  "concept": {
+    "emergency": "An emergency fund is money kept only for surprises. It is not saving for something — it is what stops a surprise from becoming a debt."
+  },
+
+  "badge": {
+    "emergency_ready": "Emergency Ready"
+  }
+}

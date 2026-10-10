@@ -1,0 +1,63 @@
+{
+  "id": "lab",
+  "name": "maps.lab",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWWWW",
+    "WKKKKWKKKKW",
+    "WFFFFFFFFFW",
+    "WFFFCCCFFFW",
+    "WFFFFFFFFFW",
+    "WnFFFFFFFnW",
+    "WFFFFFFFFFW",
+    "WQFFFFFFFQW",
+    "WWWWWEWWWWW"
+  ],
+  "entry": {
+    "x": 5,
+    "y": 7,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "professor",
+      "sprite": "professor",
+      "x": 5,
+      "y": 2,
+      "facing": "down",
+      "script": "professor"
+    },
+    {
+      "id": "kabir_lab",
+      "sprite": "kabir",
+      "x": 7,
+      "y": 5,
+      "facing": "left",
+      "script": "kabir",
+      "when": "flag:kabir_in_lab"
+    }
+  ],
+  "objects": [
+    {
+      "x": 1,
+      "y": 7,
+      "script": "lab_terminal"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "script": "whatif"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "script": "lab_books"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "script": "lab_books"
+    }
+  ],
+  "triggers": []
+}

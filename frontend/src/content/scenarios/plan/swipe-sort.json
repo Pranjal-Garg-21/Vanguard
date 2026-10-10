@@ -1,0 +1,465 @@
+{
+  "_comment": "UC-PB-01 Needs vs Wants Swipe Sort card pool. Implementation.md 12.6 requires 30+ cards drawn from the persona's life, and forbids labelling a genuinely ambiguous item 'wrong'. Cards with correctBucket: null are accepted either way and get 'here's another way to see it' in the summary. personaFilter is applied by the game before the deck reaches the Triage verb.",
+  "_owner": "P3",
+  "_useCase": "UC-PB-01",
+  "id": "swipe-sort",
+  "pillar": "plan",
+  "verb": "triage",
+  "layout": "queue",
+  "maxCards": 8,
+  "promptKey": "pb01.prompt",
+  "buckets": [
+    {
+      "id": "need",
+      "labelKey": "pb01.bucket.need",
+      "emoji": "🏠"
+    },
+    {
+      "id": "want",
+      "labelKey": "pb01.bucket.want",
+      "emoji": "🎉"
+    }
+  ],
+  "concepts": [
+    "needs_wants",
+    "context_dependence"
+  ],
+  "cards": [
+    {
+      "id": "bus_pass",
+      "textKey": "pb01.bus_pass.text",
+      "amount": 300,
+      "correctBucket": "need",
+      "explainKey": "pb01.bus_pass.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "storyItem": "bus_pass"
+    },
+    {
+      "id": "sneakers_new",
+      "textKey": "pb01.sneakers_new.text",
+      "amount": 1800,
+      "correctBucket": "want",
+      "explainKey": "pb01.sneakers_new.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "misconception": "everything_i_want_is_need",
+      "storyItem": "sneakers"
+    },
+    {
+      "id": "phone_recharge",
+      "textKey": "pb01.phone_recharge.text",
+      "amount": 299,
+      "correctBucket": null,
+      "explainKey": "pb01.phone_recharge.why",
+      "recontext": {
+        "contextKey": "pb01.phone_recharge.context",
+        "correctBucket": "need",
+        "explainKey": "pb01.phone_recharge.why2"
+      },
+      "concepts": {
+        "context_dependence": 0.9
+      },
+      "storyItem": "recharge"
+    },
+    {
+      "id": "biryani_friends",
+      "textKey": "pb01.biryani_friends.text",
+      "amount": 250,
+      "correctBucket": null,
+      "explainKey": "pb01.biryani_friends.why",
+      "concepts": {
+        "needs_wants": 0.7
+      }
+    },
+    {
+      "id": "exam_fee",
+      "textKey": "pb01.exam_fee.text",
+      "amount": 500,
+      "correctBucket": "need",
+      "explainKey": "pb01.exam_fee.why",
+      "concepts": {
+        "needs_wants": 0.9
+      }
+    },
+    {
+      "id": "gaming_skin",
+      "textKey": "pb01.gaming_skin.text",
+      "amount": 149,
+      "correctBucket": "want",
+      "explainKey": "pb01.gaming_skin.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "misconception": "everything_i_want_is_need"
+    },
+    {
+      "id": "notebook",
+      "textKey": "pb01.notebook.text",
+      "amount": 60,
+      "correctBucket": "need",
+      "explainKey": "pb01.notebook.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "storyItem": "notebooks"
+    },
+    {
+      "id": "umbrella",
+      "textKey": "pb01.umbrella.text",
+      "amount": 220,
+      "correctBucket": "need",
+      "explainKey": "pb01.umbrella.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "movie_ticket",
+      "textKey": "pb01.movie_ticket.text",
+      "amount": 180,
+      "correctBucket": "want",
+      "explainKey": "pb01.movie_ticket.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "storyItem": "movie"
+    },
+    {
+      "id": "haircut",
+      "textKey": "pb01.haircut.text",
+      "amount": 100,
+      "correctBucket": null,
+      "explainKey": "pb01.haircut.why",
+      "concepts": {
+        "context_dependence": 0.7
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "medicine_fever",
+      "textKey": "pb01.medicine_fever.text",
+      "amount": 150,
+      "correctBucket": "need",
+      "explainKey": "pb01.medicine_fever.why",
+      "concepts": {
+        "needs_wants": 0.9
+      }
+    },
+    {
+      "id": "birthday_gift",
+      "textKey": "pb01.birthday_gift.text",
+      "amount": 300,
+      "correctBucket": null,
+      "explainKey": "pb01.birthday_gift.why",
+      "concepts": {
+        "context_dependence": 0.7
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "cricket_bat",
+      "textKey": "pb01.cricket_bat.text",
+      "amount": 900,
+      "correctBucket": "want",
+      "explainKey": "pb01.cricket_bat.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "misconception": "everything_i_want_is_need"
+    },
+    {
+      "id": "tiffin_box",
+      "textKey": "pb01.tiffin_box.text",
+      "amount": 180,
+      "correctBucket": null,
+      "explainKey": "pb01.tiffin_box.why",
+      "recontext": {
+        "contextKey": "pb01.tiffin_box.context",
+        "correctBucket": "need",
+        "explainKey": "pb01.tiffin_box.why2"
+      },
+      "concepts": {
+        "context_dependence": 0.9
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "earphones",
+      "textKey": "pb01.earphones.text",
+      "amount": 450,
+      "correctBucket": null,
+      "explainKey": "pb01.earphones.why",
+      "recontext": {
+        "contextKey": "pb01.earphones.context",
+        "correctBucket": "need",
+        "explainKey": "pb01.earphones.why2"
+      },
+      "concepts": {
+        "context_dependence": 0.9
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "hostel_mess",
+      "textKey": "pb01.hostel_mess.text",
+      "amount": 2200,
+      "correctBucket": "need",
+      "explainKey": "pb01.hostel_mess.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "personaFilter": {
+        "lifeStage": [
+          "college_student"
+        ]
+      },
+      "storyItem": "mess_fee"
+    },
+    {
+      "id": "lab_manual",
+      "textKey": "pb01.lab_manual.text",
+      "amount": 350,
+      "correctBucket": "need",
+      "explainKey": "pb01.lab_manual.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "personaFilter": {
+        "lifeStage": [
+          "college_student"
+        ]
+      }
+    },
+    {
+      "id": "bedsheet",
+      "textKey": "pb01.bedsheet.text",
+      "amount": 400,
+      "correctBucket": "need",
+      "explainKey": "pb01.bedsheet.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "minLevel": 2,
+      "personaFilter": {
+        "lifeStage": [
+          "college_student"
+        ]
+      }
+    },
+    {
+      "id": "fest_ticket",
+      "textKey": "pb01.fest_ticket.text",
+      "amount": 600,
+      "correctBucket": "want",
+      "explainKey": "pb01.fest_ticket.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "misconception": "everything_i_want_is_need",
+      "personaFilter": {
+        "lifeStage": [
+          "college_student"
+        ]
+      }
+    },
+    {
+      "id": "coaching_fees",
+      "textKey": "pb01.coaching_fees.text",
+      "amount": 3000,
+      "correctBucket": null,
+      "explainKey": "pb01.coaching_fees.why",
+      "concepts": {
+        "context_dependence": 0.8
+      },
+      "minLevel": 2,
+      "personaFilter": {
+        "lifeStage": [
+          "school_student",
+          "college_student"
+        ]
+      }
+    },
+    {
+      "id": "auto_fare_late",
+      "textKey": "pb01.auto_fare_late.text",
+      "amount": 80,
+      "correctBucket": null,
+      "explainKey": "pb01.auto_fare_late.why",
+      "recontext": {
+        "contextKey": "pb01.auto_fare_late.context",
+        "correctBucket": "need",
+        "explainKey": "pb01.auto_fare_late.why2"
+      },
+      "concepts": {
+        "context_dependence": 0.9
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "phone_upgrade",
+      "textKey": "pb01.phone_upgrade.text",
+      "amount": 12000,
+      "correctBucket": "want",
+      "explainKey": "pb01.phone_upgrade.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "misconception": "everything_i_want_is_need"
+    },
+    {
+      "id": "laptop_repair",
+      "textKey": "pb01.laptop_repair.text",
+      "amount": 1500,
+      "correctBucket": null,
+      "explainKey": "pb01.laptop_repair.why",
+      "recontext": {
+        "contextKey": "pb01.laptop_repair.context",
+        "correctBucket": "need",
+        "explainKey": "pb01.laptop_repair.why2"
+      },
+      "concepts": {
+        "context_dependence": 0.9
+      },
+      "minLevel": 3,
+      "personaFilter": {
+        "lifeStage": [
+          "college_student",
+          "first_earner"
+        ]
+      }
+    },
+    {
+      "id": "chai_daily",
+      "textKey": "pb01.chai_daily.text",
+      "amount": 440,
+      "correctBucket": "want",
+      "explainKey": "pb01.chai_daily.why",
+      "concepts": {
+        "needs_wants": 0.7
+      },
+      "minLevel": 2,
+      "misconception": "small_spends_dont_matter"
+    },
+    {
+      "id": "photocopy_notes",
+      "textKey": "pb01.photocopy_notes.text",
+      "amount": 120,
+      "correctBucket": "need",
+      "explainKey": "pb01.photocopy_notes.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "personaFilter": {
+        "lifeStage": [
+          "school_student",
+          "college_student"
+        ]
+      }
+    },
+    {
+      "id": "household_share",
+      "textKey": "pb01.household_share.text",
+      "amount": 3000,
+      "correctBucket": "need",
+      "explainKey": "pb01.household_share.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "personaFilter": {
+        "circumstance": [
+          "family_contributor",
+          "part_time_earner"
+        ]
+      }
+    },
+    {
+      "id": "sibling_fee",
+      "textKey": "pb01.sibling_fee.text",
+      "amount": 1200,
+      "correctBucket": "need",
+      "explainKey": "pb01.sibling_fee.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "personaFilter": {
+        "circumstance": [
+          "family_contributor"
+        ]
+      }
+    },
+    {
+      "id": "lpg_cylinder",
+      "textKey": "pb01.lpg_cylinder.text",
+      "amount": 950,
+      "correctBucket": "need",
+      "explainKey": "pb01.lpg_cylinder.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "personaFilter": {
+        "circumstance": [
+          "family_contributor"
+        ]
+      }
+    },
+    {
+      "id": "festival_clothes",
+      "textKey": "pb01.festival_clothes.text",
+      "amount": 1500,
+      "correctBucket": null,
+      "explainKey": "pb01.festival_clothes.why",
+      "concepts": {
+        "context_dependence": 0.8
+      },
+      "minLevel": 2
+    },
+    {
+      "id": "petrol_work",
+      "textKey": "pb01.petrol_work.text",
+      "amount": 800,
+      "correctBucket": "need",
+      "explainKey": "pb01.petrol_work.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "personaFilter": {
+        "lifeStage": [
+          "first_earner"
+        ]
+      }
+    },
+    {
+      "id": "ott_subscription",
+      "textKey": "pb01.ott_subscription.text",
+      "amount": 199,
+      "correctBucket": "want",
+      "explainKey": "pb01.ott_subscription.why",
+      "concepts": {
+        "needs_wants": 0.8
+      },
+      "misconception": "small_spends_dont_matter",
+      "minLevel": 2
+    },
+    {
+      "id": "parent_checkup",
+      "textKey": "pb01.parent_checkup.text",
+      "amount": 600,
+      "correctBucket": "need",
+      "explainKey": "pb01.parent_checkup.why",
+      "concepts": {
+        "needs_wants": 0.9
+      },
+      "minLevel": 2,
+      "personaFilter": {
+        "circumstance": [
+          "family_contributor",
+          "part_time_earner"
+        ]
+      }
+    }
+  ]
+}

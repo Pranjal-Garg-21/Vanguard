@@ -1,0 +1,30 @@
+{
+  "title": "PaisaPath",
+  "tagline": "Live a money life. Make mistakes safely. Grow.",
+  "welcomeBack": "Welcome back, {name}!",
+  "sceneLabel": "A small village with houses, trees and a path",
+  "simulator": {
+    "title": "Play Paisapur",
+    "body": "A money adventure: walk the town, meet Professor Arth and earn six badges."
+  },
+  "minigames": {
+    "title": "Play Minigames",
+    "body": "Short games on saving, scams, investing and more."
+  },
+  "facilitator": "I’m a facilitator",
+  "arcade": {
+    "title": "Minigames",
+    "body": "Pick a game. More are being built.",
+    "soon": "Coming soon",
+    "back": "Back to the village",
+    "games": {
+      "documentHunt": "Document Hunt",
+      "jarSplit": "Jar Split",
+      "scamInbox": "Scam Inbox",
+      "upiSimulator": "UPI Simulator",
+      "compoundingGarden": "Compounding Garden",
+      "stockMarket": "Stock Market"
+    },
+    "more": "Coming from the rest of the team"
+  }
+}

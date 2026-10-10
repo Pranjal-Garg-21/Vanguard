@@ -1,0 +1,123 @@
+{
+  "id": "deccan",
+  "name": "maps.deccan",
+  "rows": [
+    "hhhhhhhhhhhhhhhhhhhhhhhh",
+    "hPppppppppppppppppppppPh",
+    "hpppppppppppppppppppppph",
+    "hpppppppppppppppppppppph",
+    "hpppppppppppppppppppppph",
+    "hpppppppppppppppppppppph",
+    "hppp=pjpjp===pp=pjpp=pjh",
+    "hp====================ph",
+    "hpppppppppp==pppppppppph",
+    "hpPpppLpppp==ppppLpppPph",
+    "hppppppppPp==pPpppppppph",
+    "hpppppppppp==pppppppppph",
+    "hppPppppppp==pppppppPpph",
+    "hppppppLppp==jppLpppppph",
+    "hpppppppppp==pppppppppph",
+    "hhhhhhhhhhh==hhhhhhhhhhh"
+  ],
+  "buildings": [
+    {
+      "id": "exchange",
+      "stamp": "hall_grey",
+      "x": 2,
+      "y": 3,
+      "to": "exchange"
+    },
+    {
+      "id": "insurance",
+      "stamp": "office_grey",
+      "x": 9,
+      "y": 3,
+      "to": "insurance",
+      "when": "chapter>=6",
+      "closed": "signs.closed_later"
+    },
+    {
+      "id": "cyber",
+      "stamp": "office_grey",
+      "x": 14,
+      "y": 3,
+      "to": "cyber",
+      "when": "chapter>=6",
+      "closed": "signs.closed_later"
+    },
+    {
+      "id": "jackpot",
+      "stamp": "shop_red",
+      "x": 18,
+      "y": 3,
+      "to": "jackpot",
+      "when": "chapter>=6",
+      "closed": "signs.closed_later"
+    }
+  ],
+  "warps": [
+    {
+      "x": 11,
+      "y": 15,
+      "to": "paisapur",
+      "tx": 24,
+      "ty": 1,
+      "facing": "down"
+    },
+    {
+      "x": 12,
+      "y": 15,
+      "to": "paisapur",
+      "tx": 25,
+      "ty": 1,
+      "facing": "down"
+    }
+  ],
+  "signs": [
+    {
+      "x": 6,
+      "y": 6,
+      "text": "signs.exchange"
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "text": "signs.insurance"
+    },
+    {
+      "x": 17,
+      "y": 6,
+      "text": "signs.cyber"
+    },
+    {
+      "x": 22,
+      "y": 6,
+      "text": "signs.jackpot"
+    },
+    {
+      "x": 13,
+      "y": 13,
+      "text": "signs.deccan"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "kabir_city",
+      "sprite": "kabir",
+      "x": 9,
+      "y": 8,
+      "facing": "down",
+      "script": "kabir",
+      "when": "chapter>=5"
+    },
+    {
+      "id": "citizen",
+      "sprite": "townsfolk_b",
+      "x": 16,
+      "y": 11,
+      "facing": "left",
+      "script": "townsfolk_city"
+    }
+  ],
+  "triggers": []
+}

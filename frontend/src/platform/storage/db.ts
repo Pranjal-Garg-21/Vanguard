@@ -36,7 +36,8 @@ export type Save = { pid: string; slot: string; data: unknown; updatedAt: number
 /** Snapshot body belongs to P1; only the indexed fields are fixed here. */
 export type StoredSnapshot = { id: string; pid: string; timelineId: string; data: unknown; createdAt: number };
 
-export type OutboxStatus = 'pending' | 'sending' | 'sent';
+/** 'rejected': the server said this event can never be accepted, so it is not retried. */
+export type OutboxStatus = 'pending' | 'sending' | 'sent' | 'rejected';
 export type OutboxEvent = GameEvent & { status: OutboxStatus; attempts: number };
 
 export type Setting = { scope: string; key: string; value: unknown };

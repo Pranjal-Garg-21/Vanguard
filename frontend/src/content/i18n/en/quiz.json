@@ -1,0 +1,191 @@
+{
+  "bank_kyc": {
+    "q": "To open a bank account, what does KYC need?",
+    "a": "Your parents' salary slips",
+    "b": "Proof of identity, proof of address and a photo",
+    "c": "Updating details through a link the bank sends by SMS",
+    "why": "KYC checks who you are with ID, address proof and a photo, at the branch or in the bank's official app. Banks never ask you to update KYC through an SMS link."
+  },
+  "bank_type": {
+    "q": "You want to keep your allowance safe and earn a little interest. Which account?",
+    "a": "A savings account",
+    "b": "A current account",
+    "c": "No account: cash at home is safer",
+    "why": "A savings account is for keeping money and earns interest. Current accounts are for businesses and usually pay none."
+  },
+  "bank_pin": {
+    "q": "Who is allowed to know your UPI PIN?",
+    "a": "A bank officer who calls about fraud",
+    "b": "Your best friend",
+    "c": "Only you",
+    "why": "Nobody else ever needs your PIN or OTP. A caller asking for it is a scammer, however official they sound."
+  },
+  "bank_receive": {
+    "q": "A buyer sends you a QR code to \"receive\" ₹1,500 for your old cycle. What do you do?",
+    "a": "Scan it and enter your PIN to receive the money",
+    "b": "Refuse: you never need your PIN to receive money",
+    "c": "Scan it but enter a wrong PIN to be safe",
+    "why": "A PIN is only ever needed to send money. Scanning a code and entering your PIN would pay them."
+  },
+  "budget_needs": {
+    "q": "Which of these is a need?",
+    "a": "A monthly bus pass to get to school",
+    "b": "A game top-up",
+    "c": "Sneakers on sale",
+    "why": "Needs are what you must have to live, study and work. Transport to school is a need; the others are wants."
+  },
+  "budget_rule": {
+    "q": "In the 50/30/20 rule, what is the 20% for?",
+    "a": "Wants",
+    "b": "Needs",
+    "c": "Saving",
+    "why": "About 50% for needs, 30% for wants and 20% for saving, with saving planned first."
+  },
+  "budget_sale": {
+    "q": "Sneakers are \"₹3,600, now ₹1,800!\" You weren't planning to buy shoes. If you buy them, you have...",
+    "a": "Saved ₹1,800",
+    "b": "Spent ₹1,800",
+    "c": "Saved ₹3,600",
+    "why": "A sale only saves money on something you were going to buy anyway. Otherwise it's just spending."
+  },
+  "budget_first": {
+    "q": "What's the most reliable way to save every month?",
+    "a": "Move savings out as soon as money arrives, automatically if possible",
+    "b": "Save whatever is left at the end of the month",
+    "c": "Save only in months when you feel rich",
+    "why": "Pay yourself first. At the end of the month there's usually nothing left."
+  },
+  "save_emergency": {
+    "q": "Your needs cost ₹800 a month. A good starting emergency fund is about...",
+    "a": "₹100",
+    "b": "₹2,400 (3 months of needs)",
+    "c": "₹50,000 in stocks",
+    "why": "Aim for 3–6 months of needs, kept somewhere you can reach quickly, like a savings account."
+  },
+  "save_compound": {
+    "q": "Why does starting to save early matter so much?",
+    "a": "Banks pay young people a special rate",
+    "b": "It doesn't, only the amount matters",
+    "c": "Compound interest earns interest on interest, so time multiplies growth",
+    "why": "With compounding, the longer money grows, the faster it grows. Time is the secret ingredient."
+  },
+  "save_72": {
+    "q": "Using the rule of 72, about how long does money take to double at 8% a year?",
+    "a": "About 9 years",
+    "b": "About 72 years",
+    "c": "About 2 years",
+    "why": "72 ÷ 8 = 9. The same rule shows how fast a debt doubles at high interest."
+  },
+  "save_inflation": {
+    "q": "Your savings earn 3.5% a year while prices rise 6% a year. What's happening to your money?",
+    "a": "It's growing, so all is fine",
+    "b": "It buys a little less each year",
+    "c": "Nothing changes",
+    "why": "If interest is lower than inflation, your real return is negative: the same money buys less."
+  },
+  "debt_total": {
+    "q": "Two loans for ₹30,000: 12 months at ₹2,665 EMI, or 24 months at ₹1,412 EMI. Which costs less in total?",
+    "a": "24 months, because the EMI is smaller",
+    "b": "12 months: ₹31,980 in total vs ₹33,890",
+    "c": "They cost the same",
+    "why": "A longer tenure lowers the EMI but adds interest. Always compare the total you'll pay."
+  },
+  "debt_minimum": {
+    "q": "You owe ₹10,000 on a credit card and pay only the minimum each month. What happens?",
+    "a": "Nothing bad: the minimum is enough",
+    "b": "The bank cancels the rest",
+    "c": "Interest of over 40% a year keeps the debt alive for years",
+    "why": "Card interest is around 3–4% a month on what you don't pay. Pay the full bill whenever you can."
+  },
+  "debt_score": {
+    "q": "What raises your credit score?",
+    "a": "Paying every EMI and card bill on time",
+    "b": "Taking many loans at once",
+    "c": "Missing a payment and paying double next month",
+    "why": "On-time repayment builds your score. A good score means cheaper loans later."
+  },
+  "debt_app": {
+    "q": "An app offers ₹5,000 instantly with no checks if you allow access to your contacts. This is...",
+    "a": "Free money for emergencies",
+    "b": "A likely predatory loan app: huge fees, high interest and harassment",
+    "c": "The same as a bank loan",
+    "why": "Only borrow from regulated lenders, and never give an app your contacts or photos."
+  },
+  "inv_bond": {
+    "q": "When you buy a town bond, you are...",
+    "a": "Lending the town money for a fixed time at a fixed interest rate",
+    "b": "Buying a piece of the town",
+    "c": "Paying a tax",
+    "why": "A bond is a loan from you to a government or company. Owning a piece of a company is a stock."
+  },
+  "inv_diversify": {
+    "q": "What's the safest way to invest ₹5,000 in the stock market?",
+    "a": "All in the one company everyone is talking about",
+    "b": "All in the cheapest share",
+    "c": "Spread across many companies, for example an index fund",
+    "why": "Diversification means one company's crash can't sink you."
+  },
+  "inv_horizon": {
+    "q": "You need money for exam fees in 3 months. Where should it be?",
+    "a": "In shares, for higher returns",
+    "b": "In a savings account or short FD",
+    "c": "In gold jewellery",
+    "why": "Money needed soon belongs somewhere safe. Stocks can be down exactly when you need them."
+  },
+  "inv_crash": {
+    "q": "Your index fund falls 15% in a month. You don't need the money for years. A sensible move?",
+    "a": "Stay invested and keep your monthly SIP going",
+    "b": "Sell everything before it falls more",
+    "c": "Borrow money to buy a single hot stock",
+    "why": "Selling in a panic locks in the loss. Long-term investors ride out falls."
+  },
+  "inv_etf": {
+    "q": "What's the main advantage of an index fund or ETF?",
+    "a": "It always beats the market",
+    "b": "Its returns are guaranteed",
+    "c": "It's diversified and has low fees",
+    "why": "Index funds hold the whole market cheaply. Nothing in the market is guaranteed."
+  },
+  "inv_risk": {
+    "q": "An investment promises much higher returns than an FD. That usually means...",
+    "a": "It's just as safe",
+    "b": "It carries more risk",
+    "c": "It has no risk at all",
+    "why": "Higher possible returns come with higher risk. \"High return, no risk\" is a red flag."
+  },
+  "safe_ponzi": {
+    "q": "\"Double Dhamaka\" pays its first members exactly on time. Where does that money come from?",
+    "a": "Real profits from clever trading",
+    "b": "Money paid in by newer members",
+    "c": "The government",
+    "why": "A Ponzi scheme pays old members with new members' money until it collapses."
+  },
+  "safe_insurance": {
+    "q": "Why pay a small insurance premium every month?",
+    "a": "To avoid a huge loss if disaster strikes",
+    "b": "To get rich quickly",
+    "c": "It's a waste unless something happens",
+    "why": "Insurance trades a small certain cost for protection from a big uncertain loss."
+  },
+  "safe_report": {
+    "q": "You've just been scammed through UPI. First thing to do?",
+    "a": "Wait a few days and hope it comes back",
+    "b": "Pay the scammer more to \"unlock\" a refund",
+    "c": "Call your bank and the cybercrime helpline 1930 right away",
+    "why": "Call 1930 first: it can freeze money before it moves on. Then call your bank, and report on cybercrime.gov.in. Speed gives the best chance of recovery."
+  },
+  "safe_job": {
+    "q": "\"Earn ₹5,000 a day! Pay ₹500 to register.\" What's the tell?",
+    "a": "A real job never asks you to pay to join",
+    "b": "₹500 is a small fee for a big salary",
+    "c": "It's fine if they paid a friend first",
+    "why": "Real jobs pay you. Task scams pay small amounts first to win trust, then ask for more."
+  },
+  "safe_real": {
+    "q": "An FD pays 7% a year and inflation is 6%. Your real return is about...",
+    "a": "13%",
+    "b": "1%",
+    "c": "7%",
+    "why": "Real return ≈ interest − inflation. 7% − 6% ≈ 1%."
+  }
+}

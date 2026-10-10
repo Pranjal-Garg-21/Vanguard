@@ -1,17 +1,8 @@
 /** UC-FAC-02: unlock stages and Arcade sections, choose a session focus. */
 import { useEffect, useState } from 'react';
 import { Badge, Card, Notice, Spinner } from '@/ui';
+import { STAGES } from '@/content/stages';
 import { supabaseOrThrow, type ClassRow } from '../data';
-
-const STAGES = [
-  { id: 'S0', name: 'Get Banked', icon: '🏦' },
-  { id: 'S1', name: 'Digital Money', icon: '📱' },
-  { id: 'S2', name: 'First Money & Plan', icon: '🫙' },
-  { id: 'S3', name: 'Save & Track', icon: '🔍' },
-  { id: 'S4', name: 'Big Decisions & Borrowing', icon: '⚖️' },
-  { id: 'S5', name: 'Grow Money', icon: '🌱' },
-  { id: 'S6', name: 'Protect & Look Ahead', icon: '🛡️' },
-];
 
 const ARCADE = [
   { id: 'arcade.everyday', name: 'Everyday Money', note: 'Open by default' },
@@ -76,7 +67,7 @@ export function PlanTab({ cls, onFocusChange }: { cls: ClassRow; onFocusChange: 
         <h2 className="mb-3 font-bold">LifePath stages</h2>
         <ol className="space-y-2">
           {STAGES.map((s) => (
-            <ToggleRow key={s.id} label={`${s.icon}  ${s.id} · ${s.name}`} on={unlocked.has(s.id)} onChange={(on) => toggle(s.id, on)} />
+            <ToggleRow key={s.id} label={`${s.id} · ${s.name}`} on={unlocked.has(s.id)} onChange={(on) => toggle(s.id, on)} />
           ))}
         </ol>
       </Card>
@@ -93,11 +84,11 @@ export function PlanTab({ cls, onFocusChange }: { cls: ClassRow; onFocusChange: 
 
         <Card>
           <h2 className="mb-1 font-bold">Session focus</h2>
-          <p className="mb-3 text-sm text-slate-500">Shows more of one pillar in Quick Play and the Daily Challenge.</p>
+          <p className="mb-3 text-sm text-muted">Shows more of one pillar in Quick Play and the Daily Challenge.</p>
           <div className="space-y-2">
             {FOCUS.map((f) => (
-              <label key={f.id} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-2 hover:bg-slate-50">
-                <input type="radio" name="focus" className="h-5 w-5 accent-teal-700" checked={(cls.focus ?? '') === f.id} onChange={() => setFocus(f.id)} />
+              <label key={f.id} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-2 hover:bg-surface-2">
+                <input type="radio" name="focus" className="h-5 w-5 accent-brand" checked={(cls.focus ?? '') === f.id} onChange={() => setFocus(f.id)} />
                 {f.name}
               </label>
             ))}
@@ -110,10 +101,10 @@ export function PlanTab({ cls, onFocusChange }: { cls: ClassRow; onFocusChange: 
 
 function ToggleRow({ label, hint, on, onChange }: { label: string; hint?: string; on: boolean; onChange: (on: boolean) => void }) {
   return (
-    <li className="flex min-h-12 list-none items-center gap-3 rounded-xl px-2 hover:bg-slate-50">
+    <li className="flex min-h-12 list-none items-center gap-3 rounded-xl px-2 hover:bg-surface-2">
       <span className="flex-1">
         <span className="font-medium">{label}</span>
-        {hint && <span className="block text-xs text-slate-500">{hint}</span>}
+        {hint && <span className="block text-xs text-muted">{hint}</span>}
       </span>
       {on && <Badge tone="good">Unlocked</Badge>}
       <button
@@ -122,9 +113,9 @@ function ToggleRow({ label, hint, on, onChange }: { label: string; hint?: string
         aria-checked={on}
         aria-label={label}
         onClick={() => onChange(!on)}
-        className={`relative h-7 w-12 rounded-full transition ${on ? 'bg-teal-700' : 'bg-slate-300'}`}
+        className={`relative h-7 w-12 rounded-full transition ${on ? 'bg-brand' : 'bg-surface-3'}`}
       >
-        <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-all ${on ? 'left-5.5' : 'left-0.5'}`} />
+        <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-surface shadow transition-all ${on ? 'left-5.5' : 'left-0.5'}`} />
       </button>
     </li>
   );

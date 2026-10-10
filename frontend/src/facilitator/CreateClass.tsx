@@ -43,14 +43,15 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
       setError(error?.message ?? 'Could not create the class.');
       return;
     }
-    navigate(`../class/${data.id}`, { replace: true });
+    // Land on the join code and QR sheet, which is what the facilitator needs next.
+    navigate(`../class/${data.id}?tab=join`, { replace: true });
   };
 
-  const input = 'mt-1 w-full rounded-xl border border-slate-300 bg-white p-3 focus:border-teal-700 focus:outline-none';
+  const input = 'mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 focus:border-brand focus:outline-none';
 
   return (
     <div className="mx-auto max-w-xl space-y-5">
-      <Link to=".." className="text-sm font-semibold text-teal-800">
+      <Link to=".." className="text-sm font-semibold text-brand">
         ← Your classes
       </Link>
       <h1 className="text-2xl font-extrabold">New class</h1>
@@ -89,11 +90,11 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
             <label key={item} className="flex cursor-pointer items-start gap-3">
               <input
                 type="checkbox"
-                className="mt-1 h-5 w-5 accent-teal-700"
+                className="mt-1 h-5 w-5 accent-brand"
                 checked={consent[i]}
                 onChange={(e) => setConsent(consent.map((v, j) => (j === i ? e.target.checked : v)))}
               />
-              <span className="text-slate-700">{item}</span>
+              <span className="text-ink-soft">{item}</span>
             </label>
           ))}
         </Card>

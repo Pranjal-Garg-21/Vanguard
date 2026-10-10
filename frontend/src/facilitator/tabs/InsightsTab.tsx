@@ -1,64 +1,72 @@
 /**
- * UC-FAC-03: what the class understands. Computed from raw events for now;
- * switches to class_concept_daily when the aggregate job lands (Phase 7).
+ * UC-FAC-03: what the class understands, who needs support and what just
+ * happened. Computed from the class's raw events (see ../insights.ts) and
+ * refreshed every 20 seconds, so the facilitator sees answers arrive.
  */
-import { useEffect, useMemo, useState } from 'react';
-import { Badge, Card, Notice, Spinner } from '@/ui';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Badge, Button, Card, Notice, Spinner } from '@/ui';
 import prompts from '@/content/facilitator/prompts.json';
 import { humanise, supabaseOrThrow, timeAgo, type ClassRow, type EventRow, type PlayerRow } from '../data';
-
-const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-/** Cells with fewer students than this are hidden so no one can be singled out. */
-const MIN_GROUP = 3;
+import { conceptName, conceptRoom, MIN_GROUP, summariseClass } from '../insights';
 
 type Prompt = { title: string; prompt: string; activity: string };
 const PROMPTS = prompts as Record<string, Prompt>;
+const REFRESH_MS = 20_000;
 
 export function InsightsTab({ cls }: { cls: ClassRow }) {
   const [players, setPlayers] = useState<PlayerRow[] | null>(null);
   const [events, setEvents] = useState<EventRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [updatedAt, setUpdatedAt] = useState<number | null>(null);
 
-  useEffect(() => {
+  const load = useCallback(async () => {
     const sb = supabaseOrThrow();
-    sb.from('players')
-      .select('pid, display_name, first_seen, last_sync')
-      .eq('class_id', cls.id)
-      .order('last_sync', { ascending: false, nullsFirst: false })
-      .then(({ data, error }) => {
-        if (error) setError(error.message);
-        setPlayers((data as PlayerRow[] | null) ?? []);
-      });
-    sb.from('events')
-      .select('pid, concept, correct, misconception, activity, ts')
-      .eq('class_id', cls.id)
-      .order('ts', { ascending: false })
-      .limit(5000)
-      .then(({ data, error }) => {
-        if (error) setError(error.message);
-        setEvents((data as EventRow[] | null) ?? []);
-      });
+    const [p, e] = await Promise.all([
+      sb.from('players').select('pid, display_name, first_seen, last_sync').eq('class_id', cls.id).order('last_sync', { ascending: false, nullsFirst: false }),
+      sb.from('events').select('pid, concept, correct, misconception, activity, ts').eq('class_id', cls.id).order('ts', { ascending: false }).limit(5000),
+    ]);
+    if (p.error || e.error) setError((p.error ?? e.error)?.message ?? 'Could not load the class.');
+    else setError(null);
+    setPlayers((p.data as PlayerRow[] | null) ?? []);
+    setEvents((e.data as EventRow[] | null) ?? []);
+    setUpdatedAt(Date.now());
   }, [cls.id]);
 
-  const stats = useMemo(() => (events && players ? summarise(events, players) : null), [events, players]);
+  useEffect(() => {
+    void load();
+    const id = window.setInterval(() => void load(), REFRESH_MS);
+    return () => window.clearInterval(id);
+  }, [load]);
 
-  if (error) return <Notice tone="bad">{error}</Notice>;
+  const stats = useMemo(() => (events && players ? summariseClass(events, players) : null), [events, players]);
+
+  if (error && !stats) return <Notice tone="bad">{error}</Notice>;
   if (!stats || !players) return <Spinner />;
 
   if (players.length === 0) {
     return (
-      <Card className="py-12 text-center">
-        <div className="text-5xl">📲</div>
+      <Card className="space-y-2 py-12 text-center">
         <h2 className="mt-3 text-lg font-bold">No students yet</h2>
-        <p className="mt-1 text-slate-600">
-          Share the join code <span className="font-mono font-bold">{cls.join_code}</span> from the “Join code” tab.
+        <p className="text-ink-soft">
+          Share the join code <span className="font-mono font-bold">{cls.join_code}</span> from the “Join code” tab. Students appear here after their
+          phone syncs once.
         </p>
+        <div>
+          <Button variant="secondary" onClick={() => void load()}>Check again</Button>
+        </div>
       </Card>
     );
   }
 
+  const struggling = stats.students.filter((s) => s.needsSupport);
+
   return (
     <div className="space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-2 print:hidden">
+        <p className="text-sm text-muted">{updatedAt ? `Updated ${timeAgo(new Date(updatedAt).toISOString())}. Refreshes every 20 seconds.` : ''}</p>
+        <Button variant="secondary" className="!min-h-9 text-sm" onClick={() => void load()}>Refresh now</Button>
+      </div>
+
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Stat label="Students joined" value={players.length} sub={cls.expected_size ? `of ${cls.expected_size} expected` : undefined} />
         <Stat label="Active this week" value={stats.activeThisWeek} />
@@ -66,24 +74,30 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
         <Stat label="Synced in last 24 h" value={stats.syncedToday} sub={`${players.length - stats.syncedToday} waiting`} />
       </div>
 
+      {struggling.length > 0 && (
+        <Notice tone="warn">
+          <strong>{struggling.length} {struggling.length === 1 ? 'student' : 'students'} may need support:</strong> {struggling.map((s) => s.name).join(', ')}.
+        </Notice>
+      )}
+
       {stats.totalEvents === 0 ? (
         <Notice tone="info">Students have joined but no answers have synced yet. Data appears after their phones go online.</Notice>
       ) : (
         <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
           <Card>
-            <h2 className="font-bold">Concepts</h2>
-            <p className="mb-3 text-sm text-slate-500">Share of answers that were right, per concept.</p>
+            <h2 className="font-bold">Where the class struggles</h2>
+            <p className="mb-3 text-sm text-muted">Share of answers that were right, hardest first.</p>
             <div className="space-y-2">
               {stats.concepts.map((c) => (
                 <div key={c.concept} className="flex items-center gap-3">
-                  <span className="w-40 shrink-0 truncate text-sm font-medium" title={c.concept}>
-                    {humanise(c.concept)}
+                  <span className="w-44 shrink-0 text-sm font-medium" title={conceptRoom(c.concept) ?? undefined}>
+                    {conceptName(c.concept)}
                   </span>
                   {c.students < MIN_GROUP ? (
-                    <span className="text-xs text-slate-400">Too few students to show</span>
+                    <span className="text-xs text-muted">Too few students to show</span>
                   ) : (
                     <>
-                      <div className="h-3 flex-1 overflow-hidden rounded-full bg-slate-100">
+                      <div className="h-3 flex-1 overflow-hidden rounded-full bg-surface-2">
                         <div className={`h-full rounded-full ${band(c.rate).bar}`} style={{ width: `${Math.round(c.rate * 100)}%` }} />
                       </div>
                       <Badge tone={band(c.rate).tone}>{Math.round(c.rate * 100)}%</Badge>
@@ -92,32 +106,32 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
                 </div>
               ))}
             </div>
-            <div className="mt-4 flex gap-4 text-xs text-slate-500">
-              <span>🔴 under 40%</span>
-              <span>🟠 40–70%</span>
-              <span>🟢 over 70%</span>
+            <div className="mt-4 flex gap-4 text-xs text-muted">
+              <span>Under 40%</span>
+              <span>40 to 70%</span>
+              <span>Over 70%</span>
             </div>
           </Card>
 
           <Card>
             <h2 className="font-bold">Top misconceptions this week</h2>
-            <p className="mb-3 text-sm text-slate-500">Discuss these in your next session.</p>
-            {stats.misconceptions.length === 0 && <p className="text-slate-500">None recorded this week. 🎉</p>}
+            <p className="mb-3 text-sm text-muted">Discuss these in your next session.</p>
+            {stats.misconceptions.length === 0 && <p className="text-muted">None recorded this week.</p>}
             <ol className="space-y-4">
               {stats.misconceptions.map((m, i) => {
                 const p = PROMPTS[m.id];
                 return (
-                  <li key={m.id} className="rounded-xl bg-amber-50 p-3">
+                  <li key={m.id} className="rounded-lg border-l-4 border-line-strong bg-surface-2 p-3">
                     <div className="flex items-start justify-between gap-2">
                       <span className="font-semibold">
                         {i + 1}. {p?.title ?? humanise(m.id)}
                       </span>
-                      <Badge tone="warn">{m.students} students</Badge>
+                      <Badge tone="warn">{m.students} {m.students === 1 ? 'student' : 'students'}</Badge>
                     </div>
                     {p && (
                       <>
-                        <p className="mt-2 text-sm text-slate-700">{p.prompt}</p>
-                        <p className="mt-1 text-xs font-semibold text-amber-900">Replay together: {p.activity}</p>
+                        <p className="mt-2 text-sm text-ink-soft">{p.prompt}</p>
+                        <p className="mt-1 text-xs font-semibold text-ink-soft">Replay together: {p.activity}</p>
                       </>
                     )}
                   </li>
@@ -128,20 +142,57 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
         </div>
       )}
 
-      <Card>
-        <h2 className="mb-3 font-bold">Students and last sync</h2>
-        <div className="divide-y divide-slate-100">
-          {players.map((p) => {
-            const stale = !p.last_sync || Date.now() - new Date(p.last_sync).getTime() > 3 * 24 * 60 * 60 * 1000;
-            return (
-              <div key={p.pid} className="flex min-h-11 items-center justify-between gap-3">
-                <span className="font-medium">{p.display_name}</span>
-                <Badge tone={stale ? 'warn' : 'good'}>{timeAgo(p.last_sync)}</Badge>
-              </div>
-            );
-          })}
-        </div>
-      </Card>
+      <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+        <Card>
+          <h2 className="mb-3 font-bold">Students</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead className="text-xs uppercase tracking-wider text-muted">
+                <tr>
+                  <th className="pb-2 pr-3 font-bold">Student</th>
+                  <th className="pb-2 pr-3 font-bold">Answers</th>
+                  <th className="pb-2 pr-3 font-bold">Right</th>
+                  <th className="pb-2 pr-3 font-bold">Hardest for them</th>
+                  <th className="pb-2 font-bold">Last sync</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {stats.students.map((s) => {
+                  const player = players.find((p) => p.pid === s.pid);
+                  const stale = !player?.last_sync || Date.now() - new Date(player.last_sync).getTime() > 3 * 24 * 60 * 60 * 1000;
+                  return (
+                    <tr key={s.pid} className="min-h-11">
+                      <td className="py-2.5 pr-3 font-medium">
+                        {s.name} {s.needsSupport && <Badge tone="warn">Needs support</Badge>}
+                      </td>
+                      <td className="py-2.5 pr-3 tabular-nums">{s.answers}</td>
+                      <td className="py-2.5 pr-3 tabular-nums">{s.accuracy === null ? 'No scored answers' : `${Math.round(s.accuracy * 100)}%`}</td>
+                      <td className="py-2.5 pr-3 text-ink-soft">{s.weakest ? conceptName(s.weakest) : 'None yet'}</td>
+                      <td className="py-2.5"><Badge tone={stale ? 'warn' : 'good'}>{timeAgo(player?.last_sync ?? null)}</Badge></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        <Card>
+          <h2 className="font-bold">Just happened</h2>
+          <p className="mb-3 text-sm text-muted">The latest answers from the class.</p>
+          {stats.recent.length === 0 && <p className="text-muted">No answers yet.</p>}
+          <ul className="space-y-2">
+            {stats.recent.map((r, i) => (
+              <li key={i} className="flex items-start justify-between gap-2 text-sm">
+                <span>
+                  <span className="font-medium">{r.name}</span> <span className="text-ink-soft">on {conceptName(r.concept)}</span>
+                </span>
+                <Badge tone={r.correct === null ? 'neutral' : r.correct ? 'good' : 'bad'}>{r.correct === null ? 'Step' : r.correct ? 'Right' : 'Wrong'}</Badge>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
     </div>
   );
 }
@@ -149,55 +200,15 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
 function Stat({ label, value, sub }: { label: string; value: number; sub?: string }) {
   return (
     <Card className="p-4">
-      <p className="text-sm text-slate-500">{label}</p>
+      <p className="text-sm text-muted">{label}</p>
       <p className="text-3xl font-extrabold">{value}</p>
-      {sub && <p className="text-xs text-slate-400">{sub}</p>}
+      {sub && <p className="text-xs text-muted">{sub}</p>}
     </Card>
   );
 }
 
 function band(rate: number) {
-  if (rate < 0.4) return { bar: 'bg-rose-500', tone: 'bad' as const };
-  if (rate <= 0.7) return { bar: 'bg-amber-500', tone: 'warn' as const };
-  return { bar: 'bg-emerald-500', tone: 'good' as const };
-}
-
-function summarise(events: EventRow[], players: PlayerRow[]) {
-  const weekAgo = Date.now() - WEEK_MS;
-  const dayAgo = Date.now() - WEEK_MS / 7;
-
-  const byConcept = new Map<string, { right: number; total: number; pids: Set<string> }>();
-  const byMisconception = new Map<string, Set<string>>();
-  const activePids = new Set<string>();
-
-  for (const e of events) {
-    const recent = new Date(e.ts).getTime() >= weekAgo;
-    if (recent) activePids.add(e.pid);
-
-    if (e.correct !== null) {
-      const c = byConcept.get(e.concept) ?? { right: 0, total: 0, pids: new Set<string>() };
-      c.total += 1;
-      if (e.correct) c.right += 1;
-      c.pids.add(e.pid);
-      byConcept.set(e.concept, c);
-    }
-    if (e.misconception && recent) {
-      const set = byMisconception.get(e.misconception) ?? new Set<string>();
-      set.add(e.pid);
-      byMisconception.set(e.misconception, set);
-    }
-  }
-
-  return {
-    totalEvents: events.length,
-    activeThisWeek: activePids.size,
-    syncedToday: players.filter((p) => p.last_sync && new Date(p.last_sync).getTime() >= dayAgo).length,
-    concepts: [...byConcept.entries()]
-      .map(([concept, c]) => ({ concept, rate: c.right / c.total, students: c.pids.size }))
-      .sort((a, b) => a.rate - b.rate),
-    misconceptions: [...byMisconception.entries()]
-      .map(([id, pids]) => ({ id, students: pids.size }))
-      .sort((a, b) => b.students - a.students)
-      .slice(0, 3),
-  };
+  if (rate < 0.4) return { bar: 'bg-bad', tone: 'bad' as const };
+  if (rate <= 0.7) return { bar: 'bg-ink-soft', tone: 'neutral' as const };
+  return { bar: 'bg-brand', tone: 'good' as const };
 }

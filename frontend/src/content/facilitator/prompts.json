@@ -18,5 +18,75 @@
     "title": "“It’s too late to report a scam”",
     "prompt": "Put the recovery steps in order together. Stress speed: call 1930 and the bank first, then report at cybercrime.gov.in.",
     "activity": "Rescue Mission"
+  },
+  "bank_asks_otp": {
+    "title": "“A bank or support agent can ask for my OTP”",
+    "prompt": "Ask: what is an OTP for? Agree that it proves it is you, so nobody who asks for it can be on your side. Role-play a caller asking for it and practise saying no and hanging up.",
+    "activity": "The Call: Fake customer care, and Digital arrest"
+  },
+  "trust_sms_credit": {
+    "title": "“If an SMS says money arrived, it arrived”",
+    "prompt": "Show a fake credit alert next to a bank app screen with no credit. Ask which one shows the truth. Agree: check your own bank app, and never return money based on a message.",
+    "activity": "UPI Simulator: Sent by mistake"
+  },
+  "trust_familiar_name": {
+    "title": "“A familiar name means it is who I think”",
+    "prompt": "Ask how a message from Mom on a new number could be checked. Agree: call the number you already have before you send anything.",
+    "activity": "Scam Inbox and Red Flag Hunter"
+  },
+  "trust_familiar_account": {
+    "title": "“If a friend's chat asks, it is my friend”",
+    "prompt": "Ask how you would know if a friend's account was hacked. Practise a question only they could answer, then calling their saved number.",
+    "activity": "Chat Traps: Hacked friend"
+  },
+  "authority_demands_money": {
+    "title": "“Police or officials can ask me to move money”",
+    "prompt": "Ask: can police arrest someone over a video call? Agree that no agency has a safe account and that hanging up and calling 1930 is always allowed.",
+    "activity": "The Call: Digital arrest"
+  },
+  "search_result_is_official": {
+    "title": "“The first search result is the real helpline”",
+    "prompt": "Search for a helpline together and point out the Ad label. Agree: use the Help section inside the official app.",
+    "activity": "The Call: Fake customer care"
+  },
+  "loan_app_permissions": {
+    "title": "“A loan app needs my contacts and photos”",
+    "prompt": "List what a lender really needs and what a scam app asks for. Agree: deny permissions that have nothing to do with a loan, and report harassment on 1930.",
+    "activity": "Loan App Trap"
+  },
+  "fraud_recovery_mistake": {
+    "title": "“After a scam I should wait, or pay someone to recover it”",
+    "prompt": "Put the recovery steps in order as a class: bank, 1930, evidence, then secure accounts. Ask why a recovery agent who wants a fee is a second scam.",
+    "activity": "Rescue Mission"
+  },
+  "scan_to_receive": {
+    "title": "“I scan a code to receive money”",
+    "prompt": "Show a QR payment screen and ask which way the money goes. Agree: scanning a code starts a payment from you. To receive, share your own UPI ID.",
+    "activity": "UPI Simulator: Scan to receive"
+  },
+  "pay_to_get_job": {
+    "title": "“A real job can ask me for a fee”",
+    "prompt": "Ask who pays whom in a real job. Agree that a registration or training fee for a job offer is a scam.",
+    "activity": "Scam Inbox"
+  },
+  "pay_to_win": {
+    "title": "“I can pay a fee to claim a prize”",
+    "prompt": "Ask if you can win a draw you never entered. Agree that a real prize never asks for money first.",
+    "activity": "Scam Inbox"
+  },
+  "click_unknown_link": {
+    "title": "“It is fine to tap a link in a message”",
+    "prompt": "Show a short link and ask where it goes. Agree: open the official app instead of tapping links in messages.",
+    "activity": "Scam Inbox and Red Flag Hunter"
+  },
+  "distrust_everything": {
+    "title": "“Every message is a scam”",
+    "prompt": "Sort real and fake messages together. Agree that being careful means checking, not blocking everyone, because real alerts and school messages matter.",
+    "activity": "Scam Inbox"
+  },
+  "pin_uncovered": {
+    "title": "“No one is watching when I type my PIN”",
+    "prompt": "Ask where someone could see your PIN at a shop or ATM. Practise covering the keypad every time.",
+    "activity": "UPI Simulator"
   }
 }

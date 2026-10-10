@@ -1,4 +1,462 @@
 {
-  "concepts": [],
-  "misconceptions": []
+  "concepts": [
+    {
+      "id": "income",
+      "pillar": "plan",
+      "chapter": 0,
+      "icon": "💼"
+    },
+    {
+      "id": "goal_setting",
+      "pillar": "plan",
+      "chapter": 0,
+      "icon": "🎯"
+    },
+    {
+      "id": "why_bank",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🏦"
+    },
+    {
+      "id": "kyc",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🪪"
+    },
+    {
+      "id": "savings_account",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "📒"
+    },
+    {
+      "id": "simple_interest",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "➕"
+    },
+    {
+      "id": "upi_basics",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "📱"
+    },
+    {
+      "id": "pin_secrecy",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "🔒"
+    },
+    {
+      "id": "phishing",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "🎣"
+    },
+    {
+      "id": "upi_collect",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "📥"
+    },
+    {
+      "id": "needs_wants",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "⚖️"
+    },
+    {
+      "id": "budgeting",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🫙"
+    },
+    {
+      "id": "opportunity_cost",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🔀"
+    },
+    {
+      "id": "sales_tricks",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🏷️"
+    },
+    {
+      "id": "gst",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🧾"
+    },
+    {
+      "id": "pay_yourself_first",
+      "pillar": "save",
+      "chapter": 2,
+      "icon": "🐷"
+    },
+    {
+      "id": "inflation",
+      "pillar": "invest",
+      "chapter": 2,
+      "icon": "☕"
+    },
+    {
+      "id": "delayed_gratification",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "⏳"
+    },
+    {
+      "id": "windfall",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🎁"
+    },
+    {
+      "id": "emergency_fund",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🛟"
+    },
+    {
+      "id": "compound_interest",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🌱"
+    },
+    {
+      "id": "rule_of_72",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "7️⃣"
+    },
+    {
+      "id": "fixed_deposit",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🔐"
+    },
+    {
+      "id": "lending_to_friends",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🤝"
+    },
+    {
+      "id": "net_worth",
+      "pillar": "plan",
+      "chapter": 3,
+      "icon": "📊"
+    },
+    {
+      "id": "job_scam",
+      "pillar": "safe",
+      "chapter": 3,
+      "icon": "🧲"
+    },
+    {
+      "id": "irregular_income",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "📉"
+    },
+    {
+      "id": "scholarships",
+      "pillar": "plan",
+      "chapter": 3,
+      "icon": "🎓"
+    },
+    {
+      "id": "good_bad_debt",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "⚖️"
+    },
+    {
+      "id": "loan_basics",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "📄"
+    },
+    {
+      "id": "emi",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "📆"
+    },
+    {
+      "id": "credit_score",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "💯"
+    },
+    {
+      "id": "credit_card",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "💳"
+    },
+    {
+      "id": "bnpl",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "⏳"
+    },
+    {
+      "id": "informal_lending",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "🧮"
+    },
+    {
+      "id": "loan_app_trap",
+      "pillar": "safe",
+      "chapter": 4,
+      "icon": "🪤"
+    },
+    {
+      "id": "impersonation",
+      "pillar": "safe",
+      "chapter": 4,
+      "icon": "🎭"
+    },
+    {
+      "id": "depreciation",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "📉"
+    },
+    {
+      "id": "education_loan",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "📚"
+    },
+    {
+      "id": "assets_that_earn",
+      "pillar": "invest",
+      "chapter": 4,
+      "icon": "🛒"
+    },
+    {
+      "id": "bonds",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🌉"
+    },
+    {
+      "id": "stocks",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "📈"
+    },
+    {
+      "id": "risk_return",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🎢"
+    },
+    {
+      "id": "diversification",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🧺"
+    },
+    {
+      "id": "mutual_funds",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "👥"
+    },
+    {
+      "id": "index_etf",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🗂️"
+    },
+    {
+      "id": "sip",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🔁"
+    },
+    {
+      "id": "time_horizon",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "⏰"
+    },
+    {
+      "id": "volatility",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🌊"
+    },
+    {
+      "id": "fees",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🪙"
+    },
+    {
+      "id": "gold",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🥇"
+    },
+    {
+      "id": "real_estate",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🏡"
+    },
+    {
+      "id": "real_return",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🧮"
+    },
+    {
+      "id": "tips_rumours",
+      "pillar": "safe",
+      "chapter": 5,
+      "icon": "📣"
+    },
+    {
+      "id": "insurance",
+      "pillar": "safe",
+      "chapter": 6,
+      "icon": "☂️"
+    },
+    {
+      "id": "ponzi",
+      "pillar": "safe",
+      "chapter": 6,
+      "icon": "🔺"
+    },
+    {
+      "id": "too_good_to_be_true",
+      "pillar": "safe",
+      "chapter": 6,
+      "icon": "🚩"
+    },
+    {
+      "id": "identity_protection",
+      "pillar": "safe",
+      "chapter": 6,
+      "icon": "🛡️"
+    },
+    {
+      "id": "fraud_recovery",
+      "pillar": "safe",
+      "chapter": 6,
+      "icon": "🚑"
+    },
+    {
+      "id": "fake_kyc",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "📄",
+      "game": "safe"
+    },
+    {
+      "id": "red_flags",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "🚩",
+      "game": "safe"
+    },
+    {
+      "id": "wrong_transfer",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "↩️",
+      "game": "safe"
+    },
+    {
+      "id": "qr_scam",
+      "pillar": "safe",
+      "chapter": 1,
+      "icon": "🔳",
+      "game": "safe"
+    },
+    {
+      "id": "account_takeover",
+      "pillar": "safe",
+      "chapter": 3,
+      "icon": "👥",
+      "game": "safe"
+    },
+    {
+      "id": "fake_support",
+      "pillar": "safe",
+      "chapter": 4,
+      "icon": "☎️",
+      "game": "safe"
+    },
+    {
+      "id": "income_tax",
+      "pillar": "plan",
+      "chapter": 6,
+      "icon": "🏛️"
+    },
+    {
+      "id": "context_dependence",
+      "pillar": "plan",
+      "chapter": 0,
+      "icon": "🔄"
+    },
+    {
+      "id": "expense_tracking",
+      "pillar": "save",
+      "chapter": 0,
+      "icon": "🧾"
+    },
+    {
+      "id": "fixed_vs_variable",
+      "pillar": "plan",
+      "chapter": 0,
+      "icon": "📊"
+    },
+    {
+      "id": "minimum_balance_fees",
+      "pillar": "bank",
+      "chapter": 0,
+      "icon": "⚠️"
+    },
+    {
+      "id": "nominee",
+      "pillar": "bank",
+      "chapter": 0,
+      "icon": "👥"
+    }
+  ],
+  "misconceptions": [
+    "cash_at_home_safe",
+    "pin_to_receive",
+    "click_kyc_link",
+    "share_otp",
+    "sale_means_saving",
+    "save_what_is_left",
+    "debt_is_free_money",
+    "emi_is_the_only_cost",
+    "minimum_payment_ok",
+    "high_return_no_risk",
+    "tips_are_reliable",
+    "one_stock_is_enough",
+    "panic_sell",
+    "inflation_doesnt_matter",
+    "insurance_is_waste",
+    "guaranteed_returns_real",
+    "pay_to_get_job",
+    "buy_now_pay_later_is_free",
+    "all_debt_is_bad",
+    "compare_emi_not_total",
+    "everything_i_want_is_need",
+    "fun_is_bad",
+    "small_spends_dont_matter",
+    "too_late_to_report"
+  ]
 }

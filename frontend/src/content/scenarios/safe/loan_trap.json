@@ -1,0 +1,401 @@
+{
+  "id": "loan_trap",
+  "simulator": "loan",
+  "mode": "act",
+  "concepts": [
+    "loan_app_trap"
+  ],
+  "level": 2,
+  "titleKey": "safe.ln.title",
+  "briefKey": "safe.ln.brief",
+  "phone": {
+    "startBalance": 12000,
+    "startTime": "20:15"
+  },
+  "rule": "safe.ln.rule",
+  "instead": [
+    "safe.ln.i1",
+    "safe.ln.i2",
+    "safe.ln.i3"
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.ln.o1",
+      "when": "read:1"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.ln.o2",
+      "when": "inspectedAny:1"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.ln.o3",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "sms",
+      "at": 800,
+      "surface": {
+        "type": "sms",
+        "from": "VK-QCLOAN",
+        "fromLens": "sender",
+        "concept": "loan_app_trap",
+        "misconception": "loan_app_permissions",
+        "best": "block",
+        "body": [
+          {
+            "k": "safe.ln.sms.a"
+          },
+          {
+            "k": "safe.ln.sms.b",
+            "lens": "nodocs"
+          },
+          {
+            "k": "safe.ln.sms.link",
+            "lens": "link",
+            "action": "open"
+          }
+        ],
+        "lens": [
+          {
+            "id": "sender",
+            "revealKey": "safe.ln.lens.sender"
+          },
+          {
+            "id": "nodocs",
+            "revealKey": "safe.ln.lens.nodocs",
+            "tell": "nodocs"
+          },
+          {
+            "id": "link",
+            "revealKey": "safe.ln.lens.link",
+            "tell": "link"
+          }
+        ],
+        "tells": [
+          {
+            "id": "nodocs",
+            "kind": "too_good",
+            "whyKey": "safe.ln.why.nodocs"
+          },
+          {
+            "id": "link",
+            "kind": "odd_link",
+            "whyKey": "safe.ln.why.link"
+          }
+        ],
+        "actions": [
+          {
+            "id": "open",
+            "labelKey": "safe.ln.a.open",
+            "risk": "neutral",
+            "unlocks": [
+              "store"
+            ],
+            "delay": 700
+          },
+          {
+            "id": "block",
+            "labelKey": "safe.ln.a.block",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.ln.n.block"
+          },
+          {
+            "id": "ignore",
+            "labelKey": "safe.ln.a.ignore",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.ln.n.ignore"
+          }
+        ]
+      }
+    },
+    {
+      "id": "store",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.ln.store.title",
+        "foreground": true,
+        "concept": "loan_app_trap",
+        "best": "back",
+        "body": [
+          {
+            "k": "safe.ln.store.a",
+            "lens": "rating"
+          },
+          {
+            "k": "safe.ln.store.b",
+            "lens": "dev"
+          },
+          {
+            "k": "safe.ln.store.c",
+            "lens": "perms"
+          }
+        ],
+        "lens": [
+          {
+            "id": "rating",
+            "revealKey": "safe.ln.lens.rating",
+            "tell": "rating"
+          },
+          {
+            "id": "dev",
+            "revealKey": "safe.ln.lens.dev",
+            "tell": "dev"
+          },
+          {
+            "id": "perms",
+            "revealKey": "safe.ln.lens.perms",
+            "tell": "perms"
+          }
+        ],
+        "tells": [
+          {
+            "id": "rating",
+            "kind": "pretends",
+            "whyKey": "safe.ln.why.rating"
+          },
+          {
+            "id": "dev",
+            "kind": "pretends",
+            "whyKey": "safe.ln.why.dev"
+          },
+          {
+            "id": "perms",
+            "kind": "asks_secret",
+            "whyKey": "safe.ln.why.perms"
+          }
+        ],
+        "actions": [
+          {
+            "id": "install",
+            "labelKey": "safe.ln.a.install",
+            "risk": "neutral",
+            "unlocks": [
+              "perm1"
+            ],
+            "delay": 500,
+            "noteKey": "safe.ln.n.install"
+          },
+          {
+            "id": "back",
+            "labelKey": "safe.ln.a.back",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.ln.n.back"
+          }
+        ]
+      }
+    },
+    {
+      "id": "perm1",
+      "surface": {
+        "type": "permission",
+        "appKey": "safe.ln.perm.app",
+        "askKey": "safe.ln.perm1.ask",
+        "concept": "loan_app_trap",
+        "misconception": "loan_app_permissions",
+        "best": "deny",
+        "actions": [
+          {
+            "id": "allow",
+            "labelKey": "safe.ln.a.allow",
+            "risk": "risky",
+            "unlocks": [
+              "perm2"
+            ],
+            "delay": 400,
+            "noteKey": "safe.ln.n.allow1",
+            "misconception": "loan_app_permissions"
+          },
+          {
+            "id": "deny",
+            "labelKey": "safe.ln.a.deny",
+            "risk": "safe",
+            "unlocks": [
+              "denied"
+            ],
+            "delay": 500,
+            "noteKey": "safe.ln.n.deny"
+          }
+        ]
+      }
+    },
+    {
+      "id": "perm2",
+      "surface": {
+        "type": "permission",
+        "appKey": "safe.ln.perm.app",
+        "askKey": "safe.ln.perm2.ask",
+        "concept": "loan_app_trap",
+        "misconception": "loan_app_permissions",
+        "best": "deny",
+        "actions": [
+          {
+            "id": "allow",
+            "labelKey": "safe.ln.a.allow",
+            "risk": "risky",
+            "unlocks": [
+              "offer"
+            ],
+            "delay": 500,
+            "noteKey": "safe.ln.n.allow2",
+            "misconception": "loan_app_permissions"
+          },
+          {
+            "id": "deny",
+            "labelKey": "safe.ln.a.deny",
+            "risk": "safe",
+            "unlocks": [
+              "denied"
+            ],
+            "delay": 500,
+            "noteKey": "safe.ln.n.deny"
+          }
+        ]
+      }
+    },
+    {
+      "id": "denied",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.ln.denied.title",
+        "foreground": true,
+        "concept": "loan_app_trap",
+        "body": [
+          {
+            "k": "safe.ln.denied.a"
+          }
+        ],
+        "actions": [
+          {
+            "id": "done",
+            "labelKey": "safe.ln.a.done",
+            "risk": "safe",
+            "end": "safe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "offer",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.ln.offer.title",
+        "foreground": true,
+        "concept": "loan_app_trap",
+        "best": "cancel",
+        "body": [
+          {
+            "k": "safe.ln.offer.a"
+          },
+          {
+            "k": "safe.ln.offer.b",
+            "lens": "fee"
+          },
+          {
+            "k": "safe.ln.offer.c",
+            "lens": "repay"
+          }
+        ],
+        "lens": [
+          {
+            "id": "fee",
+            "revealKey": "safe.ln.lens.fee",
+            "tell": "fee"
+          },
+          {
+            "id": "repay",
+            "revealKey": "safe.ln.lens.repay",
+            "tell": "repay"
+          }
+        ],
+        "tells": [
+          {
+            "id": "fee",
+            "kind": "pulls_money",
+            "whyKey": "safe.ln.why.fee"
+          },
+          {
+            "id": "repay",
+            "kind": "pulls_money",
+            "whyKey": "safe.ln.why.repay"
+          }
+        ],
+        "actions": [
+          {
+            "id": "accept",
+            "labelKey": "safe.ln.a.accept",
+            "risk": "risky",
+            "effects": {
+              "money.bank": -3500
+            },
+            "unlocks": [
+              "timeline"
+            ],
+            "delay": 900,
+            "noteKey": "safe.ln.n.accept",
+            "misconception": "loan_app_permissions"
+          },
+          {
+            "id": "cancel",
+            "labelKey": "safe.ln.a.cancel",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.ln.n.cancel"
+          }
+        ]
+      }
+    },
+    {
+      "id": "timeline",
+      "surface": {
+        "type": "page",
+        "url": "",
+        "titleKey": "safe.ln.tl.title",
+        "foreground": true,
+        "concept": "loan_app_trap",
+        "best": "report",
+        "body": [
+          {
+            "k": "safe.ln.tl.a"
+          },
+          {
+            "k": "safe.ln.tl.b"
+          },
+          {
+            "k": "safe.ln.tl.c"
+          }
+        ],
+        "actions": [
+          {
+            "id": "report",
+            "labelKey": "safe.ln.a.report",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.ln.n.report"
+          },
+          {
+            "id": "pay_more",
+            "labelKey": "safe.ln.a.paymore",
+            "risk": "risky",
+            "effects": {
+              "money.bank": -2000
+            },
+            "end": "fooled",
+            "noteKey": "safe.ln.n.paymore",
+            "misconception": "loan_app_permissions"
+          }
+        ]
+      }
+    }
+  ]
+}

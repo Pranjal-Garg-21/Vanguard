@@ -1,12 +1,19 @@
 /**
- * Bank Counter (S0): choose an account, fill the form, set a PIN.
+ * Bank Counter (S0): open the character's first account.
  * Use case: UC-BANK-02 · Owner: P3
- *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
  */
+import content from '@/content/scenarios/bank/bank-counter.json';
+import { defineGame } from '../shared/game';
+import { BankCounter } from './BankCounter';
 
-export {};
+export { BankCounter } from './BankCounter';
+export { accountsFor, canMaintain, isWeakPin, isMinor, type Account } from './logic/accounts';
+
+export const bankCounter = defineGame({
+  id: content.id,
+  useCase: 'UC-BANK-02',
+  verbs: ['choose', 'allocate'],
+  concepts: content.concepts,
+  levels: [1, 2, 3],
+  Component: BankCounter,
+});

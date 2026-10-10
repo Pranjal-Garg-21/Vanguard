@@ -1,0 +1,137 @@
+{
+  "intro": {
+    "title": "Let’s find your starting point",
+    "body": "A few quick questions, like a game. There are no marks and nobody is judged. Your answers just help us pick the right place to begin.",
+    "start": "Let’s go"
+  },
+  "sections": {
+    "about": "About you",
+    "goals": "Your goals",
+    "knowledge": "Quick check"
+  },
+  "nav": {
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "finish": "Finish",
+    "multiHint": "Pick all that fit.",
+    "step": "{current} of {total}"
+  },
+  "notSure": "I’m not sure",
+  "done": {
+    "title": "Ready, {name}!",
+    "level": {
+      "starter": "You’re at the start of the path. We’ll begin with the basics.",
+      "builder": "You already know some things. We’ll build on them.",
+      "navigator": "You know your way around. We’ll go further, faster."
+    },
+    "goalLabel": "Your goal",
+    "focusLabel": "First stop",
+    "go": "Go to the village"
+  },
+  "q": {
+    "confidence": {
+      "title": "How do you feel when you have to handle money?",
+      "options": {
+        "c1": "Worried. I’d rather someone else do it",
+        "c2": "A bit unsure",
+        "c3": "Okay for most things",
+        "c4": "Confident"
+      }
+    },
+    "experience": {
+      "title": "Which of these have you already done?",
+      "options": {
+        "shop_cash": "Paid for something in a shop with cash",
+        "upi": "Used UPI or a payment app",
+        "bank_visit": "Been inside a bank",
+        "own_account": "Had my own bank account",
+        "saved_goal": "Saved up for something",
+        "none": "None of these yet"
+      }
+    },
+    "moneySource": {
+      "title": "How does money for your own things usually reach you?",
+      "options": {
+        "family_gives": "Family gives it when I need it",
+        "allowance": "A regular amount from family",
+        "work": "I earn a little by working",
+        "scholarship": "A scholarship or stipend",
+        "none": "I don’t handle money yet",
+        "prefer_not": "I’d rather not say"
+      }
+    },
+    "goal": {
+      "title": "In the next one or two years, what would you most like money to help you do?",
+      "options": {
+        "fees": "Pay for coaching or college",
+        "device": "Buy a phone or laptop",
+        "business": "Start a small business",
+        "family": "Help my family",
+        "emergency": "Be ready for emergencies",
+        "unsure": "I haven’t thought about it"
+      }
+    },
+    "focus": {
+      "title": "What do you want to get better at first?",
+      "options": {
+        "banking": "Banks and digital payments",
+        "budgeting": "Planning where money goes",
+        "saving": "Saving up",
+        "investing": "Making money grow",
+        "safety": "Staying safe from scams"
+      }
+    },
+    "style": {
+      "title": "How do you like to learn?",
+      "options": {
+        "games": "Short games",
+        "stories": "Stories",
+        "challenges": "Timed challenges",
+        "mix": "A bit of everything"
+      }
+    },
+    "needs": {
+      "title": "Which of these is a need, not a want?",
+      "options": {
+        "sneakers": "New sneakers",
+        "buspass": "Bus pass for school",
+        "snacks": "Snacks with friends",
+        "gametopup": "Game top-up"
+      }
+    },
+    "saveFirst": {
+      "title": "Your character gets pocket money. When is the best time to save?",
+      "options": {
+        "leftover": "After spending, save whatever is left",
+        "first": "Set some aside as soon as it arrives",
+        "big_only": "Only when I have a lot of money"
+      }
+    },
+    "interest": {
+      "title": "₹1,000 stays in a bank for one year and the bank pays 4% interest a year. About how much is there at the end?",
+      "options": {
+        "a1040": "About ₹1,040",
+        "a1400": "About ₹1,400",
+        "a1000": "Still ₹1,000"
+      }
+    },
+    "prize": {
+      "title": "What should your character do?",
+      "body": "A message says: “You won ₹50,000! Pay ₹500 now to get your prize.”",
+      "options": {
+        "pay": "Pay ₹500 to get the prize",
+        "ignore": "Don’t pay. Delete it or report it",
+        "forward": "Forward it so friends can win too",
+        "call": "Call the number to check"
+      }
+    },
+    "upiPin": {
+      "title": "True or false: to RECEIVE money on UPI, you have to enter your UPI PIN.",
+      "options": {
+        "true": "True",
+        "false": "False"
+      }
+    }
+  }
+}

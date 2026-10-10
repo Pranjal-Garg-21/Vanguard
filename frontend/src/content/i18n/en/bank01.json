@@ -1,0 +1,47 @@
+{
+  "prompt": "The bank needs proof of who you are and where you live before it opens a bank account in your name. Find what it asks for and put it in the folder.",
+  "summary": "Your folder is ready. Now you can open the account.",
+  "bucket": {
+    "folder": "Bank folder",
+    "leave": "Leave it here"
+  },
+  "aadhaar": {
+    "text": "Your Aadhaar card",
+    "why": "This proves who you are and where you live. The bank needs it."
+  },
+  "photo": {
+    "text": "A passport photo of you",
+    "why": "The bank keeps a photo on your file. Take two, they always ask for a spare."
+  },
+  "school_id": {
+    "text": "Your school ID card",
+    "why": "A school or college ID helps the bank confirm you are a student."
+  },
+  "sibling_id": {
+    "text": "Your brother's ID card",
+    "why": "This is your brother's ID. The bank needs yours — the account is in your name."
+  },
+  "cinema_ticket": {
+    "text": "A cinema ticket",
+    "why": "Not this one. A ticket does not prove who you are."
+  },
+  "guardian_id": {
+    "text": "Your guardian's ID",
+    "why": "You are under 18, so this is a minor account. A parent or guardian signs with you, and the bank needs their ID too."
+  },
+  "electricity_bill": {
+    "text": "The electricity bill for your house",
+    "why": "A recent bill proves your address. Any utility bill in the family's name usually works."
+  },
+  "pan": {
+    "text": "Your PAN card",
+    "why": "PAN links your account to your tax record. Worth having before your first salary."
+  },
+  "concept": {
+    "kyc": "KYC means Know Your Customer. It is the bank checking that you are really you."
+  },
+  "missing": {
+    "hook": "You cannot find your Aadhaar card anywhere.",
+    "explain": "This happens. You can apply at an Aadhaar centre — it takes a few weeks, and the account can wait that long. Nothing is lost."
+  }
+}

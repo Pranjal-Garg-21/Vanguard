@@ -1,0 +1,234 @@
+{
+  "id": "customer_care",
+  "simulator": "call",
+  "mode": "act",
+  "concepts": [
+    "fake_support"
+  ],
+  "level": 2,
+  "titleKey": "safe.cc.title",
+  "briefKey": "safe.cc.brief",
+  "phone": {
+    "startBalance": 8000,
+    "startTime": "16:50"
+  },
+  "rule": "safe.cc.rule",
+  "instead": [
+    "safe.cc.i1",
+    "safe.cc.i2",
+    "safe.cc.i3"
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "textKey": "safe.cc.o1",
+      "when": "read:1"
+    },
+    {
+      "id": "o2",
+      "textKey": "safe.cc.o2",
+      "when": "inspectedAny:1"
+    },
+    {
+      "id": "o3",
+      "textKey": "safe.cc.o3",
+      "when": "ended"
+    }
+  ],
+  "steps": [
+    {
+      "id": "search",
+      "at": 300,
+      "surface": {
+        "type": "search",
+        "query": "QuickPay customer care number",
+        "foreground": true,
+        "concept": "fake_support",
+        "misconception": "search_result_is_official",
+        "best": "pick_official",
+        "results": [
+          {
+            "id": "r1",
+            "titleKey": "safe.cc.r1.title",
+            "url": "quickpay-care-help.example",
+            "urlLens": "u1",
+            "snippetKey": "safe.cc.r1.snip",
+            "ad": true,
+            "action": "pick_ad"
+          },
+          {
+            "id": "r2",
+            "titleKey": "safe.cc.r2.title",
+            "url": "help.quickpay.example",
+            "urlLens": "u2",
+            "snippetKey": "safe.cc.r2.snip",
+            "action": "pick_official"
+          },
+          {
+            "id": "r3",
+            "titleKey": "safe.cc.r3.title",
+            "url": "community-talk.example",
+            "urlLens": "u3",
+            "snippetKey": "safe.cc.r3.snip",
+            "action": "pick_forum"
+          }
+        ],
+        "lens": [
+          {
+            "id": "u1",
+            "revealKey": "safe.cc.lens.u1",
+            "tell": "ad"
+          },
+          {
+            "id": "u2",
+            "revealKey": "safe.cc.lens.u2"
+          },
+          {
+            "id": "u3",
+            "revealKey": "safe.cc.lens.u3",
+            "tell": "forum"
+          }
+        ],
+        "tells": [
+          {
+            "id": "ad",
+            "kind": "odd_link",
+            "whyKey": "safe.cc.why.ad"
+          },
+          {
+            "id": "forum",
+            "kind": "odd_link",
+            "whyKey": "safe.cc.why.forum"
+          }
+        ],
+        "actions": [
+          {
+            "id": "pick_ad",
+            "labelKey": "safe.cc.a.ad",
+            "risk": "risky",
+            "unlocks": [
+              "call"
+            ],
+            "delay": 900,
+            "noteKey": "safe.cc.n.ad",
+            "misconception": "search_result_is_official"
+          },
+          {
+            "id": "pick_official",
+            "labelKey": "safe.cc.a.official",
+            "risk": "safe",
+            "unlocks": [
+              "official"
+            ],
+            "delay": 600,
+            "noteKey": "safe.cc.n.official"
+          },
+          {
+            "id": "pick_forum",
+            "labelKey": "safe.cc.a.forum",
+            "risk": "risky",
+            "unlocks": [
+              "call"
+            ],
+            "delay": 900,
+            "noteKey": "safe.cc.n.forum",
+            "misconception": "search_result_is_official"
+          }
+        ]
+      }
+    },
+    {
+      "id": "call",
+      "surface": {
+        "type": "call",
+        "caller": "QuickPay Support",
+        "ring": false,
+        "foreground": true,
+        "concept": "fake_support",
+        "misconception": "search_result_is_official",
+        "best": "refuse",
+        "lines": [
+          {
+            "k": "safe.cc.call.a"
+          },
+          {
+            "k": "safe.cc.call.b",
+            "lens": "remote"
+          },
+          {
+            "k": "safe.cc.call.c",
+            "lens": "otp"
+          }
+        ],
+        "lens": [
+          {
+            "id": "remote",
+            "revealKey": "safe.cc.lens.remote",
+            "tell": "remote"
+          },
+          {
+            "id": "otp",
+            "revealKey": "safe.cc.lens.otp",
+            "tell": "otp"
+          }
+        ],
+        "tells": [
+          {
+            "id": "remote",
+            "kind": "asks_secret",
+            "whyKey": "safe.cc.why.remote"
+          },
+          {
+            "id": "otp",
+            "kind": "asks_secret",
+            "whyKey": "safe.cc.why.otp"
+          }
+        ],
+        "actions": [
+          {
+            "id": "install",
+            "labelKey": "safe.cc.a.install",
+            "risk": "risky",
+            "effects": {
+              "money.bank": -6000
+            },
+            "end": "fooled",
+            "noteKey": "safe.cc.n.install",
+            "misconception": "search_result_is_official"
+          },
+          {
+            "id": "refuse",
+            "labelKey": "safe.cc.a.refuse",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.cc.n.refuse"
+          }
+        ]
+      }
+    },
+    {
+      "id": "official",
+      "surface": {
+        "type": "page",
+        "url": "help.quickpay.example",
+        "titleKey": "safe.cc.off.title",
+        "foreground": true,
+        "concept": "fake_support",
+        "body": [
+          {
+            "k": "safe.cc.off.a"
+          }
+        ],
+        "actions": [
+          {
+            "id": "done",
+            "labelKey": "safe.cc.a.done",
+            "risk": "safe",
+            "end": "safe",
+            "noteKey": "safe.cc.n.done"
+          }
+        ]
+      }
+    }
+  ]
+}

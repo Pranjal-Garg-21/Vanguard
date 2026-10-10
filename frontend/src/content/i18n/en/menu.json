@@ -1,0 +1,41 @@
+{
+  "title": "Start menu",
+  "back": "◀ Back",
+  "item": {
+    "bag": "Bag",
+    "journal": "Journal",
+    "card": "Card",
+    "badges": "Badges",
+    "wallet": "Wallet",
+    "sound": "Sound",
+    "save": "Save",
+    "reset": "New game",
+    "quit": "Quit",
+    "exit": "Exit"
+  },
+  "card": {
+    "heading": "PAISAPUR PLAYER CARD",
+    "id": "ID No.",
+    "name": "Name",
+    "money": "Money",
+    "worth": "Net worth",
+    "savings": "Safety net",
+    "month": "Played",
+    "month_value": "Month {n} · {chapter}",
+    "journal": "Journal",
+    "journal_value": "{seen}/{total} seen · {mastered} ⭐",
+    "goal": "Goal",
+    "badges": "Badges",
+    "locked": "Not earned yet"
+  },
+  "reset": {
+    "intro": "Start a brand-new year in Paisapur? You'll wake up on your birthday again, in a new world with different luck.",
+    "lost": "This year's money, goals, badges, Money Journal, What-If lives and checkpoints will be erased.",
+    "kept": "Your player, picture-PIN and sound settings stay. Everything you learnt stays in your head!",
+    "start": "Start a new game",
+    "keep": "Keep playing",
+    "really": "Are you sure? This can't be undone.",
+    "yes": "Yes, start over",
+    "no": "No, go back"
+  }
+}

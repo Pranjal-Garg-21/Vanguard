@@ -39,6 +39,8 @@ export type MiniGameContext = {
   seed: number;
   stateSlice: Partial<GameState>;
   mode: PlayMode;
+  /** Scene setup from the story (e.g. which shock arrives, whose money was lost). Games treat it as optional. */
+  params?: Record<string, unknown>;
 };
 
 export type MiniGameChoice = {
@@ -46,6 +48,10 @@ export type MiniGameChoice = {
   choiceId: string;
   correct?: boolean;
   ms: number;
+  /** Optional: the concept this choice tests, when a game covers several. */
+  concept?: ConceptId;
+  /** Optional: the misconception a wrong choice reveals. */
+  misconception?: MisconceptionId;
 };
 
 export type MiniGameResult = {

@@ -1,0 +1,31 @@
+{
+  "id": "insurance",
+  "name": "maps.insurance",
+  "interior": true,
+  "rows": [
+    "WWWWWWWWW",
+    "WKKKWKKKW",
+    "WFFFFFFFW",
+    "WFFCCCFFW",
+    "WFFFFFFFW",
+    "WnFFFFFnW",
+    "WWWWEWWWW"
+  ],
+  "entry": {
+    "x": 4,
+    "y": 5,
+    "facing": "up"
+  },
+  "npcs": [
+    {
+      "id": "insurer",
+      "sprite": "meena",
+      "x": 4,
+      "y": 2,
+      "facing": "down",
+      "script": "insurer"
+    }
+  ],
+  "objects": [],
+  "triggers": []
+}
