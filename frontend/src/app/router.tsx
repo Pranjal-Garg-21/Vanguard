@@ -4,6 +4,7 @@
  */
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, useParams } from 'react-router';
+import { Arcade } from '@/features/arcade';
 import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
 import { LessonList, LessonPlayer } from '@/games/investing/lessons';
 import { InvestOrScam } from '@/games/investing/invest-or-scam';
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
   { path: '/who', element: <PlayerPicker /> },
   { path: '/join/:code', element: <JoinLink /> },
   { path: '/home', element: <Dashboard /> },
+  { path: '/arcade', element: <Arcade /> },
   { path: '/dev', element: <DevHome /> },
   { path: '/gallery', element: <Gallery /> },
   { path: '/learn/invest', element: <LessonList /> },

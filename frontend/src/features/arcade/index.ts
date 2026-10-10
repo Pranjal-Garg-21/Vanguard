@@ -3,4 +3,4 @@
  * Owner: P4
  */
 
-export {};
+export { Arcade } from './Arcade';
