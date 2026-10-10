@@ -75,7 +75,7 @@ export function Dashboard() {
               <span className="text-brand">{stats.streak}</span> <span className="text-muted">d</span>
             </span>
             <span title={t('home.stats.xp')}>
-              <span className="text-brand">{stats.xp}</span> <span className="text-muted">XP</span>
+              <span className="text-brand">{stats.xp}</span> <span className="text-muted">{t('home.stats.xp')}</span>
             </span>
             <button
               type="button"

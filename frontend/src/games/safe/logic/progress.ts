@@ -86,12 +86,12 @@ export function rankFor(xp: number): RankId {
 }
 
 /** XP needed for the next rank and how far through the current one the student is (0 to 1). */
-export function rankProgress(xp: number): { rank: RankId; next: RankId | null; toNext: number; fraction: number } {
+export function rankProgress(xp: number): { rank: RankId; level: number; next: RankId | null; toNext: number; fraction: number } {
   const i = RANKS.findIndex((r) => r.id === rankFor(xp));
   const current = RANKS[i] as (typeof RANKS)[number];
   const next = RANKS[i + 1];
-  if (!next) return { rank: current.id, next: null, toNext: 0, fraction: 1 };
-  return { rank: current.id, next: next.id, toNext: next.min - xp, fraction: (xp - current.min) / (next.min - current.min) };
+  if (!next) return { rank: current.id, level: i + 1, next: null, toNext: 0, fraction: 1 };
+  return { rank: current.id, level: i + 1, next: next.id, toNext: next.min - xp, fraction: (xp - current.min) / (next.min - current.min) };
 }
 
 const dayOf = (ms: number) => {

@@ -43,10 +43,10 @@
     "next": "Next",
     "skipReplay": "Skip to summary",
     "cards": "Red-flag cards",
-    "cardsHint": "Every sign you spot becomes a card. Collect them all.",
+    "cardsHint": "Use the Scam Lens to find red flags. Each type you find unlocks a card, and your cards are saved.",
     "newCard": "New card",
     "moneyLost": "Money lost in the simulation",
-    "tellsFound": "Red flags found",
+    "tellsFound": "Red flags spotted",
     "judgedRight": "Judged safely",
     "youDid": "You chose: {what}",
     "auto": "The timer ran out, so nothing was sent.",
@@ -65,7 +65,7 @@
     "singleMessage": "Single message",
     "logFlag": "red flag",
     "inbox": "Scam Inbox",
-    "falseAlarms": "False alarms",
+    "falseAlarms": "Real messages blocked by mistake",
     "handled": "Handled safely",
     "whatIfBadge": "Simulated outcome",
     "clockDay": "Day view",
@@ -83,7 +83,10 @@
     "remember": "Remember",
     "doInstead": "What to do instead",
     "taskComplete": "Task complete",
-    "typing": "Typing"
+    "typing": "Typing",
+    "allTasks": "All tasks complete",
+    "cardCollected": "Collected",
+    "cardUnlock": "Find it with the Scam Lens"
   },
   "verdict": {
     "legit": "Legit",
@@ -509,7 +512,7 @@
   "hub": {
     "title": "Stay Safe",
     "sub": "Seven simulators, each built around a different kind of trap. Pick one to practise, or follow the path. Everything here is simulated: no real money, no real people.",
-    "choose": "Choose a simulator",
+    "choose": "Choose what to practise",
     "modes": "Ways to play",
     "available": "Available",
     "soon": "Coming soon",
@@ -549,20 +552,20 @@
       "rescue_mission": "After a scam"
     },
     "profile": "Your progress",
-    "xp": "XP",
-    "badges": "Badges",
-    "cards": "Red-flag cards",
-    "rooms": "Rooms done",
+    "xp": "Points",
+    "badges": "Achievements",
+    "cards": "Red-flag cards found",
+    "rooms": "Rooms finished",
     "continue": "Continue",
     "recommended": "Recommended",
     "completed": "Completed",
     "notStarted": "Not started",
-    "upTo": "Up to {n} XP",
-    "best": "Best: {n}%",
-    "collection": "Collection",
+    "upTo": "Up to {n} points",
+    "best": "Best score: {n}%",
+    "collection": "Your collection",
     "earned": "Earned",
     "locked": "Locked",
-    "pathTitle": "Next on your path",
+    "pathTitle": "Up next for you",
     "chat": {
       "title": "Chat Traps",
       "blurb": "Conversations where a familiar name asks for money. Learn to verify through another channel before you help."
@@ -574,7 +577,16 @@
     "rescue": {
       "title": "Rescue Mission",
       "blurb": "You have just lost money to a scam. Choose the right steps in the right order, fast."
-    }
+    },
+    "cardsHint": "Find each type of red flag with the Scam Lens in any room to unlock its card.",
+    "level": "Your level",
+    "points": "Points",
+    "pointsNote": "Earned by finishing rooms and spotting red flags",
+    "roomsFinished": "Rooms finished",
+    "roomsNote": "Practice rooms you have completed",
+    "achievements": "Achievements",
+    "achievementsNote": "Unlocked by milestones, such as your first room",
+    "levelNote": "Level {n} of {total}"
   },
   "fb": {
     "title": {
@@ -1099,23 +1111,24 @@
   "reward": {
     "title": "Room complete",
     "stars": "{n} of 3 stars",
-    "xp": "XP earned",
-    "rank": "Rank",
-    "toNext": "{n} XP to {rank}",
-    "top": "Top rank reached",
-    "rankUp": "Rank up",
-    "newBadge": "New badge",
+    "xp": "points",
+    "rank": "Your level",
+    "toNext": "{n} more points to reach {rank}",
+    "top": "You have reached the top level",
+    "rankUp": "Level up",
+    "newBadge": "New achievement",
     "newCards": "New red-flag cards",
     "next": "Next room",
     "replay": "Play again",
     "back": "Back to {name}",
     "allDone": "You have played every room",
     "line": {
-      "performance": "Performance",
-      "firstClear": "First clear bonus",
+      "performance": "Your score",
+      "firstClear": "First time bonus",
       "moreStars": "Extra stars (+{n})",
       "newCards": "New red-flag cards ({n})"
     },
-    "noXp": "No new XP this time. Beat your best score to earn more."
+    "noXp": "No new points this time. Beat your best score to earn more.",
+    "total": "{n} points in total"
   }
 }

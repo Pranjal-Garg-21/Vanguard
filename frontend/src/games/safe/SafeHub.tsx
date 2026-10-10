@@ -12,7 +12,7 @@ import { logResult, t } from '@/platform';
 import type { MiniGameResult } from '@/core/types';
 import { Badge, Button, Card, ProgressBar, SectionLabel } from '@/ui';
 import { CATALOGUE, findEntry, getEntry, getSimulator, PATH, SIMULATORS, type CatalogEntry } from './catalog';
-import { ALL_CARDS, applyRun, BADGES, BASE_XP, emptyProgress, nextOnPath, rankProgress, scoreOf, type Gain, type Progress } from './logic/progress';
+import { ALL_CARDS, applyRun, BADGES, BASE_XP, emptyProgress, nextOnPath, RANKS, rankProgress, scoreOf, type Gain, type Progress } from './logic/progress';
 import { loadProgress, saveProgress } from './progressStore';
 import { Icon } from './phone/Icon';
 import { PhoneRoom } from './phone/PhoneRoom';
@@ -84,19 +84,21 @@ function Simulators() {
 
       <Card className="grid gap-5 sm:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <SectionLabel>{t('safe.reward.rank')}</SectionLabel>
+          <SectionLabel>{t('safe.hub.level')}</SectionLabel>
           <p className="mt-1 text-2xl font-bold text-xp">{t(`safe.rank.${rank.rank}`)}</p>
+          <p className="text-xs text-muted">{t('safe.hub.levelNote', { n: rank.level, total: RANKS.length })}</p>
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-surface-3"><div className="h-full rounded-full bg-xp" style={{ width: `${Math.round(rank.fraction * 100)}%` }} /></div>
           <p className="mt-1 text-xs text-muted">{rank.next ? t('safe.reward.toNext', { n: rank.toNext, rank: t(`safe.rank.${rank.next}`) }) : t('safe.reward.top')}</p>
         </div>
         {[
-          [t('safe.hub.xp'), String(progress.xp)],
-          [t('safe.hub.rooms'), `${done}/${total}`],
-          [t('safe.hub.badges'), `${progress.badges.length}/${BADGES.length}`],
-        ].map(([label, value]) => (
+          [t('safe.hub.points'), String(progress.xp), t('safe.hub.pointsNote')],
+          [t('safe.hub.roomsFinished'), `${done} of ${total}`, t('safe.hub.roomsNote')],
+          [t('safe.hub.achievements'), `${progress.badges.length} of ${BADGES.length}`, t('safe.hub.achievementsNote')],
+        ].map(([label, value, note]) => (
           <div key={label}>
             <SectionLabel>{label}</SectionLabel>
             <p className="mt-1 text-2xl font-bold tabular-nums text-ink">{value}</p>
+            <p className="text-xs text-muted">{note}</p>
           </div>
         ))}
       </Card>
@@ -143,7 +145,7 @@ function Simulators() {
 
       <section className="space-y-3">
         <SectionLabel>{t('safe.hub.collection')}</SectionLabel>
-        <p className="text-sm text-muted">{t('safe.hub.badges')}: {progress.badges.length}/{BADGES.length}</p>
+        <p className="text-sm text-muted">{t('safe.hub.badges')}: {progress.badges.length} of {BADGES.length}</p>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {BADGES.map((b) => {
             const has = progress.badges.includes(b);
@@ -158,9 +160,10 @@ function Simulators() {
             );
           })}
         </div>
-        <p className="pt-2 text-sm text-muted">{t('safe.hub.cards')}: {progress.cards.length}/{ALL_CARDS}</p>
+        <p className="pt-2 text-sm text-muted">{t('safe.hub.cards')}: {progress.cards.length} of {ALL_CARDS}</p>
+        <p className="text-xs text-muted">{t('safe.hub.cardsHint')}</p>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {TELL_KINDS.map((k) => <TellCard key={k} kind={k} found={progress.cards.includes(k)} />)}
+          {TELL_KINDS.map((k) => <TellCard key={k} kind={k} found={false} collected={progress.cards.includes(k)} />)}
         </div>
       </section>
     </main>
@@ -243,6 +246,7 @@ function Play({ simId, entry }: { simId: string; entry: CatalogEntry }) {
   const seed = useSeed();
   const [attempt, setAttempt] = useState(0);
   const [done, setDone] = useState<Done | null>(null);
+  const saved = useProgress();
 
   const finish = async (result: MiniGameResult, meta: RunMeta) => {
     void logResult(result, { activity: entry.activity, concept: entry.concept });
@@ -287,5 +291,5 @@ function Play({ simId, entry }: { simId: string; entry: CatalogEntry }) {
   if (!built) return <Navigate to={`/safe/${simId}`} replace />;
   // Shuffle the options so the right answer is not always in the same place.
   const script = shuffleChoices(built, playSeed);
-  return <PhoneRoom key={attempt} script={script} mode="arcade" onComplete={(r, m) => void finish(r, m)} />;
+  return <PhoneRoom key={attempt} script={script} mode="arcade" collected={saved.cards} onComplete={(r, m) => void finish(r, m)} />;
 }

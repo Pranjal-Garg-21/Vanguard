@@ -85,7 +85,7 @@ export function RewardScreen({ entryTitle, gain, progress, next, backLabel, onNe
       <Card className="animate-rise space-y-3">
         <div className="flex items-center justify-between">
           <SectionLabel>{t('safe.reward.rank')}</SectionLabel>
-          <span className="font-mono text-xs text-muted">{progress.xp} {t('safe.reward.xp')}</span>
+          <span className="font-mono text-xs text-muted">{t('safe.reward.total', { n: progress.xp })}</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-xp/15 text-xp"><Icon name="shield" className="h-6 w-6" /></span>
