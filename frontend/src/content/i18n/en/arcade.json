@@ -17,21 +17,41 @@
   "worth_another_look": "Worth another look",
   "no_effects": "This was practice. Your character's money and meters are unchanged — only what you learned carries over.",
   "game": {
-    "document-hunt": {
-      "title": "Document Hunt",
-      "blurb": "Find what the bank actually needs to open an account in your name."
-    },
-    "swipe-sort": {
-      "title": "Need or Want?",
-      "blurb": "Sort spending into needs and wants — and find out why context changes the answer."
+    "bank-counter": {
+      "title": "Open an Account",
+      "blurb": "Pick the right account, fill the form, and set a PIN nobody is watching you type."
     },
     "debt-ladder": {
       "title": "The Cost of Borrowing",
       "blurb": "You need ₹2,000 for three months. Four ways to get it. Which costs least?"
     },
+    "document-hunt": {
+      "title": "Document Hunt",
+      "blurb": "Find what the bank actually needs to open an account in your name."
+    },
+    "goal-builder": {
+      "title": "When Do I Get It?",
+      "blurb": "Guess how long your goal takes, then find out."
+    },
+    "jar-split": {
+      "title": "Three Jars",
+      "blurb": "Your money for the month, and three jars. The bills are already waiting."
+    },
     "rescue-mission": {
       "title": "Rescue Mission",
       "blurb": "A friend lost money to a fake job site. What do you do, and in what order?"
+    },
+    "spending-detective": {
+      "title": "Where Did It Go?",
+      "blurb": "A month of payments and nothing to show for it. Find the leak."
+    },
+    "surprise-month": {
+      "title": "The Surprise",
+      "blurb": "Something breaks, and it costs money you had not planned for."
+    },
+    "swipe-sort": {
+      "title": "Need or Want?",
+      "blurb": "Sort spending into needs and wants — and find out why context changes the answer."
     }
   }
 }

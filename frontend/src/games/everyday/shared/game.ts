@@ -86,6 +86,15 @@ export function combine(
   };
 }
 
+/**
+ * Narrow a two-bucket list read from content JSON.
+ *
+ * Triage takes an explicit pair so content cannot accidentally declare three
+ * buckets, but JSON infers a plain array. The validator already checks that
+ * every `correctBucket` names a declared bucket.
+ */
+export const asBuckets = <T,>(value: readonly T[]): [T, T] => value as unknown as [T, T];
+
 export type ContextFilter = {
   lifeStage?: string[];
   circumstance?: string[];

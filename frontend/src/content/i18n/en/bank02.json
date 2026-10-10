@@ -1,0 +1,72 @@
+{
+  "_comment": "UC-BANK-02 Bank Counter. No real bank is named anywhere, by rule. The clerk is friendly and a little brisk, the way a real counter is.",
+  "hook": "The bank. There is a queue, a ceiling fan, and a clerk who has done this ten thousand times. Your documents are in your folder.",
+  "summary": "You have an account in your own name.",
+  "clerk": {
+    "which": "“Which account do you want to open?”",
+    "form": "“Fill this in. Take your time, people get the nominee bit wrong.”",
+    "kit": "“Passbook, card, and your PIN. Do not write the PIN on the card.”"
+  },
+  "account": {
+    "savings": {
+      "text": "Regular savings account",
+      "blurb": "Earns interest. You must keep {minimum} in it at all times, or they charge you {charge} a month."
+    },
+    "zero_balance": {
+      "text": "Zero-balance account",
+      "blurb": "No minimum. No charge for falling below it, because there is nothing to fall below. Earns the same interest."
+    },
+    "minor": {
+      "text": "Minor account, with a guardian",
+      "blurb": "For under-18s. A parent or guardian signs with you. No minimum balance."
+    }
+  },
+  "warning": {
+    "cannot_maintain": "You earn about {income} a month. Keeping {minimum} sitting in the account at all times would be most of it — and the month you dip below, they take {charge}.",
+    "keep_anyway": "Open it anyway",
+    "choose_other": "Look at the others again"
+  },
+  "form": {
+    "title": "Account opening form",
+    "name": "Your name",
+    "address": "Where you live",
+    "nominee": "Nominee",
+    "nominee_why": "The person the bank gives your money to if something happens to you. Without one, your family needs court papers to get it.",
+    "nominee_choose": "Choose a nominee",
+    "signature": "Your signature",
+    "submit": "Hand it over"
+  },
+  "kit": {
+    "title": "Your welcome kit",
+    "passbook": "Passbook",
+    "card": "Debit card",
+    "envelope": "PIN envelope"
+  },
+  "pin": {
+    "title": "Set your PIN",
+    "prompt": "Four digits. Not your birth year.",
+    "passerby": "Someone has stopped behind you to look at the queue display.",
+    "covered": "You turned your shoulder and carried on.",
+    "cover": "Shield the keypad",
+    "weak": "That is one of the first PINs anyone would try. Pick another.",
+    "done": "PIN set. Never tell it to anyone — not a friend, not someone who calls saying they are from the bank."
+  },
+  "deposit": {
+    "prompt": "You have {amount} on you. How much goes into the account today?",
+    "jar_bank": "Into the account",
+    "jar_pocket": "Keep on me"
+  },
+  "sms": {
+    "arrived": "A message arrives before you are out of the door: “Dear customer, your KYC is incomplete. Click here to update or your account will be blocked.”",
+    "note": "You just finished your KYC at the counter. You will meet this message again."
+  },
+  "concept": {
+    "account": "A bank account in your own name means your money is yours: it is safe, it is recorded, and a scholarship or salary can be paid into it."
+  },
+  "nominee": {
+    "mother": "Your mother",
+    "father": "Your father",
+    "guardian": "Your guardian",
+    "sibling": "Your brother or sister"
+  }
+}

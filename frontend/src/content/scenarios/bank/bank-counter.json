@@ -1,0 +1,48 @@
+{
+  "_comment": "UC-BANK-02 Bank Counter. 12.6: a generic counter with no real bank branding anywhere, three account cards (the minor account only for under-18s), an illustrated form with a nominee, and a welcome kit whose PIN screen dims when someone walks past — that moment is the lesson, not decoration. Sets hasBankAccount, which every later Everyday Money game depends on.",
+  "_owner": "P3",
+  "_useCase": "UC-BANK-02",
+  "id": "bank-counter",
+  "pillar": "bank",
+  "stage": ["S0"],
+  "verb": "choose",
+  "hookKey": "bank02.hook",
+  "concepts": ["why_bank_account", "account_types", "minimum_balance_fees", "nominee", "pin_secrecy"],
+
+  "accounts": [
+    {
+      "id": "savings",
+      "textKey": "bank02.account.savings.text",
+      "blurbKey": "bank02.account.savings.blurb",
+      "minimumBalance": 1000,
+      "monthlyCharge": 100,
+      "interest": true
+    },
+    {
+      "id": "zero_balance",
+      "textKey": "bank02.account.zero_balance.text",
+      "blurbKey": "bank02.account.zero_balance.blurb",
+      "minimumBalance": 0,
+      "monthlyCharge": 0,
+      "interest": true
+    },
+    {
+      "id": "minor",
+      "textKey": "bank02.account.minor.text",
+      "blurbKey": "bank02.account.minor.blurb",
+      "minimumBalance": 0,
+      "monthlyCharge": 0,
+      "interest": true,
+      "requiresMinor": true
+    }
+  ],
+
+  "_nominee": "12.6 asks for a one-line 'why nominee' explanation on the form rather than a separate lesson.",
+  "formFields": ["name", "address", "nominee", "signature"],
+
+  "_pin": "The passer-by appears partway through entering the PIN. Nothing is scored on it; the point is that the student notices the screen change and learns to shield it.",
+  "pin": { "length": 4, "passerByAtDigit": 2 },
+
+  "conceptCard": { "textKey": "bank02.concept.account", "icon": "bank" },
+  "summaryKey": "bank02.summary"
+}

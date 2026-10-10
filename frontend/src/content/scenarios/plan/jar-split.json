@@ -1,0 +1,25 @@
+{
+  "_comment": "UC-PB-02 Jar Split. Implementation.md 12.6: income arrives as coins scaled to the character, bills attach to the Needs jar, and the Next button names the bill that will not be covered rather than scoring the student. The Emergency jar appears at L3, or once UC-SM-03 has introduced it. Amounts come from the character, not from this file, so one scenario serves every persona.",
+  "_owner": "P3",
+  "_useCase": "UC-PB-02",
+  "id": "jar-split",
+  "pillar": "plan",
+  "stage": ["S2"],
+  "verb": "allocate",
+  "promptKey": "pb02.prompt",
+  "hookKey": "pb02.hook",
+  "concepts": ["budget_jars", "fixed_vs_variable"],
+
+  "jars": [
+    { "id": "needs", "textKey": "pb02.jar.needs", "emoji": "🏠", "attachBills": true },
+    { "id": "wants", "textKey": "pb02.jar.wants", "emoji": "🎉" },
+    { "id": "future", "textKey": "pb02.jar.future", "emoji": "🌱" },
+    { "id": "emergency", "textKey": "pb02.jar.emergency", "emoji": "🛡️", "minLevel": 3 }
+  ],
+
+  "_feedback": "Rules live in logic/statement.ts so they can be tested. The family-contributor line is required by 12.6: when needs take most of the money, the response acknowledges it rather than suggesting the student spend less.",
+  "heavyNeedsShare": 0.7,
+
+  "conceptCard": { "textKey": "pb02.concept.jars", "icon": "jars" },
+  "summaryKey": "pb02.summary"
+}

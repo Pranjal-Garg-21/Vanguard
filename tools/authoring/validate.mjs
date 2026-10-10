@@ -251,6 +251,18 @@ for (const file of scenarioFiles) {
     err(where, `unknown verb "${scenario.verb}" — expected one of [${[...VERBS]}]`);
   }
 
+  // A bucket needs an id and a labelKey. Triage renders `labelKey`, so a
+  // bucket that only has `textKey` typechecks as content and renders blank.
+  for (const bucket of scenario.buckets ?? []) {
+    if (!bucket.id) err(where, 'a bucket has no id');
+    if (!bucket.labelKey) {
+      err(where, `bucket "${bucket.id}": needs a labelKey${bucket.textKey ? ' (found textKey)' : ''}`);
+    }
+  }
+  if (scenario.buckets && scenario.buckets.length !== 2) {
+    err(where, `expected exactly 2 buckets, found ${scenario.buckets.length}`);
+  }
+
   const ids = new Set();
   for (const card of scenario.cards ?? []) {
     if (!card.id) {

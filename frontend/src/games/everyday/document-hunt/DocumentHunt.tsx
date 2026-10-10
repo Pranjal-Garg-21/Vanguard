@@ -14,7 +14,7 @@
 import { useMemo } from 'react';
 
 import { Triage, type TriageCard } from '@/runtime/verbs/triage';
-import { combine, type GameProps } from '../shared/game';
+import { asBuckets, combine, type GameProps } from '../shared/game';
 import { conceptMap } from '@/runtime/verbs/types';
 
 import content from '@/content/scenarios/bank/document-hunt.json';
@@ -42,7 +42,7 @@ export function DocumentHunt({ ctx, onComplete }: GameProps) {
     <Triage
       stepId="bank01.hunt"
       ctx={ctx}
-      buckets={content.buckets as [typeof content.buckets[0], typeof content.buckets[1]]}
+      buckets={asBuckets(content.buckets)}
       cards={cards}
       layout="board"
       bounceWrong

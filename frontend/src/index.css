@@ -319,3 +319,165 @@
     @apply py-0.5 text-sm;
   }
 }
+
+/* The five later Everyday Money games. Owner: P3. Same approach as above:
+   semantic hooks in the markup, all the styling here. */
+@layer components {
+  .game ul,
+  .game ol,
+  .game dl {
+    @apply list-none p-0;
+  }
+  .game li > button {
+    @apply w-full;
+  }
+
+  /* --- Jar Split -------------------------------------------------------- */
+  .statement li {
+    @apply flex justify-between border-b border-line py-2 text-sm tabular-nums;
+  }
+  .statement li[data-paid='false'] {
+    @apply text-bad;
+  }
+  .statement__verdict {
+    @apply rounded-lg border-l-4 border-brand bg-brand/10 p-3 text-ink;
+  }
+
+  /* --- Goal Builder ----------------------------------------------------- */
+  .predict__options,
+  .specific__options,
+  .choose__options,
+  .reflect__options,
+  .accounts,
+  .nominees {
+    @apply flex flex-col gap-2;
+  }
+  .specific__options button,
+  .accounts button {
+    @apply flex flex-col items-start gap-1;
+  }
+  .specific__options span,
+  .accounts span {
+    @apply text-sm font-normal tabular-nums text-muted;
+  }
+  .predict__verdict {
+    @apply rounded-lg border-l-4 border-warn bg-warn/10 p-3;
+  }
+  .plan__rate {
+    @apply text-2xl font-bold tabular-nums text-brand;
+  }
+  .plan__long {
+    @apply text-sm text-muted;
+  }
+  .game input[type='range'] {
+    @apply w-full accent-[var(--color-brand)];
+  }
+
+  /* --- Surprise Month --------------------------------------------------- */
+  .buffer {
+    @apply rounded-lg border-l-4 p-3;
+  }
+  .buffer--have {
+    @apply border-good bg-brand/10;
+  }
+  .buffer--none {
+    @apply border-bad bg-bad/10;
+  }
+  .badge {
+    @apply rounded-lg border border-brand bg-brand/10 p-3 text-center font-bold text-brand;
+  }
+
+  /* --- Bank Counter ----------------------------------------------------- */
+  .warning {
+    @apply rounded-lg border-l-4 border-warn bg-warn/10 p-3;
+  }
+  .form {
+    @apply grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 rounded-lg border border-line bg-surface p-3 text-sm;
+  }
+  .form dt {
+    @apply text-ink-soft;
+  }
+  .form dd {
+    @apply m-0 text-brand;
+  }
+  .kit li {
+    @apply border-b border-line py-2;
+  }
+  .passerby {
+    @apply rounded-lg border-l-4 border-warn bg-warn/10 p-3 text-sm;
+  }
+  .passerby--handled {
+    @apply border-good bg-brand/10;
+  }
+  .pin__display {
+    @apply text-center font-mono text-3xl tracking-[0.4em] text-ink;
+  }
+  .pin__display[data-hidden='true'] {
+    @apply text-muted;
+  }
+  .keypad {
+    @apply grid grid-cols-3 gap-2;
+  }
+  .keypad button {
+    @apply justify-center py-3 text-center font-mono text-lg;
+  }
+  .sms {
+    @apply rounded-lg border border-line-strong bg-surface-2 p-3 font-mono text-sm;
+  }
+
+  /* --- Spending Detective ----------------------------------------------- */
+  .txn-list {
+    @apply flex flex-col;
+  }
+  .txn-list__row {
+    @apply border-b border-line;
+  }
+  .txn-list__row button {
+    @apply min-h-0 border-0 bg-transparent px-0 py-2 font-normal;
+  }
+  .txn-list__row button[aria-pressed='true'] {
+    @apply bg-transparent text-brand;
+  }
+  .txn-list__row > button,
+  .txn-list__row {
+    @apply flex items-baseline gap-2 py-2 text-sm;
+  }
+  .txn-list__name {
+    @apply flex-1;
+  }
+  .txn-list__count,
+  .txn-list__tag {
+    @apply text-xs text-muted;
+  }
+  .txn-list__amount {
+    @apply font-bold tabular-nums text-ink;
+  }
+  .spend-chart {
+    @apply m-0 flex flex-col items-center gap-3;
+  }
+  .spend-chart svg {
+    @apply w-40;
+  }
+  .spend-chart__total {
+    @apply text-center font-bold tabular-nums;
+  }
+  .spend-chart__legend {
+    @apply flex w-full flex-col gap-1 text-sm;
+  }
+  .spend-chart__legend li {
+    @apply flex items-center gap-2;
+  }
+  .spend-chart__swatch {
+    @apply inline-block h-3 w-3 flex-none rounded-sm;
+  }
+  .spend-chart__value {
+    @apply ml-auto tabular-nums text-muted;
+  }
+  .simulated {
+    @apply text-xs text-muted;
+  }
+  .leak__annual,
+  .leak__projection {
+    @apply rounded-lg border-l-4 border-brand bg-brand/10 p-3 font-bold text-ink;
+  }
+}

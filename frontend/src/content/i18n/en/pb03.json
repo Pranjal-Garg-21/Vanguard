@@ -1,0 +1,72 @@
+{
+  "_comment": "UC-PB-03 Goal Builder. On most characters' numbers a goal takes longer than the twelve months the LifePath covers, so the year-one milestone is written as the normal, respectable outcome — not as failure.",
+
+  "hook": "You know what you are saving for. Now work out when you actually get it.",
+  "summary": "Your goal has a number and a date now.",
+
+  "predict": {
+    "question": "Guess first: saving {monthly} a month, how many months until you have {amount}?",
+    "option": "{count} months",
+    "close": "Close. It is {actual} months.",
+    "exact": "Exactly right — {actual} months.",
+    "off": "Not quite. It is {actual} months. The gap between what we guess and what the maths says is the whole reason to write it down."
+  },
+
+  "plan": {
+    "how_much": "How much can you put away each month?",
+    "reached_in": "At {monthly} a month, you get there in {count} months.",
+    "reached_by": "At {monthly} a month, you get there by {festival}.",
+    "reached_next_year": "At {monthly} a month, you get there by {festival} next year.",
+    "never": "At nothing a month, this never arrives. Try moving the slider.",
+    "year_one": "Twelve months from now you will have {amount} — that is {percent}% of the way there.",
+    "long_goal": "This is a goal bigger than one year. That is normal, and it is not a reason to pick a smaller dream. Aim at the twelve-month mark and keep going."
+  },
+
+  "specific": {
+    "title": "Which one, exactly?",
+    "why": "A goal with a number and a name is one you can actually hit. “Some money saved” is not a goal.",
+    "laptop": {
+      "second_hand": "A good second-hand laptop",
+      "entry": "A new entry-level laptop",
+      "wanted": "The one you actually want"
+    },
+    "phone": {
+      "refurb": "A refurbished phone that works fine",
+      "new_basic": "A new basic phone",
+      "wanted": "The one you actually want"
+    },
+    "bike": {
+      "used": "A used bike in good condition",
+      "new": "A new bike"
+    },
+    "coaching": {
+      "online": "An online course",
+      "batch": "A coaching batch near home"
+    },
+    "business": {
+      "small": "Enough stock to start small",
+      "planned": "Enough to start properly"
+    },
+    "family": {
+      "part": "Cover part of it",
+      "whole": "Cover the whole thing"
+    }
+  },
+
+  "festival": {
+    "sankranti": "Sankranti",
+    "ugadi": "Ugadi",
+    "bonalu": "Bonalu",
+    "ganesh": "Ganesh Chaturthi",
+    "diwali": "Diwali",
+    "christmas": "Christmas"
+  },
+
+  "concept": {
+    "goal": "A goal needs three things: what it is, how much it costs, and the month you expect to have it."
+  },
+
+  "commit": {
+    "label": "Towards {goal}"
+  }
+}

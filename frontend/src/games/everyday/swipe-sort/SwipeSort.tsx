@@ -16,7 +16,7 @@ import { useMemo } from 'react';
 
 import { Triage, type TriageCard } from '@/runtime/verbs/triage';
 import type { MisconceptionId } from '@/core/types';
-import { combine, matchesPersona, type GameProps } from '../shared/game';
+import { asBuckets, combine, matchesPersona, type GameProps } from '../shared/game';
 import { conceptMap } from '@/runtime/verbs/types';
 import content from '@/content/scenarios/plan/swipe-sort.json';
 import { detectFunIsBad, type FunRecord } from './logic/fun';
@@ -46,7 +46,7 @@ export function SwipeSort({ ctx, onComplete }: GameProps) {
     <Triage
       stepId="pb01.sort"
       ctx={ctx}
-      buckets={content.buckets as [typeof content.buckets[0], typeof content.buckets[1]]}
+      buckets={asBuckets(content.buckets)}
       cards={cards}
       layout="queue"
       maxCards={content.maxCards}

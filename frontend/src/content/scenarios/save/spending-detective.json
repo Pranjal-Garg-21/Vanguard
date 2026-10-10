@@ -1,0 +1,67 @@
+{
+  "_comment": "UC-SM-02 Spending Detective. DATA RULE from 12.6: every transaction is simulated, generated from the character's own LifePath choices plus tape items. Nothing is ever read from a real phone, bank or message. The Triage step is 'small and often' versus 'one-off', which is exactly the task the plan describes — finding where the rest of the money went.",
+  "_owner": "P3",
+  "_useCase": "UC-SM-02",
+  "id": "spending-detective",
+  "pillar": "save",
+  "stage": [
+    "S3"
+  ],
+  "verb": "triage",
+  "hookKey": "sm02.hook",
+  "promptKey": "sm02.prompt",
+  "concepts": [
+    "expense_tracking"
+  ],
+  "buckets": [
+    {
+      "id": "often",
+      "labelKey": "sm02.bucket.often",
+      "emoji": "🔁"
+    },
+    {
+      "id": "one_off",
+      "labelKey": "sm02.bucket.one_off",
+      "emoji": "1️⃣"
+    }
+  ],
+  "_categories": "Colour and label only; the chart groups by these.",
+  "categories": [
+    {
+      "id": "chai",
+      "textKey": "sm02.category.chai",
+      "colour": "#a3ea2a"
+    },
+    {
+      "id": "games",
+      "textKey": "sm02.category.games",
+      "colour": "#b57cff"
+    },
+    {
+      "id": "recharge",
+      "textKey": "sm02.category.recharge",
+      "colour": "#3dc8f5"
+    },
+    {
+      "id": "delivery",
+      "textKey": "sm02.category.delivery",
+      "colour": "#ffb72b"
+    },
+    {
+      "id": "transport",
+      "textKey": "sm02.category.transport",
+      "colour": "#ff5468"
+    },
+    {
+      "id": "other",
+      "textKey": "sm02.category.other",
+      "colour": "#8b95ad"
+    }
+  ],
+  "projectionMonths": 6,
+  "conceptCard": {
+    "textKey": "sm02.concept.tracking",
+    "icon": "receipt"
+  },
+  "summaryKey": "sm02.summary"
+}
