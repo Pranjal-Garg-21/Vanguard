@@ -84,10 +84,10 @@ export async function logResult(
     result.choices.map((c) =>
       logEvent({
         activity: meta.activity,
-        concept: meta.concept,
+        concept: c.concept ?? meta.concept,
         choice: c.choiceId,
         correct: c.correct ?? null,
-        misconception: c.correct === false ? misconception : null,
+        misconception: c.correct === false ? (c.misconception ?? misconception) : null,
       }),
     ),
   );
