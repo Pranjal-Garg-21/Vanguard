@@ -35,6 +35,29 @@
   --color-bad: #ff5468;
   --color-info: #3dc8f5;
   --color-xp: #b57cff;
+
+  /* Fake phone (Stay Safe rooms): a light screen so it reads as a real phone on the dark page */
+  --color-phone-bezel: #0a0f1d;
+  --color-phone-screen: #f2f4f8;
+  --color-phone-card: #ffffff;
+  --color-phone-ink: #1a2133;
+  --color-phone-muted: #6b7489;
+  --color-phone-line: #dde2ec;
+  --color-phone-link: #1a6dff;
+  --color-phone-bubble: #e4e8f1;
+
+  --animate-banner-in: banner-in 0.35s ease-out both;
+  --animate-ring: ring 1s ease-in-out infinite;
+}
+
+@keyframes banner-in {
+  from { transform: translateY(-120%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes ring {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgb(163 234 42 / 0.5); }
+  50% { transform: scale(1.06); box-shadow: 0 0 0 14px rgb(163 234 42 / 0); }
 }
 
 @layer base {
@@ -61,5 +84,13 @@
       @apply bg-white text-black;
       background-image: none;
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
