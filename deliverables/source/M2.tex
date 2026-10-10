@@ -59,10 +59,11 @@ All figures come from the final commit of each branch (Vitest, \texttt{tsc -b}, 
 \section*{3\quad Progress on Testing (against the M1 plan)}
 
 \begin{itemize}
-  \item \textbf{Done:} unit tests of pure logic; determinism and rewind; content validator and a word-list test with 157 brand-name checks; simulation checks against closed forms; guardrail tests (every investing route shows the simulation banner, no screen shows a lone projected number); colour tokens at 4.5:1 contrast (23 checks); a test that every number a room quotes matches the assumptions file.
+  \item \textbf{Done:} unit tests of pure logic; determinism and rewind; content validator; simulation checks against closed forms; a test that every number a room quotes matches the assumptions file; and guardrail tests (every investing route shows the ``simulation, not advice'' banner and no screen shows a lone projected number).
+  \item \textbf{Brand-name (word-list) check.} The brief says the app must not name or recommend any real investment product, and the users are minors. A test holds a list of real bank, fund, app and company names and scans every lesson, game and scenario text; the build fails if one appears (157 checks across the content files). This enforces the ``fictional assets only'' rule automatically.
+  \item \textbf{Colour-contrast check.} Students use low-end phones, often in bright classrooms. A test computes the contrast ratio of every text and background colour pair in the design tokens and fails below 4.5:1, the accessibility (WCAG AA) minimum for readable text (23 checks).
   \item \textbf{Partly done:} offline use is covered by unit tests of the outbox and PWA state, but not yet played in airplane mode on a phone and reconnected. Right-to-left and large-text switches exist in the gallery but are not yet checked on every screen.
-  \item \textbf{Not started:} the 360\,$\times$\,640 pass on real low-end phones, peer playtests with timing, and the pre-check/post-check learning-gain measurement.
-  \item \textbf{Known gaps:} a few lint warnings (impure \texttt{Date.now} in render, state set inside effects) and the load-sensitive timing tests above.
+  \item \textbf{Not started:} the 360\,$\times$\,640 pass on real low-end phones and the pre-check/post-check learning-gain measurement.
 \end{itemize}
 
 \section*{4\quad Plan for the Remaining Time}
@@ -71,8 +72,8 @@ All figures come from the final commit of each branch (Vitest, \texttt{tsc -b}, 
   \item \textbf{Merge the three branches into one app} (shared files: router, game registry, concept list, UI kit, translation files), then re-run all tests, types, lint and build as one suite.
   \item \textbf{Connect the pieces:} open investing games from chapter 5 and Stay Safe from chapter 6 of the town, register them as mini-games in the shared runner, and log mastery events from all of them to the dashboard.
   \item \textbf{Verify offline and sync} end to end: play in airplane mode, reconnect, and confirm the facilitator sees the data and unlocks flow back.
-  \item \textbf{Phone and accessibility pass} at 360\,$\times$\,640 with large text; fix the lint warnings and make the timing tests robust.
-  \item \textbf{Playtests and learning gain} with a few peers using a short pre/post quiz; fix what confuses them. Add Hindi, Telugu and Urdu text for the main flow if time allows; otherwise state this limit plainly.
+  \item \textbf{Phone and accessibility pass} at 360\,$\times$\,640 with large text; make the timing tests robust.
+  \item \textbf{Personalisation.} Attempt to adapt the experience to each student: use the concept mastery values to bring weak concepts back as review questions, and shape story events and examples to the character the student chose. Add Hindi, Telugu and Urdu text for the main flow if time allows; otherwise state this limit plainly.
   \item \textbf{Final deliverables:} README with setup steps, MIT licence, final report, demo video, code zip and slides.
 \end{enumerate}
 
