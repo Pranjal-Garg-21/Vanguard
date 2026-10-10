@@ -5,7 +5,7 @@
  * until LifePath, Arcade and Progress land).
  */
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 import {
   loadActiveProfile,
   recentEvents,
@@ -149,14 +149,26 @@ export function Dashboard() {
             <section className="space-y-3">
               <SectionLabel>{t('home.practiceTitle')}</SectionLabel>
               <div className="grid gap-3 sm:grid-cols-3">
-                {ARCADE_SECTIONS.map((a) => (
-                  <div key={a.id} className="flex flex-col gap-2 rounded-xl border border-line bg-surface p-4">
-                    <Badge>{a.level}</Badge>
-                    <h3 className="font-bold">{a.name}</h3>
-                    <p className="flex-1 text-sm text-muted">{a.blurb}</p>
-                    <span className="text-xs font-bold text-muted uppercase">{t('home.soon')}</span>
-                  </div>
-                ))}
+                {ARCADE_SECTIONS.map((a) => {
+                  const playable = a.id === 'arcade.safe';
+                  const body = (
+                    <>
+                      <Badge>{a.level}</Badge>
+                      <h3 className="font-bold">{a.name}</h3>
+                      <p className="flex-1 text-sm text-muted">{a.blurb}</p>
+                      <span className={`text-xs font-bold uppercase ${playable ? 'text-brand' : 'text-muted'}`}>{playable ? t('home.play') : t('home.soon')}</span>
+                    </>
+                  );
+                  return playable ? (
+                    <Link key={a.id} to="/safe" className="flex flex-col gap-2 rounded-xl border border-line-strong bg-surface p-4 transition hover:border-brand">
+                      {body}
+                    </Link>
+                  ) : (
+                    <div key={a.id} className="flex flex-col gap-2 rounded-xl border border-line bg-surface p-4">
+                      {body}
+                    </div>
+                  );
+                })}
               </div>
             </section>
           </div>
