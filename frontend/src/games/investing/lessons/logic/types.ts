@@ -85,6 +85,9 @@ export interface Lesson {
   pillar: 'invest';
   order: number;
   estMinutes: number;
+  /** Shown in the lesson list and at the start of the lesson. */
+  titleKey: string;
+  blurbKey: string;
   concepts: string[];
   misconceptions: string[];
   levels: Level[];

@@ -1,4 +1,6 @@
 {
+  "title": "Interest: simple and compound",
+  "blurb": "See why money that earns on itself pulls ahead over time.",
   "hook": "Sana puts {P} in a savings plan that pays {r} a year. How much will she have after {years} years?",
   "define": "**Interest** is the price of using money. **Simple interest** is paid only on the money you started with.",
   "define2": "**Compound interest** is paid on your money and on the interest you already earned.",

@@ -67,6 +67,8 @@ describe.each(lessons.map((l) => [l.id, l] as const))('lesson %s', (_id, lesson)
 
   it('every number computes, and every text key exists and renders cleanly', () => {
     const c = ctx();
+    render(lesson.titleKey, c, `${lesson.id} title`);
+    render(lesson.blurbKey, c, `${lesson.id} blurb`);
     for (const [i, b] of lesson.blocks.entries()) {
       const where = `${lesson.id} block ${i} (${b.type})`;
       if (b.textKey) {
@@ -211,6 +213,8 @@ describe('strings hygiene', () => {
     }
     for (const l of lessons) {
       const c = runCalcs(l.vars, l.calcs);
+      used.add(l.titleKey);
+      used.add(l.blurbKey);
       for (const b of l.blocks) {
         if (b.textKey) render(b.textKey, c, 'hygiene');
         b.stepKeys?.forEach((k) => used.add(k));

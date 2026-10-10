@@ -1,0 +1,65 @@
+{
+  "banner": "Simulation based on assumptions. Not a prediction or advice.",
+
+  "list.title": "Investing ABC",
+  "list.subtitle": "Short lessons on how money works. One idea at a time.",
+  "list.lesson": "Lesson {n}",
+  "list.minutes": "{n} min",
+  "list.back": "Back",
+
+  "intro.depth": "How deep do you want to go?",
+  "intro.start": "Start lesson",
+  "level.1": "Feel it",
+  "level.1.hint": "Stories and pictures",
+  "level.2": "Count it",
+  "level.2.hint": "Adds real numbers",
+  "level.3": "Prove it",
+  "level.3.hint": "Adds the formulas",
+
+  "btn.next": "Next",
+  "btn.back": "Back",
+  "btn.showStep": "Show next step",
+  "btn.lockIn": "Lock in my guess",
+  "btn.startCheck": "Check what you learned",
+  "btn.nextQuestion": "Next question",
+  "btn.seeResults": "See results",
+  "btn.backToLessons": "Back to lessons",
+  "btn.again": "Do this lesson again",
+
+  "card.words": "Words to remember",
+  "card.explore": "Try it yourself",
+  "card.predict": "Make a guess",
+  "card.mistake": "A common mistake",
+  "card.tradeoff": "The trade-off",
+  "card.formula": "The formula",
+  "card.note": "Good to know",
+  "card.steps": "Step by step",
+
+  "check.title": "Check yourself",
+  "check.question": "Question {n} of {total}",
+  "check.right": "Correct!",
+  "check.wrong": "Not quite.",
+
+  "summary.title": "Lesson complete",
+  "summary.score": "You got {right} of {total} right.",
+  "summary.good": "Nice work. Move on, or redo the lesson to lock it in.",
+  "summary.more": "A few to revisit. Try the lesson again at a deeper level.",
+
+  "predict.yourGuess": "Your guess",
+  "predict.model": "The model says",
+  "predict.range": "A fair range: {low} to {high}",
+  "predict.exact": "This one is exact, not an estimate.",
+
+  "fallrise.fall": "How far does it fall?",
+  "fallrise.start": "You start with",
+  "fallrise.after": "After the fall",
+  "fallrise.needed": "Rise needed to get back",
+  "fallrise.same": "If it rises by only {fall}, you reach",
+
+  "scp.rate": "Rate per year",
+  "scp.years": "Years",
+  "scp.simple": "Simple",
+  "scp.compound": "Compound",
+  "scp.extra": "Interest on interest",
+  "scp.summary": "After {years} years: simple {simple}, compound {compound}. The gap, {extra}, is interest on interest."
+}

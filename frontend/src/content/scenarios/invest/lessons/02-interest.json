@@ -4,6 +4,8 @@
   "pillar": "invest",
   "order": 2,
   "estMinutes": 4,
+  "titleKey": "invest_interest.title",
+  "blurbKey": "invest_interest.blurb",
   "concepts": ["interest_simple", "interest_compound", "simple_vs_compound", "start_early"],
   "misconceptions": ["interest_always_simple", "late_start_is_fine"],
   "levels": [1, 2, 3],

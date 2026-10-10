@@ -1,4 +1,6 @@
 {
+  "title": "Profit, loss and return",
+  "blurb": "Learn to measure whether you made money or lost it.",
   "hook": "Asha buys 50 samosas for {buy} and sells them all for {sell}. Did she do well?",
   "define": "**Profit** is what you keep after paying your costs. If you end up with less, that is a **loss**.",
   "define2": "**Return** is profit as a percentage of what you put in. It lets you compare small and big amounts.",

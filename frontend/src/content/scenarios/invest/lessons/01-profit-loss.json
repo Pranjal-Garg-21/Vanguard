@@ -4,6 +4,8 @@
   "pillar": "invest",
   "order": 1,
   "estMinutes": 3,
+  "titleKey": "invest_profit_loss.title",
+  "blurbKey": "invest_profit_loss.blurb",
   "concepts": ["profit_loss", "return_percent", "paper_vs_realised"],
   "misconceptions": ["fall_then_rise_same_pct_is_even"],
   "levels": [1, 2, 3],

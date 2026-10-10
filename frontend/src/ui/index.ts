@@ -5,3 +5,4 @@
  */
 
 export { Badge, Button, Card, Notice, Spinner } from './components';
+export { SimBanner } from './SimBanner';

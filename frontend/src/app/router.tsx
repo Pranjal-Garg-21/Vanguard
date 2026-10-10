@@ -5,6 +5,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, useParams } from 'react-router';
 import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
+import { LessonList, LessonPlayer } from '@/games/investing/lessons';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
 import { StudentEntry } from './StudentEntry';
@@ -27,6 +28,8 @@ export const router = createBrowserRouter([
   { path: '/join/:code', element: <JoinLink /> },
   { path: '/home', element: <StudentHome /> },
   { path: '/dev', element: <DevHome /> },
+  { path: '/learn/invest', element: <LessonList /> },
+  { path: '/learn/invest/:lessonId', element: <LessonPlayer /> },
   {
     path: '/facilitator/*',
     element: (

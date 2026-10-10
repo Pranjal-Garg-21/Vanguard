@@ -48,6 +48,7 @@ export function DevHome() {
       <nav className="flex flex-wrap gap-3">
         <Link className="rounded bg-teal-700 px-3 py-2 text-white" to="/setup">Setup (P5)</Link>
         <Link className="rounded bg-slate-700 px-3 py-2 text-white" to="/facilitator">Facilitator (P5)</Link>
+        <Link className="rounded bg-indigo-700 px-3 py-2 text-white" to="/learn/invest">Investing ABC (P4)</Link>
         <button className="rounded border px-3 py-2 disabled:opacity-50" disabled={!profile} onClick={logTestEvent}>
           Log test event
         </button>
