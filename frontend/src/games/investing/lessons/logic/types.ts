@@ -130,3 +130,59 @@ export interface GlossaryEntry {
 }
 
 export type Strings = Record<string, string>;
+
+// ---------------------------------------------------------------------------
+// Rooms: TryHackMe-style lessons. Numbered tasks, each a little teaching then
+// "answer the questions below", with hints and points.
+// ---------------------------------------------------------------------------
+
+export type Unit = 'rupees' | 'percent' | 'number';
+
+export interface RoomQuestion {
+  id: string;
+  /** 'number' = type the answer; 'choice' = pick one option. */
+  kind: 'number' | 'choice';
+  promptKey: string;
+  concept: string;
+  points: number;
+  /** Free hint. Required on number questions. */
+  hintKey?: string;
+  /** Shown after a correct answer. */
+  explainKey: string;
+  /** number: id of the calc (in the room's calcs) holding the right answer. */
+  answer?: string;
+  /** number: how the answer is typed. percent answers are typed as 60, not 0.6. */
+  unit?: Unit;
+  /** number: allowed distance from the right answer, in typed units (default 0.5). */
+  tolerance?: number;
+  /** choice */
+  options?: CheckOption[];
+  correct?: string;
+}
+
+export interface RoomTask {
+  id: string;
+  titleKey: string;
+  /** Teaching for this task (same block types as a card lesson). */
+  blocks: LessonBlock[];
+  questions: RoomQuestion[];
+}
+
+export interface Room {
+  id: string;
+  kind: 'room';
+  pillar: 'invest';
+  order: number;
+  estMinutes: number;
+  difficulty: 'easy' | 'medium' | 'hard';
+  titleKey: string;
+  blurbKey: string;
+  concepts: string[];
+  misconceptions: string[];
+  vars?: Record<string, VarDef>;
+  calcs?: CalcDef[];
+  tasks: RoomTask[];
+  glossary: string[];
+}
+
+export type AnyLesson = Lesson | Room;

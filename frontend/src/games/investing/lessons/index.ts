@@ -5,3 +5,4 @@
 
 export { LessonList } from './LessonList';
 export { LessonPlayer } from './LessonPlayer';
+export { RoomPlayer } from './RoomPlayer';

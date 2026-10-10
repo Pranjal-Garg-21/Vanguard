@@ -6,13 +6,20 @@
  * so "hook" in invest_profit_loss.json is the key "invest_profit_loss.hook" (same as t()).
  */
 import conceptData from '@/content/scenarios/invest/concepts.p4.json';
-import type { CheckItem, GlossaryEntry, Lesson, Strings } from './types';
+import type { AnyLesson, CheckItem, GlossaryEntry, Lesson, Room, Strings } from './types';
 
 const values = (mods: Record<string, unknown>) => Object.values(mods);
 
-export const lessons = (
-  values(import.meta.glob('/src/content/scenarios/invest/lessons/*.json', { eager: true, import: 'default' })) as Lesson[]
+/** Every lesson, whichever style it is written in, in teaching order. */
+export const allLessons = (
+  values(import.meta.glob('/src/content/scenarios/invest/lessons/*.json', { eager: true, import: 'default' })) as AnyLesson[]
 ).sort((a, b) => a.order - b.order);
+
+/** Card-style lessons (depth picker, cards, quiz). */
+export const lessons = allLessons.filter((l): l is Lesson => l.kind === 'lesson');
+
+/** TryHackMe-style rooms (numbered tasks, typed answers, hints, points). */
+export const rooms = allLessons.filter((l): l is Room => l.kind === 'room');
 
 export const checks = values(
   import.meta.glob('/src/content/scenarios/invest/checks/*.json', { eager: true, import: 'default' }),
@@ -42,4 +49,4 @@ export const knownMisconceptions = new Set([
 
 export const checkById = new Map(checks.map((c) => [c.id, c]));
 export const glossaryById = new Map(glossary.map((g) => [g.id, g]));
-export const lessonById = new Map(lessons.map((l) => [l.id, l]));
+export const lessonById = new Map(allLessons.map((l) => [l.id, l]));

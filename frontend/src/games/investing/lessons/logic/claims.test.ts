@@ -20,6 +20,32 @@ describe('lesson 1: profit and loss', () => {
   });
 });
 
+describe('room 1: profit, loss and return (facts that live only in the wording)', () => {
+  it('q10: a 50% fall then a 50% rise ends 25% below the start', () => {
+    const end = 1000 * (1 - 0.5) * (1 + 0.5);
+    expect(end).toBe(750);
+    expect((1000 - end) / 1000).toBeCloseTo(0.25);
+  });
+  it('q13: after a 20% fall you hold 80 of every 100, and need 20 more on 80, which is 25%', () => {
+    expect(100 * (1 - 0.2)).toBe(80);
+    expect(20 / 80).toBeCloseTo(f.breakevenGain(0.2));
+  });
+  it('q8 explanation: after a 50% fall the money must double', () => {
+    expect(1000 * 0.5 * 2).toBe(1000);
+  });
+  it('q4: Asha gains 50% and Imran 5%, so Asha has the higher return but Imran the higher rupee gain', () => {
+    expect(200 / 400).toBeGreaterThan(300 / 6000);
+    expect(300).toBeGreaterThan(200);
+  });
+  it('q12: 10% of 5,000 is more rupees than 50% of 200', () => {
+    expect(5000 * 0.1).toBeGreaterThan(200 * 0.5);
+  });
+  it('the lab at 60% fall: 400 left, 150% rise needed', () => {
+    expect(1000 * (1 - 0.6)).toBeCloseTo(400);
+    expect(f.breakevenGain(0.6)).toBeCloseTo(1.5);
+  });
+});
+
 describe('lesson 2: interest', () => {
   it('"far less than half": a late starter ends with under half of the early starter', () => {
     const early = f.futureValueMonthly(500, 0.1, (58 - 18) * 12);

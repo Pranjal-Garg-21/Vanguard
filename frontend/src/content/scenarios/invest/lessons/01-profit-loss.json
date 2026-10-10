@@ -1,24 +1,31 @@
 {
   "id": "lesson_profit_loss",
-  "kind": "lesson",
+  "kind": "room",
   "pillar": "invest",
   "order": 1,
-  "estMinutes": 3,
+  "estMinutes": 8,
+  "difficulty": "easy",
   "titleKey": "invest_profit_loss.title",
   "blurbKey": "invest_profit_loss.blurb",
   "concepts": ["profit_loss", "return_percent", "paper_vs_realised"],
   "misconceptions": ["fall_then_rise_same_pct_is_even"],
-  "levels": [1, 2, 3],
   "vars": {
     "buy": { "value": 250, "fmt": "rupees" },
     "sell": { "value": 400, "fmt": "rupees" },
     "lowSell": { "value": 200, "fmt": "rupees" },
     "startAmt": { "value": 1000, "fmt": "rupees" },
     "fall": { "value": 0.5, "fmt": "percent" },
+    "fall2": { "value": 0.8, "fmt": "percent" },
+    "fall3": { "value": 0.2, "fmt": "percent" },
+    "g1": { "value": 200, "fmt": "rupees" },
+    "b1": { "value": 400, "fmt": "rupees" },
+    "g2": { "value": 300, "fmt": "rupees" },
+    "b2": { "value": 6000, "fmt": "rupees" },
     "smallBase": { "value": 200, "fmt": "rupees" },
     "smallPct": { "value": 0.5, "fmt": "percent" },
     "bigBase": { "value": 5000, "fmt": "rupees" },
-    "bigPct": { "value": 0.1, "fmt": "percent" }
+    "bigPct": { "value": 0.1, "fmt": "percent" },
+    "paperLoss": { "value": 800, "fmt": "rupees" }
   },
   "calcs": [
     { "id": "profit1", "fn": "profit", "args": ["$buy", "$sell"], "fmt": "rupees" },
@@ -28,57 +35,270 @@
     { "id": "keep", "fn": "sub", "args": [1, "$fall"] },
     { "id": "afterFall", "fn": "mul", "args": ["$startAmt", "$keep"], "fmt": "rupees" },
     { "id": "needGain", "fn": "breakevenGain", "args": ["$fall"], "fmt": "percent" },
+    { "id": "needGain2", "fn": "breakevenGain", "args": ["$fall2"], "fmt": "percent" },
+    { "id": "needGain3", "fn": "breakevenGain", "args": ["$fall3"], "fmt": "percent" },
     { "id": "up", "fn": "add", "args": [1, "$fall"] },
     { "id": "afterRise", "fn": "mul", "args": ["$afterFall", "$up"], "fmt": "rupees" },
+    { "id": "r1", "fn": "div", "args": ["$g1", "$b1"], "fmt": "percent" },
+    { "id": "r2", "fn": "div", "args": ["$g2", "$b2"], "fmt": "percent" },
     { "id": "smallGain", "fn": "mul", "args": ["$smallBase", "$smallPct"], "fmt": "rupees" },
     { "id": "bigGain", "fn": "mul", "args": ["$bigBase", "$bigPct"], "fmt": "rupees" }
   ],
-  "blocks": [
-    { "type": "hook", "visual": "samosa_stall", "textKey": "invest_profit_loss.hook" },
-    { "type": "define", "textKey": "invest_profit_loss.define" },
-    { "type": "define", "textKey": "invest_profit_loss.define2" },
-    { "type": "analogy", "visual": "tea_stall", "textKey": "invest_profit_loss.analogy" },
+  "tasks": [
     {
-      "type": "steps",
-      "minLevel": 2,
-      "stepKeys": [
-        "invest_profit_loss.steps.1",
-        "invest_profit_loss.steps.2",
-        "invest_profit_loss.steps.3",
-        "invest_profit_loss.steps.4"
+      "id": "t1",
+      "titleKey": "invest_profit_loss.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "samosa_stall", "textKey": "invest_profit_loss.t1.hook" },
+        { "type": "define", "textKey": "invest_profit_loss.t1.define" },
+        { "type": "analogy", "visual": "tea_stall", "textKey": "invest_profit_loss.t1.analogy" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q1.prompt",
+          "concept": "profit_loss",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q1.hint",
+          "explainKey": "invest_profit_loss.q1.explain",
+          "answer": "profit1",
+          "unit": "rupees"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "invest_profit_loss.q2.prompt",
+          "concept": "profit_loss",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q2.hint",
+          "explainKey": "invest_profit_loss.q2.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_profit_loss.q2.opt.a" },
+            { "id": "b", "textKey": "invest_profit_loss.q2.opt.b" },
+            { "id": "c", "textKey": "invest_profit_loss.q2.opt.c" },
+            { "id": "d", "textKey": "invest_profit_loss.q2.opt.d" }
+          ],
+          "correct": "b"
+        }
       ]
     },
-    { "type": "note", "textKey": "invest_profit_loss.paper" },
     {
-      "type": "explore",
-      "explore": {
-        "widget": "fall_rise",
-        "promptKey": "invest_profit_loss.explore.prompt",
-        "params": { "start": "$startAmt", "fall": "$fall" }
-      }
-    },
-    {
-      "type": "predict",
-      "predict": {
-        "questionKey": "invest_profit_loss.predict.q",
-        "input": { "kind": "slider", "min": 0, "max": 3, "step": 0.1, "unit": "percent" },
-        "reveal": {
-          "actual": "needGain",
-          "rangeLow": "needGain",
-          "rangeHigh": "needGain",
-          "explainKey": "invest_profit_loss.predict.explain"
+      "id": "t2",
+      "titleKey": "invest_profit_loss.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_profit_loss.t2.define" },
+        {
+          "type": "steps",
+          "stepKeys": ["invest_profit_loss.t2.steps.1", "invest_profit_loss.t2.steps.2"]
         }
-      }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q3.prompt",
+          "concept": "return_percent",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q3.hint",
+          "explainKey": "invest_profit_loss.q3.explain",
+          "answer": "ret1",
+          "unit": "percent"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "invest_profit_loss.q4.prompt",
+          "concept": "return_percent",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q4.hint",
+          "explainKey": "invest_profit_loss.q4.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_profit_loss.q4.opt.a" },
+            { "id": "b", "textKey": "invest_profit_loss.q4.opt.b" },
+            { "id": "c", "textKey": "invest_profit_loss.q4.opt.c" },
+            { "id": "d", "textKey": "invest_profit_loss.q4.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
     },
-    { "type": "tradeoff", "textKey": "invest_profit_loss.tradeoff" },
     {
-      "type": "misconception",
-      "misconceptions": ["fall_then_rise_same_pct_is_even"],
-      "textKey": "invest_profit_loss.mistake"
+      "id": "t3",
+      "titleKey": "invest_profit_loss.t3.title",
+      "blocks": [
+        {
+          "type": "steps",
+          "stepKeys": [
+            "invest_profit_loss.t3.steps.1",
+            "invest_profit_loss.t3.steps.2",
+            "invest_profit_loss.t3.steps.3"
+          ]
+        },
+        { "type": "note", "textKey": "invest_profit_loss.t3.paper" }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q5.prompt",
+          "concept": "profit_loss",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q5.hint",
+          "explainKey": "invest_profit_loss.q5.explain",
+          "answer": "loss1",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q6.prompt",
+          "concept": "return_percent",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q6.hint",
+          "explainKey": "invest_profit_loss.q6.explain",
+          "answer": "ret2",
+          "unit": "percent"
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "invest_profit_loss.q7.prompt",
+          "concept": "paper_vs_realised",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q7.hint",
+          "explainKey": "invest_profit_loss.q7.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_profit_loss.q7.opt.a" },
+            { "id": "b", "textKey": "invest_profit_loss.q7.opt.b" },
+            { "id": "c", "textKey": "invest_profit_loss.q7.opt.c" },
+            { "id": "d", "textKey": "invest_profit_loss.q7.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
     },
-    { "type": "formula", "minLevel": 3, "textKey": "invest_profit_loss.formula" },
-    { "type": "jargon", "terms": ["profit", "loss", "return", "paper_gain", "realised"] }
+    {
+      "id": "t4",
+      "titleKey": "invest_profit_loss.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "fall_rise",
+            "promptKey": "invest_profit_loss.t4.explore",
+            "params": { "start": "$startAmt", "fall": "$fall" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q8.prompt",
+          "concept": "return_percent",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q8.hint",
+          "explainKey": "invest_profit_loss.q8.explain",
+          "answer": "needGain",
+          "unit": "percent"
+        },
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q9.prompt",
+          "concept": "return_percent",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q9.hint",
+          "explainKey": "invest_profit_loss.q9.explain",
+          "answer": "needGain2",
+          "unit": "percent"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "invest_profit_loss.q10.prompt",
+          "concept": "return_percent",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q10.hint",
+          "explainKey": "invest_profit_loss.q10.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "invest_profit_loss.q10.opt.a",
+              "misconception": "fall_then_rise_same_pct_is_even",
+              "feedbackKey": "invest_profit_loss.q10.fb.a"
+            },
+            { "id": "b", "textKey": "invest_profit_loss.q10.opt.b" },
+            { "id": "c", "textKey": "invest_profit_loss.q10.opt.c" },
+            { "id": "d", "textKey": "invest_profit_loss.q10.opt.d" }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "invest_profit_loss.t5.title",
+      "blocks": [
+        { "type": "tradeoff", "textKey": "invest_profit_loss.t5.tradeoff" },
+        {
+          "type": "misconception",
+          "misconceptions": ["fall_then_rise_same_pct_is_even"],
+          "textKey": "invest_profit_loss.t5.mistake"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q11",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q11.prompt",
+          "concept": "profit_loss",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q11.hint",
+          "explainKey": "invest_profit_loss.q11.explain",
+          "answer": "bigGain",
+          "unit": "rupees"
+        },
+        {
+          "id": "q12",
+          "kind": "choice",
+          "promptKey": "invest_profit_loss.q12.prompt",
+          "concept": "return_percent",
+          "points": 10,
+          "hintKey": "invest_profit_loss.q12.hint",
+          "explainKey": "invest_profit_loss.q12.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_profit_loss.q12.opt.a" },
+            { "id": "b", "textKey": "invest_profit_loss.q12.opt.b" },
+            { "id": "c", "textKey": "invest_profit_loss.q12.opt.c" },
+            { "id": "d", "textKey": "invest_profit_loss.q12.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "titleKey": "invest_profit_loss.t6.title",
+      "blocks": [
+        { "type": "formula", "textKey": "invest_profit_loss.t6.formula" },
+        { "type": "jargon", "terms": ["profit", "loss", "return", "paper_gain", "realised"] }
+      ],
+      "questions": [
+        {
+          "id": "q13",
+          "kind": "number",
+          "promptKey": "invest_profit_loss.q13.prompt",
+          "concept": "return_percent",
+          "points": 20,
+          "hintKey": "invest_profit_loss.q13.hint",
+          "explainKey": "invest_profit_loss.q13.explain",
+          "answer": "needGain3",
+          "unit": "percent"
+        }
+      ]
+    }
   ],
-  "check": ["profit_loss_01", "profit_loss_02", "profit_loss_03", "profit_loss_04", "profit_loss_05"],
   "glossary": ["profit", "loss", "return", "paper_gain", "realised"]
 }

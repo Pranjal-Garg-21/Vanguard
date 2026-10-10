@@ -9,14 +9,16 @@ import { Button, Card, SimBanner } from '@/ui';
 import { CheckQuiz } from './CheckQuiz';
 import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
-import { checkById, lessonById, lessons } from './logic/content';
+import { allLessons, checkById, lessonById } from './logic/content';
 import type { Lesson, LessonBlock, Level } from './logic/types';
+import { RoomPlayer } from './RoomPlayer';
 
 type Page = { kind: 'block'; block: LessonBlock } | { kind: 'check' } | { kind: 'summary' };
 
 export function LessonPlayer() {
   const { lessonId = '' } = useParams();
   const lesson = lessonById.get(lessonId);
+  if (lesson?.kind === 'room') return <RoomPlayer key={lesson.id} room={lesson} />;
   if (!lesson) {
     return (
       <Shell>
@@ -124,7 +126,7 @@ function LessonRun({ lesson }: { lesson: Lesson }) {
 
   // ---------- summary ----------
   if (current.kind === 'summary') {
-    const next = lessons.find((l) => l.order === lesson.order + 1);
+    const next = allLessons.find((l) => l.order === lesson.order + 1);
     const good = score !== null && score.right >= Math.ceil(score.total * 0.7);
     return (
       <Shell progress={1}>
