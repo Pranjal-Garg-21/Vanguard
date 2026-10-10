@@ -106,7 +106,7 @@ export function FanChart({ percentiles, invested, inflation, learnMoreHref, clas
         <LegendItem swatch={<span className="w-5 border-t-2 border-dashed border-ink-soft" />} label={t('assume.chart.legend.invested')} />
       </ul>
       {inflation !== undefined && (
-        <div className="space-y-2 rounded-lg border-l-4 border-info bg-surface-2 p-3 text-sm text-ink-soft" aria-live="polite">
+        <div className="space-y-2 rounded-lg border-s-4 border-info bg-surface-2 p-3 text-sm text-ink-soft" aria-live="polite">
           {real ? (
             <>
               <p className="font-bold text-ink">{t('assume.real.title')}</p>

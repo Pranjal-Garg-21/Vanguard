@@ -1,7 +1,7 @@
 /** The cards a lesson is made of. One card = one idea, readable in about 20 seconds. */
 import { useState } from 'react';
 import { t } from '@/platform';
-import { Button, Card } from '@/ui';
+import { AudioButton, Button, Card } from '@/ui';
 import { fillTemplate, type Computed } from './logic/calc';
 import { glossaryById } from './logic/content';
 import type { LessonBlock } from './logic/types';
@@ -12,13 +12,13 @@ type Ctx = Record<string, Computed>;
 
 /** Label shown above a card, and a coloured left edge so card kinds are easy to tell apart. */
 const LABELS: Partial<Record<LessonBlock['type'], { key: string; edge: string }>> = {
-  note: { key: 'investui.card.note', edge: 'border-l-line-strong' },
-  tradeoff: { key: 'investui.card.tradeoff', edge: 'border-l-info' },
-  misconception: { key: 'investui.card.mistake', edge: 'border-l-warn' },
-  formula: { key: 'investui.card.formula', edge: 'border-l-xp' },
-  explore: { key: 'investui.card.explore', edge: 'border-l-brand' },
-  steps: { key: 'investui.card.steps', edge: 'border-l-brand' },
-  jargon: { key: 'investui.card.words', edge: 'border-l-line-strong' },
+  note: { key: 'investui.card.note', edge: 'border-s-line-strong' },
+  tradeoff: { key: 'investui.card.tradeoff', edge: 'border-s-info' },
+  misconception: { key: 'investui.card.mistake', edge: 'border-s-warn' },
+  formula: { key: 'investui.card.formula', edge: 'border-s-xp' },
+  explore: { key: 'investui.card.explore', edge: 'border-s-brand' },
+  steps: { key: 'investui.card.steps', edge: 'border-s-brand' },
+  jargon: { key: 'investui.card.words', edge: 'border-s-line-strong' },
 };
 
 export function BlockCard({ block, ctx }: { block: LessonBlock; ctx: Ctx }) {
@@ -46,9 +46,14 @@ export function BlockCard({ block, ctx }: { block: LessonBlock; ctx: Ctx }) {
     );
   }
 
+  const spoken = (block.textKey ? [tx(block.textKey)] : block.type === 'steps' ? (block.stepKeys ?? []).map(tx) : []).join(' ').replace(/\*\*/g, '');
+
   return (
-    <Card className={`space-y-3 !p-5 ${label ? `border-l-4 ${label.edge}` : ''}`}>
-      {label && <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t(label.key)}</h2>}
+    <Card className={`space-y-3 !p-5 ${label ? `border-s-4 ${label.edge}` : ''}`}>
+      <div className="flex items-center justify-between gap-2">
+        {label ? <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t(label.key)}</h2> : <span />}
+        {spoken && <AudioButton text={spoken} />}
+      </div>
 
       {block.textKey && block.type !== 'formula' && (
         <p className={block.type === 'hook' ? 'text-xl font-bold text-ink' : 'text-lg leading-relaxed text-ink'}>

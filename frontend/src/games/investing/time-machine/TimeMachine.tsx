@@ -190,7 +190,7 @@ function Result({ done, inflation, setInflation }: { done: { params: TimeMachine
         <p className="text-lg text-ink">{t('timemachine.result.goal', { chance: tenthsText(facts.goalChance) })}</p>
       </Card>
 
-      <Card className="space-y-2 border-l-4 border-l-info">
+      <Card className="space-y-2 border-s-4 border-s-info">
         <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('timemachine.insight.title')}</h3>
         <p className="text-lg leading-relaxed text-ink">{t(insight.textKey, { loss })}</p>
       </Card>

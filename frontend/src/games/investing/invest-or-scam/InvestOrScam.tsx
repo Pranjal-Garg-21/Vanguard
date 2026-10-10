@@ -148,7 +148,7 @@ function InvestOrScamGame({ seed, last, onSave }: { seed: number | string; last:
 
             {given && (
               <div className="coach-in space-y-3" aria-live="polite">
-                <p className={`rounded-lg border-l-4 p-3 text-lg font-bold ${isCorrect(card, given) ? 'border-brand bg-brand/10 text-ink' : 'border-warn bg-warn/10 text-ink'}`}>
+                <p className={`rounded-lg border-s-4 p-3 text-lg font-bold ${isCorrect(card, given) ? 'border-brand bg-brand/10 text-ink' : 'border-warn bg-warn/10 text-ink'}`}>
                   {isCorrect(card, given)
                     ? t('scamsort.reveal.right', { bucket: t(`scamsort.bucket.${card.answer}`) })
                     : t('scamsort.reveal.wrong', { bucket: t(`scamsort.bucket.${card.answer}`) })}

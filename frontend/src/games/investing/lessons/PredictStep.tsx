@@ -13,7 +13,7 @@ export function PredictStep({ roomId, predict, ctx }: { roomId: string; predict:
   const high = raw(predict.rangeHigh);
 
   return (
-    <div className="rounded-xl border border-line border-l-4 border-l-info bg-surface p-4">
+    <div className="rounded-xl border border-line border-s-4 border-s-info bg-surface p-4">
       <h3 className="mb-3 text-xs font-bold uppercase tracking-[0.15em] text-muted">{t('investui.card.predict')}</h3>
       <Predict
         question={tx(predict.questionKey)}

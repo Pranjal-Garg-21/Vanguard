@@ -4,7 +4,7 @@
  */
 import { useMemo, useState } from 'react';
 import { t } from '@/platform';
-import { Button, CheckIcon, ChevronIcon } from '@/ui';
+import { AudioButton, Button, CheckIcon, ChevronIcon } from '@/ui';
 import { fillTemplate, type Computed } from './logic/calc';
 import type { QuestionState } from './logic/room';
 import { shuffleStable } from './logic/shuffle';
@@ -35,6 +35,7 @@ export function QuestionRow(props: Props) {
         <p className="text-lg font-bold text-ink">
           <Markup text={tx(q.promptKey)} />
         </p>
+        <AudioButton text={tx(q.promptKey).replace(/\*\*/g, '')} />
         <span className={`shrink-0 rounded-md px-2 py-0.5 text-xs font-bold uppercase tracking-wide ${won ? 'bg-brand text-brand-ink' : 'bg-surface-3 text-ink-soft'}`}>
           {won ? t('investui.room.won', { n: q.points }) : t('investui.list.points', { n: q.points })}
         </span>
@@ -48,12 +49,12 @@ export function QuestionRow(props: Props) {
             {state.hintShown ? t('investui.room.hideHint') : t('investui.room.hint')}
             <ChevronIcon dir={state.hintShown ? 'up' : 'down'} />
           </button>
-          {state.hintShown && <p className="mt-2 rounded-lg border-l-4 border-info bg-info/10 p-3 text-ink">{tx(q.hintKey)}</p>}
+          {state.hintShown && <p className="mt-2 rounded-lg border-s-4 border-info bg-info/10 p-3 text-ink">{tx(q.hintKey)}</p>}
         </div>
       )}
 
       {won && (
-        <div className="rounded-lg border-l-4 border-brand bg-brand/10 p-3 text-ink" aria-live="polite">
+        <div className="rounded-lg border-s-4 border-brand bg-brand/10 p-3 text-ink" aria-live="polite">
           <p className="flex items-center gap-1.5 font-bold text-brand">
             <CheckIcon />
             {t('investui.room.correct')}
@@ -62,7 +63,7 @@ export function QuestionRow(props: Props) {
         </div>
       )}
       {state.revealed && (
-        <div className="rounded-lg border-l-4 border-line-strong bg-surface-2 p-3 text-ink" aria-live="polite">
+        <div className="rounded-lg border-s-4 border-line-strong bg-surface-2 p-3 text-ink" aria-live="polite">
           <p className="font-bold">{t('investui.room.revealed', { answer: answerText(q, ctx, tx) })}</p>
           <p className="text-ink-soft">{tx(q.explainKey)}</p>
         </div>
@@ -109,7 +110,7 @@ function NumberInput({ q, state, onSubmitNumber, onReveal }: Props) {
 
       {!done && state.invalid && <p className="text-sm text-warn">{t('investui.room.invalid')}</p>}
       {!done && !state.invalid && state.wrong > 0 && (
-        <p className="rounded-lg border-l-4 border-warn bg-warn/10 p-3 text-ink" aria-live="polite">
+        <p className="rounded-lg border-s-4 border-warn bg-warn/10 p-3 text-ink" aria-live="polite">
           {t('investui.room.tryAgain')}
         </p>
       )}
@@ -155,7 +156,7 @@ function ChoiceList({ q, state, onPickOption, onReveal, tx }: Props & { tx: (k: 
       </ul>
 
       {!done && state.wrong > 0 && (
-        <div className="space-y-1 rounded-lg border-l-4 border-warn bg-warn/10 p-3 text-ink" aria-live="polite">
+        <div className="space-y-1 rounded-lg border-s-4 border-warn bg-warn/10 p-3 text-ink" aria-live="polite">
           {state.lastFeedbackKey && <p className="font-bold">{tx(state.lastFeedbackKey)}</p>}
           <p>{t('investui.room.tryAgain')}</p>
         </div>

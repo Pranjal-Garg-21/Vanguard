@@ -6,6 +6,7 @@
 import { useState, type ReactNode } from 'react';
 import { t } from '@/platform';
 import { Button } from './components';
+import { AudioButton } from './kit';
 
 export interface PagerPage {
   id: string;
@@ -44,7 +45,12 @@ export function Pager({ pages, index: controlled, onIndex }: { pages: PagerPage[
           </ol>
         </div>
         <h2 className="text-2xl font-bold">{page.title}</h2>
-        {page.hint && <p className="max-w-3xl text-lg text-ink-soft">{page.hint}</p>}
+        {page.hint && (
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="max-w-3xl text-lg text-ink-soft">{page.hint}</p>
+            <AudioButton text={`${page.title}. ${page.hint}`} />
+          </div>
+        )}
       </div>
 
       <div key={page.id} className="coach-in space-y-4">

@@ -205,7 +205,7 @@ function StockMarketGame({ seed, initial, onSave }: { seed: number | string; ini
             <NewsCard news={news} vars={{ cash: money(config.cash) }} />
 
             {error && (
-              <p role="alert" className="rounded-lg border-l-4 border-warn bg-warn/10 p-3 text-ink">
+              <p role="alert" className="rounded-lg border-s-4 border-warn bg-warn/10 p-3 text-ink">
                 {error}
               </p>
             )}

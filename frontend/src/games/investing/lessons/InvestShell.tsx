@@ -21,7 +21,7 @@ export function InvestShell({ children, wide = false }: { children: ReactNode; w
             </span>
             <span className="hidden font-medium text-muted sm:inline">{t('investui.list.title')}</span>
           </Link>
-          <Link to="/home" className="ml-auto text-sm font-bold text-ink-soft hover:text-brand">
+          <Link to="/home" className="ms-auto text-sm font-bold text-ink-soft hover:text-brand">
             {t('investui.list.home')}
           </Link>
         </div>

@@ -16,7 +16,7 @@ import { LineChart, UnitsBars } from './Charts';
 import { notesFor, type Note } from './logic/notes';
 
 const check = (raw as unknown as { check: { vars: Parameters<typeof runCalcs>[0]; calcs: Parameters<typeof runCalcs>[1]; questions: RoomQuestion[] } }).check;
-const EDGE = { good: 'border-l-brand', warn: 'border-l-warn', info: 'border-l-info' } as const;
+const EDGE = { good: 'border-s-brand', warn: 'border-s-warn', info: 'border-s-info' } as const;
 
 export function Results({ fundId, plan, seed, onAgain }: { fundId: string; plan: FundPlan; seed: number | string; onAgain: () => void }) {
   const fundName = (id: string) => t(assumptions.funds[id]!.labelKey);
@@ -166,7 +166,7 @@ export function Results({ fundId, plan, seed, onAgain }: { fundId: string; plan:
       hint: t('mutualfund.r6.hint'),
       content: (
         <>
-          <p className="rounded-lg border-l-4 border-brand bg-brand/10 p-3 text-ink">{t('mutualfund.never')}</p>
+          <p className="rounded-lg border-s-4 border-brand bg-brand/10 p-3 text-ink">{t('mutualfund.never')}</p>
           <p className="text-sm font-bold text-muted">{t('investui.room.pointsEarned', { earned, total })}</p>
           <QuestionFlow
             questions={check.questions}
@@ -197,7 +197,7 @@ function Notes({ notes }: { notes: Note[] }) {
   return (
     <ul className="space-y-2">
       {notes.map((n, i) => (
-        <li key={i} className={`rounded-lg border-l-4 bg-surface-2 p-3 ${EDGE[n.tone]}`}>
+        <li key={i} className={`rounded-lg border-s-4 bg-surface-2 p-3 ${EDGE[n.tone]}`}>
           <div className="mb-0.5 text-xs font-bold uppercase tracking-[0.12em] text-muted">{n.kind === 'think' ? t('mutualfund.note.think') : t('mutualfund.note.happened')}</div>
           <p className="text-ink">{t(`mutualfund.note.${n.key}`, n.vars)}</p>
         </li>

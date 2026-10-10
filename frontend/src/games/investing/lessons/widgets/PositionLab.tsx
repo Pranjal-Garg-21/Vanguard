@@ -16,8 +16,8 @@ export function PositionLab({ shares, price, change: c0, dividend: d0, fee }: { 
         {t('investui.pos.intro', { shares, price: formatRupees(price), spent: formatRupees(o.spent), fee: formatValue(fee, 'percent', 1) })}
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
-        <LabSlider id="pl-change" label={t('investui.pos.change')} shown={`${changePct > 0 ? '+' : ''}${changePct}%`} min={-30} max={30} step={1} value={changePct} onChange={setChangePct} />
-        <LabSlider id="pl-div" label={t('investui.pos.dividend')} shown={formatRupees(dividend, 1)} min={0} max={5} step={0.5} value={dividend} onChange={setDividend} />
+        <LabSlider id="ps-change" label={t('investui.pos.change')} shown={`${changePct > 0 ? '+' : ''}${changePct}%`} min={-30} max={30} step={1} value={changePct} onChange={setChangePct} />
+        <LabSlider id="ps-div" label={t('investui.pos.dividend')} shown={formatRupees(dividend, 1)} min={0} max={5} step={0.5} value={dividend} onChange={setDividend} />
       </div>
       <div className="grid gap-3 sm:grid-cols-2" aria-live="polite">
         <Readout label={t('investui.pos.price')} value={formatRupees(o.nowPrice, 2)} />

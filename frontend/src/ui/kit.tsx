@@ -187,9 +187,9 @@ export function Toast({ message, tone = 'info', onClose, ms = 4000 }: { message:
     const id = window.setTimeout(onClose, ms);
     return () => window.clearTimeout(id);
   }, [message, ms, onClose]);
-  const edge = { info: 'border-l-info', good: 'border-l-brand', warn: 'border-l-warn' }[tone];
+  const edge = { info: 'border-s-info', good: 'border-s-brand', warn: 'border-s-warn' }[tone];
   return (
-    <div role="status" className={`fixed bottom-4 start-1/2 z-50 w-[min(28rem,calc(100vw-2rem))] -translate-x-1/2 rounded-lg border border-line border-l-4 bg-surface-2 p-3 text-ink shadow-lg rtl:translate-x-1/2 ${edge}`}>
+    <div role="status" className={`fixed bottom-4 start-1/2 z-50 w-[min(28rem,calc(100vw-2rem))] -translate-x-1/2 rounded-lg border border-line border-s-4 bg-surface-2 p-3 text-ink shadow-lg rtl:translate-x-1/2 ${edge}`}>
       <div className="flex items-start justify-between gap-3">
         <p>{message}</p>
         <button type="button" onClick={onClose} aria-label={t('ui.close')} className="min-h-8 min-w-8 text-ink-soft hover:text-ink">

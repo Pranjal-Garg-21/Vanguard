@@ -14,11 +14,11 @@ export interface Turn {
   comments: Comment[];
 }
 
-const EDGE: Record<Comment['tone'], string> = { good: 'border-l-brand', warn: 'border-l-warn', info: 'border-l-info' };
+const EDGE: Record<Comment['tone'], string> = { good: 'border-s-brand', warn: 'border-s-warn', info: 'border-s-info' };
 
 function Line({ c }: { c: Comment }) {
   return (
-    <li className={`rounded-lg border-l-4 bg-surface-2 p-3 ${EDGE[c.tone]}`}>
+    <li className={`rounded-lg border-s-4 bg-surface-2 p-3 ${EDGE[c.tone]}`}>
       <div className="mb-0.5 text-xs font-bold uppercase tracking-[0.12em] text-muted">
         {c.kind === 'think' ? t('stockmarket.coach.think') : t('stockmarket.coach.happened')}
       </div>
@@ -73,7 +73,7 @@ export function CoachFeed({ turns }: { turns: Turn[] }) {
                 <div className="text-xs font-bold text-muted">{t('stockmarket.coach.week', { n: turn.round })}</div>
                 <ul className="space-y-1">
                   {turn.comments.map((c, i) => (
-                    <li key={i} className={`border-l-4 ps-2 text-ink-soft ${EDGE[c.tone]}`}>
+                    <li key={i} className={`border-s-4 ps-2 text-ink-soft ${EDGE[c.tone]}`}>
                       {t(`stockmarket.coach.${c.key}`, c.vars)}
                     </li>
                   ))}
