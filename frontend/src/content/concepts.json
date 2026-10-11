@@ -319,6 +319,216 @@
       "icon": "🧮"
     },
     {
+      "id": "profit_loss",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "📈",
+      "game": "invest"
+    },
+    {
+      "id": "return_percent",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "💯",
+      "game": "invest"
+    },
+    {
+      "id": "paper_vs_realised",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "📝",
+      "game": "invest"
+    },
+    {
+      "id": "interest_simple",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "➕",
+      "game": "invest"
+    },
+    {
+      "id": "interest_compound",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🌱",
+      "game": "invest"
+    },
+    {
+      "id": "simple_vs_compound",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "⚖️",
+      "game": "invest"
+    },
+    {
+      "id": "start_early",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "⏳",
+      "game": "invest"
+    },
+    {
+      "id": "lending_as_investing",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🤝",
+      "game": "invest"
+    },
+    {
+      "id": "default_risk",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "⚠️",
+      "game": "invest"
+    },
+    {
+      "id": "bond_price_rates",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🔄",
+      "game": "invest"
+    },
+    {
+      "id": "stock_basics",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🏭",
+      "game": "invest"
+    },
+    {
+      "id": "dividends",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "💵",
+      "game": "invest"
+    },
+    {
+      "id": "market_cap",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "📏",
+      "game": "invest"
+    },
+    {
+      "id": "exchange_basics",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "🏛️",
+      "game": "invest"
+    },
+    {
+      "id": "bid_ask_liquidity",
+      "pillar": "invest",
+      "chapter": 5,
+      "icon": "↔️",
+      "game": "invest"
+    },
+    {
+      "id": "liquidity",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "💧",
+      "game": "invest"
+    },
+    {
+      "id": "volatility_vs_loss",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🎢",
+      "game": "invest"
+    },
+    {
+      "id": "behaviour_gap",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🧠",
+      "game": "invest"
+    },
+    {
+      "id": "uncertainty_ranges",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🌫️",
+      "game": "invest"
+    },
+    {
+      "id": "pooled_funds",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🧺",
+      "game": "invest"
+    },
+    {
+      "id": "sip_concept",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "📅",
+      "game": "invest"
+    },
+    {
+      "id": "fees_cost",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "✂️",
+      "game": "invest"
+    },
+    {
+      "id": "etf",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🗂️",
+      "game": "invest"
+    },
+    {
+      "id": "index_investing",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "📊",
+      "game": "invest"
+    },
+    {
+      "id": "commodities",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🪙",
+      "game": "invest"
+    },
+    {
+      "id": "commodity_exchange",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "⚖️",
+      "game": "invest"
+    },
+    {
+      "id": "gold_costs",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🔒",
+      "game": "invest"
+    },
+    {
+      "id": "property_costs",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🏚️",
+      "game": "invest"
+    },
+    {
+      "id": "asset_comparison",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🔍",
+      "game": "invest"
+    },
+    {
+      "id": "speculation_vs_investing",
+      "pillar": "invest",
+      "chapter": 6,
+      "icon": "🎲",
+      "game": "invest"
+    },
+    {
       "id": "tips_rumours",
       "pillar": "safe",
       "chapter": 5,
@@ -457,6 +667,33 @@
     "everything_i_want_is_need",
     "fun_is_bad",
     "small_spends_dont_matter",
-    "too_late_to_report"
+    "too_late_to_report",
+    "guaranteed_returns_exist",
+    "dip_means_loss",
+    "property_always_profits",
+    "gold_has_no_costs",
+    "recruiting_is_normal_income",
+    "fall_then_rise_same_pct_is_even",
+    "interest_always_simple",
+    "late_start_is_fine",
+    "money_in_box_is_safe",
+    "high_rate_is_free_bonus",
+    "bonds_are_risk_free",
+    "stock_price_equals_company_size",
+    "loss_only_if_sold",
+    "diversified_means_no_loss",
+    "sip_guarantees_profit",
+    "higher_fee_means_better",
+    "best_fund_exists",
+    "etf_means_no_risk",
+    "gold_always_goes_up",
+    "commodity_trading_is_easy_money",
+    "highest_return_is_best",
+    "past_returns_repeat",
+    "speculation_is_investing",
+    "it_always_comes_back",
+    "risk_means_only_loss",
+    "chasing_hype",
+    "panic_selling"
   ]
 }

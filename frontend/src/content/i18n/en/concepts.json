@@ -4,15 +4,35 @@
     "body": "A message that really comes from your friend's account may not come from your friend. A stolen account is used to ask their contacts for money, because the name and photo make it feel safe. Verify on a different channel before sending anything.",
     "example": "\"Emergency, send ₹3,000, I'll return it tomorrow\" from your friend's number. Call them. If they do not pick up, do not send."
   },
+  "asset_comparison": {
+    "title": "Comparing one thing with another",
+    "body": "Nothing is good or bad on its own. Compare on the same four questions: what return, with what risk, how quickly you can get your money out, and what it costs to own. Any one of them alone misleads.",
+    "example": "Gold and a fixed deposit can show the same return and still be completely different holdings."
+  },
   "assets_that_earn": {
     "title": "Assets that earn money",
     "body": "Some things you buy put money in your pocket: a stall that sells, tools for paid work, a course that raises your pay. Others take money out: running costs, repairs, EMIs. Borrowing for an asset can make sense only if what it earns comfortably covers the repayments.",
     "example": "A ₹10,000 stall that earns ₹600 a month pays for itself in under a year and a half."
   },
+  "behaviour_gap": {
+    "title": "The behaviour gap",
+    "body": "Most people earn less than the things they invest in, because they buy after a rise and sell after a fall. The gap between what the investment did and what the investor got is made entirely of decisions taken while frightened or excited.",
+    "example": "A fund rose 12% over five years while its average investor got 7% — the difference is buying high and selling low."
+  },
+  "bid_ask_liquidity": {
+    "title": "The gap between buying and selling",
+    "body": "At any moment there is a price buyers will pay and a slightly higher price sellers will take. The gap between them is a cost you pay on every trade. In a thinly traded share the gap is wide, and trading often eats the gains.",
+    "example": "Buyers at ₹98, sellers at ₹102: buy and sell immediately and you are 4% down before anything moved."
+  },
   "bnpl": {
     "title": "Buy now, pay later",
     "body": "BNPL splits a purchase into instalments. It feels free, but late fees and interest can follow, it counts as borrowing, and it makes it easy to buy wants you can't afford today.",
     "example": "\"Headphones for ₹300 a month!\" is still ₹1,200 of headphones, and a debt."
+  },
+  "bond_price_rates": {
+    "title": "Bond prices and interest rates",
+    "body": "A bond pays a fixed amount. When new bonds start paying more, the old one is worth less to a buyer, so its price falls — and the other way around. The payment never changed; what changed is what else was on offer.",
+    "example": "You hold a bond paying ₹80 a year. New bonds pay ₹100. Nobody will pay full price for yours, so its price drops until the deal matches."
   },
   "bonds": {
     "title": "Bonds: lending to a government or company",
@@ -23,6 +43,16 @@
     "title": "Budgeting with jars",
     "body": "A budget is a plan for your money before you spend it. A simple version is the 50/30/20 rule: about 50% for needs, 30% for wants and 20% for saving. Adjust the numbers to your life, but always plan saving first.",
     "example": "With ₹1,500: about ₹750 for needs, ₹450 for wants, ₹300 saved."
+  },
+  "commodities": {
+    "title": "Commodities",
+    "body": "Gold, silver and oil are things, not businesses. They earn nothing on their own: no profit, no dividend, no rent. The only return is someone later paying more than you did.",
+    "example": "A gram of gold produces nothing in a year. A share in a shop might pay a dividend."
+  },
+  "commodity_exchange": {
+    "title": "How commodities are traded",
+    "body": "Commodities trade on their own exchanges, in standard units and grades, often as contracts rather than the metal itself. Price moves follow world demand and currency as much as anything local.",
+    "example": "The price on the board is for a standard purity and weight, not for the bangle in the shop."
   },
   "compound_interest": {
     "title": "Compound interest",
@@ -44,6 +74,11 @@
     "body": "A credit score (in India, usually 300 to 900) shows lenders how reliably you repay. Paying on time raises it; missing payments drops it fast. A good score gets you loans at better rates later.",
     "example": "Every on-time EMI nudges your score up. One missed EMI can undo months of good behaviour."
   },
+  "default_risk": {
+    "title": "Default risk",
+    "body": "The promise of a return is only as good as whoever makes it. Default risk is the chance the borrower simply cannot pay. A higher promised rate usually means a higher chance of not being paid at all, not a free bonus.",
+    "example": "Two lenders offer 9% and 30%. The 30% is not generosity: it is what the borrower had to promise because nobody safer would lend to them."
+  },
   "delayed_gratification": {
     "title": "Waiting pays (delayed gratification)",
     "body": "Buying something now with credit feels great today and costs more tomorrow. Saving for it first means you pay only the price, and you often find you wanted it less than you thought.",
@@ -59,6 +94,11 @@
     "body": "Don't put all your eggs in one basket. Spreading money across many companies and kinds of assets means one bad investment can't sink you.",
     "example": "If Gully Gadgets crashes, someone with all their money in it loses badly; someone holding 50 companies barely notices."
   },
+  "dividends": {
+    "title": "Dividends",
+    "body": "Some companies hand part of their profit to shareholders as a dividend. It is cash in your pocket without selling anything. A company can cut or skip it in a bad year — a dividend is a decision, not a promise.",
+    "example": "100 shares paying ₹4 each gives you ₹400, whether or not the share price moved that year."
+  },
   "education_loan": {
     "title": "Education loans",
     "body": "Education loans pay for courses and degrees, often at lower interest than other loans, and repayment usually starts after the course. They can be good debt when the course really improves what you can earn. Always try scholarships first.",
@@ -73,6 +113,16 @@
     "title": "EMI: equated monthly instalment",
     "body": "An EMI is the fixed amount you repay every month, covering both interest and principal. A longer tenure means a smaller EMI but more total interest. Always compare total cost, not just the EMI.",
     "example": "₹30,000 at 1% a month: 12 months = ₹2,665 EMI (₹31,980 total); 24 months = ₹1,412 EMI (₹33,890 total)."
+  },
+  "etf": {
+    "title": "Exchange-traded funds",
+    "body": "An ETF is a fund you buy and sell on the exchange like a share. It usually tracks an index and charges less than a managed fund, but every trade carries the exchange's own costs, so frequent trading undoes the saving.",
+    "example": "The same basket as an index fund, bought through a broker at a live price instead of at the day's closing value."
+  },
+  "exchange_basics": {
+    "title": "What an exchange does",
+    "body": "An exchange is the marketplace where buyers and sellers of shares find each other. It does not set prices or guarantee anything; it matches orders and records who owns what. The price is just where a buyer and a seller agreed.",
+    "example": "Nobody decided the share was worth ₹240. Someone offered ₹240, someone accepted, and that became the price."
   },
   "expense_tracking": {
     "title": "Where it actually went",
@@ -93,6 +143,11 @@
     "title": "Fees eat returns",
     "body": "A small yearly fee looks harmless, but it's taken every year from your whole investment, and compounds against you. Always check the fee (expense ratio).",
     "example": "Over 20 years, a 1.5% fee can eat roughly a quarter of what you would have had with a 0.2% fee."
+  },
+  "fees_cost": {
+    "title": "Fees are certain, returns are not",
+    "body": "A fee is taken every year whether the investment did well or badly, and it compounds against you exactly as returns compound for you. A difference of one percent sounds trivial and is not.",
+    "example": "Over 20 years, 1.5% a year instead of 0.3% takes roughly a fifth of the final amount."
   },
   "fixed_deposit": {
     "title": "Fixed deposit (FD)",
@@ -118,6 +173,11 @@
     "title": "Gold",
     "body": "Gold often holds value when other things fall, and families in India have long saved in it. But it pays no interest, jewellery has making charges, and its price swings too. Many people keep only a small part of their money in gold.",
     "example": "Buying a ₹6,000 gold coin as jewellery may cost ₹6,600 with making charges, and sell back for less."
+  },
+  "gold_costs": {
+    "title": "What gold actually costs",
+    "body": "Jewellery carries making charges, the dealer's margin and the gap between buying and selling price, and keeping it safe costs money too. The metal can rise and you can still be behind.",
+    "example": "Making charges of 10% mean the price has to rise 10% before you break even."
   },
   "good_bad_debt": {
     "title": "Good debt and bad debt",
@@ -154,6 +214,11 @@
     "body": "An index fund simply buys every company in a market index (like the top companies of a stock exchange) instead of picking. An ETF is a fund you buy and sell on the exchange like a share. Both are usually cheap and well diversified.",
     "example": "The Deccan 5 Index ETF holds all five Deccan companies for a fee of just 0.2% a year."
   },
+  "index_investing": {
+    "title": "Tracking the index",
+    "body": "An index fund does not try to pick winners; it holds the whole list in the same proportions. That sounds unambitious, and over long periods it beats most funds that do try, mainly because it costs so much less.",
+    "example": "No manager, no star picks — just the index, minus a small fee."
+  },
   "inflation": {
     "title": "Inflation",
     "body": "Inflation is prices rising over time, so the same money buys less. In India prices have often risen around 4–6% a year. Money that earns less than inflation is quietly shrinking.",
@@ -168,6 +233,16 @@
     "title": "Insurance: sharing risk",
     "body": "Insurance pools small payments (premiums) from many people to pay the few who face a big loss. You pay a little for sure to avoid a huge loss maybe. Health and term life insurance protect families from disasters.",
     "example": "₹100 a month for insurance feels wasted until the month your stall burns down."
+  },
+  "interest_compound": {
+    "title": "Compound interest",
+    "body": "Compound interest is paid on the original amount plus everything it has already earned. Each period starts from a slightly bigger number, so the growth curves upward instead of running straight.",
+    "example": "₹10,000 at 8% compounded earns ₹800, then ₹864, then ₹933 — because the second year earns interest on ₹10,800, not ₹10,000."
+  },
+  "interest_simple": {
+    "title": "Simple interest",
+    "body": "Simple interest is paid on the original amount only, every period, and never on the interest already earned. It grows in a straight line.",
+    "example": "₹10,000 at 8% simple interest earns ₹800 every year: ₹800, ₹1,600, ₹2,400 after three years. Always ₹800."
   },
   "irregular_income": {
     "title": "When income changes",
@@ -184,10 +259,20 @@
     "body": "Before opening an account, a bank must check who you are with an identity proof and an address proof, plus a photo. Students under 18 can open a minor account with a parent or guardian.",
     "example": "Real banks ask for KYC at the branch or in their official app. They never ask you to \"update KYC\" through a link in an SMS."
   },
+  "lending_as_investing": {
+    "title": "Lending is investing",
+    "body": "When you lend, you are investing: you hand over money now for a promise of more later. Everything that makes lending risky — who the borrower is, whether they can pay — is exactly what makes an investment risky.",
+    "example": "Lending ₹5,000 to a shop that pays back ₹5,500 in a year is a 10% investment, with the shop's survival as the risk."
+  },
   "lending_to_friends": {
     "title": "Lending to friends and family",
     "body": "Only lend what you could afford to never get back. Agree on when it will be repaid. Saying no kindly is allowed.",
     "example": "Lending ₹500 out of ₹3,000 is fine. Lending your whole emergency fund is not."
+  },
+  "liquidity": {
+    "title": "Liquidity",
+    "body": "Liquidity is how quickly you can turn something into money at a fair price. Cash is perfectly liquid, a listed share nearly so, a room full of stock or a plot of land much less. An emergency does not wait for a buyer.",
+    "example": "Shares sell in minutes. A shop's unsold stock might take months, and only at a discount."
   },
   "loan_app_trap": {
     "title": "Predatory loan apps",
@@ -198,6 +283,11 @@
     "title": "How a loan works",
     "body": "A loan has a principal (the amount borrowed), an interest rate, a tenure (how long) and sometimes fees. The total cost is everything you pay back minus what you received.",
     "example": "Borrow ₹10,000 at 1% a month for 12 months: you pay back about ₹10,660. The ₹660 is the cost of borrowing."
+  },
+  "market_cap": {
+    "title": "Market capitalisation",
+    "body": "A company's market value is its share price times the number of shares. A high price per share does not mean a big company — a small company can have few, expensive shares, and a huge one can have many cheap ones.",
+    "example": "₹50 × 10 crore shares is a bigger company than ₹2,000 × 1 lakh shares, by a long way."
   },
   "minimum_balance_fees": {
     "title": "Minimum balance",
@@ -229,6 +319,11 @@
     "body": "Every rupee can only be spent once. The opportunity cost of a choice is the best thing you gave up to make it.",
     "example": "The ₹1,800 sneakers cost you more than ₹1,800: they also cost 2 months of progress towards your phone."
   },
+  "paper_vs_realised": {
+    "title": "On paper, or in your hand",
+    "body": "A price going up does not put money in your pocket. The gain is on paper until you actually sell; until then it can still disappear. The same is true of a fall: it is not a loss you have taken until you sell.",
+    "example": "Your shares are worth ₹5,000 today against the ₹4,000 you paid. You have not made ₹1,000 — you have ₹1,000 of paper gain that next month may be ₹600."
+  },
   "pay_yourself_first": {
     "title": "Pay yourself first",
     "body": "Don't save whatever is left at the end of the month: there is usually nothing left. Move your saving out the day money arrives, ideally automatically, then live on the rest.",
@@ -249,6 +344,21 @@
     "body": "A Ponzi scheme pays early investors with money from new investors, not real profits. It looks like it works, until new money stops and it collapses. Most people lose everything.",
     "example": "\"Double Dhamaka\" pays the first members on time. That's what makes everyone else join."
   },
+  "pooled_funds": {
+    "title": "Pooled funds",
+    "body": "A fund collects money from many people and buys a basket of things with it. For a small amount you get a spread you could not afford alone, and someone else does the buying — for a fee.",
+    "example": "₹500 buys a slice of a basket of thirty companies; ₹500 of a single share buys two shares of one."
+  },
+  "profit_loss": {
+    "title": "Profit and loss",
+    "body": "Profit is what you have left after you take away what you paid. Sell something for more than it cost and the difference is profit; sell for less and the difference is a loss. Everything else about investing is a longer version of this one sum.",
+    "example": "You buy a cricket bat for ₹1,200 and sell it a year later for ₹1,500. Profit ₹300. Sell it for ₹900 instead and you are ₹300 down."
+  },
+  "property_costs": {
+    "title": "What property actually costs",
+    "body": "The purchase price is not the cost. Registration, stamp duty, repairs, taxes and the months it may sit empty all come out of the return — and it cannot be sold in a hurry without a discount.",
+    "example": "A flat that rose 40% over ten years may have returned very little after registration, repairs and the agent's cut."
+  },
   "qr_scam": {
     "title": "QR codes only send money",
     "body": "Scanning a QR code and entering your PIN pays money out. Nothing you scan and approve can pull money in. Anyone who sends a QR code so they can \"pay you\" is trying to take money from you.",
@@ -268,6 +378,11 @@
     "title": "Reading the red flags",
     "body": "Almost every scam message carries the same few tells: a deadline, a threat, a reward you did not earn, a link that is nearly the right address, a request for a secret, and a stranger who wants the conversation moved somewhere private. Spotting two of them together is usually enough.",
     "example": "\"Congratulations, you won. Claim in 2 hours. Share OTP to confirm.\" A prize you never entered, a clock, and a request for a secret: three flags in one line."
+  },
+  "return_percent": {
+    "title": "Return as a percentage",
+    "body": "₹300 of profit means nothing on its own — it depends how much you put in. A percentage return divides the profit by what you paid, so you can compare two very different amounts fairly.",
+    "example": "₹300 on ₹1,200 is 25%. ₹300 on ₹30,000 is 1%. The same rupees, two very different results."
   },
   "risk_return": {
     "title": "Risk and return",
@@ -299,10 +414,35 @@
     "body": "Interest is the price of money. When you save, the bank pays you interest. When you borrow, you pay interest. Simple interest = principal × rate × time.",
     "example": "₹1,000 at 6% a year for 2 years earns ₹1,000 × 0.06 × 2 = ₹120 of simple interest."
   },
+  "simple_vs_compound": {
+    "title": "Simple against compound",
+    "body": "Over one year the two are almost identical, which is why the difference is easy to miss. Over ten or twenty the gap becomes most of the result. Compounding is not a trick; it is what happens when you leave earnings where they are.",
+    "example": "₹10,000 at 8% for 20 years: ₹26,000 simple, about ₹46,600 compounded. The extra ₹20,000 is interest earning interest."
+  },
   "sip": {
     "title": "SIP: investing a fixed amount every month",
     "body": "A Systematic Investment Plan invests the same amount every month, whatever the market does. You buy more units when prices are low and fewer when high, and you build the habit.",
     "example": "₹500 a month into an index fund for 10 years. Some months are up, some down; the habit does the work."
+  },
+  "sip_concept": {
+    "title": "Investing a little each month",
+    "body": "Putting in a fixed amount regularly means you buy more units when prices are low and fewer when they are high, without having to guess. It smooths the price you pay. It does not promise a profit.",
+    "example": "₹1,000 a month buys 10 units at ₹100 and 12.5 at ₹80 — the average cost ends up below the average price."
+  },
+  "speculation_vs_investing": {
+    "title": "Investing or speculating",
+    "body": "Investing puts money behind something that earns: a business, a loan, rent. Speculating bets on a price moving, with nothing underneath producing anything. Both can make money; only one has something working for you.",
+    "example": "A share in a tiffin business earns from meals sold. A coin that earns nothing only pays if someone later pays more."
+  },
+  "start_early": {
+    "title": "Starting early",
+    "body": "Years matter more than amounts. Money put in early gets more compounding periods than money put in later, so a small amount started now can beat a larger amount started in ten years.",
+    "example": "₹500 a month from 18 beats ₹1,000 a month from 33, if both stop at 50 — the first had fifteen extra years to compound."
+  },
+  "stock_basics": {
+    "title": "What a share is",
+    "body": "A share is a small piece of ownership in a company. Owning one means a share of whatever the company earns and is worth — and a share of the fall if it does badly. You are a part-owner, not a lender.",
+    "example": "A company split into 1,000 shares, and you hold 10: you own 1% of it, with no promise attached."
   },
   "stocks": {
     "title": "Stocks: owning a piece of a company",
@@ -324,6 +464,11 @@
     "body": "Guaranteed high returns, no risk, and pressure to decide fast: that combination is a scam. Real investments never guarantee to double your money quickly.",
     "example": "\"Guaranteed 10% a week!\" That's over 14,000% a year. No honest investment does that."
   },
+  "uncertainty_ranges": {
+    "title": "Ranges, not single numbers",
+    "body": "Nobody can say what an investment will be worth in ten years. An honest projection gives a range and says what it assumed. A single confident number is a sales pitch, not a forecast.",
+    "example": "\"Between ₹1.4 and ₹2.6 lakh, assuming 8% average growth\" is a real answer. \"₹2.6 lakh\" is not."
+  },
   "upi_basics": {
     "title": "UPI payments",
     "body": "UPI moves money instantly between bank accounts using a phone. To pay, you scan a QR code or enter a UPI ID, check the name, then enter your secret UPI PIN.",
@@ -338,6 +483,11 @@
     "title": "Ups and downs (volatility)",
     "body": "Markets go up and down, sometimes sharply. Selling in a panic after a fall locks in the loss. People who stay invested for years have historically been rewarded, but nothing is guaranteed.",
     "example": "The Deccan market falls 15% in a month. The patient investor holds; the panicked one sells at the bottom."
+  },
+  "volatility_vs_loss": {
+    "title": "A swing is not a loss",
+    "body": "Volatility is how much a price moves about. It feels like danger, but a price that fell and recovered cost you nothing unless you sold at the bottom. The permanent loss is the one you lock in.",
+    "example": "A fund that dropped 20% and came back within a year lost money only for those who sold in the dip."
   },
   "why_bank": {
     "title": "Why keep money in a bank",
