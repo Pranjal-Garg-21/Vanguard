@@ -123,7 +123,7 @@ A **scaffold** is the empty skeleton of the project: the folder layout, the buil
    - Add Zustand (app state), React Router (screens), Dexie (local DB), `vite-plugin-pwa` (installed now, configured in Phase 3).
 2. **Set strict TypeScript**
    - `strict: true`, `noUncheckedIndexedAccess: true`, path aliases (`@platform/*`, `@engine/*`, `@games/*`, `@design/*`).
-3. **Create the folder layout** from [`REPO_STRUCTURE.md`](REPO_STRUCTURE.md) (`frontend/`, `backend/`, `shared/`), with an `index.ts` and an owner comment in each folder. The scaffold already exists; see `readme.md` to run it.
+3. **Create the folder layout** from [`REPO_STRUCTURE.md`](REPO_STRUCTURE.md) (`frontend/`, `backend/`, `shared/`), with an `index.ts` and an owner comment in each folder. The scaffold already exists; see `README.md` to run it.
 4. **Lint and format**
    - ESLint (React, hooks, TypeScript rules) and Prettier. One config, no debates later.
    - Add `eslint-plugin-boundaries` or an import rule so that `engine/` cannot import from `platform/` or React. This protects P2's "pure reducer" rule.
