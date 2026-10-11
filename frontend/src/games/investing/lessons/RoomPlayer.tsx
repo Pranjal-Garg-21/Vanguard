@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { t } from '@/platform';
-import { Badge, Button, Card, CheckIcon, ChevronIcon, Icon, MascotFace, ProgressBar } from '@/ui';
+import { Badge, Button, Card, CheckIcon, ChevronIcon, Confetti, Icon, MascotFace, ProgressBar } from '@/ui';
 import { InvestShell } from './InvestShell';
 import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
@@ -44,6 +44,14 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
   const tasksDone = room.tasks.filter((_, i) => taskDone(i)).length;
   const earned = questions.reduce((sum, q) => sum + earnedFor(q), 0);
   const roomDone = tasksDone === room.tasks.length;
+
+  // The party popper fires when the room is finished just now, not each time an already finished room is opened.
+  const wasDone = useRef(roomDone);
+  const [burst, setBurst] = useState(0);
+  useEffect(() => {
+    if (roomDone && !wasDone.current) setBurst((n) => n + 1);
+    wasDone.current = roomDone;
+  }, [roomDone]);
   const next = rooms.find((l) => l.order === room.order + 1);
   const task = room.tasks[active]!;
 
@@ -203,6 +211,7 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
           )}
         </section>
       </div>
+      <Confetti trigger={burst} count={90} />
     </InvestShell>
   );
 }
