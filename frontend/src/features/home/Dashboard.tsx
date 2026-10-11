@@ -19,13 +19,12 @@ import {
 } from '@/platform';
 import { ARCADE_SECTIONS, STAGES } from '@/content/stages';
 import { Avatar } from '@/features/setup';
-import { Badge, Button, Card, Icon, Notice, SectionLabel, Spinner } from '@/ui';
+import { Badge, Button, Card, Icon, Notice, SectionLabel, Spinner, TopNav } from '@/ui';
 import { summariseEvents } from './stats';
+import { BadgesCard } from './BadgesCard';
 import { HomeHub } from './HomeHub';
 import { SECTION_ROUTES } from './sections';
-import { TopNav } from './TopNav';
 
-const BADGE_SLOTS = 6;
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -79,7 +78,7 @@ export function Dashboard() {
             </button>
           </TopNav>
 
-      <main className="mx-auto max-w-5xl space-y-6 px-4 py-6">
+      <main className="mx-auto max-w-6xl space-y-6 px-4 py-6">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h1 className="text-2xl font-bold">{t('home.greeting', { name: profile.displayName })}</h1>
           <Badge variant={sync.state === 'synced' ? 'good' : sync.state === 'error' ? 'bad' : 'neutral'}>{syncLabel}</Badge>
@@ -163,15 +162,7 @@ export function Dashboard() {
               </Button>
             </Card>
 
-            <Card className="space-y-3">
-              <SectionLabel>{t('home.badges.title')}</SectionLabel>
-              <div className="grid grid-cols-6 gap-2 lg:grid-cols-3">
-                {Array.from({ length: BADGE_SLOTS }, (_, i) => (
-                  <div key={i} className="aspect-square rounded-lg border border-dashed border-line-strong bg-bg" />
-                ))}
-              </div>
-              <p className="text-xs text-muted">{t('home.badges.body')}</p>
-            </Card>
+            <BadgesCard pid={profile.pid} />
 
             <div className="rounded-lg border-l-4 border-bad bg-surface p-4">
               <h2 className="font-bold">{t('home.help.title')}</h2>
