@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { prefersReducedMotion, t } from '@/platform';
 import { Button, Card, Icon, SectionLabel } from '@/ui';
-import { Confetti } from './phone/Confetti';
+import { Confetti } from '@/ui/Confetti';
 import { TellCard } from './phone/TellCard';
 import { rankProgress, type Gain, type Progress } from './logic/progress';
 import type { TellKind } from './phone/logic/types';

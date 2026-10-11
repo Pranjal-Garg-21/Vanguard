@@ -1,6 +1,7 @@
 /** UC-FAC-02: unlock stages and Arcade sections, choose a session focus. */
 import { useEffect, useState } from 'react';
-import { Badge, Card, Alert, Spinner } from '@/ui';
+import { Badge, Alert, Spinner } from '@/ui';
+import { Panel } from '../theme';
 import { STAGES } from '@/content/stages';
 import { supabaseOrThrow, type ClassRow } from '../data';
 
@@ -56,35 +57,31 @@ export function PlanTab({ cls, onFocusChange }: { cls: ClassRow; onFocusChange: 
   if (!unlocked) return <Spinner />;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       <Alert variant="info">
         Students follow the LifePath in order. Unlocking a stage opens it in the Arcade and Quick Play for the whole class. Changes reach phones
         at their next sync.
       </Alert>
       {error && <Alert variant="bad">{error}</Alert>}
 
-      <Card>
-        <h2 className="mb-3 font-bold">LifePath stages</h2>
+      <Panel icon="flag" title="LifePath stages" subtitle="Open a stage for the whole class, for example before a workshop on it.">
         <ol className="space-y-2">
           {STAGES.map((s) => (
             <ToggleRow key={s.id} label={`${s.id} · ${s.name}`} on={unlocked.has(s.id)} onChange={(on) => toggle(s.id, on)} />
           ))}
         </ol>
-      </Card>
+      </Panel>
 
-      <div className="grid gap-5 md:grid-cols-2">
-        <Card>
-          <h2 className="mb-3 font-bold">Arcade sections</h2>
+      <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+        <Panel icon="star" title="Arcade sections">
           <ul className="space-y-2">
             {ARCADE.map((a) => (
               <ToggleRow key={a.id} label={a.name} hint={a.note} on={unlocked.has(a.id)} onChange={(on) => toggle(a.id, on)} />
             ))}
           </ul>
-        </Card>
+        </Panel>
 
-        <Card>
-          <h2 className="mb-1 font-bold">Session focus</h2>
-          <p className="mb-3 text-sm text-muted">Shows more of one pillar in Quick Play and the Daily Challenge.</p>
+        <Panel icon="target" title="Session focus" subtitle="Shows more of one pillar in Quick Play and the Daily Challenge.">
           <div className="space-y-2">
             {FOCUS.map((f) => (
               <label key={f.id} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-2 hover:bg-surface-2">
@@ -93,7 +90,7 @@ export function PlanTab({ cls, onFocusChange }: { cls: ClassRow; onFocusChange: 
               </label>
             ))}
           </div>
-        </Card>
+        </Panel>
       </div>
     </div>
   );
