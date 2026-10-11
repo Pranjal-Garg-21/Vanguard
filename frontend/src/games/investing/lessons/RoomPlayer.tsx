@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { t } from '@/platform';
-import { Badge, Button, Card, CheckIcon, ChevronIcon, ProgressBar } from '@/ui';
+import { Badge, Button, Card, CheckIcon, ChevronIcon, Icon, MascotFace, ProgressBar } from '@/ui';
 import { InvestShell } from './InvestShell';
 import { BlockCard } from './LessonCards';
 import { fillTemplate, runCalcs } from './logic/calc';
@@ -164,8 +164,28 @@ export function RoomPlayer({ room, initial = {}, onChange }: { room: Room; initi
 
           {roomDone && (
             <Card className="space-y-3 border-brand text-center">
+              <div className="mx-auto flex w-fit items-center justify-center border-2 border-brand bg-surface-2 p-1 shadow-[4px_4px_0_rgb(0_0_0/0.35)]">
+                <MascotFace size={64} />
+              </div>
               <h2 className="text-2xl font-bold text-brand">{t('investui.room.complete.title')}</h2>
               <p className="text-lg">{t('investui.room.complete.body', { earned, total: totalPoints })}</p>
+              <dl className="mx-auto grid max-w-xl gap-3 sm:grid-cols-3">
+                {(
+                  [
+                    ['tasks', room.tasks.length, 'check'],
+                    ['earned', earned, 'target'],
+                    ['possible', totalPoints, 'flag'],
+                  ] as const
+                ).map(([key, value, icon]) => (
+                  <div key={key} className="rounded-xl border border-line-strong bg-surface-2 p-4 text-start">
+                    <dt className="text-sm text-ink-soft">{t(`investui.room.stat.${key}`)}</dt>
+                    <dd className="mt-1 flex items-center gap-2 text-2xl font-extrabold tabular-nums">
+                      <Icon name={icon} className="h-6 w-6 text-brand" />
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
               {earned < totalPoints && <p className="text-sm text-ink-soft">{t('investui.room.complete.skipped')}</p>}
               <div className="flex flex-col justify-center gap-3 pt-2 sm:flex-row">
                 {next && (

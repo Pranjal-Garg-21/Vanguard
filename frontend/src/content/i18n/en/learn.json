@@ -32,5 +32,8 @@
       "blurb": "Spot scams and protect your accounts. Taught by P5."
     }
   },
-  "lessonsTitle": "All {n} lessons"
+  "lessonsTitle": "Investing lessons ({n})",
+  "view": "View",
+  "view_path": "Path",
+  "view_grid": "Classic"
 }
