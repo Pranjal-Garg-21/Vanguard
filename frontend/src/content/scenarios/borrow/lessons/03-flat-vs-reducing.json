@@ -1,0 +1,555 @@
+{
+  "id": "lesson_borrow_flat_vs_reducing",
+  "kind": "room",
+  "pillar": "borrow",
+  "order": 3,
+  "estMinutes": 12,
+  "difficulty": "hard",
+  "titleKey": "borrow_flat.title",
+  "blurbKey": "borrow_flat.blurb",
+  "concepts": [
+    "flat_vs_reducing",
+    "emi",
+    "borrowing_cost"
+  ],
+  "misconceptions": [
+    "flat_rate_is_yearly_rate",
+    "lower_headline_rate_is_cheaper"
+  ],
+  "vars": {
+    "exP": {
+      "value": 50000,
+      "fmt": "rupees"
+    },
+    "exF": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "exY": {
+      "value": 2
+    },
+    "exMonths": {
+      "value": 24
+    },
+    "P": {
+      "value": 30000,
+      "fmt": "rupees"
+    },
+    "F": {
+      "value": 0.08,
+      "fmt": "percent"
+    },
+    "Y": {
+      "value": 3
+    },
+    "months": {
+      "value": 36
+    },
+    "oP": {
+      "value": 40000,
+      "fmt": "rupees"
+    },
+    "oFlat": {
+      "value": 0.09,
+      "fmt": "percent"
+    },
+    "oRed": {
+      "value": 0.15,
+      "fmt": "percent"
+    },
+    "oY": {
+      "value": 2
+    },
+    "oM": {
+      "value": 24
+    }
+  },
+  "calcs": [
+    {
+      "id": "exEmi",
+      "fn": "flatEmi",
+      "args": [
+        "$exP",
+        "$exF",
+        "$exY"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exTotal",
+      "fn": "mul",
+      "args": [
+        "$exEmi",
+        "$exMonths"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exReal",
+      "fn": "flatToReal",
+      "args": [
+        "$exP",
+        "$exF",
+        "$exY"
+      ],
+      "fmt": "percent",
+      "round": 1
+    },
+    {
+      "id": "flatEmi1",
+      "fn": "flatEmi",
+      "args": [
+        "$P",
+        "$F",
+        "$Y"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "flatTotal1",
+      "fn": "mul",
+      "args": [
+        "$flatEmi1",
+        "$months"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "real1",
+      "fn": "flatToReal",
+      "args": [
+        "$P",
+        "$F",
+        "$Y"
+      ],
+      "fmt": "percent",
+      "round": 1
+    },
+    {
+      "id": "oFlatEmi",
+      "fn": "flatEmi",
+      "args": [
+        "$oP",
+        "$oFlat",
+        "$oY"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "oFlatTotal",
+      "fn": "mul",
+      "args": [
+        "$oFlatEmi",
+        "$oM"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "oRedTotal",
+      "fn": "loanTotalPaid",
+      "args": [
+        "$oP",
+        "$oRed",
+        "$oM"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "oGap",
+      "fn": "sub",
+      "args": [
+        "$oFlatTotal",
+        "$oRedTotal"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "oReal",
+      "fn": "flatToReal",
+      "args": [
+        "$oP",
+        "$oFlat",
+        "$oY"
+      ],
+      "fmt": "percent",
+      "round": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "borrow_flat.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "loan_ledger",
+          "textKey": "borrow_flat.t1.b1"
+        },
+        {
+          "type": "define",
+          "textKey": "borrow_flat.t1.b2"
+        },
+        {
+          "type": "analogy",
+          "visual": "loan_ledger",
+          "textKey": "borrow_flat.t1.b3"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "borrow_flat.t1.b4.1",
+            "borrow_flat.t1.b4.2",
+            "borrow_flat.t1.b4.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "borrow_flat.q1.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q1.hint",
+          "explainKey": "borrow_flat.q1.explain",
+          "answer": "flatEmi1",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "borrow_flat.q2.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q2.hint",
+          "explainKey": "borrow_flat.q2.explain",
+          "answer": "flatTotal1",
+          "unit": "rupees",
+          "tolerance": 1
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "borrow_flat.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "borrow_flat.t2.b1"
+        },
+        {
+          "type": "note",
+          "textKey": "borrow_flat.t2.b2"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "choice",
+          "promptKey": "borrow_flat.q3.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q3.hint",
+          "explainKey": "borrow_flat.q3.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_flat.q3.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_flat.q3.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_flat.q3.opt.c"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "borrow_flat.q4.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q4.hint",
+          "explainKey": "borrow_flat.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_flat.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_flat.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_flat.q4.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "borrow_flat.t3.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "borrow_flat.t3.b1.prompt",
+            "params": {
+              "amount": "$P",
+              "flat": "$F",
+              "years": "$Y"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "amount",
+                  "labelKey": "borrow_flat.t3.b1.s.amount",
+                  "min": 10000,
+                  "max": 100000,
+                  "step": 5000,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "flat",
+                  "labelKey": "borrow_flat.t3.b1.s.flat",
+                  "min": 0.05,
+                  "max": 0.2,
+                  "step": 0.01,
+                  "fmt": "percent"
+                },
+                {
+                  "id": "years",
+                  "labelKey": "borrow_flat.t3.b1.s.years",
+                  "min": 1,
+                  "max": 5,
+                  "step": 1,
+                  "fmt": "number"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "pay",
+                  "labelKey": "borrow_flat.t3.b1.r.pay",
+                  "fn": "flatEmi",
+                  "args": [
+                    "amount",
+                    "flat",
+                    "years"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "mths",
+                  "labelKey": "borrow_flat.t3.b1.r.mths",
+                  "fn": "mul",
+                  "args": [
+                    "years",
+                    12
+                  ],
+                  "fmt": "number"
+                },
+                {
+                  "id": "total",
+                  "labelKey": "borrow_flat.t3.b1.r.total",
+                  "fn": "mul",
+                  "args": [
+                    "pay",
+                    "mths"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "real",
+                  "labelKey": "borrow_flat.t3.b1.r.real",
+                  "fn": "flatToReal",
+                  "args": [
+                    "amount",
+                    "flat",
+                    "years"
+                  ],
+                  "fmt": "percent",
+                  "tone": "bad"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "flat_rate_is_yearly_rate"
+          ],
+          "textKey": "borrow_flat.t3.b2"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "borrow_flat.q5.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q5.hint",
+          "explainKey": "borrow_flat.q5.explain",
+          "answer": "real1",
+          "unit": "percent",
+          "tolerance": 0.5
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "borrow_flat.q6.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q6.hint",
+          "explainKey": "borrow_flat.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_flat.q6.opt.a",
+              "misconception": "flat_rate_is_yearly_rate",
+              "feedbackKey": "borrow_flat.q6.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_flat.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_flat.q6.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "borrow_flat.t4.title",
+      "blocks": [
+        {
+          "type": "tradeoff",
+          "textKey": "borrow_flat.t4.b1"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "borrow_flat.t4.b2.1",
+            "borrow_flat.t4.b2.2",
+            "borrow_flat.t4.b2.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "borrow_flat.q7.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q7.hint",
+          "explainKey": "borrow_flat.q7.explain",
+          "answer": "oGap",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "borrow_flat.q8.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q8.hint",
+          "explainKey": "borrow_flat.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_flat.q8.opt.a",
+              "misconception": "lower_headline_rate_is_cheaper",
+              "feedbackKey": "borrow_flat.q8.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_flat.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_flat.q8.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "borrow_flat.t5.title",
+      "blocks": [
+        {
+          "type": "note",
+          "textKey": "borrow_flat.t5.b1"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "borrow_flat_rate",
+            "borrow_reducing",
+            "borrow_real_rate"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "borrow_flat.q9.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 10,
+          "hintKey": "borrow_flat.q9.hint",
+          "explainKey": "borrow_flat.q9.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_flat.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_flat.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_flat.q9.opt.c"
+            }
+          ],
+          "correct": "c"
+        },
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "borrow_flat.q10.prompt",
+          "concept": "flat_vs_reducing",
+          "points": 20,
+          "hintKey": "borrow_flat.q10.hint",
+          "explainKey": "borrow_flat.q10.explain",
+          "answer": "oReal",
+          "unit": "percent",
+          "tolerance": 0.5
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "borrow_flat_rate",
+    "borrow_reducing",
+    "borrow_real_rate"
+  ]
+}

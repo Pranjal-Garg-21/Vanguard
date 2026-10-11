@@ -1,11 +1,11 @@
 {
   "_note": "Concept and misconception IDs used by the borrow lessons. 'existing' are in Implementation.md section 11 / concepts.json; 'proposed' must be reviewed and merged by P2.",
   "concepts": {
-    "existing": [],
-    "proposed": []
+    "existing": ["interest_basics", "emi", "bnpl", "credit_score", "education_financing"],
+    "proposed": ["borrowing_cost", "tenure_tradeoff", "flat_vs_reducing", "credit_card_interest", "minimum_payment_trap"]
   },
   "misconceptions": {
-    "existing": [],
-    "proposed": []
+    "existing": ["debt_is_free_money", "compare_emi_not_total"],
+    "proposed": ["friend_loan_is_free", "flat_rate_is_yearly_rate", "lower_headline_rate_is_cheaper", "minimum_payment_is_fine", "zero_cost_emi_is_free"]
   }
 }

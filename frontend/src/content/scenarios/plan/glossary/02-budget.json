@@ -1,0 +1,26 @@
+[
+  {
+    "id": "plan_budget",
+    "termKey": "plan_budget.glossary.plan_budget.term",
+    "defKey": "plan_budget.glossary.plan_budget.def",
+    "lesson": "lesson_plan_budget"
+  },
+  {
+    "id": "plan_income",
+    "termKey": "plan_budget.glossary.plan_income.term",
+    "defKey": "plan_budget.glossary.plan_income.def",
+    "lesson": "lesson_plan_budget"
+  },
+  {
+    "id": "plan_share",
+    "termKey": "plan_budget.glossary.plan_share.term",
+    "defKey": "plan_budget.glossary.plan_share.def",
+    "lesson": "lesson_plan_budget"
+  },
+  {
+    "id": "plan_leftover",
+    "termKey": "plan_budget.glossary.plan_leftover.term",
+    "defKey": "plan_budget.glossary.plan_leftover.def",
+    "lesson": "lesson_plan_budget"
+  }
+]

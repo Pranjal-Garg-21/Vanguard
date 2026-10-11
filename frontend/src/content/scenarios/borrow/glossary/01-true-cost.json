@@ -1,0 +1,20 @@
+[
+  {
+    "id": "borrow_principal",
+    "termKey": "borrow_cost.glossary.borrow_principal.term",
+    "defKey": "borrow_cost.glossary.borrow_principal.def",
+    "lesson": "lesson_borrow_cost"
+  },
+  {
+    "id": "borrow_interest",
+    "termKey": "borrow_cost.glossary.borrow_interest.term",
+    "defKey": "borrow_cost.glossary.borrow_interest.def",
+    "lesson": "lesson_borrow_cost"
+  },
+  {
+    "id": "borrow_cost_of_loan",
+    "termKey": "borrow_cost.glossary.borrow_cost_of_loan.term",
+    "defKey": "borrow_cost.glossary.borrow_cost_of_loan.def",
+    "lesson": "lesson_borrow_cost"
+  }
+]

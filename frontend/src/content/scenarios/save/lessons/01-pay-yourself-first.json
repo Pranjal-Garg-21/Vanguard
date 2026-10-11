@@ -1,0 +1,466 @@
+{
+  "id": "lesson_save_pay_yourself_first",
+  "kind": "room",
+  "pillar": "save",
+  "order": 1,
+  "estMinutes": 9,
+  "difficulty": "easy",
+  "titleKey": "save_pay_yourself_first.title",
+  "blurbKey": "save_pay_yourself_first.blurb",
+  "concepts": [
+    "pay_yourself_first",
+    "habit_beats_amount",
+    "goal_months"
+  ],
+  "misconceptions": [
+    "save_what_is_left",
+    "save_only_big_amounts"
+  ],
+  "vars": {
+    "income": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "save": {
+      "value": 500,
+      "fmt": "rupees"
+    },
+    "step": {
+      "value": 300,
+      "fmt": "rupees"
+    },
+    "goal": {
+      "value": 4500,
+      "fmt": "rupees"
+    },
+    "goal2": {
+      "value": 3000,
+      "fmt": "rupees"
+    },
+    "ex": {
+      "value": 500,
+      "fmt": "rupees"
+    },
+    "labStart": {
+      "value": 300,
+      "fmt": "rupees"
+    },
+    "labLeft": {
+      "value": 0,
+      "fmt": "rupees"
+    },
+    "labSave": {
+      "value": 800,
+      "fmt": "rupees"
+    },
+    "labLeftQ": {
+      "value": 100,
+      "fmt": "rupees"
+    },
+    "pay2": {
+      "value": 15000,
+      "fmt": "rupees"
+    },
+    "rate2": {
+      "value": 0.1,
+      "fmt": "percent"
+    }
+  },
+  "calcs": [
+    {
+      "id": "yearSave",
+      "fn": "mul",
+      "args": [
+        "$save",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "pct",
+      "fn": "percentOf",
+      "args": [
+        "$save",
+        "$income"
+      ],
+      "fmt": "percent"
+    },
+    {
+      "id": "months",
+      "fn": "monthsToGoal",
+      "args": [
+        "$goal",
+        "$step"
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "labYear",
+      "fn": "mul",
+      "args": [
+        "$labSave",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labLeftYear",
+      "fn": "mul",
+      "args": [
+        "$labLeftQ",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labGap",
+      "fn": "sub",
+      "args": [
+        "$labYear",
+        "$labLeftYear"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "mo2",
+      "fn": "mul",
+      "args": [
+        "$pay2",
+        "$rate2"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "yr2",
+      "fn": "mul",
+      "args": [
+        "$mo2",
+        12
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "save_pay_yourself_first.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "piggy_bank",
+          "textKey": "save_pay_yourself_first.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "save_pay_yourself_first.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "tea_stall",
+          "textKey": "save_pay_yourself_first.t1.analogy"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "save_pay_yourself_first.q1.prompt",
+          "concept": "pay_yourself_first",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q1.hint",
+          "explainKey": "save_pay_yourself_first.q1.explain",
+          "answer": "yearSave",
+          "unit": "rupees"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "save_pay_yourself_first.q2.prompt",
+          "concept": "pay_yourself_first",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q2.hint",
+          "explainKey": "save_pay_yourself_first.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_pay_yourself_first.q2.opt.a",
+              "misconception": "save_what_is_left",
+              "feedbackKey": "save_pay_yourself_first.q2.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_pay_yourself_first.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_pay_yourself_first.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_pay_yourself_first.q2.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "save_pay_yourself_first.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "save_pay_yourself_first.t2.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "save_pay_yourself_first.t2.steps.1",
+            "save_pay_yourself_first.t2.steps.2",
+            "save_pay_yourself_first.t2.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "save_pay_yourself_first.q3.prompt",
+          "concept": "pay_yourself_first",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q3.hint",
+          "explainKey": "save_pay_yourself_first.q3.explain",
+          "answer": "pct",
+          "unit": "percent"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "save_pay_yourself_first.q4.prompt",
+          "concept": "habit_beats_amount",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q4.hint",
+          "explainKey": "save_pay_yourself_first.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_pay_yourself_first.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_pay_yourself_first.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_pay_yourself_first.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_pay_yourself_first.q4.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "save_pay_yourself_first.t3.title",
+      "blocks": [
+        {
+          "type": "steps",
+          "stepKeys": [
+            "save_pay_yourself_first.t3.steps.1",
+            "save_pay_yourself_first.t3.steps.2",
+            "save_pay_yourself_first.t3.steps.3"
+          ]
+        },
+        {
+          "type": "note",
+          "textKey": "save_pay_yourself_first.t3.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "save_pay_yourself_first.q5.prompt",
+          "concept": "goal_months",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q5.hint",
+          "explainKey": "save_pay_yourself_first.q5.explain",
+          "answer": "months",
+          "unit": "number"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "save_pay_yourself_first.q6.prompt",
+          "concept": "habit_beats_amount",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q6.hint",
+          "explainKey": "save_pay_yourself_first.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_pay_yourself_first.q6.opt.a",
+              "misconception": "save_only_big_amounts",
+              "feedbackKey": "save_pay_yourself_first.q6.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_pay_yourself_first.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_pay_yourself_first.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_pay_yourself_first.q6.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "save_pay_yourself_first.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "save_pay_yourself_first.t4.explore",
+            "params": {
+              "save": "$labStart",
+              "left": "$labLeft"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "save",
+                  "labelKey": "save_pay_yourself_first.t4.lab.save",
+                  "min": 0,
+                  "max": 2000,
+                  "step": 100,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "left",
+                  "labelKey": "save_pay_yourself_first.t4.lab.left",
+                  "min": 0,
+                  "max": 500,
+                  "step": 50,
+                  "fmt": "rupees"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "payFirst",
+                  "labelKey": "save_pay_yourself_first.t4.lab.payFirst",
+                  "fn": "mul",
+                  "args": [
+                    "save",
+                    12
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                },
+                {
+                  "id": "spendFirst",
+                  "labelKey": "save_pay_yourself_first.t4.lab.spendFirst",
+                  "fn": "mul",
+                  "args": [
+                    "left",
+                    12
+                  ],
+                  "fmt": "rupees",
+                  "tone": "bad"
+                },
+                {
+                  "id": "gap",
+                  "labelKey": "save_pay_yourself_first.t4.lab.gap",
+                  "fn": "sub",
+                  "args": [
+                    "payFirst",
+                    "spendFirst"
+                  ],
+                  "fmt": "rupees"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "save_pay_yourself_first.q7.prompt",
+          "concept": "pay_yourself_first",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q7.hint",
+          "explainKey": "save_pay_yourself_first.q7.explain",
+          "answer": "labYear",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "save_pay_yourself_first.q8.prompt",
+          "concept": "pay_yourself_first",
+          "points": 10,
+          "hintKey": "save_pay_yourself_first.q8.hint",
+          "explainKey": "save_pay_yourself_first.q8.explain",
+          "answer": "labGap",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "save_pay_yourself_first.t5.title",
+      "blocks": [
+        {
+          "type": "tradeoff",
+          "textKey": "save_pay_yourself_first.t5.tradeoff"
+        },
+        {
+          "type": "misconception",
+          "textKey": "save_pay_yourself_first.t5.mistake",
+          "misconceptions": [
+            "save_what_is_left"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "save_savings",
+            "save_pay_first",
+            "save_habit"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "save_pay_yourself_first.q9.prompt",
+          "concept": "pay_yourself_first",
+          "points": 20,
+          "hintKey": "save_pay_yourself_first.q9.hint",
+          "explainKey": "save_pay_yourself_first.q9.explain",
+          "answer": "yr2",
+          "unit": "rupees"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "save_savings",
+    "save_pay_first",
+    "save_habit"
+  ]
+}

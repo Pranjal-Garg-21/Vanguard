@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bank_kyc",
+    "termKey": "bank_documents.glossary.bank_kyc.term",
+    "defKey": "bank_documents.glossary.bank_kyc.def",
+    "lesson": "lesson_bank_documents"
+  },
+  {
+    "id": "bank_nominee",
+    "termKey": "bank_documents.glossary.bank_nominee.term",
+    "defKey": "bank_documents.glossary.bank_nominee.def",
+    "lesson": "lesson_bank_documents"
+  },
+  {
+    "id": "bank_minor_account",
+    "termKey": "bank_documents.glossary.bank_minor_account.term",
+    "defKey": "bank_documents.glossary.bank_minor_account.def",
+    "lesson": "lesson_bank_documents"
+  }
+]

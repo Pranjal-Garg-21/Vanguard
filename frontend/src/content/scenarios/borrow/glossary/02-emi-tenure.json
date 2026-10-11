@@ -1,0 +1,20 @@
+[
+  {
+    "id": "borrow_emi",
+    "termKey": "borrow_emi.glossary.borrow_emi.term",
+    "defKey": "borrow_emi.glossary.borrow_emi.def",
+    "lesson": "lesson_borrow_emi"
+  },
+  {
+    "id": "borrow_tenure",
+    "termKey": "borrow_emi.glossary.borrow_tenure.term",
+    "defKey": "borrow_emi.glossary.borrow_tenure.def",
+    "lesson": "lesson_borrow_emi"
+  },
+  {
+    "id": "borrow_instalment",
+    "termKey": "borrow_emi.glossary.borrow_instalment.term",
+    "defKey": "borrow_emi.glossary.borrow_instalment.def",
+    "lesson": "lesson_borrow_emi"
+  }
+]

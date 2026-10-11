@@ -1,0 +1,503 @@
+{
+  "id": "lesson_save_emergency_fund",
+  "kind": "room",
+  "pillar": "save",
+  "order": 2,
+  "estMinutes": 11,
+  "difficulty": "medium",
+  "titleKey": "save_emergency_fund.title",
+  "blurbKey": "save_emergency_fund.blurb",
+  "concepts": [
+    "emergency_fund",
+    "emergency_cover_months",
+    "emergency_refill"
+  ],
+  "misconceptions": [
+    "sale_is_emergency",
+    "emergency_fund_should_grow"
+  ],
+  "vars": {
+    "spend": {
+      "value": 8000,
+      "fmt": "rupees"
+    },
+    "months": {
+      "value": 3,
+      "fmt": "number"
+    },
+    "saved": {
+      "value": 12000,
+      "fmt": "rupees"
+    },
+    "monthlyAdd": {
+      "value": 1500,
+      "fmt": "rupees"
+    },
+    "repair": {
+      "value": 3500,
+      "fmt": "rupees"
+    },
+    "refill": {
+      "value": 700,
+      "fmt": "rupees"
+    },
+    "spend2": {
+      "value": 9000,
+      "fmt": "rupees"
+    },
+    "months2": {
+      "value": 4,
+      "fmt": "number"
+    },
+    "labSpend": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "labMonths": {
+      "value": 6,
+      "fmt": "number"
+    },
+    "exSpend": {
+      "value": 5000,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "target",
+      "fn": "mul",
+      "args": [
+        "$spend",
+        "$months"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "cover",
+      "fn": "coverMonths",
+      "args": [
+        "$saved",
+        "$spend"
+      ],
+      "fmt": "number",
+      "round": 1
+    },
+    {
+      "id": "gap",
+      "fn": "sub",
+      "args": [
+        "$target",
+        "$saved"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "buildMonths",
+      "fn": "monthsToGoal",
+      "args": [
+        "$gap",
+        "$monthlyAdd"
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "labTarget",
+      "fn": "mul",
+      "args": [
+        "$labSpend",
+        "$labMonths"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "left",
+      "fn": "sub",
+      "args": [
+        "$saved",
+        "$repair"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "refillMonths",
+      "fn": "monthsToGoal",
+      "args": [
+        "$repair",
+        "$refill"
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "need2",
+      "fn": "mul",
+      "args": [
+        "$spend2",
+        "$months2"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "gap2",
+      "fn": "sub",
+      "args": [
+        "$need2",
+        "$left"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "save_emergency_fund.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "umbrella",
+          "textKey": "save_emergency_fund.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "save_emergency_fund.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "umbrella",
+          "textKey": "save_emergency_fund.t1.analogy"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "save_emergency_fund.q1.prompt",
+          "concept": "emergency_fund",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q1.hint",
+          "explainKey": "save_emergency_fund.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_emergency_fund.q1.opt.a",
+              "misconception": "sale_is_emergency",
+              "feedbackKey": "save_emergency_fund.q1.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_emergency_fund.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_emergency_fund.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_emergency_fund.q1.opt.d"
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "save_emergency_fund.q2.prompt",
+          "concept": "emergency_fund",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q2.hint",
+          "explainKey": "save_emergency_fund.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_emergency_fund.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_emergency_fund.q2.opt.b",
+              "misconception": "emergency_fund_should_grow",
+              "feedbackKey": "save_emergency_fund.q2.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_emergency_fund.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_emergency_fund.q2.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "save_emergency_fund.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "save_emergency_fund.t2.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "save_emergency_fund.t2.steps.1",
+            "save_emergency_fund.t2.steps.2",
+            "save_emergency_fund.t2.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "save_emergency_fund.q3.prompt",
+          "concept": "emergency_cover_months",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q3.hint",
+          "explainKey": "save_emergency_fund.q3.explain",
+          "answer": "target",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "save_emergency_fund.q4.prompt",
+          "concept": "emergency_cover_months",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q4.hint",
+          "explainKey": "save_emergency_fund.q4.explain",
+          "answer": "cover",
+          "unit": "number",
+          "tolerance": 0.05
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "save_emergency_fund.t3.title",
+      "blocks": [
+        {
+          "type": "steps",
+          "stepKeys": [
+            "save_emergency_fund.t3.steps.1",
+            "save_emergency_fund.t3.steps.2",
+            "save_emergency_fund.t3.steps.3"
+          ]
+        },
+        {
+          "type": "note",
+          "textKey": "save_emergency_fund.t3.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "save_emergency_fund.q5.prompt",
+          "concept": "emergency_cover_months",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q5.hint",
+          "explainKey": "save_emergency_fund.q5.explain",
+          "answer": "buildMonths",
+          "unit": "number"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "save_emergency_fund.q6.prompt",
+          "concept": "emergency_fund",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q6.hint",
+          "explainKey": "save_emergency_fund.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_emergency_fund.q6.opt.a",
+              "misconception": "emergency_fund_should_grow",
+              "feedbackKey": "save_emergency_fund.q6.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_emergency_fund.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_emergency_fund.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_emergency_fund.q6.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "save_emergency_fund.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "save_emergency_fund.t4.explore",
+            "params": {
+              "spend": "$spend",
+              "months": "$months",
+              "mSave": "$monthlyAdd"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "spend",
+                  "labelKey": "save_emergency_fund.t4.lab.spend",
+                  "min": 3000,
+                  "max": 20000,
+                  "step": 500,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "months",
+                  "labelKey": "save_emergency_fund.t4.lab.months",
+                  "min": 1,
+                  "max": 12,
+                  "step": 1,
+                  "fmt": "number"
+                },
+                {
+                  "id": "mSave",
+                  "labelKey": "save_emergency_fund.t4.lab.mSave",
+                  "min": 500,
+                  "max": 5000,
+                  "step": 500,
+                  "fmt": "rupees"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "tgt",
+                  "labelKey": "save_emergency_fund.t4.lab.tgt",
+                  "fn": "mul",
+                  "args": [
+                    "spend",
+                    "months"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                },
+                {
+                  "id": "time",
+                  "labelKey": "save_emergency_fund.t4.lab.time",
+                  "fn": "monthsToGoal",
+                  "args": [
+                    "tgt",
+                    "mSave"
+                  ],
+                  "fmt": "number"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "save_emergency_fund.q7.prompt",
+          "concept": "emergency_cover_months",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q7.hint",
+          "explainKey": "save_emergency_fund.q7.explain",
+          "answer": "labTarget",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "save_emergency_fund.q8.prompt",
+          "concept": "emergency_cover_months",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q8.hint",
+          "explainKey": "save_emergency_fund.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_emergency_fund.q8.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_emergency_fund.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_emergency_fund.q8.opt.c"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "save_emergency_fund.t5.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "save_emergency_fund.t5.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "budget_jars",
+          "textKey": "save_emergency_fund.t5.analogy"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "save_emergency_fund.t5.steps.1",
+            "save_emergency_fund.t5.steps.2",
+            "save_emergency_fund.t5.steps.3"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "save_emergency_fund",
+            "save_months_of_cover",
+            "save_must_have"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "save_emergency_fund.q9.prompt",
+          "concept": "emergency_refill",
+          "points": 10,
+          "hintKey": "save_emergency_fund.q9.hint",
+          "explainKey": "save_emergency_fund.q9.explain",
+          "answer": "refillMonths",
+          "unit": "number"
+        },
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "save_emergency_fund.q10.prompt",
+          "concept": "emergency_refill",
+          "points": 20,
+          "hintKey": "save_emergency_fund.q10.hint",
+          "explainKey": "save_emergency_fund.q10.explain",
+          "answer": "gap2",
+          "unit": "rupees"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "save_emergency_fund",
+    "save_months_of_cover",
+    "save_must_have"
+  ]
+}

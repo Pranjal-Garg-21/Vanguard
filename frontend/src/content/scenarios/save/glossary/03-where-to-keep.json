@@ -1,0 +1,32 @@
+[
+  {
+    "id": "save_interest",
+    "termKey": "save_where_to_keep.glossary.save_interest.term",
+    "defKey": "save_where_to_keep.glossary.save_interest.def",
+    "lesson": "lesson_save_where_to_keep"
+  },
+  {
+    "id": "save_fixed_deposit",
+    "termKey": "save_where_to_keep.glossary.save_fixed_deposit.term",
+    "defKey": "save_where_to_keep.glossary.save_fixed_deposit.def",
+    "lesson": "lesson_save_where_to_keep"
+  },
+  {
+    "id": "save_recurring_deposit",
+    "termKey": "save_where_to_keep.glossary.save_recurring_deposit.term",
+    "defKey": "save_where_to_keep.glossary.save_recurring_deposit.def",
+    "lesson": "lesson_save_where_to_keep"
+  },
+  {
+    "id": "save_access",
+    "termKey": "save_where_to_keep.glossary.save_access.term",
+    "defKey": "save_where_to_keep.glossary.save_access.def",
+    "lesson": "lesson_save_where_to_keep"
+  },
+  {
+    "id": "save_penalty",
+    "termKey": "save_where_to_keep.glossary.save_penalty.term",
+    "defKey": "save_where_to_keep.glossary.save_penalty.def",
+    "lesson": "lesson_save_where_to_keep"
+  }
+]

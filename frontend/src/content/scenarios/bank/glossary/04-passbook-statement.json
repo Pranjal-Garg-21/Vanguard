@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bank_credit",
+    "termKey": "bank_statement.glossary.bank_credit.term",
+    "defKey": "bank_statement.glossary.bank_credit.def",
+    "lesson": "lesson_bank_statement"
+  },
+  {
+    "id": "bank_debit",
+    "termKey": "bank_statement.glossary.bank_debit.term",
+    "defKey": "bank_statement.glossary.bank_debit.def",
+    "lesson": "lesson_bank_statement"
+  },
+  {
+    "id": "bank_statement",
+    "termKey": "bank_statement.glossary.bank_statement.term",
+    "defKey": "bank_statement.glossary.bank_statement.def",
+    "lesson": "lesson_bank_statement"
+  }
+]

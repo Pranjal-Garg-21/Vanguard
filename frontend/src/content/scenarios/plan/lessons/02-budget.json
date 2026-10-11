@@ -1,0 +1,503 @@
+{
+  "id": "lesson_plan_budget",
+  "kind": "room",
+  "pillar": "plan",
+  "order": 2,
+  "estMinutes": 11,
+  "difficulty": "medium",
+  "titleKey": "plan_budget.title",
+  "blurbKey": "plan_budget.blurb",
+  "concepts": [
+    "budget_jars",
+    "fixed_vs_variable",
+    "irregular_income"
+  ],
+  "misconceptions": [
+    "fun_is_bad",
+    "save_what_is_left",
+    "leftover_is_free",
+    "rule_is_a_law",
+    "spend_the_good_month",
+    "forget_yearly_costs"
+  ],
+  "vars": {
+    "income": {
+      "value": 12000,
+      "fmt": "rupees"
+    },
+    "needsShare": {
+      "value": 0.5,
+      "fmt": "percent"
+    },
+    "wantsShare": {
+      "value": 0.3,
+      "fmt": "percent"
+    },
+    "saveShare": {
+      "value": 0.2,
+      "fmt": "percent"
+    },
+    "rentShare": {
+      "value": 0.7,
+      "fmt": "percent"
+    },
+    "wantsSpent": {
+      "value": 3000,
+      "fmt": "rupees"
+    },
+    "goodMonth": {
+      "value": 16000,
+      "fmt": "rupees"
+    },
+    "leanMonth": {
+      "value": 8000,
+      "fmt": "rupees"
+    },
+    "festival": {
+      "value": 3000,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "needsAmt",
+      "fn": "mul",
+      "args": [
+        "$income",
+        "$needsShare"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "wantsAmt",
+      "fn": "mul",
+      "args": [
+        "$income",
+        "$wantsShare"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "leftover",
+      "fn": "sub",
+      "args": [
+        "$wantsAmt",
+        "$wantsSpent"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "leanSave",
+      "fn": "mul",
+      "args": [
+        "$leanMonth",
+        "$saveShare"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "festMonthly",
+      "fn": "div",
+      "args": [
+        "$festival",
+        12
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "plan_budget.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "plan_budget.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "plan_budget.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "budget_jars",
+          "textKey": "plan_budget.t1.analogy"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "plan_budget.q1.prompt",
+          "concept": "budget_jars",
+          "points": 10,
+          "hintKey": "plan_budget.q1.hint",
+          "explainKey": "plan_budget.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_budget.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_budget.q1.opt.b",
+              "misconception": "fun_is_bad",
+              "feedbackKey": "plan_budget.q1.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_budget.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_budget.q1.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "plan_budget.q2.prompt",
+          "concept": "budget_jars",
+          "points": 10,
+          "hintKey": "plan_budget.q2.hint",
+          "explainKey": "plan_budget.q2.explain",
+          "answer": "needsAmt",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "plan_budget.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "plan_budget.t2.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "plan_budget.t2.steps.1",
+            "plan_budget.t2.steps.2",
+            "plan_budget.t2.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "plan_budget.q3.prompt",
+          "concept": "budget_jars",
+          "points": 10,
+          "hintKey": "plan_budget.q3.hint",
+          "explainKey": "plan_budget.q3.explain",
+          "answer": "wantsAmt",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "plan_budget.q4.prompt",
+          "concept": "budget_jars",
+          "points": 10,
+          "hintKey": "plan_budget.q4.hint",
+          "explainKey": "plan_budget.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_budget.q4.opt.a",
+              "misconception": "rule_is_a_law",
+              "feedbackKey": "plan_budget.q4.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_budget.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_budget.q4.opt.c",
+              "misconception": "save_what_is_left",
+              "feedbackKey": "plan_budget.q4.fb.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_budget.q4.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "plan_budget.t3.title",
+      "blocks": [
+        {
+          "type": "note",
+          "textKey": "plan_budget.t3.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "plan_budget.q5.prompt",
+          "concept": "budget_jars",
+          "points": 10,
+          "hintKey": "plan_budget.q5.hint",
+          "explainKey": "plan_budget.q5.explain",
+          "answer": "leftover",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "plan_budget.q6.prompt",
+          "concept": "budget_jars",
+          "points": 10,
+          "hintKey": "plan_budget.q6.hint",
+          "explainKey": "plan_budget.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_budget.q6.opt.a",
+              "misconception": "leftover_is_free",
+              "feedbackKey": "plan_budget.q6.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_budget.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_budget.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_budget.q6.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "plan_budget.t4.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "plan_budget.t4.define"
+        },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "plan_budget.t4.explore",
+            "params": {
+              "income": "$income",
+              "needsShare": "$needsShare",
+              "wantsShare": "$wantsShare"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "income",
+                  "labelKey": "plan_budget.t4.lab.income",
+                  "min": 4000,
+                  "max": 20000,
+                  "step": 500,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "needsShare",
+                  "labelKey": "plan_budget.t4.lab.needsShare",
+                  "min": 0.3,
+                  "max": 0.7,
+                  "step": 0.05,
+                  "fmt": "percent"
+                },
+                {
+                  "id": "wantsShare",
+                  "labelKey": "plan_budget.t4.lab.wantsShare",
+                  "min": 0.1,
+                  "max": 0.5,
+                  "step": 0.05,
+                  "fmt": "percent"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "needs",
+                  "labelKey": "plan_budget.t4.lab.needs",
+                  "fn": "mul",
+                  "args": [
+                    "income",
+                    "needsShare"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "wants",
+                  "labelKey": "plan_budget.t4.lab.wants",
+                  "fn": "mul",
+                  "args": [
+                    "income",
+                    "wantsShare"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "spentJars",
+                  "labelKey": "plan_budget.t4.lab.spentJars",
+                  "fn": "add",
+                  "args": [
+                    "needs",
+                    "wants"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "saving",
+                  "labelKey": "plan_budget.t4.lab.saving",
+                  "fn": "sub",
+                  "args": [
+                    "income",
+                    "spentJars"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "plan_budget.q7.prompt",
+          "concept": "irregular_income",
+          "points": 10,
+          "hintKey": "plan_budget.q7.hint",
+          "explainKey": "plan_budget.q7.explain",
+          "answer": "leanSave",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "plan_budget.q8.prompt",
+          "concept": "irregular_income",
+          "points": 10,
+          "hintKey": "plan_budget.q8.hint",
+          "explainKey": "plan_budget.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_budget.q8.opt.a",
+              "misconception": "spend_the_good_month",
+              "feedbackKey": "plan_budget.q8.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_budget.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_budget.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_budget.q8.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "plan_budget.t5.title",
+      "blocks": [
+        {
+          "type": "misconception",
+          "textKey": "plan_budget.t5.misconception",
+          "misconceptions": [
+            "forget_yearly_costs"
+          ]
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "plan_budget.t5.steps.1",
+            "plan_budget.t5.steps.2",
+            "plan_budget.t5.steps.3"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "plan_budget",
+            "plan_income",
+            "plan_share",
+            "plan_leftover"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "plan_budget.q9.prompt",
+          "concept": "fixed_vs_variable",
+          "points": 10,
+          "hintKey": "plan_budget.q9.hint",
+          "explainKey": "plan_budget.q9.explain",
+          "answer": "festMonthly",
+          "unit": "rupees"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "plan_budget.q10.prompt",
+          "concept": "fixed_vs_variable",
+          "points": 20,
+          "hintKey": "plan_budget.q10.hint",
+          "explainKey": "plan_budget.q10.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_budget.q10.opt.a",
+              "misconception": "forget_yearly_costs",
+              "feedbackKey": "plan_budget.q10.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_budget.q10.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_budget.q10.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_budget.q10.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "plan_budget",
+    "plan_income",
+    "plan_share",
+    "plan_leftover"
+  ]
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "borrow_flat_rate",
+    "termKey": "borrow_flat.glossary.borrow_flat_rate.term",
+    "defKey": "borrow_flat.glossary.borrow_flat_rate.def",
+    "lesson": "lesson_borrow_flat_vs_reducing"
+  },
+  {
+    "id": "borrow_reducing",
+    "termKey": "borrow_flat.glossary.borrow_reducing.term",
+    "defKey": "borrow_flat.glossary.borrow_reducing.def",
+    "lesson": "lesson_borrow_flat_vs_reducing"
+  },
+  {
+    "id": "borrow_real_rate",
+    "termKey": "borrow_flat.glossary.borrow_real_rate.term",
+    "defKey": "borrow_flat.glossary.borrow_real_rate.def",
+    "lesson": "lesson_borrow_flat_vs_reducing"
+  }
+]

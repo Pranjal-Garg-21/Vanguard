@@ -1,0 +1,14 @@
+[
+  {
+    "id": "plan_need",
+    "termKey": "plan_needs_wants.glossary.plan_need.term",
+    "defKey": "plan_needs_wants.glossary.plan_need.def",
+    "lesson": "lesson_plan_needs_wants"
+  },
+  {
+    "id": "plan_want",
+    "termKey": "plan_needs_wants.glossary.plan_want.term",
+    "defKey": "plan_needs_wants.glossary.plan_want.def",
+    "lesson": "lesson_plan_needs_wants"
+  }
+]

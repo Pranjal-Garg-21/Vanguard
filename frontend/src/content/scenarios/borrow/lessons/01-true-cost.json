@@ -1,0 +1,485 @@
+{
+  "id": "lesson_borrow_cost",
+  "kind": "room",
+  "pillar": "borrow",
+  "order": 1,
+  "estMinutes": 9,
+  "difficulty": "easy",
+  "titleKey": "borrow_cost.title",
+  "blurbKey": "borrow_cost.blurb",
+  "concepts": [
+    "borrowing_cost",
+    "interest_basics"
+  ],
+  "misconceptions": [
+    "friend_loan_is_free",
+    "debt_is_free_money"
+  ],
+  "vars": {
+    "got1": {
+      "value": 20000,
+      "fmt": "rupees"
+    },
+    "back1": {
+      "value": 22000,
+      "fmt": "rupees"
+    },
+    "got2": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "back2": {
+      "value": 11500,
+      "fmt": "rupees"
+    },
+    "labAmt": {
+      "value": 30000,
+      "fmt": "rupees"
+    },
+    "labRate": {
+      "value": 0.18,
+      "fmt": "percent"
+    },
+    "labMonths": {
+      "value": 12
+    },
+    "fAmt": {
+      "value": 5000,
+      "fmt": "rupees"
+    },
+    "lBack": {
+      "value": 5600,
+      "fmt": "rupees"
+    },
+    "oGot": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "oA": {
+      "value": 12600,
+      "fmt": "rupees"
+    },
+    "oB": {
+      "value": 12250,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "cost1",
+      "fn": "sub",
+      "args": [
+        "$back1",
+        "$got1"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "pct1",
+      "fn": "div",
+      "args": [
+        "$cost1",
+        "$got1"
+      ],
+      "fmt": "percent"
+    },
+    {
+      "id": "cost2",
+      "fn": "sub",
+      "args": [
+        "$back2",
+        "$got2"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "pct2",
+      "fn": "div",
+      "args": [
+        "$cost2",
+        "$got2"
+      ],
+      "fmt": "percent"
+    },
+    {
+      "id": "labCost",
+      "fn": "loanInterest",
+      "args": [
+        "$labAmt",
+        "$labRate",
+        "$labMonths"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "lCost",
+      "fn": "sub",
+      "args": [
+        "$lBack",
+        "$fAmt"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "offerGap",
+      "fn": "sub",
+      "args": [
+        "$oA",
+        "$oB"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "borrow_cost.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "neighbour_loan",
+          "textKey": "borrow_cost.t1.b1"
+        },
+        {
+          "type": "define",
+          "textKey": "borrow_cost.t1.b2"
+        },
+        {
+          "type": "analogy",
+          "visual": "piggy_bank",
+          "textKey": "borrow_cost.t1.b3"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "borrow_cost.q1.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q1.hint",
+          "explainKey": "borrow_cost.q1.explain",
+          "answer": "cost2",
+          "unit": "rupees"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "borrow_cost.q2.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q2.hint",
+          "explainKey": "borrow_cost.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cost.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cost.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cost.q2.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "borrow_cost.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "borrow_cost.t2.b1"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "borrow_cost.t2.b2.1",
+            "borrow_cost.t2.b2.2",
+            "borrow_cost.t2.b2.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "borrow_cost.q3.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q3.hint",
+          "explainKey": "borrow_cost.q3.explain",
+          "answer": "pct2",
+          "unit": "percent"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "borrow_cost.q4.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q4.hint",
+          "explainKey": "borrow_cost.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cost.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cost.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cost.q4.opt.c"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "borrow_cost.t3.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "borrow_cost.t3.b1.prompt",
+            "params": {
+              "amount": "$labAmt",
+              "rate": "$labRate",
+              "months": "$labMonths"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "amount",
+                  "labelKey": "borrow_cost.t3.b1.s.amount",
+                  "min": 5000,
+                  "max": 50000,
+                  "step": 1000,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "rate",
+                  "labelKey": "borrow_cost.t3.b1.s.rate",
+                  "min": 0.06,
+                  "max": 0.36,
+                  "step": 0.01,
+                  "fmt": "percent"
+                },
+                {
+                  "id": "months",
+                  "labelKey": "borrow_cost.t3.b1.s.months",
+                  "min": 3,
+                  "max": 24,
+                  "step": 1,
+                  "fmt": "number"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "emi",
+                  "labelKey": "borrow_cost.t3.b1.r.emi",
+                  "fn": "emi",
+                  "args": [
+                    "amount",
+                    "rate",
+                    "months"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "total",
+                  "labelKey": "borrow_cost.t3.b1.r.total",
+                  "fn": "loanTotalPaid",
+                  "args": [
+                    "amount",
+                    "rate",
+                    "months"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "cost",
+                  "labelKey": "borrow_cost.t3.b1.r.cost",
+                  "fn": "loanInterest",
+                  "args": [
+                    "amount",
+                    "rate",
+                    "months"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "bad"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "borrow_cost.q5.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q5.hint",
+          "explainKey": "borrow_cost.q5.explain",
+          "answer": "labCost",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "borrow_cost.q6.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q6.hint",
+          "explainKey": "borrow_cost.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cost.q6.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cost.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cost.q6.opt.c"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "borrow_cost.t4.title",
+      "blocks": [
+        {
+          "type": "tradeoff",
+          "textKey": "borrow_cost.t4.b1"
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "friend_loan_is_free"
+          ],
+          "textKey": "borrow_cost.t4.b2"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "borrow_cost.q7.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q7.hint",
+          "explainKey": "borrow_cost.q7.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cost.q7.opt.a",
+              "misconception": "friend_loan_is_free",
+              "feedbackKey": "borrow_cost.q7.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cost.q7.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cost.q7.opt.c"
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "borrow_cost.q8.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q8.hint",
+          "explainKey": "borrow_cost.q8.explain",
+          "answer": "lCost",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "borrow_cost.t5.title",
+      "blocks": [
+        {
+          "type": "note",
+          "textKey": "borrow_cost.t5.b1"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "borrow_principal",
+            "borrow_interest",
+            "borrow_cost_of_loan"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "borrow_cost.q9.prompt",
+          "concept": "borrowing_cost",
+          "points": 20,
+          "hintKey": "borrow_cost.q9.hint",
+          "explainKey": "borrow_cost.q9.explain",
+          "answer": "offerGap",
+          "unit": "rupees"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "borrow_cost.q10.prompt",
+          "concept": "borrowing_cost",
+          "points": 10,
+          "hintKey": "borrow_cost.q10.hint",
+          "explainKey": "borrow_cost.q10.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cost.q10.opt.a",
+              "misconception": "debt_is_free_money",
+              "feedbackKey": "borrow_cost.q10.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cost.q10.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cost.q10.opt.c"
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "borrow_principal",
+    "borrow_interest",
+    "borrow_cost_of_loan"
+  ]
+}

@@ -1,0 +1,533 @@
+{
+  "id": "lesson_plan_tradeoffs",
+  "kind": "room",
+  "pillar": "plan",
+  "order": 4,
+  "estMinutes": 11,
+  "difficulty": "medium",
+  "titleKey": "plan_tradeoffs.title",
+  "blurbKey": "plan_tradeoffs.blurb",
+  "concepts": [
+    "opportunity_cost",
+    "cost_per_day",
+    "price_over_time"
+  ],
+  "misconceptions": [
+    "opportunity_cost_is_price",
+    "cheap_price_is_cheap_use",
+    "small_instalment_is_cheap",
+    "money_in_hand_means_no_cost"
+  ],
+  "vars": {
+    "savings": {
+      "value": 20000,
+      "fmt": "rupees"
+    },
+    "phone": {
+      "value": 14600,
+      "fmt": "rupees"
+    },
+    "coaching": {
+      "value": 9000,
+      "fmt": "rupees"
+    },
+    "years": {
+      "value": 2,
+      "fmt": "number"
+    },
+    "phoneLong": {
+      "value": 14600,
+      "fmt": "rupees"
+    },
+    "yearsLong": {
+      "value": 4,
+      "fmt": "number"
+    },
+    "cheapPhone": {
+      "value": 9500,
+      "fmt": "rupees"
+    },
+    "yearsCheap": {
+      "value": 2,
+      "fmt": "number"
+    },
+    "p5": {
+      "value": 9000,
+      "fmt": "rupees"
+    },
+    "y5": {
+      "value": 3,
+      "fmt": "number"
+    },
+    "inst": {
+      "value": 1350,
+      "fmt": "rupees"
+    },
+    "instMonths": {
+      "value": 12,
+      "fmt": "number"
+    }
+  },
+  "calcs": [
+    {
+      "id": "both",
+      "fn": "add",
+      "args": [
+        "$phone",
+        "$coaching"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "shortfall",
+      "fn": "sub",
+      "args": [
+        "$both",
+        "$savings"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "days",
+      "fn": "mul",
+      "args": [
+        "$years",
+        365
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "perDay",
+      "fn": "div",
+      "args": [
+        "$phone",
+        "$days"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "daysCheap",
+      "fn": "mul",
+      "args": [
+        "$yearsCheap",
+        365
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "perDayCheap",
+      "fn": "div",
+      "args": [
+        "$cheapPhone",
+        "$daysCheap"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "daysLong",
+      "fn": "mul",
+      "args": [
+        "$yearsLong",
+        365
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "perDayLong",
+      "fn": "div",
+      "args": [
+        "$phoneLong",
+        "$daysLong"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "months5",
+      "fn": "mul",
+      "args": [
+        "$y5",
+        12
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "perMonth5",
+      "fn": "div",
+      "args": [
+        "$p5",
+        "$months5"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "instTotal",
+      "fn": "mul",
+      "args": [
+        "$inst",
+        "$instMonths"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "instExtra",
+      "fn": "sub",
+      "args": [
+        "$instTotal",
+        "$phone"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "extraPct",
+      "fn": "percentOf",
+      "args": [
+        "$instExtra",
+        "$phone"
+      ],
+      "fmt": "percent"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "plan_tradeoffs.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "plan_tradeoffs.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "plan_tradeoffs.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "phone_offer",
+          "textKey": "plan_tradeoffs.t1.analogy"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "plan_tradeoffs.q1.prompt",
+          "concept": "opportunity_cost",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q1.hint",
+          "explainKey": "plan_tradeoffs.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_tradeoffs.q1.opt.a",
+              "misconception": "opportunity_cost_is_price",
+              "feedbackKey": "plan_tradeoffs.q1.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_tradeoffs.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_tradeoffs.q1.opt.c",
+              "misconception": "money_in_hand_means_no_cost",
+              "feedbackKey": "plan_tradeoffs.q1.fb.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_tradeoffs.q1.opt.d"
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "plan_tradeoffs.q2.prompt",
+          "concept": "opportunity_cost",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q2.hint",
+          "explainKey": "plan_tradeoffs.q2.explain",
+          "answer": "shortfall",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "plan_tradeoffs.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "plan_tradeoffs.t2.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "plan_tradeoffs.t2.steps.1",
+            "plan_tradeoffs.t2.steps.2"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "plan_tradeoffs.q3.prompt",
+          "concept": "cost_per_day",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q3.hint",
+          "explainKey": "plan_tradeoffs.q3.explain",
+          "answer": "perDay",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "plan_tradeoffs.q4.prompt",
+          "concept": "cost_per_day",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q4.hint",
+          "explainKey": "plan_tradeoffs.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_tradeoffs.q4.opt.a",
+              "misconception": "cheap_price_is_cheap_use",
+              "feedbackKey": "plan_tradeoffs.q4.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_tradeoffs.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_tradeoffs.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_tradeoffs.q4.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "plan_tradeoffs.t3.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "plan_tradeoffs.t3.explore",
+            "params": {
+              "price": "$phone",
+              "years": "$years"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "price",
+                  "labelKey": "plan_tradeoffs.t3.lab.price",
+                  "min": 5000,
+                  "max": 30000,
+                  "step": 500,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "years",
+                  "labelKey": "plan_tradeoffs.t3.lab.years",
+                  "min": 1,
+                  "max": 6,
+                  "step": 0.5,
+                  "fmt": "number"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "useDays",
+                  "labelKey": "plan_tradeoffs.t3.lab.useDays",
+                  "fn": "mul",
+                  "args": [
+                    "years",
+                    365
+                  ],
+                  "fmt": "number"
+                },
+                {
+                  "id": "perDayLab",
+                  "labelKey": "plan_tradeoffs.t3.lab.perDayLab",
+                  "fn": "div",
+                  "args": [
+                    "price",
+                    "useDays"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                },
+                {
+                  "id": "useMonths",
+                  "labelKey": "plan_tradeoffs.t3.lab.useMonths",
+                  "fn": "mul",
+                  "args": [
+                    "years",
+                    12
+                  ],
+                  "fmt": "number"
+                },
+                {
+                  "id": "perMonthLab",
+                  "labelKey": "plan_tradeoffs.t3.lab.perMonthLab",
+                  "fn": "div",
+                  "args": [
+                    "price",
+                    "useMonths"
+                  ],
+                  "fmt": "rupees"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "plan_tradeoffs.q5.prompt",
+          "concept": "cost_per_day",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q5.hint",
+          "explainKey": "plan_tradeoffs.q5.explain",
+          "answer": "perMonth5",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "plan_tradeoffs.q6.prompt",
+          "concept": "cost_per_day",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q6.hint",
+          "explainKey": "plan_tradeoffs.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_tradeoffs.q6.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_tradeoffs.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_tradeoffs.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_tradeoffs.q6.opt.d"
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "plan_tradeoffs.t4.title",
+      "blocks": [
+        {
+          "type": "note",
+          "textKey": "plan_tradeoffs.t4.note"
+        },
+        {
+          "type": "tradeoff",
+          "textKey": "plan_tradeoffs.t4.tradeoff"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "plan_tradeoffs.q7.prompt",
+          "concept": "price_over_time",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q7.hint",
+          "explainKey": "plan_tradeoffs.q7.explain",
+          "answer": "instExtra",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "plan_tradeoffs.q8.prompt",
+          "concept": "price_over_time",
+          "points": 10,
+          "hintKey": "plan_tradeoffs.q8.hint",
+          "explainKey": "plan_tradeoffs.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_tradeoffs.q8.opt.a",
+              "misconception": "small_instalment_is_cheap",
+              "feedbackKey": "plan_tradeoffs.q8.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_tradeoffs.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_tradeoffs.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_tradeoffs.q8.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "plan_tradeoffs.t5.title",
+      "blocks": [
+        {
+          "type": "misconception",
+          "textKey": "plan_tradeoffs.t5.misconception",
+          "misconceptions": [
+            "small_instalment_is_cheap"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "plan_opportunity_cost",
+            "plan_cost_per_day",
+            "plan_instalment"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "plan_tradeoffs.q9.prompt",
+          "concept": "price_over_time",
+          "points": 20,
+          "hintKey": "plan_tradeoffs.q9.hint",
+          "explainKey": "plan_tradeoffs.q9.explain",
+          "answer": "extraPct",
+          "unit": "percent"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "plan_opportunity_cost",
+    "plan_cost_per_day",
+    "plan_instalment"
+  ]
+}

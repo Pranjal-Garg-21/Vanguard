@@ -1,0 +1,32 @@
+[
+  {
+    "id": "borrow_credit_card",
+    "termKey": "borrow_cards.glossary.borrow_credit_card.term",
+    "defKey": "borrow_cards.glossary.borrow_credit_card.def",
+    "lesson": "lesson_borrow_credit_cards"
+  },
+  {
+    "id": "borrow_min_due",
+    "termKey": "borrow_cards.glossary.borrow_min_due.term",
+    "defKey": "borrow_cards.glossary.borrow_min_due.def",
+    "lesson": "lesson_borrow_credit_cards"
+  },
+  {
+    "id": "borrow_bnpl",
+    "termKey": "borrow_cards.glossary.borrow_bnpl.term",
+    "defKey": "borrow_cards.glossary.borrow_bnpl.def",
+    "lesson": "lesson_borrow_credit_cards"
+  },
+  {
+    "id": "borrow_credit_score",
+    "termKey": "borrow_cards.glossary.borrow_credit_score.term",
+    "defKey": "borrow_cards.glossary.borrow_credit_score.def",
+    "lesson": "lesson_borrow_credit_cards"
+  },
+  {
+    "id": "borrow_scholarship",
+    "termKey": "borrow_cards.glossary.borrow_scholarship.term",
+    "defKey": "borrow_cards.glossary.borrow_scholarship.def",
+    "lesson": "lesson_borrow_credit_cards"
+  }
+]
