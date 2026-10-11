@@ -67,10 +67,10 @@ export function MissionPanel({ state }: { state: RunState }) {
   return (
     <div className="space-y-6">
       {toast && (
-        <div role="status" className="flex animate-banner-in items-center gap-3 rounded-lg border border-brand bg-brand/15 p-3 text-sm">
+        <div role="status" className="flex animate-banner-in items-center gap-3 rounded-lg border border-brand bg-brand/15 p-3.5 text-base">
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand text-brand-ink"><Icon name="check" className="h-4 w-4" /></span>
           <span>
-            <span className="block text-xs font-bold uppercase tracking-wider text-brand">{t('safe.ui.taskComplete')}</span>
+            <span className="block text-sm font-bold uppercase tracking-wider text-brand">{t('safe.ui.taskComplete')}</span>
             <span className="text-ink">{toast}</span>
           </span>
         </div>
@@ -95,18 +95,18 @@ export function MissionPanel({ state }: { state: RunState }) {
 
       {needing.length > 0 && (
         <div className="rounded-xl border border-line bg-surface p-4">
-          <div className="mb-1.5 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted">
+          <div className="mb-2 flex items-center justify-between text-sm font-bold uppercase tracking-wider text-muted">
             <span>{t('safe.ui.progressInbox')}</span>
             <span className="font-mono">{answered}/{needing.length}</span>
           </div>
           <ProgressBar value={answered / needing.length} />
-          {script.simulator === 'inbox' && <p className="mt-2 text-xs text-muted">{t('safe.ui.where')}</p>}
+          {script.simulator === 'inbox' && <p className="mt-2 text-sm text-muted">{t('safe.ui.where')}</p>}
         </div>
       )}
 
       <div>
         <SectionLabel>{t('safe.ui.log')}</SectionLabel>
-        <div className="mt-2 h-44 overflow-y-auto rounded-lg border border-line bg-black/40 p-3 font-mono text-xs leading-relaxed" role="log" aria-live="polite">
+        <div className="mt-2 h-44 overflow-y-auto rounded-lg border border-line bg-black/40 p-3 font-mono text-sm leading-relaxed" role="log" aria-live="polite">
           {lines.length === 0 && <p className="text-muted">$ ...</p>}
           {lines.map(({ e, line }, i) => (
             <p key={i} className={line?.tone}>

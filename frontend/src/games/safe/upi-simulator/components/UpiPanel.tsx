@@ -18,8 +18,8 @@ export function UpiPanel({ chapter, balance }: { chapter: Chapter; balance: numb
       />
       <TaskList tasks={TASKS.map((task, i) => ({ id: task.id, title: t(task.titleKey), hint: t(`safe.upi.hint.${HINTS[task.id]}`), done: i < current }))} />
       <div className="rounded-xl border border-line bg-surface p-4">
-        <p className="text-xs font-bold uppercase tracking-wider text-muted">{t('safe.upi.balance')}</p>
-        <p className="mt-1 text-2xl font-bold tabular-nums text-ink">{rupees(balance)}</p>
+        <p className="text-sm font-bold uppercase tracking-wider text-muted">{t('safe.upi.balance')}</p>
+        <p className="mt-1 text-3xl font-bold tabular-nums text-ink">{rupees(balance)}</p>
       </div>
     </div>
   );
