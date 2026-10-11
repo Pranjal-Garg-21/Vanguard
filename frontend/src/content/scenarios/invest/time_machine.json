@@ -1,0 +1,197 @@
+{
+  "_note": "Time Machine content. Goals fill in the sliders. Insight rules are checked in order and the first match is shown; each must hold ALL its 'when' conditions. They never recommend a mix.",
+  "goals": [
+    {
+      "id": "laptop",
+      "nameKey": "timemachine.goal.laptop",
+      "target": 60000,
+      "years": 2,
+      "initial": 10000,
+      "monthly": 2000
+    },
+    {
+      "id": "shop",
+      "nameKey": "timemachine.goal.shop",
+      "target": 300000,
+      "years": 7,
+      "initial": 20000,
+      "monthly": 2500
+    },
+    {
+      "id": "later",
+      "nameKey": "timemachine.goal.later",
+      "target": 1000000,
+      "years": 20,
+      "initial": 0,
+      "monthly": 2000
+    }
+  ],
+  "rules": [
+    {
+      "id": "short_deadline",
+      "when": {
+        "maxYears": 2,
+        "p5BelowInvested": true
+      },
+      "textKey": "timemachine.insight.short_deadline",
+      "concept": "time_horizon"
+    },
+    {
+      "id": "all_bumpy",
+      "when": {
+        "minBumpy": 80
+      },
+      "textKey": "timemachine.insight.all_bumpy",
+      "concept": "risk_return"
+    },
+    {
+      "id": "steady_and_long",
+      "when": {
+        "minYears": 10,
+        "minSteady": 80
+      },
+      "textKey": "timemachine.insight.steady_and_long",
+      "concept": "inflation"
+    },
+    {
+      "id": "loss_chance",
+      "when": {
+        "minLossChance": 0.15
+      },
+      "textKey": "timemachine.insight.loss_chance",
+      "concept": "risk_return"
+    },
+    {
+      "id": "long_wait",
+      "when": {
+        "minYears": 10
+      },
+      "textKey": "timemachine.insight.long_wait",
+      "concept": "time_horizon",
+      "misconception": "guaranteed_returns_exist"
+    },
+    {
+      "id": "default",
+      "when": {},
+      "textKey": "timemachine.insight.default",
+      "concept": "uncertainty_ranges",
+      "misconception": "guaranteed_returns_exist"
+    }
+  ],
+  "check": {
+    "vars": {
+      "initial": {
+        "value": 10000,
+        "fmt": "rupees"
+      },
+      "monthly": {
+        "value": 2000,
+        "fmt": "rupees"
+      },
+      "yrs": {
+        "value": 2
+      }
+    },
+    "calcs": [
+      {
+        "id": "months",
+        "fn": "mul",
+        "args": [
+          "$yrs",
+          12
+        ]
+      },
+      {
+        "id": "added",
+        "fn": "mul",
+        "args": [
+          "$monthly",
+          "$months"
+        ],
+        "fmt": "rupees"
+      },
+      {
+        "id": "put",
+        "fn": "add",
+        "args": [
+          "$initial",
+          "$added"
+        ],
+        "fmt": "rupees"
+      }
+    ],
+    "questions": [
+      {
+        "id": "g1",
+        "kind": "number",
+        "promptKey": "timemachine.check.g1.prompt",
+        "concept": "uncertainty_ranges",
+        "points": 15,
+        "hintKey": "timemachine.check.g1.hint",
+        "explainKey": "timemachine.check.g1.explain",
+        "answer": "put",
+        "unit": "rupees"
+      },
+      {
+        "id": "g2",
+        "kind": "choice",
+        "promptKey": "timemachine.check.g2.prompt",
+        "concept": "uncertainty_ranges",
+        "points": 15,
+        "hintKey": "timemachine.check.g2.hint",
+        "explainKey": "timemachine.check.g2.explain",
+        "options": [
+          {
+            "id": "a",
+            "textKey": "timemachine.check.g2.opt.a"
+          },
+          {
+            "id": "b",
+            "textKey": "timemachine.check.g2.opt.b"
+          },
+          {
+            "id": "c",
+            "textKey": "timemachine.check.g2.opt.c",
+            "misconception": "guaranteed_returns_exist",
+            "feedbackKey": "timemachine.check.g2.fb.c"
+          },
+          {
+            "id": "d",
+            "textKey": "timemachine.check.g2.opt.d"
+          }
+        ],
+        "correct": "a"
+      },
+      {
+        "id": "g3",
+        "kind": "choice",
+        "promptKey": "timemachine.check.g3.prompt",
+        "concept": "time_horizon",
+        "points": 20,
+        "hintKey": "timemachine.check.g3.hint",
+        "explainKey": "timemachine.check.g3.explain",
+        "options": [
+          {
+            "id": "a",
+            "textKey": "timemachine.check.g3.opt.a"
+          },
+          {
+            "id": "b",
+            "textKey": "timemachine.check.g3.opt.b",
+            "misconception": "highest_return_is_best",
+            "feedbackKey": "timemachine.check.g3.fb.b"
+          },
+          {
+            "id": "c",
+            "textKey": "timemachine.check.g3.opt.c"
+          },
+          {
+            "id": "d",
+            "textKey": "timemachine.check.g3.opt.d"
+          }
+        ],
+        "correct": "a"
+      }
+    ]
+  }
+}

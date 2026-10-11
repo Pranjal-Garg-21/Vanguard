@@ -4,14 +4,20 @@
  */
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, useParams } from 'react-router';
-import { ArcadeHub, ArcadeRoute } from '@/features/arcade';
+import { Arcade, ArcadeHub, ArcadeRoute } from '@/features/arcade';
 import { Landing } from '@/features/landing';
 import { BaselineFlow } from '@/features/onboarding';
 import { PaisapurGame } from '@/features/paisapur';
 import { PlayerPicker, SetupFlow, WelcomeScreen } from '@/features/setup';
+import { LearnHub, LessonList, LessonPlayer, PillarLessons } from '@/games/investing/lessons';
+import { InvestOrScam } from '@/games/investing/invest-or-scam';
+import { MutualFund } from '@/games/investing/mutual-fund';
+import { StockMarket } from '@/games/investing/stock-market';
+import { TimeMachine } from '@/games/investing/time-machine';
 import { Spinner } from '@/ui';
 import { DevHome } from './DevHome';
 import { TileInspector } from './TileInspector';
+import { Gallery } from './Gallery';
 import { Dashboard } from '@/features/home';
 import { PhoneLab } from '@/games/safe/phone';
 import { SafeHub } from '@/games/safe/SafeHub';
@@ -28,7 +34,9 @@ function JoinLink() {
 export const router = createBrowserRouter([
   { path: '/', element: <Landing /> },
   { path: '/onboarding', element: <BaselineFlow /> },
-  { path: '/arcade', element: <ArcadeHub /> },
+  { path: '/arcade', element: <Arcade /> },
+  // The older village-styled menu, still opened by the arcade cabinet in town.
+  { path: '/arcade/village', element: <ArcadeHub /> },
   // The Everyday Money section of the Arcade (P3). ArcadeHub links here.
   { path: '/arcade/everyday', element: <ArcadeRoute /> },
   { path: '/play', element: <PaisapurGame /> },
@@ -44,11 +52,23 @@ export const router = createBrowserRouter([
         { path: '/dev', element: <DevHome /> },
         { path: '/dev/tiles', element: <TileInspector /> },
         { path: '/dev/phone', element: <PhoneLab /> },
+        { path: '/gallery', element: <Gallery /> },
       ]
     : []),
   { path: '/safe', element: <SafeHub /> },
   { path: '/safe/:sim', element: <SafeHub /> },
   { path: '/safe/:sim/:entry', element: <SafeHub /> },
+
+  // Investing: a standalone lessons section, not part of the Paisapur story.
+  { path: '/learn', element: <LearnHub /> },
+  { path: '/learn/invest', element: <LessonList /> },
+  { path: '/learn/invest/time-machine', element: <TimeMachine /> },
+  { path: '/learn/invest/stock-market', element: <StockMarket /> },
+  { path: '/learn/invest/mutual-fund', element: <MutualFund /> },
+  { path: '/learn/invest/invest-or-scam', element: <InvestOrScam /> },
+  { path: '/learn/invest/:lessonId', element: <LessonPlayer /> },
+  { path: '/learn/:pillar', element: <PillarLessons /> },
+  { path: '/learn/:pillar/:lessonId', element: <LessonPlayer /> },
   {
     path: '/facilitator/*',
     element: (

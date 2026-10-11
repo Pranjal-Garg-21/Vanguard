@@ -1,0 +1,86 @@
+{
+  "title": "Cash when you need it",
+  "blurb": "How fast, and at what cost, things turn back into cash, and why growth is not the only thing to compare.",
+
+  "t1.title": "Turning things into cash",
+  "t1.hook": "Dev needs cash within a week for a sudden repair bill. Your mission: find out how quickly his money can become cash.",
+  "t1.define": "**Liquidity** is how fast and how cheaply you can turn something into cash.",
+  "t1.analogy": "A bag of rice sells in minutes at the market. A house can take weeks or months to find a buyer.",
+
+  "q1.prompt": "What does liquidity mean?",
+  "q1.opt.a": "How fast and how cheaply you can turn something into cash",
+  "q1.opt.b": "How much something will grow",
+  "q1.opt.c": "How much tax you pay on it",
+  "q1.opt.d": "How old the investment is",
+  "q1.hint": "Think of the rice and the house.",
+  "q1.explain": "Liquidity is about speed and cost of getting cash, not about growth.",
+
+  "q2.prompt": "Which is more liquid?",
+  "q2.opt.a": "Money in the Steady Box, which sells in about a day",
+  "q2.opt.b": "A plot of land, which can take months to sell",
+  "q2.opt.c": "Both are equally liquid",
+  "q2.opt.d": "Neither can ever be sold",
+  "q2.hint": "Which one turns into cash faster?",
+  "q2.explain": "The Steady Box turns into cash in about a day. Land takes far longer.",
+
+  "t2.title": "Check the speed",
+  "t2.define": "Getting cash has two prices: the time it takes, and the cost of selling. Both vary a lot from one asset to another.",
+  "t2.explore": "Open the lab with {amt}. Try each place and compare the days and the cost.",
+
+  "q3.prompt": "In the lab, how many rupees does it cost to sell the Bumpy Ride holding? Type a number in rupees.",
+  "q3.hint": "Read the cost of selling in the lab.",
+  "q3.explain": "Selling costs {bumpySell} of {amt}, which is {bumpyCost}.",
+
+  "q4.prompt": "If Dev sells the property, how much cash lands in his hand? Type a number in rupees.",
+  "q4.hint": "Read the cash in your hand in the lab.",
+  "q4.explain": "Selling property costs {propSell}. Of {amt}, Dev keeps {propGot}.",
+
+  "q5.prompt": "Which of these takes the longest to turn into cash?",
+  "q5.opt.a": "Property",
+  "q5.opt.b": "The Steady Box",
+  "q5.opt.c": "The Bumpy Ride",
+  "q5.opt.d": "Gold",
+  "q5.hint": "Compare the days in the lab.",
+  "q5.explain": "Property takes about three months, far longer than the others.",
+
+  "t3.title": "A deadline test",
+  "t3.hook": "Dev needs {amt} in 10 days. Most of his savings sit in property.",
+  "t3.define": "When you need cash soon, slow and costly choices are the risky ones, even if they might grow well.",
+
+  "q6.prompt": "Can Dev's property deliver the cash in 10 days?",
+  "q6.opt.a": "Probably not, because a property sale takes far longer",
+  "q6.opt.b": "Yes, property always sells in a week",
+  "q6.opt.c": "Yes, because property is the most liquid",
+  "q6.opt.d": "It does not matter how long it takes",
+  "q6.hint": "Check the days for property in the lab.",
+  "q6.explain": "A property sale takes about three months, so 10 days is too short.",
+
+  "q7.prompt": "If Dev held gold instead, selling costs {goldSell}. On {amt}, how many rupees go to that cost? Type a number in rupees.",
+  "q7.hint": "The selling cost rate times the amount.",
+  "q7.explain": "{goldSell} of {amt} is {goldCost}.",
+
+  "t4.title": "Safety, access, growth",
+  "t4.define": "Every asset trades off three things: **safety** (does it hold its value), **access** (how fast you can get cash) and **growth**. None wins all three.",
+  "t4.tradeoff": "The right mix depends on when you will need the money. Cash needed soon wants access. Cash that can wait can lean on growth.",
+
+  "q8.prompt": "Asha says: pick whatever has the highest growth. What is she missing?",
+  "q8.opt.a": "Whether she can get cash when she needs it, and how big the swings are",
+  "q8.opt.b": "Nothing, the highest growth is always best",
+  "q8.opt.c": "Growth does not matter at all",
+  "q8.opt.d": "Only the colour of the logo",
+  "q8.fb.b": "Highest growth often comes with big swings and slow access. It is one thing to compare, not the only thing.",
+  "q8.hint": "Reread the three things every asset trades off.",
+  "q8.explain": "Growth is one of three things. Access and safety matter too.",
+
+  "q9.prompt": "Property in Dev's town rose last year. What can you say?",
+  "q9.opt.a": "It can also stay flat or fall, and it is slow and costly to sell",
+  "q9.opt.b": "Property always rises",
+  "q9.opt.c": "It will fall this year",
+  "q9.opt.d": "It can be sold in a day at no cost",
+  "q9.fb.b": "Property does not always rise. It can stay flat or fall, and selling costs time and money.",
+  "q9.hint": "Think about the days and the cost you saw in the lab.",
+  "q9.explain": "A rise last year promises nothing, and selling property is slow and costly.",
+
+  "glossary.sell_cost.term": "Selling cost",
+  "glossary.sell_cost.def": "What it costs, in rupees, to turn something into cash."
+}

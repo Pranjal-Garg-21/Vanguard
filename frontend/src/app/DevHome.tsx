@@ -53,7 +53,12 @@ export function DevHome() {
         <button className="rounded border border-line-strong px-3 py-2" onClick={async () => { await syncNow({ force: true }); await refresh(); }}>
           Sync now
         </button>
+        <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/learn">Learn: all topics (P4)</Link>
+        <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/learn/invest">Investing ABC (P4)</Link>
+        <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/arcade">Arcade (P4)</Link>
+        <Link className="rounded bg-surface-3 px-3 py-2 text-ink" to="/gallery">Design kit gallery (P4)</Link>
         <button className="rounded border border-line-strong px-3 py-2 disabled:opacity-50" disabled={!profile} onClick={logTestEvent}>
+
           Log test event
         </button>
       </nav>

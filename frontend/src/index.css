@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* Design tokens are added here by P4 (src/ui). */
 
@@ -94,7 +95,7 @@ body {
 
   /* Text */
   --color-ink-soft: #c3cbdc;
-  --color-muted: #8b95ad;
+  --color-muted: #9aa5bd;
 
   /* Accent: THM lime, with dark text on top */
   --color-brand: #a3ea2a;
@@ -105,7 +106,7 @@ body {
   /* Status / difficulty tags */
   --color-good: #a3ea2a;
   --color-warn: #ffb72b;
-  --color-bad: #ff5468;
+  --color-bad: #ff6a7b;
   --color-info: #3dc8f5;
   --color-xp: #b57cff;
 
@@ -135,6 +136,52 @@ body {
 
 @utility theme-dark {
   --color-ink: #f4f6fa;
+}
+
+/*
+ * shadcn semantic tokens. They point at the palette above, so the theme still changes in one place. Components in
+ * src/components/ui use these names (bg-primary, text-foreground, border-border...); the older names (bg-brand,
+ * text-ink...) keep working. Note: shadcn's "muted" background is not mapped, because text-muted is already the muted
+ * text colour here; use bg-surface-3 for a muted background.
+ */
+:root {
+  --background: var(--color-bg);
+  --foreground: var(--color-ink);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-brand);
+  --primary-foreground: var(--color-brand-ink);
+  --secondary: var(--color-surface-2);
+  --secondary-foreground: var(--color-ink);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-surface-2);
+  --accent-foreground: var(--color-ink);
+  --destructive: var(--color-bad);
+  --border: var(--color-line);
+  --input: var(--color-line-strong);
+  --ring: var(--color-brand);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 }
 
 @layer base {
@@ -616,4 +663,36 @@ html[data-large-text='true'] {
   0% { transform: translate(0, 0) rotate(0); opacity: 1; }
   45% { transform: translate(calc(var(--dx) * 0.75), var(--dy1)) rotate(calc(var(--rot) * 0.5)); opacity: 1; }
   100% { transform: translate(var(--dx), var(--dy2)) rotate(var(--rot)); opacity: 0; }
+}
+
+/* Feedback in the games: a value that just changed glows briefly, and a new coach message slides in. */
+@keyframes flash-change {
+  from {
+    background-color: color-mix(in srgb, var(--color-brand) 40%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+@keyframes coach-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.flash-change {
+  animation: flash-change 1s ease-out;
+}
+.coach-in {
+  animation: coach-in 250ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flash-change,
+  .coach-in {
+    animation: none;
+  }
 }

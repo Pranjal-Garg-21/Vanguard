@@ -1,12 +1,11 @@
 /**
  * Time Machine (S5): goal, deadline, 500 futures.
- * Use case: UC-INV-04 · Owner: P4
+ * Use case: UC-INV-04 · Owner: P4 · Route: /learn/invest/time-machine
  *
- * Folder shape (copy from games/example):
- *   index.ts      export the MiniGame and add it to games/registry.ts
- *   <Name>.tsx    top-level component
- *   components/   screens used only by this game
- *   logic/        pure logic + tests (no React, no platform)
+ *   TimeMachine.tsx   the screen
+ *   logic/            pure logic + tests (mix sliders, insight rules, the run)
+ *
+ * Not yet a registered MiniGame: that waits for P2's runner. Until then the screen runs standalone.
  */
 
-export {};
+export { TimeMachine } from './TimeMachine';

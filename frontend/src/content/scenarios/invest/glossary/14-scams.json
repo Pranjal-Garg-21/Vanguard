@@ -1,0 +1,6 @@
+[
+  { "id": "red_flag", "termKey": "invest_scams.glossary.red_flag.term", "defKey": "invest_scams.glossary.red_flag.def", "lesson": "lesson_scams" },
+  { "id": "pyramid_scheme", "termKey": "invest_scams.glossary.pyramid_scheme.term", "defKey": "invest_scams.glossary.pyramid_scheme.def", "lesson": "lesson_scams" },
+  { "id": "regulator", "termKey": "invest_scams.glossary.regulator.term", "defKey": "invest_scams.glossary.regulator.def", "lesson": "lesson_scams" },
+  { "id": "speculation", "termKey": "invest_scams.glossary.speculation.term", "defKey": "invest_scams.glossary.speculation.def", "lesson": "lesson_scams" }
+]

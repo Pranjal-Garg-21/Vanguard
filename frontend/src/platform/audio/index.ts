@@ -68,6 +68,15 @@ export function setSpeechEngine(next: SpeechEngine | null): void {
 }
 
 /**
+ * True when there is any way to read text aloud. A screen can hide its speaker
+ * button rather than show a dead one; a missing voice for one language is a
+ * different thing, and is reported through onAudioNotice instead.
+ */
+export function canSpeak(): boolean {
+  return speech() !== null;
+}
+
+/**
  * The voice list arrives asynchronously on most browsers, and is empty on the
  * first call after a cold start.
  */

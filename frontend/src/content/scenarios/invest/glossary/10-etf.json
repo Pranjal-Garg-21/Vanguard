@@ -1,0 +1,5 @@
+[
+  { "id": "etf", "termKey": "invest_etf.glossary.etf.term", "defKey": "invest_etf.glossary.etf.def", "lesson": "lesson_etf" },
+  { "id": "index", "termKey": "invest_etf.glossary.index.term", "defKey": "invest_etf.glossary.index.def", "lesson": "lesson_etf" },
+  { "id": "trading_cost", "termKey": "invest_etf.glossary.trading_cost.term", "defKey": "invest_etf.glossary.trading_cost.def", "lesson": "lesson_etf" }
+]

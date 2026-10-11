@@ -1,0 +1,11 @@
+{
+  "_note": "Concept and misconception IDs used by the borrow lessons. 'existing' are in Implementation.md section 11 / concepts.json; 'proposed' must be reviewed and merged by P2.",
+  "concepts": {
+    "existing": [],
+    "proposed": []
+  },
+  "misconceptions": {
+    "existing": [],
+    "proposed": []
+  }
+}

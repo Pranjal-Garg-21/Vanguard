@@ -135,7 +135,7 @@ export function EverydayArcade({
           </button>
         )}
         <h1>{t('arcade.everyday.title')}</h1>
-        <p>{t('arcade.everyday.blurb')}</p>
+        <p>{t('arcade.everyday.intro')}</p>
       </header>
 
       <fieldset className="arcade__levels">

@@ -1,0 +1,11 @@
+{
+  "_note": "The Investing page's games. 'requires' lists the rooms (lesson ids) to do first, per the plan: rooms 1-3 before Chai Price and the Garden, rooms 4-6 before the Stock Market and Mutual Fund, risk and spreading before the Time Machine. A student can always 'play anyway' (the plan lets lessons be skipped).",
+  "games": [
+    { "id": "game_chai_price", "route": "/learn/invest/game_chai_price", "kind": "room", "titleKey": "invest_chai.title", "hintKey": "invest_chai.blurb", "requires": ["lesson_inflation"] },
+    { "id": "game_garden", "route": "/learn/invest/game_garden", "kind": "room", "titleKey": "invest_garden.title", "hintKey": "invest_garden.blurb", "requires": ["lesson_interest"] },
+    { "id": "stock-market", "route": "/learn/invest/stock-market", "kind": "page", "titleKey": "stockmarket.title", "hintKey": "stockmarket.open.hint", "requires": ["lesson_lending", "lesson_bonds", "lesson_stocks"] },
+    { "id": "time-machine", "route": "/learn/invest/time-machine", "kind": "page", "titleKey": "timemachine.title", "hintKey": "timemachine.open.hint", "requires": ["lesson_risk", "lesson_diversification"] },
+    { "id": "mutual-fund", "route": "/learn/invest/mutual-fund", "kind": "page", "titleKey": "mutualfund.title", "hintKey": "mutualfund.open.hint", "requires": ["lesson_stocks", "lesson_funds"] },
+    { "id": "invest-or-scam", "route": "/learn/invest/invest-or-scam", "kind": "page", "titleKey": "scamsort.title", "hintKey": "scamsort.open.hint", "requires": [] }
+  ]
+}

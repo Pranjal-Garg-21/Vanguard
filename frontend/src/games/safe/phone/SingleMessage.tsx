@@ -27,7 +27,7 @@ export function SingleMessage({ script, mode = 'lifepath', timersOff = false, on
     <div className="mx-auto w-full max-w-sm space-y-3">
       <div className="flex items-center justify-between">
         <p className="font-mono text-xs text-muted">{t('safe.ui.simulated')}</p>
-        <Button variant={lensOn ? 'primary' : 'secondary'} className="!min-h-9 text-sm" aria-pressed={lensOn} onClick={() => setLensOn((v) => !v)}>
+        <Button variant={lensOn ? 'default' : 'secondary'} className="!min-h-9 text-sm" aria-pressed={lensOn} onClick={() => setLensOn((v) => !v)}>
           <Icon name="search" className="h-4 w-4" /> {t('safe.ui.lens')}
         </Button>
       </div>

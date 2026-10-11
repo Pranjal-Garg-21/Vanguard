@@ -1,0 +1,8 @@
+[
+  { "id": "mutual_fund", "termKey": "invest_funds.glossary.mutual_fund.term", "defKey": "invest_funds.glossary.mutual_fund.def", "lesson": "lesson_funds" },
+  { "id": "nav", "termKey": "invest_funds.glossary.nav.term", "defKey": "invest_funds.glossary.nav.def", "lesson": "lesson_funds" },
+  { "id": "unit", "termKey": "invest_funds.glossary.unit.term", "defKey": "invest_funds.glossary.unit.def", "lesson": "lesson_funds" },
+  { "id": "sip", "termKey": "invest_funds.glossary.sip.term", "defKey": "invest_funds.glossary.sip.def", "lesson": "lesson_funds" },
+  { "id": "expense_ratio", "termKey": "invest_funds.glossary.expense_ratio.term", "defKey": "invest_funds.glossary.expense_ratio.def", "lesson": "lesson_funds" },
+  { "id": "index_fund", "termKey": "invest_funds.glossary.index_fund.term", "defKey": "invest_funds.glossary.index_fund.def", "lesson": "lesson_funds" }
+]

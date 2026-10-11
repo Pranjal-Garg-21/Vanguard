@@ -1,0 +1,205 @@
+{
+  "id": "lesson_etf",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 10,
+  "estMinutes": 12,
+  "difficulty": "medium",
+  "titleKey": "invest_etf.title",
+  "blurbKey": "invest_etf.blurb",
+  "concepts": ["etf", "index_investing", "fees_cost", "pooled_funds"],
+  "misconceptions": ["etf_means_no_risk", "guaranteed_returns_exist"],
+  "vars": {
+    "amt": { "value": 10000, "fmt": "rupees" },
+    "nav": { "value": 101, "fmt": "rupees" },
+    "p1": { "value": 99, "fmt": "rupees" },
+    "p2": { "value": 100, "fmt": "rupees" },
+    "p3": { "value": 102, "fmt": "rupees" },
+    "cost": { "value": 0.001, "fmt": "percent", "round": 1 },
+    "buys": { "value": 12 },
+    "perBuy": { "value": 1000, "fmt": "rupees" }
+  },
+  "calcs": [
+    { "id": "etfUnits1", "fn": "unitsBought", "args": ["$amt", "$p1"], "fmt": "number", "round": 2 },
+    { "id": "fundUnits", "fn": "unitsBought", "args": ["$amt", "$nav"], "fmt": "number", "round": 2 },
+    { "id": "etfFee", "fn": "tradeFee", "args": ["$amt", "$cost"], "fmt": "rupees" },
+    { "id": "oneCost", "fn": "tradeFee", "args": ["$perBuy", "$cost"], "fmt": "rupees" },
+    { "id": "planCost", "fn": "mul", "args": ["$buys", "$oneCost"], "fmt": "rupees" }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_etf.t1.title",
+      "blocks": [
+        { "type": "hook", "visual": "thali", "textKey": "invest_etf.t1.hook" },
+        { "type": "define", "textKey": "invest_etf.t1.define" },
+        { "type": "analogy", "visual": "thali", "textKey": "invest_etf.t1.analogy" }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_etf.q1.prompt",
+          "concept": "etf",
+          "points": 10,
+          "hintKey": "invest_etf.q1.hint",
+          "explainKey": "invest_etf.q1.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_etf.q1.opt.a" },
+            { "id": "b", "textKey": "invest_etf.q1.opt.b" },
+            { "id": "c", "textKey": "invest_etf.q1.opt.c", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_etf.q1.fb.c" },
+            { "id": "d", "textKey": "invest_etf.q1.opt.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "invest_etf.q2.prompt",
+          "concept": "etf",
+          "points": 10,
+          "hintKey": "invest_etf.q2.hint",
+          "explainKey": "invest_etf.q2.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_etf.q2.opt.a" },
+            { "id": "b", "textKey": "invest_etf.q2.opt.b" },
+            { "id": "c", "textKey": "invest_etf.q2.opt.c", "misconception": "etf_means_no_risk", "feedbackKey": "invest_etf.q2.fb.c" },
+            { "id": "d", "textKey": "invest_etf.q2.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_etf.t2.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_etf.t2.define" },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "etf_buy",
+            "promptKey": "invest_etf.t2.explore",
+            "params": { "amount": "$amt", "nav": "$nav", "p1": "$p1", "p2": "$p2", "p3": "$p3", "cost": "$cost" }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_etf.q3.prompt",
+          "concept": "etf",
+          "points": 15,
+          "hintKey": "invest_etf.q3.hint",
+          "explainKey": "invest_etf.q3.explain",
+          "answer": "etfUnits1",
+          "unit": "number"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "invest_etf.q4.prompt",
+          "concept": "pooled_funds",
+          "points": 15,
+          "hintKey": "invest_etf.q4.hint",
+          "explainKey": "invest_etf.q4.explain",
+          "answer": "fundUnits",
+          "unit": "number"
+        },
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "invest_etf.q5.prompt",
+          "concept": "fees_cost",
+          "points": 15,
+          "hintKey": "invest_etf.q5.hint",
+          "explainKey": "invest_etf.q5.explain",
+          "answer": "etfFee",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_etf.t3.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_etf.t3.define" },
+        { "type": "note", "textKey": "invest_etf.t3.note" }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "invest_etf.q6.prompt",
+          "concept": "etf",
+          "points": 15,
+          "hintKey": "invest_etf.q6.hint",
+          "explainKey": "invest_etf.q6.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_etf.q6.opt.a" },
+            { "id": "b", "textKey": "invest_etf.q6.opt.b", "misconception": "etf_means_no_risk", "feedbackKey": "invest_etf.q6.fb.b" },
+            { "id": "c", "textKey": "invest_etf.q6.opt.c" },
+            { "id": "d", "textKey": "invest_etf.q6.opt.d", "misconception": "guaranteed_returns_exist", "feedbackKey": "invest_etf.q6.fb.d" }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "invest_etf.q7.prompt",
+          "concept": "index_investing",
+          "points": 10,
+          "hintKey": "invest_etf.q7.hint",
+          "explainKey": "invest_etf.q7.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_etf.q7.opt.a" },
+            { "id": "b", "textKey": "invest_etf.q7.opt.b" },
+            { "id": "c", "textKey": "invest_etf.q7.opt.c" },
+            { "id": "d", "textKey": "invest_etf.q7.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_etf.t4.title",
+      "blocks": [
+        { "type": "define", "textKey": "invest_etf.t4.define" },
+        { "type": "tradeoff", "textKey": "invest_etf.t4.tradeoff" },
+        { "type": "jargon", "terms": ["etf", "index", "trading_cost"] }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "invest_etf.q8.prompt",
+          "concept": "fees_cost",
+          "points": 15,
+          "hintKey": "invest_etf.q8.hint",
+          "explainKey": "invest_etf.q8.explain",
+          "answer": "planCost",
+          "unit": "rupees"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "invest_etf.q9.prompt",
+          "concept": "etf",
+          "points": 10,
+          "hintKey": "invest_etf.q9.hint",
+          "explainKey": "invest_etf.q9.explain",
+          "options": [
+            { "id": "a", "textKey": "invest_etf.q9.opt.a" },
+            { "id": "b", "textKey": "invest_etf.q9.opt.b" },
+            { "id": "c", "textKey": "invest_etf.q9.opt.c" },
+            { "id": "d", "textKey": "invest_etf.q9.opt.d" }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": ["etf", "index", "trading_cost"]
+}

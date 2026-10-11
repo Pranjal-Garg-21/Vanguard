@@ -1,0 +1,698 @@
+{
+  "id": "lesson_interest",
+  "kind": "room",
+  "pillar": "invest",
+  "order": 2,
+  "estMinutes": 10,
+  "difficulty": "easy",
+  "titleKey": "invest_interest.title",
+  "blurbKey": "invest_interest.blurb",
+  "concepts": [
+    "interest_simple",
+    "interest_compound",
+    "simple_vs_compound",
+    "start_early"
+  ],
+  "misconceptions": [
+    "interest_always_simple",
+    "late_start_is_fine"
+  ],
+  "vars": {
+    "P": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "r": {
+      "value": 0.08,
+      "fmt": "percent"
+    },
+    "y3": {
+      "value": 3
+    },
+    "sP": {
+      "value": 5000,
+      "fmt": "rupees"
+    },
+    "sr": {
+      "value": 0.06,
+      "fmt": "percent"
+    },
+    "sy": {
+      "value": 3
+    },
+    "lp": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "lr": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "ly": {
+      "value": 2
+    },
+    "labStart": {
+      "value": 10
+    },
+    "labRate": {
+      "value": 0.12,
+      "fmt": "percent"
+    },
+    "labYears": {
+      "value": 30
+    },
+    "r4": {
+      "value": 0.04,
+      "fmt": "percent"
+    },
+    "rate9": {
+      "value": 0.09,
+      "fmt": "percent"
+    },
+    "d6": {
+      "value": 6
+    },
+    "m": {
+      "value": 500,
+      "fmt": "rupees"
+    },
+    "sipRate": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "a1": {
+      "value": 18
+    },
+    "a2": {
+      "value": 28
+    },
+    "stop": {
+      "value": 58
+    }
+  },
+  "calcs": [
+    {
+      "id": "yr1",
+      "fn": "simpleInterest",
+      "args": [
+        "$P",
+        "$r",
+        1
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "yr3",
+      "fn": "simpleInterest",
+      "args": [
+        "$P",
+        "$r",
+        "$y3"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "tot3",
+      "fn": "simpleAmount",
+      "args": [
+        "$P",
+        "$r",
+        "$y3"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "c1",
+      "fn": "compoundAmount",
+      "args": [
+        "$P",
+        "$r",
+        1
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "c2",
+      "fn": "compoundAmount",
+      "args": [
+        "$P",
+        "$r",
+        2
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "c3",
+      "fn": "compoundAmount",
+      "args": [
+        "$P",
+        "$r",
+        "$y3"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "extra3",
+      "fn": "sub",
+      "args": [
+        "$c3",
+        "$tot3"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "i1",
+      "fn": "simpleInterest",
+      "args": [
+        "$sP",
+        "$sr",
+        1
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "i3",
+      "fn": "simpleInterest",
+      "args": [
+        "$sP",
+        "$sr",
+        "$sy"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "cq5a",
+      "fn": "compoundAmount",
+      "args": [
+        "$lp",
+        "$lr",
+        1
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "cq5",
+      "fn": "compoundAmount",
+      "args": [
+        "$lp",
+        "$lr",
+        "$ly"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labAnswer",
+      "fn": "compoundAmount",
+      "args": [
+        "$P",
+        "$labRate",
+        "$labYears"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labSimple",
+      "fn": "simpleAmount",
+      "args": [
+        "$P",
+        "$labRate",
+        "$labYears"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "r4n",
+      "fn": "mul",
+      "args": [
+        "$r4",
+        100
+      ]
+    },
+    {
+      "id": "d4",
+      "fn": "ruleOf72",
+      "args": [
+        "$r4n"
+      ],
+      "round": 0
+    },
+    {
+      "id": "r9n",
+      "fn": "mul",
+      "args": [
+        "$rate9",
+        100
+      ]
+    },
+    {
+      "id": "ans8",
+      "fn": "ruleOf72",
+      "args": [
+        "$r9n"
+      ],
+      "round": 0
+    },
+    {
+      "id": "ans9",
+      "fn": "div",
+      "args": [
+        72,
+        "$d6"
+      ],
+      "round": 0
+    },
+    {
+      "id": "yE",
+      "fn": "sub",
+      "args": [
+        "$stop",
+        "$a1"
+      ]
+    },
+    {
+      "id": "yL",
+      "fn": "sub",
+      "args": [
+        "$stop",
+        "$a2"
+      ]
+    },
+    {
+      "id": "mE",
+      "fn": "mul",
+      "args": [
+        "$yE",
+        12
+      ]
+    },
+    {
+      "id": "mL",
+      "fn": "mul",
+      "args": [
+        "$yL",
+        12
+      ]
+    },
+    {
+      "id": "early",
+      "fn": "futureValueMonthly",
+      "args": [
+        "$m",
+        "$sipRate",
+        "$mE"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "late",
+      "fn": "futureValueMonthly",
+      "args": [
+        "$m",
+        "$sipRate",
+        "$mL"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "gap",
+      "fn": "sub",
+      "args": [
+        "$a2",
+        "$a1"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "invest_interest.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "piggy_bank",
+          "textKey": "invest_interest.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_interest.t1.define"
+        },
+        {
+          "type": "note",
+          "textKey": "invest_interest.t1.example"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "invest_interest.q1.prompt",
+          "concept": "interest_simple",
+          "points": 10,
+          "hintKey": "invest_interest.q1.hint",
+          "explainKey": "invest_interest.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "invest_interest.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_interest.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_interest.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_interest.q1.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "invest_interest.q2.prompt",
+          "concept": "interest_simple",
+          "points": 10,
+          "hintKey": "invest_interest.q2.hint",
+          "explainKey": "invest_interest.q2.explain",
+          "answer": "i1",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "invest_interest.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "invest_interest.t2.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "invest_interest.t2.steps.1",
+            "invest_interest.t2.steps.2",
+            "invest_interest.t2.steps.3"
+          ]
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_interest.t2.formula"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "invest_interest.q3.prompt",
+          "concept": "interest_simple",
+          "points": 10,
+          "hintKey": "invest_interest.q3.hint",
+          "explainKey": "invest_interest.q3.explain",
+          "answer": "i3",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "invest_interest.q4.prompt",
+          "concept": "interest_simple",
+          "points": 10,
+          "hintKey": "invest_interest.q4.hint",
+          "explainKey": "invest_interest.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "invest_interest.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_interest.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_interest.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_interest.q4.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "invest_interest.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "invest_interest.t3.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "mango_trees",
+          "textKey": "invest_interest.t3.analogy"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "invest_interest.t3.steps.1",
+            "invest_interest.t3.steps.2",
+            "invest_interest.t3.steps.3",
+            "invest_interest.t3.steps.4"
+          ]
+        },
+        {
+          "type": "formula",
+          "textKey": "invest_interest.t3.formula"
+        },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "simple_vs_compound",
+            "promptKey": "invest_interest.t3.explore",
+            "params": {
+              "principal": "$P",
+              "rate": "$r",
+              "years": "$labStart"
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "invest_interest.q5.prompt",
+          "concept": "interest_compound",
+          "points": 10,
+          "hintKey": "invest_interest.q5.hint",
+          "explainKey": "invest_interest.q5.explain",
+          "answer": "cq5",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "invest_interest.q6.prompt",
+          "concept": "interest_compound",
+          "points": 10,
+          "hintKey": "invest_interest.q6.hint",
+          "explainKey": "invest_interest.q6.explain",
+          "answer": "labAnswer",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "invest_interest.q7.prompt",
+          "concept": "simple_vs_compound",
+          "points": 10,
+          "hintKey": "invest_interest.q7.hint",
+          "explainKey": "invest_interest.q7.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "invest_interest.q7.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_interest.q7.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_interest.q7.opt.c",
+              "misconception": "interest_always_simple",
+              "feedbackKey": "invest_interest.q7.fb.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_interest.q7.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "invest_interest.t4.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "invest_interest.t4.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "invest_interest.t4.steps.1",
+            "invest_interest.t4.steps.2",
+            "invest_interest.t4.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "invest_interest.q8.prompt",
+          "concept": "interest_compound",
+          "points": 10,
+          "hintKey": "invest_interest.q8.hint",
+          "explainKey": "invest_interest.q8.explain",
+          "answer": "ans8",
+          "unit": "number"
+        },
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "invest_interest.q9.prompt",
+          "concept": "interest_compound",
+          "points": 10,
+          "hintKey": "invest_interest.q9.hint",
+          "explainKey": "invest_interest.q9.explain",
+          "answer": "ans9",
+          "unit": "number"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "invest_interest.t5.title",
+      "blocks": [
+        {
+          "type": "note",
+          "textKey": "invest_interest.t5.story"
+        },
+        {
+          "type": "define",
+          "textKey": "invest_interest.t5.define"
+        },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "start_early",
+            "promptKey": "invest_interest.t5.explore",
+            "params": {
+              "monthly": "$m",
+              "rate": "$sipRate",
+              "startAge": "$a2",
+              "stopAge": "$stop"
+            }
+          }
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "late_start_is_fine"
+          ],
+          "textKey": "invest_interest.t5.mistake"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "interest",
+            "principal",
+            "simple_interest",
+            "compound_interest",
+            "rate",
+            "rule_of_72"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "invest_interest.q10.prompt",
+          "concept": "start_early",
+          "points": 10,
+          "hintKey": "invest_interest.q10.hint",
+          "explainKey": "invest_interest.q10.explain",
+          "answer": "early",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q11",
+          "kind": "number",
+          "promptKey": "invest_interest.q11.prompt",
+          "concept": "start_early",
+          "points": 10,
+          "hintKey": "invest_interest.q11.hint",
+          "explainKey": "invest_interest.q11.explain",
+          "answer": "late",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q12",
+          "kind": "choice",
+          "promptKey": "invest_interest.q12.prompt",
+          "concept": "start_early",
+          "points": 10,
+          "hintKey": "invest_interest.q12.hint",
+          "explainKey": "invest_interest.q12.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "invest_interest.q12.opt.a",
+              "misconception": "late_start_is_fine",
+              "feedbackKey": "invest_interest.q12.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "invest_interest.q12.opt.b",
+              "misconception": "late_start_is_fine",
+              "feedbackKey": "invest_interest.q12.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "invest_interest.q12.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "invest_interest.q12.opt.d"
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "interest",
+    "principal",
+    "simple_interest",
+    "compound_interest",
+    "rate",
+    "rule_of_72"
+  ]
+}

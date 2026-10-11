@@ -1,0 +1,6 @@
+[
+  { "id": "commodity", "termKey": "invest_gold.glossary.commodity.term", "defKey": "invest_gold.glossary.commodity.def", "lesson": "lesson_gold" },
+  { "id": "commodity_exchange", "termKey": "invest_gold.glossary.commodity_exchange.term", "defKey": "invest_gold.glossary.commodity_exchange.def", "lesson": "lesson_gold" },
+  { "id": "making_charge", "termKey": "invest_gold.glossary.making_charge.term", "defKey": "invest_gold.glossary.making_charge.def", "lesson": "lesson_gold" },
+  { "id": "purity", "termKey": "invest_gold.glossary.purity.term", "defKey": "invest_gold.glossary.purity.def", "lesson": "lesson_gold" }
+]

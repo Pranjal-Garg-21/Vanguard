@@ -251,10 +251,33 @@ const scenarioFiles = walk(join(APP, 'content/scenarios'), (f) => f.endsWith('.j
 // its own. Its text keys are still checked.
 const isPool = (file) => rel(file).split(/[\\/]/).includes('pools');
 
+/**
+ * Not every JSON file under content/scenarios is a script a verb plays. A
+ * pillar may keep its own concept registry, a section manifest, or the
+ * configuration a whole simulator runs on (the market's companies, a fund's
+ * NAV path). Those have no id and no cards, and checking them as scripts only
+ * produces noise. Their text keys are still collected.
+ */
+const SCRIPT_FIELDS = ['id', 'verb', 'cards', 'steps', 'module', 'items', 'jars'];
+const isScenario = (data) =>
+  !Array.isArray(data) && typeof data === 'object' && SCRIPT_FIELDS.some((field) => data[field] !== undefined);
+
+/**
+ * The bucket and card rules below describe P3's two-bucket Triage. Other verbs
+ * sort differently — Invest, Gamble or Scam? has three buckets named as plain
+ * strings and answers in `answer` — so they are checked by their own owner.
+ */
+const isTriage = (data) => Array.isArray(data.buckets) && data.buckets.every((b) => b && typeof b === 'object');
+
 for (const file of scenarioFiles) {
   const where = rel(file);
   const scenario = readJson(file);
   if (!scenario) continue;
+
+  if (!isScenario(scenario)) {
+    collectKeys(scenario, where);
+    continue;
+  }
 
   if (!scenario.id && !isPool(file)) err(where, 'missing "id"');
   // The folder under content/scenarios is the pillar, so a file only needs the
@@ -275,13 +298,13 @@ for (const file of scenarioFiles) {
 
   // A bucket needs an id and a labelKey. Triage renders `labelKey`, so a
   // bucket that only has `textKey` typechecks as content and renders blank.
-  for (const bucket of scenario.buckets ?? []) {
+  for (const bucket of (isTriage(scenario) ? scenario.buckets : [])) {
     if (!bucket.id) err(where, 'a bucket has no id');
     if (!bucket.labelKey) {
       err(where, `bucket "${bucket.id}": needs a labelKey${bucket.textKey ? ' (found textKey)' : ''}`);
     }
   }
-  if (scenario.buckets && scenario.buckets.length !== 2) {
+  if (isTriage(scenario) && scenario.buckets.length !== 2) {
     err(where, `expected exactly 2 buckets, found ${scenario.buckets.length}`);
   }
 
@@ -293,7 +316,7 @@ for (const file of scenarioFiles) {
     }
     if (ids.has(card.id)) err(where, `duplicate card id "${card.id}"`);
     ids.add(card.id);
-    validateCard(card, scenario, where);
+    if (isTriage(scenario)) validateCard(card, scenario, where);
   }
 
   validateEffects(scenario.effects, where, scenario.id);

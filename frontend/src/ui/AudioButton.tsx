@@ -9,7 +9,7 @@
  * everything. A message body is several keys because the Scam Lens points at
  * parts of it, and those parts are not sentences, so they are read as one.
  */
-import { speak, speakKeys, stopSpeaking, t, useSpeaking, type TVars } from '@/platform';
+import { canSpeak, hasAudio, speak, speakKeys, stopSpeaking, t, useSpeaking, type TVars } from '@/platform';
 import { Icon } from './Icon';
 
 type Props = {
@@ -23,12 +23,20 @@ type Props = {
   className?: string;
   /** 'inline' sits next to a heading; 'solid' is a button in its own right. */
   tone?: 'inline' | 'solid';
+  /** Overrides the spoken-aloud name of the button itself. */
+  label?: string;
 };
 
-export function AudioButton({ keys, text, vars, clipKey, className = '', tone = 'inline' }: Props) {
+
+
+export function AudioButton({ keys, text, vars, clipKey, className = '', tone = 'inline', label }: Props) {
   const id = clipKey ?? (keys ? keys.join('|') : (text ?? '').trim());
   const playing = useSpeaking() === id && id !== '';
   if (!id) return null;
+  // A phone with no voice and no recording for this would give a dead button,
+  // which is worse than no button. The no-voice notice covers the case where a
+  // voice exists but not for this language.
+  if (!canSpeak() && !(clipKey && hasAudio(clipKey))) return null;
 
   const press = () => {
     if (playing) {
@@ -48,9 +56,9 @@ export function AudioButton({ keys, text, vars, clipKey, className = '', tone = 
     <button
       type="button"
       onClick={press}
-      aria-label={t(playing ? 'readaloud.stop' : 'readaloud.play')}
+      aria-label={label ?? t(playing ? 'readaloud.stop' : 'readaloud.play')}
       aria-pressed={playing}
-      title={t(playing ? 'readaloud.stop' : 'readaloud.play')}
+      title={label ?? t(playing ? 'readaloud.stop' : 'readaloud.play')}
       className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${look} ${className}`}
     >
       <Icon name={playing ? 'volumeOff' : 'volume'} className={playing ? 'h-5 w-5 animate-pulse' : 'h-5 w-5'} />

@@ -1,6 +1,6 @@
 /** UC-FAC-02: unlock stages and Arcade sections, choose a session focus. */
 import { useEffect, useState } from 'react';
-import { Badge, Card, Notice, Spinner } from '@/ui';
+import { Badge, Card, Alert, Spinner } from '@/ui';
 import { STAGES } from '@/content/stages';
 import { supabaseOrThrow, type ClassRow } from '../data';
 
@@ -57,11 +57,11 @@ export function PlanTab({ cls, onFocusChange }: { cls: ClassRow; onFocusChange: 
 
   return (
     <div className="space-y-5">
-      <Notice tone="info">
+      <Alert variant="info">
         Students follow the LifePath in order. Unlocking a stage opens it in the Arcade and Quick Play for the whole class. Changes reach phones
         at their next sync.
-      </Notice>
-      {error && <Notice tone="bad">{error}</Notice>}
+      </Alert>
+      {error && <Alert variant="bad">{error}</Alert>}
 
       <Card>
         <h2 className="mb-3 font-bold">LifePath stages</h2>
@@ -106,7 +106,7 @@ function ToggleRow({ label, hint, on, onChange }: { label: string; hint?: string
         <span className="font-medium">{label}</span>
         {hint && <span className="block text-xs text-muted">{hint}</span>}
       </span>
-      {on && <Badge tone="good">Unlocked</Badge>}
+      {on && <Badge variant="good">Unlocked</Badge>}
       <button
         type="button"
         role="switch"

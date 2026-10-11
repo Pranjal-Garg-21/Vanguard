@@ -891,7 +891,7 @@
     "o2": "Inspect the app listing with the Scam Lens",
     "o3": "Finish the mission safely",
     "rule": "A genuine lender does not need your contacts or photos. Threats and harassment over a loan are illegal. Report them on 1930.",
-    "i1": "Use only lenders registered with the RBI, and check them on the RBI website.",
+    "i1": "Use only lenders that are registered, and check them on the lending regulator's own website.",
     "i2": "Deny permissions that have nothing to do with a loan.",
     "i3": "If you are harassed, report to 1930 and the cybercrime portal. Do not pay more.",
     "sms": {
@@ -935,7 +935,7 @@
       "nodocs": "A real lender always checks documents. No documents is bait.",
       "link": "A short link to an unknown site is not a safe place to apply.",
       "rating": "Twelve reviews that all sound alike. Reviews can be bought.",
-      "dev": "No registered company or RBI details. This lender is not regulated.",
+      "dev": "No registered company and no licence number. This lender is not regulated.",
       "perms": "A real lender does not need your contacts, photos or messages. These are used for threats later.",
       "fee": "Fees are taken before you receive the money, so you get less than you owe.",
       "repay": "₹12,000 back in 7 days on a ₹6,500 payout is an enormous interest rate."
@@ -944,7 +944,7 @@
       "nodocs": "Skipping documents means there is no real check, which is how these apps hide.",
       "link": "Never apply through a link in a message.",
       "rating": "Few and similar reviews are a warning sign.",
-      "dev": "Check the lender on the RBI list. This one is not registered.",
+      "dev": "Check the lender on the regulator's list. This one is not registered.",
       "perms": "Contacts and photos are used for harassment when you cannot pay.",
       "fee": "The fee reduces your payout while the repayment stays high.",
       "repay": "The repayment is far above what you received."

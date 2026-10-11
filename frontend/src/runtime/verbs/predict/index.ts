@@ -3,4 +3,4 @@
  * Owner: P4
  */
 
-export {};
+export { Predict, type PredictProps, type PredictResult } from './Predict';

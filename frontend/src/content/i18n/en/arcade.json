@@ -1,7 +1,7 @@
 {
   "everyday": {
     "title": "Everyday Money",
-    "blurb": "Banking, budgeting, saving and borrowing. Practise freely — nothing here changes your character's money."
+    "intro": "Banking, budgeting, saving and borrowing. Practise freely — nothing here changes your character's money."
   },
   "difficulty": "Difficulty",
   "level": {
@@ -53,5 +53,22 @@
       "title": "Need or Want?",
       "blurb": "Sort spending into needs and wants — and find out why context changes the answer."
     }
-  }
+  },
+  "title": "Arcade",
+  "subtitle": "Pick a topic and practise it. Games here never change your LifePath character.",
+  "level.easy": "Easy",
+  "level.medium": "Medium",
+  "level.hard": "Hard",
+  "everyday.name": "Everyday Money",
+  "everyday.blurb": "Needs vs wants, jars, goals and surprise months.",
+  "safe.name": "Stay Safe",
+  "safe.blurb": "Spot scams, protect your identity and your accounts.",
+  "investing.name": "Investing",
+  "investing.blurb": "Risk, return and diversification with made-up assets. Lessons first, then games.",
+  "open": "Open",
+  "openAnyway": "Open anyway",
+  "comingSoon": "Coming soon",
+  "lockedReason": "Finish Save & Track (S3) first. You invest from savings, after an emergency fund.",
+  "recommended": "Recommended",
+  "back": "Back to dashboard"
 }
