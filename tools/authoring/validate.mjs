@@ -121,7 +121,7 @@ function loadBundle(locale) {
   for (const file of files) {
     const data = readJson(file);
     if (!data) continue;
-    const namespace = file.split('/').pop().replace('.json', '');
+    const namespace = file.split(/[\\/]/).pop().replace('.json', '');
     flattenInto(namespace, data, file, merged, origin);
   }
   return { keys: merged, files: files.length };
