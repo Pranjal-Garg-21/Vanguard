@@ -14,6 +14,7 @@
 import { useState } from 'react';
 
 import type { Persona } from '@/core/types';
+import { TopNav } from '@/ui';
 import { EverydayArcade } from './EverydayArcade';
 
 type Sample = { id: string; label: string; note: string; persona: Persona };
@@ -75,37 +76,40 @@ export function ArcadeRoute() {
   const sample = SAMPLES[index] ?? SAMPLES[0]!;
 
   return (
-    <div className="mx-auto flex max-w-md flex-col gap-4 p-4">
-      <aside className="flex flex-col gap-2 rounded-xl border border-dashed border-line-strong p-3">
-        <p className="font-mono text-xs uppercase tracking-wide text-muted">
-          Temporary — until the character builder lands
-        </p>
-        <label className="text-xs font-bold uppercase tracking-wide text-muted" htmlFor="sample">
-          Playing as
-        </label>
-        <select
-          id="sample"
-          className="min-h-11 rounded-lg border border-line-strong bg-surface-2 px-3 text-ink"
-          value={index}
-          onChange={(e) => setIndex(Number(e.currentTarget.value))}
-        >
-          {SAMPLES.map((s, i) => (
-            <option key={s.id} value={i}>
-              {s.label}
-            </option>
-          ))}
-        </select>
-        <p className="text-sm text-ink-soft">{sample.note}</p>
-        <button
-          type="button"
-          className="min-h-11 rounded-lg border border-line-strong bg-surface-2 px-4 font-bold text-ink hover:border-brand hover:text-brand"
-          onClick={() => setSeed((s) => s + 1)}
-        >
-          Reshuffle (seed {seed})
-        </button>
-      </aside>
+    <div className="min-h-dvh bg-bg text-ink">
+      <TopNav />
+      <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6">
+        {/* Temporary picker, one row on a wide screen. */}
+        <aside className="flex flex-col gap-3 rounded-xl border border-dashed border-line-strong p-3 lg:flex-row lg:items-end">
+          <div className="flex flex-col gap-1 lg:w-80">
+            <label className="text-xs font-bold uppercase tracking-wide text-muted" htmlFor="sample">
+              Playing as
+            </label>
+            <select
+              id="sample"
+              className="min-h-11 rounded-lg border border-line-strong bg-surface-2 px-3 text-ink"
+              value={index}
+              onChange={(e) => setIndex(Number(e.currentTarget.value))}
+            >
+              {SAMPLES.map((s, i) => (
+                <option key={s.id} value={i}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <p className="flex-1 text-sm text-ink-soft">{sample.note}</p>
+          <button
+            type="button"
+            className="min-h-11 rounded-lg border border-line-strong bg-surface-2 px-4 font-bold text-ink hover:border-brand hover:text-brand"
+            onClick={() => setSeed((s) => s + 1)}
+          >
+            Reshuffle (seed {seed})
+          </button>
+        </aside>
 
-      <EverydayArcade key={`${sample.id}-${seed}`} persona={sample.persona} seed={seed} />
+        <EverydayArcade key={`${sample.id}-${seed}`} persona={sample.persona} seed={seed} />
+      </main>
     </div>
   );
 }

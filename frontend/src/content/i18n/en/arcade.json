@@ -70,5 +70,20 @@
   "comingSoon": "Coming soon",
   "lockedReason": "Finish Save & Track (S3) first. You invest from savings, after an emergency fund.",
   "recommended": "Recommended",
-  "back": "Back to dashboard"
+  "back": "Back to dashboard",
+  "objective": "Your mission",
+  "youPractise": "You will practise",
+  "safeNote": "Practice only. Your character's money is never touched.",
+  "count": "{n} games at this level",
+  "notAtLevel": "Not at this level",
+  "progress": "Games finished",
+  "search": "Find a game by keyword...",
+  "status": "Status",
+  "status_all": "All",
+  "status_todo": "To do",
+  "status_done": "Done",
+  "allGames": "All games",
+  "noMatch": "No game matches that. Try another word.",
+  "playAgain": "Play again",
+  "coinsLabel": "A stack of coins"
 }
