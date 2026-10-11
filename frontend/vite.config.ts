@@ -45,6 +45,9 @@ export default defineConfig({
           // time a language is chosen (src/app/fonts.ts) and kept from then on.
           '**/noto-*.woff2',
           '**/noto-*.woff',
+          // The same for the strings themselves: four bundles are about 2.9 MB
+          // of JSON, and a student reads in one language.
+          '**/lang-*.js',
         ],
         runtimeCaching: [
           {
@@ -56,6 +59,12 @@ export default defineConfig({
             urlPattern: ({ url }: { url: URL }) => /\/assets\/noto-.*\.woff2?$/.test(url.pathname),
             handler: 'CacheFirst',
             options: { cacheName: 'script-fonts', expiration: { maxEntries: 12 } },
+          },
+          {
+            // A language pack, kept once downloaded so the phone can go offline in it.
+            urlPattern: ({ url }: { url: URL }) => /\/assets\/lang-(te|hi|ur)-.*\.js$/.test(url.pathname),
+            handler: 'CacheFirst',
+            options: { cacheName: 'language-packs', expiration: { maxEntries: 200 } },
           },
           {
             // Spoken text (see src/platform/audio). Downloaded per language,
@@ -72,6 +81,23 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rolldownOptions: {
+      output: {
+        /**
+         * A language pack's chunks are named lang-<code>-… so the service
+         * worker can leave them out of the install and fetch them when a
+         * student picks that language (see workbox below, and platform/i18n).
+         * Without this they are named after the string file, and te/bag.json
+         * and hi/bag.json are indistinguishable from each other.
+         */
+        chunkFileNames(chunk: { facadeModuleId?: string | null; name: string }) {
+          const pack = /content\/i18n\/(te|hi|ur)\//.exec(chunk.facadeModuleId ?? '');
+          return pack ? `assets/lang-${pack[1]}-[name]-[hash].js` : 'assets/[name]-[hash].js';
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

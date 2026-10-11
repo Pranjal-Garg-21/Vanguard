@@ -3,11 +3,11 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   formatRupees,
   getLanguage,
+  isRtl,
   registerStrings,
   setLanguage,
   setMissingKeyHandler,
   t,
-  isRtl,
 } from './index';
 
 afterEach(() => {
