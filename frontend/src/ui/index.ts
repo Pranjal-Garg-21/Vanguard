@@ -13,6 +13,7 @@ export { AssumptionsDrawer, type AssumptionsDrawerProps } from './AssumptionsDra
 export { FanChart, type FanChartProps } from './FanChart';
 export { RangeDisplay, type RangeDisplayProps } from './RangeDisplay';
 export { BottomSheet, CoinStack, Dialog, LockedTile, Meter, Toast } from './kit';
+export { LanguageSwitcher } from './LanguageSwitcher';
 export { Pager, type PagerPage } from './Pager';
 export { SimBanner } from './SimBanner';
 export { CheckIcon, ChevronIcon } from './icons';

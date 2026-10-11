@@ -135,6 +135,16 @@ export async function resetPin(pid: string, pinPictures: string[]): Promise<void
   await db.profiles.update(pid, { pinSalt, pinHash: await hashPin(pinPictures, pinSalt), failedAttempts: 0, lockedUntil: 0 });
 }
 
+/**
+ * Change the signed-in student's language (UC-SYS-09). Saved on the profile, so it is theirs on this phone from now on.
+ * Everything follows through followProfileLanguage, and the page redraws in the new language straight away.
+ */
+export async function setProfileLanguage(pid: string, language: Profile['language']): Promise<void> {
+  await db.profiles.update(pid, { language });
+  const active = useActiveProfile.getState().profile;
+  if (active && active.pid === pid) useActiveProfile.setState({ profile: { ...active, language } });
+}
+
 export async function setClassStatus(pid: string, classStatus: Profile['classStatus']): Promise<void> {
   await db.profiles.update(pid, { classStatus });
 }

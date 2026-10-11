@@ -1,0 +1,59 @@
+{
+  "triage": {
+    "all_agreed": "آپ نے اور میں نے ہر کارڈ ایک ہی طرح چھانٹا۔ شاباش۔",
+    "another_way": "یہ دونوں طرف جا سکتا ہے۔ اسے دیکھنے کا ایک اور طریقہ یہ ہے۔",
+    "done": "میرا فولڈر دیکھیں",
+    "not_this_one": "یہ والا نہیں۔ کوئی اور آزمائیں۔",
+    "remaining": {
+      "one": "{count} کارڈ باقی",
+      "other": "{count} کارڈ باقی"
+    },
+    "summary_title": "آئیے ان میں سے کچھ پر نظر ڈالتے ہیں",
+    "you_sorted": "آپ نے اسے {bucket} میں رکھا۔"
+  },
+  "allocate": {
+    "remaining": "{amount, rupees} بانٹنے کو باقی",
+    "put_here": "یہاں رکھیں",
+    "take_back": "واپس لیں",
+    "all_of_it": "پورے {amount, rupees}",
+    "nothing_left": "آپ نے سب کچھ بانٹ دیا۔",
+    "bills_covered": "بل پورے ہو گئے",
+    "bill_uncovered": "آپ کا {bill} پورا نہیں ہوگا۔ منصوبہ بدلیں؟",
+    "short_by": "اس مرتبان میں {amount, rupees} کم ہیں۔",
+    "allocate_all_first": "آگے بڑھنے سے پہلے باقی پیسے بانٹ دیں۔",
+    "continue_anyway": "پھر بھی جاری رکھیں"
+  },
+  "commit": {
+    "how_much": "ہر مہینے کتنا؟",
+    "how_long": "کتنے وقت کے لیے؟",
+    "until_i_stop": "جب تک میں نہ روکوں",
+    "n_months": {
+      "one": "{count} مہینہ",
+      "other": "{count} مہینے"
+    },
+    "share_of_income": "یہ آپ کو ہر مہینے ملنے والی رقم کا {percent}% ہے۔",
+    "reach_goal_in": {
+      "one": "آپ {count} مہینے میں {amount, rupees} تک پہنچ جائیں گے۔",
+      "other": "آپ {count} مہینوں میں {amount, rupees} تک پہنچ جائیں گے۔"
+    },
+    "total_over_term": "یہ کل ملا کر {amount, rupees} بنتے ہیں۔",
+    "heavy_warning": "یہ آپ کے پیسوں کا بڑا حصہ ہے۔ تنگی والے مہینے میں بھی یہ کٹے گا۔",
+    "confirm_question": "ایک بار سیٹ ہو گیا تو یہ ہر مہینے کٹے گا — پیسوں کی تنگی ہو تب بھی۔ سیٹ کریں؟",
+    "confirm_yes": "ہاں، سیٹ کریں",
+    "confirm_change": "مجھے بدلنے دیں",
+    "set_it": "سیٹ کریں"
+  },
+  "rank": {
+    "check_order": "میری ترتیب چیک کریں",
+    "result_title": "یہ ہے اصل ترتیب",
+    "perfect": "بالکل صحیح۔ آپ نے ہر ایک کو صحیح جگہ پر رکھا۔",
+    "top_pick_cost": "آپ کی پہلی پسند سب سے سستی سے {amount, rupees} زیادہ مہنگی ہے۔",
+    "out_of_order": {
+      "one": "{count} جوڑی الٹی تھی۔",
+      "other": "{count} جوڑیاں الٹی تھیں۔"
+    },
+    "elapsed": "لگا ہوا وقت: {seconds} سیکنڈ",
+    "move_up": "{item} کو اوپر کریں",
+    "move_down": "{item} کو نیچے کریں"
+  }
+}

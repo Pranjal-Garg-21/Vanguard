@@ -5,7 +5,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { t } from '@/platform';
-import { SimBanner } from '@/ui';
+import { LanguageSwitcher, SimBanner } from '@/ui';
 import type { Pillar } from './logic/types';
 
 /** `pillar` picks the header title and where the logo goes; `hub` is the all-topics page. The simulation banner shows on Investing screens only. */
@@ -23,7 +23,8 @@ export function InvestShell({ children, wide = false, pillar = 'invest', hub = f
             </span>
             <span className="hidden font-medium text-muted sm:inline">{hub ? t('learn.title') : t(`learn.pillar.${pillar}.name`)}</span>
           </Link>
-          <Link to="/learn" className="ms-auto text-sm font-bold text-ink-soft hover:text-brand">
+          <LanguageSwitcher className="ms-auto" />
+          <Link to="/learn" className=" text-sm font-bold text-ink-soft hover:text-brand">
             {t('learn.all')}
           </Link>
           <Link to="/home" className="text-sm font-bold text-ink-soft hover:text-brand">

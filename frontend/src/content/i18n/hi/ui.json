@@ -1,0 +1,10 @@
+{
+  "pager.step": "स्टेप {n} / {total}",
+  "pager.next": "आगे",
+  "pager.back": "पीछे",
+  "close": "बंद करें",
+  "cancel": "रद्द करें",
+  "locked": "बंद",
+  "listen": "सुनें",
+  "language": "भाषा"
+}

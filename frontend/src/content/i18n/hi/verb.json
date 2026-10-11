@@ -1,0 +1,59 @@
+{
+  "triage": {
+    "all_agreed": "आपने और मैंने हर कार्ड एक ही तरह से छाँटा। बढ़िया!",
+    "another_way": "यह वाला दोनों तरफ़ जा सकता है। इसे देखने का एक और तरीका यह है।",
+    "done": "मेरा फ़ोल्डर जाँचें",
+    "not_this_one": "यह वाला नहीं। कोई और आज़माएँ।",
+    "remaining": {
+      "one": "{count} कार्ड बाकी",
+      "other": "{count} कार्ड बाकी"
+    },
+    "summary_title": "आइए इनमें से कुछ पर नज़र डालें",
+    "you_sorted": "आपने इसे {bucket} में रखा।"
+  },
+  "allocate": {
+    "remaining": "बाँटने के लिए {amount, rupees} बाकी",
+    "put_here": "यहाँ रखें",
+    "take_back": "वापस लें",
+    "all_of_it": "पूरे {amount, rupees}",
+    "nothing_left": "आपने सब कुछ बाँट दिया है।",
+    "bills_covered": "बिल पूरे हुए",
+    "bill_uncovered": "आपका {bill} पूरा नहीं होगा। प्लान बदलें?",
+    "short_by": "इस जार में {amount, rupees} कम हैं।",
+    "allocate_all_first": "आगे बढ़ने से पहले बाकी पैसे बाँट दें।",
+    "continue_anyway": "फिर भी आगे बढ़ें"
+  },
+  "commit": {
+    "how_much": "हर महीने कितना?",
+    "how_long": "कितने समय के लिए?",
+    "until_i_stop": "जब तक मैं रोकूँ नहीं",
+    "n_months": {
+      "one": "{count} महीना",
+      "other": "{count} महीने"
+    },
+    "share_of_income": "यह आपको हर महीने मिलने वाले पैसों का {percent}% है।",
+    "reach_goal_in": {
+      "one": "आप {count} महीने में {amount, rupees} तक पहुँच जाएँगे।",
+      "other": "आप {count} महीनों में {amount, rupees} तक पहुँच जाएँगे।"
+    },
+    "total_over_term": "कुल मिलाकर यह {amount, rupees} होता है।",
+    "heavy_warning": "यह आपके पैसों का बड़ा हिस्सा है। तंगी वाले महीने में भी यह कटेगा।",
+    "confirm_question": "एक बार सेट होने के बाद यह हर महीने कटता है, पैसों की तंगी में भी। सेट करें?",
+    "confirm_yes": "हाँ, सेट करें",
+    "confirm_change": "मुझे बदलने दें",
+    "set_it": "सेट करें"
+  },
+  "rank": {
+    "check_order": "मेरा क्रम जाँचें",
+    "result_title": "यह रहा असली क्रम",
+    "perfect": "बिल्कुल सही। आपने हर एक को सही जगह रखा।",
+    "top_pick_cost": "आपकी पहली पसंद सबसे सस्ती वाली से {amount, rupees} ज़्यादा महँगी है।",
+    "out_of_order": {
+      "one": "{count} जोड़ी उल्टी रखी थी।",
+      "other": "{count} जोड़ियाँ उल्टी रखी थीं।"
+    },
+    "elapsed": "लगा समय: {seconds} सेकंड",
+    "move_up": "{item} को ऊपर ले जाएँ",
+    "move_down": "{item} को नीचे ले जाएँ"
+  }
+}

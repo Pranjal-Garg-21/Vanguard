@@ -5,6 +5,7 @@
   "soon": "Coming soon",
   "empty": "Lessons for this topic are on the way.",
   "notFound": "Topic not found.",
+  "lessonNotFound": "Lesson not found.",
   "count": "{done} of {total} done",
   "pillar": {
     "bank": {
@@ -29,7 +30,7 @@
     },
     "safe": {
       "name": "Staying safe",
-      "blurb": "Spot scams and protect your accounts. Taught by P5."
+      "blurb": "Spot scams and protect your accounts."
     }
   },
   "lessonsTitle": "All {n} lessons"
