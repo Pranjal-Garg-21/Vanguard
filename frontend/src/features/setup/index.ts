@@ -4,4 +4,4 @@
 export { WelcomeScreen } from './WelcomeScreen';
 export { SetupFlow } from './SetupFlow';
 export { PlayerPicker } from './PlayerPicker';
-export { avatarEmoji } from './pictures';
+export { Avatar } from './components/Avatar';

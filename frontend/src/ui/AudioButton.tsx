@@ -10,6 +10,7 @@
  * parts of it, and those parts are not sentences, so they are read as one.
  */
 import { speak, speakKeys, stopSpeaking, t, useSpeaking, type TVars } from '@/platform';
+import { Icon } from './Icon';
 
 type Props = {
   /** Read as one sentence, in order. */
@@ -52,33 +53,7 @@ export function AudioButton({ keys, text, vars, clipKey, className = '', tone = 
       title={t(playing ? 'readaloud.stop' : 'readaloud.play')}
       className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${look} ${className}`}
     >
-      <Speaker playing={playing} />
+      <Icon name={playing ? 'volumeOff' : 'volume'} className={playing ? 'h-5 w-5 animate-pulse' : 'h-5 w-5'} />
     </button>
-  );
-}
-
-/** A speaker, with waves while it is reading and a cross when it is not. */
-function Speaker({ playing }: { playing: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <path d="M11 5 6.5 9H3v6h3.5L11 19V5Z" />
-      {playing ? (
-        <>
-          <path d="M15 9.5a3.5 3.5 0 0 1 0 5" />
-          <path d="M17.8 7a7 7 0 0 1 0 10" className="animate-pulse" />
-        </>
-      ) : (
-        <path d="M15 9.5a3.5 3.5 0 0 1 0 5" />
-      )}
-    </svg>
   );
 }

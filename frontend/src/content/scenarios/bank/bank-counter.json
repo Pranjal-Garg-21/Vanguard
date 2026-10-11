@@ -4,11 +4,18 @@
   "_useCase": "UC-BANK-02",
   "id": "bank-counter",
   "pillar": "bank",
-  "stage": ["S0"],
+  "stage": [
+    "S0"
+  ],
   "verb": "choose",
   "hookKey": "bank02.hook",
-  "concepts": ["why_bank", "savings_account", "minimum_balance_fees", "nominee", "pin_secrecy"],
-
+  "concepts": [
+    "why_bank",
+    "savings_account",
+    "minimum_balance_fees",
+    "nominee",
+    "pin_secrecy"
+  ],
   "accounts": [
     {
       "id": "savings",
@@ -36,13 +43,33 @@
       "requiresMinor": true
     }
   ],
-
   "_nominee": "12.6 asks for a one-line 'why nominee' explanation on the form rather than a separate lesson.",
-  "formFields": ["name", "address", "nominee", "signature"],
-
+  "formFields": [
+    "name",
+    "address",
+    "nominee",
+    "signature"
+  ],
   "_pin": "The passer-by appears partway through entering the PIN. Nothing is scored on it; the point is that the student notices the screen change and learns to shield it.",
-  "pin": { "length": 4, "passerByAtDigit": 2 },
-
-  "conceptCard": { "textKey": "bank02.concept.account", "icon": "bank" },
+  "pin": {
+    "length": 4,
+    "passerByAtDigit": 2
+  },
+  "depositJars": [
+    {
+      "id": "bank",
+      "textKey": "bank02.deposit.jar_bank",
+      "emoji": "🏦"
+    },
+    {
+      "id": "pocket",
+      "textKey": "bank02.deposit.jar_pocket",
+      "emoji": "👛"
+    }
+  ],
+  "conceptCard": {
+    "textKey": "bank02.concept.account",
+    "icon": "bank"
+  },
   "summaryKey": "bank02.summary"
 }

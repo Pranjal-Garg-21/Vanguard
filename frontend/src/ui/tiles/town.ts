@@ -2,7 +2,7 @@
  * Named tiles from Kenney "Tiny Town" and "Tiny Dungeon", plus ready-made
  * legends for maps. Indices count left to right, top to bottom, from 0.
  *
- * ⚠ UNVERIFIED: these indices are first guesses. Open /dev/tiles, read the
+ * UNVERIFIED: these indices are first guesses. Open /dev/tiles, read the
  * correct numbers off the sheet, and fix them here. Nothing else changes.
  */
 import type { LegendEntry } from './Tiles';

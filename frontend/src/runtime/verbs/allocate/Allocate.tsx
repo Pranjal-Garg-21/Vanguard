@@ -18,6 +18,7 @@
 import { useMemo, useRef, useState } from 'react';
 
 import { rupees, useT } from '@/platform';
+import { AudioButton } from '@/ui';
 import {
   billsTotal,
   findUnderfunded,
@@ -52,7 +53,6 @@ export type AllocateProps = VerbCommonProps & {
   /** Values for the prompt's {placeholders}. */
   promptVars?: Record<string, string | number>;
   concepts?: Record<ConceptId, number>;
-  onPlayAudio?: (audioKey: string) => void;
 };
 
 export function Allocate({
@@ -67,7 +67,6 @@ export function Allocate({
   promptKey,
   promptVars,
   concepts,
-  onPlayAudio,
 }: AllocateProps) {
   const t = useT();
 
@@ -253,15 +252,7 @@ export function Allocate({
                 <p className="allocate__covered">{t('verb.allocate.bills_covered')}</p>
               )}
 
-              {jar.audioKey && onPlayAudio && (
-                <button
-                  type="button"
-                  aria-label={t('common.play_audio')}
-                  onClick={() => onPlayAudio(jar.audioKey!)}
-                >
-                  🔊
-                </button>
-              )}
+              {jar.audioKey && <AudioButton keys={[jar.audioKey]} />}
             </li>
           );
         })}

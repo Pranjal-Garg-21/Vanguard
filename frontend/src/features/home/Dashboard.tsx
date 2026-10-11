@@ -18,8 +18,8 @@ import {
   type GameEvent,
 } from '@/platform';
 import { ARCADE_SECTIONS, STAGES } from '@/content/stages';
-import { avatarEmoji } from '@/features/setup';
-import { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from '@/ui';
+import { Avatar } from '@/features/setup';
+import { Badge, Button, Card, Icon, Notice, ProgressBar, SectionLabel, Spinner } from '@/ui';
 import { summariseEvents } from './stats';
 
 const NAV = ['dashboard', 'learn', 'practice', 'compete'] as const;
@@ -77,23 +77,25 @@ export function Dashboard() {
           </nav>
 
           <div className="ml-auto flex items-center gap-4 text-sm font-bold">
-            <span title={t('home.stats.streak')}>
+            <span title={t('home.stats.streak')} className="inline-flex items-center gap-1">
+              <Icon name="flame" className="h-4 w-4 text-warn" />
               <span className="text-brand">{stats.streak}</span> <span className="text-muted">d</span>
             </span>
-            <span title={t('home.stats.xp')}>
+            <span title={t('home.stats.xp')} className="inline-flex items-center gap-1">
+              <Icon name="zap" className="h-4 w-4 text-xp" />
               <span className="text-brand">{stats.xp}</span> <span className="text-muted">{t('home.stats.xp')}</span>
             </span>
             <button
               type="button"
               aria-label={t('home.switchPlayer')}
               title={t('home.switchPlayer')}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-surface-2 text-xl hover:border-brand"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-surface-2 hover:border-brand"
               onClick={async () => {
                 await switchPlayer();
                 navigate('/who');
               }}
             >
-              {avatarEmoji(profile.avatarId)}
+              <Avatar id={profile.avatarId} className="h-9 w-9" iconClassName="h-5 w-5" />
             </button>
           </div>
         </div>

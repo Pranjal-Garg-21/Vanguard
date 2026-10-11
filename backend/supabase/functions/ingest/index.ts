@@ -86,12 +86,18 @@ Deno.serve(async (req) => {
   }
 
   const { data: unlocks } = await db.from('unlocks').select('target, from_date').eq('class_id', cls.id);
+  const { data: scenarios } = await db
+    .from('custom_scenarios')
+    .select('id, version, title, brief, concept, language, body')
+    .eq('class_id', cls.id)
+    .eq('status', 'published');
 
   const response: IngestResponse = {
     accepted: valid.map((e) => e.eid),
     rejected,
     unlocks: (unlocks ?? []).map((u) => ({ target: u.target, fromDate: u.from_date })),
     focus: cls.focus,
+    scenarios: scenarios ?? [],
   };
   return json(response);
 });

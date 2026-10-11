@@ -20,6 +20,7 @@ import { combine, type GameProps } from '../shared/game';
 import { conceptMap, effectMap } from '@/runtime/verbs/types';
 import { bufferFromContext, emergencyTargets, pickShock, type Shock } from './logic/shock';
 import content from '@/content/scenarios/save/surprise-month.json';
+import { Icon } from '@/ui';
 
 type Option = (typeof content.options)[number];
 
@@ -93,7 +94,7 @@ export function SurpriseMonth({ ctx, onComplete }: GameProps) {
       <section className="game game--sm03">
         <p>{t(chosen.resultKey)}</p>
         {'badge' in chosen && chosen.badge && (
-          <p className="badge">🛡️ {t(`sm03.badge.${chosen.badge}`)}</p>
+          <p className="badge"><Icon name="shield" className="h-4 w-4" /> {t(`sm03.badge.${chosen.badge}`)}</p>
         )}
         <p>{t(content.conceptCard.textKey)}</p>
         <button type="button" onClick={() => setPhase('reflect')}>

@@ -3,6 +3,7 @@
  * baseline questions. Plain presentational components; owner: P4.
  */
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { Icon } from './Icon';
 
 type PixelTone = 'wood' | 'grass' | 'parchment';
 
@@ -73,9 +74,7 @@ export function PixelOption({
         {emoji}
       </span>
       <span className="flex-1">{label}</span>
-      <span aria-hidden="true" className="text-2xl">
-        {selected ? '✔' : ''}
-      </span>
+      {selected && <Icon name="check" className="h-6 w-6" />}
     </button>
   );
 }

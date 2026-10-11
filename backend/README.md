@@ -64,6 +64,21 @@ Facilitators cannot sign themselves up. An admin adds them once:
    ```
    This adds a class called "Demo class (sample data)" with 24 made-up students and about 1,600 answers, so the dashboard is not empty. Remove it again with `select unseed_demo_class('<the UID>');`.
 
+## Facilitator-made scenarios (custom inbox)
+
+Facilitators can write their own scam practice for a class in the **Scenarios** tab. To switch it on for the hosted project, once:
+
+1. In the **SQL Editor**, run `supabase/migrations/20261011000000_custom_scenarios.sql` (creates the `custom_scenarios` table and its access rules).
+2. Redeploy the upload function so it also sends published scenarios to phones:
+   ```bash
+   cd backend
+   npx supabase functions deploy ingest --project-ref <your-project-ref>
+   ```
+
+How it flows: the facilitator saves a scenario (a draft, or published), phones receive published ones at their next sync (even with no answers to upload), keep them offline, and show them under **From your facilitator** in Stay Safe. Answers appear in Insights under the skill the facilitator chose. Unpublishing or deleting removes it from phones at their next sync.
+
+Students never read the table directly; `ingest` returns only the published scenarios for the class whose join code was sent.
+
 ## Check that sync can work
 
 The student app uploads events to the `ingest` function. From the project folder, this should print `200` (a `404` means the function is not deployed yet):

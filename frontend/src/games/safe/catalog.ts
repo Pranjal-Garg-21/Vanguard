@@ -3,8 +3,8 @@
  * screen reads this to draw the picker and the learning path, and decides how
  * to launch each entry. Owner: P5.
  */
-import type { IconName } from './phone/Icon';
 import type { SimulatorId } from './phone/logic/types';
+import type { IconName } from '@/ui';
 
 export type EntryKind = 'upi-full' | 'collect' | 'qr' | 'inbox-day' | 'scenario' | 'template';
 

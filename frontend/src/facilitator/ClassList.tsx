@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { Badge, Button, Card, Notice, Spinner } from '@/ui';
+import { Badge, Button, Card, Icon, Notice, Spinner } from '@/ui';
 import { LANGUAGE_NAMES, supabaseOrThrow, type ClassRow } from './data';
 
 type ClassWithCount = ClassRow & { players: { count: number }[] };
@@ -25,7 +25,10 @@ export function ClassList() {
       <div className="flex items-center justify-between gap-4">
         <h1 className="text-2xl font-extrabold">Your classes</h1>
         <Link to="new">
-          <Button>＋ New class</Button>
+          <Button>
+            <Icon name="plus" className="h-4 w-4" />
+            New class
+          </Button>
         </Link>
       </div>
 

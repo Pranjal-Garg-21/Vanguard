@@ -4,17 +4,17 @@
  * brief. The caller passes a script id and gets a MiniGameResult back.
  */
 import { useEffect, useState } from 'react';
-import { t } from '@/platform';
+import { t, useAccessibility } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
-import { Button, Notice } from '@/ui';
-import { Icon } from './Icon';
+import { Button, Icon, Notice } from '@/ui';
 import { scoreRun } from './logic/scoring';
 import type { Scenario } from './logic/types';
 import { PhoneScreen } from './PhoneScreen';
 import { usePhoneRun } from './usePhoneRun';
 
 export function SingleMessage({ script, mode = 'lifepath', timersOff = false, onResolve }: { script: Scenario; mode?: PlayMode; timersOff?: boolean; onResolve: (result: MiniGameResult) => void }) {
-  const { state, dispatch } = usePhoneRun(script, { timersOff });
+  const a11y = useAccessibility();
+  const { state, dispatch } = usePhoneRun(script, { timersOff: timersOff || a11y.timersOff });
   const [lensOn, setLensOn] = useState(false);
 
   // Open the first message as soon as it arrives.

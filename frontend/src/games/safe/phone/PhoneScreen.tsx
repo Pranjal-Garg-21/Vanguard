@@ -5,7 +5,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { t, useReadAloud } from '@/platform';
-import { AudioButton, Button } from '@/ui';
+import { AudioButton, Button, Icon, type IconName } from '@/ui';
 import { IncomingCall } from './apps/CallScreen';
 import { PayHome } from './apps/PayApp';
 import { PermissionDialog } from './apps/PermissionDialog';
@@ -13,7 +13,6 @@ import { bankBalance, isOverlay, surfaceOf } from './logic/runner';
 import type { RunAction, RunState, Surface } from './logic/types';
 import { judgeFeedback, responseFeedback } from './logic/feedback';
 import { FeedbackCard } from './FeedbackCard';
-import { Icon, type IconName } from './Icon';
 import { buzz } from './usePhoneRun';
 import { formatClock, PhoneShell } from './PhoneShell';
 import { APP_OF, surfaceClipKey, surfaceKeys, SurfaceBody, surfacePreview, surfaceTitle } from './SurfaceView';

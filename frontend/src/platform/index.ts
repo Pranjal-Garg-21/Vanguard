@@ -14,6 +14,8 @@ export * from './audio';
 export * from './audio/hooks';
 export * from './i18n/hooks';
 export * from './classes';
+export * from './a11y';
+export * from './custom';
 export { getSupabase, isSupabaseConfigured } from './supabase/client';
 export type { Accessibility, Profile } from './storage/db';
 export type { GameEvent, GameEventInput, GameMode, StageId } from '@shared/telemetry/event.ts';

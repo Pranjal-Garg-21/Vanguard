@@ -16,6 +16,7 @@
 import { useMemo, useRef, useState } from 'react';
 
 import { rupees, useT } from '@/platform';
+import { AudioButton } from '@/ui';
 import { deriveSeed, makeRng, shuffled } from '../shared/rng';
 import {
   bestOrder,
@@ -43,7 +44,6 @@ export type RankProps = VerbCommonProps & {
   /** Values for the prompt's {placeholders}. */
   promptVars?: Record<string, string | number>;
   shuffle?: boolean;
-  onPlayAudio?: (audioKey: string) => void;
 };
 
 export function Rank({
@@ -57,7 +57,6 @@ export function Rank({
   promptKey,
   promptVars,
   shuffle = false,
-  onPlayAudio,
 }: RankProps) {
   const t = useT();
 
@@ -186,15 +185,7 @@ export function Rank({
           return (
             <li key={id}>
               <span>{t(item.textKey)}</span>
-              {item.audioKey && onPlayAudio && (
-                <button
-                  type="button"
-                  aria-label={t('common.play_audio')}
-                  onClick={() => onPlayAudio(item.audioKey!)}
-                >
-                  🔊
-                </button>
-              )}
+              {item.audioKey && <AudioButton keys={[item.audioKey]} />}
               <button
                 type="button"
                 disabled={idx === 0}

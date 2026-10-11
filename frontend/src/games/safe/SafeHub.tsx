@@ -6,15 +6,16 @@
  * Finished runs are logged as events and saved as progress (XP, stars, rank,
  * badges, red-flag cards). Owner: P5.
  */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import { logResult, t } from '@/platform';
 import type { MiniGameResult } from '@/core/types';
-import { Badge, Button, Card, ProgressBar, SectionLabel } from '@/ui';
+import { Badge, Button, Card, Icon, ProgressBar, SectionLabel } from '@/ui';
 import { CATALOGUE, findEntry, getEntry, getSimulator, PATH, SIMULATORS, type CatalogEntry } from './catalog';
-import { ALL_CARDS, applyRun, BADGES, BASE_XP, emptyProgress, nextOnPath, RANKS, rankProgress, scoreOf, type Gain, type Progress } from './logic/progress';
-import { loadProgress, saveProgress } from './progressStore';
-import { Icon } from './phone/Icon';
+import { ALL_CARDS, applyRun, BADGES, BASE_XP, nextOnPath, RANKS, rankProgress, scoreOf, type Gain, type Progress } from './logic/progress';
+import { saveProgress, loadProgress } from './progressStore';
+import { BackLink, LEVEL, Stars, useProgress } from './hubShared';
+import { CustomCard, CustomHub } from './CustomHub';
 import { PhoneRoom } from './phone/PhoneRoom';
 import { TellCard } from './phone/TellCard';
 import type { RunMeta } from './phone/logic/scoring';
@@ -27,38 +28,10 @@ import { TEMPLATES, UPI_TEMPLATES } from './specs';
 import { UpiSimulator } from './upi-simulator';
 import { collectRequestVariant, qrReceiveVariant } from './upi-simulator/logic/variants';
 
-const LEVEL = { 1: 'Easy', 2: 'Medium', 3: 'Hard' } as const;
-
-function BackLink({ to, label }: { to: string; label: string }) {
-  return (
-    <Link to={to} className="inline-flex items-center gap-1 text-sm font-bold text-brand hover:underline">
-      <Icon name="back" className="h-4 w-4" />
-      {label}
-    </Link>
-  );
-}
-
-function useProgress() {
-  const [progress, setProgress] = useState<Progress>(emptyProgress());
-  useEffect(() => {
-    void loadProgress().then(setProgress);
-  }, []);
-  return progress;
-}
-
-function Stars({ n }: { n: number }) {
-  return (
-    <span className="inline-flex gap-0.5" role="img" aria-label={t('safe.reward.stars', { n })}>
-      {[1, 2, 3].map((i) => (
-        <Icon key={i} name="star" className={`h-4 w-4 ${i <= n ? 'fill-current text-warn' : 'text-surface-3'}`} />
-      ))}
-    </span>
-  );
-}
-
 export function SafeHub() {
   const { sim: simId, entry: entryId } = useParams();
   if (!simId) return <Simulators />;
+  if (simId === 'custom') return <CustomHub entryId={entryId} />;
   const sim = getSimulator(simId);
   if (!sim || sim.entries.length === 0) return <Navigate to="/safe" replace />;
   const entry = entryId ? getEntry(sim, entryId) : undefined;
@@ -102,6 +75,8 @@ function Simulators() {
           </div>
         ))}
       </Card>
+
+      <CustomCard />
 
       {next && (
         <Link to={`/safe/${next.sim.id}/${next.entry.id}`} className="flex items-center gap-4 rounded-xl border-2 border-brand bg-brand/10 p-5 transition hover:bg-brand/20">

@@ -5,7 +5,7 @@
  */
 import { useState } from 'react';
 import { t } from '@/platform';
-import { Icon } from '../../phone/Icon';
+import { Icon } from '@/ui';
 
 const KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', 'del'] as const;
 

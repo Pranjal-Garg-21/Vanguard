@@ -1,7 +1,7 @@
 /** UC-FAC-01: create a class, confirm consent, get a join code. */
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Button, Card, Notice } from '@/ui';
+import { Button, Card, Icon, Notice } from '@/ui';
 import { LANGUAGE_NAMES, supabaseOrThrow } from './data';
 
 const CONSENT_ITEMS = [
@@ -51,8 +51,9 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
 
   return (
     <div className="mx-auto max-w-xl space-y-5">
-      <Link to=".." className="text-sm font-semibold text-brand">
-        ← Your classes
+      <Link to=".." className="inline-flex items-center gap-1 text-sm font-semibold text-brand">
+        <Icon name="arrowLeft" className="h-4 w-4" />
+        Your classes
       </Link>
       <h1 className="text-2xl font-extrabold">New class</h1>
 

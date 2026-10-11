@@ -1,38 +1,43 @@
-/** Avatars and picture-PIN images. Emoji for now; P4 swaps in illustrations. */
+/**
+ * Avatars and picture-PIN images, drawn with the shared icon set (see ui/Icon).
+ * The ids are stored in profiles and PIN hashes, so they never change; only the
+ * drawing does. P4 may swap in illustrations later.
+ */
+import type { IconName } from '@/ui';
 
 export const AVATARS = [
-  { id: 'avatar_01', emoji: '🧑🏽‍🎓' },
-  { id: 'avatar_02', emoji: '👩🏽‍🎓' },
-  { id: 'avatar_03', emoji: '🧕🏽' },
-  { id: 'avatar_04', emoji: '👨🏽‍💻' },
-  { id: 'avatar_05', emoji: '👩🏽‍🔧' },
-  { id: 'avatar_06', emoji: '🧑🏽‍🍳' },
-  { id: 'avatar_07', emoji: '👩🏽‍🎨' },
-  { id: 'avatar_08', emoji: '🧑🏽‍🌾' },
-  { id: 'avatar_09', emoji: '👨🏽‍🔬' },
-  { id: 'avatar_10', emoji: '👩🏽‍🏫' },
-  { id: 'avatar_11', emoji: '🧑🏽‍🚀' },
-  { id: 'avatar_12', emoji: '🦸🏽' },
-] as const;
+  { id: 'avatar_01', icon: 'graduation' },
+  { id: 'avatar_02', icon: 'book' },
+  { id: 'avatar_03', icon: 'heart' },
+  { id: 'avatar_04', icon: 'code' },
+  { id: 'avatar_05', icon: 'wrench' },
+  { id: 'avatar_06', icon: 'chef' },
+  { id: 'avatar_07', icon: 'palette' },
+  { id: 'avatar_08', icon: 'sprout' },
+  { id: 'avatar_09', icon: 'flask' },
+  { id: 'avatar_10', icon: 'school' },
+  { id: 'avatar_11', icon: 'rocket' },
+  { id: 'avatar_12', icon: 'star' },
+] as const satisfies readonly { id: string; icon: IconName }[];
 
-export function avatarEmoji(id: string): string {
-  return AVATARS.find((a) => a.id === id)?.emoji ?? '🙂';
+export function avatarIcon(id: string): IconName {
+  return AVATARS.find((a) => a.id === id)?.icon ?? 'user';
 }
 
 export const PIN_PICTURES = [
-  { id: 'mango', emoji: '🥭' },
-  { id: 'kite', emoji: '🪁' },
-  { id: 'bus', emoji: '🚌' },
-  { id: 'star', emoji: '⭐' },
-  { id: 'elephant', emoji: '🐘' },
-  { id: 'flower', emoji: '🌸' },
-  { id: 'chai', emoji: '🍵' },
-  { id: 'cricket', emoji: '🏏' },
-  { id: 'peacock', emoji: '🦚' },
-  { id: 'cycle', emoji: '🚲' },
-  { id: 'moon', emoji: '🌙' },
-  { id: 'balloon', emoji: '🎈' },
-] as const;
+  { id: 'mango', icon: 'citrus' },
+  { id: 'kite', icon: 'wind' },
+  { id: 'bus', icon: 'bus' },
+  { id: 'star', icon: 'star' },
+  { id: 'elephant', icon: 'cat' },
+  { id: 'flower', icon: 'flower' },
+  { id: 'chai', icon: 'coffee' },
+  { id: 'cricket', icon: 'trophy' },
+  { id: 'peacock', icon: 'bird' },
+  { id: 'cycle', icon: 'bike' },
+  { id: 'moon', icon: 'moon' },
+  { id: 'balloon', icon: 'cloud' },
+] as const satisfies readonly { id: string; icon: IconName }[];
 
 export const PIN_LENGTH = 4;
 

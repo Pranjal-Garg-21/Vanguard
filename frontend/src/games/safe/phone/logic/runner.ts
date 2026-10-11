@@ -186,6 +186,9 @@ export function reduce(state: RunState, action: RunAction): RunState {
       return advance(state, action.ms);
     case 'continue':
       return proceed(state);
+    case 'timers':
+      // The student's "No timers" setting can load after the room was created, so it can change mid-run.
+      return state.timersOff === action.off ? state : { ...state, timersOff: action.off };
     case 'open':
       return openSurface(proceed(state), action.surface);
     case 'close':

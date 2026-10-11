@@ -22,6 +22,7 @@ import { combine, type GameProps } from '../shared/game';
 import { cashOf, incomeOf } from '../shared/economics';
 import { accountsFor, canMaintain, isWeakPin, type Account } from './logic/accounts';
 import content from '@/content/scenarios/bank/bank-counter.json';
+import { Icon } from '@/ui';
 
 type Phase = 'hook' | 'choose' | 'warn' | 'form' | 'deposit' | 'pin' | 'kit' | 'sms';
 
@@ -152,11 +153,11 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
 
         <dl className="form">
           <dt>{t('bank02.form.name')}</dt>
-          <dd>✓</dd>
+          <dd><Icon name="check" className="h-4 w-4" /></dd>
           <dt>{t('bank02.form.address')}</dt>
-          <dd>✓</dd>
+          <dd><Icon name="check" className="h-4 w-4" /></dd>
           <dt>{t('bank02.form.signature')}</dt>
-          <dd>✓</dd>
+          <dd><Icon name="check" className="h-4 w-4" /></dd>
         </dl>
 
         <h3>{t('bank02.form.nominee')}</h3>
@@ -190,10 +191,7 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
         total={cashOnHand}
         promptKey="bank02.deposit.prompt"
         promptVars={{ amount: rupees(cashOnHand) }}
-        jars={[
-          { id: 'bank', textKey: 'bank02.deposit.jar_bank', emoji: '🏦' },
-          { id: 'pocket', textKey: 'bank02.deposit.jar_pocket', emoji: '👛' },
-        ]}
+        jars={content.depositJars}
         concepts={{ why_bank: 0.8 }}
         onComplete={(outcome) => {
           const detail = outcome.detail as AllocateDetail | undefined;
@@ -269,9 +267,9 @@ export function BankCounter({ ctx, onComplete }: GameProps) {
         <h3>{t('bank02.kit.title')}</h3>
         <p>{t('bank02.clerk.kit')}</p>
         <ul className="kit">
-          <li>📒 {t('bank02.kit.passbook')}</li>
-          <li>💳 {t('bank02.kit.card')}</li>
-          <li>✉️ {t('bank02.kit.envelope')}</li>
+          <li><Icon name="book" className="h-4 w-4" /> {t('bank02.kit.passbook')}</li>
+          <li><Icon name="wallet" className="h-4 w-4" /> {t('bank02.kit.card')}</li>
+          <li><Icon name="mail" className="h-4 w-4" /> {t('bank02.kit.envelope')}</li>
         </ul>
         <p>{t('bank02.pin.done')}</p>
         <p>{t(content.conceptCard.textKey)}</p>

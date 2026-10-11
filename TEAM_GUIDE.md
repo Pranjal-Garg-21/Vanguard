@@ -319,6 +319,7 @@ Tests get a real in-memory IndexedDB automatically, so platform functions just w
 Also agreed (not linted):
 - A game never imports another game; use `games/registry.ts`.
 - No real bank, app, fund, company or brand names anywhere.
+- Icons: always `<Icon name="…" />` from `@/ui` (Lucide, the shadcn icon set). Never emoji, never text symbols such as arrows, crosses or bullets as icons, and never import `lucide-react` anywhere except `src/ui/Icon.tsx`. `src/test/icons.test.ts` fails the build if you do.
 - Never ask about or store a student's real money, family or messages.
 - Student-visible text goes through `t()`.
 

@@ -1,6 +1,6 @@
 /** Display info for each red-flag kind. Text lives in content/i18n/en/safe.json. Owner: P5. */
-import type { IconName } from './Icon';
 import type { TellKind } from './logic/types';
+import type { IconName } from '@/ui';
 
 export const TELL_META: Record<TellKind, { icon: IconName; nameKey: string; hintKey: string }> = {
   urgency: { icon: 'clock', nameKey: 'safe.tell.urgency.name', hintKey: 'safe.tell.urgency.hint' },

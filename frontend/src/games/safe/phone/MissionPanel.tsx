@@ -5,8 +5,7 @@
  */
 import { t } from '@/platform';
 import { useEffect, useRef, useState } from 'react';
-import { ProgressBar, SectionLabel } from '@/ui';
-import { Icon } from './Icon';
+import { Icon, ProgressBar, SectionLabel } from '@/ui';
 import { objectiveDone, surfaceOf } from './logic/runner';
 import type { HistoryEntry, RunState } from './logic/types';
 import { RoomHeader, TaskList } from './RoomParts';

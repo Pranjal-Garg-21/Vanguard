@@ -210,7 +210,7 @@ export function GoalBuilder({ ctx, onComplete }: GameProps) {
                 misconceptions: outcome.misconceptions,
                 effects: {
                   ...(outcome.effects ?? {}),
-                  // The 🎯 meter on the dashboard.
+                  // The goal meter on the dashboard.
                   'meta.goals.set': {
                     id: goal.id,
                     labelKey: specific?.textKey ?? goal.textKey,

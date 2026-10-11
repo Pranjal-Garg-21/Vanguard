@@ -1,8 +1,8 @@
 /** A generic pay app (no real brand): balance, recent items and payment requests. Phase 5's UPI Simulator builds on it. */
 import { t } from '@/platform';
-import { Icon } from '../Icon';
 import { Lensable, RichText, type ViewProps } from '../Text';
 import type { Surface } from '../logic/types';
+import { Icon } from '@/ui';
 
 export const rupees = (n: number) => `₹${Math.abs(n).toLocaleString('en-IN')}`;
 
@@ -21,7 +21,7 @@ export function PayHome({ balance, lost, requests, onOpen }: { balance: number; 
         requests.map((r) => (
           <button key={r.id} type="button" onClick={() => onOpen(r.id)} className="mb-2 flex w-full items-center justify-between rounded-lg bg-phone-card p-3 text-start text-sm font-medium shadow-sm">
             {r.label}
-            <span aria-hidden>›</span>
+            <Icon name="chevronRight" className="h-4 w-4 text-phone-muted" />
           </button>
         ))
       )}

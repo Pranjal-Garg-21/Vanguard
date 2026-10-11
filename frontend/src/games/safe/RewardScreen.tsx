@@ -4,17 +4,16 @@
  * big "Next room" button so there is always a reason to keep going.
  */
 import { useEffect, useState } from 'react';
-import { t } from '@/platform';
-import { Button, Card, SectionLabel } from '@/ui';
+import { prefersReducedMotion, t } from '@/platform';
+import { Button, Card, Icon, SectionLabel } from '@/ui';
 import { Confetti } from './phone/Confetti';
-import { Icon } from './phone/Icon';
 import { TellCard } from './phone/TellCard';
 import { rankProgress, type Gain, type Progress } from './logic/progress';
 import type { TellKind } from './phone/logic/types';
 
 /** Counts up to `target`. Jumps straight to it when the student prefers reduced motion. */
 function useCountUp(target: number, ms = 1100) {
-  const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+  const reduce = prefersReducedMotion();
   const [value, setValue] = useState(reduce ? target : 0);
   useEffect(() => {
     if (reduce || target === 0) return;

@@ -1,7 +1,7 @@
 import { t } from '@/platform';
-import { Icon } from '../Icon';
 import { Lensable, RichText, type ViewProps } from '../Text';
 import type { Surface } from '../logic/types';
+import { Icon } from '@/ui';
 
 /** A fake page behind a fake address bar. The address is inspectable, because reading it is the habit. */
 export function BrowserView({ surface, view }: { surface: Extract<Surface, { type: 'page' }>; view: ViewProps }) {

@@ -4,6 +4,7 @@
  * motion. Change `trigger` to a new positive number to fire another burst.
  */
 import { useEffect, useState } from 'react';
+import { prefersReducedMotion } from '@/platform';
 
 type Piece = { id: number; color: string; w: number; h: number; dx: number; dy1: number; dy2: number; rot: number; delay: number; dur: number };
 
@@ -29,7 +30,7 @@ export function Confetti({ trigger, count = 48 }: { trigger: number; count?: num
 
   useEffect(() => {
     if (trigger <= 0) return;
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    if (prefersReducedMotion()) return;
     setPieces(makePieces(count));
     const id = window.setTimeout(() => setPieces([]), 2600);
     return () => window.clearTimeout(id);

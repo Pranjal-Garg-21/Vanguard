@@ -17,6 +17,7 @@
 import { useMemo, useRef, useState } from 'react';
 
 import { rupees, useT } from '@/platform';
+import { AudioButton } from '@/ui';
 import {
   expectedBucket,
   explanationKey,
@@ -50,7 +51,6 @@ export type TriageProps = VerbCommonProps & {
   maxCards?: number;
   promptKey?: string;
   shuffle?: boolean;
-  onPlayAudio?: (audioKey: string) => void;
 };
 
 export function Triage({
@@ -64,7 +64,6 @@ export function Triage({
   maxCards,
   promptKey,
   shuffle = false,
-  onPlayAudio,
 }: TriageProps) {
   const t = useT();
 
@@ -268,15 +267,7 @@ export function Triage({
         <h3>{t(current.textKey)}</h3>
         {current.amount !== undefined && <p>{rupees(current.amount)}</p>}
         {current.contextKey && <p className="triage__context">{t(current.contextKey)}</p>}
-        {current.audioKey && onPlayAudio && (
-          <button
-            type="button"
-            aria-label={t('common.play_audio')}
-            onClick={() => onPlayAudio(current.audioKey!)}
-          >
-            🔊
-          </button>
-        )}
+        {current.audioKey && <AudioButton keys={[current.audioKey]} />}
       </article>
 
       <div className="triage__buckets">

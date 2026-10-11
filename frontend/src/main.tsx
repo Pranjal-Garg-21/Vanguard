@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';
 import { router } from './app/router';
-import { followProfileLanguage, startSyncTriggers } from './platform';
+import { followProfileLanguage, startAccessibility, startSyncTriggers } from './platform';
 import { PwaBanner } from './app/pwa/PwaBanner';
 import { startPwa } from './app/pwa';
 import { startFonts } from './app/fonts';
@@ -17,6 +17,7 @@ import '@fontsource/ubuntu-mono/latin-700.css';
 import './index.css';
 
 // Save the app on the phone so it opens offline, and upload saved events whenever the phone is online.
+startAccessibility();
 startPwa();
 startSyncTriggers();
 startFonts();

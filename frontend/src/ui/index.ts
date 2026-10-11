@@ -6,5 +6,6 @@
 
 export { AudioButton } from './AudioButton';
 export { Badge, Button, Card, Notice, ProgressBar, SectionLabel, Spinner } from './components';
+export { Icon, type IconName } from './Icon';
 export { PixelButton, PixelOption, PixelPanel, PixelProgress } from './pixel';
 export * from './tiles';

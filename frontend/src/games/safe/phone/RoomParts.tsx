@@ -4,8 +4,7 @@
  */
 import type { ReactNode } from 'react';
 import { t } from '@/platform';
-import { AudioButton, Badge } from '@/ui';
-import { Icon } from './Icon';
+import { AudioButton, Badge, Icon } from '@/ui';
 
 export function RoomHeader({ title, brief, tags, progress, speak }: { title: string; brief: string; tags: { label: string; tone?: 'neutral' | 'good' | 'warn' | 'bad' | 'info' }[]; progress: number; /** Keys for the title and brief, so they can be read aloud. */ speak?: string[] }) {
   const pct = Math.round(Math.min(1, Math.max(0, progress)) * 100);

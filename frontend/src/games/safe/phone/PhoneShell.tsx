@@ -5,7 +5,7 @@
  */
 import type { ReactNode } from 'react';
 import { t } from '@/platform';
-import { Icon } from './Icon';
+import { Icon } from '@/ui';
 
 export function formatClock(startTime: string, nowMs: number, rate = 1 / 60): string {
   const [h = '0', m = '0'] = startTime.split(':');

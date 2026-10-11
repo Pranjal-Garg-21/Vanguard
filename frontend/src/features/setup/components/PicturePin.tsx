@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { t } from '@/platform';
+import { Icon } from '@/ui';
 import { PIN_LENGTH, PIN_PICTURES } from '../pictures';
 
 /** 12 big picture buttons; calls onComplete after 4 taps. */
@@ -34,7 +35,7 @@ export function PicturePin({
               i < picked.length ? 'border-brand bg-brand text-brand-ink' : 'border-line-strong bg-surface'
             }`}
           >
-            {i < picked.length ? '●' : ''}
+            {i < picked.length && <span className="h-3 w-3 rounded-full bg-brand-ink" />}
           </span>
         ))}
       </div>
@@ -47,9 +48,9 @@ export function PicturePin({
             disabled={disabled}
             onClick={() => tap(p.id)}
             aria-label={p.id}
-            className="flex aspect-square items-center justify-center rounded-xl border border-line bg-surface text-4xl transition active:scale-95 hover:border-brand disabled:opacity-40"
+            className="flex aspect-square items-center justify-center rounded-xl border border-line bg-surface text-ink-soft transition active:scale-95 hover:border-brand hover:text-brand disabled:opacity-40"
           >
-            {p.emoji}
+            <Icon name={p.icon} className="h-9 w-9" />
           </button>
         ))}
       </div>
