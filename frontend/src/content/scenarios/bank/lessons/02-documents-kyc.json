@@ -1,0 +1,477 @@
+{
+  "id": "lesson_bank_documents",
+  "kind": "room",
+  "pillar": "bank",
+  "order": 2,
+  "estMinutes": 9,
+  "difficulty": "easy",
+  "titleKey": "bank_documents.title",
+  "blurbKey": "bank_documents.blurb",
+  "concepts": [
+    "kyc_documents",
+    "nominee",
+    "minor_accounts",
+    "kyc_update"
+  ],
+  "misconceptions": [
+    "minors_cannot_bank",
+    "nominee_is_joint_owner"
+  ],
+  "vars": {
+    "idProof": {
+      "value": 1
+    },
+    "addrProof": {
+      "value": 1
+    },
+    "photos": {
+      "value": 2
+    },
+    "form": {
+      "value": 1
+    },
+    "minorAge": {
+      "value": 15
+    },
+    "adultAge": {
+      "value": 18
+    },
+    "friends": {
+      "value": 3
+    },
+    "startBal": {
+      "value": 60000,
+      "fmt": "rupees"
+    },
+    "startNom": {
+      "value": 2
+    },
+    "labBal": {
+      "value": 120000,
+      "fmt": "rupees"
+    },
+    "labNom": {
+      "value": 4
+    }
+  },
+  "calcs": [
+    {
+      "id": "docsA",
+      "fn": "add",
+      "args": [
+        "$idProof",
+        "$addrProof"
+      ]
+    },
+    {
+      "id": "docsB",
+      "fn": "add",
+      "args": [
+        "$docsA",
+        "$photos"
+      ]
+    },
+    {
+      "id": "docsTotal",
+      "fn": "add",
+      "args": [
+        "$docsB",
+        "$form"
+      ]
+    },
+    {
+      "id": "yearsLeft",
+      "fn": "sub",
+      "args": [
+        "$adultAge",
+        "$minorAge"
+      ]
+    },
+    {
+      "id": "nomShare",
+      "fn": "div",
+      "args": [
+        "$labBal",
+        "$labNom"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "groupPhotos",
+      "fn": "mul",
+      "args": [
+        "$friends",
+        "$photos"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "bank_documents.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "bank_documents.t1.hook",
+          "visual": "bank_counter"
+        },
+        {
+          "type": "define",
+          "textKey": "bank_documents.t1.define"
+        },
+        {
+          "type": "analogy",
+          "textKey": "bank_documents.t1.analogy",
+          "visual": "documents"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "bank_documents.q1.prompt",
+          "concept": "kyc_documents",
+          "points": 10,
+          "hintKey": "bank_documents.q1.hint",
+          "explainKey": "bank_documents.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_documents.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_documents.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_documents.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_documents.q1.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "bank_documents.q2.prompt",
+          "concept": "kyc_documents",
+          "points": 10,
+          "hintKey": "bank_documents.q2.hint",
+          "explainKey": "bank_documents.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_documents.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_documents.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_documents.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_documents.q2.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "bank_documents.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_documents.t2.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_documents.t2.steps.1",
+            "bank_documents.t2.steps.2",
+            "bank_documents.t2.steps.3",
+            "bank_documents.t2.steps.4"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "bank_documents.q3.prompt",
+          "concept": "kyc_documents",
+          "points": 10,
+          "hintKey": "bank_documents.q3.hint",
+          "explainKey": "bank_documents.q3.explain",
+          "answer": "docsTotal",
+          "unit": "number"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "bank_documents.q4.prompt",
+          "concept": "kyc_documents",
+          "points": 10,
+          "hintKey": "bank_documents.q4.hint",
+          "explainKey": "bank_documents.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_documents.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_documents.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_documents.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_documents.q4.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "bank_documents.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_documents.t3.define"
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "minors_cannot_bank"
+          ],
+          "textKey": "bank_documents.t3.mistake"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "bank_documents.q5.prompt",
+          "concept": "minor_accounts",
+          "points": 10,
+          "hintKey": "bank_documents.q5.hint",
+          "explainKey": "bank_documents.q5.explain",
+          "answer": "yearsLeft",
+          "unit": "number"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "bank_documents.q6.prompt",
+          "concept": "minor_accounts",
+          "points": 10,
+          "hintKey": "bank_documents.q6.hint",
+          "explainKey": "bank_documents.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_documents.q6.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_documents.q6.opt.b",
+              "misconception": "minors_cannot_bank",
+              "feedbackKey": "bank_documents.q6.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_documents.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_documents.q6.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "bank_documents.t4.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_documents.t4.define"
+        },
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "bank_documents.t4.explore",
+            "params": {
+              "balance": "$startBal",
+              "nominees": "$startNom"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "balance",
+                  "labelKey": "bank_documents.lab.4.s.balance",
+                  "min": 10000,
+                  "max": 200000,
+                  "step": 10000,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "nominees",
+                  "labelKey": "bank_documents.lab.4.s.nominees",
+                  "min": 1,
+                  "max": 5,
+                  "step": 1,
+                  "fmt": "number"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "share",
+                  "labelKey": "bank_documents.lab.4.r.share",
+                  "fn": "div",
+                  "args": [
+                    "balance",
+                    "nominees"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "bank_documents.q7.prompt",
+          "concept": "nominee",
+          "points": 10,
+          "hintKey": "bank_documents.q7.hint",
+          "explainKey": "bank_documents.q7.explain",
+          "answer": "nomShare",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "bank_documents.q8.prompt",
+          "concept": "nominee",
+          "points": 10,
+          "hintKey": "bank_documents.q8.hint",
+          "explainKey": "bank_documents.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_documents.q8.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_documents.q8.opt.b",
+              "misconception": "nominee_is_joint_owner",
+              "feedbackKey": "bank_documents.q8.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_documents.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_documents.q8.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "bank_documents.t5.title",
+      "blocks": [
+        {
+          "type": "tradeoff",
+          "textKey": "bank_documents.t5.tradeoff"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_documents.t5.steps.1",
+            "bank_documents.t5.steps.2",
+            "bank_documents.t5.steps.3"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "bank_kyc",
+            "bank_nominee",
+            "bank_minor_account"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "bank_documents.q9.prompt",
+          "concept": "kyc_update",
+          "points": 10,
+          "hintKey": "bank_documents.q9.hint",
+          "explainKey": "bank_documents.q9.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_documents.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_documents.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_documents.q9.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_documents.q9.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "bank_documents.q10.prompt",
+          "concept": "kyc_documents",
+          "points": 20,
+          "hintKey": "bank_documents.q10.hint",
+          "explainKey": "bank_documents.q10.explain",
+          "answer": "groupPhotos",
+          "unit": "number"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "bank_kyc",
+    "bank_nominee",
+    "bank_minor_account"
+  ]
+}

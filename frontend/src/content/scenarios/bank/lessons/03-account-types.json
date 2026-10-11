@@ -1,0 +1,575 @@
+{
+  "id": "lesson_bank_accounts",
+  "kind": "room",
+  "pillar": "bank",
+  "order": 3,
+  "estMinutes": 11,
+  "difficulty": "medium",
+  "titleKey": "bank_accounts.title",
+  "blurbKey": "bank_accounts.blurb",
+  "concepts": [
+    "account_types",
+    "minimum_balance_fees",
+    "interest_basics",
+    "deposit_types"
+  ],
+  "misconceptions": [
+    "min_balance_is_a_fee",
+    "fd_money_always_available"
+  ],
+  "vars": {
+    "rate": {
+      "value": 0.03,
+      "fmt": "percent"
+    },
+    "years1": {
+      "value": 1
+    },
+    "exBal": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "qBal": {
+      "value": 25000,
+      "fmt": "rupees"
+    },
+    "minBal": {
+      "value": 2000,
+      "fmt": "rupees"
+    },
+    "raviBal": {
+      "value": 1300,
+      "fmt": "rupees"
+    },
+    "chargeEach": {
+      "value": 150,
+      "fmt": "rupees"
+    },
+    "chargeMonths": {
+      "value": 3
+    },
+    "startBal": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "startRate": {
+      "value": 0.03,
+      "fmt": "percent"
+    },
+    "labBal": {
+      "value": 30000,
+      "fmt": "rupees"
+    },
+    "labRate": {
+      "value": 0.04,
+      "fmt": "percent"
+    },
+    "fdAmt": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "fdRate": {
+      "value": 0.07,
+      "fmt": "percent"
+    },
+    "rdMonthly": {
+      "value": 500,
+      "fmt": "rupees"
+    },
+    "rdMonths": {
+      "value": 12
+    }
+  },
+  "calcs": [
+    {
+      "id": "exInt",
+      "fn": "simpleInterest",
+      "args": [
+        "$exBal",
+        "$rate",
+        "$years1"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "qInt",
+      "fn": "simpleInterest",
+      "args": [
+        "$qBal",
+        "$rate",
+        "$years1"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "short",
+      "fn": "sub",
+      "args": [
+        "$minBal",
+        "$raviBal"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "charges",
+      "fn": "mul",
+      "args": [
+        "$chargeEach",
+        "$chargeMonths"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labInt",
+      "fn": "simpleInterest",
+      "args": [
+        "$labBal",
+        "$labRate",
+        "$years1"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "fdInt",
+      "fn": "simpleInterest",
+      "args": [
+        "$fdAmt",
+        "$fdRate",
+        "$years1"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "rdTotal",
+      "fn": "mul",
+      "args": [
+        "$rdMonthly",
+        "$rdMonths"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "bank_accounts.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "bank_accounts.t1.hook",
+          "visual": "bank_counter"
+        },
+        {
+          "type": "define",
+          "textKey": "bank_accounts.t1.define"
+        },
+        {
+          "type": "analogy",
+          "textKey": "bank_accounts.t1.analogy",
+          "visual": "bank_counter"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "bank_accounts.q1.prompt",
+          "concept": "account_types",
+          "points": 10,
+          "hintKey": "bank_accounts.q1.hint",
+          "explainKey": "bank_accounts.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_accounts.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_accounts.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_accounts.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_accounts.q1.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "bank_accounts.q2.prompt",
+          "concept": "account_types",
+          "points": 10,
+          "hintKey": "bank_accounts.q2.hint",
+          "explainKey": "bank_accounts.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_accounts.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_accounts.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_accounts.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_accounts.q2.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "bank_accounts.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_accounts.t2.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "bank_accounts.t2.formula"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_accounts.t2.steps.1",
+            "bank_accounts.t2.steps.2",
+            "bank_accounts.t2.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "bank_accounts.q3.prompt",
+          "concept": "interest_basics",
+          "points": 10,
+          "hintKey": "bank_accounts.q3.hint",
+          "explainKey": "bank_accounts.q3.explain",
+          "answer": "qInt",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "bank_accounts.q4.prompt",
+          "concept": "interest_basics",
+          "points": 10,
+          "hintKey": "bank_accounts.q4.hint",
+          "explainKey": "bank_accounts.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_accounts.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_accounts.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_accounts.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_accounts.q4.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "bank_accounts.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_accounts.t3.define"
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "min_balance_is_a_fee"
+          ],
+          "textKey": "bank_accounts.t3.mistake"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_accounts.t3.steps.1",
+            "bank_accounts.t3.steps.2",
+            "bank_accounts.t3.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "bank_accounts.q5.prompt",
+          "concept": "minimum_balance_fees",
+          "points": 10,
+          "hintKey": "bank_accounts.q5.hint",
+          "explainKey": "bank_accounts.q5.explain",
+          "answer": "short",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "bank_accounts.q6.prompt",
+          "concept": "minimum_balance_fees",
+          "points": 10,
+          "hintKey": "bank_accounts.q6.hint",
+          "explainKey": "bank_accounts.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_accounts.q6.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_accounts.q6.opt.b",
+              "misconception": "min_balance_is_a_fee",
+              "feedbackKey": "bank_accounts.q6.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_accounts.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_accounts.q6.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "bank_accounts.q7.prompt",
+          "concept": "minimum_balance_fees",
+          "points": 10,
+          "hintKey": "bank_accounts.q7.hint",
+          "explainKey": "bank_accounts.q7.explain",
+          "answer": "charges",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "bank_accounts.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "bank_accounts.t4.explore",
+            "params": {
+              "balance": "$startBal",
+              "rate": "$startRate",
+              "minBal": "$minBal",
+              "years1": "$years1"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "balance",
+                  "labelKey": "bank_accounts.lab.4.s.balance",
+                  "min": 0,
+                  "max": 50000,
+                  "step": 1000,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "rate",
+                  "labelKey": "bank_accounts.lab.4.s.rate",
+                  "min": 0.02,
+                  "max": 0.07,
+                  "step": 0.005,
+                  "fmt": "percent"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "interest",
+                  "labelKey": "bank_accounts.lab.4.r.interest",
+                  "fn": "simpleInterest",
+                  "args": [
+                    "balance",
+                    "rate",
+                    "years1"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                },
+                {
+                  "id": "monthly",
+                  "labelKey": "bank_accounts.lab.4.r.monthly",
+                  "fn": "div",
+                  "args": [
+                    "interest",
+                    12
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "gap",
+                  "labelKey": "bank_accounts.lab.4.r.gap",
+                  "fn": "sub",
+                  "args": [
+                    "balance",
+                    "minBal"
+                  ],
+                  "fmt": "rupees"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "bank_accounts.q8.prompt",
+          "concept": "interest_basics",
+          "points": 10,
+          "hintKey": "bank_accounts.q8.hint",
+          "explainKey": "bank_accounts.q8.explain",
+          "answer": "labInt",
+          "unit": "rupees"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "bank_accounts.q9.prompt",
+          "concept": "minimum_balance_fees",
+          "points": 10,
+          "hintKey": "bank_accounts.q9.hint",
+          "explainKey": "bank_accounts.q9.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_accounts.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_accounts.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_accounts.q9.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_accounts.q9.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "bank_accounts.t5.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_accounts.t5.define"
+        },
+        {
+          "type": "tradeoff",
+          "textKey": "bank_accounts.t5.tradeoff"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "bank_savings_account",
+            "bank_current_account",
+            "bank_min_balance",
+            "bank_fixed_deposit",
+            "bank_recurring_deposit",
+            "bank_zero_balance"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "bank_accounts.q10.prompt",
+          "concept": "deposit_types",
+          "points": 10,
+          "hintKey": "bank_accounts.q10.hint",
+          "explainKey": "bank_accounts.q10.explain",
+          "answer": "fdInt",
+          "unit": "rupees"
+        },
+        {
+          "id": "q11",
+          "kind": "number",
+          "promptKey": "bank_accounts.q11.prompt",
+          "concept": "deposit_types",
+          "points": 10,
+          "hintKey": "bank_accounts.q11.hint",
+          "explainKey": "bank_accounts.q11.explain",
+          "answer": "rdTotal",
+          "unit": "rupees"
+        },
+        {
+          "id": "q12",
+          "kind": "choice",
+          "promptKey": "bank_accounts.q12.prompt",
+          "concept": "deposit_types",
+          "points": 10,
+          "hintKey": "bank_accounts.q12.hint",
+          "explainKey": "bank_accounts.q12.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_accounts.q12.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_accounts.q12.opt.b",
+              "misconception": "fd_money_always_available",
+              "feedbackKey": "bank_accounts.q12.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_accounts.q12.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_accounts.q12.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "bank_savings_account",
+    "bank_current_account",
+    "bank_min_balance",
+    "bank_fixed_deposit",
+    "bank_recurring_deposit",
+    "bank_zero_balance"
+  ]
+}

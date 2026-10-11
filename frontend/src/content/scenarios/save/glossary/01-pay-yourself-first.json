@@ -1,0 +1,20 @@
+[
+  {
+    "id": "save_savings",
+    "termKey": "save_pay_yourself_first.glossary.save_savings.term",
+    "defKey": "save_pay_yourself_first.glossary.save_savings.def",
+    "lesson": "lesson_save_pay_yourself_first"
+  },
+  {
+    "id": "save_pay_first",
+    "termKey": "save_pay_yourself_first.glossary.save_pay_first.term",
+    "defKey": "save_pay_yourself_first.glossary.save_pay_first.def",
+    "lesson": "lesson_save_pay_yourself_first"
+  },
+  {
+    "id": "save_habit",
+    "termKey": "save_pay_yourself_first.glossary.save_habit.term",
+    "defKey": "save_pay_yourself_first.glossary.save_habit.def",
+    "lesson": "lesson_save_pay_yourself_first"
+  }
+]

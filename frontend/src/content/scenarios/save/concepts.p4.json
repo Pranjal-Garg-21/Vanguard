@@ -1,11 +1,36 @@
 {
   "_note": "Concept and misconception IDs used by the save lessons. 'existing' are in Implementation.md section 11 / concepts.json; 'proposed' must be reviewed and merged by P2.",
   "concepts": {
-    "existing": [],
-    "proposed": []
+    "existing": [
+      "pay_yourself_first",
+      "expense_tracking",
+      "emergency_fund",
+      "where_to_keep_money",
+      "interest_basics",
+      "lending_boundaries",
+      "simple_vs_compound",
+      "liquidity"
+    ],
+    "proposed": [
+      "habit_beats_amount",
+      "goal_months",
+      "emergency_cover_months",
+      "emergency_refill",
+      "fd_lock_in",
+      "recurring_deposit",
+      "spending_leaks",
+      "spending_patterns"
+    ]
   },
   "misconceptions": {
-    "existing": [],
-    "proposed": []
+    "existing": ["save_what_is_left", "small_spends_dont_matter"],
+    "proposed": [
+      "save_only_big_amounts",
+      "sale_is_emergency",
+      "emergency_fund_should_grow",
+      "cash_at_home_is_safest",
+      "fd_withdraw_free",
+      "friend_always_repays"
+    ]
   }
 }

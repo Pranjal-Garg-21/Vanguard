@@ -1,0 +1,14 @@
+[
+  {
+    "id": "plan_goal",
+    "termKey": "plan_goals.glossary.plan_goal.term",
+    "defKey": "plan_goals.glossary.plan_goal.def",
+    "lesson": "lesson_plan_goals"
+  },
+  {
+    "id": "plan_monthly_step",
+    "termKey": "plan_goals.glossary.plan_monthly_step.term",
+    "defKey": "plan_goals.glossary.plan_monthly_step.def",
+    "lesson": "lesson_plan_goals"
+  }
+]

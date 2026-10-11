@@ -1,11 +1,38 @@
 {
   "_note": "Concept and misconception IDs used by the bank lessons. 'existing' are in Implementation.md section 11 / concepts.json; 'proposed' must be reviewed and merged by P2.",
   "concepts": {
-    "existing": [],
-    "proposed": []
+    "existing": [
+      "why_bank_account",
+      "interest_basics",
+      "kyc_documents",
+      "nominee",
+      "account_types",
+      "minimum_balance_fees"
+    ],
+    "proposed": [
+      "cash_risks",
+      "bank_records",
+      "small_savings_add_up",
+      "minor_accounts",
+      "kyc_update",
+      "deposit_types",
+      "statement_reading",
+      "credit_debit",
+      "spotting_charges",
+      "reconcile_balance"
+    ]
   },
   "misconceptions": {
     "existing": [],
-    "proposed": []
+    "proposed": [
+      "interest_is_a_fee",
+      "bank_only_for_the_rich",
+      "minors_cannot_bank",
+      "nominee_is_joint_owner",
+      "min_balance_is_a_fee",
+      "fd_money_always_available",
+      "credit_means_money_out",
+      "small_charges_not_worth_checking"
+    ]
   }
 }

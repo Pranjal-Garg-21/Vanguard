@@ -1,0 +1,621 @@
+{
+  "id": "lesson_save_track_spending",
+  "kind": "room",
+  "pillar": "save",
+  "order": 4,
+  "estMinutes": 12,
+  "difficulty": "medium",
+  "titleKey": "save_track_spending.title",
+  "blurbKey": "save_track_spending.blurb",
+  "concepts": [
+    "expense_tracking",
+    "spending_leaks",
+    "spending_patterns",
+    "lending_boundaries"
+  ],
+  "misconceptions": [
+    "small_spends_dont_matter",
+    "friend_always_repays"
+  ],
+  "vars": {
+    "daily": {
+      "value": 40,
+      "fmt": "rupees"
+    },
+    "daily2": {
+      "value": 35,
+      "fmt": "rupees"
+    },
+    "monthDays": {
+      "value": 30,
+      "fmt": "number"
+    },
+    "mon": {
+      "value": 60,
+      "fmt": "rupees"
+    },
+    "tue": {
+      "value": 40,
+      "fmt": "rupees"
+    },
+    "wed": {
+      "value": 100,
+      "fmt": "rupees"
+    },
+    "thu": {
+      "value": 40,
+      "fmt": "rupees"
+    },
+    "fri": {
+      "value": 210,
+      "fmt": "rupees"
+    },
+    "sat": {
+      "value": 350,
+      "fmt": "rupees"
+    },
+    "sun": {
+      "value": 200,
+      "fmt": "rupees"
+    },
+    "labStart": {
+      "value": 40,
+      "fmt": "rupees"
+    },
+    "labDaily": {
+      "value": 70,
+      "fmt": "rupees"
+    },
+    "lent": {
+      "value": 1500,
+      "fmt": "rupees"
+    },
+    "back": {
+      "value": 600,
+      "fmt": "rupees"
+    },
+    "cutTo": {
+      "value": 15,
+      "fmt": "rupees"
+    },
+    "ask": {
+      "value": 800,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "perMonth",
+      "fn": "mul",
+      "args": [
+        "$daily",
+        "$monthDays"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "perYear",
+      "fn": "mul",
+      "args": [
+        "$perMonth",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exMonth",
+      "fn": "mul",
+      "args": [
+        "$daily2",
+        "$monthDays"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exYear",
+      "fn": "mul",
+      "args": [
+        "$exMonth",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "w1",
+      "fn": "add",
+      "args": [
+        "$mon",
+        "$tue"
+      ]
+    },
+    {
+      "id": "w2",
+      "fn": "add",
+      "args": [
+        "$w1",
+        "$wed"
+      ]
+    },
+    {
+      "id": "w3",
+      "fn": "add",
+      "args": [
+        "$w2",
+        "$thu"
+      ]
+    },
+    {
+      "id": "w4",
+      "fn": "add",
+      "args": [
+        "$w3",
+        "$fri"
+      ]
+    },
+    {
+      "id": "w5",
+      "fn": "add",
+      "args": [
+        "$w4",
+        "$sat"
+      ]
+    },
+    {
+      "id": "weekTotal",
+      "fn": "add",
+      "args": [
+        "$w5",
+        "$sun"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "weekend",
+      "fn": "add",
+      "args": [
+        "$sat",
+        "$sun"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "weekendShare",
+      "fn": "percentOf",
+      "args": [
+        "$weekend",
+        "$weekTotal"
+      ],
+      "fmt": "percent"
+    },
+    {
+      "id": "labMonth",
+      "fn": "mul",
+      "args": [
+        "$labDaily",
+        "$monthDays"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labYear",
+      "fn": "mul",
+      "args": [
+        "$labMonth",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "owed",
+      "fn": "sub",
+      "args": [
+        "$lent",
+        "$back"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "saveDay",
+      "fn": "sub",
+      "args": [
+        "$daily",
+        "$cutTo"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "saveMonth",
+      "fn": "mul",
+      "args": [
+        "$saveDay",
+        "$monthDays"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "saveYear",
+      "fn": "mul",
+      "args": [
+        "$saveMonth",
+        12
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "save_track_spending.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "budget_jars",
+          "textKey": "save_track_spending.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "save_track_spending.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "tea_stall",
+          "textKey": "save_track_spending.t1.analogy"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "save_track_spending.q1.prompt",
+          "concept": "spending_leaks",
+          "points": 10,
+          "hintKey": "save_track_spending.q1.hint",
+          "explainKey": "save_track_spending.q1.explain",
+          "answer": "perMonth",
+          "unit": "rupees"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "save_track_spending.q2.prompt",
+          "concept": "spending_leaks",
+          "points": 10,
+          "hintKey": "save_track_spending.q2.hint",
+          "explainKey": "save_track_spending.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_track_spending.q2.opt.a",
+              "misconception": "small_spends_dont_matter",
+              "feedbackKey": "save_track_spending.q2.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_track_spending.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_track_spending.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_track_spending.q2.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "save_track_spending.t2.title",
+      "blocks": [
+        {
+          "type": "steps",
+          "stepKeys": [
+            "save_track_spending.t2.steps.1",
+            "save_track_spending.t2.steps.2",
+            "save_track_spending.t2.steps.3"
+          ]
+        },
+        {
+          "type": "note",
+          "textKey": "save_track_spending.t2.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "save_track_spending.q3.prompt",
+          "concept": "spending_leaks",
+          "points": 10,
+          "hintKey": "save_track_spending.q3.hint",
+          "explainKey": "save_track_spending.q3.explain",
+          "answer": "perYear",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "save_track_spending.q4.prompt",
+          "concept": "spending_leaks",
+          "points": 10,
+          "hintKey": "save_track_spending.q4.hint",
+          "explainKey": "save_track_spending.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_track_spending.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_track_spending.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_track_spending.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_track_spending.q4.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "save_track_spending.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "save_track_spending.t3.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "save_track_spending.t3.steps.1",
+            "save_track_spending.t3.steps.2",
+            "save_track_spending.t3.steps.3"
+          ]
+        },
+        {
+          "type": "note",
+          "textKey": "save_track_spending.t3.week"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "save_track_spending.q5.prompt",
+          "concept": "expense_tracking",
+          "points": 10,
+          "hintKey": "save_track_spending.q5.hint",
+          "explainKey": "save_track_spending.q5.explain",
+          "answer": "weekTotal",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "save_track_spending.q6.prompt",
+          "concept": "spending_patterns",
+          "points": 10,
+          "hintKey": "save_track_spending.q6.hint",
+          "explainKey": "save_track_spending.q6.explain",
+          "answer": "weekendShare",
+          "unit": "percent",
+          "tolerance": 1
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "save_track_spending.q7.prompt",
+          "concept": "spending_patterns",
+          "points": 10,
+          "hintKey": "save_track_spending.q7.hint",
+          "explainKey": "save_track_spending.q7.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_track_spending.q7.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_track_spending.q7.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_track_spending.q7.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_track_spending.q7.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "save_track_spending.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "save_track_spending.t4.explore",
+            "params": {
+              "daily": "$labStart",
+              "days": "$monthDays"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "daily",
+                  "labelKey": "save_track_spending.t4.lab.daily",
+                  "min": 10,
+                  "max": 200,
+                  "step": 10,
+                  "fmt": "rupees"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "month",
+                  "labelKey": "save_track_spending.t4.lab.month",
+                  "fn": "mul",
+                  "args": [
+                    "daily",
+                    "days"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "year",
+                  "labelKey": "save_track_spending.t4.lab.year",
+                  "fn": "mul",
+                  "args": [
+                    "month",
+                    12
+                  ],
+                  "fmt": "rupees",
+                  "tone": "bad"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "save_track_spending.q8.prompt",
+          "concept": "spending_leaks",
+          "points": 10,
+          "hintKey": "save_track_spending.q8.hint",
+          "explainKey": "save_track_spending.q8.explain",
+          "answer": "labYear",
+          "unit": "rupees"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "save_track_spending.q9.prompt",
+          "concept": "spending_leaks",
+          "points": 10,
+          "hintKey": "save_track_spending.q9.hint",
+          "explainKey": "save_track_spending.q9.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_track_spending.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_track_spending.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_track_spending.q9.opt.c"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "save_track_spending.t5.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "save_track_spending.t5.define"
+        },
+        {
+          "type": "note",
+          "textKey": "save_track_spending.t5.note"
+        },
+        {
+          "type": "misconception",
+          "textKey": "save_track_spending.t5.mistake",
+          "misconceptions": [
+            "friend_always_repays"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "save_leak",
+            "save_tracking",
+            "save_pattern"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "save_track_spending.q10.prompt",
+          "concept": "lending_boundaries",
+          "points": 10,
+          "hintKey": "save_track_spending.q10.hint",
+          "explainKey": "save_track_spending.q10.explain",
+          "answer": "owed",
+          "unit": "rupees"
+        },
+        {
+          "id": "q11",
+          "kind": "choice",
+          "promptKey": "save_track_spending.q11.prompt",
+          "concept": "lending_boundaries",
+          "points": 10,
+          "hintKey": "save_track_spending.q11.hint",
+          "explainKey": "save_track_spending.q11.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "save_track_spending.q11.opt.a",
+              "misconception": "friend_always_repays",
+              "feedbackKey": "save_track_spending.q11.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "save_track_spending.q11.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "save_track_spending.q11.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "save_track_spending.q11.opt.d"
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q12",
+          "kind": "number",
+          "promptKey": "save_track_spending.q12.prompt",
+          "concept": "spending_leaks",
+          "points": 20,
+          "hintKey": "save_track_spending.q12.hint",
+          "explainKey": "save_track_spending.q12.explain",
+          "answer": "saveYear",
+          "unit": "rupees"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "save_leak",
+    "save_tracking",
+    "save_pattern"
+  ]
+}

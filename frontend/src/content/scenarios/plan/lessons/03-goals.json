@@ -1,0 +1,418 @@
+{
+  "id": "lesson_plan_goals",
+  "kind": "room",
+  "pillar": "plan",
+  "order": 3,
+  "estMinutes": 10,
+  "difficulty": "medium",
+  "titleKey": "plan_goals.title",
+  "blurbKey": "plan_goals.blurb",
+  "concepts": [
+    "goal_setting",
+    "months_to_goal"
+  ],
+  "misconceptions": [
+    "vague_goal_is_a_goal",
+    "only_saving_more_helps"
+  ],
+  "vars": {
+    "target": {
+      "value": 21000,
+      "fmt": "rupees"
+    },
+    "monthly": {
+      "value": 1500,
+      "fmt": "rupees"
+    },
+    "wishMonths": {
+      "value": 10,
+      "fmt": "number"
+    },
+    "partial": {
+      "value": 2000,
+      "fmt": "rupees"
+    },
+    "fast": {
+      "value": 3000,
+      "fmt": "rupees"
+    },
+    "deadline": {
+      "value": 9,
+      "fmt": "number"
+    },
+    "head": {
+      "value": 4500,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "monthlyNeeded",
+      "fn": "div",
+      "args": [
+        "$target",
+        "$wishMonths"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "months",
+      "fn": "monthsToGoal",
+      "args": [
+        "$target",
+        "$monthly"
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "months2",
+      "fn": "monthsToGoal",
+      "args": [
+        "$target",
+        "$partial"
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "months3",
+      "fn": "monthsToGoal",
+      "args": [
+        "$target",
+        "$fast"
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "affordable",
+      "fn": "mul",
+      "args": [
+        "$monthly",
+        "$deadline"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "remaining",
+      "fn": "sub",
+      "args": [
+        "$target",
+        "$head"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "months4",
+      "fn": "monthsToGoal",
+      "args": [
+        "$remaining",
+        "$monthly"
+      ],
+      "fmt": "number"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "plan_goals.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "plan_goals.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "plan_goals.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "goal_ladder",
+          "textKey": "plan_goals.t1.analogy"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "plan_goals.q1.prompt",
+          "concept": "goal_setting",
+          "points": 10,
+          "hintKey": "plan_goals.q1.hint",
+          "explainKey": "plan_goals.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_goals.q1.opt.a",
+              "misconception": "vague_goal_is_a_goal",
+              "feedbackKey": "plan_goals.q1.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_goals.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_goals.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_goals.q1.opt.d"
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "plan_goals.q2.prompt",
+          "concept": "goal_setting",
+          "points": 10,
+          "hintKey": "plan_goals.q2.hint",
+          "explainKey": "plan_goals.q2.explain",
+          "answer": "monthlyNeeded",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "plan_goals.t2.title",
+      "blocks": [
+        {
+          "type": "formula",
+          "textKey": "plan_goals.t2.formula"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "plan_goals.t2.steps.1",
+            "plan_goals.t2.steps.2",
+            "plan_goals.t2.steps.3"
+          ]
+        },
+        {
+          "type": "note",
+          "textKey": "plan_goals.t2.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "plan_goals.q3.prompt",
+          "concept": "months_to_goal",
+          "points": 10,
+          "hintKey": "plan_goals.q3.hint",
+          "explainKey": "plan_goals.q3.explain",
+          "answer": "months",
+          "unit": "number"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "plan_goals.q4.prompt",
+          "concept": "months_to_goal",
+          "points": 10,
+          "hintKey": "plan_goals.q4.hint",
+          "explainKey": "plan_goals.q4.explain",
+          "answer": "months2",
+          "unit": "number",
+          "tolerance": 0.1
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "plan_goals.t3.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "plan_goals.t3.explore",
+            "params": {
+              "target": "$target",
+              "monthly": "$monthly"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "monthly",
+                  "labelKey": "plan_goals.t3.lab.monthly",
+                  "min": 500,
+                  "max": 5000,
+                  "step": 250,
+                  "fmt": "rupees"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "monthsNeeded",
+                  "labelKey": "plan_goals.t3.lab.monthsNeeded",
+                  "fn": "monthsToGoal",
+                  "args": [
+                    "target",
+                    "monthly"
+                  ],
+                  "fmt": "number",
+                  "tone": "good"
+                },
+                {
+                  "id": "putIn",
+                  "labelKey": "plan_goals.t3.lab.putIn",
+                  "fn": "mul",
+                  "args": [
+                    "monthsNeeded",
+                    "monthly"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "extra",
+                  "labelKey": "plan_goals.t3.lab.extra",
+                  "fn": "sub",
+                  "args": [
+                    "putIn",
+                    "target"
+                  ],
+                  "fmt": "rupees"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "plan_goals.q5.prompt",
+          "concept": "months_to_goal",
+          "points": 10,
+          "hintKey": "plan_goals.q5.hint",
+          "explainKey": "plan_goals.q5.explain",
+          "answer": "months3",
+          "unit": "number"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "plan_goals.q6.prompt",
+          "concept": "months_to_goal",
+          "points": 10,
+          "hintKey": "plan_goals.q6.hint",
+          "explainKey": "plan_goals.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_goals.q6.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_goals.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_goals.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_goals.q6.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "plan_goals.t4.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "plan_goals.t4.define"
+        },
+        {
+          "type": "note",
+          "textKey": "plan_goals.t4.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "plan_goals.q7.prompt",
+          "concept": "goal_setting",
+          "points": 10,
+          "hintKey": "plan_goals.q7.hint",
+          "explainKey": "plan_goals.q7.explain",
+          "answer": "affordable",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "plan_goals.q8.prompt",
+          "concept": "goal_setting",
+          "points": 10,
+          "hintKey": "plan_goals.q8.hint",
+          "explainKey": "plan_goals.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_goals.q8.opt.a",
+              "misconception": "only_saving_more_helps",
+              "feedbackKey": "plan_goals.q8.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_goals.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_goals.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_goals.q8.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "plan_goals.t5.title",
+      "blocks": [
+        {
+          "type": "note",
+          "textKey": "plan_goals.t5.note"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "plan_goal",
+            "plan_monthly_step"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "plan_goals.q9.prompt",
+          "concept": "months_to_goal",
+          "points": 20,
+          "hintKey": "plan_goals.q9.hint",
+          "explainKey": "plan_goals.q9.explain",
+          "answer": "months4",
+          "unit": "number"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "plan_goal",
+    "plan_monthly_step"
+  ]
+}

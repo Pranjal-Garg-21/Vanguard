@@ -1,0 +1,494 @@
+{
+  "id": "lesson_plan_needs_wants",
+  "kind": "room",
+  "pillar": "plan",
+  "order": 1,
+  "estMinutes": 8,
+  "difficulty": "easy",
+  "titleKey": "plan_needs_wants.title",
+  "blurbKey": "plan_needs_wants.blurb",
+  "concepts": [
+    "needs_vs_wants",
+    "context_dependence",
+    "share_of_income"
+  ],
+  "misconceptions": [
+    "fun_is_bad",
+    "needs_are_same_for_everyone"
+  ],
+  "vars": {
+    "income": {
+      "value": 4000,
+      "fmt": "rupees"
+    },
+    "bus": {
+      "value": 400,
+      "fmt": "rupees"
+    },
+    "food": {
+      "value": 1200,
+      "fmt": "rupees"
+    },
+    "sneakers": {
+      "value": 1800,
+      "fmt": "rupees"
+    },
+    "movie": {
+      "value": 300,
+      "fmt": "rupees"
+    },
+    "basicPhone": {
+      "value": 9000,
+      "fmt": "rupees"
+    },
+    "fancyPhone": {
+      "value": 24000,
+      "fmt": "rupees"
+    },
+    "wantStart": {
+      "value": 1000,
+      "fmt": "rupees"
+    },
+    "n2": {
+      "value": 2200,
+      "fmt": "rupees"
+    },
+    "w2": {
+      "value": 1100,
+      "fmt": "rupees"
+    },
+    "n3": {
+      "value": 3000,
+      "fmt": "rupees"
+    },
+    "w3": {
+      "value": 2000,
+      "fmt": "rupees"
+    },
+    "capShare": {
+      "value": 0.25,
+      "fmt": "percent"
+    }
+  },
+  "calcs": [
+    {
+      "id": "needsTotal",
+      "fn": "add",
+      "args": [
+        "$bus",
+        "$food"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "phoneWant",
+      "fn": "sub",
+      "args": [
+        "$fancyPhone",
+        "$basicPhone"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "spent2",
+      "fn": "add",
+      "args": [
+        "$n2",
+        "$w2"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "left2",
+      "fn": "sub",
+      "args": [
+        "$income",
+        "$spent2"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "needShare",
+      "fn": "percentOf",
+      "args": [
+        "$needsTotal",
+        "$income"
+      ],
+      "fmt": "percent"
+    },
+    {
+      "id": "wantCap",
+      "fn": "mul",
+      "args": [
+        "$income",
+        "$capShare"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "plan_needs_wants.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "plan_needs_wants.t1.hook"
+        },
+        {
+          "type": "define",
+          "textKey": "plan_needs_wants.t1.define"
+        },
+        {
+          "type": "analogy",
+          "visual": "thali",
+          "textKey": "plan_needs_wants.t1.analogy"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "plan_needs_wants.q1.prompt",
+          "concept": "needs_vs_wants",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q1.hint",
+          "explainKey": "plan_needs_wants.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_needs_wants.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_needs_wants.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_needs_wants.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_needs_wants.q1.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "plan_needs_wants.q2.prompt",
+          "concept": "needs_vs_wants",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q2.hint",
+          "explainKey": "plan_needs_wants.q2.explain",
+          "answer": "needsTotal",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "plan_needs_wants.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "plan_needs_wants.t2.define"
+        },
+        {
+          "type": "note",
+          "textKey": "plan_needs_wants.t2.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "choice",
+          "promptKey": "plan_needs_wants.q3.prompt",
+          "concept": "needs_vs_wants",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q3.hint",
+          "explainKey": "plan_needs_wants.q3.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_needs_wants.q3.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_needs_wants.q3.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_needs_wants.q3.opt.c",
+              "misconception": "needs_are_same_for_everyone",
+              "feedbackKey": "plan_needs_wants.q3.fb.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_needs_wants.q3.opt.d"
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "plan_needs_wants.q4.prompt",
+          "concept": "needs_vs_wants",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q4.hint",
+          "explainKey": "plan_needs_wants.q4.explain",
+          "answer": "phoneWant",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "plan_needs_wants.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "plan_needs_wants.t3.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "plan_needs_wants.t3.steps.1",
+            "plan_needs_wants.t3.steps.2",
+            "plan_needs_wants.t3.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "plan_needs_wants.q5.prompt",
+          "concept": "context_dependence",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q5.hint",
+          "explainKey": "plan_needs_wants.q5.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_needs_wants.q5.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_needs_wants.q5.opt.b",
+              "misconception": "needs_are_same_for_everyone",
+              "feedbackKey": "plan_needs_wants.q5.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_needs_wants.q5.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_needs_wants.q5.opt.d"
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "plan_needs_wants.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "plan_needs_wants.t4.explore",
+            "params": {
+              "income": "$income",
+              "needs": "$needsTotal",
+              "wants": "$wantStart"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "needs",
+                  "labelKey": "plan_needs_wants.t4.lab.needs",
+                  "min": 0,
+                  "max": 4000,
+                  "step": 100,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "wants",
+                  "labelKey": "plan_needs_wants.t4.lab.wants",
+                  "min": 0,
+                  "max": 4000,
+                  "step": 100,
+                  "fmt": "rupees"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "spent",
+                  "labelKey": "plan_needs_wants.t4.lab.spent",
+                  "fn": "add",
+                  "args": [
+                    "needs",
+                    "wants"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "left",
+                  "labelKey": "plan_needs_wants.t4.lab.left",
+                  "fn": "sub",
+                  "args": [
+                    "income",
+                    "spent"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "plan_needs_wants.q6.prompt",
+          "concept": "needs_vs_wants",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q6.hint",
+          "explainKey": "plan_needs_wants.q6.explain",
+          "answer": "left2",
+          "unit": "rupees"
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "plan_needs_wants.q7.prompt",
+          "concept": "needs_vs_wants",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q7.hint",
+          "explainKey": "plan_needs_wants.q7.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_needs_wants.q7.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_needs_wants.q7.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_needs_wants.q7.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_needs_wants.q7.opt.d"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "plan_needs_wants.t5.title",
+      "blocks": [
+        {
+          "type": "misconception",
+          "textKey": "plan_needs_wants.t5.misconception",
+          "misconceptions": [
+            "fun_is_bad"
+          ]
+        },
+        {
+          "type": "tradeoff",
+          "textKey": "plan_needs_wants.t5.tradeoff"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "plan_needs_wants.q8.prompt",
+          "concept": "needs_vs_wants",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q8.hint",
+          "explainKey": "plan_needs_wants.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "plan_needs_wants.q8.opt.a",
+              "misconception": "fun_is_bad",
+              "feedbackKey": "plan_needs_wants.q8.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "plan_needs_wants.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "plan_needs_wants.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "plan_needs_wants.q8.opt.d"
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "plan_needs_wants.q9.prompt",
+          "concept": "share_of_income",
+          "points": 10,
+          "hintKey": "plan_needs_wants.q9.hint",
+          "explainKey": "plan_needs_wants.q9.explain",
+          "answer": "needShare",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "titleKey": "plan_needs_wants.t6.title",
+      "blocks": [
+        {
+          "type": "formula",
+          "textKey": "plan_needs_wants.t6.formula"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "plan_need",
+            "plan_want"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "plan_needs_wants.q10.prompt",
+          "concept": "share_of_income",
+          "points": 20,
+          "hintKey": "plan_needs_wants.q10.hint",
+          "explainKey": "plan_needs_wants.q10.explain",
+          "answer": "wantCap",
+          "unit": "rupees"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "plan_need",
+    "plan_want"
+  ]
+}

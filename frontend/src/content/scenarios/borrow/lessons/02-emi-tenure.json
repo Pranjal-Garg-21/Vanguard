@@ -1,0 +1,520 @@
+{
+  "id": "lesson_borrow_emi",
+  "kind": "room",
+  "pillar": "borrow",
+  "order": 2,
+  "estMinutes": 11,
+  "difficulty": "medium",
+  "titleKey": "borrow_emi.title",
+  "blurbKey": "borrow_emi.blurb",
+  "concepts": [
+    "emi",
+    "tenure_tradeoff",
+    "borrowing_cost"
+  ],
+  "misconceptions": [
+    "compare_emi_not_total"
+  ],
+  "vars": {
+    "exP": {
+      "value": 12000,
+      "fmt": "rupees"
+    },
+    "exR": {
+      "value": 0.12,
+      "fmt": "percent"
+    },
+    "exM": {
+      "value": 12
+    },
+    "P": {
+      "value": 36000,
+      "fmt": "rupees"
+    },
+    "rate": {
+      "value": 0.12,
+      "fmt": "percent"
+    },
+    "m12": {
+      "value": 12
+    },
+    "m24": {
+      "value": 24
+    },
+    "m36": {
+      "value": 36
+    },
+    "income": {
+      "value": 12000,
+      "fmt": "rupees"
+    },
+    "budget": {
+      "value": 2000,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "exEmi",
+      "fn": "emi",
+      "args": [
+        "$exP",
+        "$exR",
+        "$exM"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exTotal",
+      "fn": "loanTotalPaid",
+      "args": [
+        "$exP",
+        "$exR",
+        "$exM"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exCost",
+      "fn": "loanInterest",
+      "args": [
+        "$exP",
+        "$exR",
+        "$exM"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "emi12",
+      "fn": "emi",
+      "args": [
+        "$P",
+        "$rate",
+        "$m12"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "total12",
+      "fn": "loanTotalPaid",
+      "args": [
+        "$P",
+        "$rate",
+        "$m12"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "emi24",
+      "fn": "emi",
+      "args": [
+        "$P",
+        "$rate",
+        "$m24"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "emi36",
+      "fn": "emi",
+      "args": [
+        "$P",
+        "$rate",
+        "$m36"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "cost12",
+      "fn": "loanInterest",
+      "args": [
+        "$P",
+        "$rate",
+        "$m12"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "cost24",
+      "fn": "loanInterest",
+      "args": [
+        "$P",
+        "$rate",
+        "$m24"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "cost36",
+      "fn": "loanInterest",
+      "args": [
+        "$P",
+        "$rate",
+        "$m36"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "share24",
+      "fn": "percentOf",
+      "args": [
+        "$emi24",
+        "$income"
+      ],
+      "fmt": "percent",
+      "round": 1
+    },
+    {
+      "id": "extraCost",
+      "fn": "sub",
+      "args": [
+        "$cost36",
+        "$cost12"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "borrow_emi.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "emi_calendar",
+          "textKey": "borrow_emi.t1.b1"
+        },
+        {
+          "type": "define",
+          "textKey": "borrow_emi.t1.b2"
+        },
+        {
+          "type": "analogy",
+          "visual": "emi_calendar",
+          "textKey": "borrow_emi.t1.b3"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "borrow_emi.t1.b4.1",
+            "borrow_emi.t1.b4.2",
+            "borrow_emi.t1.b4.3",
+            "borrow_emi.t1.b4.4"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "borrow_emi.q1.prompt",
+          "concept": "emi",
+          "points": 10,
+          "hintKey": "borrow_emi.q1.hint",
+          "explainKey": "borrow_emi.q1.explain",
+          "answer": "emi12",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "borrow_emi.q2.prompt",
+          "concept": "emi",
+          "points": 10,
+          "hintKey": "borrow_emi.q2.hint",
+          "explainKey": "borrow_emi.q2.explain",
+          "answer": "total12",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q3",
+          "kind": "choice",
+          "promptKey": "borrow_emi.q3.prompt",
+          "concept": "emi",
+          "points": 10,
+          "hintKey": "borrow_emi.q3.hint",
+          "explainKey": "borrow_emi.q3.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_emi.q3.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_emi.q3.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_emi.q3.opt.c"
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "borrow_emi.t2.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "borrow_emi.t2.b1.prompt",
+            "params": {
+              "amount": "$P",
+              "rate": "$rate",
+              "months": "$m12"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "amount",
+                  "labelKey": "borrow_emi.t2.b1.s.amount",
+                  "min": 10000,
+                  "max": 100000,
+                  "step": 2000,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "rate",
+                  "labelKey": "borrow_emi.t2.b1.s.rate",
+                  "min": 0.06,
+                  "max": 0.3,
+                  "step": 0.01,
+                  "fmt": "percent"
+                },
+                {
+                  "id": "months",
+                  "labelKey": "borrow_emi.t2.b1.s.months",
+                  "min": 6,
+                  "max": 48,
+                  "step": 6,
+                  "fmt": "number"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "emi",
+                  "labelKey": "borrow_emi.t2.b1.r.emi",
+                  "fn": "emi",
+                  "args": [
+                    "amount",
+                    "rate",
+                    "months"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "total",
+                  "labelKey": "borrow_emi.t2.b1.r.total",
+                  "fn": "loanTotalPaid",
+                  "args": [
+                    "amount",
+                    "rate",
+                    "months"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "cost",
+                  "labelKey": "borrow_emi.t2.b1.r.cost",
+                  "fn": "loanInterest",
+                  "args": [
+                    "amount",
+                    "rate",
+                    "months"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "bad"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "note",
+          "textKey": "borrow_emi.t2.b2"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "borrow_emi.q4.prompt",
+          "concept": "tenure_tradeoff",
+          "points": 10,
+          "hintKey": "borrow_emi.q4.hint",
+          "explainKey": "borrow_emi.q4.explain",
+          "answer": "emi36",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "borrow_emi.q5.prompt",
+          "concept": "tenure_tradeoff",
+          "points": 10,
+          "hintKey": "borrow_emi.q5.hint",
+          "explainKey": "borrow_emi.q5.explain",
+          "answer": "cost36",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "borrow_emi.q6.prompt",
+          "concept": "tenure_tradeoff",
+          "points": 10,
+          "hintKey": "borrow_emi.q6.hint",
+          "explainKey": "borrow_emi.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_emi.q6.opt.a",
+              "misconception": "compare_emi_not_total",
+              "feedbackKey": "borrow_emi.q6.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_emi.q6.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_emi.q6.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "borrow_emi.t3.title",
+      "blocks": [
+        {
+          "type": "note",
+          "textKey": "borrow_emi.t3.b1"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "borrow_emi.t3.b2.1",
+            "borrow_emi.t3.b2.2",
+            "borrow_emi.t3.b2.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "borrow_emi.q7.prompt",
+          "concept": "emi",
+          "points": 10,
+          "hintKey": "borrow_emi.q7.hint",
+          "explainKey": "borrow_emi.q7.explain",
+          "answer": "share24",
+          "unit": "percent",
+          "tolerance": 0.5
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "borrow_emi.q8.prompt",
+          "concept": "tenure_tradeoff",
+          "points": 10,
+          "hintKey": "borrow_emi.q8.hint",
+          "explainKey": "borrow_emi.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_emi.q8.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_emi.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_emi.q8.opt.c",
+              "misconception": "compare_emi_not_total",
+              "feedbackKey": "borrow_emi.q8.fb.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "borrow_emi.t4.title",
+      "blocks": [
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "compare_emi_not_total"
+          ],
+          "textKey": "borrow_emi.t4.b1"
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "borrow_emi",
+            "borrow_tenure",
+            "borrow_instalment"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "borrow_emi.q9.prompt",
+          "concept": "tenure_tradeoff",
+          "points": 10,
+          "hintKey": "borrow_emi.q9.hint",
+          "explainKey": "borrow_emi.q9.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_emi.q9.opt.a",
+              "misconception": "compare_emi_not_total",
+              "feedbackKey": "borrow_emi.q9.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_emi.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_emi.q9.opt.c"
+            }
+          ],
+          "correct": "c"
+        },
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "borrow_emi.q10.prompt",
+          "concept": "tenure_tradeoff",
+          "points": 20,
+          "hintKey": "borrow_emi.q10.hint",
+          "explainKey": "borrow_emi.q10.explain",
+          "answer": "extraCost",
+          "unit": "rupees",
+          "tolerance": 1
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "borrow_emi",
+    "borrow_tenure",
+    "borrow_instalment"
+  ]
+}

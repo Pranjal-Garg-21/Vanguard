@@ -1,0 +1,521 @@
+{
+  "id": "lesson_bank_why",
+  "kind": "room",
+  "pillar": "bank",
+  "order": 1,
+  "estMinutes": 8,
+  "difficulty": "easy",
+  "titleKey": "bank_why.title",
+  "blurbKey": "bank_why.blurb",
+  "concepts": [
+    "why_bank_account",
+    "cash_risks",
+    "bank_records",
+    "interest_basics",
+    "small_savings_add_up"
+  ],
+  "misconceptions": [
+    "interest_is_a_fee",
+    "bank_only_for_the_rich"
+  ],
+  "vars": {
+    "tin": {
+      "value": 8000,
+      "fmt": "rupees"
+    },
+    "damaged": {
+      "value": 2500,
+      "fmt": "rupees"
+    },
+    "rate": {
+      "value": 0.03,
+      "fmt": "percent"
+    },
+    "exBal": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "years1": {
+      "value": 1
+    },
+    "startBal": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "startYears": {
+      "value": 1
+    },
+    "exMonthly": {
+      "value": 100,
+      "fmt": "rupees"
+    },
+    "exMonths": {
+      "value": 5
+    },
+    "saveMonthly": {
+      "value": 150,
+      "fmt": "rupees"
+    },
+    "saveMonths": {
+      "value": 10
+    },
+    "loBal": {
+      "value": 5000,
+      "fmt": "rupees"
+    },
+    "hiBal": {
+      "value": 15000,
+      "fmt": "rupees"
+    },
+    "qBal": {
+      "value": 20000,
+      "fmt": "rupees"
+    },
+    "labBal": {
+      "value": 30000,
+      "fmt": "rupees"
+    },
+    "labYears": {
+      "value": 2
+    },
+    "tiny": {
+      "value": 100,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "kept",
+      "fn": "sub",
+      "args": [
+        "$tin",
+        "$damaged"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exInt",
+      "fn": "simpleInterest",
+      "args": [
+        "$exBal",
+        "$rate",
+        "$years1"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "qInt",
+      "fn": "simpleInterest",
+      "args": [
+        "$qBal",
+        "$rate",
+        "$years1"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labInt",
+      "fn": "simpleInterest",
+      "args": [
+        "$labBal",
+        "$rate",
+        "$labYears"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "exSaved",
+      "fn": "mul",
+      "args": [
+        "$exMonthly",
+        "$exMonths"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "saved",
+      "fn": "mul",
+      "args": [
+        "$saveMonthly",
+        "$saveMonths"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "bank_why.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "bank_why.t1.hook",
+          "visual": "piggy_bank"
+        },
+        {
+          "type": "define",
+          "textKey": "bank_why.t1.define"
+        },
+        {
+          "type": "analogy",
+          "textKey": "bank_why.t1.analogy",
+          "visual": "bank_counter"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "bank_why.q1.prompt",
+          "concept": "cash_risks",
+          "points": 10,
+          "hintKey": "bank_why.q1.hint",
+          "explainKey": "bank_why.q1.explain",
+          "answer": "kept",
+          "unit": "rupees"
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "bank_why.q2.prompt",
+          "concept": "cash_risks",
+          "points": 10,
+          "hintKey": "bank_why.q2.hint",
+          "explainKey": "bank_why.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_why.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_why.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_why.q2.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_why.q2.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "bank_why.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_why.t2.define"
+        },
+        {
+          "type": "note",
+          "textKey": "bank_why.t2.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "choice",
+          "promptKey": "bank_why.q3.prompt",
+          "concept": "bank_records",
+          "points": 10,
+          "hintKey": "bank_why.q3.hint",
+          "explainKey": "bank_why.q3.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_why.q3.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_why.q3.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_why.q3.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_why.q3.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "bank_why.q4.prompt",
+          "concept": "why_bank_account",
+          "points": 10,
+          "hintKey": "bank_why.q4.hint",
+          "explainKey": "bank_why.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_why.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_why.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_why.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_why.q4.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "bank_why.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_why.t3.define"
+        },
+        {
+          "type": "formula",
+          "textKey": "bank_why.t3.formula"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_why.t3.steps.1",
+            "bank_why.t3.steps.2",
+            "bank_why.t3.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "bank_why.q5.prompt",
+          "concept": "interest_basics",
+          "points": 10,
+          "hintKey": "bank_why.q5.hint",
+          "explainKey": "bank_why.q5.explain",
+          "answer": "qInt",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "choice",
+          "promptKey": "bank_why.q6.prompt",
+          "concept": "interest_basics",
+          "points": 10,
+          "hintKey": "bank_why.q6.hint",
+          "explainKey": "bank_why.q6.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_why.q6.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_why.q6.opt.b",
+              "misconception": "interest_is_a_fee",
+              "feedbackKey": "bank_why.q6.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_why.q6.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_why.q6.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "bank_why.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "bank_why.t4.explore",
+            "params": {
+              "balance": "$startBal",
+              "years": "$startYears",
+              "rate": "$rate"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "balance",
+                  "labelKey": "bank_why.lab.4.s.balance",
+                  "min": 1000,
+                  "max": 50000,
+                  "step": 1000,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "years",
+                  "labelKey": "bank_why.lab.4.s.years",
+                  "min": 1,
+                  "max": 10,
+                  "step": 1,
+                  "fmt": "number"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "interest",
+                  "labelKey": "bank_why.lab.4.r.interest",
+                  "fn": "simpleInterest",
+                  "args": [
+                    "balance",
+                    "rate",
+                    "years"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                },
+                {
+                  "id": "total",
+                  "labelKey": "bank_why.lab.4.r.total",
+                  "fn": "add",
+                  "args": [
+                    "balance",
+                    "interest"
+                  ],
+                  "fmt": "rupees"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "bank_why.q7.prompt",
+          "concept": "interest_basics",
+          "points": 10,
+          "hintKey": "bank_why.q7.hint",
+          "explainKey": "bank_why.q7.explain",
+          "answer": "labInt",
+          "unit": "rupees"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "bank_why.q8.prompt",
+          "concept": "interest_basics",
+          "points": 10,
+          "hintKey": "bank_why.q8.hint",
+          "explainKey": "bank_why.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_why.q8.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_why.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_why.q8.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_why.q8.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "bank_why.t5.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_why.t5.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_why.t5.steps.1",
+            "bank_why.t5.steps.2",
+            "bank_why.t5.steps.3"
+          ]
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "bank_only_for_the_rich"
+          ],
+          "textKey": "bank_why.t5.mistake"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "number",
+          "promptKey": "bank_why.q9.prompt",
+          "concept": "small_savings_add_up",
+          "points": 20,
+          "hintKey": "bank_why.q9.hint",
+          "explainKey": "bank_why.q9.explain",
+          "answer": "saved",
+          "unit": "rupees"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "bank_why.q10.prompt",
+          "concept": "why_bank_account",
+          "points": 10,
+          "hintKey": "bank_why.q10.hint",
+          "explainKey": "bank_why.q10.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_why.q10.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_why.q10.opt.b",
+              "misconception": "bank_only_for_the_rich",
+              "feedbackKey": "bank_why.q10.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_why.q10.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_why.q10.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "bank_account",
+    "bank_interest",
+    "bank_balance"
+  ]
+}

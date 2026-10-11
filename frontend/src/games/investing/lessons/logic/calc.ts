@@ -10,6 +10,12 @@ const helpers: Record<string, (...a: number[]) => number> = {
   mul: (a, b) => a * b,
   div: (a, b) => a / b,
   identity: (a) => a,
+  sum: (...n) => n.reduce((a, b) => a + b, 0),
+  min: (...n) => Math.min(...n),
+  max: (...n) => Math.max(...n),
+  abs: (a) => Math.abs(a),
+  floor: (a) => Math.floor(a),
+  ceil: (a) => Math.ceil(a),
 };
 
 type Fn = (...a: number[]) => number;

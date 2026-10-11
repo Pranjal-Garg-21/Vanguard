@@ -1,0 +1,549 @@
+{
+  "id": "lesson_bank_statement",
+  "kind": "room",
+  "pillar": "bank",
+  "order": 4,
+  "estMinutes": 11,
+  "difficulty": "medium",
+  "titleKey": "bank_statement.title",
+  "blurbKey": "bank_statement.blurb",
+  "concepts": [
+    "statement_reading",
+    "credit_debit",
+    "spotting_charges",
+    "reconcile_balance"
+  ],
+  "misconceptions": [
+    "credit_means_money_out",
+    "small_charges_not_worth_checking"
+  ],
+  "vars": {
+    "open": {
+      "value": 6000,
+      "fmt": "rupees"
+    },
+    "dep": {
+      "value": 2500,
+      "fmt": "rupees"
+    },
+    "wd": {
+      "value": 1000,
+      "fmt": "rupees"
+    },
+    "chargeA": {
+      "value": 15,
+      "fmt": "rupees"
+    },
+    "chargeB": {
+      "value": 59,
+      "fmt": "rupees"
+    },
+    "ownRec": {
+      "value": 7500,
+      "fmt": "rupees"
+    },
+    "months12": {
+      "value": 12
+    },
+    "startCr": {
+      "value": 2500,
+      "fmt": "rupees"
+    },
+    "startDr": {
+      "value": 1000,
+      "fmt": "rupees"
+    },
+    "startCh": {
+      "value": 0,
+      "fmt": "rupees"
+    },
+    "labCr": {
+      "value": 3000,
+      "fmt": "rupees"
+    },
+    "labDr": {
+      "value": 1800,
+      "fmt": "rupees"
+    },
+    "labCh": {
+      "value": 90,
+      "fmt": "rupees"
+    }
+  },
+  "calcs": [
+    {
+      "id": "afterDep",
+      "fn": "add",
+      "args": [
+        "$open",
+        "$dep"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "afterWd",
+      "fn": "sub",
+      "args": [
+        "$afterDep",
+        "$wd"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "allCharges",
+      "fn": "add",
+      "args": [
+        "$chargeA",
+        "$chargeB"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "yearA",
+      "fn": "mul",
+      "args": [
+        "$chargeA",
+        "$months12"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "closing",
+      "fn": "sub",
+      "args": [
+        "$afterWd",
+        "$allCharges"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labA",
+      "fn": "add",
+      "args": [
+        "$open",
+        "$labCr"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labB",
+      "fn": "sub",
+      "args": [
+        "$labA",
+        "$labDr"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "labClose",
+      "fn": "sub",
+      "args": [
+        "$labB",
+        "$labCh"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "bank_statement.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "textKey": "bank_statement.t1.hook",
+          "visual": "passbook"
+        },
+        {
+          "type": "define",
+          "textKey": "bank_statement.t1.define"
+        },
+        {
+          "type": "analogy",
+          "textKey": "bank_statement.t1.analogy",
+          "visual": "passbook"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "promptKey": "bank_statement.q1.prompt",
+          "concept": "credit_debit",
+          "points": 10,
+          "hintKey": "bank_statement.q1.hint",
+          "explainKey": "bank_statement.q1.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_statement.q1.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_statement.q1.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_statement.q1.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_statement.q1.opt.d"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q2",
+          "kind": "number",
+          "promptKey": "bank_statement.q2.prompt",
+          "concept": "statement_reading",
+          "points": 10,
+          "hintKey": "bank_statement.q2.hint",
+          "explainKey": "bank_statement.q2.explain",
+          "answer": "afterDep",
+          "unit": "rupees"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "bank_statement.t2.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_statement.t2.define"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_statement.t2.steps.1",
+            "bank_statement.t2.steps.2",
+            "bank_statement.t2.steps.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "bank_statement.q3.prompt",
+          "concept": "statement_reading",
+          "points": 10,
+          "hintKey": "bank_statement.q3.hint",
+          "explainKey": "bank_statement.q3.explain",
+          "answer": "afterWd",
+          "unit": "rupees"
+        },
+        {
+          "id": "q4",
+          "kind": "choice",
+          "promptKey": "bank_statement.q4.prompt",
+          "concept": "credit_debit",
+          "points": 10,
+          "hintKey": "bank_statement.q4.hint",
+          "explainKey": "bank_statement.q4.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_statement.q4.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_statement.q4.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_statement.q4.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_statement.q4.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "bank_statement.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "bank_statement.t3.define"
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "small_charges_not_worth_checking"
+          ],
+          "textKey": "bank_statement.t3.mistake"
+        },
+        {
+          "type": "note",
+          "textKey": "bank_statement.t3.note"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q5",
+          "kind": "number",
+          "promptKey": "bank_statement.q5.prompt",
+          "concept": "spotting_charges",
+          "points": 10,
+          "hintKey": "bank_statement.q5.hint",
+          "explainKey": "bank_statement.q5.explain",
+          "answer": "allCharges",
+          "unit": "rupees"
+        },
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "bank_statement.q6.prompt",
+          "concept": "spotting_charges",
+          "points": 10,
+          "hintKey": "bank_statement.q6.hint",
+          "explainKey": "bank_statement.q6.explain",
+          "answer": "yearA",
+          "unit": "rupees"
+        },
+        {
+          "id": "q7",
+          "kind": "choice",
+          "promptKey": "bank_statement.q7.prompt",
+          "concept": "spotting_charges",
+          "points": 10,
+          "hintKey": "bank_statement.q7.hint",
+          "explainKey": "bank_statement.q7.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_statement.q7.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_statement.q7.opt.b",
+              "misconception": "small_charges_not_worth_checking",
+              "feedbackKey": "bank_statement.q7.fb.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_statement.q7.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_statement.q7.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "bank_statement.t4.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "bank_statement.t4.explore",
+            "params": {
+              "credits": "$startCr",
+              "debits": "$startDr",
+              "charges": "$startCh",
+              "open": "$open",
+              "ownRec": "$ownRec"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "credits",
+                  "labelKey": "bank_statement.lab.4.s.credits",
+                  "min": 0,
+                  "max": 10000,
+                  "step": 500,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "debits",
+                  "labelKey": "bank_statement.lab.4.s.debits",
+                  "min": 0,
+                  "max": 10000,
+                  "step": 100,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "charges",
+                  "labelKey": "bank_statement.lab.4.s.charges",
+                  "min": 0,
+                  "max": 500,
+                  "step": 10,
+                  "fmt": "rupees"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "withCr",
+                  "labelKey": "bank_statement.lab.4.r.withCr",
+                  "fn": "add",
+                  "args": [
+                    "open",
+                    "credits"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "afterDr",
+                  "labelKey": "bank_statement.lab.4.r.afterDr",
+                  "fn": "sub",
+                  "args": [
+                    "withCr",
+                    "debits"
+                  ],
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "close",
+                  "labelKey": "bank_statement.lab.4.r.close",
+                  "fn": "sub",
+                  "args": [
+                    "afterDr",
+                    "charges"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "good"
+                },
+                {
+                  "id": "gap",
+                  "labelKey": "bank_statement.lab.4.r.gap",
+                  "fn": "sub",
+                  "args": [
+                    "ownRec",
+                    "close"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "bad"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q8",
+          "kind": "number",
+          "promptKey": "bank_statement.q8.prompt",
+          "concept": "statement_reading",
+          "points": 10,
+          "hintKey": "bank_statement.q8.hint",
+          "explainKey": "bank_statement.q8.explain",
+          "answer": "labClose",
+          "unit": "rupees"
+        },
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "bank_statement.q9.prompt",
+          "concept": "reconcile_balance",
+          "points": 10,
+          "hintKey": "bank_statement.q9.hint",
+          "explainKey": "bank_statement.q9.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_statement.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_statement.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_statement.q9.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_statement.q9.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "bank_statement.t5.title",
+      "blocks": [
+        {
+          "type": "tradeoff",
+          "textKey": "bank_statement.t5.tradeoff"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "bank_statement.t5.steps.1",
+            "bank_statement.t5.steps.2",
+            "bank_statement.t5.steps.3"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "bank_credit",
+            "bank_debit",
+            "bank_statement"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "kind": "number",
+          "promptKey": "bank_statement.q10.prompt",
+          "concept": "reconcile_balance",
+          "points": 20,
+          "hintKey": "bank_statement.q10.hint",
+          "explainKey": "bank_statement.q10.explain",
+          "answer": "closing",
+          "unit": "rupees"
+        },
+        {
+          "id": "q11",
+          "kind": "choice",
+          "promptKey": "bank_statement.q11.prompt",
+          "concept": "reconcile_balance",
+          "points": 10,
+          "hintKey": "bank_statement.q11.hint",
+          "explainKey": "bank_statement.q11.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "bank_statement.q11.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "bank_statement.q11.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "bank_statement.q11.opt.c"
+            },
+            {
+              "id": "d",
+              "textKey": "bank_statement.q11.opt.d"
+            }
+          ],
+          "correct": "a"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "bank_credit",
+    "bank_debit",
+    "bank_statement"
+  ]
+}

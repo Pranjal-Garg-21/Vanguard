@@ -1,0 +1,556 @@
+{
+  "id": "lesson_borrow_credit_cards",
+  "kind": "room",
+  "pillar": "borrow",
+  "order": 4,
+  "estMinutes": 13,
+  "difficulty": "hard",
+  "titleKey": "borrow_cards.title",
+  "blurbKey": "borrow_cards.blurb",
+  "concepts": [
+    "credit_card_interest",
+    "minimum_payment_trap",
+    "bnpl",
+    "credit_score",
+    "education_financing"
+  ],
+  "misconceptions": [
+    "minimum_payment_is_fine",
+    "zero_cost_emi_is_free"
+  ],
+  "vars": {
+    "exBal": {
+      "value": 6000,
+      "fmt": "rupees"
+    },
+    "rate": {
+      "value": 0.36,
+      "fmt": "percent"
+    },
+    "bal": {
+      "value": 10000,
+      "fmt": "rupees"
+    },
+    "pay": {
+      "value": 600,
+      "fmt": "rupees"
+    },
+    "cash": {
+      "value": 22500,
+      "fmt": "rupees"
+    },
+    "planTotal": {
+      "value": 24000,
+      "fmt": "rupees"
+    },
+    "buy": {
+      "value": 2000,
+      "fmt": "rupees"
+    },
+    "fee": {
+      "value": 400,
+      "fmt": "rupees"
+    },
+    "eduP": {
+      "value": 200000,
+      "fmt": "rupees"
+    },
+    "eduR": {
+      "value": 0.1,
+      "fmt": "percent"
+    },
+    "eduM": {
+      "value": 48
+    }
+  },
+  "calcs": [
+    {
+      "id": "exInt",
+      "fn": "mul",
+      "args": [
+        "$exBal",
+        "$rate"
+      ]
+    },
+    {
+      "id": "exMonthInt",
+      "fn": "div",
+      "args": [
+        "$exInt",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "balInt",
+      "fn": "mul",
+      "args": [
+        "$bal",
+        "$rate"
+      ]
+    },
+    {
+      "id": "monthInt",
+      "fn": "div",
+      "args": [
+        "$balInt",
+        12
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "months",
+      "fn": "monthsToClear",
+      "args": [
+        "$bal",
+        "$rate",
+        "$pay"
+      ],
+      "fmt": "number"
+    },
+    {
+      "id": "totalInt",
+      "fn": "interestToClear",
+      "args": [
+        "$bal",
+        "$rate",
+        "$pay"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "noCostGap",
+      "fn": "sub",
+      "args": [
+        "$planTotal",
+        "$cash"
+      ],
+      "fmt": "rupees"
+    },
+    {
+      "id": "feePct",
+      "fn": "percentOf",
+      "args": [
+        "$fee",
+        "$buy"
+      ],
+      "fmt": "percent"
+    },
+    {
+      "id": "eduCost",
+      "fn": "loanInterest",
+      "args": [
+        "$eduP",
+        "$eduR",
+        "$eduM"
+      ],
+      "fmt": "rupees"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "titleKey": "borrow_cards.t1.title",
+      "blocks": [
+        {
+          "type": "hook",
+          "visual": "card_bill",
+          "textKey": "borrow_cards.t1.b1"
+        },
+        {
+          "type": "define",
+          "textKey": "borrow_cards.t1.b2"
+        },
+        {
+          "type": "analogy",
+          "visual": "card_bill",
+          "textKey": "borrow_cards.t1.b3"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "borrow_cards.t1.b4.1",
+            "borrow_cards.t1.b4.2",
+            "borrow_cards.t1.b4.3"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "number",
+          "promptKey": "borrow_cards.q1.prompt",
+          "concept": "credit_card_interest",
+          "points": 10,
+          "hintKey": "borrow_cards.q1.hint",
+          "explainKey": "borrow_cards.q1.explain",
+          "answer": "monthInt",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q2",
+          "kind": "choice",
+          "promptKey": "borrow_cards.q2.prompt",
+          "concept": "credit_card_interest",
+          "points": 10,
+          "hintKey": "borrow_cards.q2.hint",
+          "explainKey": "borrow_cards.q2.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cards.q2.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cards.q2.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cards.q2.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titleKey": "borrow_cards.t2.title",
+      "blocks": [
+        {
+          "type": "explore",
+          "explore": {
+            "widget": "slider_lab",
+            "promptKey": "borrow_cards.t2.b1.prompt",
+            "params": {
+              "balance": "$bal",
+              "rate": "$rate",
+              "payment": "$pay"
+            },
+            "lab": {
+              "sliders": [
+                {
+                  "id": "balance",
+                  "labelKey": "borrow_cards.t2.b1.s.balance",
+                  "min": 5000,
+                  "max": 15000,
+                  "step": 1000,
+                  "fmt": "rupees"
+                },
+                {
+                  "id": "rate",
+                  "labelKey": "borrow_cards.t2.b1.s.rate",
+                  "min": 0.24,
+                  "max": 0.42,
+                  "step": 0.01,
+                  "fmt": "percent"
+                },
+                {
+                  "id": "payment",
+                  "labelKey": "borrow_cards.t2.b1.s.payment",
+                  "min": 400,
+                  "max": 3000,
+                  "step": 100,
+                  "fmt": "rupees"
+                }
+              ],
+              "readouts": [
+                {
+                  "id": "months",
+                  "labelKey": "borrow_cards.t2.b1.r.months",
+                  "fn": "monthsToClear",
+                  "args": [
+                    "balance",
+                    "rate",
+                    "payment"
+                  ],
+                  "fmt": "number"
+                },
+                {
+                  "id": "interest",
+                  "labelKey": "borrow_cards.t2.b1.r.interest",
+                  "fn": "interestToClear",
+                  "args": [
+                    "balance",
+                    "rate",
+                    "payment"
+                  ],
+                  "fmt": "rupees",
+                  "tone": "bad"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "minimum_payment_is_fine"
+          ],
+          "textKey": "borrow_cards.t2.b2"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "kind": "number",
+          "promptKey": "borrow_cards.q3.prompt",
+          "concept": "minimum_payment_trap",
+          "points": 10,
+          "hintKey": "borrow_cards.q3.hint",
+          "explainKey": "borrow_cards.q3.explain",
+          "answer": "months",
+          "unit": "number",
+          "tolerance": 0.5
+        },
+        {
+          "id": "q4",
+          "kind": "number",
+          "promptKey": "borrow_cards.q4.prompt",
+          "concept": "minimum_payment_trap",
+          "points": 10,
+          "hintKey": "borrow_cards.q4.hint",
+          "explainKey": "borrow_cards.q4.explain",
+          "answer": "totalInt",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q5",
+          "kind": "choice",
+          "promptKey": "borrow_cards.q5.prompt",
+          "concept": "minimum_payment_trap",
+          "points": 10,
+          "hintKey": "borrow_cards.q5.hint",
+          "explainKey": "borrow_cards.q5.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cards.q5.opt.a",
+              "misconception": "minimum_payment_is_fine",
+              "feedbackKey": "borrow_cards.q5.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cards.q5.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cards.q5.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titleKey": "borrow_cards.t3.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "borrow_cards.t3.b1"
+        },
+        {
+          "type": "note",
+          "textKey": "borrow_cards.t3.b2"
+        },
+        {
+          "type": "misconception",
+          "misconceptions": [
+            "zero_cost_emi_is_free"
+          ],
+          "textKey": "borrow_cards.t3.b3"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q6",
+          "kind": "number",
+          "promptKey": "borrow_cards.q6.prompt",
+          "concept": "bnpl",
+          "points": 10,
+          "hintKey": "borrow_cards.q6.hint",
+          "explainKey": "borrow_cards.q6.explain",
+          "answer": "noCostGap",
+          "unit": "rupees"
+        },
+        {
+          "id": "q7",
+          "kind": "number",
+          "promptKey": "borrow_cards.q7.prompt",
+          "concept": "bnpl",
+          "points": 10,
+          "hintKey": "borrow_cards.q7.hint",
+          "explainKey": "borrow_cards.q7.explain",
+          "answer": "feePct",
+          "unit": "percent"
+        },
+        {
+          "id": "q8",
+          "kind": "choice",
+          "promptKey": "borrow_cards.q8.prompt",
+          "concept": "bnpl",
+          "points": 10,
+          "hintKey": "borrow_cards.q8.hint",
+          "explainKey": "borrow_cards.q8.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cards.q8.opt.a",
+              "misconception": "zero_cost_emi_is_free",
+              "feedbackKey": "borrow_cards.q8.fb.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cards.q8.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cards.q8.opt.c"
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titleKey": "borrow_cards.t4.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "borrow_cards.t4.b1"
+        },
+        {
+          "type": "note",
+          "textKey": "borrow_cards.t4.b2"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q9",
+          "kind": "choice",
+          "promptKey": "borrow_cards.q9.prompt",
+          "concept": "credit_score",
+          "points": 10,
+          "hintKey": "borrow_cards.q9.hint",
+          "explainKey": "borrow_cards.q9.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cards.q9.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cards.q9.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cards.q9.opt.c"
+            }
+          ],
+          "correct": "a"
+        },
+        {
+          "id": "q10",
+          "kind": "choice",
+          "promptKey": "borrow_cards.q10.prompt",
+          "concept": "credit_score",
+          "points": 10,
+          "hintKey": "borrow_cards.q10.hint",
+          "explainKey": "borrow_cards.q10.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cards.q10.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cards.q10.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cards.q10.opt.c"
+            }
+          ],
+          "correct": "b"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titleKey": "borrow_cards.t5.title",
+      "blocks": [
+        {
+          "type": "define",
+          "textKey": "borrow_cards.t5.b1"
+        },
+        {
+          "type": "steps",
+          "stepKeys": [
+            "borrow_cards.t5.b2.1",
+            "borrow_cards.t5.b2.2",
+            "borrow_cards.t5.b2.3"
+          ]
+        },
+        {
+          "type": "jargon",
+          "terms": [
+            "borrow_credit_card",
+            "borrow_min_due",
+            "borrow_bnpl",
+            "borrow_credit_score",
+            "borrow_scholarship"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q11",
+          "kind": "number",
+          "promptKey": "borrow_cards.q11.prompt",
+          "concept": "education_financing",
+          "points": 20,
+          "hintKey": "borrow_cards.q11.hint",
+          "explainKey": "borrow_cards.q11.explain",
+          "answer": "eduCost",
+          "unit": "rupees",
+          "tolerance": 1
+        },
+        {
+          "id": "q12",
+          "kind": "choice",
+          "promptKey": "borrow_cards.q12.prompt",
+          "concept": "education_financing",
+          "points": 10,
+          "hintKey": "borrow_cards.q12.hint",
+          "explainKey": "borrow_cards.q12.explain",
+          "options": [
+            {
+              "id": "a",
+              "textKey": "borrow_cards.q12.opt.a"
+            },
+            {
+              "id": "b",
+              "textKey": "borrow_cards.q12.opt.b"
+            },
+            {
+              "id": "c",
+              "textKey": "borrow_cards.q12.opt.c"
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    "borrow_credit_card",
+    "borrow_min_due",
+    "borrow_bnpl",
+    "borrow_credit_score",
+    "borrow_scholarship"
+  ]
+}

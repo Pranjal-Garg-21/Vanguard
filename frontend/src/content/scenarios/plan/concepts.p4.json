@@ -1,11 +1,39 @@
 {
   "_note": "Concept and misconception IDs used by the plan lessons. 'existing' are in Implementation.md section 11 / concepts.json; 'proposed' must be reviewed and merged by P2.",
   "concepts": {
-    "existing": [],
-    "proposed": []
+    "existing": [
+      "needs_vs_wants",
+      "context_dependence",
+      "budget_jars",
+      "fixed_vs_variable",
+      "irregular_income",
+      "goal_setting",
+      "opportunity_cost"
+    ],
+    "proposed": [
+      "share_of_income",
+      "months_to_goal",
+      "cost_per_day",
+      "price_over_time"
+    ]
   },
   "misconceptions": {
-    "existing": [],
-    "proposed": []
+    "existing": [
+      "fun_is_bad",
+      "save_what_is_left"
+    ],
+    "proposed": [
+      "needs_are_same_for_everyone",
+      "leftover_is_free",
+      "rule_is_a_law",
+      "spend_the_good_month",
+      "forget_yearly_costs",
+      "vague_goal_is_a_goal",
+      "only_saving_more_helps",
+      "opportunity_cost_is_price",
+      "cheap_price_is_cheap_use",
+      "small_instalment_is_cheap",
+      "money_in_hand_means_no_cost"
+    ]
   }
 }

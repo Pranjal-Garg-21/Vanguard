@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bank_account",
+    "termKey": "bank_why.glossary.bank_account.term",
+    "defKey": "bank_why.glossary.bank_account.def",
+    "lesson": "lesson_bank_why"
+  },
+  {
+    "id": "bank_interest",
+    "termKey": "bank_why.glossary.bank_interest.term",
+    "defKey": "bank_why.glossary.bank_interest.def",
+    "lesson": "lesson_bank_why"
+  },
+  {
+    "id": "bank_balance",
+    "termKey": "bank_why.glossary.bank_balance.term",
+    "defKey": "bank_why.glossary.bank_balance.def",
+    "lesson": "lesson_bank_why"
+  }
+]

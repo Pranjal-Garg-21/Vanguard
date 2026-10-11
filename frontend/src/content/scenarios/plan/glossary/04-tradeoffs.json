@@ -1,0 +1,20 @@
+[
+  {
+    "id": "plan_opportunity_cost",
+    "termKey": "plan_tradeoffs.glossary.plan_opportunity_cost.term",
+    "defKey": "plan_tradeoffs.glossary.plan_opportunity_cost.def",
+    "lesson": "lesson_plan_tradeoffs"
+  },
+  {
+    "id": "plan_cost_per_day",
+    "termKey": "plan_tradeoffs.glossary.plan_cost_per_day.term",
+    "defKey": "plan_tradeoffs.glossary.plan_cost_per_day.def",
+    "lesson": "lesson_plan_tradeoffs"
+  },
+  {
+    "id": "plan_instalment",
+    "termKey": "plan_tradeoffs.glossary.plan_instalment.term",
+    "defKey": "plan_tradeoffs.glossary.plan_instalment.def",
+    "lesson": "lesson_plan_tradeoffs"
+  }
+]

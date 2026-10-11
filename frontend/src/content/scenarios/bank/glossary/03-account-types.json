@@ -1,0 +1,38 @@
+[
+  {
+    "id": "bank_savings_account",
+    "termKey": "bank_accounts.glossary.bank_savings_account.term",
+    "defKey": "bank_accounts.glossary.bank_savings_account.def",
+    "lesson": "lesson_bank_accounts"
+  },
+  {
+    "id": "bank_current_account",
+    "termKey": "bank_accounts.glossary.bank_current_account.term",
+    "defKey": "bank_accounts.glossary.bank_current_account.def",
+    "lesson": "lesson_bank_accounts"
+  },
+  {
+    "id": "bank_min_balance",
+    "termKey": "bank_accounts.glossary.bank_min_balance.term",
+    "defKey": "bank_accounts.glossary.bank_min_balance.def",
+    "lesson": "lesson_bank_accounts"
+  },
+  {
+    "id": "bank_fixed_deposit",
+    "termKey": "bank_accounts.glossary.bank_fixed_deposit.term",
+    "defKey": "bank_accounts.glossary.bank_fixed_deposit.def",
+    "lesson": "lesson_bank_accounts"
+  },
+  {
+    "id": "bank_recurring_deposit",
+    "termKey": "bank_accounts.glossary.bank_recurring_deposit.term",
+    "defKey": "bank_accounts.glossary.bank_recurring_deposit.def",
+    "lesson": "lesson_bank_accounts"
+  },
+  {
+    "id": "bank_zero_balance",
+    "termKey": "bank_accounts.glossary.bank_zero_balance.term",
+    "defKey": "bank_accounts.glossary.bank_zero_balance.def",
+    "lesson": "lesson_bank_accounts"
+  }
+]

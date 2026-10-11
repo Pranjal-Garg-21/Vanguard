@@ -1,0 +1,20 @@
+[
+  {
+    "id": "save_leak",
+    "termKey": "save_track_spending.glossary.save_leak.term",
+    "defKey": "save_track_spending.glossary.save_leak.def",
+    "lesson": "lesson_save_track_spending"
+  },
+  {
+    "id": "save_tracking",
+    "termKey": "save_track_spending.glossary.save_tracking.term",
+    "defKey": "save_track_spending.glossary.save_tracking.def",
+    "lesson": "lesson_save_track_spending"
+  },
+  {
+    "id": "save_pattern",
+    "termKey": "save_track_spending.glossary.save_pattern.term",
+    "defKey": "save_track_spending.glossary.save_pattern.def",
+    "lesson": "lesson_save_track_spending"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "save_emergency_fund",
+    "termKey": "save_emergency_fund.glossary.save_emergency_fund.term",
+    "defKey": "save_emergency_fund.glossary.save_emergency_fund.def",
+    "lesson": "lesson_save_emergency_fund"
+  },
+  {
+    "id": "save_months_of_cover",
+    "termKey": "save_emergency_fund.glossary.save_months_of_cover.term",
+    "defKey": "save_emergency_fund.glossary.save_months_of_cover.def",
+    "lesson": "lesson_save_emergency_fund"
+  },
+  {
+    "id": "save_must_have",
+    "termKey": "save_emergency_fund.glossary.save_must_have.term",
+    "defKey": "save_emergency_fund.glossary.save_must_have.def",
+    "lesson": "lesson_save_emergency_fund"
+  }
+]
