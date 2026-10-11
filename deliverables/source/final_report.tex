@@ -24,7 +24,7 @@
 
 \textbf{MoneyPath} is an offline-first progressive web app that teaches financial literacy to Grade 11--12 students by having them \emph{live} a fictional character's money year rather than read rules about it. The problem statement, \emph{Empowering the Next Generation Through Financial Literacy}, asks for a scalable way to cover five areas --- banking and digital payments, budgeting, saving and borrowing, investing, and fraud safety --- for a pilot of about 1{,}500 students in Hyderabad, delivered through NGO partners.
 
-Our reading of the problem has not changed since M1: money lessons fail because consequences arrive weeks later and cost too much to learn from. A student told to ``keep an emergency fund'' has no way to feel what happens when they do not. So the app makes consequences immediate, cheap and reversible. The main mode is \textbf{Money Town}, a top-down tile town in the style of a classic handheld RPG. The student walks the town, enters buildings, and plays a prologue plus six chapters --- bank, budget, save, borrow, invest, protect --- each closing with a ``master's challenge'' gate. The character can overspend, fall for a simulated scam or miss a goal; the student can then rewind to an earlier decision through the \textbf{What-If Machine}, choose differently and compare the two lives. Both timelines replay from the same seed, so any difference comes from the decision and not from luck. A rival character, re-simulated from that same seed, gives a constant side-by-side contrast: the student always sees what the other choice was worth.
+Our reading of the problem has not changed since M1: money lessons fail because consequences arrive weeks later and cost too much to learn from. A student told to ``keep an emergency fund'' has no way to feel what happens when they do not. So the app makes consequences immediate, cheap and reversible. The main mode is \textbf{Paisapur}, a top-down tile town in the style of a classic handheld RPG. The student walks the town, enters buildings, and plays a prologue plus six chapters --- bank, budget, save, borrow, invest, protect --- each closing with a ``master's challenge'' gate. The character can overspend, fall for a simulated scam or miss a goal; the student can then rewind to an earlier decision through the \textbf{What-If Machine}, choose differently and compare the two lives. Both timelines replay from the same seed, so any difference comes from the decision and not from luck. A rival character, re-simulated from that same seed, gives a constant side-by-side contrast: the student always sees what the other choice was worth.
 
 Every activity runs the same seven-step loop --- \emph{story, decision, consequence, ``why'', concept, check, reward}. The consequence always lands before the explanation, so the ``why'' answers a question the student already has. Each check is tagged with a concept ID and, when wrong, a \emph{misconception} ID. That is what later lets a facilitator see not merely that a class scored badly, but which wrong idea it holds.
 
@@ -54,7 +54,7 @@ These boundaries are not conventions but \textbf{lint-enforced} import rules, so
 \section*{3\quad Features}
 
 \begin{itemize}
-  \item \textbf{Money Town (main mode).} Prologue and six chapters, 53 story scripts across 10 files, a walkable town with shops, a bank, a lender and NPCs, a seeded market, a needs/wants/goal economy, badges, and the What-If Machine with its rival timeline.
+  \item \textbf{Paisapur (main mode).} Prologue and six chapters, 53 story scripts across 10 files, a walkable town with shops, a bank, a lender and NPCs, a seeded market, a needs/wants/goal economy, badges, and the What-If Machine with its rival timeline.
   \item \textbf{Mini-games.} 15 Everyday Money games (document hunt, bank counter, jar split, goal builder, spending detective, surprise month, debt ladder, \ldots), 9 investing modules and 11 Stay Safe simulators --- 52 registered IDs in total. Games read money only through shared context helpers, and a coherence test fails the build if a game and the story disagree about income, bills or prices.
   \item \textbf{Investing.} Task-based rooms with typed answers, hints and points; interactive labs; a Time Machine that runs 500 simulated futures and reports a \emph{range} with its assumptions, never a single number; a 12-week stock-market simulator with six fictional companies and a coach that never says what to buy; a mutual-fund challenge; and an investing/gambling/scam sorter.
   \item \textbf{Stay Safe.} A simulated phone with SMS, chat, email, calls and search; a Scam Lens that annotates the tells in a message; a UPI simulator --- pay by QR, then receive a fake collect request, the trap being that one looks like the other; Scam Duels; XP, stars, ranks and badges.
@@ -97,14 +97,14 @@ Colour contrast & 23 checks pass & every text/background token pair $\geq$ 4.5:1
 \toprule
 \textbf{Language} & \textbf{Keys translated} & \textbf{Coverage} & \textbf{Complete namespaces}\\
 \midrule
-Hindi   & 5716 / 6799 & 84.1\% & all of Money Town, Stay Safe, Scam Duels, arcade, setup\\
+Hindi   & 5716 / 6799 & 84.1\% & all of Paisapur, Stay Safe, Scam Duels, arcade, setup\\
 Urdu    & 5236 / 6799 & 77.0\% & as above, right-to-left verified\\
 Telugu  & 4770 / 6799 & 70.2\% & as above\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\noindent 57 of the 82 string namespaces are complete in all four languages, and \textbf{Money Town itself --- the main mode --- is 100\% complete in all four} (1456 keys each, 4368 translations); 15{,}722 of 20{,}397 non-English strings are translated overall. The remainder is standalone lesson bundles, none of which sit on the Money Town story path, and a missing key falls back to English rather than breaking the screen.
+\noindent 57 of the 82 string namespaces are complete in all four languages, and \textbf{Paisapur itself --- the main mode --- is 100\% complete in all four} (1456 keys each, 4368 translations); 15{,}722 of 20{,}397 non-English strings are translated overall. The remainder is standalone lesson bundles, none of which sit on the Paisapur story path, and a missing key falls back to English rather than breaking the screen.
 
 \textbf{Integration.} The three parallel branches reported separately in M2 are merged into a single app. The investing rooms and Stay Safe simulators are reachable from inside the town and cross-linked by concept, so a student who meets \texttt{loan\_app\_trap} in the story is pointed at the simulator that drills it, and every mode logs its events to the same dashboard.
 
