@@ -4,7 +4,7 @@ import { foundKinds, summarise } from './logic/scoring';
 import { TELL_KINDS, type RunState } from './logic/types';
 import { TellCard } from './TellCard';
 import { rupees } from './apps/PayApp';
-import { Confetti } from './Confetti';
+import { Confetti } from '@/ui/Confetti';
 
 function Stat({ label, value, tone = 'text-ink' }: { label: string; value: string; tone?: string }) {
   return (
