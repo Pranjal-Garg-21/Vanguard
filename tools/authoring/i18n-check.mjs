@@ -40,7 +40,11 @@ function flatten(prefix, node, out) {
 
 const parts = (s) => (String(s).match(/\{[^}]+\}/g) ?? []).sort().join('|');
 const bold = (s) => (String(s).match(/\*\*/g) ?? []).length;
-const letters = (s) => String(s).replace(/\{[^}]*\}/g, '').match(/[A-Za-z]{3,}/g) ?? [];
+/** Words that stay in Latin letters in every language (TRANSLATION_GUIDE rule 5). */
+const KEEP = new Set(['PaisaPath', 'UPI', 'PIN', 'OTP', 'KYC', 'EMI', 'SIP', 'FD', 'ETF', 'SMS', 'WhatsApp', 'Telegram', 'ATM', 'NAV']);
+const looksLikeUrl = (s) => /^\S+[./]\S*$/.test(String(s).trim()) && !/\s/.test(String(s).trim());
+/** Latin words in the English that a translation is expected to turn into the target language. */
+const letters = (s) => (looksLikeUrl(s) ? [] : (String(s).replace(/\{[^}]*\}/g, '').match(/[A-Za-z]{3,}/g) ?? []).filter((w) => !KEEP.has(w)));
 
 const files = readdirSync(join(DIR, 'en')).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5));
 const namespaces = only.length ? only : files;
