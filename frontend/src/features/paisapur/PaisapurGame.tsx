@@ -282,6 +282,8 @@ export function PaisapurGame() {
       if (a.type === 'badge' && !before.badges.includes(a.id)) {
         pushToast(t('toast.badge', { name: t(`paisapur.badge.${a.id}.name`) }), 'info');
         audio.jingle('badge');
+        // Saved straight away, so the dashboard's badge shelf matches the game.
+        persist();
       }
       if (a.type === 'chapter') setTelemetryContext({ stage: `S${Math.min(6, a.n)}` as StageId });
     },
@@ -683,7 +685,7 @@ export function PaisapurGame() {
             onQuit={() => {
               persist();
               answer();
-              navigate('/');
+              navigate('/home');
             }}
           />
         );
