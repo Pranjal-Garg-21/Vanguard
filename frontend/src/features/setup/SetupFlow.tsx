@@ -13,6 +13,7 @@ import {
   normaliseJoinCode,
   t,
   useLanguage,
+  loadLanguage,
   setLanguage as applyLanguage,
   speakKeys,
   stopSpeaking,
@@ -128,7 +129,8 @@ export function SetupFlow() {
                   setLanguage(l.id);
                   // The rest of setup is read in the language just chosen, so a
                   // student who cannot read English is not stuck on screen two.
-                  applyLanguage(l.id);
+                  // The pack is fetched first; English stays if it cannot be.
+                  void loadLanguage(l.id).then(() => applyLanguage(l.id));
                   go('a11y');
                 }}
                 className={`flex aspect-[4/3] flex-col items-center justify-center rounded-xl border-2 bg-surface transition active:scale-95 ${

@@ -39,14 +39,22 @@ const GLYPH_IN_TEXT = />\s*[←-↓]\s|←\s*\{t\(|←\s*[A-Z]|×</u;
  */
 const ARTWORK = [
   'features/paisapur',
+  'features/onboarding/baseline',
   'features/arcade/ArcadeHub.tsx',
-  'content/i18n/en/paisapur.json',
-  'content/i18n/en/menu.json',
-  'content/i18n/en/bag.json',
-  'content/i18n/en/toast.json',
+  'content/i18n/*/paisapur.json',
+  'content/i18n/*/menu.json',
+  'content/i18n/*/bag.json',
+  'content/i18n/*/toast.json',
 ];
 
-const isArtwork = (file: string) => ARTWORK.some((allowed) => file.startsWith(allowed));
+/**
+ * A translated bundle carries the same sprites as the English one, so the
+ * allowed paths name the file and not the language: content/i18n/te/menu.json
+ * is the same file as content/i18n/en/menu.json in a different language.
+ */
+const withoutLanguage = (file: string) => file.replace(/^content\/i18n\/[a-z]{2}\//, 'content/i18n/*/');
+
+const isArtwork = (file: string) => ARTWORK.some((allowed) => withoutLanguage(file).startsWith(allowed));
 
 /**
  * A content file may hold emoji only as the value of an `emoji` or `icon`
