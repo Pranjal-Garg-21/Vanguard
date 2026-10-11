@@ -235,6 +235,48 @@
       "icon": "📚"
     },
     {
+      "id": "education_financing",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "🎓",
+      "game": "lessons"
+    },
+    {
+      "id": "borrowing_cost",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "💸",
+      "game": "lessons"
+    },
+    {
+      "id": "tenure_tradeoff",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "⏱️",
+      "game": "lessons"
+    },
+    {
+      "id": "flat_vs_reducing",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "📐",
+      "game": "lessons"
+    },
+    {
+      "id": "credit_card_interest",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "💳",
+      "game": "lessons"
+    },
+    {
+      "id": "minimum_payment_trap",
+      "pillar": "borrow",
+      "chapter": 4,
+      "icon": "🕳️",
+      "game": "lessons"
+    },
+    {
       "id": "assets_that_earn",
       "pillar": "invest",
       "chapter": 4,
@@ -625,10 +667,122 @@
       "icon": "🧾"
     },
     {
+      "id": "where_to_keep_money",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🗄️",
+      "game": "lessons"
+    },
+    {
+      "id": "lending_boundaries",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🙅",
+      "game": "lessons"
+    },
+    {
+      "id": "habit_beats_amount",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🔂",
+      "game": "lessons"
+    },
+    {
+      "id": "goal_months",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🎯",
+      "game": "lessons"
+    },
+    {
+      "id": "emergency_cover_months",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🛟",
+      "game": "lessons"
+    },
+    {
+      "id": "emergency_refill",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "♻️",
+      "game": "lessons"
+    },
+    {
+      "id": "fd_lock_in",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "🔐",
+      "game": "lessons"
+    },
+    {
+      "id": "recurring_deposit",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "📥",
+      "game": "lessons"
+    },
+    {
+      "id": "spending_leaks",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "💧",
+      "game": "lessons"
+    },
+    {
+      "id": "spending_patterns",
+      "pillar": "save",
+      "chapter": 3,
+      "icon": "📊",
+      "game": "lessons"
+    },
+    {
       "id": "fixed_vs_variable",
       "pillar": "plan",
       "chapter": 0,
       "icon": "📊"
+    },
+    {
+      "id": "needs_vs_wants",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "⚖️",
+      "game": "lessons"
+    },
+    {
+      "id": "budget_jars",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🫙",
+      "game": "lessons"
+    },
+    {
+      "id": "share_of_income",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🥧",
+      "game": "lessons"
+    },
+    {
+      "id": "months_to_goal",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "📆",
+      "game": "lessons"
+    },
+    {
+      "id": "cost_per_day",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "🧮",
+      "game": "lessons"
+    },
+    {
+      "id": "price_over_time",
+      "pillar": "plan",
+      "chapter": 2,
+      "icon": "📉",
+      "game": "lessons"
     },
     {
       "id": "minimum_balance_fees",
@@ -641,6 +795,104 @@
       "pillar": "bank",
       "chapter": 0,
       "icon": "👥"
+    },
+    {
+      "id": "why_bank_account",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🏦",
+      "game": "lessons"
+    },
+    {
+      "id": "interest_basics",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "％",
+      "game": "lessons"
+    },
+    {
+      "id": "kyc_documents",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🪪",
+      "game": "lessons"
+    },
+    {
+      "id": "account_types",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🗂️",
+      "game": "lessons"
+    },
+    {
+      "id": "cash_risks",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🚨",
+      "game": "lessons"
+    },
+    {
+      "id": "bank_records",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🧾",
+      "game": "lessons"
+    },
+    {
+      "id": "small_savings_add_up",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🪙",
+      "game": "lessons"
+    },
+    {
+      "id": "minor_accounts",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🧒",
+      "game": "lessons"
+    },
+    {
+      "id": "kyc_update",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🔁",
+      "game": "lessons"
+    },
+    {
+      "id": "deposit_types",
+      "pillar": "bank",
+      "chapter": 1,
+      "icon": "🏧",
+      "game": "lessons"
+    },
+    {
+      "id": "statement_reading",
+      "pillar": "bank",
+      "chapter": 2,
+      "icon": "📄",
+      "game": "lessons"
+    },
+    {
+      "id": "credit_debit",
+      "pillar": "bank",
+      "chapter": 2,
+      "icon": "↕️",
+      "game": "lessons"
+    },
+    {
+      "id": "spotting_charges",
+      "pillar": "bank",
+      "chapter": 2,
+      "icon": "🔎",
+      "game": "lessons"
+    },
+    {
+      "id": "reconcile_balance",
+      "pillar": "bank",
+      "chapter": 2,
+      "icon": "✔",
+      "game": "lessons"
     }
   ],
   "misconceptions": [
@@ -694,6 +946,36 @@
     "it_always_comes_back",
     "risk_means_only_loss",
     "chasing_hype",
-    "panic_selling"
+    "panic_selling",
+    "interest_is_a_fee",
+    "bank_only_for_the_rich",
+    "minors_cannot_bank",
+    "nominee_is_joint_owner",
+    "min_balance_is_a_fee",
+    "fd_money_always_available",
+    "credit_means_money_out",
+    "small_charges_not_worth_checking",
+    "friend_loan_is_free",
+    "flat_rate_is_yearly_rate",
+    "lower_headline_rate_is_cheaper",
+    "minimum_payment_is_fine",
+    "zero_cost_emi_is_free",
+    "needs_are_same_for_everyone",
+    "leftover_is_free",
+    "rule_is_a_law",
+    "spend_the_good_month",
+    "forget_yearly_costs",
+    "vague_goal_is_a_goal",
+    "only_saving_more_helps",
+    "opportunity_cost_is_price",
+    "cheap_price_is_cheap_use",
+    "small_instalment_is_cheap",
+    "money_in_hand_means_no_cost",
+    "save_only_big_amounts",
+    "sale_is_emergency",
+    "emergency_fund_should_grow",
+    "cash_at_home_is_safest",
+    "fd_withdraw_free",
+    "friend_always_repays"
   ]
 }

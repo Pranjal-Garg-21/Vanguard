@@ -4,6 +4,11 @@
     "body": "A message that really comes from your friend's account may not come from your friend. A stolen account is used to ask their contacts for money, because the name and photo make it feel safe. Verify on a different channel before sending anything.",
     "example": "\"Emergency, send ₹3,000, I'll return it tomorrow\" from your friend's number. Call them. If they do not pick up, do not send."
   },
+  "account_types": {
+    "title": "Kinds of account",
+    "body": "Accounts differ in what they demand and what they give: a minimum balance, monthly charges, interest, how many free withdrawals. The \"better\" account is often the one with the lowest demands, not the highest interest.",
+    "example": "A zero-balance account paying 3% beats a 4% account that fines you ₹200 whenever the balance dips."
+  },
   "asset_comparison": {
     "title": "Comparing one thing with another",
     "body": "Nothing is good or bad on its own. Compare on the same four questions: what return, with what risk, how quickly you can get your money out, and what it costs to own. Any one of them alone misleads.",
@@ -13,6 +18,11 @@
     "title": "Assets that earn money",
     "body": "Some things you buy put money in your pocket: a stall that sells, tools for paid work, a course that raises your pay. Others take money out: running costs, repairs, EMIs. Borrowing for an asset can make sense only if what it earns comfortably covers the repayments.",
     "example": "A ₹10,000 stall that earns ₹600 a month pays for itself in under a year and a half."
+  },
+  "bank_records": {
+    "title": "The record a bank keeps",
+    "body": "Every rupee in or out is dated and described. That record is what lets you prove a payment, spot a charge you did not expect, and apply for things that need evidence of income.",
+    "example": "A landlord doubts you paid. The statement settles it in one line."
   },
   "behaviour_gap": {
     "title": "The behaviour gap",
@@ -39,10 +49,25 @@
     "body": "When you buy a bond, you lend money to a government or company for a fixed time and they pay you a fixed interest rate. Government bonds are among the safest investments; returns are lower than stocks but steadier.",
     "example": "Paisapur's town bond pays 8% a year for 1 year. The town uses the money to rebuild the bridge."
   },
+  "borrowing_cost": {
+    "title": "What borrowing really costs",
+    "body": "The cost of a loan is everything you hand back minus what you got: interest, processing fee, insurance added on, late charges. Compare totals, never instalments.",
+    "example": "₹10,000 repaid as ₹1,000 a month for twelve months cost ₹2,000, whatever the advertised rate said."
+  },
+  "budget_jars": {
+    "title": "Splitting money into jars",
+    "body": "Decide where money goes before it is spent, by putting it into named parts: bills, saving, spending. Money without a name gets spent by default, and nobody remembers on what.",
+    "example": "₹3,000 split ₹1,500 bills, ₹600 saving, ₹900 spending leaves nothing to drift."
+  },
   "budgeting": {
     "title": "Budgeting with jars",
     "body": "A budget is a plan for your money before you spend it. A simple version is the 50/30/20 rule: about 50% for needs, 30% for wants and 20% for saving. Adjust the numbers to your life, but always plan saving first.",
     "example": "With ₹1,500: about ₹750 for needs, ₹450 for wants, ₹300 saved."
+  },
+  "cash_risks": {
+    "title": "What can go wrong with cash",
+    "body": "Cash cannot be traced, replaced, or proved to be yours. Lost, stolen or burnt, it is simply gone, and there is no record that it was ever there.",
+    "example": "₹4,000 missing from a drawer is a story. ₹4,000 missing from an account is a line in a statement."
   },
   "commodities": {
     "title": "Commodities",
@@ -64,10 +89,25 @@
     "body": "Whether something is a need depends on your life, not on the object. The same item can be a want one month and a need the next, and nobody can tell you which from outside.",
     "example": "A phone recharge is a want — until your classes move online, and then it is how you attend school."
   },
+  "cost_per_day": {
+    "title": "Cost over its life",
+    "body": "A price is not a cost. What something costs is the price spread over how long it lasts and what it needs along the way. The cheaper thing is often the dearer one.",
+    "example": "₹600 shoes that last a year cost more per month than ₹1,400 shoes that last three."
+  },
   "credit_card": {
     "title": "Credit cards and the minimum payment trap",
     "body": "A credit card is a short loan. Pay the full bill on time and it's free. Pay only the minimum and the rest is charged interest of around 3–4% a month (over 40% a year), so a small balance can last years.",
     "example": "₹10,000 on a card, paying only the minimum, can take years to clear and cost thousands in interest."
+  },
+  "credit_card_interest": {
+    "title": "What a credit card charges",
+    "body": "Paid in full by the due date, a credit card costs nothing. Anything left over is charged at a monthly rate on the whole balance, and new purchases stop being interest-free too.",
+    "example": "3% a month is about 43% a year — and it starts the day you leave any balance unpaid."
+  },
+  "credit_debit": {
+    "title": "Credit and debit on a statement",
+    "body": "On a bank statement, credit means money arriving and debit means money leaving. It is the bank's point of view, not yours, which is why it reads backwards the first time.",
+    "example": "Your salary appears as a credit. Your rent appears as a debit."
   },
   "credit_score": {
     "title": "Credit score",
@@ -84,6 +124,11 @@
     "body": "Buying something now with credit feels great today and costs more tomorrow. Saving for it first means you pay only the price, and you often find you wanted it less than you thought.",
     "example": "A ₹8,000 phone on a card, paying the minimum, can end up costing ₹10,000 or more. Saved for over 10 months, it costs ₹8,000."
   },
+  "deposit_types": {
+    "title": "Ways of keeping money at a bank",
+    "body": "A savings account is money you can take out any day. A fixed deposit locks it for a term and pays more. A recurring deposit takes a fixed amount every month. Each trades access for interest.",
+    "example": "An emergency fund belongs in savings. Money for a goal two years away can sit in a deposit."
+  },
   "depreciation": {
     "title": "Depreciation: things lose value",
     "body": "Phones, bikes and gadgets are worth less every year you own them. If you borrow to buy them, you keep paying for something that keeps shrinking.",
@@ -99,15 +144,30 @@
     "body": "Some companies hand part of their profit to shareholders as a dividend. It is cash in your pocket without selling anything. A company can cut or skip it in a bad year — a dividend is a decision, not a promise.",
     "example": "100 shares paying ₹4 each gives you ₹400, whether or not the share price moved that year."
   },
+  "education_financing": {
+    "title": "Paying for study",
+    "body": "Fees can be paid from savings, from family, or with a loan meant for study, which usually costs less and waits longer than ordinary borrowing. The question is what the study earns afterwards, against what the borrowing costs.",
+    "example": "A course costing ₹40,000 that raises your pay by ₹2,000 a month pays for itself in under two years."
+  },
   "education_loan": {
     "title": "Education loans",
     "body": "Education loans pay for courses and degrees, often at lower interest than other loans, and repayment usually starts after the course. They can be good debt when the course really improves what you can earn. Always try scholarships first.",
     "example": "Paisapur Bank's education loan charges 0.8% a month, cheaper than its regular 1% and far cheaper than a moneylender's 5%."
   },
+  "emergency_cover_months": {
+    "title": "How big an emergency fund",
+    "body": "Count what you must pay in a month, then keep several of those months somewhere you can reach today. It is measured in months of your life, not in a round number someone suggested.",
+    "example": "₹2,400 of unavoidable monthly costs means an emergency fund of roughly ₹7,000 to ₹15,000."
+  },
   "emergency_fund": {
     "title": "Emergency fund",
     "body": "An emergency fund is money kept only for surprises: a broken phone, a medical bill, a lost job. Aim for 3–6 months of needs, in a place you can reach quickly, like a savings account.",
     "example": "With ₹800 of needs a month, 3 months is ₹2,400. When the phone screen cracks, you pay and stay calm."
+  },
+  "emergency_refill": {
+    "title": "Refilling it after you use it",
+    "body": "An emergency fund is supposed to be spent on emergencies. What matters is what happens next: it goes back to the top before anything else is funded, or the next emergency becomes a loan.",
+    "example": "You spend ₹4,000 on a repair. The next three months put ₹1,400 back before anything else."
   },
   "emi": {
     "title": "EMI: equated monthly instalment",
@@ -139,6 +199,11 @@
     "body": "Scammers buy ads and seed search results with helpline numbers that look official. Whoever answers will ask you to install a screen-sharing app, read out an OTP, or make a small \"test\" payment. Real support never needs any of those.",
     "example": "Your payment failed, so you search for the helpline and call the first number. Use the number printed inside the official app instead."
   },
+  "fd_lock_in": {
+    "title": "Money that is locked away",
+    "body": "A fixed deposit pays more because you promised to leave it alone. Breaking it early is allowed but costs some of the interest — which is fine for a goal and wrong for an emergency.",
+    "example": "Breaking a deposit a month early can cost more interest than it earned."
+  },
   "fees": {
     "title": "Fees eat returns",
     "body": "A small yearly fee looks harmless, but it's taken every year from your whole investment, and compounds against you. Always check the fee (expense ratio).",
@@ -159,10 +224,20 @@
     "body": "Some costs are the same every month and arrive whether you plan for them or not — rent, a bus pass, a fee. Others move. Cover the fixed ones first; they are the ones that bite.",
     "example": "Your sister's school fee arrives the same month every year. It is never a surprise, only an un-planned-for one."
   },
+  "flat_vs_reducing": {
+    "title": "Flat rate and reducing rate",
+    "body": "A flat rate charges interest on the whole original amount for the whole term, even on the part you have already repaid. A reducing rate charges only on what is left. The same number means very different money.",
+    "example": "12% flat is close to 22% reducing. The advertised number is the flat one."
+  },
   "fraud_recovery": {
     "title": "If you get scammed",
     "body": "Act fast: call India's cybercrime helpline 1930 first (it can freeze money before it moves on), then call your bank to block your account or card, report on cybercrime.gov.in, change your passwords, and tell someone you trust.",
     "example": "Scammed at 9 pm? Call 1930 and your bank the same night. Don't wait for morning."
+  },
+  "goal_months": {
+    "title": "Giving a goal a date",
+    "body": "A goal needs a number and a month, or it is a wish. With both, you can tell at any point whether you are ahead or behind, and do something about it while there is still time.",
+    "example": "\"₹9,000 by December\" can be checked in August. \"A new cycle sometime\" cannot."
   },
   "goal_setting": {
     "title": "Money goals",
@@ -188,6 +263,11 @@
     "title": "GST: tax on what you buy",
     "body": "Goods and Services Tax is added to most things you buy and goes to the government. Since 2025 most items are taxed at 5% or 18%, and some basics like fresh fruit and notebooks at 0%. The shelf price usually already includes GST.",
     "example": "A ₹150 recharge with 18% GST includes about ₹23 of tax. Your bill shows it."
+  },
+  "habit_beats_amount": {
+    "title": "The habit matters more than the size",
+    "body": "What makes saving work is that it happens every month without a decision. The amount can be small and can grow later; the habit is the thing that is hard to start twice.",
+    "example": "₹100 every month for a year beats ₹1,200 that you keep meaning to set aside."
   },
   "identity_protection": {
     "title": "Protecting your identity",
@@ -234,6 +314,11 @@
     "body": "Insurance pools small payments (premiums) from many people to pay the few who face a big loss. You pay a little for sure to avoid a huge loss maybe. Health and term life insurance protect families from disasters.",
     "example": "₹100 a month for insurance feels wasted until the month your stall burns down."
   },
+  "interest_basics": {
+    "title": "What interest is",
+    "body": "Interest is rent on money. The bank pays you a little for keeping your money; a lender charges you more for using theirs. It is always a rate for a period, so \"2%\" means nothing until you know 2% of what, and per what.",
+    "example": "₹5,000 at 4% a year earns ₹200 in a year — and the same ₹5,000 borrowed at 24% a year costs ₹1,200."
+  },
   "interest_compound": {
     "title": "Compound interest",
     "body": "Compound interest is paid on the original amount plus everything it has already earned. Each period starts from a slightly bigger number, so the growth curves upward instead of running straight.",
@@ -259,10 +344,25 @@
     "body": "Before opening an account, a bank must check who you are with an identity proof and an address proof, plus a photo. Students under 18 can open a minor account with a parent or guardian.",
     "example": "Real banks ask for KYC at the branch or in their official app. They never ask you to \"update KYC\" through a link in an SMS."
   },
+  "kyc_documents": {
+    "title": "The papers a bank needs",
+    "body": "To open an account a bank must confirm who you are and where you live. One photo ID, one address proof, a photograph, and a form. Nothing else. Anyone asking for more — a fee, a PIN, an OTP — is not the bank.",
+    "example": "An Aadhaar card covers both identity and address for most accounts. Under 18, a guardian signs with you."
+  },
+  "kyc_update": {
+    "title": "When the bank asks again",
+    "body": "Banks occasionally re-confirm who you are. A real request comes through the bank's own app or branch and never asks for a PIN, an OTP or a payment. A message with a link and a deadline is a scam, every time.",
+    "example": "\"Update KYC today or your account closes\" with a link is the scam. Walk into the branch and ask."
+  },
   "lending_as_investing": {
     "title": "Lending is investing",
     "body": "When you lend, you are investing: you hand over money now for a promise of more later. Everything that makes lending risky — who the borrower is, whether they can pay — is exactly what makes an investment risky.",
     "example": "Lending ₹5,000 to a shop that pays back ₹5,500 in a year is a 10% investment, with the shop's survival as the risk."
+  },
+  "lending_boundaries": {
+    "title": "Lending to people you know",
+    "body": "Lending to friends and family is a real decision, not a reflex. Agree the amount and the date out loud, lend only what you could do without, and accept that saying no is allowed.",
+    "example": "\"I can lend ₹500 until the 10th\" is a loan. \"However much you need\" is a gift you have not admitted to."
   },
   "lending_to_friends": {
     "title": "Lending to friends and family",
@@ -294,10 +394,30 @@
     "body": "A minimum balance is money you must leave sitting in the account at all times. Dip below it, even once, and the bank takes a fee. It is not a saving — it is money you cannot use.",
     "example": "₹1,000 locked away out of a ₹800 allowance is not a savings plan. It is a monthly fine waiting to happen."
   },
+  "minimum_payment_trap": {
+    "title": "The minimum payment",
+    "body": "The minimum keeps the account in good standing and almost nothing else. Pay it and the balance barely moves while interest keeps building, which is how a small bill becomes a long one.",
+    "example": "₹10,000 at 3% a month, paying the 5% minimum, takes years and costs more than the original amount."
+  },
+  "minor_accounts": {
+    "title": "Accounts before 18",
+    "body": "Under 18 you can have an account in your own name, opened with a guardian. Some features wait until you are older, and some documents an adult would give are replaced by the guardian's.",
+    "example": "A student account at 16 needs a guardian's signature and the guardian's ID, not a PAN card of your own."
+  },
+  "months_to_goal": {
+    "title": "How long a goal takes",
+    "body": "The goal's price divided by what you can put aside each month is the honest answer. It is often longer than hoped, which is the useful part: it is the number that tells you whether to save more or want less.",
+    "example": "₹9,000 at ₹750 a month is twelve months. Not \"soon\"."
+  },
   "mutual_funds": {
     "title": "Mutual funds",
     "body": "A mutual fund pools money from many people and a professional manager invests it in many stocks or bonds. You get instant diversification with a small amount, but you pay a yearly fee.",
     "example": "Star Picks Fund charges 1.5% a year to try to beat the market. Most active funds don't, over the long run."
+  },
+  "needs_vs_wants": {
+    "title": "Needs and wants",
+    "body": "A need is something that causes real trouble if it goes unpaid; a want is everything else. The line is not fixed — it moves with who you are and what month it is — which is why it has to be thought about rather than memorised.",
+    "example": "Bus fare is a need on an exam day and a want on a holiday when you could walk."
   },
   "needs_wants": {
     "title": "Needs and wants",
@@ -349,6 +469,11 @@
     "body": "A fund collects money from many people and buys a basket of things with it. For a small amount you get a spread you could not afford alone, and someone else does the buying — for a fee.",
     "example": "₹500 buys a slice of a basket of thirty companies; ₹500 of a single share buys two shares of one."
   },
+  "price_over_time": {
+    "title": "What a thing costs to keep",
+    "body": "Buying is one payment; owning is many. Charging, repairs, data, fuel, renewals. Ask what the next twelve months cost, not what the shelf says.",
+    "example": "A ₹7,000 phone with ₹250 of data a month costs ₹10,000 by the end of its first year."
+  },
   "profit_loss": {
     "title": "Profit and loss",
     "body": "Profit is what you have left after you take away what you paid. Sell something for more than it cost and the difference is profit; sell for less and the difference is a loss. Everything else about investing is a longer version of this one sum.",
@@ -373,6 +498,16 @@
     "title": "Real return",
     "body": "Your real return is what you earn after inflation. If savings pay 3.5% and prices rise 6%, your money is actually losing buying power.",
     "example": "Real return ≈ interest rate − inflation. 7% FD − 6% inflation ≈ 1% real growth."
+  },
+  "reconcile_balance": {
+    "title": "Checking the balance yourself",
+    "body": "Start from last month's balance, add what came in, take away what went out, and see whether you land on this month's. When you do not, the difference is something worth finding.",
+    "example": "You are ₹300 short of what you expected. That ₹300 is either a charge or a payment you forgot."
+  },
+  "recurring_deposit": {
+    "title": "Paying yourself every month",
+    "body": "A recurring deposit takes a fixed amount automatically, every month, for a set term. It makes saving the default instead of a decision you have to win each month.",
+    "example": "₹500 a month for two years puts away ₹12,000 without any month requiring willpower."
   },
   "red_flags": {
     "title": "Reading the red flags",
@@ -409,6 +544,11 @@
     "body": "A scholarship is money for studies that you don't pay back. Government schemes, colleges, NGOs and companies offer them for merit, need or both. Apply early and to many; it's the cheapest money there is.",
     "example": "A ₹1,500 merit scholarship covers almost a third of a ₹5,000 course, with nothing to repay."
   },
+  "share_of_income": {
+    "title": "Thinking in shares, not rupees",
+    "body": "A plan in percentages survives a change in income; a plan in rupees does not. Deciding to save a fifth works whether the month brought ₹2,000 or ₹5,000.",
+    "example": "Saving a fifth means ₹400 in a quiet month and ₹1,000 in a good one, without rewriting the plan."
+  },
   "simple_interest": {
     "title": "Interest",
     "body": "Interest is the price of money. When you save, the bank pays you interest. When you borrow, you pay interest. Simple interest = principal × rate × time.",
@@ -429,15 +569,40 @@
     "body": "Putting in a fixed amount regularly means you buy more units when prices are low and fewer when they are high, without having to guess. It smooths the price you pay. It does not promise a profit.",
     "example": "₹1,000 a month buys 10 units at ₹100 and 12.5 at ₹80 — the average cost ends up below the average price."
   },
+  "small_savings_add_up": {
+    "title": "Small amounts add up",
+    "body": "Saving is a habit before it is an amount. A little set aside every month, without fail, builds more than an occasional large deposit — and builds the habit, which is the part that lasts.",
+    "example": "₹200 a month is ₹2,400 a year. Waiting for a spare ₹2,400 usually means nothing is saved at all."
+  },
   "speculation_vs_investing": {
     "title": "Investing or speculating",
     "body": "Investing puts money behind something that earns: a business, a loan, rent. Speculating bets on a price moving, with nothing underneath producing anything. Both can make money; only one has something working for you.",
     "example": "A share in a tiffin business earns from meals sold. A coin that earns nothing only pays if someone later pays more."
   },
+  "spending_leaks": {
+    "title": "Where money disappears",
+    "body": "A leak is small, regular and invisible: a subscription, a daily snack, a delivery fee. Nobody notices one. The month's total notices all of them.",
+    "example": "₹60 four times a week is ₹1,000 a month, and nobody can say afterwards what it bought."
+  },
+  "spending_patterns": {
+    "title": "Seeing the pattern",
+    "body": "Written down, a month of spending stops being a blur. The same shop, the same day, the same hour keeps appearing — and a pattern is something you can change, where a vague feeling is not.",
+    "example": "Every Friday evening, the same ₹200. That is one decision to make, not twenty."
+  },
+  "spotting_charges": {
+    "title": "Finding charges you did not expect",
+    "body": "Charges hide in plain sight: a minimum-balance penalty, an SMS fee, an ATM withdrawal past the free limit, a renewal nobody cancelled. They are small and monthly, which is exactly why they add up.",
+    "example": "Four ₹25 charges a month is ₹1,200 a year — more than most accounts pay in interest."
+  },
   "start_early": {
     "title": "Starting early",
     "body": "Years matter more than amounts. Money put in early gets more compounding periods than money put in later, so a small amount started now can beat a larger amount started in ten years.",
     "example": "₹500 a month from 18 beats ₹1,000 a month from 33, if both stop at 50 — the first had fifteen extra years to compound."
+  },
+  "statement_reading": {
+    "title": "Reading a statement",
+    "body": "A statement is a dated list: what came in, what went out, and the balance after each. Read it from the balance backwards and anything you do not recognise stands out.",
+    "example": "A ₹49 charge every month you never agreed to is invisible in your head and obvious on a statement."
   },
   "stock_basics": {
     "title": "What a share is",
@@ -448,6 +613,11 @@
     "title": "Stocks: owning a piece of a company",
     "body": "A share (stock) is a small piece of ownership in a company. If the company does well, the price can rise and it may share profits as dividends. If it does badly, the price can fall a lot.",
     "example": "Buying 1 share of Pearl City Power makes you a tiny owner of the power company."
+  },
+  "tenure_tradeoff": {
+    "title": "Longer loan, smaller instalment, more paid",
+    "body": "Stretching a loan makes each month easier and the whole thing dearer, because interest is charged for longer. The comfortable instalment and the cheap loan are rarely the same loan.",
+    "example": "₹20,000 over 12 months or 24: the longer one halves the instalment and roughly doubles the interest."
   },
   "time_horizon": {
     "title": "Time horizon",
@@ -489,10 +659,20 @@
     "body": "Volatility is how much a price moves about. It feels like danger, but a price that fell and recovered cost you nothing unless you sold at the bottom. The permanent loss is the one you lock in.",
     "example": "A fund that dropped 20% and came back within a year lost money only for those who sold in the dip."
   },
+  "where_to_keep_money": {
+    "title": "Where savings should sit",
+    "body": "Match the place to the job. Money for an emergency has to be reachable today. Money for a goal two years out can be locked away for more interest. Money for next week should not be anywhere it can be lost.",
+    "example": "An emergency fund in a one-year deposit is not an emergency fund."
+  },
   "why_bank": {
     "title": "Why keep money in a bank",
     "body": "Cash at home can be lost, stolen or spent on a whim. A bank keeps it safe, pays you interest, and lets you pay digitally. In India, deposits are insured up to ₹5 lakh per person per bank if a bank fails.",
     "example": "₹1,000 under the mattress is still ₹1,000 next year, if nobody takes it. In a savings account it earns a little extra and is protected."
+  },
+  "why_bank_account": {
+    "title": "Why have a bank account",
+    "body": "A bank account gives money a record. It can be proved to be yours, it cannot be taken from a drawer, it can be sent and received without meeting anyone, and it earns a little while it sits. Cash in a tin does none of that.",
+    "example": "A scholarship, a refund or a salary cannot be paid into a tin. They need an account in your name."
   },
   "windfall": {
     "title": "Windfalls and lump sums",
