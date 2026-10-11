@@ -19,10 +19,18 @@ import {
 } from '@/platform';
 import { ARCADE_SECTIONS, STAGES } from '@/content/stages';
 import { Avatar } from '@/features/setup';
-import { Badge, Button, Card, Icon, Notice, ProgressBar, SectionLabel, Spinner } from '@/ui';
+import { Badge, Button, Card, Icon, Notice, SectionLabel, Spinner } from '@/ui';
 import { summariseEvents } from './stats';
+import { HomeHub } from './HomeHub';
 
 const NAV = ['dashboard', 'learn', 'practice', 'compete'] as const;
+
+/** Where each Arcade section lives. Missing means its page is not built yet. */
+const SECTION_ROUTES: Record<string, string | undefined> = {
+  'arcade.everyday': '/arcade/everyday',
+  'arcade.safe': '/safe',
+  'arcade.investing': '/learn/invest',
+};
 const BADGE_SLOTS = 6;
 
 export function Dashboard() {
@@ -125,21 +133,7 @@ export function Dashboard() {
 
         <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
           <div className="space-y-6">
-            <Card className="space-y-4">
-              <SectionLabel>{t('home.continue.title')}</SectionLabel>
-              <div>
-                <h2 className="text-xl font-bold">{t('home.lifepath.title')}</h2>
-                <p className="mt-1 text-sm text-ink-soft">{t('home.lifepath.body')}</p>
-              </div>
-              <div>
-                <div className="mb-1.5 flex justify-between text-xs font-bold text-muted">
-                  <span>{t('home.continue.stage', { n: 1, total: STAGES.length })}</span>
-                  <span>0%</span>
-                </div>
-                <ProgressBar value={0} />
-              </div>
-              <Button disabled>{t('home.continue.start')}</Button>
-            </Card>
+            <HomeHub pid={profile.pid} />
 
             <section className="space-y-3">
               <SectionLabel>{t('home.stagesTitle')}</SectionLabel>
@@ -167,17 +161,17 @@ export function Dashboard() {
               <SectionLabel>{t('home.practiceTitle')}</SectionLabel>
               <div className="grid gap-3 sm:grid-cols-3">
                 {ARCADE_SECTIONS.map((a) => {
-                  const playable = a.id === 'arcade.safe';
+                  const to = SECTION_ROUTES[a.id];
                   const body = (
                     <>
                       <Badge>{a.level}</Badge>
                       <h3 className="font-bold">{a.name}</h3>
                       <p className="flex-1 text-sm text-muted">{a.blurb}</p>
-                      <span className={`text-xs font-bold uppercase ${playable ? 'text-brand' : 'text-muted'}`}>{playable ? t('home.play') : t('home.soon')}</span>
+                      <span className={`text-xs font-bold uppercase ${to ? 'text-brand' : 'text-muted'}`}>{to ? t('home.play') : t('home.soon')}</span>
                     </>
                   );
-                  return playable ? (
-                    <Link key={a.id} to="/safe" className="flex flex-col gap-2 rounded-xl border border-line-strong bg-surface p-4 transition hover:border-brand">
+                  return to ? (
+                    <Link key={a.id} to={to} className="flex flex-col gap-2 rounded-xl border border-line-strong bg-surface p-4 transition hover:border-brand">
                       {body}
                     </Link>
                   ) : (

@@ -3,14 +3,6 @@
   "tagline": "Live a money life. Make mistakes safely. Grow.",
   "welcomeBack": "Welcome back, {name}!",
   "sceneLabel": "A small village with houses, trees and a path",
-  "simulator": {
-    "title": "Play Paisapur",
-    "body": "A money adventure: walk the town, meet Professor Arth and earn six badges."
-  },
-  "minigames": {
-    "title": "Play Minigames",
-    "body": "Short games on saving, scams, investing and more."
-  },
   "facilitator": "I’m a facilitator",
   "arcade": {
     "title": "Minigames",
@@ -26,5 +18,10 @@
       "stockMarket": "Stock Market"
     },
     "more": "Coming from the rest of the team"
+  },
+  "enter": {
+    "title": "Start playing",
+    "back": "Carry on",
+    "body": "Your year in Paisapur, the lessons and the scam simulators are all behind this door."
   }
 }

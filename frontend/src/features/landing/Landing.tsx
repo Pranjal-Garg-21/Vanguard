@@ -1,14 +1,16 @@
 /**
- * The first screen: a tile-based village with two doors, the simulator and
- * the minigames. Sends brand-new players through setup and the starting-point
- * questions first, then on to the door they picked.
+ * The first screen: a tile-based village with one door into the app.
+ *
+ * It used to jump straight to Paisapur or the Arcade. Both now live on the
+ * dashboard alongside the lessons and Stay Safe, so this leads there and the
+ * dashboard is the one place that knows what a student can do next.
+ *
+ * Brand-new players go through setup and the starting-point questions first.
  */
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { getSetting, listProfiles, loadActiveProfile, t, useActiveProfile } from '@/platform';
 import { LANDING_SCENE, PixelButton, STRIP_TREES, TileMap, VILLAGE_LEGEND } from '@/ui';
-
-type Door = '/play' | '/arcade';
 
 export function Landing() {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ export function Landing() {
     void loadActiveProfile();
   }, []);
 
-  async function enter(door: Door) {
+  async function enter() {
     setBusy(true);
     const active = await loadActiveProfile();
     if (!active) {
@@ -28,8 +30,8 @@ export function Landing() {
       return;
     }
     const baseline = await getSetting(active.pid, 'baseline');
-    if (baseline) navigate(door);
-    else navigate('/onboarding', { state: { next: door } });
+    if (baseline) navigate('/home');
+    else navigate('/onboarding', { state: { next: '/home' } });
   }
 
   return (
@@ -48,22 +50,9 @@ export function Landing() {
           </header>
 
           <nav className="mt-8 flex flex-col gap-5" aria-label="Main menu">
-            <PixelButton
-              className="w-full flex-col items-start! gap-1 py-4 text-left"
-              disabled={busy}
-              onClick={() => void enter('/play')}
-            >
-              <span className="text-2xl">{t('landing.simulator.title')}</span>
-              <span className="text-base font-normal">{t('landing.simulator.body')}</span>
-            </PixelButton>
-            <PixelButton
-              tone="parchment"
-              className="w-full flex-col items-start! gap-1 py-4 text-left"
-              disabled={busy}
-              onClick={() => void enter('/arcade')}
-            >
-              <span className="text-2xl">{t('landing.minigames.title')}</span>
-              <span className="text-base font-normal">{t('landing.minigames.body')}</span>
+            <PixelButton className="w-full flex-col items-start! gap-1 py-4 text-start" disabled={busy} onClick={() => void enter()}>
+              <span className="text-2xl">{t(profile ? 'landing.enter.back' : 'landing.enter.title')}</span>
+              <span className="text-base font-normal">{t('landing.enter.body')}</span>
             </PixelButton>
           </nav>
 

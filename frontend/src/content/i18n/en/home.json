@@ -66,5 +66,31 @@
   "soon": "Coming soon",
   "play": "Play",
   "newUnlock": "New: {names} is open.",
-  "dismiss": "Dismiss"
+  "dismiss": "Dismiss",
+  "hub": {
+    "continue": "Carry on",
+    "start": "Start here",
+    "resume": "Continue your year",
+    "begin": "Start your year",
+    "noSave": "You have not played a month yet. This starts at your birthday, in the prologue.",
+    "chapter": "Chapter",
+    "month": "Month",
+    "money": "Money",
+    "learn": {
+      "title": "Lessons",
+      "body": "Interest, inflation, shares and funds, one short room at a time. Nothing here uses real companies.",
+      "count": {
+        "one": "{count} room",
+        "other": "{count} rooms"
+      }
+    },
+    "safe": {
+      "title": "Stay Safe",
+      "body": "A simulated phone full of scams. Spot the tells before they cost you anything real.",
+      "count": {
+        "one": "{count} simulator",
+        "other": "{count} simulators"
+      }
+    }
+  }
 }
