@@ -7,6 +7,9 @@ import { Link } from 'react-router';
 import { Button, Card, Icon, Notice } from '@/ui';
 import { supabaseOrThrow } from './data';
 
+/** The digits of whatever was typed or pasted, at most the 8 a sign-in code can have. */
+const digitsOf = (text: string) => text.replace(/\D/g, '').slice(0, 8);
+
 export function LoginScreen() {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -80,10 +83,19 @@ export function LoginScreen() {
               <label className="block">
                 <span className="font-semibold">Code</span>
                 <input
+                  type="text"
                   inputMode="numeric"
-                  autoComplete="one-time-code"
+                  // "one-time-code" makes some browsers fill and clear the box as you type, so the code is kept off it.
+                  autoComplete="off"
+                  autoFocus
+                  maxLength={32}
                   value={code}
-                  onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 8))}
+                  onChange={(e) => setCode(digitsOf(e.target.value))}
+                  onPaste={(e) => {
+                    // A pasted code often carries spaces or line breaks; keep only the digits.
+                    e.preventDefault();
+                    setCode(digitsOf(e.clipboardData.getData('text')));
+                  }}
                   placeholder="123456"
                   className="mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 text-center font-mono text-2xl tracking-widest focus:border-brand focus:outline-none"
                 />
