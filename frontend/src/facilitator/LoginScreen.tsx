@@ -62,7 +62,7 @@ export function LoginScreen() {
           <circle cx="0" cy="100" r="80" fill="#3b82f6" />
         </svg>
         <div className="relative ml-auto max-w-md px-12 py-16">
-          <span className="rounded-md bg-white/10 px-2 py-0.5 text-xs font-medium tracking-wide text-[#c8d0de] uppercase">PaisaPath · Facilitator</span>
+          <span className="rounded-md bg-white/10 px-2 py-0.5 text-xs font-medium tracking-wide text-[#c8d0de] uppercase">MoneyPath · Facilitator</span>
           <h2 className="mt-5 text-4xl leading-tight font-bold">Run your class. See what clicks.</h2>
           <ul className="mt-8 space-y-4">
             {FEATURES.map((f) => (
@@ -80,7 +80,7 @@ export function LoginScreen() {
       <div className="flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="mb-8">
-          <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#2563eb] text-xl font-bold text-white">P</div>
+          <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#2563eb] text-xl font-bold text-white">M</div>
           <h1 className="mt-5 text-3xl font-bold">Facilitator sign in</h1>
           <p className="mt-2 text-[#5b6577]">Run your class, unlock stages and see what your students understand.</p>
         </div>

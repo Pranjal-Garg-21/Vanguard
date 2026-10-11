@@ -53,7 +53,7 @@ export function Dashboard() {
           <span className="flex items-center gap-2 font-bold">
             <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand text-sm font-bold text-brand-ink">P</span>
             <span className="hidden sm:inline">
-              Paisa<span className="text-brand">Path</span>
+              Money<span className="text-brand">Path</span>
             </span>
           </span>
 

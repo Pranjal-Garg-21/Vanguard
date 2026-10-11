@@ -1,4 +1,4 @@
-# PaisaPath Team Guide
+# MoneyPath Team Guide
 
 Everything built so far, how to run it, and how to add your own work. Read this first, then `REPO_STRUCTURE.md` for the full folder map.
 

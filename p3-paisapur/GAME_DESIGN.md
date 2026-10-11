@@ -1,10 +1,10 @@
-# PaisaPath — Game Design: *Paisapur*
+# MoneyPath — Game Design: *Paisapur*
 
 > **A money RPG in the style of the classic handheld monster-collecting games.** You walk around a small town, enter buildings, talk to people, follow a story, and every chapter of that story teaches a money skill.
 
 This document makes the tile-based RPG **the main game**. It sits on top of `Implementation.md`: the engine, concepts, mastery model, telemetry, guardrails and stages S0–S6 all stay. What changes is the *front end of the experience*: instead of menus and month screens, the student lives the LifePath by walking around a town.
 
-*Paisapur* is the working name of the town and the game mode. PaisaPath stays the product name.
+*Paisapur* is the working name of the town and the game mode. MoneyPath stays the product name.
 
 ---
 

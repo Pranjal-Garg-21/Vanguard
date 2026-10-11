@@ -112,7 +112,7 @@ From the decision log in `P5_implementation.md`. Change any line here before run
 ## Prompt 1: Sync engine
 
 ```text
-You're building the sync engine for PaisaPath, P5's Phase 8. Read sections A, B and C of P5_PROMPTS.md and follow them throughout. Then read TEAM_GUIDE.md, P5_implementation.md (Phase 8 and Phase 2), shared/telemetry/event.ts, shared/sync/protocol.ts, backend/supabase/functions/ingest/index.ts and everything in frontend/src/platform/.
+You're building the sync engine for MoneyPath, P5's Phase 8. Read sections A, B and C of P5_PROMPTS.md and follow them throughout. Then read TEAM_GUIDE.md, P5_implementation.md (Phase 8 and Phase 2), shared/telemetry/event.ts, shared/sync/protocol.ts, backend/supabase/functions/ingest/index.ts and everything in frontend/src/platform/.
 
 Goal: events a student records on their phone reach Supabase automatically when there's internet, and class unlocks come back down, without the student ever waiting or noticing.
 
@@ -147,7 +147,7 @@ I'll deploy the function myself. At the end, tell me the exact command and how t
 ## Prompt 2: Accessibility, settings and read-aloud
 
 ```text
-You're making PaisaPath's accessibility settings real across the app (P5 owns setup and platform). Read sections A, B and C of P5_PROMPTS.md and follow them throughout. Then read TEAM_GUIDE.md, frontend/src/features/setup/, frontend/src/platform/profiles/ and frontend/src/app/.
+You're making MoneyPath's accessibility settings real across the app (P5 owns setup and platform). Read sections A, B and C of P5_PROMPTS.md and follow them throughout. Then read TEAM_GUIDE.md, frontend/src/features/setup/, frontend/src/platform/profiles/ and frontend/src/app/.
 
 Students choose four settings during setup (read aloud, bigger text, less movement, no timers), but nothing uses them yet. Make them work everywhere and give teammates simple hooks.
 
@@ -157,7 +157,7 @@ Build:
 3. Less movement: honour both the profile setting and the OS prefers-reduced-motion. Expose useReducedMotion(). Add a global CSS rule that removes non-essential transitions and animations when either is on.
 4. No timers: a useCountdown(seconds, { onExpire }) hook. With timers off it still shows the timer (so students learn that pressure exists) but it never runs out and is visibly paused. Games must use this hook for any timer.
 5. Read aloud: a speak(text) function and an <AudioButton textKey="…" /> using the browser's speech synthesis, with the language mapped to the best available voice. It speaks automatically on screen entry when "read aloud" is on, and never overlaps itself. P3 will later swap in recorded audio behind the same API, so keep it in platform/audio with a comment for P3. Add audio buttons to every setup screen title.
-6. Settings screen at /settings, reachable from the student home header: language, the four accessibility toggles (same look as setup), "Switch player", and a short "About PaisaPath" line. Changes apply immediately.
+6. Settings screen at /settings, reachable from the student home header: language, the four accessibility toggles (same look as setup), "Switch player", and a short "About MoneyPath" line. Changes apply immediately.
 7. Right-to-left: when the language is Urdu, set dir="rtl" on <html>. Check the setup flow, home and settings mirror correctly.
 
 Keep the existing setup flow's look; extract shared pieces (the toggle row, the step header) rather than duplicating them. Write tests for useCountdown (timers on and off) and for the settings update functions.
@@ -284,7 +284,7 @@ Writing quality matters most here. The scams must read like real Indian scam mes
 ## Prompt 7: Offline app (PWA)
 
 ```text
-You're making PaisaPath install like an app and work fully offline (P5 Phase 3). Read sections A, B and C of P5_PROMPTS.md and follow them throughout. Then read TEAM_GUIDE.md, P5_implementation.md (Phase 3), Implementation.md (UC-SYS-01, UC-PLAT-01), frontend/vite.config.ts and frontend/src/main.tsx.
+You're making MoneyPath install like an app and work fully offline (P5 Phase 3). Read sections A, B and C of P5_PROMPTS.md and follow them throughout. Then read TEAM_GUIDE.md, P5_implementation.md (Phase 3), Implementation.md (UC-SYS-01, UC-PLAT-01), frontend/vite.config.ts and frontend/src/main.tsx.
 
 1. Manifest: name, short name, theme and background colours, portrait, standalone, and proper PNG icons (192, 512, maskable) generated from the existing logo into frontend/public/.
 2. Caching (vite-plugin-pwa with runtime caching rules):
@@ -293,7 +293,7 @@ You're making PaisaPath install like an app and work fully offline (P5 Phase 3).
    - Audio, if any: cache-first, downloaded when a stage is reached.
    - Supabase API and functions: network-only (sync handles retries).
    - The facilitator dashboard stays lazy-loaded and out of the student precache.
-3. Install prompt: catch beforeinstallprompt and show our own clear "Add PaisaPath to your home screen" card after the language step and on the home screen until installed or dismissed. On iPhone, show a short picture guide (Share → Add to Home Screen).
+3. Install prompt: catch beforeinstallprompt and show our own clear "Add MoneyPath to your home screen" card after the language step and on the home screen until installed or dismissed. On iPhone, show a short picture guide (Share → Add to Home Screen).
 4. Safe updates: register with 'prompt'. Add a platform flag setInActivity(true/false) that games set while playing. Show "New version ready, restart when you finish" only when not in an activity, never mid-game.
 5. Persistent storage: request navigator.storage.persist() after setup and show a gentle warning on /settings if it was refused or free space is under 50 MB.
 6. Offline banner: a small, calm indicator when offline. No modal, no blocking.

@@ -1,6 +1,6 @@
 # backend
 
-The cloud side of PaisaPath, on Supabase. Owner: P5.
+The cloud side of MoneyPath, on Supabase. Owner: P5.
 
 ```
 backend/supabase/

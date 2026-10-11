@@ -63,7 +63,7 @@ export async function refreshSyncStatus(): Promise<void> {
 }
 
 let running = false;
-const LOCK_NAME = 'paisapath-sync';
+const LOCK_NAME = 'moneypath-sync';
 
 /** Only one sync at a time, across tabs where the browser supports Web Locks. */
 async function exclusive<T>(job: () => Promise<T>): Promise<T | undefined> {

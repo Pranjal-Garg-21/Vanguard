@@ -50,7 +50,7 @@ export type ClassInfo = { code: string; name: string | null; unlocks: Unlock[]; 
 /** A scenario a facilitator published for the student's class, kept on the phone so it plays offline. */
 export type StoredCustomScenario = CustomScenarioRow & { classCode: string; updatedAt: number };
 
-export class PaisaDB extends Dexie {
+export class MoneyDB extends Dexie {
   profiles!: Table<Profile, string>;
   saves!: Table<Save, [string, string]>;
   snapshots!: Table<StoredSnapshot, string>;
@@ -60,6 +60,7 @@ export class PaisaDB extends Dexie {
   classCache!: Table<ClassInfo, string>;
   customScenarios!: Table<StoredCustomScenario, string>;
 
+  // The device database keeps its original name (from before the rename to MoneyPath) so existing saves survive.
   constructor(name = 'paisapath') {
     super(name);
     this.version(1).stores({
@@ -76,4 +77,4 @@ export class PaisaDB extends Dexie {
   }
 }
 
-export const db = new PaisaDB();
+export const db = new MoneyDB();

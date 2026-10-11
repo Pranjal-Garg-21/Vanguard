@@ -41,7 +41,7 @@ export function Landing() {
             P
           </span>
           <span className="text-2xl font-bold">
-            Paisa<span className="text-brand">Path</span>
+            Money<span className="text-brand">Path</span>
           </span>
         </div>
 

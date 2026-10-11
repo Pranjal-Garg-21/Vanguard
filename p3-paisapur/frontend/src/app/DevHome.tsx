@@ -37,7 +37,7 @@ export function DevHome() {
 
   return (
     <main className="mx-auto max-w-xl space-y-6 p-4">
-      <h1 className="text-2xl font-bold">PaisaPath scaffold</h1>
+      <h1 className="text-2xl font-bold">MoneyPath scaffold</h1>
 
       <section className="space-y-1">
         <p>Supabase: {isSupabaseConfigured() ? 'configured' : 'not configured (see frontend/.env.example)'}</p>

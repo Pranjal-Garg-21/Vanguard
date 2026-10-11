@@ -1,11 +1,11 @@
-# PaisaPath — Implementation Plan
+# MoneyPath — Implementation Plan
 
 > **Learn money by living it.**
 > A persona-driven financial life simulator for Grade 11–12 students in Hyderabad, built for the Vanguard India *Community Stewardship* problem statement: *"Empowering the Next Generation Through Financial Literacy."*
 >
-> *PaisaPath is the working product name. **LifePath** is the name of its main life-simulation mode.*
+> *MoneyPath is the working product name. **LifePath** is the name of its main life-simulation mode.*
 
-This document combines everything decided so far: the problem brief, the LifePath concept (persona life sim, mini-games, rewind and replay), the PaisaPath README (engine, verbs, scenario library, tech stack), the sequential life path starting from opening a bank account, the 10-question character builder, and the student workflow and use cases. It ends with a work split for five people.
+This document combines everything decided so far: the problem brief, the LifePath concept (persona life sim, mini-games, rewind and replay), the MoneyPath README (engine, verbs, scenario library, tech stack), the sequential life path starting from opening a bank account, the 10-question character builder, and the student workflow and use cases. It ends with a work split for five people.
 
 ---
 
@@ -32,7 +32,7 @@ This document combines everything decided so far: the problem brief, the LifePat
 
 ## 1. Summary
 
-PaisaPath is **a simulator, not a course**. A student builds a fictional character, then lives that character's financial life month by month. The life starts at the very beginning, opening a bank account, and moves forward in order: digital payments, a first budget, saving, borrowing decisions, growing money, and protecting it. Consequences arrive weeks or months later in simulated time. The student can get scammed, overspend and miss goals *safely*, then rewind to an earlier decision and compare the two lives side by side.
+MoneyPath is **a simulator, not a course**. A student builds a fictional character, then lives that character's financial life month by month. The life starts at the very beginning, opening a bank account, and moves forward in order: digital payments, a first budget, saving, borrowing decisions, growing money, and protecting it. Consequences arrive weeks or months later in simulated time. The student can get scammed, overspend and miss goals *safely*, then rewind to an earlier decision and compare the two lives side by side.
 
 Four ways to learn sit on top of one engine:
 
@@ -61,7 +61,7 @@ Four ways to learn sit on top of one engine:
 
 ### 2.2 The "simulated only" rule
 
-Everything a student does in PaisaPath happens to their **character, in a simulated world**. The app never asks for, stores or analyses the student's real money, real family finances or real messages.
+Everything a student does in MoneyPath happens to their **character, in a simulated world**. The app never asks for, stores or analyses the student's real money, real family finances or real messages.
 
 The following ideas from earlier drafts and the README are **removed**, each with its simulated replacement:
 
@@ -1243,7 +1243,7 @@ MVP totals: P1 11 · P2 8 · P3 8 · P4 5 · P5 5. P4's and P5's MVP items are t
 **Owner:** P2 · **Where:** System · **MVP:** ✅
 **Goal:** keep the app within the guardrail when students ask "what should I buy?"
 **Trigger:** the "Which one should I buy?" chip that appears on investing screens and in Learn (there is no free-text box).
-**Main flow:** a static card in all languages: "PaisaPath teaches how money works, not what to buy. For real decisions, talk to a trusted adult or a registered adviser." It links to the `regulated_check` explainer.
+**Main flow:** a static card in all languages: "MoneyPath teaches how money works, not what to buy. For real decisions, talk to a trusted adult or a registered adviser." It links to the `regulated_check` explainer.
 
 #### UC-CLASS-01 · Class mastery leaderboard
 **Owner:** P2 · **MVP:** Stretch · **Main flow:** the class sees a ranking by **concepts mastered** and a class goal ("340 / 500 activities completed"), never by simulated money. Display names only; a student can hide their name.

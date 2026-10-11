@@ -1,4 +1,4 @@
-# PaisaPath Repository Structure
+# MoneyPath Repository Structure
 
 How the code is organised, who owns which folder, and the rules that keep it clean. Ownership follows `work_division.md`.
 

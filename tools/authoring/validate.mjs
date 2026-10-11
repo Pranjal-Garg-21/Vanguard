@@ -509,7 +509,7 @@ const unusedEnglish = englishKeys.filter((k) => {
 
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
-console.log('PaisaPath content validator\n');
+console.log('MoneyPath content validator\n');
 console.log(`  concepts   ${knownConcepts.size} concepts, ${knownMisconceptions.size} misconceptions`);
 console.log(`  scenarios  ${plural(scenarioFiles.length, 'file')}`);
 console.log(`  story      ${plural(storyScripts, 'script')} in ${plural(storyFiles.length, 'file')}`);
