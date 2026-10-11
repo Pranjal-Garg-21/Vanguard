@@ -6,11 +6,11 @@ import { Icon } from '@/ui';
 export function FacilitatorLayout({ children, email, name }: { children: ReactNode; email?: string; name?: string }) {
   const who = name ?? email ?? '';
   return (
-    <div className="min-h-dvh bg-[#eef1f6] font-[Ubuntu,ui-sans-serif,system-ui] text-[#1c2538]">
+    <div className="theme-light min-h-dvh bg-[#eef1f6] font-[Ubuntu,ui-sans-serif,system-ui] text-[#1c2538]">
       <header className="bg-[#141b2d] text-white print:hidden">
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-4 sm:px-6">
           <Link to="/facilitator" className="flex items-center gap-2.5 text-lg font-bold">
-            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-[#a3e635] text-base font-bold text-[#14240b]">P</span>
+            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-[#2563eb] text-base font-bold text-white">P</span>
             PaisaPath
             <span className="rounded-md bg-white/10 px-2 py-0.5 text-xs font-medium tracking-wide text-[#c8d0de] uppercase">Facilitator</span>
           </Link>

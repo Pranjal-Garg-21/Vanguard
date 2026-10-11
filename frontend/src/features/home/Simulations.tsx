@@ -7,6 +7,7 @@ import { Link, Navigate } from 'react-router';
 import { t, useActiveProfile } from '@/platform';
 import section from '@/content/scenarios/invest/section.json';
 import { SIMULATORS } from '@/games/safe/catalog';
+import { CustomCard } from '@/games/safe/CustomHub';
 import type { SectionGame } from '@/games/investing/lessons/logic/section';
 import { Icon, SectionLabel, type IconName, TopNav } from '@/ui';
 
@@ -24,6 +25,9 @@ export function Simulations() {
           <h1 className="text-2xl font-bold">{t('home.simulations.title')}</h1>
           <p className="max-w-2xl text-ink-soft">{t('home.simulations.subtitle')}</p>
         </div>
+
+        {/* The facilitator's own scenarios for this class; the card only shows when there are some. */}
+        <CustomCard />
 
         <Group title={t('home.simulations.safe')}>
           {SIMULATORS.map((s) => (

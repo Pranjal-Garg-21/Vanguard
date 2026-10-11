@@ -3,7 +3,7 @@ import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 
 import { LANGUAGE_NAMES, supabaseOrThrow } from './data';
-import { BackLink, Hero, lime, Notice, Panel } from './theme';
+import { BackLink, Hero, primary, Notice, Panel } from './theme';
 
 const CONSENT_ITEMS = [
   'Parents or guardians have been informed by the NGO and have given consent.',
@@ -48,12 +48,12 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
     navigate(`../class/${data.id}?tab=join`, { replace: true });
   };
 
-  const input = 'mt-2 w-full rounded-md border border-[#d5dbe5] bg-white p-3 text-[#111827] placeholder:text-[#9aa3b2] [color-scheme:light] focus:border-[#1c2538] focus:ring-2 focus:ring-[#a3e635] focus:outline-none';
+  const input = 'mt-2 w-full rounded-md border border-[#d5dbe5] bg-white p-3 text-[#111827] placeholder:text-[#9aa3b2] [color-scheme:light] focus:border-[#1c2538] focus:ring-2 focus:ring-[#2563eb]/40 focus:outline-none';
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <BackLink to="..">Your classes</BackLink>
-      <Hero tone="lime" title="New class" body="Name it, pick the language, and you’ll get a join code and QR to share." />
+      <Hero title="New class" body="Name it, pick the language, and you’ll get a join code and QR to share." />
 
       <form onSubmit={submit} className="space-y-6">
         <Panel icon="school" title="Class details" subtitle="Students see the class name when they join.">
@@ -102,7 +102,7 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
         </Panel>
 
         {error && <Notice tone="bad">{error}</Notice>}
-        <button type="submit" className={`${lime} min-h-12 w-full text-lg`} disabled={busy || !name.trim() || !allConsented}>
+        <button type="submit" className={`${primary} min-h-12 w-full text-lg`} disabled={busy || !name.trim() || !allConsented}>
           {busy ? 'Creating…' : 'Create class and get join code'}
         </button>
       </form>

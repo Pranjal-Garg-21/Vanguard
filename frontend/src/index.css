@@ -31,6 +31,50 @@
   --color-ink: #3b2412;
 }
 
+/*
+ * The facilitator dashboard is a light page. Wrap it in .theme-light and the same token names (bg-surface, text-ink,
+ * bg-brand, the shadcn bg-primary...) take light-page values, so shared components stay readable there and the accent is
+ * a standard blue instead of the app's lime. Kept above the main palette so the contrast test still reads that one.
+ */
+@utility theme-light {
+  --color-bg: #eef1f6;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f5f9;
+  --color-surface-3: #e2e8f0;
+  --color-line: #e3e8ef;
+  --color-line-strong: #cbd5e1;
+  --color-ink: #1c2538;
+  --color-ink-soft: #3b4558;
+  --color-muted: #5b6577;
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-brand-deep: #1e40af;
+  --color-brand-ink: #ffffff;
+  --color-good: #15803d;
+  --color-warn: #b45309;
+  --color-bad: #b91c1c;
+  --color-info: #0369a1;
+  --color-xp: #7c3aed;
+  --background: var(--color-bg);
+  --foreground: var(--color-ink);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-brand);
+  --primary-foreground: var(--color-brand-ink);
+  --secondary: var(--color-surface-2);
+  --secondary-foreground: var(--color-ink);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-surface-2);
+  --accent-foreground: var(--color-ink);
+  --destructive: var(--color-bad);
+  --border: var(--color-line);
+  --input: var(--color-line-strong);
+  --ring: var(--color-brand);
+  color-scheme: light;
+}
+
 /* Hard, stepped outline instead of a soft border: the "pixel" look. */
 @utility pixel-frame {
   box-shadow:

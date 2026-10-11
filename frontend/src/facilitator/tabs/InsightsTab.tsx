@@ -49,7 +49,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
       <Panel icon="users" title="No students yet">
         <div className="rounded-xl border-2 border-dashed border-[#d5dbe5] px-6 py-12 text-center">
           <p className="mx-auto max-w-lg text-[#5b6577]">
-            Share the join code <span className="rounded bg-[#1c2538] px-2 py-0.5 font-mono font-bold text-[#a3e635]">{cls.join_code}</span> from the
+            Share the join code <span className="rounded bg-[#1c2538] px-2 py-0.5 font-mono font-bold text-white">{cls.join_code}</span> from the
             “Join code” tab. Students appear here after their phone syncs once.
           </p>
           <button type="button" className={`${ghost} mt-6`} onClick={() => void load()}>
@@ -68,7 +68,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
       <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
         <p className="flex items-center gap-2 text-sm text-[#5b6577]">
           <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#a3e635] opacity-60 motion-reduce:hidden" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2563eb] opacity-60 motion-reduce:hidden" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#65a30d]" />
           </span>
           {updatedAt ? `Live · updated ${timeAgo(new Date(updatedAt).toISOString())}. Refreshes every 20 seconds.` : 'Live'}
@@ -140,7 +140,7 @@ export function InsightsTab({ cls }: { cls: ClassRow }) {
                   <li key={m.id} className="rounded-xl border border-[#e3e8ef] p-4 sm:p-5">
                     <div className="flex items-start justify-between gap-3">
                       <span className="flex items-start gap-3 font-bold">
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#1c2538] text-sm text-[#a3e635]">{i + 1}</span>
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#1c2538] text-sm text-white">{i + 1}</span>
                         <span className="pt-0.5">{p?.title ?? humanise(m.id)}</span>
                       </span>
                       <Pill tone="warn">{m.students} {m.students === 1 ? 'student' : 'students'}</Pill>

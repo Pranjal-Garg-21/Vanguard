@@ -1,23 +1,23 @@
 /**
  * The facilitator dashboard's look: deep navy hero cards with layered arcs,
- * lime calls to action, and roomy white panels on a soft grey page. Plain
+ * blue calls to action, and roomy white panels on a soft grey page. Plain
  * presentational pieces; the pages decide what goes in them. Owner: P5.
  */
 import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Icon, type IconName } from '@/ui';
 
-/** Lime button styling, for <button> and <Link> alike. */
-export const lime =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-[#a3e635] px-5 font-bold text-[#14240b] transition hover:bg-[#b5f04f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3e635] disabled:opacity-50';
+/** Primary button styling, for <button> and <Link> alike. */
+export const primary =
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-[#2563eb] px-5 font-bold text-white transition hover:bg-[#1d4ed8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] disabled:opacity-50';
 
 /** Quiet secondary button on light panels. */
 export const ghost =
   'inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#d5dbe5] bg-white px-4 text-sm font-semibold text-[#1c2538] transition hover:border-[#1c2538] disabled:opacity-50';
 
 const ARCS = {
-  lime: ['#a3e635', '#3f6b2f', '#22382a'],
-  blue: ['#38bdf8', '#1d5b8f', '#163a5f'],
+  blue: ['#3b82f6', '#1d4ed8', '#1e3a8a'],
+  slate: ['#94a3b8', '#475569', '#2b3754'],
 } as const;
 
 /** Three concentric arcs bleeding off the card's left edge. */
@@ -36,7 +36,7 @@ function Arcs({ tone }: { tone: keyof typeof ARCS }) {
 export function Hero({
   title,
   body,
-  tone = 'lime',
+  tone = 'blue',
   children,
   className = '',
 }: {
@@ -115,7 +115,7 @@ export function StatTile({ icon, label, value, sub, accent = '#2563eb' }: { icon
 export function Pill({ tone = 'neutral', children }: { tone?: 'neutral' | 'good' | 'warn' | 'bad' | 'info'; children: ReactNode }) {
   const tones = {
     neutral: 'bg-[#eef1f6] text-[#3b4558]',
-    good: 'bg-[#ecfccb] text-[#3f6212]',
+    good: 'bg-[#dcfce7] text-[#166534]',
     warn: 'bg-[#fef3c7] text-[#92400e]',
     bad: 'bg-[#fee2e2] text-[#b91c1c]',
     info: 'bg-[#e0f2fe] text-[#075985]',

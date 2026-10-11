@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Icon, Spinner } from '@/ui';
 import { LANGUAGE_NAMES, supabaseOrThrow, type ClassRow } from './data';
-import { Hero, lime, Notice, Panel, Pill } from './theme';
+import { Hero, primary, Notice, Panel, Pill } from './theme';
 
 type ClassWithCount = ClassRow & { players: { count: number }[] };
 
@@ -27,8 +27,8 @@ export function ClassList() {
   return (
     <div className="space-y-8">
       <div className="grid gap-6 lg:grid-cols-2">
-        <Hero tone="lime" title="Create a class" body="Get a join code and a QR for your students. They join once, then play offline.">
-          <Link to="new" className={lime}>
+        <Hero title="Create a class" body="Get a join code and a QR for your students. They join once, then play offline.">
+          <Link to="new" className={primary}>
             <Icon name="plus" className="h-4 w-4" />
             New class
           </Link>
@@ -43,7 +43,7 @@ export function ClassList() {
           }
         >
           {latest && (
-            <Link to={`class/${latest.id}`} className={lime}>
+            <Link to={`class/${latest.id}`} className={primary}>
               Open {latest.name}
               <Icon name="arrowRight" className="h-4 w-4" />
             </Link>
@@ -60,7 +60,7 @@ export function ClassList() {
           <div className="rounded-xl border-2 border-dashed border-[#d5dbe5] px-6 py-14 text-center">
             <h3 className="text-lg font-bold">No classes yet</h3>
             <p className="mt-1 text-[#5b6577]">Create a class to get a join code and QR for your students.</p>
-            <Link to="new" className={`${lime} mt-6`}>
+            <Link to="new" className={`${primary} mt-6`}>
               Create your first class
             </Link>
           </div>
@@ -82,7 +82,7 @@ export function ClassList() {
                         <h3 className="truncate text-lg font-bold group-hover:text-[#2563eb]">{c.name}</h3>
                         <p className="text-sm text-[#5b6577]">{c.centre ?? 'No centre set'}</p>
                       </div>
-                      <span className="rounded-md bg-[#1c2538] px-2.5 py-1 font-mono text-sm font-bold tracking-widest text-[#a3e635]">{c.join_code}</span>
+                      <span className="rounded-md bg-[#1c2538] px-2.5 py-1 font-mono text-sm font-bold tracking-widest text-white">{c.join_code}</span>
                     </div>
 
                     <div className="mt-5">
@@ -95,7 +95,7 @@ export function ClassList() {
                       </div>
                       {share !== null && (
                         <span className="mt-2 block h-2 overflow-hidden rounded-full bg-[#eef1f6]">
-                          <span className="block h-full rounded-full bg-[#a3e635]" style={{ width: `${share * 100}%` }} />
+                          <span className="block h-full rounded-full bg-[#2563eb]" style={{ width: `${share * 100}%` }} />
                         </span>
                       )}
                     </div>
