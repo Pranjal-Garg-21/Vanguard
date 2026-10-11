@@ -8,8 +8,7 @@ import { t, useActiveProfile } from '@/platform';
 import section from '@/content/scenarios/invest/section.json';
 import { SIMULATORS } from '@/games/safe/catalog';
 import type { SectionGame } from '@/games/investing/lessons/logic/section';
-import { Icon, SectionLabel, type IconName } from '@/ui';
-import { TopNav } from './TopNav';
+import { Icon, SectionLabel, type IconName, TopNav } from '@/ui';
 
 const INVEST_GAMES = section.games as SectionGame[];
 
@@ -20,7 +19,7 @@ export function Simulations() {
   return (
     <div className="min-h-dvh bg-bg text-ink">
       <TopNav />
-      <main className="mx-auto max-w-5xl space-y-8 px-4 py-6">
+      <main className="mx-auto max-w-6xl space-y-8 px-4 py-6">
         <div className="animate-rise space-y-1">
           <h1 className="text-2xl font-bold">{t('home.simulations.title')}</h1>
           <p className="max-w-2xl text-ink-soft">{t('home.simulations.subtitle')}</p>

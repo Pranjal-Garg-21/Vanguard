@@ -1,0 +1,13 @@
+{
+  "open": "Ask Professor Arth for a tip",
+  "close": "Close the tip",
+  "tip": {
+    "home": "Pick up where you left off, or try something new. Every game here uses made-up money.",
+    "learn": "Short lessons first, then try the games. Each lesson takes a few minutes.",
+    "lesson": "Take the tasks in order. A wrong answer is fine. Read the hint and try again.",
+    "simulations": "These are real situations with pretend money. Make mistakes here, not in real life.",
+    "minigames": "Quick games on one idea each. Pick an easy one to start.",
+    "safe": "If a message makes you rush, stop. Real banks never ask for your PIN or OTP."
+  },
+  "name": "Professor Arth"
+}

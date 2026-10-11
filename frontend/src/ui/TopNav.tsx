@@ -1,9 +1,14 @@
-/** The top bar shared by the dashboard and the practice page: brand, the three sections, and what the student has earned. */
+/**
+ * The app's top bar, shared by every signed-in page: the brand on the left, the four sections as tabs, and a slot on
+ * the right for whatever the page wants there (streak, points, the player's avatar). Styled after TryHackMe's:
+ * a dark bar, a lime underline on the current tab, and a soft hover on the others.
+ */
 import type { ReactNode } from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { t } from '@/platform';
+import { Mascot } from './Mascot';
 
-const NAV = [
+const TABS = [
   { key: 'dashboard', to: '/home' },
   { key: 'learn', to: '/learn' },
   { key: 'simulations', to: '/simulations' },
@@ -12,22 +17,28 @@ const NAV = [
 
 export function TopNav({ children }: { children?: ReactNode }) {
   return (
-    <header className="sticky top-0 z-10 border-b border-line bg-surface/95 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-2.5">
-        <span className="flex items-center gap-2 font-bold">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand text-sm font-bold text-brand-ink">P</span>
+    <>
+    <Mascot />
+    <header className="sticky top-0 z-20 border-b border-line bg-surface/95 backdrop-blur">
+      <div className="mx-auto flex h-14 max-w-6xl items-stretch gap-2 px-4 sm:gap-6">
+        <Link to="/home" className="flex shrink-0 items-center gap-2 font-bold" aria-label="PaisaPath">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand text-sm font-bold text-brand-ink" aria-hidden="true">
+            P
+          </span>
           <span className="hidden sm:inline">
             Paisa<span className="text-brand">Path</span>
           </span>
-        </span>
+        </Link>
 
-        <nav className="hidden gap-1 md:flex" aria-label="Main">
-          {NAV.map(({ key, to }) => (
+        <nav className="flex min-w-0 flex-1 items-stretch gap-1 overflow-x-auto" aria-label="Main">
+          {TABS.map(({ key, to }) => (
             <NavLink
               key={key}
               to={to}
               className={({ isActive }) =>
-                `border-b-2 px-3 py-2 text-sm font-bold transition ${isActive ? 'border-brand text-brand' : 'border-transparent text-ink-soft hover:text-brand'}`
+                `flex items-center border-b-2 px-3 text-sm font-bold whitespace-nowrap transition-colors ${
+                  isActive ? 'border-brand text-brand' : 'border-transparent text-ink-soft hover:bg-surface-2 hover:text-ink'
+                }`
               }
             >
               {t(`home.nav.${key}`)}
@@ -35,8 +46,9 @@ export function TopNav({ children }: { children?: ReactNode }) {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-4 text-sm font-bold">{children}</div>
+        {children && <div className="flex shrink-0 items-center gap-4 text-sm font-bold">{children}</div>}
       </div>
     </header>
+    </>
   );
 }

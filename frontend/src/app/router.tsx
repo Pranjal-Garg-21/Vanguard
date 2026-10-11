@@ -35,9 +35,9 @@ function JoinLink() {
 const village = (el: ReactNode) => <div className="theme-village contents">{el}</div>;
 
 export const router = createBrowserRouter([
-  { path: '/', element: village(<Landing />) },
+  { path: '/', element: <Landing /> },
   { path: '/onboarding', element: <BaselineFlow /> },
-  { path: '/arcade', element: village(<Arcade />) },
+  { path: '/arcade', element: <Arcade /> },
   // The older village-styled menu, still opened by the arcade cabinet in town.
   { path: '/arcade/village', element: village(<ArcadeHub />) },
   // The Everyday Money section of the Arcade (P3). ArcadeHub links here.
