@@ -40,6 +40,8 @@ class Chiptune {
   private wanted: TrackId | null = null;
   private jingleUntil = 0;
   settings: AudioSettings = { ...DEFAULTS };
+  /** True while someone is being read aloud, so the music sits quietly under the voice. */
+  private ducked = false;
   private listeners = new Set<() => void>();
 
   /** Loads saved volumes (call once at start). */
@@ -54,6 +56,13 @@ class Chiptune {
     return () => this.listeners.delete(fn);
   }
 
+  /** Lowers the music while a voice is speaking. Not saved: it is a moment, not a setting. */
+  duck(on: boolean): void {
+    if (this.ducked === on) return;
+    this.ducked = on;
+    this.apply();
+  }
+
   update(patch: Partial<AudioSettings>): void {
     this.settings = { ...this.settings, ...patch };
     this.apply();
@@ -64,7 +73,7 @@ class Chiptune {
   private apply() {
     if (!this.ctx || !this.musicBus || !this.sfxBus) return;
     const now = this.ctx.currentTime;
-    this.musicBus.gain.setTargetAtTime(this.settings.muted ? 0 : this.settings.music, now, 0.05);
+    this.musicBus.gain.setTargetAtTime(this.settings.muted ? 0 : this.settings.music * (this.ducked ? 0.12 : 1), now, 0.15);
     this.sfxBus.gain.setTargetAtTime(this.settings.muted ? 0 : this.settings.sfx, now, 0.02);
   }
 

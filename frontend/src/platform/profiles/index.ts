@@ -12,12 +12,15 @@ export const MAX_PIN_ATTEMPTS = 3;
 export const LOCKOUT_MS = 30_000;
 
 /** What the avatar grid needs. No PIN data leaves this module. */
-export type ProfileSummary = Pick<Profile, 'pid' | 'displayName' | 'avatarId' | 'language' | 'a11y' | 'classCode' | 'classStatus'>;
+export type ProfileSummary = Pick<Profile, 'pid' | 'displayName' | 'avatarId' | 'language' | 'a11y' | 'classCode' | 'classStatus'> & {
+  /** False when the student skipped the picture PIN at setup; they sign in with one tap. */
+  hasPin: boolean;
+};
 
 export type NewProfile = {
   displayName: string;
   avatarId: string;
-  /** Picture IDs tapped in order, e.g. ['mango', 'kite', 'bus', 'star']. */
+  /** Picture IDs tapped in order, e.g. ['mango', 'kite', 'bus', 'star']. Empty when the student skipped the PIN. */
   pinPictures: string[];
   language: Profile['language'];
   a11y: Accessibility;
@@ -38,7 +41,7 @@ export const useActiveProfile = create<{ profile: ProfileSummary | null; loaded:
 
 function toSummary(p: Profile): ProfileSummary {
   const { pid, displayName, avatarId, language, a11y, classCode, classStatus } = p;
-  return { pid, displayName, avatarId, language, a11y, classCode, classStatus };
+  return { pid, displayName, avatarId, language, a11y, classCode, classStatus, hasPin: p.pinHash !== '' };
 }
 
 function toHex(bytes: ArrayBuffer | Uint8Array): string {
@@ -65,7 +68,7 @@ export async function createProfile(input: NewProfile): Promise<ProfileSummary> 
     classCode: input.classCode ? input.classCode.toUpperCase() : null,
     classStatus: input.classCode ? (input.classStatus ?? 'pending') : 'none',
     pinSalt,
-    pinHash: await hashPin(input.pinPictures, pinSalt),
+    pinHash: input.pinPictures.length ? await hashPin(input.pinPictures, pinSalt) : '',
     failedAttempts: 0,
     lockedUntil: 0,
     createdAt: now,
@@ -91,7 +94,7 @@ export async function unlockProfile(pid: string, pinPictures: string[], now = Da
     return { ok: false, lockedForMs: profile.lockedUntil - now, attemptsLeft: 0 };
   }
 
-  if ((await hashPin(pinPictures, profile.pinSalt)) === profile.pinHash) {
+  if (profile.pinHash === '' || (await hashPin(pinPictures, profile.pinSalt)) === profile.pinHash) {
     await db.profiles.update(pid, { failedAttempts: 0, lockedUntil: 0, lastActiveAt: now });
     await setSetting(DEVICE_SCOPE, ACTIVE_KEY, pid);
     useActiveProfile.setState({ profile: toSummary(profile), loaded: true });

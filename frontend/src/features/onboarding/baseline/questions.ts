@@ -9,7 +9,7 @@
 
 export type BaselineSection = 'about' | 'goals' | 'knowledge';
 
-export type BaselineOption = { id: string; emoji: string };
+export type BaselineOption = { id: string };
 
 export type BaselineQuestion = {
   id: string;
@@ -37,10 +37,10 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'about',
     kind: 'single',
     options: [
-      { id: 'c1', emoji: '😰' },
-      { id: 'c2', emoji: '😕' },
-      { id: 'c3', emoji: '🙂' },
-      { id: 'c4', emoji: '😎' },
+      { id: 'c1' },
+      { id: 'c2' },
+      { id: 'c3' },
+      { id: 'c4' },
     ],
   },
   {
@@ -48,12 +48,12 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'about',
     kind: 'multi',
     options: [
-      { id: 'shop_cash', emoji: '🛒' },
-      { id: 'upi', emoji: '📱' },
-      { id: 'bank_visit', emoji: '🏦' },
-      { id: 'own_account', emoji: '💳' },
-      { id: 'saved_goal', emoji: '🐷' },
-      { id: 'none', emoji: '🌱' },
+      { id: 'shop_cash' },
+      { id: 'upi' },
+      { id: 'bank_visit' },
+      { id: 'own_account' },
+      { id: 'saved_goal' },
+      { id: 'none' },
     ],
   },
   {
@@ -61,12 +61,12 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'about',
     kind: 'single',
     options: [
-      { id: 'family_gives', emoji: '🏠' },
-      { id: 'allowance', emoji: '📅' },
-      { id: 'work', emoji: '🛠️' },
-      { id: 'scholarship', emoji: '🎓' },
-      { id: 'none', emoji: '🙅' },
-      { id: 'prefer_not', emoji: '🤐' },
+      { id: 'family_gives' },
+      { id: 'allowance' },
+      { id: 'work' },
+      { id: 'scholarship' },
+      { id: 'none' },
+      { id: 'prefer_not' },
     ],
   },
 
@@ -76,12 +76,12 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'goals',
     kind: 'single',
     options: [
-      { id: 'fees', emoji: '🎓' },
-      { id: 'device', emoji: '📱' },
-      { id: 'business', emoji: '🏪' },
-      { id: 'family', emoji: '👨‍👩‍👧' },
-      { id: 'emergency', emoji: '🛟' },
-      { id: 'unsure', emoji: '🤔' },
+      { id: 'fees' },
+      { id: 'device' },
+      { id: 'business' },
+      { id: 'family' },
+      { id: 'emergency' },
+      { id: 'unsure' },
     ],
   },
   {
@@ -89,11 +89,11 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'goals',
     kind: 'single',
     options: [
-      { id: 'banking', emoji: '🏦' },
-      { id: 'budgeting', emoji: '📒' },
-      { id: 'saving', emoji: '🐷' },
-      { id: 'investing', emoji: '📈' },
-      { id: 'safety', emoji: '🛡️' },
+      { id: 'banking' },
+      { id: 'budgeting' },
+      { id: 'saving' },
+      { id: 'investing' },
+      { id: 'safety' },
     ],
   },
   {
@@ -101,10 +101,10 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'goals',
     kind: 'single',
     options: [
-      { id: 'games', emoji: '🎮' },
-      { id: 'stories', emoji: '📖' },
-      { id: 'challenges', emoji: '⏱️' },
-      { id: 'mix', emoji: '🎲' },
+      { id: 'games' },
+      { id: 'stories' },
+      { id: 'challenges' },
+      { id: 'mix' },
     ],
   },
 
@@ -114,10 +114,10 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'knowledge',
     kind: 'single',
     options: [
-      { id: 'sneakers', emoji: '👟' },
-      { id: 'buspass', emoji: '🚌' },
-      { id: 'snacks', emoji: '🍟' },
-      { id: 'gametopup', emoji: '🎮' },
+      { id: 'sneakers' },
+      { id: 'buspass' },
+      { id: 'snacks' },
+      { id: 'gametopup' },
     ],
     knowledge: { concept: 'needs_vs_wants', correct: 'buspass' },
   },
@@ -126,9 +126,9 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'knowledge',
     kind: 'single',
     options: [
-      { id: 'leftover', emoji: '🪙' },
-      { id: 'first', emoji: '🐷' },
-      { id: 'big_only', emoji: '💰' },
+      { id: 'leftover' },
+      { id: 'first' },
+      { id: 'big_only' },
     ],
     knowledge: {
       concept: 'pay_yourself_first',
@@ -141,9 +141,9 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'knowledge',
     kind: 'single',
     options: [
-      { id: 'a1040', emoji: '🏦' },
-      { id: 'a1400', emoji: '📈' },
-      { id: 'a1000', emoji: '🟰' },
+      { id: 'a1040' },
+      { id: 'a1400' },
+      { id: 'a1000' },
     ],
     knowledge: {
       concept: 'simple_interest',
@@ -157,10 +157,10 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     kind: 'single',
     hasBody: true,
     options: [
-      { id: 'pay', emoji: '💸' },
-      { id: 'ignore', emoji: '🚫' },
-      { id: 'forward', emoji: '↗️' },
-      { id: 'call', emoji: '📞' },
+      { id: 'pay' },
+      { id: 'ignore' },
+      { id: 'forward' },
+      { id: 'call' },
     ],
     knowledge: {
       concept: 'scam_advance_fee',
@@ -173,8 +173,8 @@ export const BASELINE_QUESTIONS: BaselineQuestion[] = [
     section: 'knowledge',
     kind: 'single',
     options: [
-      { id: 'true', emoji: '✅' },
-      { id: 'false', emoji: '❌' },
+      { id: 'true' },
+      { id: 'false' },
     ],
     knowledge: {
       concept: 'upi_collect',

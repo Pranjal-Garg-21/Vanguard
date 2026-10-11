@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router';
 import { loadActiveProfile, logEvent, setSetting, t, useActiveProfile } from '@/platform';
-import { PixelButton, PixelOption, PixelPanel, PixelProgress, Spinner, STRIP_FLOWERS, TileMap, VILLAGE_LEGEND } from '@/ui';
+import { Button, Card, Icon, ProgressBar, Spinner } from '@/ui';
 import { BASELINE_QUESTIONS, NOT_SURE, type BaselineQuestion } from './questions';
 import { scoreBaseline, type BaselineAnswers, type BaselineResult } from './logic/score';
 
@@ -88,46 +88,44 @@ export function BaselineFlow() {
   }
 
   return (
-    <div className="min-h-dvh bg-grass">
-      <TileMap rows={[STRIP_FLOWERS]} legend={VILLAGE_LEGEND} className="mx-auto max-w-md md:max-w-3xl" />
-      <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-5 px-4 py-6 text-ink md:max-w-3xl md:px-8">
+    <div className="min-h-dvh bg-bg text-ink">
+      <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-5 px-4 py-6 md:max-w-2xl md:px-8">
         {result ? (
           <Done result={result} name={profile.displayName} onGo={() => navigate(next, { replace: true })} />
         ) : !question ? (
-          <PixelPanel className="mt-10">
-            <p className="text-5xl" aria-hidden="true">
-              🧭
-            </p>
-            <h1 className="mt-3 text-3xl font-bold">{t('baseline.intro.title')}</h1>
-            <p className="mt-3 text-lg">{t('baseline.intro.body')}</p>
-            <PixelButton className="mt-6 w-full" onClick={() => setIndex(0)}>
+          <Card className="mt-10 space-y-4 p-6">
+            <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand/15 text-brand">
+              <Icon name="target" className="h-6 w-6" />
+            </span>
+            <h1 className="text-3xl font-bold">{t('baseline.intro.title')}</h1>
+            <p className="text-lg text-ink-soft">{t('baseline.intro.body')}</p>
+            <Button size="lg" className="w-full" onClick={() => setIndex(0)}>
               {t('baseline.intro.start')}
-            </PixelButton>
-          </PixelPanel>
+            </Button>
+          </Card>
         ) : (
           <>
             <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm font-bold">
+              <div className="flex items-center justify-between text-sm font-bold text-ink-soft">
                 <span>{t(`baseline.sections.${question.section}`)}</span>
                 <span>{t('baseline.nav.step', { current: index + 1, total })}</span>
               </div>
-              <PixelProgress current={index + 1} total={total} />
+              <ProgressBar value={(index + 1) / total} />
             </div>
 
-            <PixelPanel>
-              {question.hasBody && <p className="mb-3 bg-white p-3 text-lg">{t(`baseline.q.${question.id}.body`)}</p>}
+            <Card className="space-y-2 p-5">
+              {question.hasBody && <p className="mb-3 rounded-lg bg-surface-2 p-3 text-lg">{t(`baseline.q.${question.id}.body`)}</p>}
               <h1 className="text-2xl font-bold">{t(`baseline.q.${question.id}.title`)}</h1>
-              {question.kind === 'multi' && <p className="mt-1 text-sm">{t('baseline.nav.multiHint')}</p>}
-            </PixelPanel>
+              {question.kind === 'multi' && <p className="text-sm text-muted">{t('baseline.nav.multiHint')}</p>}
+            </Card>
 
             <div className="grid gap-3 md:grid-cols-2" role={question.kind === 'multi' ? 'group' : 'radiogroup'}>
               {question.options.map((option) => {
                 const a = answers[question.id];
                 const selected = Array.isArray(a) ? a.includes(option.id) : a === option.id;
                 return (
-                  <PixelOption
+                  <Choice
                     key={option.id}
-                    emoji={option.emoji}
                     label={t(`baseline.q.${question.id}.options.${option.id}`)}
                     selected={selected}
                     multi={question.kind === 'multi'}
@@ -135,38 +133,21 @@ export function BaselineFlow() {
                   />
                 );
               })}
-              {question.knowledge && (
-                <PixelOption
-                  emoji="🤷"
-                  label={t('baseline.notSure')}
-                  selected={answers[question.id] === NOT_SURE}
-                  onClick={() => pick(question, NOT_SURE)}
-                />
-              )}
+              {question.knowledge && <Choice label={t('baseline.notSure')} selected={answers[question.id] === NOT_SURE} onClick={() => pick(question, NOT_SURE)} />}
             </div>
 
             <div className="mt-auto flex items-center gap-3 pt-2">
-              <PixelButton
-                tone="parchment"
-                disabled={saving}
-                onClick={() => setIndex(index - 1)}
-                aria-label={t('baseline.nav.back')}
-              >
-                ←
-              </PixelButton>
+              <Button variant="secondary" size="lg" disabled={saving} onClick={() => setIndex(index - 1)} aria-label={t('baseline.nav.back')}>
+                <Icon name="arrowLeft" className="h-5 w-5" />
+              </Button>
               {!question.knowledge && (
-                <PixelButton tone="parchment" disabled={saving} onClick={() => void advance(true)}>
+                <Button variant="ghost" size="lg" disabled={saving} onClick={() => void advance(true)}>
                   {t('baseline.nav.skip')}
-                </PixelButton>
+                </Button>
               )}
-              <PixelButton
-                tone="grass"
-                className="flex-1"
-                disabled={!isAnswered(question) || saving}
-                onClick={() => void advance()}
-              >
+              <Button size="lg" className="flex-1" disabled={!isAnswered(question) || saving} onClick={() => void advance()}>
                 {index === total - 1 ? t('baseline.nav.finish') : t('baseline.nav.next')}
-              </PixelButton>
+              </Button>
             </div>
           </>
         )}
@@ -175,31 +156,49 @@ export function BaselineFlow() {
   );
 }
 
+/** One selectable answer: a large target with a clear selected state. */
+function Choice({ label, selected, onClick, multi = false }: { label: string; selected: boolean; onClick: () => void; multi?: boolean }) {
+  return (
+    <button
+      type="button"
+      role={multi ? 'checkbox' : 'radio'}
+      aria-checked={selected}
+      onClick={onClick}
+      className={`flex min-h-16 w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-start text-lg font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+        selected ? 'border-brand bg-brand/15 text-ink' : 'border-line-strong bg-surface text-ink hover:border-brand'
+      }`}
+    >
+      <span className="flex-1">{label}</span>
+      {selected && <Icon name="check" className="h-6 w-6 text-brand" />}
+    </button>
+  );
+}
+
 function Done({ result, name, onGo }: { result: BaselineResult; name: string; onGo: () => void }) {
   return (
-    <PixelPanel className="mt-10">
-      <p className="text-5xl" aria-hidden="true">
-        🌱
-      </p>
-      <h1 className="mt-3 text-3xl font-bold">{t('baseline.done.title', { name })}</h1>
-      <p className="mt-3 text-lg">{t(`baseline.done.level.${result.level}`)}</p>
-      <dl className="mt-4 space-y-2 text-lg">
+    <Card className="mt-10 space-y-4 p-6">
+      <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand/15 text-brand">
+        <Icon name="sprout" className="h-6 w-6" />
+      </span>
+      <h1 className="text-3xl font-bold">{t('baseline.done.title', { name })}</h1>
+      <p className="text-lg text-ink-soft">{t(`baseline.done.level.${result.level}`)}</p>
+      <dl className="space-y-2 text-lg">
         {result.goal && (
-          <div className="bg-white p-3">
-            <dt className="text-sm font-bold">{t('baseline.done.goalLabel')}</dt>
+          <div className="rounded-lg bg-surface-2 p-3">
+            <dt className="text-sm font-bold text-muted">{t('baseline.done.goalLabel')}</dt>
             <dd>{t(`baseline.q.goal.options.${result.goal}`)}</dd>
           </div>
         )}
         {result.focus && (
-          <div className="bg-white p-3">
-            <dt className="text-sm font-bold">{t('baseline.done.focusLabel')}</dt>
+          <div className="rounded-lg bg-surface-2 p-3">
+            <dt className="text-sm font-bold text-muted">{t('baseline.done.focusLabel')}</dt>
             <dd>{t(`baseline.q.focus.options.${result.focus}`)}</dd>
           </div>
         )}
       </dl>
-      <PixelButton tone="grass" className="mt-6 w-full" onClick={onGo}>
+      <Button size="lg" className="w-full" onClick={onGo}>
         {t('baseline.done.go')}
-      </PixelButton>
-    </PixelPanel>
+      </Button>
+    </Card>
   );
 }

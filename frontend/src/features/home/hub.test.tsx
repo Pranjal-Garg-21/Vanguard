@@ -39,9 +39,11 @@ describe('the dashboard hub', () => {
   it('offers three doors and no raw keys', async () => {
     const p = await createTestProfile({});
     await render(p.pid);
-    expect(links()).toEqual(expect.arrayContaining(['/play', '/learn', '/safe']));
+    expect(links()).toEqual(expect.arrayContaining(['/learn', '/safe']));
     expect(host.textContent).not.toMatch(/\b(home|landing)\.[a-z0-9_.]+/i);
     expect(host.textContent).toContain('Start your year');
+    // Starting the year is a button, not a link: it asks the starting-point questions first, once.
+    expect([...host.querySelectorAll('button')].some((b) => /begin|start/i.test(b.textContent ?? ''))).toBe(true);
   });
 
   it('shows where a saved year got to', async () => {

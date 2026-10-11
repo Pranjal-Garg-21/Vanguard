@@ -39,7 +39,6 @@ const GLYPH_IN_TEXT = />\s*[←-↓]\s|←\s*\{t\(|←\s*[A-Z]|×</u;
  */
 const ARTWORK = [
   'features/paisapur',
-  'features/onboarding/baseline',
   'features/arcade/ArcadeHub.tsx',
   'content/i18n/en/paisapur.json',
   'content/i18n/en/menu.json',

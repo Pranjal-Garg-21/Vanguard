@@ -38,6 +38,13 @@ export type AudioClip = { play(): Promise<void>; stop(): void };
 // ---------------------------------------------------------------------------
 // The browser
 
+/** The best installed voice for a language tag: the exact region, then the same language, preferring voices the phone itself provides. */
+function pickVoice(voices: SpeechSynthesisVoice[], tag: string): SpeechSynthesisVoice | undefined {
+  const same = voices.filter((v) => sameLanguage(v.lang, tag));
+  const rank = (v: SpeechSynthesisVoice) => (v.lang.toLowerCase().replace('_', '-') === tag.toLowerCase() ? 0 : 2) + (v.localService ? 0 : 1);
+  return [...same].sort((a, b) => rank(a) - rank(b))[0];
+}
+
 function browserSpeech(): SpeechEngine | null {
   const synth = typeof window !== 'undefined' ? window.speechSynthesis : undefined;
   if (!synth) return null;
@@ -47,6 +54,11 @@ function browserSpeech(): SpeechEngine | null {
       new Promise<void>((resolve) => {
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
+        // Naming the voice matters: with only a language tag, some browsers fall back to the system's default
+        // voice when there is no exact regional match, and that can be a voice for a different language
+        // (on Linux, a Japanese one), which comes out as noise rather than words.
+        const voice = pickVoice(synth.getVoices(), lang);
+        if (voice) utterance.voice = voice;
         utterance.onend = () => resolve();
         utterance.onerror = () => resolve();
         synth.speak(utterance);

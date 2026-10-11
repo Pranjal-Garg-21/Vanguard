@@ -1,12 +1,13 @@
 /**
- * Every topic section in one place: Banking, Planning, Saving, Borrowing and Investing (Staying safe is taught by P5 and
- * shown as coming soon). Route: /learn. Owner: P4.
+ * Every topic section in one place (Banking, Planning, Saving, Borrowing, Investing), then the investing lessons themselves.
+ * Stay Safe is practised under Simulations, not taught here. Route: /learn. Owner: P4.
  */
 import { Link } from 'react-router';
 import { t } from '@/platform';
-import { Badge, Card, ProgressBar } from '@/ui';
+import { Badge, Card, ProgressBar, SectionLabel } from '@/ui';
 import { InvestShell } from './InvestShell';
-import { roomsFor } from './logic/content';
+import { LessonGrid } from './LessonGrid';
+import { roomsFor, rooms } from './logic/content';
 import { PILLARS } from './logic/types';
 import { useRoomSummaries } from './useSavedProgress';
 
@@ -43,14 +44,12 @@ export function LearnHub() {
             </li>
           );
         })}
-        <li>
-          <Card className="flex h-full flex-col gap-3 border-dashed opacity-80">
-            <h2 className="text-lg font-bold">{t('learn.pillar.safe.name')}</h2>
-            <p className="flex-1 text-sm text-ink-soft">{t('learn.pillar.safe.blurb')}</p>
-            <Badge>{t('learn.soon')}</Badge>
-          </Card>
-        </li>
       </ul>
+
+      <section className="space-y-3 pt-4">
+        <SectionLabel>{t('learn.lessonsTitle', { n: rooms.length })}</SectionLabel>
+        <LessonGrid lessons={rooms} summaries={summaries ?? undefined} upNextId={summaries ? rooms.find((r) => summaries[r.id]?.status !== 'done')?.id : rooms[0]?.id} />
+      </section>
     </InvestShell>
   );
 }

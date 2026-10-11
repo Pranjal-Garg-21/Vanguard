@@ -55,7 +55,7 @@ const signedIn = (audio: boolean) =>
       language: 'en',
       a11y: { audio, largeText: false, reduceMotion: false, timersOff: false },
       classCode: null,
-      classStatus: 'none',
+      classStatus: 'none', hasPin: true,
     },
     loaded: true,
   });

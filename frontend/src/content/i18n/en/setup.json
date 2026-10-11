@@ -48,7 +48,9 @@
     "clear": "Clear",
     "enterTitle": "Hi {name}! Tap your picture code",
     "wrong": "Not quite. {left} tries left.",
-    "locked": "Too many tries. Wait {seconds} seconds."
+    "locked": "Too many tries. Wait {seconds} seconds.",
+    "skip": "Skip for now",
+    "skipHint": "You can sign in without a PIN on this phone."
   },
   "done": {
     "title": "You’re all set, {name}!",

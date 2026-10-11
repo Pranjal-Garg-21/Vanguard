@@ -23,5 +23,19 @@
     "title": "Start playing",
     "back": "Carry on",
     "body": "Your year in Paisapur, the lessons and the scam simulators are all behind this door."
+  },
+  "feature": {
+    "life": {
+      "title": "Live a year",
+      "body": "Make money choices month by month and see what happens."
+    },
+    "learn": {
+      "title": "Learn it",
+      "body": "Short lessons and games on saving, risk and investing."
+    },
+    "safe": {
+      "title": "Stay safe",
+      "body": "Practise spotting scams before they cost you."
+    }
   }
 }

@@ -18,8 +18,17 @@
   --color-wood-dark: #7a4a1c;
   --color-parchment: #fff1c9;
   --color-parchment-dark: #e8c98a;
-  --color-ink: #3b2412;
   --color-gold: #f5c542;
+}
+
+/* The village screens (landing, Paisapur, the Everyday arcade) sit on parchment, so their text is dark brown.
+   Everything else is the dark theme, where text-ink is light. Wrap a village screen in .theme-village. */
+@utility theme-dark {
+  --color-ink: #f4f6fa;
+}
+
+@utility theme-village {
+  --color-ink: #3b2412;
 }
 
 /* Hard, stepped outline instead of a soft border: the "pixel" look. */
@@ -49,7 +58,12 @@
     -1px 1px 0 var(--color-ink);
 }
 
+/* The app reads in Ubuntu, like TryHackMe. The pixel face is for the village game screens only. */
 body {
+  font-family: var(--font-sans);
+}
+
+.theme-village {
   font-family: var(--font-pixel);
 }
 
@@ -76,9 +90,8 @@ body {
  * `--color-ink`, which means "dark brown on parchment" in one and "light text
  * on navy" in the other.
  *
- * The student-facing app is the village, so the village value wins globally.
- * `.theme-dark` restores the other meaning for the few screens that need it
- * (facilitator, dev tools). Every other token from both sets is kept, because
+ * The dark theme is the default; `.theme-village` gives the village screens
+ * their dark-brown text back. Every other token from both sets is kept, because
  * ui/components.tsx and the facilitator pages use them heavily.
  */
 @theme {
@@ -94,6 +107,7 @@ body {
   --color-line-strong: #3e4b69;
 
   /* Text */
+  --color-ink: #f4f6fa;
   --color-ink-soft: #c3cbdc;
   --color-muted: #9aa5bd;
 
@@ -121,7 +135,13 @@ body {
   --color-phone-bubble: #e4e8f1;
 
   --animate-banner-in: banner-in 0.35s ease-out both;
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   --animate-ring: ring 1s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes banner-in {
@@ -132,10 +152,6 @@ body {
 @keyframes ring {
   0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgb(163 234 42 / 0.5); }
   50% { transform: scale(1.06); box-shadow: 0 0 0 14px rgb(163 234 42 / 0); }
-}
-
-@utility theme-dark {
-  --color-ink: #f4f6fa;
 }
 
 /*
@@ -264,7 +280,7 @@ body {
   .commit button,
   .game button,
   .arcade button {
-    @apply pixel-frame min-h-12 bg-parchment px-4 py-2 text-start font-bold text-ink
+    @apply min-h-12 rounded-xl border border-line-strong bg-surface-2 px-4 py-2 text-start font-bold text-ink
            transition-transform hover:translate-y-[-2px]
            focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink
            disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0;
@@ -274,7 +290,7 @@ body {
   .rank button[aria-pressed='true'],
   .arcade button[aria-pressed='true'],
   .game button[aria-pressed='true'] {
-    @apply bg-gold;
+    @apply bg-brand/20;
   }
   .game li > button,
   .arcade li > button {
@@ -293,7 +309,7 @@ body {
   }
   .game input[type='range'],
   .allocate input[type='range'] {
-    @apply w-full accent-[var(--color-grass-dark)];
+    @apply w-full accent-[var(--color-brand)];
   }
 
   /* Panels: anything that is "a card" in the games. */
@@ -305,7 +321,7 @@ body {
   .form,
   .help-card,
   .commit__confirm {
-    @apply pixel-frame bg-parchment p-4;
+    @apply rounded-xl border border-line-strong bg-surface-2 p-4;
   }
 
   /* --- Arcade ----------------------------------------------------------- */
@@ -325,7 +341,7 @@ body {
     @apply flex flex-wrap gap-1.5;
   }
   .arcade__concepts li {
-    @apply bg-wood px-2 py-0.5 text-xs font-bold text-parchment;
+    @apply bg-surface-3 px-2 py-0.5 text-xs font-bold text-ink;
   }
   .arcade__bar {
     @apply flex items-center gap-3 text-sm;
@@ -340,10 +356,10 @@ body {
     @apply ms-2 inline-block h-3 w-3 align-middle;
   }
   .arcade__dot[data-status='green'] {
-    @apply bg-grass-dark;
+    @apply bg-brand;
   }
   .arcade__dot[data-status='amber'] {
-    @apply bg-gold;
+    @apply bg-brand/20;
   }
   .arcade__dot[data-status='red'] {
     @apply bg-bad;
@@ -359,7 +375,7 @@ body {
   .warning,
   .passerby,
   .predict__verdict {
-    @apply pixel-frame bg-white p-3;
+    @apply rounded-xl border border-line-strong bg-surface-3 p-3;
   }
 
   /* --- Triage ----------------------------------------------------------- */
@@ -376,7 +392,7 @@ body {
     @apply min-h-0 self-center px-3 py-1;
   }
   .triage__context {
-    @apply text-base font-normal text-balance text-wood-dark;
+    @apply text-base font-normal text-balance text-ink-soft;
   }
   .triage__buckets {
     @apply grid grid-cols-2 gap-3;
@@ -394,7 +410,7 @@ body {
     @apply h-full justify-center text-center text-sm;
   }
   .triage__items p[role='alert'] {
-    @apply mt-1 bg-bad px-2 py-1 text-sm text-balance text-parchment;
+    @apply mt-1 bg-bad px-2 py-1 text-sm text-balance text-white;
   }
   .triage--board .triage__buckets {
     @apply grid-cols-1;
@@ -406,7 +422,7 @@ body {
     @apply mt-2 flex flex-wrap gap-1.5;
   }
   .triage--board .triage__buckets ul li {
-    @apply bg-grass px-2 py-0.5 text-xs font-bold;
+    @apply bg-brand px-2 py-0.5 text-xs font-bold text-brand-ink;
   }
   .triage--summary li {
     @apply border-b-2 border-dotted border-ink/30 py-3;
@@ -435,10 +451,10 @@ body {
     @apply text-sm tabular-nums;
   }
   .allocate__overflow {
-    @apply bg-bad px-2 py-1 text-sm font-bold text-parchment;
+    @apply bg-bad px-2 py-1 text-sm font-bold text-white;
   }
   .allocate__covered {
-    @apply text-sm font-bold text-grass-dark;
+    @apply text-sm font-bold text-brand;
   }
 
   /* --- Commit ----------------------------------------------------------- */
@@ -473,10 +489,10 @@ body {
     @apply flex flex-col gap-3;
   }
   .rank__ladder li {
-    @apply border-s-8 border-l-grass-dark;
+    @apply border-s-8 border-l-brand;
   }
   .rank__ladder li[data-moved='true'] {
-    @apply border-l-gold;
+    @apply border-l-warn;
   }
   .rank__ladder li span {
     @apply font-bold tabular-nums;
@@ -513,13 +529,13 @@ body {
     @apply font-bold text-bad;
   }
   .buffer--have {
-    @apply border-s-8 border-l-grass-dark;
+    @apply border-s-8 border-l-brand;
   }
   .buffer--none {
     @apply border-s-8 border-l-bad;
   }
   .badge {
-    @apply pixel-frame bg-gold p-3 text-center font-bold;
+    @apply rounded-xl border border-brand bg-brand/15 p-3 text-center font-bold;
   }
   .help-card ol {
     @apply my-2 list-decimal ps-6;
@@ -531,13 +547,13 @@ body {
     @apply grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 text-sm;
   }
   .form dd {
-    @apply m-0 font-bold text-grass-dark;
+    @apply m-0 font-bold text-brand;
   }
   .kit li {
     @apply border-b-2 border-dotted border-ink/30 py-2;
   }
   .passerby--handled {
-    @apply border-s-8 border-l-grass-dark;
+    @apply border-s-8 border-l-brand;
   }
   .pin__display {
     @apply text-center text-4xl tracking-[0.4em];
@@ -549,7 +565,7 @@ body {
     @apply justify-center py-3 text-center text-xl;
   }
   .sms {
-    @apply pixel-frame bg-white p-3 text-sm;
+    @apply rounded-xl border border-line-strong bg-surface-3 p-3 text-sm;
   }
 
   /* --- Spending Detective ----------------------------------------------- */
@@ -564,7 +580,7 @@ body {
     box-shadow: none;
   }
   .txn-list__row button[aria-pressed='true'] {
-    @apply bg-gold px-2;
+    @apply bg-brand px-2 text-brand-ink;
   }
   .txn-list__name {
     @apply flex-1;

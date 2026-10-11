@@ -6,12 +6,24 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { emergencyFund, needsCost, type LifeState } from '@/core/engine';
 import { quizById, type QuizQuestion } from '@/core/story/content';
 import type { QuizResult } from '@/core/story';
-import { t } from '@/platform';
+import { autoSpeak, stopSpeaking, t } from '@/platform';
+import { AudioButton } from '@/ui';
 import conceptsJson from '@/content/concepts.json';
 import { audio } from './audio/engine';
 import { useAudioSettings } from './audio/useAudioSettings';
 import { KEY_A, KEY_B, pressKey, useKeys } from './input';
 import { rupees } from './logic/format';
+
+/**
+ * Reads what is on screen aloud when the student ticked "Read things aloud", and stops when it goes away. The
+ * speaker button beside a box does the same on demand, for everyone.
+ */
+function useNarration(text: string): void {
+  useEffect(() => {
+    autoSpeak(text, { id: text });
+    return stopSpeaking;
+  }, [text]);
+}
 
 /** The classic two-border text box. */
 export function Box({ children, className = '' }: { children: ReactNode; className?: string }) {
@@ -41,6 +53,8 @@ function useTypewriter(text: string, instant: boolean) {
 
 export function DialogueBox({ text, speaker, instant, onNext }: { text: string; speaker?: string; instant: boolean; onNext: () => void }) {
   const tw = useTypewriter(text, instant);
+  const spoken = speaker ? `${speaker}. ${text}` : text;
+  useNarration(spoken);
   const next = () => {
     if (!tw.done) return tw.finish();
     audio.sfx('blip');
@@ -50,6 +64,7 @@ export function DialogueBox({ text, speaker, instant, onNext }: { text: string; 
     if (KEY_A.has(k) || KEY_B.has(k)) next();
   });
   return (
+    <div className="relative">
     <button type="button" onClick={next} className="block w-full text-left" aria-live="polite">
       <Box>
         {speaker && <p className="mb-1 text-sm font-bold text-[#c0392b]">{speaker}</p>}
@@ -62,11 +77,15 @@ export function DialogueBox({ text, speaker, instant, onNext }: { text: string; 
         </p>
       </Box>
     </button>
+    <AudioButton text={spoken} className="absolute end-3 top-3 bg-[#f8f8f0] text-[#3a4a6b]" />
+    </div>
   );
 }
 
 export function ChoiceBox({ prompt, speaker, options, onPick }: { prompt?: string; speaker?: string; options: string[]; onPick: (i: number) => void }) {
   const [cursor, setCursor] = useState(0);
+  const spoken = [speaker, prompt, ...options.map((o, i) => `${i + 1}. ${o}`)].filter(Boolean).join('. ');
+  useNarration(spoken);
   const pick = (i: number) => {
     audio.sfx('select');
     onPick(i);
@@ -85,10 +104,13 @@ export function ChoiceBox({ prompt, speaker, options, onPick }: { prompt?: strin
   return (
     <div className="flex flex-col gap-2">
       {prompt && (
-        <Box>
-          {speaker && <p className="mb-1 text-sm font-bold text-[#c0392b]">{speaker}</p>}
-          <p className="text-base md:text-lg">{prompt}</p>
-        </Box>
+        <div className="relative">
+          <Box>
+            {speaker && <p className="mb-1 text-sm font-bold text-[#c0392b]">{speaker}</p>}
+            <p className="pe-12 text-base md:text-lg">{prompt}</p>
+          </Box>
+          <AudioButton text={spoken} className="absolute end-3 top-3 bg-[#f8f8f0] text-[#3a4a6b]" />
+        </div>
       )}
       <Box className="ml-auto w-full sm:w-auto sm:min-w-[60%]">
         <ul role="listbox" aria-label={prompt ?? t('paisapur.choose')}>
@@ -234,7 +256,7 @@ function Meter({ label, value, color }: { label: string; value: number; color: s
   );
 }
 
-export function Hud({ life, mapName, onMenu }: { life: LifeState; mapName: string; onMenu: () => void }) {
+export function Hud({ life, mapName, onMenu, onHelp }: { life: LifeState; mapName: string; onMenu: () => void; onHelp: () => void }) {
   const peaceColor = life.peace > 60 ? '#3fb950' : life.peace > 30 ? '#e3b341' : '#f85149';
   const months = Math.floor(emergencyFund(life) / Math.max(1, needsCost(life)));
   return (
@@ -248,6 +270,9 @@ export function Hud({ life, mapName, onMenu }: { life: LifeState; mapName: strin
         {life.chapter >= 3 && <span title={t('paisapur.hud.fund_months')}>🛟 {months}</span>}
         <Meter label={t('paisapur.hud.peace')} value={life.peace} color={peaceColor} />
         <MuteButton />
+        <button type="button" onClick={onHelp} className="rounded bg-[#a3ea2a] px-2 py-0.5 text-xs font-bold text-[#141c2e] hover:bg-[#b8f550]">
+          {t('paisapur.hud.help')}
+        </button>
         <button type="button" onClick={onMenu} className="rounded bg-white/15 px-2 py-0.5 text-xs font-bold hover:bg-white/25">
           {t('paisapur.hud.menu')}
         </button>

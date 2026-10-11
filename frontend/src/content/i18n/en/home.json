@@ -37,8 +37,8 @@
   "nav": {
     "dashboard": "Dashboard",
     "learn": "Learn",
-    "practice": "Practice",
-    "compete": "Compete"
+    "simulations": "Simulations",
+    "minigames": "Mini games"
   },
   "stats": {
     "streak": "Day streak",
@@ -61,7 +61,7 @@
     "body": "Earned for understanding and good habits, never for money."
   },
   "stagesTitle": "LifePath stages",
-  "practiceTitle": "Practice",
+  "practiceTitle": "Mini games",
   "locked": "Locked",
   "soon": "Coming soon",
   "play": "Play",
@@ -92,5 +92,15 @@
         "other": "{count} simulators"
       }
     }
+  },
+  "simulations": {
+    "title": "Simulations",
+    "subtitle": "Try real situations with made-up money. Nothing here costs you anything.",
+    "safe": "Stay Safe simulators",
+    "invest": "Investing simulations"
+  },
+  "minigames": {
+    "title": "Mini games",
+    "subtitle": "Quick games on each topic. Pick one and play."
   }
 }

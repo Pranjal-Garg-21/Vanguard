@@ -12,14 +12,17 @@ import { audio } from './audio/engine';
 import { SoundSettings } from './audio/SoundSettings';
 import { KEY_A, KEY_B, KEY_MENU, useKeys } from './input';
 import { rupees } from './logic/format';
+import { Feedback, Help } from './help';
 import { Bag, Badges, Journal, Wallet } from './panels';
 import { Sprite } from './sprite';
 import { Box } from './ui';
 
-export type MenuScreen = 'bag' | 'journal' | 'card' | 'badges' | 'wallet' | 'sound' | 'reset';
+export type MenuScreen = 'bag' | 'journal' | 'card' | 'badges' | 'wallet' | 'sound' | 'reset' | 'help' | 'feedback';
 type Entry = MenuScreen | 'save' | 'quit' | 'exit';
 
 const ENTRIES: { id: Entry; icon: string }[] = [
+  { id: 'help', icon: '💡' },
+  { id: 'feedback', icon: '📝' },
   { id: 'bag', icon: '🎒' },
   { id: 'journal', icon: '📔' },
   { id: 'card', icon: '🪪' },
@@ -38,6 +41,8 @@ type Props = {
   pid: string;
   /** Open straight to a screen (B then closes the menu), or null for the list. */
   initial: MenuScreen | null;
+  /** The name of the place the player is standing in, for the Help screen. */
+  place?: string;
   onClose: () => void;
   onSave: () => void;
   onQuit: () => void;
@@ -74,6 +79,8 @@ export function StartMenu(props: Props) {
     const back = () => (initial ? onClose() : setScreen(null));
     return (
       <Screen title={t(`menu.item.${screen}`)} onBack={back} backLabel={initial ? t('paisapur.close') : t('menu.back')}>
+        {screen === 'help' && <Help life={life} place={props.place} />}
+        {screen === 'feedback' && <Feedback life={life} />}
         {screen === 'bag' && <Bag life={life} onUse={(to) => setScreen(to)} />}
         {screen === 'journal' && <Journal life={life} />}
         {screen === 'card' && <PlayerCard {...props} />}

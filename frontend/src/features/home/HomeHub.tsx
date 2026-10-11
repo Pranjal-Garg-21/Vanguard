@@ -11,8 +11,8 @@
  * there is progress to resume.
  */
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
-import { loadGame, rupees, t } from '@/platform';
+import { Link, useNavigate } from 'react-router';
+import { getSetting, loadGame, rupees, t } from '@/platform';
 import { Button, Card, Icon, SectionLabel, TileMap, LANDING_SCENE, VILLAGE_LEGEND, type IconName } from '@/ui';
 import { SIMULATORS } from '@/games/safe/catalog';
 import { rooms } from '@/games/investing/lessons/logic/content';
@@ -30,6 +30,16 @@ type Progress = { chapter: number; month: number; money: number } | null;
 export function HomeHub({ pid }: { pid: string }) {
   const [progress, setProgress] = useState<Progress>(null);
   const [checked, setChecked] = useState(false);
+  const navigate = useNavigate();
+
+  /** The starting-point questions are asked once, the first time the student begins, not before they have chosen to play. */
+  async function play() {
+    // Fullscreen has to be asked for inside the tap; the game leaves it again when it closes.
+    void document.documentElement.requestFullscreen?.().catch(() => undefined);
+    const baseline = await getSetting(pid, 'baseline');
+    if (baseline || started) navigate('/play');
+    else navigate('/onboarding', { state: { next: '/play' } });
+  }
 
   useEffect(() => {
     let live = true;
@@ -82,11 +92,9 @@ export function HomeHub({ pid }: { pid: string }) {
             </dl>
           )}
 
-          <Button size="lg" asChild className="w-full sm:w-auto">
-            <Link to="/play">
-              {t(started ? 'home.hub.resume' : 'home.hub.begin')}
-              <Icon name="arrowRight" className="h-5 w-5" />
-            </Link>
+          <Button size="lg" className="w-full sm:w-auto" onClick={() => void play()}>
+            {t(started ? 'home.hub.resume' : 'home.hub.begin')}
+            <Icon name="arrowRight" className="h-5 w-5" />
           </Button>
           {checked && !started && <p className="text-xs text-muted">{t('home.hub.noSave')}</p>}
         </div>
@@ -116,7 +124,7 @@ function SideDoor({ to, icon, title, body, count }: { to: string; icon: IconName
   return (
     <Link
       to={to}
-      className="flex items-start gap-4 rounded-xl border border-line-strong bg-surface p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      className="flex items-start gap-4 rounded-xl border border-line-strong bg-surface p-4 transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:shadow-lg hover:shadow-brand/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
       <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15 text-brand">
         <Icon name={icon} className="h-6 w-6" />

@@ -14,6 +14,8 @@ import {
   t,
   useLanguage,
   setLanguage as applyLanguage,
+  speakKeys,
+  stopSpeaking,
   type Accessibility,
   type ClassCheck,
   type Language,
@@ -116,7 +118,7 @@ export function SetupFlow() {
       )}
 
       {step === 'language' && (
-        <StepBody title={t('setup.language.title')} speak={['setup.language.title', 'setup.language.note']}>
+        <StepBody auto={a11y.audio} title={t('setup.language.title')} speak={['setup.language.title', 'setup.language.note']}>
           <div className="grid grid-cols-2 gap-3">
             {LANGUAGES.map((l) => (
               <button
@@ -145,7 +147,7 @@ export function SetupFlow() {
       )}
 
       {step === 'a11y' && (
-        <StepBody title={t('setup.a11y.title')} speak={['setup.a11y.title', 'setup.a11y.audio', 'setup.a11y.largeText', 'setup.a11y.reduceMotion', 'setup.a11y.timersOff', 'setup.a11y.timersOffHint']}>
+        <StepBody auto={a11y.audio} title={t('setup.a11y.title')} speak={['setup.a11y.title', 'setup.a11y.audio', 'setup.a11y.largeText', 'setup.a11y.reduceMotion', 'setup.a11y.timersOff', 'setup.a11y.timersOffHint']}>
           <div className="space-y-3">
             {A11Y_OPTIONS.map(({ key }) => (
               <label key={key} className="flex min-h-16 cursor-pointer items-center gap-4 rounded-xl border border-line bg-surface px-4">
@@ -173,7 +175,7 @@ export function SetupFlow() {
       )}
 
       {step === 'class' && (
-        <StepBody title={t('setup.class.title')} subtitle={t('setup.class.hint')} speak={['setup.class.title', 'setup.class.hint']}>
+        <StepBody auto={a11y.audio} title={t('setup.class.title')} subtitle={t('setup.class.hint')} speak={['setup.class.title', 'setup.class.hint']}>
           <input
             autoFocus
             inputMode="text"
@@ -212,7 +214,7 @@ export function SetupFlow() {
       )}
 
       {step === 'avatar' && (
-        <StepBody title={t('setup.avatar.title')} speak={['setup.avatar.title', 'setup.avatar.nameLabel', 'setup.avatar.nameHint']}>
+        <StepBody auto={a11y.audio} title={t('setup.avatar.title')} speak={['setup.avatar.title', 'setup.avatar.nameLabel', 'setup.avatar.nameHint']}>
           <div className="grid grid-cols-4 gap-3">
             {AVATARS.map((a) => (
               <button
@@ -246,7 +248,7 @@ export function SetupFlow() {
       )}
 
       {step === 'pin' && (
-        <StepBody title={t('setup.pin.createTitle')} subtitle={t('setup.pin.createHint')} speak={['setup.pin.createTitle', 'setup.pin.createHint']}>
+        <StepBody auto={a11y.audio} title={t('setup.pin.createTitle')} subtitle={t('setup.pin.createHint')} speak={['setup.pin.createTitle', 'setup.pin.createHint']}>
           {pinError && <div className="mb-4"><Notice tone="bad">{t('setup.pin.mismatch')}</Notice></div>}
           <PicturePin
             resetKey={`create-${pinAttempt}`}
@@ -257,11 +259,15 @@ export function SetupFlow() {
             }}
           />
           <p className="mt-4 text-center text-sm text-muted">{t('setup.pin.coverTip')}</p>
+          <Button size="lg" variant="ghost" className="mt-2 w-full" disabled={saving} onClick={() => void finish([], classValid && classCode.length === JOIN_CODE_LENGTH)}>
+            {t('setup.pin.skip')}
+          </Button>
+          <p className="text-center text-sm text-muted">{t('setup.pin.skipHint')}</p>
         </StepBody>
       )}
 
       {step === 'confirm' && (
-        <StepBody title={t('setup.pin.confirmTitle')} speak={['setup.pin.confirmTitle']}>
+        <StepBody auto={a11y.audio} title={t('setup.pin.confirmTitle')} speak={['setup.pin.confirmTitle']}>
           <PicturePin resetKey={`confirm-${pinAttempt}`} disabled={saving} onComplete={confirmPin} />
         </StepBody>
       )}
@@ -286,7 +292,14 @@ export function SetupFlow() {
  * button is here on every step, before the "Read things aloud" setting even
  * exists on their profile.
  */
-function StepBody({ title, subtitle, children, speak }: { title: string; subtitle?: string; children: ReactNode; speak?: string[] }) {
+function StepBody({ title, subtitle, children, speak, auto = false }: { title: string; subtitle?: string; children: ReactNode; speak?: string[]; auto?: boolean }) {
+  // Once "Read things aloud" is ticked on this phone, every later step reads itself.
+  const spoken = speak?.join('|') ?? '';
+  useEffect(() => {
+    if (!auto || !spoken) return;
+    void speakKeys(spoken.split('|'));
+    return stopSpeaking;
+  }, [auto, spoken]);
   return (
     <section>
       <div className="flex items-start gap-2">

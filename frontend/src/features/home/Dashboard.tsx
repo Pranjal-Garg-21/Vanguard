@@ -22,15 +22,9 @@ import { Avatar } from '@/features/setup';
 import { Badge, Button, Card, Icon, Notice, SectionLabel, Spinner } from '@/ui';
 import { summariseEvents } from './stats';
 import { HomeHub } from './HomeHub';
+import { SECTION_ROUTES } from './sections';
+import { TopNav } from './TopNav';
 
-const NAV = ['dashboard', 'learn', 'practice', 'compete'] as const;
-
-/** Where each Arcade section lives. Missing means its page is not built yet. */
-const SECTION_ROUTES: Record<string, string | undefined> = {
-  'arcade.everyday': '/arcade/everyday',
-  'arcade.safe': '/safe',
-  'arcade.investing': '/learn/invest',
-};
 const BADGE_SLOTS = 6;
 
 export function Dashboard() {
@@ -62,29 +56,7 @@ export function Dashboard() {
 
   return (
     <div className="min-h-dvh">
-      <header className="sticky top-0 z-10 border-b border-line bg-surface/95 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-2.5">
-          <span className="flex items-center gap-2 font-bold">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand text-sm font-bold text-brand-ink">P</span>
-            <span className="hidden sm:inline">
-              Paisa<span className="text-brand">Path</span>
-            </span>
-          </span>
-
-          <nav className="hidden gap-1 md:flex" aria-label="Main">
-            {NAV.map((key) => (
-              <span
-                key={key}
-                aria-current={key === 'dashboard' ? 'page' : undefined}
-                title={key === 'dashboard' ? undefined : t('home.soon')}
-                className={`rounded-md px-3 py-2 text-sm font-bold ${key === 'dashboard' ? 'bg-surface-2 text-brand' : 'cursor-not-allowed text-muted'}`}
-              >
-                {t(`home.nav.${key}`)}
-              </span>
-            ))}
-          </nav>
-
-          <div className="ml-auto flex items-center gap-4 text-sm font-bold">
+      <TopNav>
             <span title={t('home.stats.streak')} className="inline-flex items-center gap-1">
               <Icon name="flame" className="h-4 w-4 text-warn" />
               <span className="text-brand">{stats.streak}</span> <span className="text-muted">d</span>
@@ -105,9 +77,7 @@ export function Dashboard() {
             >
               <Avatar id={profile.avatarId} className="h-9 w-9" iconClassName="h-5 w-5" />
             </button>
-          </div>
-        </div>
-      </header>
+          </TopNav>
 
       <main className="mx-auto max-w-5xl space-y-6 px-4 py-6">
         <div className="flex flex-wrap items-center justify-between gap-2">
@@ -124,7 +94,7 @@ export function Dashboard() {
           </Notice>
         )}
 
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="grid animate-rise grid-cols-2 gap-3 md:grid-cols-4">
           <Stat label={t('home.stats.streak')} value={stats.streak} />
           <Stat label={t('home.stats.xp')} value={stats.xp} />
           <Stat label={t('home.stats.answers')} value={stats.answers} />
@@ -132,7 +102,7 @@ export function Dashboard() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
-          <div className="space-y-6">
+          <div className="animate-rise space-y-6 [animation-delay:80ms]">
             <HomeHub pid={profile.pid} />
 
             <section className="space-y-3">
@@ -171,7 +141,7 @@ export function Dashboard() {
                     </>
                   );
                   return to ? (
-                    <Link key={a.id} to={to} className="flex flex-col gap-2 rounded-xl border border-line-strong bg-surface p-4 transition hover:border-brand">
+                    <Link key={a.id} to={to} className="flex flex-col gap-2 rounded-xl border border-line-strong bg-surface p-4 transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:shadow-lg hover:shadow-brand/10">
                       {body}
                     </Link>
                   ) : (
@@ -184,7 +154,7 @@ export function Dashboard() {
             </section>
           </div>
 
-          <aside className="space-y-6">
+          <aside className="animate-rise space-y-6 [animation-delay:160ms]">
             <Card className="space-y-3">
               <SectionLabel>{t('home.daily.title')}</SectionLabel>
               <p className="text-sm text-ink-soft">{t('home.daily.body')}</p>
@@ -216,8 +186,8 @@ export function Dashboard() {
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <Card className="p-4">
-      <p className="text-3xl font-bold">{value}</p>
+    <Card className="p-4 transition duration-200 hover:border-brand/60">
+      <p className="text-3xl font-bold tabular-nums">{value}</p>
       <p className="text-xs font-bold tracking-wide text-muted uppercase">{label}</p>
     </Card>
   );

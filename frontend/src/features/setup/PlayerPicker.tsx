@@ -86,6 +86,11 @@ export function PlayerPicker() {
             key={p.pid}
             type="button"
             onClick={() => {
+              if (!p.hasPin) {
+                // No PIN was set, so one tap signs in.
+                void unlockProfile(p.pid, []).then(() => navigate('/'));
+                return;
+              }
               setSelected(p);
               setMessage(null);
             }}

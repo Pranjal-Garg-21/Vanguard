@@ -11,7 +11,9 @@
     "save": "Save",
     "reset": "New game",
     "quit": "Quit",
-    "exit": "Exit"
+    "exit": "Exit",
+    "help": "Help",
+    "feedback": "Feedback"
   },
   "card": {
     "heading": "PAISAPUR PLAYER CARD",

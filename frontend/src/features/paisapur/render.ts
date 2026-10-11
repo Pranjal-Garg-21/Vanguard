@@ -154,11 +154,20 @@ export function draw(ctx: CanvasRenderingContext2D, assets: Assets, f: Frame): v
   const { world, walker } = f;
   const map = mapOf(world, walker.pos.map);
   const { w, h } = size(map);
-  const viewW = VIEW_W * TILE;
-  const viewH = VIEW_H * TILE;
+  // The window onto the map is as big as the room: a small room fills the screen instead of floating in a
+  // fixed-size frame, and a big map scrolls inside the usual 15 x 10 tiles.
+  const viewW = Math.min(w, VIEW_W) * TILE;
+  const viewH = Math.min(h, VIEW_H) * TILE;
+  const canvas = ctx.canvas;
+  if (canvas.width !== viewW * RENDER_SCALE || canvas.height !== viewH * RENDER_SCALE) {
+    canvas.width = viewW * RENDER_SCALE;
+    canvas.height = viewH * RENDER_SCALE;
+    canvas.style.aspectRatio = `${viewW} / ${viewH}`;
+    canvas.parentElement?.parentElement?.style.setProperty('--stage-ratio', String(viewW / viewH));
+  }
 
   // Game pixels → device pixels (see RENDER_SCALE).
-  const scale = ctx.canvas.width / viewW;
+  const scale = canvas.width / viewW;
   ctx.setTransform(scale, 0, 0, scale, 0, 0);
   ctx.imageSmoothingEnabled = false;
   ctx.fillStyle = '#10141c';

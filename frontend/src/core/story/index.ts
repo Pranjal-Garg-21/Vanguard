@@ -192,6 +192,8 @@ export interface Host {
   sleep(): Promise<void>;
   warp(to: Pos): void;
   log(spec: LogSpec): void;
+  /** Shows the player why a decision was good or poor. Called once the choice has played out; optional, so a headless host can skip it. */
+  feedback?(spec: LogSpec): Promise<void>;
   toast(text: string): void;
   /** A Scam Duel; resolves with who won. */
   duel(id: string): Promise<'win' | 'lose'>;
@@ -228,7 +230,13 @@ async function runStep(scripts: Scripts, step: Step, host: Host, depth: number):
     const picked = options[await host.choose(options.map((o) => o.label), step.prompt, step.who)];
     if (!picked) return;
     if (picked.log) host.log(picked.log);
-    return runSteps(scripts, picked.do ?? [], host, depth + 1);
+    try {
+      await runSteps(scripts, picked.do ?? [], host, depth + 1);
+    } finally {
+      // After the choice has played out (even if it ended the scene), say why it was good or poor.
+      if (picked.log) await host.feedback?.(picked.log);
+    }
+    return;
   }
   if ('if' in step) {
     return runSteps(scripts, (evalCond(step.if, state) ? step.then : step.else) ?? [], host, depth + 1);
@@ -281,6 +289,9 @@ async function runStep(scripts: Scripts, step: Step, host: Host, depth: number):
     for (const misconception of result.misconceptions) {
       host.log({ concept, choice: step.minigame, correct: false, misconception });
     }
+    // The first slip gets an explanation and a way to practise it; the game already showed its own results.
+    const slip = result.misconceptions[0];
+    if (slip) await host.feedback?.({ concept, choice: step.minigame, correct: false, misconception: slip });
     if (step.apply) for (const action of gameEffectsToActions(result.effects)) host.dispatch(action);
     for (const choice of result.choices) {
       const branch = step.on?.[`${choice.stepId}:${choice.choiceId}`];

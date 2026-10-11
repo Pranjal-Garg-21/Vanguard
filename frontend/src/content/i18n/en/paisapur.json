@@ -12,7 +12,8 @@
     "bank": "Money in the bank (including your goal pot)",
     "fund_months": "Months of needs your savings cover",
     "peace": "Peace",
-    "menu": "MENU"
+    "menu": "MENU",
+    "help": "HELP"
   },
   "pad": {
     "up": "Walk up",
@@ -329,5 +330,242 @@
     "insurance": "Insurance",
     "cyber": "Cyber Cell",
     "jackpot": "Dhamaka"
+  },
+  "help": {
+    "title": "How to play",
+    "welcome": "Welcome to Paisapur. You live one year of a money life. Every choice changes your cash, your savings and how calm you feel, and the town teaches you why.",
+    "controlsTitle": "Controls",
+    "move": "Walk: arrow keys or WASD. On a phone, use the pad at the bottom.",
+    "talk": "Talk to people, read signs, open doors: Z, Enter or Space (the A button).",
+    "back": "Go back or close something: X or Esc (the B button).",
+    "menu": "Open the menu: M or the MENU button. Bag, Journal, Wallet, Help and Feedback are all there.",
+    "goalTitle": "What to do",
+    "goal": "Follow the line at the bottom of the screen that starts with the target icon. It always says where to go next. Talk to everyone: people give you jobs, advice and badges.",
+    "learnTitle": "How you learn here",
+    "learn": "People in town teach you an idea, then you try it with your own money. Mini-games and quizzes check that it stuck. New ideas land in your Journal, and the Feedback screen shows how you are doing.",
+    "nowTitle": "Right now",
+    "tipTitle": "Tip for this chapter",
+    "tip": {
+      "0": "Walk up to a person or a door and press Z to talk or go in. Your first stop is Professor Arth's Money Lab, shown in the line at the bottom of the screen.",
+      "1": "A bank account keeps money safe and lets you pay without cash. Visit the bank and open one. Bring what the counter asks for.",
+      "2": "Needs come before wants. Split what you earn into jars, and check what each thing really costs before you pay.",
+      "3": "Surprises happen. Savings you set aside early are what get you through a bad month. Look at Months covered in the top bar.",
+      "4": "Borrowing costs more than the amount you borrow. Compare the full repayment before you sign. Never borrow for something you merely want.",
+      "5": "Money can grow, and it can fall. Spread it around, think long term, and never put in what you cannot afford to lose.",
+      "6": "If a deal sounds too good to be true, it is. Check who is offering it, never share OTPs or PINs, and ask someone you trust."
+    },
+    "moreTitle": "Practise more",
+    "moreBody": "Stuck on an idea? These are outside the game and do not change your story. Save first (Menu, then Save).",
+    "lessons": "Lessons",
+    "simulations": "Simulations",
+    "minigames": "Mini games",
+    "whereTitle": "Where to go",
+    "youAreIn": "You are in: {place}",
+    "stepsTitle": "What you can do",
+    "generic": "Follow the line at the bottom of the screen, and talk to people you meet.",
+    "goalProgress": "Goal progress: {pct}%"
+  },
+  "feedback": {
+    "title": "How you are doing",
+    "meters": "Your year so far",
+    "ideas": "Money ideas",
+    "ideasCount": "{seen} discovered, {mastered} mastered",
+    "toReview": "Worth another look",
+    "toReviewBody": "You have met these ideas but not mastered them yet. Open the Journal to read them again, or try a lesson.",
+    "allGood": "Nothing to review yet. Keep going and new ideas will show up here.",
+    "recent": "Your latest money moves",
+    "recentNone": "No money has moved yet.",
+    "next": "What to do next"
+  },
+  "decision": {
+    "goodTitle": "Good choice",
+    "badTitle": "Let's look at that again",
+    "whyGood": "Why it works:",
+    "whyBad": "What to remember:",
+    "practise": "Practise this idea",
+    "saved": "Your game is saved before you go.",
+    "link": {
+      "lesson": "Open a lesson",
+      "simulation": "Try a simulation",
+      "minigame": "Play a mini game"
+    }
+  },
+  "guide": {
+    "meet_prof": {
+      "where": "North-west of the town square: the Money Lab.",
+      "step1": "Walk to the Lab door and press Z to go in.",
+      "step2": "Talk to Professor Arth. He explains the next idea and sets your next job.",
+      "step3": "Lost? The line at the bottom of the screen always names the next place.",
+      "n": "3"
+    },
+    "open_account": {
+      "where": "Paisapur Bank, east of the Lab.",
+      "step1": "Go into the bank and talk to Meena Rao at the counter.",
+      "step2": "She asks for your KYC documents. If you do not have them yet, go home and ask Mom.",
+      "step3": "With the documents, she opens your account. After that, the bank screen is where you manage your money.",
+      "n": "3"
+    },
+    "get_docs": {
+      "where": "Home. Mom is there.",
+      "step1": "Walk home and talk to Mom.",
+      "step2": "Choose the documents a bank really needs. Pick carefully.",
+      "step3": "Then take them to Meena Rao at the bank.",
+      "n": "3"
+    },
+    "back_to_bank": {
+      "where": "Paisapur Bank.",
+      "step1": "Talk to Meena Rao at the counter.",
+      "step2": "Hand over your documents and answer her questions to open the account.",
+      "n": "2"
+    },
+    "tell_mom": {
+      "where": "Home.",
+      "step1": "Walk home and talk to Mom.",
+      "step2": "Tell her the news. A new idea can follow.",
+      "n": "2"
+    },
+    "buyer_outside": {
+      "where": "Just outside your home.",
+      "step1": "Step outside and talk to the buyer about your old cycle.",
+      "step2": "Think about the price before you agree to anything.",
+      "n": "2"
+    },
+    "meena_challenge": {
+      "where": "Paisapur Bank.",
+      "step1": "Talk to Meena Rao and take her challenge.",
+      "step2": "It checks the banking ideas you have just learned. Wrong answers show you the idea again.",
+      "n": "2"
+    },
+    "ch2_prof": {
+      "where": "The Money Lab, north-west of the square.",
+      "step1": "Go to the Lab and talk to Professor Arth.",
+      "step2": "He starts the next chapter.",
+      "n": "2"
+    },
+    "ch2_month": {
+      "where": "Zaroorat Store, then home.",
+      "step1": "Go to Zaroorat Store and buy what you need this month. Needs come before wants.",
+      "step2": "Open MENU and then Wallet to see how much you have left before you spend.",
+      "step3": "When you are done, go home and sleep. Sleeping ends the month.",
+      "n": "3"
+    },
+    "ch2_pyf": {
+      "where": "The Money Lab.",
+      "step1": "Visit Professor Arth. He has a saving trick for you.",
+      "step2": "Try it with your own money next month.",
+      "n": "2"
+    },
+    "ch2_month2": {
+      "where": "Wherever you like, then home.",
+      "step1": "Earn and spend by the budget you made.",
+      "step2": "Check MENU, then Wallet, to stay on budget.",
+      "step3": "Go home and sleep to finish the month.",
+      "n": "3"
+    },
+    "anwar_challenge": {
+      "where": "Zaroorat Store.",
+      "step1": "Talk to Anwar Chacha and take his challenge.",
+      "step2": "It checks the budgeting ideas from this chapter.",
+      "n": "2"
+    },
+    "ch3_home": {
+      "where": "Home.",
+      "step1": "Walk home and sleep. A rest ends the chapter's first part.",
+      "n": "1"
+    },
+    "ch3_lakshmi": {
+      "where": "The town square.",
+      "step1": "Find Lakshmi Aunty in the square and talk to her.",
+      "step2": "She explains why a safety net matters.",
+      "n": "2"
+    },
+    "ch3_fund": {
+      "where": "The bank, then the town square.",
+      "step1": "Go to the bank and put money into savings.",
+      "step2": "Watch the lifebelt number in the top bar. It counts the months of needs your savings cover. You need 3.",
+      "step3": "When you have 3, take Lakshmi Aunty's challenge.",
+      "n": "3"
+    },
+    "lakshmi_challenge": {
+      "where": "The town square.",
+      "step1": "Talk to Lakshmi Aunty and take her challenge.",
+      "n": "1"
+    },
+    "ch4_prof": {
+      "where": "The Money Lab.",
+      "step1": "Talk to Professor Arth about your big goal.",
+      "step2": "He sets up the borrowing chapter.",
+      "n": "2"
+    },
+    "ch4_compare": {
+      "where": "The bank, and the moneylender's house.",
+      "step1": "Visit Mr. Iyer at the bank and the moneylender. Ask each what you would repay in total.",
+      "step2": "Compare the full amount you pay back, not just the monthly figure.",
+      "step3": "Then decide how you want to borrow, if at all.",
+      "n": "3"
+    },
+    "ch4_iyer": {
+      "where": "Home, then the bank.",
+      "step1": "Live with your choice for two months: earn, repay and sleep.",
+      "step2": "Then go to the bank and take Mr. Iyer's challenge.",
+      "n": "2"
+    },
+    "ch5_prof": {
+      "where": "The Money Lab.",
+      "step1": "Talk to Professor Arth. Something big is happening in town.",
+      "n": "1"
+    },
+    "ch5_bonds": {
+      "where": "The Bond Office, north of the main road.",
+      "step1": "Walk to the Bond Office and talk to the clerk.",
+      "step2": "Buy a town bond. A bond is a loan to the town that pays you back with interest.",
+      "n": "2"
+    },
+    "ch5_sleep": {
+      "where": "Home.",
+      "step1": "Go home and sleep. The bridge will be ready next month.",
+      "n": "1"
+    },
+    "ch5_exchange": {
+      "where": "Across the new bridge: the Deccan Exchange.",
+      "step1": "Cross the bridge and go into the Exchange.",
+      "step2": "Look at the prices and the news before you buy anything.",
+      "n": "2"
+    },
+    "ch5_invest": {
+      "where": "The Deccan Exchange, then home.",
+      "step1": "Invest a little. Only put in what you could afford to see go down.",
+      "step2": "Stay invested until month 10. Sleeping at home moves time on.",
+      "step3": "Then take Ravi Sharma's challenge.",
+      "n": "3"
+    },
+    "ch6_prof": {
+      "where": "The Money Lab.",
+      "step1": "Talk to Professor Arth. Something is wrong in Deccan City.",
+      "n": "1"
+    },
+    "ch6_investigate": {
+      "where": "Deccan City.",
+      "step1": "Go to Deccan City and look into Double Dhamaka.",
+      "step2": "Ask yourself who is offering it, and what they want from you.",
+      "n": "2"
+    },
+    "ch6_report": {
+      "where": "The Cyber Cell.",
+      "step1": "Go to Inspector Fatima and report Double Dhamaka.",
+      "step2": "Say what you saw and what you were asked for.",
+      "n": "2"
+    },
+    "end": {
+      "where": "The Money Lab.",
+      "step1": "Visit Professor Arth for your year-end review.",
+      "n": "1"
+    },
+    "new_goal": {
+      "where": "Anywhere.",
+      "step1": "Keep saving for your goal. Open MENU, then Wallet, to see your progress.",
+      "step2": "Earn, spend carefully and sleep to end each month.",
+      "n": "2"
+    }
   }
 }

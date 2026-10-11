@@ -16,8 +16,8 @@ import { duelById } from '@/core/story/duel';
 import { addCheckpoint, rewind, type Checkpoint, type OtherLife } from '@/core/timeline';
 import { interact, isValidPos, step, type Dir, type Pos } from '@/core/world';
 import { PAISAPUR, START_MAP } from '@/core/world/paisapur';
-import { loadActiveProfile, loadGame, logEvent, saveGame, setTelemetryContext, t, useActiveProfile, type StageId } from '@/platform';
-import { Spinner } from '@/ui';
+import { useSpeaking, getSetting, loadActiveProfile, loadGame, logEvent, setSetting, saveGame, setTelemetryContext, t, useActiveProfile, type StageId } from '@/platform';
+import { Icon, Spinner } from '@/ui';
 import { rupees, storyVars } from './logic/format';
 import {
   BankPanel,
@@ -29,6 +29,7 @@ import {
   ShopPanel,
   YearPanel,
 } from './panels';
+import { FeedbackCard, type Decision } from './feedbackCard';
 import { StartMenu, type MenuScreen } from './menu';
 import { audio } from './audio/engine';
 import { trackForMap } from './audio/logic/score';
@@ -52,7 +53,8 @@ type Overlay =
   | { kind: 'night'; before: LifeState }
   | { kind: 'menu'; screen: MenuScreen | null }
   | { kind: 'duel'; id: string }
-  | { kind: 'minigame'; id: string; level: Level; params?: Record<string, unknown> };
+  | { kind: 'minigame'; id: string; level: Level; params?: Record<string, unknown> }
+  | { kind: 'feedback'; decision: Decision };
 
 const KEY_DIRS: Record<string, Dir> = {
   ArrowUp: 'up',
@@ -106,6 +108,14 @@ export function PaisapurGame() {
   const [ready, setReady] = useState(false);
   const wide = useWide();
 
+  // The home screen goes fullscreen when the game starts; give the screen back when it closes.
+  useEffect(
+    () => () => {
+      if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
+    },
+    [],
+  );
+
   const lifeRef = useRef<LifeState | null>(null);
   const overlayRef = useRef<Overlay | null>(null);
   const resolver = useRef<((v: unknown) => void) | null>(null);
@@ -118,6 +128,13 @@ export function PaisapurGame() {
   const assets = useRef<Assets | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stepsSinceSave = useRef(0);
+  const startedRef = useRef(false);
+  const speaking = useSpeaking();
+  // The music sits quietly under a voice, so the words can be heard.
+  useEffect(() => {
+    audio.duck(speaking !== null);
+    return () => audio.duck(false);
+  }, [speaking]);
   const toastId = useRef(0);
   const lastBump = useRef(0);
   const checkpoints = useRef<Checkpoint[]>([]);
@@ -287,6 +304,10 @@ export function PaisapurGame() {
       setMapId(to.map);
     },
     log: logChoice,
+    feedback: async (spec) => {
+      if (spec.correct === undefined) return;
+      await ask<void>({ kind: 'feedback', decision: spec });
+    },
     toast: (key) => {
       pushToast(t(key, vars()), 'info');
       if (key === 'toast.goal') audio.jingle('goal');
@@ -469,8 +490,17 @@ export function PaisapurGame() {
 
   // Run any auto script (e.g. the birthday intro) once the game is ready.
   useEffect(() => {
-    if (ready) void latest.current.runAutos();
-  }, [ready]);
+    if (!ready || !pid || startedRef.current) return;
+    startedRef.current = true;
+    void (async () => {
+      // A first-time player sees how to play before anything else happens.
+      if (!(await getSetting(pid, 'paisapurHelpSeen'))) {
+        await setSetting(pid, 'paisapurHelpSeen', true);
+        await latest.current.openMenu('help');
+      }
+      await latest.current.runAutos();
+    })();
+  }, [ready, pid]);
 
   // Keyboard (and the touch pad, which sends the same keys).
   useEffect(() => {
@@ -616,7 +646,7 @@ export function PaisapurGame() {
         const Play = game.Component;
         return (
           // Games are styled for a light page; give them a parchment panel over the dark overlay.
-          <div className="minigame pixel-raised max-h-[92dvh] w-full max-w-xl overflow-y-auto bg-parchment p-4 text-ink">
+          <div className="minigame theme-dark max-h-[92dvh] w-full max-w-xl overflow-y-auto rounded-xl border border-line-strong bg-surface p-4 text-ink">
             {/* Keyed so a game that opens twice starts over rather than
                 resuming the state of the previous time it ran. */}
             <Play
@@ -640,6 +670,7 @@ export function PaisapurGame() {
             name={name}
             pid={pid ?? ''}
             initial={overlay.screen}
+            place={t(PAISAPUR.maps[mapId]?.name ?? 'maps.paisapur')}
             onReset={() => {
               afterMenu.current = startOver;
               answer();
@@ -653,6 +684,19 @@ export function PaisapurGame() {
               persist();
               answer();
               navigate('/');
+            }}
+          />
+        );
+      case 'feedback':
+        return (
+          <FeedbackCard
+            decision={overlay.decision}
+            onDone={() => answer()}
+            onGo={(to) => {
+              // Save first, so coming back picks up where the player left off.
+              persist();
+              answer();
+              navigate(to);
             }}
           />
         );
@@ -696,9 +740,10 @@ export function PaisapurGame() {
     ) : null;
 
   return (
-    <div className="flex min-h-dvh flex-col items-center bg-[#10141c] px-2 py-2 text-white">
-      <div className="w-full max-w-3xl">
-        <Hud life={life} mapName={t(PAISAPUR.maps[mapId]?.name ?? 'maps.paisapur')} onMenu={() => void openMenu()} />
+    <div className="flex min-h-dvh flex-col items-center justify-center bg-[#10141c] px-2 py-2 text-white">
+      {/* On a wide screen the game grows until the map fills the window's height; on a phone it fills the width. */}
+      <div className="w-full" style={wide ? { maxWidth: `min(100%, calc((100dvh - 7.5rem) * var(--stage-ratio, ${VIEW_W / VIEW_H})))` } : undefined}>
+        <Hud life={life} mapName={t(PAISAPUR.maps[mapId]?.name ?? 'maps.paisapur')} onMenu={() => void openMenu()} onHelp={() => void openMenu('help')} />
         <div className="relative overflow-hidden rounded-b-md bg-black">
           <canvas
             ref={canvasRef}
@@ -712,8 +757,9 @@ export function PaisapurGame() {
           <Toasts toasts={toasts} />
           {speech && wide && <div className="absolute inset-x-2 bottom-2">{speech}</div>}
         </div>
-        <p className="mt-1 truncate rounded bg-[#1d2433] px-2 py-1 text-sm" title={t(life.objective)}>
-          🎯 {t(life.objective)}
+        <p className="mt-1 flex items-center gap-2 truncate rounded bg-[#1d2433] px-2 py-1 text-sm" title={t(life.objective)}>
+          <Icon name="target" className="h-4 w-4 shrink-0 text-brand" />
+          <span className="truncate">{t(life.objective)}</span>
         </p>
         {speech && !wide && <div className="mt-2">{speech}</div>}
         {!speech && <Controls />}
@@ -731,9 +777,9 @@ function emptyResult(): MiniGameResult {
 
 function MissingGame({ id, onClose }: { id: string; onClose: () => void }) {
   return (
-    <div className="minigame w-full max-w-md bg-parchment p-4 text-ink">
+    <div className="minigame theme-dark w-full max-w-md rounded-xl border border-line-strong bg-surface p-4 text-ink">
       <p>{t('errors.missing_game', { id })}</p>
-      <button type="button" className="pixel-frame mt-3 bg-parchment px-4 py-2 font-bold" onClick={onClose}>
+      <button type="button" className="mt-3 rounded-lg border border-line-strong bg-surface-2 px-4 py-2 font-bold" onClick={onClose}>
         {t('common.continue')}
       </button>
     </div>
