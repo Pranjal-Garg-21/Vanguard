@@ -5,7 +5,6 @@
   "soon": "جلد آ رہا ہے",
   "empty": "اس موضوع کے سبق آ رہے ہیں۔",
   "notFound": "موضوع نہیں ملا۔",
-  "lessonNotFound": "سبق نہیں ملا۔",
   "count": "{total} میں سے {done} مکمل",
   "pillar": {
     "bank": {
@@ -33,5 +32,9 @@
       "blurb": "اسکیم پہچانیں اور اپنے اکاؤنٹ محفوظ رکھیں۔"
     }
   },
-  "lessonsTitle": "سب {n} سبق"
+  "lessonsTitle": "سب {n} سبق",
+  "view": "منظر",
+  "view_path": "راستہ",
+  "view_grid": "کلاسک",
+  "lessonNotFound": "سبق نہیں ملا۔"
 }

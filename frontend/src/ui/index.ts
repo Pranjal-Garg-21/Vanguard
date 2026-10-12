@@ -22,5 +22,8 @@ export { CheckIcon, ChevronIcon } from './icons';
 export { AudioButton } from './AudioButton';
 export { Icon, type IconName } from './Icon';
 export { Notice, ProgressBar, SectionLabel, Spinner } from './components';
+export { Confetti } from './Confetti';
+export { TopNav } from './TopNav';
+export { Mascot, MascotFace } from './Mascot';
 export { PixelButton, PixelOption, PixelPanel, PixelProgress } from './pixel';
 export * from './tiles';

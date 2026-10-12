@@ -1,8 +1,9 @@
 /** UC-FAC-01: create a class, confirm consent, get a join code. */
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { Button, Card, Icon, Notice } from '@/ui';
+import { useNavigate } from 'react-router';
+
 import { LANGUAGE_NAMES, supabaseOrThrow } from './data';
+import { BackLink, Hero, primary, Notice, Panel } from './theme';
 
 const CONSENT_ITEMS = [
   'Parents or guardians have been informed by the NGO and have given consent.',
@@ -47,18 +48,16 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
     navigate(`../class/${data.id}?tab=join`, { replace: true });
   };
 
-  const input = 'mt-1 w-full rounded-lg border border-line-strong bg-bg p-3 focus:border-brand focus:outline-none';
+  const input = 'mt-2 w-full rounded-md border border-[#d5dbe5] bg-white p-3 text-[#111827] placeholder:text-[#9aa3b2] [color-scheme:light] focus:border-[#1c2538] focus:ring-2 focus:ring-[#2563eb]/40 focus:outline-none';
 
   return (
-    <div className="mx-auto max-w-xl space-y-5">
-      <Link to=".." className="inline-flex items-center gap-1 text-sm font-semibold text-brand">
-        <Icon name="arrowLeft" className="h-4 w-4" />
-        Your classes
-      </Link>
-      <h1 className="text-2xl font-extrabold">New class</h1>
+    <div className="mx-auto max-w-2xl space-y-6">
+      <BackLink to="..">Your classes</BackLink>
+      <Hero title="New class" body="Name it, pick the language, and you’ll get a join code and QR to share." />
 
-      <form onSubmit={submit} className="space-y-5">
-        <Card className="space-y-4">
+      <form onSubmit={submit} className="space-y-6">
+        <Panel icon="school" title="Class details" subtitle="Students see the class name when they join.">
+          <div className="space-y-5">
           <label className="block">
             <span className="font-semibold">Class name</span>
             <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Grade 11 · Batch A" className={input} />
@@ -83,27 +82,29 @@ export function CreateClass({ ngoId }: { ngoId: string | null }) {
               <input type="number" min={1} max={200} value={size} onChange={(e) => setSize(e.target.value)} placeholder="40" className={input} />
             </label>
           </div>
-        </Card>
+          </div>
+        </Panel>
 
-        <Card className="space-y-3">
-          <h2 className="font-bold">Before students join</h2>
+        <Panel icon="check" title="Before students join" subtitle="Tick all three to create the class.">
+          <div className="space-y-4">
           {CONSENT_ITEMS.map((item, i) => (
             <label key={item} className="flex cursor-pointer items-start gap-3">
               <input
                 type="checkbox"
-                className="mt-1 h-5 w-5 accent-brand"
+                className="mt-0.5 h-5 w-5 accent-[#65a30d]"
                 checked={consent[i]}
                 onChange={(e) => setConsent(consent.map((v, j) => (j === i ? e.target.checked : v)))}
               />
-              <span className="text-ink-soft">{item}</span>
+              <span className="text-[#3b4558]">{item}</span>
             </label>
           ))}
-        </Card>
+          </div>
+        </Panel>
 
         {error && <Notice tone="bad">{error}</Notice>}
-        <Button type="submit" size="lg" className="w-full" disabled={busy || !name.trim() || !allConsented}>
+        <button type="submit" className={`${primary} min-h-12 w-full text-lg`} disabled={busy || !name.trim() || !allConsented}>
           {busy ? 'Creating…' : 'Create class and get join code'}
-        </Button>
+        </button>
       </form>
     </div>
   );

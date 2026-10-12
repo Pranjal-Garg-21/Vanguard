@@ -61,5 +61,5 @@ function SignedInGate() {
 }
 
 function Centered({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto flex min-h-dvh max-w-md items-center px-4">{children}</div>;
+  return <div className="theme-light mx-auto flex min-h-dvh max-w-md items-center px-4">{children}</div>;
 }

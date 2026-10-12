@@ -12,17 +12,17 @@ export function RoomHeader({ title, brief, tags, progress, speak }: { title: str
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2">
         {tags.map((tag) => (
-          <Badge key={tag.label} tone={tag.tone}>{tag.label}</Badge>
+          <Badge key={tag.label} tone={tag.tone} className="px-2.5 py-1 text-sm">{tag.label}</Badge>
         ))}
       </div>
       <div className="flex items-start gap-2">
-        <h1 className="flex-1 text-2xl font-bold text-ink">{title}</h1>
+        <h1 className="flex-1 text-3xl font-bold text-ink">{title}</h1>
         {speak && <AudioButton keys={speak} className="-my-1 text-ink-soft" />}
       </div>
-      <p className="text-sm text-ink-soft">{brief}</p>
+      <p className="text-lg leading-relaxed text-ink-soft">{brief}</p>
       <div>
-        <p className="mb-1 text-xs font-bold text-ink-soft">{t('safe.ui.roomProgress', { pct })}</p>
-        <div className="h-2 overflow-hidden rounded-full bg-surface-3" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
+        <p className="mb-1.5 text-sm font-bold text-ink-soft">{t('safe.ui.roomProgress', { pct })}</p>
+        <div className="h-2.5 overflow-hidden rounded-full bg-surface-3" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
           <div className="h-full rounded-full bg-brand transition-[width]" style={{ width: `${pct}%` }} />
         </div>
       </div>
@@ -40,17 +40,17 @@ export function TaskList({ tasks }: { tasks: TaskItem[] }) {
       {tasks.map((task, i) => (
         <li key={task.id}>
           <details open={i === current} className="group rounded-lg border border-line bg-surface open:border-line-strong">
-            <summary className="flex cursor-pointer list-none items-center gap-3 p-3.5">
-              <span className="text-sm font-bold text-brand">{t('safe.ui.taskN', { n: i + 1 })}</span>
-              <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${task.done ? 'border-brand bg-brand text-brand-ink' : 'border-line-strong'}`}>
-                {task.done && <Icon name="check" className="h-3 w-3" />}
+            <summary className="flex cursor-pointer list-none items-center gap-3 p-4">
+              <span className="text-base font-bold text-brand">{t('safe.ui.taskN', { n: i + 1 })}</span>
+              <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border ${task.done ? 'border-brand bg-brand text-brand-ink' : 'border-line-strong'}`}>
+                {task.done && <Icon name="check" className="h-3.5 w-3.5" />}
               </span>
-              <span className={`flex-1 text-sm font-medium ${task.done ? 'text-ink' : 'text-ink-soft'}`}>{task.title}<span className="sr-only">{task.done ? ' (done)' : ''}</span></span>
-              <Icon name="chevronDown" className="h-4 w-4 text-muted transition group-open:rotate-180" />
+              <span className={`flex-1 text-lg font-semibold ${task.done ? 'text-ink' : 'text-ink-soft'}`}>{task.title}<span className="sr-only">{task.done ? ' (done)' : ''}</span></span>
+              <Icon name="chevronDown" className="h-5 w-5 text-muted transition group-open:rotate-180" />
             </summary>
             {task.hint && (
-              <div className="border-t border-line px-3.5 py-3 text-sm text-ink-soft">
-                <p className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted">
+              <div className="border-t border-line px-4 py-3.5 text-base leading-relaxed text-ink-soft">
+                <p className="mb-1.5 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted">
                   {t('safe.ui.hintLabel')}
                   {task.speak && <AudioButton keys={task.speak} className="-my-2 ms-auto h-9 w-9" />}
                 </p>
@@ -64,4 +64,4 @@ export function TaskList({ tasks }: { tasks: TaskItem[] }) {
   );
 }
 
-export const Block = ({ children }: { children: ReactNode }) => <div className="space-y-5">{children}</div>;
+export const Block = ({ children }: { children: ReactNode }) => <div className="space-y-6">{children}</div>;

@@ -1,4 +1,4 @@
-# PaisaPath — Work Division (5 People, Rebalanced)
+# MoneyPath — Work Division (5 People, Rebalanced)
 
 ## How the work is split
 

@@ -16,8 +16,8 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['favicon.svg', 'icons/*.png'],
       manifest: {
-        name: 'PaisaPath',
-        short_name: 'PaisaPath',
+        name: 'MoneyPath',
+        short_name: 'MoneyPath',
         description: 'Practise money skills and spot scams on a simulated phone. Works without internet.',
         lang: 'en',
         start_url: '/',

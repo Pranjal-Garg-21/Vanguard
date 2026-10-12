@@ -1,6 +1,5 @@
 {
   "banner": "Simulation based on assumptions. Not a prediction or advice.",
-
   "list.title": "Investing ABC",
   "list.subtitle": "Short lessons on how money works. One idea at a time.",
   "list.minutes": "{n} min",
@@ -19,12 +18,10 @@
   "game.playAnyway": "Play anyway",
   "list.open": "Open",
   "card.predict": "Make a guess",
-
   "btn.back": "Back",
   "btn.showStep": "Show next step",
   "btn.lockIn": "Lock in my guess",
   "btn.backToLessons": "Back to lessons",
-
   "card.words": "Words to remember",
   "card.explore": "Try it yourself",
   "card.mistake": "A common mistake",
@@ -32,18 +29,15 @@
   "card.formula": "The formula",
   "card.note": "Good to know",
   "card.steps": "Step by step",
-
   "predict.yourGuess": "Your guess",
   "predict.model": "The model says",
   "predict.range": "A fair range: {low} to {high}",
   "predict.exact": "This one is exact, not an estimate.",
-
   "fallrise.fall": "How far does it fall?",
   "fallrise.start": "You start with",
   "fallrise.after": "After the fall",
   "fallrise.needed": "Rise needed to get back",
   "fallrise.same": "If it rises by only {fall}, you reach",
-
   "list.how": "Work through the rooms in order. Each room has short tasks: a brief explanation, then questions about it. Your progress is saved.",
   "list.upnext": "Up next",
   "list.status.started": "In progress",
@@ -55,7 +49,6 @@
   "list.earned": "{earned} of {total} points",
   "list.home": "Dashboard",
   "list.points": "{n} pts",
-
   "room.label": "ROOM",
   "room.difficulty.easy": "Easy",
   "room.difficulty.medium": "Medium",
@@ -87,13 +80,11 @@
   "room.all": "All rooms",
   "room.prevTask": "Previous task",
   "room.nextTask": "Next task",
-
   "startearly.age": "Age you start saving",
   "startearly.monthly": "Saved each month",
   "startearly.assume": "Grows at {rate} a year. Saving stops at age {stop}.",
   "startearly.putin": "Money you put in",
   "startearly.final": "Value at the end",
-
   "infl.rate": "Inflation per year",
   "infl.years": "Years from now",
   "infl.today": "Price of one cup today",
@@ -102,7 +93,6 @@
   "infl.cups": "{now} / {then} cups",
   "infl.now": "Cups today",
   "infl.then": "Cups then",
-
   "lend.intro": "One lender lends {amount} to a shop owner. Choose what the shop promises and what happens if it fails.",
   "lend.rate": "Interest the shop promises",
   "lend.recovery": "Share of the money recovered if the shop fails",
@@ -111,7 +101,6 @@
   "lend.gain": "Interest earned",
   "lend.back": "Money that comes back",
   "lend.net": "Net result",
-
   "bond.face": "A bond with a face value of {face}.",
   "bond.coupon": "Coupon (yearly interest)",
   "bond.years": "Years until maturity",
@@ -119,13 +108,11 @@
   "bond.year": "Year {n}",
   "bond.yearly": "Interest each year",
   "bond.total": "Total received, including face value",
-
   "bondp.intro": "A bond with face value {face}, paying a {coupon} coupon, with {years} years left.",
   "bondp.market": "Rate paid by new bonds",
   "bondp.faceLabel": "Face value",
   "bondp.price": "Price a buyer would pay",
   "bondp.diff": "Compared with face value",
-
   "pos.intro": "You buy {shares} shares at {price} each: {spent} in total, with a {fee} fee.",
   "pos.change": "Share price change",
   "pos.dividend": "Dividend per share",
@@ -134,21 +121,18 @@
   "pos.divtotal": "Dividend received",
   "pos.fee": "Fee paid to buy",
   "pos.profit": "Your profit",
-
   "scp.rate": "Rate per year",
   "scp.years": "Years",
   "scp.simple": "Simple",
   "scp.compound": "Compound",
   "scp.extra": "Interest on interest",
   "scp.summary": "After {years} years: simple {simple}, compound {compound}. The gap, {extra}, is interest on interest.",
-
   "path.intro": "Pick a path to see where {amount} could end after one typical year.",
   "path.pick": "Choose a path",
   "path.low": "Low end",
   "path.high": "High end",
   "path.width": "How wide the range is",
   "path.note": "About 2 years in 3 end inside this range. Other years can be better or worse.",
-
   "basket.intro": "You have {total} to spread over businesses in equal slices. One business, or the whole market, takes a hit.",
   "basket.count": "Businesses you split across",
   "basket.fall": "How far it falls",
@@ -158,14 +142,12 @@
   "basket.each": "Money in each business",
   "basket.loss": "Your loss",
   "basket.left": "What you have left",
-
   "sip.intro": "You put {amount} into a fund at the start of each month. The price of one unit changes every month. Drag the prices.",
   "sip.month": "Price in month {n}",
   "sip.unitsIn": "Month {n} at {nav}: units bought",
   "sip.total": "Total units",
   "sip.avgCost": "Your average cost per unit",
   "sip.avgNav": "Plain average of the prices",
-
   "fee.intro": "You put {monthly} a month into a fund that earns {gross} a year before fees. Compare two yearly fees.",
   "fee.years": "Years",
   "fee.a": "Lower yearly fee",
@@ -174,7 +156,6 @@
   "fee.endA": "End value, lower fee",
   "fee.endB": "End value, higher fee",
   "fee.gap": "What the higher fee costs you",
-
   "etf.intro": "You have {amount} to invest. A mutual fund gives you one price for the day: {nav}. An ETF has a price that changes while the market is open. Pick a time.",
   "etf.pick": "Buy the ETF at",
   "etf.at": "{time}: {price}",
@@ -182,7 +163,6 @@
   "etf.etf": "ETF (market price)",
   "etf.units": "Units you get",
   "etf.tradeCost": "Trading cost",
-
   "gold.intro": "You buy gold jewellery for {price}. Part of that price is a making charge, not gold. Change the charge and the gold price.",
   "gold.charge": "Making charge",
   "gold.change": "Gold price change since you bought",
@@ -191,14 +171,12 @@
   "gold.sell": "Value if you sell",
   "gold.result": "Your result",
   "gold.breakeven": "To get your money back, the gold price must rise by about {rise}.",
-
   "cash.intro": "You hold {amount} in one place and need it as cash. Pick where it is held.",
   "cash.pick": "Where the money is held",
   "cash.days": "Time to get cash",
   "cash.daysValue": "{n} days",
   "cash.cost": "Cost of selling",
   "cash.received": "Cash in your hand",
-
   "hor.intro": "You put {amount} on one path and wait. See where it ends across 500 simulated futures.",
   "hor.years": "Years you wait",
   "hor.low": "Bad case",
@@ -206,12 +184,14 @@
   "hor.high": "Good case",
   "hor.loss": "Futures ending below what you put in",
   "hor.note": "Bad case and good case cover 90 of 100 futures. Simulation, not a prediction.",
-
   "pyr.intro": "A scheme says every member must bring in new members to earn. See how fast the numbers grow.",
   "pyr.recruits": "New members each person must bring in",
   "pyr.level": "Level of the pyramid",
   "pyr.atLevel": "People who must join at this level",
   "pyr.total": "People in the scheme so far",
   "pyr.town": "Compared with a town of {town}",
-  "pyr.more": "More than the whole town"
+  "pyr.more": "More than the whole town",
+  "room.stat.tasks": "Completed tasks",
+  "room.stat.earned": "Points earned",
+  "room.stat.possible": "Points possible"
 }

@@ -8,4 +8,4 @@
 
 Only `tilemap.png` (the packed sprite sheet, 16×16 tiles) of each pack is used. RPG Urban supplies the walking characters (4 directions × 3 frames), street props and shop stalls. The tile names and indices live in `src/ui/tiles/town.ts` and `src/content/world/legend.json`; inspect them at `/dev/tiles`.
 
-Music and sound effects are original compositions for PaisaPath, synthesised in the browser (`src/features/paisapur/audio/`); there are no audio files.
+Music and sound effects are original compositions for MoneyPath, synthesised in the browser (`src/features/paisapur/audio/`); there are no audio files.

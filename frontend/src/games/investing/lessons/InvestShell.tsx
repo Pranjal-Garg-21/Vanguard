@@ -1,5 +1,5 @@
 /**
- * Page frame for the Investing ABC screens, matching the dashboard: a dark top bar with the brand mark,
+ * Page frame for the lesson screens, matching the dashboard: the shared top bar,
  * the simulation banner, and a content width that suits a laptop. Colours come from the tokens in index.css.
  */
 import type { ReactNode } from 'react';

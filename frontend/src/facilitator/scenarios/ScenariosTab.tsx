@@ -5,7 +5,8 @@
  */
 import { useCallback, useEffect, useState } from 'react';
 import { validateCustom } from '@shared/custom/scenario.ts';
-import { Badge, Button, Card, Icon, Notice, Spinner } from '@/ui';
+import { Badge, Button, Card, Icon, Spinner } from '@/ui';
+import { Notice } from '../theme';
 import concepts from '@/content/facilitator/concepts.json';
 import { timeAgo, type ClassRow } from '../data';
 import { conceptName } from '../insights';
@@ -57,7 +58,7 @@ export function ScenariosTab({ cls }: { cls: ClassRow }) {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-xl font-bold">Your own scam practice</h2>

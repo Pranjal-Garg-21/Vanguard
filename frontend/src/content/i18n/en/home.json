@@ -58,7 +58,12 @@
   },
   "badges": {
     "title": "Badges",
-    "body": "Earned for understanding and good habits, never for money."
+    "body": "Earned for understanding and good habits, never for money. They fill in as you play.",
+    "count": "{n} of {total}",
+    "paisapur": "Paisapur",
+    "safe": "Stay Safe",
+    "earned": "Earned",
+    "locked": "Not earned yet"
   },
   "stagesTitle": "LifePath stages",
   "practiceTitle": "Mini games",

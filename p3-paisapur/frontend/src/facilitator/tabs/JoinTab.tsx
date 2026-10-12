@@ -16,7 +16,7 @@ export function JoinTab({ cls }: { cls: ClassRow }) {
   return (
     <div className="grid gap-5 md:grid-cols-[1fr_1.2fr]">
       <Card className="flex flex-col items-center text-center print:border-0 print:bg-white print:text-black">
-        <h2 className="text-xl font-extrabold">Join {cls.name} on PaisaPath</h2>
+        <h2 className="text-xl font-extrabold">Join {cls.name} on MoneyPath</h2>
         {qr && <img src={qr} alt={`QR code for ${url}`} className="mt-4 w-64 max-w-full" />}
         <p className="mt-4 text-sm text-muted">or open the app and type</p>
         <p className="font-mono text-4xl font-black tracking-[0.3em]">{cls.join_code}</p>

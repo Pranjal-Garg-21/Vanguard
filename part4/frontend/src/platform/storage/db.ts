@@ -45,7 +45,7 @@ export type ContentMeta = { packId: string; version: string; updatedAt: number }
 
 export type ClassInfo = { code: string; name: string | null; unlocks: Unlock[]; focus: string | null; updatedAt: number };
 
-export class PaisaDB extends Dexie {
+export class MoneyDB extends Dexie {
   profiles!: Table<Profile, string>;
   saves!: Table<Save, [string, string]>;
   snapshots!: Table<StoredSnapshot, string>;
@@ -54,7 +54,7 @@ export class PaisaDB extends Dexie {
   contentMeta!: Table<ContentMeta, string>;
   classCache!: Table<ClassInfo, string>;
 
-  constructor(name = 'paisapath') {
+  constructor(name = 'moneypath') {
     super(name);
     this.version(1).stores({
       profiles: 'pid, classCode, lastActiveAt',
@@ -68,4 +68,4 @@ export class PaisaDB extends Dexie {
   }
 }
 
-export const db = new PaisaDB();
+export const db = new MoneyDB();

@@ -1,4 +1,4 @@
--- PaisaPath initial schema. Owner: P5.
+-- MoneyPath initial schema. Owner: P5.
 -- Students never read or write tables directly: their phones send events to the
 -- `ingest` edge function, which uses the service role. Facilitators log in and
 -- see only their own classes through row-level security.

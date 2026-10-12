@@ -9,7 +9,7 @@ export function FacilitatorLayout({ children, email, name }: { children: ReactNo
         <div className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3">
           <Link to="/facilitator" className="flex items-center gap-2 font-extrabold text-ink">
             <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand text-sm font-bold text-brand-ink">P</span>
-            PaisaPath <span className="font-medium text-muted">Facilitator</span>
+            MoneyPath <span className="font-medium text-muted">Facilitator</span>
           </Link>
           <div className="ml-auto flex items-center gap-3 text-sm">
             <span className="hidden text-ink-soft sm:inline">{name ?? email}</span>

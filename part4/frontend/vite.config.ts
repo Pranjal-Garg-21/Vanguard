@@ -13,8 +13,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'prompt',
       manifest: {
-        name: 'PaisaPath',
-        short_name: 'PaisaPath',
+        name: 'MoneyPath',
+        short_name: 'MoneyPath',
         description: 'Live a character’s money life for a year.',
         theme_color: '#141c2e',
         background_color: '#141c2e',

@@ -35,7 +35,7 @@ export function Arcade() {
               P
             </span>
             <span>
-              Paisa<span className="text-brand">Path</span>
+              Money<span className="text-brand">Path</span>
             </span>
           </span>
           <LanguageSwitcher className="ms-auto" />

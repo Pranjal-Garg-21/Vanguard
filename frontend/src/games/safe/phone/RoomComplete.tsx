@@ -1,10 +1,9 @@
 import { t } from '@/platform';
-import { AudioButton, Button, Card, Icon, SectionLabel } from '@/ui';
+import { AudioButton, Button, Card, Confetti, Icon, SectionLabel } from '@/ui';
 import { foundKinds, summarise } from './logic/scoring';
 import { TELL_KINDS, type RunState } from './logic/types';
 import { TellCard } from './TellCard';
 import { rupees } from './apps/PayApp';
-import { Confetti } from './Confetti';
 
 function Stat({ label, value, tone = 'text-ink' }: { label: string; value: string; tone?: string }) {
   return (

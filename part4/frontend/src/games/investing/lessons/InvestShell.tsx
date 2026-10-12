@@ -17,7 +17,7 @@ export function InvestShell({ children, wide = false }: { children: ReactNode; w
               P
             </span>
             <span>
-              Paisa<span className="text-brand">Path</span>
+              Money<span className="text-brand">Path</span>
             </span>
             <span className="hidden font-medium text-muted sm:inline">{t('investui.list.title')}</span>
           </Link>

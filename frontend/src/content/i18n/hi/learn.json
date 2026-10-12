@@ -5,7 +5,6 @@
   "soon": "जल्द आ रहा है",
   "empty": "इस टॉपिक के पाठ जल्द आ रहे हैं।",
   "notFound": "टॉपिक नहीं मिला।",
-  "lessonNotFound": "पाठ नहीं मिला।",
   "count": "{total} में से {done} पूरे",
   "pillar": {
     "bank": {
@@ -33,5 +32,9 @@
       "blurb": "स्कैम पहचानें और अपने खाते सुरक्षित रखें।"
     }
   },
-  "lessonsTitle": "सभी {n} पाठ"
+  "lessonsTitle": "सभी {n} पाठ",
+  "view": "दृश्य",
+  "view_path": "राह",
+  "view_grid": "क्लासिक",
+  "lessonNotFound": "पाठ नहीं मिला।"
 }

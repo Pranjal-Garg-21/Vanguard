@@ -31,6 +31,50 @@
   --color-ink: #3b2412;
 }
 
+/*
+ * The facilitator dashboard is a light page. Wrap it in .theme-light and the same token names (bg-surface, text-ink,
+ * bg-brand, the shadcn bg-primary...) take light-page values, so shared components stay readable there and the accent is
+ * a standard blue instead of the app's lime. Kept above the main palette so the contrast test still reads that one.
+ */
+@utility theme-light {
+  --color-bg: #eef1f6;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f5f9;
+  --color-surface-3: #e2e8f0;
+  --color-line: #e3e8ef;
+  --color-line-strong: #cbd5e1;
+  --color-ink: #1c2538;
+  --color-ink-soft: #3b4558;
+  --color-muted: #5b6577;
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-brand-deep: #1e40af;
+  --color-brand-ink: #ffffff;
+  --color-good: #15803d;
+  --color-warn: #b45309;
+  --color-bad: #b91c1c;
+  --color-info: #0369a1;
+  --color-xp: #7c3aed;
+  --background: var(--color-bg);
+  --foreground: var(--color-ink);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-brand);
+  --primary-foreground: var(--color-brand-ink);
+  --secondary: var(--color-surface-2);
+  --secondary-foreground: var(--color-ink);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-surface-2);
+  --accent-foreground: var(--color-ink);
+  --destructive: var(--color-bad);
+  --border: var(--color-line);
+  --input: var(--color-line-strong);
+  --ring: var(--color-brand);
+  color-scheme: light;
+}
+
 /* Hard, stepped outline instead of a soft border: the "pixel" look. */
 @utility pixel-frame {
   box-shadow:
@@ -137,6 +181,11 @@ body {
   --animate-banner-in: banner-in 0.35s ease-out both;
   --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   --animate-ring: ring 1s ease-in-out infinite;
+}
+
+@keyframes mascot-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 @keyframes rise {
@@ -326,16 +375,26 @@ body {
 
   /* --- Arcade ----------------------------------------------------------- */
   .arcade__levels {
-    @apply grid grid-cols-3 gap-2;
+    @apply grid grid-cols-3 gap-2 sm:max-w-md;
   }
   .arcade__levels button {
     @apply text-center;
   }
+  /* Cards sit side by side on a wide screen and stack on a phone. */
   .arcade__games {
-    @apply flex flex-col gap-4;
+    @apply grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3;
   }
   .arcade__card {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-3 transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:shadow-lg hover:shadow-brand/10;
+  }
+  .arcade__card[data-available='false'] {
+    @apply opacity-60 hover:translate-y-0 hover:border-line-strong hover:shadow-none;
+  }
+  .arcade__card > .arcade__concepts {
+    @apply flex-1 content-start;
+  }
+  .arcade__card > button {
+    @apply mt-auto;
   }
   .arcade__concepts {
     @apply flex flex-wrap gap-1.5;
@@ -343,14 +402,56 @@ body {
   .arcade__concepts li {
     @apply bg-surface-3 px-2 py-0.5 text-xs font-bold text-ink;
   }
+  /* A running game is a "room": the game on the left, what it is about on the right. */
+  .arcade--playing {
+    @apply w-full;
+  }
+  .arcade__room {
+    @apply grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem];
+  }
+  .arcade__stage {
+    @apply rounded-2xl border border-line-strong bg-surface p-5 shadow-lg shadow-black/20 sm:p-7;
+  }
+  .arcade__rail {
+    @apply flex h-fit flex-col gap-5 rounded-2xl border border-line bg-surface p-5 lg:sticky lg:top-20;
+  }
+  .arcade__rail-title {
+    @apply mb-1.5 text-xs font-bold tracking-[0.15em] text-muted uppercase;
+  }
+  .arcade__rail-note {
+    @apply rounded-lg border-s-4 border-brand bg-bg p-3 text-xs text-ink-soft;
+  }
+  .arcade--result {
+    @apply mx-auto w-full max-w-2xl rounded-2xl border border-line-strong bg-surface p-6;
+  }
+  /* A dark, softly lit banner like TryHackMe's challenge page: deep navy, a green glow, faint stars. */
+  .arcade__hero {
+    @apply relative flex flex-col gap-6 overflow-hidden rounded-2xl border border-line p-6 md:flex-row md:items-center md:p-10;
+    background:
+      radial-gradient(circle at 85% 60%, rgb(163 234 42 / 0.2), transparent 45%),
+      radial-gradient(1px 1px at 20% 30%, rgb(255 255 255 / 0.5), transparent),
+      radial-gradient(1px 1px at 60% 20%, rgb(255 255 255 / 0.35), transparent),
+      radial-gradient(1.5px 1.5px at 75% 75%, rgb(255 255 255 / 0.4), transparent),
+      radial-gradient(1px 1px at 35% 80%, rgb(255 255 255 / 0.3), transparent),
+      linear-gradient(135deg, #172037 0%, #0f1829 60%, #131d33 100%);
+  }
+  .arcade__filters {
+    @apply flex flex-col gap-3 lg:flex-row lg:items-center;
+  }
+  .arcade__filters input[type='search'] {
+    @apply h-12 w-full rounded-xl border border-line-strong bg-surface ps-12 pe-4 text-ink placeholder:text-muted focus:border-brand focus:outline-none;
+  }
+  .arcade button.arcade__play {
+    @apply justify-center border-transparent bg-brand text-center text-brand-ink hover:bg-brand-hover disabled:bg-surface-3 disabled:text-muted;
+  }
   .arcade__bar {
-    @apply flex items-center gap-3 text-sm;
+    @apply flex items-center justify-between gap-3 text-sm;
   }
   .arcade__bar button {
     @apply min-h-0 px-3 py-1 text-sm;
   }
-  .arcade__bar span:first-of-type {
-    @apply flex-1 font-bold;
+  .arcade__bar > span:first-of-type {
+    @apply flex-1;
   }
   .arcade__dot {
     @apply ms-2 inline-block h-3 w-3 align-middle;

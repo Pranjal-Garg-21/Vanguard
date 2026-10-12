@@ -7,8 +7,7 @@
 import { useMemo, useReducer } from 'react';
 import { t } from '@/platform';
 import type { MiniGameResult, PlayMode } from '@/core/types';
-import { Button, Card, Icon, ProgressBar } from '@/ui';
-import { Confetti } from '../phone/Confetti';
+import { Button, Card, Confetti, Icon, ProgressBar } from '@/ui';
 import { PhoneRoom } from '../phone/PhoneRoom';
 import { PhoneShell } from '../phone/PhoneShell';
 import { RoomLayout } from '../phone/RoomLayout';

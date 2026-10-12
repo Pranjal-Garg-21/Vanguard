@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-PaisaPath is an offline-first PWA that teaches financial literacy to Grade 11–12 students in Hyderabad by having them live a fictional character's money life month by month (ECell Megathon 2026, Vanguard India brief). Built by a 5-person team (P1–P5).
+MoneyPath is an offline-first PWA that teaches financial literacy to Grade 11–12 students in Hyderabad by having them live a fictional character's money life month by month (ECell Megathon 2026, Vanguard India brief). Built by a 5-person team (P1–P5).
 
 The main game is **Paisapur**, a top-down tile RPG (classic handheld style) where the student walks a town, enters buildings and follows a 6-chapter story; `GAME_DESIGN.md` defines it and overrides `Implementation.md` where they differ (the overworld replaces the LifePath month screens and home dashboard; engine, concepts, mastery, telemetry and guardrails are unchanged).
 

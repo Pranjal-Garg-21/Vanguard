@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { validateCustom, type CustomScenarioRow } from '@shared/custom/scenario.ts';
-import { Button, Card, Icon, Notice } from '@/ui';
+import { Button, Card, Icon } from '@/ui';
+import { Notice } from '../theme';
 import concepts from '@/content/facilitator/concepts.json';
 import { buildCustomInbox } from '@/games/safe/phone/logic/custom';
 import { PhoneRoom } from '@/games/safe/phone/PhoneRoom';

@@ -2,9 +2,8 @@
 import { Link, Navigate } from 'react-router';
 import { ARCADE_SECTIONS } from '@/content/stages';
 import { t, useActiveProfile } from '@/platform';
-import { Badge } from '@/ui';
+import { Badge, TopNav } from '@/ui';
 import { SECTION_ROUTES } from './sections';
-import { TopNav } from './TopNav';
 
 export function Minigames() {
   const { profile, loaded } = useActiveProfile();
@@ -13,7 +12,7 @@ export function Minigames() {
   return (
     <div className="min-h-dvh bg-bg text-ink">
       <TopNav />
-      <main className="mx-auto max-w-5xl space-y-6 px-4 py-6">
+      <main className="mx-auto max-w-6xl space-y-6 px-4 py-6">
         <div className="animate-rise space-y-1">
           <h1 className="text-2xl font-bold">{t('home.minigames.title')}</h1>
           <p className="max-w-2xl text-ink-soft">{t('home.minigames.subtitle')}</p>

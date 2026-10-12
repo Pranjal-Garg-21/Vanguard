@@ -3,11 +3,11 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   formatRupees,
   getLanguage,
+  isRtl,
   registerStrings,
   setLanguage,
   setMissingKeyHandler,
   t,
-  isRtl,
 } from './index';
 
 afterEach(() => {
@@ -36,7 +36,7 @@ describe('t()', () => {
   it('still resolves the strings the setup screens already use', () => {
     // P5 wrote these before the real loader existed; replacing the stub must
     // not break them, including single-brace {placeholders}.
-    expect(t('setup.welcome.title')).toBe('PaisaPath');
+    expect(t('setup.welcome.title')).toBe('MoneyPath');
     expect(t('setup.steps.progress', { current: 2, total: 5 })).toBe('Step 2 of 5');
   });
 

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { FLAG_KINDS, type Channel, type FlagKind } from '@shared/custom/scenario.ts';
-import { Badge, Button, Card, Icon, Notice } from '@/ui';
+import { Badge, Button, Card, Icon } from '@/ui';
+import { Notice } from '../theme';
 import { TELL_META } from '@/games/safe/phone/tells';
 import { t } from '@/platform';
 import { LIMITS, occurrenceAt, rangesFor, type EditorFlag, type EditorMessage } from './model';

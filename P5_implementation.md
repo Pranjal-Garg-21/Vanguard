@@ -118,12 +118,12 @@ A **scaffold** is the empty skeleton of the project: the folder layout, the buil
 ### Step-by-step
 
 1. **Create the app**
-   - `pnpm create vite paisapath --template react-ts`
+   - `pnpm create vite moneypath --template react-ts`
    - Add Tailwind CSS (P4 will put design tokens in it, you only install it).
    - Add Zustand (app state), React Router (screens), Dexie (local DB), `vite-plugin-pwa` (installed now, configured in Phase 3).
 2. **Set strict TypeScript**
    - `strict: true`, `noUncheckedIndexedAccess: true`, path aliases (`@platform/*`, `@engine/*`, `@games/*`, `@design/*`).
-3. **Create the folder layout** from [`REPO_STRUCTURE.md`](REPO_STRUCTURE.md) (`frontend/`, `backend/`, `shared/`), with an `index.ts` and an owner comment in each folder. The scaffold already exists; see `readme.md` to run it.
+3. **Create the folder layout** from [`REPO_STRUCTURE.md`](REPO_STRUCTURE.md) (`frontend/`, `backend/`, `shared/`), with an `index.ts` and an owner comment in each folder. The scaffold already exists; see `README.md` to run it.
 4. **Lint and format**
    - ESLint (React, hooks, TypeScript rules) and Prettier. One config, no debates later.
    - Add `eslint-plugin-boundaries` or an import rule so that `engine/` cannot import from `platform/` or React. This protects P2's "pure reducer" rule.
@@ -200,7 +200,7 @@ A student can set up a profile on a phone, several students can share one phone 
 
 1. **Define the Dexie schema** (`frontend/src/platform/storage/db.ts`):
    ```ts
-   class PaisaDB extends Dexie {
+   class MoneyDB extends Dexie {
      profiles!: Table<Profile, string>;        // pid
      saves!: Table<Save, [string, string]>;     // [pid, slot]
      snapshots!: Table<Snapshot, string>;      // P1's format, id
@@ -210,7 +210,7 @@ A student can set up a profile on a phone, several students can share one phone 
      classCache!: Table<ClassInfo, string>;    // join code → class info, unlocks
 
      constructor() {
-       super('paisapath');
+       super('moneypath');
        this.version(1).stores({
          profiles: 'pid, classCode, lastActiveAt',
          saves: '[pid+slot], pid, updatedAt',

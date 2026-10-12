@@ -37,8 +37,21 @@ export function direction(language: Language): 'rtl' | 'ltr' {
 // Loading
 // ---------------------------------------------------------------------------
 
-const files = import.meta.glob<Bundle>('../../content/i18n/*/*.json', {
+/**
+ * English ships with the app. The other three are fetched the first time a
+ * student picks one, and the service worker keeps them from then on.
+ *
+ * This is not a micro-optimisation: the four bundles together are about 2.9 MB
+ * of JSON, so loading all of them put the whole app over the offline cache's
+ * size limit and nothing was saved for offline at all. A student reads in one
+ * language; they should download one.
+ */
+const english = import.meta.glob<Bundle>('../../content/i18n/en/*.json', {
   eager: true,
+  import: 'default',
+});
+
+const packs = import.meta.glob<Bundle>('../../content/i18n/{te,hi,ur}/*.json', {
   import: 'default',
 });
 
@@ -55,19 +68,47 @@ function flatten(prefix: string, bundle: Bundle, into: Map<string, string>) {
   }
 }
 
-for (const [file, bundle] of Object.entries(files)) {
+/** The file name is the namespace, so bank01.json holds the key "bank01.x". */
+function absorb(file: string, bundle: Bundle): void {
   const parts = file.split('/');
   const fileName = parts.at(-1);
   const language = parts.at(-2) as Language | undefined;
-  if (!fileName || !language || !LANGUAGES.includes(language)) continue;
-  const namespace = fileName.replace('.json', '');
+  if (!fileName || !language || !LANGUAGES.includes(language)) return;
 
   let table = strings.get(language);
   if (!table) {
     table = new Map();
     strings.set(language, table);
   }
-  flatten(namespace, bundle, table);
+  flatten(fileName.replace('.json', ''), bundle, table);
+}
+
+for (const [file, bundle] of Object.entries(english)) absorb(file, bundle);
+
+const loading = new Map<Language, Promise<boolean>>();
+
+/**
+ * Downloads a language pack (UC-PLAT-04). English is already here; a language
+ * with no files on the server resolves false, and the caller keeps English
+ * rather than dropping the student into a screen of raw key names.
+ */
+export function loadLanguage(language: Language): Promise<boolean> {
+  if (language === DEFAULT_LANGUAGE || hasLanguage(language)) return Promise.resolve(true);
+  const already = loading.get(language);
+  if (already) return already;
+
+  const mine = Object.entries(packs).filter(([file]) => file.split('/').at(-2) === language);
+  const job = mine.length
+    ? Promise.all(mine.map(async ([file, load]) => absorb(file, await load())))
+        .then(() => {
+          notify();
+          return hasLanguage(language);
+        })
+        .catch(() => false)
+    : Promise.resolve(false);
+
+  loading.set(language, job);
+  return job;
 }
 
 export function hasLanguage(language: Language): boolean {
