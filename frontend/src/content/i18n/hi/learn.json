@@ -35,5 +35,6 @@
   "lessonsTitle": "सभी {n} पाठ",
   "view": "दृश्य",
   "view_path": "राह",
-  "view_grid": "क्लासिक"
+  "view_grid": "क्लासिक",
+  "lessonNotFound": "पाठ नहीं मिला।"
 }

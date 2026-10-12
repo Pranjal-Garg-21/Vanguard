@@ -35,5 +35,6 @@
   "lessonsTitle": "سب {n} سبق",
   "view": "منظر",
   "view_path": "راستہ",
-  "view_grid": "کلاسک"
+  "view_grid": "کلاسک",
+  "lessonNotFound": "سبق نہیں ملا۔"
 }

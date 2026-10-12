@@ -6,7 +6,7 @@
  * unlock order teaches it, and "Open anyway" keeps it usable for a facilitator demo or a curious student.
  */
 import { Link } from 'react-router';
-import { Badge, Button, Card, LockedTile } from '@/ui';
+import { Badge, Button, Card, LanguageSwitcher, LockedTile } from '@/ui';
 import { t } from '@/platform';
 import { facilitatorOpened, isStagePassed } from './deps';
 
@@ -38,7 +38,8 @@ export function Arcade() {
               Money<span className="text-brand">Path</span>
             </span>
           </span>
-          <Link to="/home" className="ms-auto text-sm font-bold text-ink-soft hover:text-brand">
+          <LanguageSwitcher className="ms-auto" />
+          <Link to="/home" className=" text-sm font-bold text-ink-soft hover:text-brand">
             {t('arcade.back')}
           </Link>
         </div>

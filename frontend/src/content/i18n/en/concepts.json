@@ -683,5 +683,185 @@
     "title": "The \"sent by mistake\" trick",
     "body": "A stranger says money landed in your account by accident and begs you to send it back fast. Often nothing arrived, or it arrived from a stolen account and will be reversed, leaving you short by whatever you sent. Check your own balance first, and let the bank move the money back.",
     "example": "Your balance has not changed, but the message insists ₹2,000 came in. Do not send anything. Tell the bank and let them sort it out."
+  },
+  "why_bank_account": {
+    "title": "Why have a bank account",
+    "body": "A bank account keeps your money safer than cash at home, keeps a record of every rupee in and out, and can pay you a little interest.",
+    "example": "Ravi keeps ₹3,000 in a tin and loses it in a fire. The same money in a bank account would still be there."
+  },
+  "interest_basics": {
+    "title": "What interest is",
+    "body": "Interest is a payment for letting someone use your money. A bank pays you interest on savings. A lender charges you interest on a loan.",
+    "example": "The bank pays Meena ₹40 a year on her ₹1,000. The same bank would charge her more than that if she borrowed ₹1,000."
+  },
+  "kyc_documents": {
+    "title": "KYC and the documents a bank asks for",
+    "body": "KYC means \"know your customer\". A bank checks who you are with a photo ID and proof of address before it opens an account.",
+    "example": "Asha brings her school ID, an address proof and a photo. The bank checks them once and opens her account."
+  },
+  "account_types": {
+    "title": "Types of bank account",
+    "body": "A savings account is for keeping money and earning a little interest. A current account is for a business with many payments. Fixed and recurring deposits lock money away for a higher return.",
+    "example": "A tea stall owner uses a current account for daily sales. His daughter uses a savings account for her fees."
+  },
+  "cash_risks": {
+    "title": "The risks of cash at home",
+    "body": "Cash at home can be lost, stolen, burned or quietly spent. It also earns nothing and leaves no record.",
+    "example": "A festival bonus kept in a cupboard is spent in small pieces before anyone notices."
+  },
+  "bank_records": {
+    "title": "A bank keeps your records",
+    "body": "Every deposit and payment is written down with a date. That record lets you check your money and prove what you paid.",
+    "example": "Ravi can show the bank record of his fee payment when the college loses the receipt."
+  },
+  "small_savings_add_up": {
+    "title": "Small savings add up",
+    "body": "Small amounts saved often become a real sum. A bank account makes it easy to keep them apart from daily spending.",
+    "example": "₹50 a week is ₹2,600 in a year, before any interest."
+  },
+  "minor_accounts": {
+    "title": "Accounts for under-18s",
+    "body": "People under 18 can have a bank account, usually with a parent or guardian as a joint holder. The rules about who can withdraw are different from an adult account.",
+    "example": "Asha, aged 16, opens a student account with her mother as guardian."
+  },
+  "kyc_update": {
+    "title": "Keeping your KYC up to date",
+    "body": "If your address, phone number or name changes, tell the bank and update your KYC. An old record can freeze an account or send messages to the wrong person.",
+    "example": "Ravi moves house and tells the bank. Its letters reach him instead of the old landlord."
+  },
+  "deposit_types": {
+    "title": "Fixed and recurring deposits",
+    "body": "A fixed deposit locks one sum for a set time at a fixed rate. A recurring deposit locks a small sum every month. Taking the money out early usually costs you part of the interest.",
+    "example": "Meena puts ₹500 a month in a recurring deposit for a year and cannot touch it without a penalty."
+  },
+  "statement_reading": {
+    "title": "Reading a bank statement",
+    "body": "A statement lists each deposit and payment in date order with a running balance. Reading it shows where your money went.",
+    "example": "Asha finds a ₹200 charge she did not expect and asks the bank about it."
+  },
+  "credit_debit": {
+    "title": "Credit and debit on a statement",
+    "body": "On your statement, a credit is money that came in and a debit is money that went out. It is the bank's point of view that matters, not what the word sounds like.",
+    "example": "Her salary shows as a credit. Her phone bill shows as a debit."
+  },
+  "spotting_charges": {
+    "title": "Spotting charges on a statement",
+    "body": "Banks can charge fees for low balances, cards, SMS alerts and more. Small charges repeat every month, so check for them.",
+    "example": "A ₹15 fee every month is ₹180 a year, gone without a sound."
+  },
+  "reconcile_balance": {
+    "title": "Matching your notes to the bank",
+    "body": "Compare your own record with the statement. If the closing balance differs, something is missing in your notes or on the statement.",
+    "example": "Ravi's notebook says ₹1,200 and the bank says ₹1,150. He finds a forgotten ₹50 payment."
+  },
+  "needs_vs_wants": {
+    "title": "Needs and wants, and the line between",
+    "body": "A need keeps you safe, healthy or able to work or study. A want is nice to have. The line moves with your life, so the same item can be a need for one person and a want for another.",
+    "example": "A phone is a want for a student who is at home all day. It is a need for a delivery rider who takes orders by app."
+  },
+  "budget_jars": {
+    "title": "Budget jars",
+    "body": "A budget splits your money into jars before you spend: needs, wants and saving. When a jar is empty, you stop spending from it.",
+    "example": "Asha divides ₹5,000 into three jars and spends only what each jar holds."
+  },
+  "share_of_income": {
+    "title": "Shares of your income",
+    "body": "Writing each part of your budget as a share of income, like 50 per cent, shows the balance at a glance and still works if your income changes.",
+    "example": "On ₹8,000 income, 50 per cent for needs is ₹4,000. On ₹10,000 it is ₹5,000."
+  },
+  "months_to_goal": {
+    "title": "Months to reach a goal",
+    "body": "Divide the goal by what you can put aside each month to see how long it takes. Round up, because a part month is still a month.",
+    "example": "₹6,000 for a phone at ₹700 a month is 9 months, not 8 and a bit."
+  },
+  "cost_per_day": {
+    "title": "Cost per day of use",
+    "body": "Divide the price by the days you will use something. A dear thing used every day can cost less per day than a cheap thing used twice.",
+    "example": "A ₹3,650 pair of shoes worn for 365 days costs ₹10 a day."
+  },
+  "price_over_time": {
+    "title": "The price of paying over time",
+    "body": "Paying in instalments often costs more in total than paying now. Add up every instalment and compare it with the price today.",
+    "example": "₹1,000 a month for 12 months is ₹12,000 for something priced at ₹11,000."
+  },
+  "where_to_keep_money": {
+    "title": "Where to keep your savings",
+    "body": "Cash at home, a savings account, a fixed deposit and a recurring deposit all trade safety, ease of access and interest. Match the place to when you will need the money.",
+    "example": "Money for next month's rent stays in a savings account. Money you will not need for two years can go in a fixed deposit."
+  },
+  "lending_boundaries": {
+    "title": "Lending to friends",
+    "body": "Lend only what you can afford to lose, say when you expect it back, and note it down. A loan you cannot afford to lose can cost you a friend as well.",
+    "example": "Ravi lends ₹200 and writes the date in his notebook. He never lends the fee money."
+  },
+  "habit_beats_amount": {
+    "title": "The habit beats the amount",
+    "body": "A small amount put aside every month builds a habit that lasts. A big amount saved once and then forgotten does not.",
+    "example": "₹100 every month for a year is ₹1,200, and Asha now saves without thinking."
+  },
+  "goal_months": {
+    "title": "Saving towards a goal",
+    "body": "A goal with an amount and a date tells you how much to put aside each month. Check your progress every month.",
+    "example": "A ₹12,000 goal in 12 months needs ₹1,000 a month."
+  },
+  "emergency_cover_months": {
+    "title": "Months of cover",
+    "body": "An emergency fund is measured in months of spending it would cover. Many people aim for three to six months.",
+    "example": "With ₹6,000 a month of spending, ₹18,000 covers three months."
+  },
+  "emergency_refill": {
+    "title": "Refilling the emergency fund",
+    "body": "When you use the emergency fund, refill it before you spend on wants again. It only protects you if it is there for the next surprise.",
+    "example": "After a ₹4,000 repair, Meena adds ₹500 a month until the fund is full again."
+  },
+  "fd_lock_in": {
+    "title": "Lock-in on a fixed deposit",
+    "body": "A fixed deposit pays more because you promise to leave the money for the full time. Breaking it early usually means a lower rate and a penalty.",
+    "example": "Breaking a two-year fixed deposit after one year pays a lower rate than promised."
+  },
+  "recurring_deposit": {
+    "title": "Recurring deposits",
+    "body": "A recurring deposit takes a fixed sum from you every month for a set time and pays interest on it. It builds the saving habit with a built-in reminder.",
+    "example": "Asha puts ₹500 a month in a recurring deposit for a year."
+  },
+  "spending_leaks": {
+    "title": "Spending leaks",
+    "body": "A leak is a small spend you hardly notice that repeats often. Added up over a month or a year it can be larger than a big purchase.",
+    "example": "₹30 a day on snacks is ₹900 a month and ₹10,950 a year."
+  },
+  "spending_patterns": {
+    "title": "Spotting your spending patterns",
+    "body": "Tracking spending for a week shows when and why you spend. Patterns, like spending more on weekends, tell you where to change.",
+    "example": "Ravi notices he spends most on Fridays with friends and plans for it."
+  },
+  "education_financing": {
+    "title": "Paying for education: loan or scholarship",
+    "body": "A scholarship is money you do not repay. A loan must be repaid with interest. Look for scholarships first and borrow only what you must.",
+    "example": "A ₹50,000 scholarship saves Asha ₹50,000. A ₹50,000 loan costs her more than that to repay."
+  },
+  "borrowing_cost": {
+    "title": "What borrowing costs",
+    "body": "The cost of a loan is everything you repay minus what you received. Compare loans by that number, not by how small the monthly payment feels.",
+    "example": "Ravi receives ₹10,000 and repays ₹11,500. The loan cost him ₹1,500."
+  },
+  "tenure_tradeoff": {
+    "title": "Longer loan, smaller payment, bigger cost",
+    "body": "A longer loan makes each monthly payment smaller but adds months of interest, so you repay more in total.",
+    "example": "The same ₹20,000 loan over 24 months costs more in total than over 12."
+  },
+  "flat_vs_reducing": {
+    "title": "Flat rate and reducing rate",
+    "body": "A flat rate charges interest on the full amount for the whole time. A reducing rate charges only on what you still owe. A flat rate is a much higher real rate than it looks.",
+    "example": "A loan at 10 per cent flat can cost like 18 per cent a year on the balance you actually owe."
+  },
+  "credit_card_interest": {
+    "title": "Credit card interest",
+    "body": "A credit card is a loan. If you do not pay the full bill by the due date, interest is charged on the unpaid part, often at a high rate.",
+    "example": "Asha pays ₹2,000 of a ₹5,000 bill. Interest is charged on the remaining ₹3,000."
+  },
+  "minimum_payment_trap": {
+    "title": "The minimum payment trap",
+    "body": "Paying only the minimum keeps the loan alive for years because most of the payment goes to interest. Paying more clears it far sooner and costs much less.",
+    "example": "A ₹20,000 balance paid at the minimum can take several years to clear."
   }
 }

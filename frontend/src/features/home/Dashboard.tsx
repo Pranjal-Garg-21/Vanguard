@@ -19,7 +19,7 @@ import {
 } from '@/platform';
 import { ARCADE_SECTIONS, STAGES } from '@/content/stages';
 import { Avatar } from '@/features/setup';
-import { Badge, Button, Card, Icon, Notice, SectionLabel, Spinner, TopNav } from '@/ui';
+import { Badge, Button, Card, Icon, LanguageSwitcher, Notice, SectionLabel, Spinner, TopNav } from '@/ui';
 import { summariseEvents } from './stats';
 import { BadgesCard } from './BadgesCard';
 import { HomeHub } from './HomeHub';
@@ -56,6 +56,7 @@ export function Dashboard() {
   return (
     <div className="min-h-dvh">
       <TopNav>
+            <LanguageSwitcher />
             <span title={t('home.stats.streak')} className="inline-flex items-center gap-1">
               <Icon name="flame" className="h-4 w-4 text-warn" />
               <span className="text-brand">{stats.streak}</span> <span className="text-muted">d</span>

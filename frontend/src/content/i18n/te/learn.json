@@ -35,5 +35,6 @@
   "lessonsTitle": "మొత్తం {n} పాఠాలు",
   "view": "వీక్షణ",
   "view_path": "దారి",
-  "view_grid": "క్లాసిక్"
+  "view_grid": "క్లాసిక్",
+  "lessonNotFound": "పాఠం దొరకలేదు."
 }

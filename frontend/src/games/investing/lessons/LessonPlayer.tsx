@@ -15,7 +15,7 @@ export function LessonPlayer() {
   if (!room) {
     return (
       <InvestShell>
-        <p>Lesson not found.</p>
+        <p>{t('learn.lessonNotFound')}</p>
         <Link to="/learn" className="inline-flex items-center gap-1 text-sm font-bold text-ink-soft hover:text-brand">
           <ChevronIcon dir="left" />
           {t('learn.all')}

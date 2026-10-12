@@ -7,6 +7,7 @@ import { PwaBanner } from './app/pwa/PwaBanner';
 import { startPwa } from './app/pwa';
 import { startFonts } from './app/fonts';
 import { AudioNotice } from './app/AudioNotice';
+import { LanguageBoundary } from './app/LanguageBoundary';
 import '@fontsource/pixelify-sans/latin-400.css';
 import '@fontsource/pixelify-sans/latin-700.css';
 import '@fontsource/ubuntu/latin-400.css';
@@ -25,8 +26,10 @@ followProfileLanguage();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
-    <PwaBanner />
-    <AudioNotice />
+    <LanguageBoundary>
+      <RouterProvider router={router} />
+      <PwaBanner />
+      <AudioNotice />
+    </LanguageBoundary>
   </StrictMode>,
 );
